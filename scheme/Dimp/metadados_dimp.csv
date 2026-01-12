@@ -1,0 +1,415 @@
+"OWNER";"TABLE_NAME";"COLUMN_ID";"COLUMN_NAME";"DATA_TYPE";"DATA_LENGTH";"NULLABLE";"DATA_SCALE";"AVG_COL_LEN";"NUM_DISTINCT";"NUM_NULLS";"DENSITY";"DEFAULT_ON_NULL";"NUM_BUCKETS";"COMMENTS";"CONSTRAINTS"
+"DIMP";"DIMP";1;"SEQ_R1110";"NUMBER";22;"N";0;7;175702016;0;0,00000000569145433140619;"NO";1;"Sequencial do arquivo R1110";"SYS_C00264788 (CHECK, ENABLED)"
+"DIMP";"DIMP";2;"SEQ_R1100";"NUMBER";22;"Y";0;6;20678656;0;0,000000048359042289789;"NO";1;"Sequencial da tabela R1100";" (, )"
+"DIMP";"DIMP";3;"COD_MCAPTURA";"VARCHAR2";30;"Y";;15;5796352;0;0,00000017252230368342;"NO";1;"Código do meio de captura (campo 02 do Registro 0200).";" (, )"
+"DIMP";"DIMP";4;"DAT_OPERACAO";"DATE";7;"Y";;8;1734;0;0,000576701268742791;"NO";1;"Data da operação ";" (, )"
+"DIMP";"DIMP";5;"VLR_OPERACAO";"NUMBER";22;"Y";2;5;2413312;0;0,00000041436830380821;"NO";1;"Valor total diário das operações realizadas na data ";" (, )"
+"DIMP";"DIMP";6;"QTD_OPERACAO";"NUMBER";22;"Y";0;4;5505;0;0,000181653042688465;"NO";1;"Quantidade total diária de operações realizadas na data";" (, )"
+"DIMP";"DIMP";7;"NUM_CNPJ_ADQUIRENTE";"NUMBER";22;"Y";0;7;4985;66224578;0,000200601805416249;"NO";1;"CNPJ da Adquirente ou subadquirente que autorizou a transação, em branco para quando o declarante for o próprio 
+adquirente. ";" (, )"
+"DIMP";"DIMP_RECUPERACAO";1;"SEQ_REGISTRO_TEMPORARIO";"NUMBER";22;"N";0;7;855719683;0;0,000000001168606986454;"NO";1;"Sequencial da tabela REGISTRO_TEMPORARIO";"PK_DIMP_RECUPERACAO (PRIMARY KEY, ENABLED); SYS_C00284212 (CHECK, ENABLED)"
+"DIMP";"DIMP_RECUPERACAO";2;"SEQ_REGISTRO";"NUMBER";22;"Y";0;0;0;855719683;0;"NO";0;"sequencial do registro filho";" (, )"
+"DIMP";"DIMP_RECUPERACAO";3;"SEQ_REGISTRO_PAI";"NUMBER";22;"Y";0;0;0;855719683;0;"NO";0;"sequencial do registro pai";" (, )"
+"DIMP";"DIMP_RECUPERACAO";4;"NOM_ARQUIVO";"VARCHAR2";300;"Y";;17;61;0;0,000000000584303493226999;"NO";61;"Nome do arquivo incorporado";" (, )"
+"DIMP";"DIMP_RECUPERACAO";5;"DSC_CAMPO_01";"VARCHAR2";300;"Y";;5;199606272;531328049;0;"NO";254;"descrição do campo 01";" (, )"
+"DIMP";"DIMP_RECUPERACAO";6;"DSC_CAMPO_02";"VARCHAR2";300;"Y";;3;64634880;717301282;0;"NO";254;"descrição do campo 02";" (, )"
+"DIMP";"DIMP_RECUPERACAO";7;"DSC_CAMPO_03";"VARCHAR2";300;"Y";;28;763232256;78142327;0,00000000131021716147175;"NO";1;"descrição do campo 03";" (, )"
+"DIMP";"DIMP_RECUPERACAO";8;"DSC_CAMPO_04";"VARCHAR2";300;"Y";;2;2;0;0,000000000584303493226999;"NO";2;"descrição do campo 04";" (, )"
+"DIMP";"DIMP_RECUPERACAO";9;"DSC_CAMPO_05";"VARCHAR2";300;"Y";;3;13;77859497;0,000000000642789037154808;"NO";13;"descrição do campo 05";" (, )"
+"DIMP";"DIMP_RECUPERACAO";10;"DSC_CAMPO_06";"VARCHAR2";300;"Y";;7;89344;0;0,000011;"NO";254;"descrição do campo 06";" (, )"
+"DIMP";"DIMP_RECUPERACAO";11;"DSC_CAMPO_07";"VARCHAR2";300;"Y";;7;1245952;0;0;"NO";254;"descrição do campo 07";" (, )"
+"DIMP";"DIMP_RECUPERACAO";12;"DSC_CAMPO_08";"VARCHAR2";300;"Y";;3;8;0;0,000000000584303493226999;"NO";8;"descrição do campo 08";" (, )"
+"DIMP";"DIMP_RECUPERACAO";13;"DSC_CAMPO_09";"VARCHAR2";300;"Y";;0;0;855719683;0;"NO";0;"descrição do campo 09";" (, )"
+"DIMP";"DIMP_RECUPERACAO";14;"DSC_CAMPO_10";"VARCHAR2";300;"Y";;2;2;286133710;0,5;"NO";1;"descrição do campo 10";" (, )"
+"DIMP";"DIMP_RECUPERACAO";15;"DSC_CAMPO_11";"VARCHAR2";300;"Y";;2;2;288236153;0,5;"NO";1;"descrição do campo 11";" (, )"
+"DIMP";"DIMP_RECUPERACAO";16;"DSC_CAMPO_12";"VARCHAR2";300;"Y";;0;0;855719683;0;"NO";0;"descrição do campo 12";" (, )"
+"DIMP";"DIMP_RECUPERACAO";17;"DSC_CAMPO_13";"VARCHAR2";300;"Y";;27;4;0;0,25;"NO";1;"descrição do campo 13";" (, )"
+"DIMP";"DIMP_RECUPERACAO";18;"DSC_CAMPO_14";"VARCHAR2";300;"Y";;0;0;855719683;0;"NO";0;"descrição do campo 14";" (, )"
+"DIMP";"DIMP_RECUPERACAO";19;"DSC_CAMPO_15";"VARCHAR2";300;"Y";;0;0;855719683;0;"NO";0;"descrição do campo 15";" (, )"
+"DIMP";"DIMP_RECUPERACAO";20;"DSC_CAMPO_16";"VARCHAR2";300;"Y";;0;0;855719683;0;"NO";0;"descrição do campo 16";" (, )"
+"DIMP";"DIMP_RECUPERACAO";21;"DSC_CAMPO_17";"VARCHAR2";300;"Y";;0;0;855719683;0;"NO";0;"descrição do campo 17";" (, )"
+"DIMP";"DIMP_RECUPERACAO";22;"DSC_CAMPO_18";"VARCHAR2";300;"Y";;0;0;855719683;0;"NO";0;"descrição do campo 18";" (, )"
+"DIMP";"DIMP_RECUPERACAO";23;"DSC_CAMPO_19";"VARCHAR2";300;"Y";;0;0;855719683;0;"NO";0;"descrição do campo 19";" (, )"
+"DIMP";"DIMP_RECUPERACAO";24;"DSC_CAMPO_20";"VARCHAR2";300;"Y";;0;0;855719683;0;"NO";0;"descrição do campo 20";" (, )"
+"DIMP";"INDICADOR_MOVIMENTO";1;"SEQ_R0000";"NUMBER";22;"N";0;5;79337;0;0,0000126044594577562;"NO";1;"Sequencial único do arquivo";"FK_R0000_R_INDICADOR_MOVIMENTO (FOREIGN KEY, ENABLED); PK_INDICADOR_MOVIMENTO (PRIMARY KEY, ENABLED); SYS_C00245707 (CHECK, ENABLED)"
+"DIMP";"INDICADOR_MOVIMENTO";2;"TIP_IND_MOV_R0001";"NUMBER";22;"Y";0;3;1;0;1;"NO";1;"Indicador de movimento: (R0001)
+0 - Bloco sem dados informados 1 - Bloco com dados informados.";" (, )"
+"DIMP";"INDICADOR_MOVIMENTO";3;"TIP_IND_MOV_R1001";"NUMBER";22;"Y";0;3;2;0;0,5;"NO";1;"Indicador de movimento: (R1001)
+0 - Bloco sem dados informados 1 - Bloco com dados informados.";" (, )"
+"DIMP";"INDICADOR_MOVIMENTO";4;"TIP_IND_MOV_R9001";"NUMBER";22;"Y";0;3;1;0;1;"NO";1;"Indicador de movimento: (R9001)
+0 - Bloco sem dados informados 1 - Bloco com dados informados.";" (, )"
+"DIMP";"RA_MESTRE";1;"SEQ_RA";"NUMBER";22;"N";0;5;78740;0;0,0000127000254000508;"NO";1;"Sequencial único do arquivo";"PK_RA_MESTRE (PRIMARY KEY, ENABLED); SYS_C00258063 (CHECK, ENABLED)"
+"DIMP";"RA_MESTRE";2;"COD_VER_RCAD";"NUMBER";22;"Y";0;3;4;0;0,25;"NO";1;"Código da versão do leiaute do RCAD ¿01¿ 				
+";" (, )"
+"DIMP";"RA_MESTRE";3;"COD_VER";"NUMBER";22;"Y";0;3;2;0;0,5;"NO";1;"Código da versão do leiaute da DIMP --	0000_02	
+";" (, )"
+"DIMP";"RA_MESTRE";4;"COD_FIN";"NUMBER";22;"Y";0;3;8;0;0,125;"NO";1;"Código de finalidade do arquivo. -	0000_03	
+";" (, )"
+"DIMP";"RA_MESTRE";5;"COD_UF_FISCO";"VARCHAR2";2;"Y";;3;1;0;1;"NO";1;"Sigla da unidade da federação do Fisco para o qual está sendo prestada a informação	-	0000_04	
+";" (, )"
+"DIMP";"RA_MESTRE";6;"COD_CNPJ";"NUMBER";22;"Y";0;9;358;0;0,00279329608938547;"NO";1;"Número da inscrição do CNPJ	-	0000_05	
+";" (, )"
+"DIMP";"RA_MESTRE";7;"DSC_NOME";"VARCHAR2";150;"Y";;33;434;0;0,00230414746543779;"NO";1;"Nome Empresarial (Razão Social/denominação) da Instituição de pagamento. 		-	-	0000_06	
+";" (, )"
+"DIMP";"RA_MESTRE";8;"DAT_INI";"DATE";7;"Y";;8;92;0;0,0108695652173913;"NO";1;"Data Inicial da Informações prestadas			0000_07	
+";" (, )"
+"DIMP";"RA_MESTRE";9;"DAT_FIN";"DATE";7;"Y";;8;92;0;0,0108695652173913;"NO";1;"Data Final da Informações prestadas			0000_08	
+";" (, )"
+"DIMP";"RA_MESTRE";10;"TIP_AMB";"NUMBER";22;"Y";0;3;2;0;0,5;"NO";1;"Tipo de Ambiente	-		0000_09	
+";" (, )"
+"DIMP";"RA_MESTRE";11;"NUM_MES_VAL";"NUMBER";22;"Y";0;5;34;0;0,0294117647058824;"NO";1;"Ano e mês que o arquivo DIMP foi validado	-		0000_10	
+";" (, )"
+"DIMP";"RA_MESTRE";12;"COD_UF";"VARCHAR2";2;"Y";;3;14;0;0,0714285714285714;"NO";1;"Sigla da Unidade da Federação	-	0005_06	
+";" (, )"
+"DIMP";"RA_MESTRE";13;"NOM_RESP";"VARCHAR2";150;"Y";;16;357;0;0,00280112044817927;"NO";1;"Nome da Pessoa Responsável pelo Contato	-			0005_07	";" (, )"
+"DIMP";"RA_MESTRE";14;"NUM_FONE";"NUMBER";22;"Y";0;8;357;0;0,00280112044817927;"NO";1;"Número do telefone para contato	-		0005_08";" (, )"
+"DIMP";"RA_MESTRE";15;"DSC_EMAIL";"VARCHAR2";150;"Y";;32;378;0;0,00264550264550265;"NO";1;"Endereço Eletrônico oficial para atendimento de solicitações -			0005_09";" (, )"
+"DIMP";"RA_MESTRE";16;"TIP_NACIONAL";"NUMBER";22;"Y";0;3;2;0;0,5;"NO";1;"Indicador que existe transação nacional neste arquivo. 
+Caso exista pelo menos 1 Registro 1100_04 marcado não (0) 0 ¿ não / 1 ¿ sim	1100_04";" (, )"
+"DIMP";"RA_MESTRE";17;"TIP_COMEX";"NUMBER";22;"Y";0;3;2;0;0,5;"NO";1;"Indicador que existe  Comex neste arquivo.  Caso exista pelo menos 1 Registro 1100_04 marcado sim (1) 0 ¿ não / 1 ¿ sim			1100_04	";" (, )"
+"DIMP";"RA_MESTRE";18;"NOM_ARQUIVO";"VARCHAR2";260;"Y";;17;77096;0;0,0000129708415481996;"NO";1;"nome do arquivo";" (, )"
+"DIMP";"RA_MESTRE";19;"DAT_INCORPORACAO";"DATE";7;"Y";;8;656;0;0,00152439024390244;"NO";1;"Data em que o ETL incorporou os dados";" (, )"
+"DIMP";"RB_BENEFICIARIO";1;"SEQ_RB";"NUMBER";22;"N";0;6;27404049;0;0,0000000364909579602635;"NO";1;"Sequencial único do arquivo";"PK_RB_BENEFICIARIO (PRIMARY KEY, ENABLED); SYS_C00258065 (CHECK, ENABLED)"
+"DIMP";"RB_BENEFICIARIO";2;"SEQ_RA";"NUMBER";22;"Y";0;5;7071;0;0,000141422712487626;"NO";1;"Sequencial único do arquivo";"FK_RA_R_RB (FOREIGN KEY, ENABLED)"
+"DIMP";"RB_BENEFICIARIO";3;"COD_CNPJ";"NUMBER";22;"Y";0;6;524032;13266089;0,00000190828041035662;"NO";1;"CNPJ do cliente		-	0100_03
+";" (, )"
+"DIMP";"RB_BENEFICIARIO";4;"COD_CPF";"NUMBER";22;"Y";0;5;1648128;14137960;0,00000060674899036968;"NO";1;"CPF do cliente 		-	0100_04	
+";" (, )"
+"DIMP";"RB_BENEFICIARIO";5;"DAT_CREDENCIAMENTO";"DATE";7;"Y";;8;12584;0;0,0000794659885568976;"NO";1;"Data do Credenciamento do Beneficiário de pagamento na IP	- 0100_13	
+";" (, )"
+"DIMP";"RC_VAN";1;"SEQ_RC";"NUMBER";22;"N";0;4;3029;0;0,000330141961043249;"NO";1;"Sequencial único do arquivo";"PK_RC_VAN (PRIMARY KEY, ENABLED); SYS_C00258068 (CHECK, ENABLED)"
+"DIMP";"RC_VAN";2;"SEQ_RA";"NUMBER";22;"Y";0;5;482;0;0,0020746887966805;"NO";1;"Sequencial único do arquivo";"FK_RA_R_RC (FOREIGN KEY, ENABLED)"
+"DIMP";"RC_VAN";3;"COD_CNPJ";"NUMBER";22;"Y";0;9;94;0;0,0106382978723404;"NO";1;"CNPJ da VAN	-	0105_02";" (, )"
+"DIMP";"RC_VAN";4;"NOM_VAN";"VARCHAR2";150;"Y";;20;172;0;0,00581395348837209;"NO";1;"Nome da VAN	-	0105_03	";" (, )"
+"DIMP";"RD_CAPTURA";1;"SEQ_RD";"NUMBER";22;"N";0;6;3503485;0;0,000000285430078907145;"NO";1;"Sequencial único do arquivo";"PK_RD_CAPTURA (PRIMARY KEY, ENABLED); SYS_C00258071 (CHECK, ENABLED)"
+"DIMP";"RD_CAPTURA";2;"SEQ_RA";"NUMBER";22;"Y";0;4;6239;0;0,000160282096489822;"NO";1;"Sequencial único do arquivo";"FK_RA_R_RD (FOREIGN KEY, ENABLED)"
+"DIMP";"RD_CAPTURA";3;"TIP_TECNOLOGIA";"NUMBER";22;"Y";0;3;9;0;0,111111111111111;"NO";1;"TIPO DE TECNOLOGIA		-	0200_04	
+";" (, )"
+"DIMP";"RD_CAPTURA";4;"TIP_TERM_PROPRIO";"NUMBER";22;"Y";0;3;2;0;0,5;"NO";1;"TERMINAL PRÓPRIO		-	0200_05	
+";" (, )"
+"DIMP";"RD_CAPTURA";5;"DSC_MARCA";"VARCHAR2";30;"Y";;5;1630;1519551;0,000613496932515337;"NO";1;"Marca indicando a instituição de pagamento no comprovante. - 		0200_06	
+";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO";1;"SEQ_REGISTRO_TEMPORARIO";"NUMBER";22;"N";0;4;3361;0;0,00029753049687593;"NO";1;"Sequencial da tabela REGISTRO_TEMPORARIO";"PK_REGISTRO_TEMPORARIO (PRIMARY KEY, ENABLED); SYS_C00243424 (CHECK, ENABLED)"
+"DIMP";"REGISTRO_TEMPORARIO";2;"SEQ_REGISTRO";"NUMBER";22;"Y";0;7;3334;23;0,0002999400119976;"NO";1;"sequencial do registro filho";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO";3;"SEQ_REGISTRO_PAI";"NUMBER";22;"Y";0;6;1115;23;0,000896860986547085;"NO";1;"sequencial do registro pai";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO";4;"NOM_ARQUIVO";"VARCHAR2";300;"Y";;17;1;0;1;"NO";1;"Nome do arquivo incorporado";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO";5;"DSC_CAMPO_01";"VARCHAR2";300;"Y";;5;16;0;0,000148765248437965;"NO";16;"descrição do campo 01";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO";6;"DSC_CAMPO_02";"VARCHAR2";300;"Y";;9;1141;1114;0,000876424189307625;"NO";1;"descrição do campo 02";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO";7;"DSC_CAMPO_03";"VARCHAR2";300;"Y";;7;1148;17;0,000871080139372822;"NO";1;"descrição do campo 03";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO";8;"DSC_CAMPO_04";"VARCHAR2";300;"Y";;11;1156;26;0,000865051903114187;"NO";1;"descrição do campo 04";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO";9;"DSC_CAMPO_05";"VARCHAR2";300;"Y";;6;14;27;0,0714285714285714;"NO";1;"descrição do campo 05";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO";10;"DSC_CAMPO_06";"VARCHAR2";300;"Y";;6;27;2100;0,037037037037037;"NO";1;"descrição do campo 06";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO";11;"DSC_CAMPO_07";"VARCHAR2";300;"Y";;4;1118;2235;0,000894454382826476;"NO";1;"descrição do campo 07";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO";12;"DSC_CAMPO_08";"VARCHAR2";300;"Y";;8;53;2235;0,0188679245283019;"NO";1;"descrição do campo 08";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO";13;"DSC_CAMPO_09";"VARCHAR2";300;"Y";;2;14;2235;0,0714285714285714;"NO";1;"descrição do campo 09";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO";14;"DSC_CAMPO_10";"VARCHAR2";300;"Y";;2;1;3360;1;"NO";1;"descrição do campo 10";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO";15;"DSC_CAMPO_11";"VARCHAR2";300;"Y";;2;1;2257;1;"NO";1;"descrição do campo 11";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO";16;"DSC_CAMPO_12";"VARCHAR2";300;"Y";;2;1;2472;1;"NO";1;"descrição do campo 12";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO";17;"DSC_CAMPO_13";"VARCHAR2";300;"Y";;2;9;3351;0,111111111111111;"NO";1;"descrição do campo 13";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO";18;"DSC_CAMPO_14";"VARCHAR2";300;"Y";;0;0;3361;0;"NO";0;"descrição do campo 14";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO";19;"DSC_CAMPO_15";"VARCHAR2";300;"Y";;0;0;3361;0;"NO";0;"descrição do campo 15";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO";20;"DSC_CAMPO_16";"VARCHAR2";300;"Y";;0;0;3361;0;"NO";0;"descrição do campo 16";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO";21;"DSC_CAMPO_17";"VARCHAR2";300;"Y";;0;0;3361;0;"NO";0;"descrição do campo 17";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO";22;"DSC_CAMPO_18";"VARCHAR2";300;"Y";;0;0;3361;0;"NO";0;"descrição do campo 18";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO";23;"DSC_CAMPO_19";"VARCHAR2";300;"Y";;0;0;3361;0;"NO";0;"descrição do campo 19";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO";24;"DSC_CAMPO_20";"VARCHAR2";300;"Y";;0;0;3361;0;"NO";0;"descrição do campo 20";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";1;"SEQ_REGISTRO_TEMPORARIO";"NUMBER";22;"N";0;0;0;0;0;"NO";0;"Sequencial da tabela REGISTRO_TEMPORARIO";"PK_REGISTRO_TEMPORARIO_RCAD (PRIMARY KEY, ENABLED); SYS_C00258077 (CHECK, ENABLED)"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";2;"SEQ_REGISTRO";"NUMBER";22;"Y";0;0;0;0;0;"NO";0;"sequencial do registro filho";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";3;"SEQ_REGISTRO_PAI";"NUMBER";22;"Y";0;0;0;0;0;"NO";0;"sequencial do registro pai";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";4;"NOM_ARQUIVO";"VARCHAR2";300;"Y";;0;0;0;0;"NO";0;"Nome do arquivo incorporado";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";5;"DSC_CAMPO_01";"VARCHAR2";300;"Y";;0;0;0;0;"NO";0;"descrição do campo 01";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";6;"DSC_CAMPO_02";"VARCHAR2";300;"Y";;0;0;0;0;"NO";0;"descrição do campo 02";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";7;"DSC_CAMPO_03";"VARCHAR2";300;"Y";;0;0;0;0;"NO";0;"descrição do campo 03";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";8;"DSC_CAMPO_04";"VARCHAR2";300;"Y";;0;0;0;0;"NO";0;"descrição do campo 04";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";9;"DSC_CAMPO_05";"VARCHAR2";300;"Y";;0;0;0;0;"NO";0;"descrição do campo 05";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";10;"DSC_CAMPO_06";"VARCHAR2";300;"Y";;0;0;0;0;"NO";0;"descrição do campo 06";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";11;"DSC_CAMPO_07";"VARCHAR2";300;"Y";;0;0;0;0;"NO";0;"descrição do campo 07";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";12;"DSC_CAMPO_08";"VARCHAR2";300;"Y";;0;0;0;0;"NO";0;"descrição do campo 08";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";13;"DSC_CAMPO_09";"VARCHAR2";300;"Y";;0;0;0;0;"NO";0;"descrição do campo 09";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";14;"DSC_CAMPO_10";"VARCHAR2";300;"Y";;0;0;0;0;"NO";0;"descrição do campo 10";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";15;"DSC_CAMPO_11";"VARCHAR2";300;"Y";;0;0;0;0;"NO";0;"descrição do campo 11";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";16;"DSC_CAMPO_12";"VARCHAR2";300;"Y";;0;0;0;0;"NO";0;"descrição do campo 12";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";17;"DSC_CAMPO_13";"VARCHAR2";300;"Y";;0;0;0;0;"NO";0;"descrição do campo 13";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";18;"DSC_CAMPO_14";"VARCHAR2";300;"Y";;0;0;0;0;"NO";0;"descrição do campo 14";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";19;"DSC_CAMPO_15";"VARCHAR2";300;"Y";;0;0;0;0;"NO";0;"descrição do campo 15";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";20;"DSC_CAMPO_16";"VARCHAR2";300;"Y";;0;0;0;0;"NO";0;"descrição do campo 16";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";21;"DSC_CAMPO_17";"VARCHAR2";300;"Y";;0;0;0;0;"NO";0;"descrição do campo 17";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";22;"DSC_CAMPO_18";"VARCHAR2";300;"Y";;0;0;0;0;"NO";0;"descrição do campo 18";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";23;"DSC_CAMPO_19";"VARCHAR2";300;"Y";;0;0;0;0;"NO";0;"descrição do campo 19";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";24;"DSC_CAMPO_20";"VARCHAR2";300;"Y";;0;0;0;0;"NO";0;"descrição do campo 20";" (, )"
+"DIMP";"REGISTRO_TEMPORARIO_RCAD";25;"DSC_CAMPO_21";"VARCHAR2";300;"Y";;0;0;0;0;"NO";0;"descrição do campo 21";" (, )"
+"DIMP";"RE_IPPARCEIRA";1;"SEQ_RE";"NUMBER";22;"N";0;4;6057;0;0,000165098233448902;"NO";1;"Sequencial único do arquivo";"PK_RE_IPPARCEIRA (PRIMARY KEY, ENABLED); SYS_C00258074 (CHECK, ENABLED)"
+"DIMP";"RE_IPPARCEIRA";2;"SEQ_RA";"NUMBER";22;"Y";0;5;688;0;0,00145348837209302;"NO";1;"Sequencial único do arquivo";"FK_RA_R_RA (FOREIGN KEY, ENABLED)"
+"DIMP";"RE_IPPARCEIRA";3;"COD_CNPJ";"NUMBER";22;"Y";0;9;505;0;0,00198019801980198;"NO";1;"Número da inscrição do CNPJ	N		-	0300_03";" (, )"
+"DIMP";"RE_IPPARCEIRA";4;"DSC_NOME";"VARCHAR2";150;"Y";;21;506;0;0,00197628458498024;"NO";1;"Nome Empresarial (Razão Social/denominação) da Instituição de pagamento. 	-	0300_04";" (, )"
+"DIMP";"RE_IPPARCEIRA";5;"NOM_RESPONSAVEL";"VARCHAR2";150;"Y";;5;50;4877;0,02;"NO";1;"Nome da Pessoa Responsável pelo Contato -		0300_09
+";" (, )"
+"DIMP";"RE_IPPARCEIRA";6;"NUM_FONE";"NUMBER";22;"Y";0;3;78;4515;0,0128205128205128;"NO";1;"Número do telefone para contato	-			0300_10";" (, )"
+"DIMP";"RE_IPPARCEIRA";7;"DSC_EMAIL";"VARCHAR2";150;"Y";;5;33;5216;0,0303030303030303;"NO";1;"Endereço Eletrônico oficial para atendimento de solicitações	 -			0300_11";" (, )"
+"DIMP";"RF_ADQUIRENCIA";1;"SEQ_RF";"NUMBER";22;"N";0;5;105635;0;0,0000094665593789937;"NO";1;"Sequencial único do arquivo";"PK_RF_ADQUIRENCIA (PRIMARY KEY, ENABLED); SYS_C00258079 (CHECK, ENABLED)"
+"DIMP";"RF_ADQUIRENCIA";2;"SEQ_RA";"NUMBER";22;"Y";0;5;5943;0;0,00016826518593303;"NO";1;"Sequencial único do arquivo";"FK_RA_R_RF (FOREIGN KEY, ENABLED)"
+"DIMP";"RF_ADQUIRENCIA";3;"COD_CNPJ_ADQUI";"NUMBER";22;"Y";0;9;6496;0;0,000153940886699507;"NO";1;"Número da inscrição do CNPJ ou subadquirente		-	1110_06
+";" (, )"
+"DIMP";"RG_UF_DEST_MERC_SERV";1;"SEQ_RG";"NUMBER";22;"N";0;5;14834;0;0,0000674127005527841;"NO";1;"Sequencial único do arquivo";"PK_RG_UF_DEST_MERC_SERV (PRIMARY KEY, ENABLED); SYS_C00258082 (CHECK, ENABLED)"
+"DIMP";"RG_UF_DEST_MERC_SERV";2;"SEQ_RA";"NUMBER";22;"Y";0;5;1076;0;0,000929368029739777;"NO";1;"Sequencial único do arquivo";"FK_RA_R_RG (FOREIGN KEY, ENABLED)"
+"DIMP";"RG_UF_DEST_MERC_SERV";3;"COD_UF";"VARCHAR2";2;"Y";;3;27;0;0,037037037037037;"NO";1;"UF do destinatário da mercadoria/serviço		-	1120_02
+";" (, )"
+"DIMP";"RG_UF_DEST_MERC_SERV";4;"NUM_QTD";"NUMBER";22;"Y";0;4;2838;0;0,000352360817477097;"NO";1;"Quantidade de transações por UF Destino		quantidade de 1120 para a UF_DEST no arquivo
+";" (, )"
+"DIMP";"RH_AUTORIZ_PARCEIRA";1;"SEQ_RH";"NUMBER";22;"N";0;3;89;0;0,0112359550561798;"NO";1;"Sequencial único do arquivo";"PK_RH_AUTORIZ_PARCEIRA (PRIMARY KEY, ENABLED); SYS_C00258085 (CHECK, ENABLED)"
+"DIMP";"RH_AUTORIZ_PARCEIRA";2;"SEQ_RA";"NUMBER";22;"Y";0;4;89;0;0,0112359550561798;"NO";1;"Sequencial único do arquivo";"FK_RA_R_RH (FOREIGN KEY, ENABLED)"
+"DIMP";"RH_AUTORIZ_PARCEIRA";3;"TIP_AUTORIZ";"NUMBER";22;"Y";0;3;1;0;1;"NO";1;"Tipo de registro de autorização  1 ¿ Inclusão 2 ¿ Exclusão		-	0600_02
+";" (, )"
+"DIMP";"RH_AUTORIZ_PARCEIRA";4;"COD_CNPJ";"NUMBER";22;"Y";0;9;2;0;0,5;"NO";1;"CNPJ da instituição autorizada  -			0600_03
+";" (, )"
+"DIMP";"RH_AUTORIZ_PARCEIRA";5;"TIP_TRANSAC";"NUMBER";22;"Y";0;3;2;0;0,5;"NO";1;"Existirão transações comerciais (registros 1120) 0 ¿ Não 1 ¿ Sim	-		0600_04
+";" (, )"
+"DIMP";"RH_AUTORIZ_PARCEIRA";6;"DAT_INI_AUT";"DATE";7;"Y";;8;9;0;0,111111111111111;"NO";1;"Data de habilitação da instituição autorizada como detentora de autonomia exclusiva para envio das informações			0600_13
+";" (, )"
+"DIMP";"RH_AUTORIZ_PARCEIRA";7;"DAT_FIM_AUT";"DATE";7;"Y";;2;6;77;0,166666666666667;"NO";1;"Data de cancelamento da habilitação da instituição autorizada como detentora de autonomia exclusiva para envio das informações  -	0600_14";" (, )"
+"DIMP";"R0000_INSTITUICAO_PAGADORA";1;"SEQ_R0000";"NUMBER";22;"N";0;5;77191;0;0,0000129548781593709;"NO";1;"Sequencial único do arquivo";"PK_R0000_INSTITUICAO_PAGADORA (PRIMARY KEY, ENABLED); SYS_C00243390 (CHECK, ENABLED)"
+"DIMP";"R0000_INSTITUICAO_PAGADORA";2;"COD_VERSAO";"NUMBER";22;"Y";0;3;7;0;0,142857142857143;"NO";1;"Código da versão do leiaute
+";" (, )"
+"DIMP";"R0000_INSTITUICAO_PAGADORA";3;"COD_FINALIDADE";"NUMBER";22;"Y";0;3;8;0;0,00000647743907968546;"NO";8;"Código da finalidade do arquivo 
+1 ¿ Remessa de arquivo normal 
+2 ¿ Remessa de arquivo retificador 
+3 ¿ Remessa de arquivo para atender notificação 
+4 ¿ Remessa de arquivo zerado 
+5 ¿ Remessa de arquivo de encerramento de atividades 
+6 ¿ Autorização para Instituição Parceira 
+7 ¿ Realiza apenas operações dispensadas do envio da DIMP 
+8 ¿ Não realiza operações na UF de destino do arquivo";"CKC_COD_FINALIDADE_R0000 (CHECK, ENABLED)"
+"DIMP";"R0000_INSTITUICAO_PAGADORA";4;"COD_UF";"VARCHAR2";2;"Y";;3;1;0;1;"NO";1;"Sigla da Unidade da Federação do Fisco para o qual está sendo prestada a informação ";" (, )"
+"DIMP";"R0000_INSTITUICAO_PAGADORA";5;"COD_CNPJ";"NUMBER";22;"Y";0;9;420;0;0,000505;"NO";254;"Número de inscrição no CNPJ ";" (, )"
+"DIMP";"R0000_INSTITUICAO_PAGADORA";6;"DSC_RAZAO_SOCIAL";"VARCHAR2";150;"Y";;33;539;0;0,000367;"NO";254;"Nome Empresarial (Razão Social/denominação) da Instituição de Pagamento ";" (, )"
+"DIMP";"R0000_INSTITUICAO_PAGADORA";7;"DAT_INICIO";"DATE";7;"Y";;8;103;0;0,00000647743907968546;"NO";103;"Data do início do período referente às informações prestadas ";" (, )"
+"DIMP";"R0000_INSTITUICAO_PAGADORA";8;"DAT_FINAL";"DATE";7;"Y";;8;105;0;0,00000647743907968546;"NO";105;"Data do fim do período referente às informações prestadas ";" (, )"
+"DIMP";"R0000_INSTITUICAO_PAGADORA";9;"TIP_AMBIENTE";"NUMBER";22;"Y";0;3;2;0;0,00000647743907968546;"NO";2;"Tipo de Ambiente: 
+1 - produção 
+2 ¿ homologação ";"CKC_TIP_AMBIENTE_R0000 (CHECK, ENABLED)"
+"DIMP";"R0000_INSTITUICAO_PAGADORA";10;"NOM_ARQUIVO";"VARCHAR2";260;"Y";;17;77191;0;0,000013;"NO";254;"Nome do Arquivo processado";" (, )"
+"DIMP";"R0000_INSTITUICAO_PAGADORA";11;"DAT_INCORPORACAO";"DATE";7;"Y";;8;1412;0;0,000168;"NO";254;"Data em que o ETL incorpora os dados";" (, )"
+"DIMP";"R0000_INSTITUICAO_PAGADORA";12;"STA_RETIFICADO";"VARCHAR2";1;"Y";;2;2;0;0,00000647743907968546;"NO";2;"Indica se arquivo foi notificado (N-não retificado; S-retificado)";"CKC_STA_RETIFICADO_R0000 (CHECK, ENABLED)"
+"DIMP";"R0000_INSTITUICAO_PAGADORA";13;"NUM_MES_VAL";"NUMBER";22;"Y";0;5;43;2323;0,0232558139534884;"NO";1;"Informar ano e mês em que o arquivo foi validado (AAAAMM)";" (, )"
+"DIMP";"R0005_DADOS_INSTITUICAO";1;"SEQ_R0000";"NUMBER";22;"N";0;5;79338;0;0,0000126043005873604;"NO";1;"Sequencial único do arquivo";"FK_R0000_R_R0005 (FOREIGN KEY, ENABLED); PK_R0005_DADOS_INSTITUICAO (PRIMARY KEY, ENABLED); SYS_C00243395 (CHECK, ENABLED)"
+"DIMP";"R0005_DADOS_INSTITUICAO";2;"DSC_FANTASIA";"VARCHAR2";150;"Y";;30;562;0;0,00177935943060498;"NO";1;"Nome Fantasia Conforme informado no equipamento ou site de pagamento";" (, )"
+"DIMP";"R0005_DADOS_INSTITUICAO";3;"DSC_ENDERECO";"VARCHAR2";300;"Y";;20;655;0;0,00152671755725191;"NO";1;"Endereço completo da instituição de pagamento";" (, )"
+"DIMP";"R0005_DADOS_INSTITUICAO";4;"NUM_CEP";"NUMBER";22;"Y";0;6;375;0;0,00266666666666667;"NO";1;"Código de Endereçamento Postal ";" (, )"
+"DIMP";"R0005_DADOS_INSTITUICAO";5;"COD_MUNICIPIO";"NUMBER";22;"Y";0;6;103;277;0,00970873786407767;"NO";1;"Código do Município de domicílio daInstituição de Pagamento, conforme Tabela do IBGE ";" (, )"
+"DIMP";"R0005_DADOS_INSTITUICAO";6;"COD_UF";"VARCHAR2";2;"Y";;3;18;0;0,0555555555555556;"NO";1;"Sigla da Unidade da Federação em que está situada a instituição autora do arquivo ";" (, )"
+"DIMP";"R0005_DADOS_INSTITUICAO";7;"NOM_RESPONSAVEL";"VARCHAR2";150;"Y";;17;536;0;0,00186567164179104;"NO";1;"Nome da Pessoa responsável para contato ";" (, )"
+"DIMP";"R0005_DADOS_INSTITUICAO";8;"NUM_TELEFONE";"NUMBER";22;"Y";0;8;503;0;0,00198807157057654;"NO";1;"Número de telefone para contato ";" (, )"
+"DIMP";"R0005_DADOS_INSTITUICAO";9;"DSC_EMAIL";"VARCHAR2";60;"Y";;32;549;0;0,00182149362477231;"NO";1;"Endereço do correio eletrônico oficial para atendimento de solicitações ";" (, )"
+"DIMP";"R0006_CONTATO_GERACAO_ARQUIVO";1;"SEQ_R0000";"NUMBER";22;"N";0;5;4167;0;0,000239980801535877;"NO";1;"Sequencial único do arquivo";"FK_R0000_R_R0006 (FOREIGN KEY, ENABLED); SYS_C00266806 (CHECK, ENABLED)"
+"DIMP";"R0006_CONTATO_GERACAO_ARQUIVO";2;"DSC_TECNICO";"VARCHAR2";150;"Y";;23;154;0;0,00649350649350649;"NO";1;"Nome do responsável técnico para contato 
+";" (, )"
+"DIMP";"R0006_CONTATO_GERACAO_ARQUIVO";3;"NUM_TELEFONE";"NUMBER";22;"Y";0;8;127;0;0,00787401574803149;"NO";1;"Número de telefone para contato";" (, )"
+"DIMP";"R0006_CONTATO_GERACAO_ARQUIVO";4;"DSC_EMAIL";"VARCHAR2";60;"Y";;29;148;0;0,00675675675675676;"NO";1;"Endereço do correio eletrônico oficial para atendimento de solicitações";" (, )"
+"DIMP";"R0006_CONTATO_GERACAO_ARQUIVO";5;"SEQ_R0006";"NUMBER";22;"N";0;4;4468;0;0,000223813786929275;"NO";1;"Sequencial do arquivo";"PK_R0006_CONTATO_GERACAO_ARQUIVO (PRIMARY KEY, ENABLED); SYS_C00270050 (CHECK, ENABLED)"
+"DIMP";"R0100_CLIENTE";1;"SEQ_R0100";"NUMBER";22;"N";0;6;74829165;0;0,0000000133637733362386;"NO";1;"Sequencial R010_CLIENTE";"PK_R0100_CLIENTE (PRIMARY KEY, ENABLED); SYS_C00243397 (CHECK, ENABLED)"
+"DIMP";"R0100_CLIENTE";2;"SEQ_R0000";"NUMBER";22;"N";0;5;12060;0;0,000036;"NO";254;"Sequencial único do arquivo
+";"FK_R0000_R_R0100 (FOREIGN KEY, ENABLED); SYS_C00243398 (CHECK, ENABLED)"
+"DIMP";"R0100_CLIENTE";3;"COD_CLIENTE";"VARCHAR2";60;"Y";;19;8783872;0;0;"NO";254;"Código do cliente ";" (, )"
+"DIMP";"R0100_CLIENTE";4;"COD_CNPJ";"NUMBER";22;"Y";0;5;732928;45946385;0,000001;"NO";254;"CNPJ do Estabelecimento Credenciado, ou do Importador (COMEX) ";" (, )"
+"DIMP";"R0100_CLIENTE";5;"COD_CPF";"NUMBER";22;"Y";0;5;3326976;28882780;0;"NO";254;"CPF do Beneficiário do Pagou do Importador (Comex) ";" (, )"
+"DIMP";"R0100_CLIENTE";6;"DSC_FANTASIA";"VARCHAR2";150;"Y";;27;5961728;6;0;"NO";254;"Nome Empresarial do estabelecimento ou nome do usuário conforme comprovante da transação";" (, )"
+"DIMP";"R0100_CLIENTE";7;"DSC_ENDERECO";"VARCHAR2";300;"Y";;36;6952960;121;0,000000143823637702504;"NO";1;"Endereço do estabelecimento ou do usuário ";" (, )"
+"DIMP";"R0100_CLIENTE";8;"NUM_CEP";"NUMBER";22;"Y";0;6;260992;1;0,00000383153506620893;"NO";1;"Código de Endereço Postal do estabelecimento ou do usuário ";" (, )"
+"DIMP";"R0100_CLIENTE";9;"COD_MUNICIPIO";"NUMBER";22;"Y";0;5;3488;8374405;0,000023;"NO";254;"Código do município do estabelecimento ou do usuário, de acordo com tabela de municípios do IBGE ";" (, )"
+"DIMP";"R0100_CLIENTE";10;"COD_UF";"VARCHAR2";2;"Y";;3;27;1;0,00000000668188675741453;"NO";27;"Sigla da Unidade da Federação ";" (, )"
+"DIMP";"R0100_CLIENTE";11;"NOM_RESPONSAVEL";"VARCHAR2";150;"Y";;9;1991680;49728568;0,000001;"NO";254;"Nome de contato ou responsável no estabelecimento ou do usuário ";" (, )"
+"DIMP";"R0100_CLIENTE";12;"NUM_FONE_CONTATO";"NUMBER";22;"Y";0;4;2173952;45160101;0,000000459991756947715;"NO";1;"Telefone do contato (DDD+FONE) ";" (, )"
+"DIMP";"R0100_CLIENTE";13;"DSC_EMAIL_CONTATO";"VARCHAR2";60;"Y";;12;2596352;43684508;0,000000385155787813055;"NO";1;"E-mail do contato ou responsável pelo estabelecimento ou do usuário ";" (, )"
+"DIMP";"R0100_CLIENTE";14;"DAT_CREDENCIAMENTO";"DATE";7;"Y";;8;13864;1;0,0000721292556260819;"NO";1;"Data do credenciamento do Beneficiário de pagamento na IP";" (, )"
+"DIMP";"R0100_CLIENTE";15;"TIP_IND_SUB";"NUMBER";22;"Y";0;0;0;74829165;0;"NO";0;"Indicador de operação de intermediação comercial e/ou de pagamentos 0 ¿ Não realiza intermediação ou serviço de subadquirência para transações de terceiros 1 ¿ Realiza intermediação ou serviço de subadquirência para transações de terceiros.
+";" (, )"
+"DIMP";"R0105_VAN_CLIENTE";1;"SEQ_R0105";"NUMBER";22;"N";0;6;58944376;0;0,0000000169651469378521;"NO";1;"Sequencial da R0105_VAN_CLIENTE";"PK_R0105_VAN_CLIENTE (PRIMARY KEY, ENABLED); SYS_C00243400 (CHECK, ENABLED)"
+"DIMP";"R0105_VAN_CLIENTE";2;"SEQ_R0100";"NUMBER";22;"Y";0;6;1743872;0;0,000000573436582501468;"NO";1;"Sequencial da tabela R0100_CLIENTE";"FK_R0100_R_R0105 (FOREIGN KEY, ENABLED)"
+"DIMP";"R0105_VAN_CLIENTE";3;"COD_CNPJ";"VARCHAR2";14;"Y";;15;3285;0;0,00030441400304414;"NO";1;"Código do CNPJ da VAN";" (, )"
+"DIMP";"R0105_VAN_CLIENTE";4;"NOM_COMERCIAL_VAN";"VARCHAR2";150;"Y";;18;294;0;0,00340136054421769;"NO";1;"Nome comercial da VAN ";" (, )"
+"DIMP";"R0105_VAN_CLIENTE";5;"QTD_TRANSACAO_CLIE";"NUMBER";22;"Y";0;2;5622;57977192;0,000177872643187478;"NO";1;"Quantidade de transações do Cliente";" (, )"
+"DIMP";"R0200_MEIO_CAPTURA";1;"SEQ_R0200";"NUMBER";22;"N";0;7;218744764;0;0,00000000457153799576204;"NO";1;"Sequencial da tabela de captura";"PK_R0200_MEIO_CAPTURA (PRIMARY KEY, ENABLED); SYS_C00243402 (CHECK, ENABLED)"
+"DIMP";"R0200_MEIO_CAPTURA";2;"SEQ_R0000";"NUMBER";22;"Y";0;5;12029;0;0,000031;"NO";254;"Sequencial único do arquivo";"FK_R0000_R_R0200 (FOREIGN KEY, ENABLED)"
+"DIMP";"R0200_MEIO_CAPTURA";3;"COD_MCAPTURA";"VARCHAR2";80;"Y";;45;149798912;0;0;"NO";254;"Código do Meio de Captura ";" (, )"
+"DIMP";"R0200_MEIO_CAPTURA";4;"TXT_NUM_LOG";"VARCHAR2";40;"Y";;24;15353856;0;0;"NO";254;"Número Lógico do Meio de Captura. ";" (, )"
+"DIMP";"R0200_MEIO_CAPTURA";5;"TIP_TECNOLOGIA";"NUMBER";22;"Y";0;3;9;0;0,00000000228576899788102;"NO";9;"Tipo de tecnologia utilizada: 1 - TEF-POS INTEGRADOS; 2 - MOBILE; 3 - POS; 4 - E-commerce; 5 - Demais tecnologias; 6 - URA / MOTO; 7-  Pagamento efetuado em dinheiro ou por outra estrutura; 8 ¿ Conta de titularidade individual 9 ¿ Conta Conjunta .
+";"CKC_TIP_TECNOLOGIA_R0200 (CHECK, ENABLED)"
+"DIMP";"R0200_MEIO_CAPTURA";6;"TIP_TERM_PROPRIO";"NUMBER";22;"Y";0;3;2;0;0,00000000228576899788102;"NO";2;"0 - terminal próprio 
+1 - terminal de terceiro ";"CKC_TIP_TERM_PROPRIO_R0200 (CHECK, ENABLED)"
+"DIMP";"R0200_MEIO_CAPTURA";7;"DSC_MARCA";"VARCHAR2";40;"Y";;22;2014;51955026;0,00000000299778635062068;"NO";254;"Marca indicando a Instituição de Pagamento identificada no comprovante ";" (, )"
+"DIMP";"R0201_TITULAR_CONTA_CONJUNTA";1;"SEQ_R0201";"NUMBER";22;"N";0;6;3460543;0;0,000000288971990811847;"NO";1;"Sequencial da tabela de titular de conta conjunta";"PK_R0201_TITULAR_CONTA_CONJUNT (PRIMARY KEY, ENABLED); SYS_C00266809 (CHECK, ENABLED)"
+"DIMP";"R0201_TITULAR_CONTA_CONJUNTA";2;"SEQ_R0200";"NUMBER";22;"Y";0;7;3434240;0;0,000000291185240402534;"NO";1;"Sequencial da tabela de captura";"FK_R0200_R_R0201 (FOREIGN KEY, ENABLED)"
+"DIMP";"R0201_TITULAR_CONTA_CONJUNTA";3;"COD_CLIENTE";"VARCHAR2";60;"Y";;17;224128;0;0,00000446173615077099;"NO";1;"Identificação do Código do Cliente Informado no Registro 0100 ";" (, )"
+"DIMP";"R0300_INSTITUICAO_PARCEIRA";1;"SEQ_R0300";"NUMBER";22;"N";0;4;8014;0;0,000124781632143748;"NO";1;"Sequencial registro r300";"PK_R0300_INSTITUICAO_PARCEIRA (PRIMARY KEY, ENABLED); SYS_C00243411 (CHECK, ENABLED)"
+"DIMP";"R0300_INSTITUICAO_PARCEIRA";2;"SEQ_R0000";"NUMBER";22;"Y";0;5;1075;0;0,000595;"NO";254;"Sequencial único do arquivo";"FK_R0000_R_R0300 (FOREIGN KEY, ENABLED)"
+"DIMP";"R0300_INSTITUICAO_PARCEIRA";3;"COD_IP_PARCEIRA";"VARCHAR2";30;"Y";;11;593;0;0,001391;"NO";254;"Código de identificação da Instituição de Pagamento Parceira (Subadquirente ou VAN) ";" (, )"
+"DIMP";"R0300_INSTITUICAO_PARCEIRA";4;"COD_CNPJ";"NUMBER";22;"Y";0;9;562;0;0,00177935943060498;"NO";1;"Número de inscrição no CNPJ ";" (, )"
+"DIMP";"R0300_INSTITUICAO_PARCEIRA";5;"NOM_EMPRESARIAL";"VARCHAR2";150;"Y";;22;563;0;0,00177619893428064;"NO";1;"Nome Empresarial (Razão Social/denominação) da Instituição de Pagamento ";" (, )"
+"DIMP";"R0300_INSTITUICAO_PARCEIRA";6;"DSC_ENDERECO";"VARCHAR2";300;"Y";;30;512;0;0,001953125;"NO";1;"Endereço completo da instituição de pagamento";" (, )"
+"DIMP";"R0300_INSTITUICAO_PARCEIRA";7;"NUM_CEP";"NUMBER";22;"Y";0;6;447;0;0,00223713646532438;"NO";1;"Código de Endereçamento Postal ";" (, )"
+"DIMP";"R0300_INSTITUICAO_PARCEIRA";8;"COD_MUNICIPIO";"NUMBER";22;"Y";0;6;76;76;0,0131578947368421;"NO";1;"Código do município do estabelecimento ou do usuário, de acordo com tabela de municípios do IBGE ";" (, )"
+"DIMP";"R0300_INSTITUICAO_PARCEIRA";9;"COD_UF";"VARCHAR2";2;"Y";;3;15;0;0,0666666666666667;"NO";1;"Sigla da Unidade da Federação ";" (, )"
+"DIMP";"R0300_INSTITUICAO_PARCEIRA";10;"NOM_RESPONSAVEL";"VARCHAR2";150;"Y";;5;95;6349;0,0105263157894737;"NO";1;"Nome da Pessoa responsável para contato ";" (, )"
+"DIMP";"R0300_INSTITUICAO_PARCEIRA";11;"NUM_FONE_CONTATO";"NUMBER";22;"Y";0;3;118;5809;0,00847457627118644;"NO";1;"Número de telefone para contato (DDD+FONE) ";" (, )"
+"DIMP";"R0300_INSTITUICAO_PARCEIRA";12;"DSC_EMAIL_CONTATO";"VARCHAR2";60;"Y";;5;40;6880;0,025;"NO";1;"e-mail do contato para atendimento de solicitações";" (, )"
+"DIMP";"R0600_AUT_INSTITUICAO_PARCEIRA";1;"SEQ_R0600";"NUMBER";22;"N";0;3;99;0;0,0101010101010101;"NO";1;"Sequencial da tabela cancelamentos R0600";"PK_R0600_AUT_INSTITUICAO_PARCEIRA (PRIMARY KEY, ENABLED); SYS_C00252202 (CHECK, ENABLED)"
+"DIMP";"R0600_AUT_INSTITUICAO_PARCEIRA";2;"SEQ_R0000";"NUMBER";22;"Y";0;5;99;0;0,0101010101010101;"NO";1;"Sequencial único do arquivo";"FK_R0000_R_R0600 (FOREIGN KEY, ENABLED)"
+"DIMP";"R0600_AUT_INSTITUICAO_PARCEIRA";3;"TIP_AUTORIZACAO";"NUMBER";22;"Y";0;3;1;0;0,00505050505050505;"NO";1;"Tipo de registro de autorização 1 - Inclusão   2 - Exclusão ";"CKC_TIP_AUTORIZ_R0600_AUT_PARCEIRA (CHECK, ENABLED)"
+"DIMP";"R0600_AUT_INSTITUICAO_PARCEIRA";4;"COD_CNPJ";"NUMBER";22;"Y";0;9;4;0;0,00505050505050505;"NO";4;"CNPJ da instituição autorizada ";" (, )"
+"DIMP";"R0600_AUT_INSTITUICAO_PARCEIRA";5;"TIP_TRANSACAO";"NUMBER";22;"Y";0;3;2;0;0,5;"NO";1;"Existirão transações comerciais (registros 1120)";"CKC_TIP_TRANSACAO_R0600_AUT_PARCEIRA (CHECK, ENABLED)"
+"DIMP";"R0600_AUT_INSTITUICAO_PARCEIRA";6;"DSC_FANTASIA";"VARCHAR2";150;"Y";;19;4;0;0,25;"NO";1;"Nome fantasia da instituição autorizada ";" (, )"
+"DIMP";"R0600_AUT_INSTITUICAO_PARCEIRA";7;"DSC_ENDERECO";"VARCHAR2";300;"Y";;43;5;0;0,2;"NO";1;"Endereço da instituição autorizada";" (, )"
+"DIMP";"R0600_AUT_INSTITUICAO_PARCEIRA";8;"NUM_CEP";"NUMBER";22;"Y";0;6;4;0;0,25;"NO";1;"Código de Endereço Postal da instituição autorizada";" (, )"
+"DIMP";"R0600_AUT_INSTITUICAO_PARCEIRA";9;"COD_MUNICIPIO";"NUMBER";22;"Y";0;6;2;0;0,5;"NO";1;"Código do município da instituição autorizada, de acordo com tabela de municípios do IBGE ";" (, )"
+"DIMP";"R0600_AUT_INSTITUICAO_PARCEIRA";10;"COD_UF";"VARCHAR2";2;"Y";;3;2;0;0,5;"NO";1;"Sigla da Unidade da Federação";" (, )"
+"DIMP";"R0600_AUT_INSTITUICAO_PARCEIRA";11;"NOM_RESPONSAVEL";"VARCHAR2";150;"Y";;29;4;0;0,25;"NO";1;"Nome de contato ou responsável no estabelecimento ou do usuário ";" (, )"
+"DIMP";"R0600_AUT_INSTITUICAO_PARCEIRA";12;"NUM_TELEFONE";"NUMBER";22;"Y";0;7;4;0;0,25;"NO";1;"Telefone do contato (DDD+FONE)";" (, )"
+"DIMP";"R0600_AUT_INSTITUICAO_PARCEIRA";13;"DSC_MAIL";"VARCHAR2";60;"Y";;26;5;0;0,2;"NO";1;"E-mail do contato ou responsável pelo estabelecimento ou do usuário";" (, )"
+"DIMP";"R0600_AUT_INSTITUICAO_PARCEIRA";14;"DAT_INICIO_ATU";"DATE";7;"Y";;8;15;0;0,0666666666666667;"NO";1;"Data de habilitação da instituição autorizada como detentora de autonomia exclusiva para envio das informações ";" (, )"
+"DIMP";"R0600_AUT_INSTITUICAO_PARCEIRA";15;"DAT_FINAL_ATU";"DATE";7;"Y";;1;0;99;0;"NO";0;"Data de cancelamento habilitação da instituição autorizada como detentora de autonomia exclusiva para envio das informações ";" (, )"
+"DIMP";"R0700_IDENTIFICACAO_INTIMACAO";1;"SEQ_R0700";"NUMBER";22;"N";0;3;1;0;1;"NO";1;"Sequencial da tabela de identificação de intimação";"PK_R0700_IDENTIFICACAO_INTIMACAO (PRIMARY KEY, ENABLED); SYS_C00266812 (CHECK, ENABLED)"
+"DIMP";"R0700_IDENTIFICACAO_INTIMACAO";2;"SEQ_R0000";"NUMBER";22;"Y";0;4;1;0;1;"NO";1;"Sequencial único do arquivo";"FK_R0000_R_R0700 (FOREIGN KEY, ENABLED)"
+"DIMP";"R0700_IDENTIFICACAO_INTIMACAO";3;"NUM_IDENT_PROCESSO";"VARCHAR2";60;"Y";;36;1;0;1;"NO";1;"Identificação do Processo Administrativo ou Procedimento Fiscal ";" (, )"
+"DIMP";"R1100_RESUMO_MENSAL";1;"SEQ_R1100";"NUMBER";22;"N";0;6;73600802;0;0,0000000135868084698316;"NO";1;"Sequencial da tabela";"PK_R1100_RESUMO_MENSAL (PRIMARY KEY, ENABLED); SYS_C00243413 (CHECK, ENABLED)"
+"DIMP";"R1100_RESUMO_MENSAL";2;"SEQ_R0000";"NUMBER";22;"Y";0;5;10166;0;0,000091;"NO";254;"Sequencial único do arquivo";"FK_R0000_R_R1100 (FOREIGN KEY, ENABLED)"
+"DIMP";"R1100_RESUMO_MENSAL";3;"COD_IP_PARCEIRA";"VARCHAR2";30;"Y";;2;91;67391592;0,0000000805255418966342;"NO";91;"Código de identificação da Instituição de Pagamento Parceira (Subadquirente) - (campo 02 do Registro 0300). ";" (, )"
+"DIMP";"R1100_RESUMO_MENSAL";4;"COD_CLIENTE";"VARCHAR2";60;"Y";;17;7278592;0;0,000000137389209341587;"NO";1;"Código de identificação do Cliente (campo 02 do Registro 0100) ";" (, )"
+"DIMP";"R1100_RESUMO_MENSAL";5;"TIP_IND_COMEX";"NUMBER";22;"Y";0;3;2;0;0,5;"NO";1;"Indicador de transação de pagamento ao exterior 0 - Não 1 - Sim";" (, )"
+"DIMP";"R1100_RESUMO_MENSAL";6;"TIP_IND_EXTEMP";"NUMBER";22;"Y";0;3;2;0;0,5;"NO";1;"Indicador de informação extemporânea: 0 - Não 1 - Sim ";" (, )"
+"DIMP";"R1100_RESUMO_MENSAL";7;"DAT_INICIO";"DATE";7;"Y";;8;2290;0;0,000295;"NO";254;"Data Inicial das informações para este CNPJ/CPF ";" (, )"
+"DIMP";"R1100_RESUMO_MENSAL";8;"DAT_FINAL";"DATE";7;"Y";;8;2280;0;0,000294;"NO";254;"Data Final das informações para este CNPJ/CPF";" (, )"
+"DIMP";"R1100_RESUMO_MENSAL";9;"VLR_OPERACAO";"NUMBER";22;"Y";2;5;5605376;0;0,000000178400164413592;"NO";1;"Valor total das operações ";" (, )"
+"DIMP";"R1100_RESUMO_MENSAL";10;"QTD_OPERACAO";"NUMBER";22;"Y";0;4;29896;0;0,0000334492908750334;"NO";1;"Quantidade de operações ";" (, )"
+"DIMP";"R1100_RESUMO_MENSAL";11;"STA_RETIFICADO";"VARCHAR2";1;"Y";;2;2;0;0,00000000679340423491581;"NO";2;"Indica se arquivo foi notificado (N-não retificado; S-retificado)";"CKC_STA_RETIFICADO_R1100 (CHECK, ENABLED)"
+"DIMP";"R1110_OPERACAO_DIARIA";1;"SEQ_R1110";"NUMBER";22;"N";0;7;754095594;0;0,00000000132609182172201;"NO";1;"Sequencial do arquivo R1110";"PK_R1110_OPERACAO_DIARIA (PRIMARY KEY, ENABLED); SYS_C00264793 (CHECK, ENABLED)"
+"DIMP";"R1110_OPERACAO_DIARIA";2;"SEQ_R1100";"NUMBER";22;"Y";0;6;66433024;0;0,00000001505275448548;"NO";1;"Sequencial da tabela R1100";"FK_R1100_R_R1110 (FOREIGN KEY, ENABLED)"
+"DIMP";"R1110_OPERACAO_DIARIA";3;"COD_MCAPTURA";"VARCHAR2";80;"Y";;25;82149376;0;0;"NO";254;"Código do meio de captura (campo 02 do Registro 0200).";" (, )"
+"DIMP";"R1110_OPERACAO_DIARIA";4;"DAT_OPERACAO";"DATE";7;"Y";;8;2933;0;0,000272;"NO";254;"Data da operação ";" (, )"
+"DIMP";"R1110_OPERACAO_DIARIA";5;"VLR_OPERACAO";"NUMBER";22;"Y";2;5;4334592;0;0,000000230702220647295;"NO";1;"Valor total diário das operações realizadas na data ";" (, )"
+"DIMP";"R1110_OPERACAO_DIARIA";6;"QTD_OPERACAO";"NUMBER";22;"Y";0;4;11006;0;0,0000908595311648192;"NO";1;"Quantidade total diária de operações realizadas na data";" (, )"
+"DIMP";"R1110_OPERACAO_DIARIA";7;"NUM_CNPJ_ADQUIRENTE";"NUMBER";22;"Y";0;8;7588;81528521;0,000019;"NO";98;"CNPJ da Adquirente ou subadquirente que autorizou a transação, em branco para quando o declarante for o próprio adquirente. ";" (, )"
+"DIMP";"R1110_OPERACAO_DIARIA_TMP2";1;"SEQ_R1110";"NUMBER";22;"N";0;7;224082194;0;0,00000000446264820131134;"NO";1;"Sequencial do arquivo R1110";"PK_R1110_OPERACAO_DIARIA_TMP2 (PRIMARY KEY, ENABLED); SYS_C00243415 (CHECK, ENABLED)"
+"DIMP";"R1110_OPERACAO_DIARIA_TMP2";2;"SEQ_R1100";"NUMBER";22;"Y";0;6;28647424;0;0,0000000349071525593366;"NO";1;"Sequencial da tabela R1100";" (, )"
+"DIMP";"R1110_OPERACAO_DIARIA_TMP2";3;"COD_MCAPTURA";"VARCHAR2";30;"Y";;15;6121984;0;0,000000163345738897717;"NO";1;"Código do meio de captura (campo 02 do Registro 0200).";" (, )"
+"DIMP";"R1110_OPERACAO_DIARIA_TMP2";4;"DAT_OPERACAO";"DATE";7;"Y";;8;1826;0;0,000547645125958379;"NO";1;"Data da operação ";" (, )"
+"DIMP";"R1110_OPERACAO_DIARIA_TMP2";5;"VLR_OPERACAO";"NUMBER";22;"Y";2;5;2519808;0;0,000000396855633445088;"NO";1;"Valor total diário das operações realizadas na data ";" (, )"
+"DIMP";"R1110_OPERACAO_DIARIA_TMP2";6;"QTD_OPERACAO";"NUMBER";22;"Y";0;4;5705;0;0,000175284837861525;"NO";1;"Quantidade total diária de operações realizadas na data";" (, )"
+"DIMP";"R1110_OPERACAO_DIARIA_TMP2";7;"NUM_CNPJ_ADQUIRENTE";"NUMBER";22;"Y";0;7;5166;66244125;0,000193573364305072;"NO";1;"CNPJ da Adquirente ou subadquirente que autorizou a transação, em branco para quando o declarante for o próprio 
+adquirente. ";" (, )"
+"DIMP";"R1115_OPERACAO_COMPROVANTE";1;"SEQ_R1115";"NUMBER";22;"N";0;7;6983765842;0;0,000000000143189222351364;"NO";1;"Sequencial do R1115";"PK_R1115_OPERACAO_COMPROVANTE (PRIMARY KEY, ENABLED); SYS_C00243417 (CHECK, ENABLED)"
+"DIMP";"R1115_OPERACAO_COMPROVANTE";2;"SEQ_R1110";"NUMBER";22;"Y";0;7;924581888;0;0,00000000108156996473632;"NO";1;"Sequencial do arquivo";"FK_R1110_R_R1115 (FOREIGN KEY, ENABLED)"
+"DIMP";"R1115_OPERACAO_COMPROVANTE";3;"NUM_NSU";"VARCHAR2";30;"Y";;9;1600258048;2296476622;0;"NO";254;"Número sequencial único atribuído pela adquirente.  Validação:Se NSU ficar em branco obrigatório o preenchimento do ID_TRANSAC. ";" (, )"
+"DIMP";"R1115_OPERACAO_COMPROVANTE";4;"COD_AUTORIZACAO";"VARCHAR2";30;"Y";;5;323518464;3747144789;0;"NO";254;"Identificação do código de autorização atribuído pela Instituição de Pagamento. ";" (, )"
+"DIMP";"R1115_OPERACAO_COMPROVANTE";5;"DSC_ID_TRANSACAO";"VARCHAR2";30;"Y";;15;3856662528;2448307795;0;"NO";254;"Identificação da transação de pagamento autorizada e atribuído pela Instituição de Pagamento ou Identificador do Pedido atribuido pelo intermediador de transações (marketplace), quando diferente do NSU ";" (, )"
+"DIMP";"R1115_OPERACAO_COMPROVANTE";6;"TIP_IND_SPLIT";"NUMBER";22;"Y";0;3;2;0;0,0000000000715946111756821;"NO";2;"informar se a operação sofre split de pagamento. Valores Válidos: [0,1] Campo 06  (BANDEIRA)  ";"CKC_TIP_IND_SPLIT_R1115 (CHECK, ENABLED)"
+"DIMP";"R1115_OPERACAO_COMPROVANTE";7;"NUM_BANDEIRA";"NUMBER";22;"Y";0;3;31;496054177;0,0000000000770687764527834;"NO";31;"Bandeira do Cartão do Cliente ";" (, )"
+"DIMP";"R1115_OPERACAO_COMPROVANTE";8;"NUM_HORA_TRANSACAO";"NUMBER";22;"Y";0;5;86080;0;0,000011;"NO";254;"informar a hora da operação.  Validação: [hhmmss] ";" (, )"
+"DIMP";"R1115_OPERACAO_COMPROVANTE";9;"VLR_OPERACAO";"NUMBER";22;"Y";2;4;2190336;0;0;"NO";254;"valor da operação";" (, )"
+"DIMP";"R1115_OPERACAO_COMPROVANTE";10;"COD_NAT_OPERACAO";"NUMBER";22;"Y";0;3;11;0;0,0000000000715946111756821;"NO";11;"  informar a natureza da operação realizada no comprovante de pagamento referenciado. Valores Válidos:[1,2,3,4,5,6,7,8,9,10,11]
+1 ¿ Crédito
+2 ¿ Débito
+3 ¿ Boleto de transações próprias
+4 ¿ Transferência de Recursos
+5 ¿ Pagamento efetuado em dinheiro ou por outra estrutura
+6 ¿ PIX  (válido para arquivos enviados a partir de 11/2021) 7 ¿ Voucher
+8 ¿ Saque em estabelecimento comercial
+9 ¿ Outros (válido para arquivos enviados até 11/2021)
+10  ¿ Depósito
+11 ¿ Recepção de pagamento de boletos, guias emitidos por terceiros e recargas de celular
+";"CKC_COD_NAT_OPERACAO_R1115 (CHECK, ENABLED)"
+"DIMP";"R1115_OPERACAO_COMPROVANTE";11;"DSC_GEO";"VARCHAR2";60;"Y";;2;2;6973573228;0,5;"NO";1;"Antena de Celular que autorizou a operação";" (, )"
+"DIMP";"R1115_OPERACAO_COMPROVANTE";12;"DAT_OPERACAO";"DATE";7;"Y";;2;396;6925260565;0,00000000854623763254723;"NO";254;"Data da operacao do registro R1110.";" (, )"
+"DIMP";"R1115_OPERACAO_COMPROVANTE";13;"TIP_IND_NAT_JUR";"NUMBER";22;"Y";0;2;2;6317709882;0,5;"NO";1;"Natureza Jurídica da Origem da Operação:  0 ¿ CPF (PF), 1 ¿ CNPJ (PJ)";" (, )"
+"DIMP";"R1115_OPERACAO_COMPROVANTE";14;"TIP_IND_TIP_PIX";"NUMBER";22;"Y";0;2;2;6449249345;0,000000000935424823754317;"NO";2;"ndicador de tipo de PIX:  0 ¿ Dinâmico ,1 ¿ Estático";" (, )"
+"DIMP";"R1120_INTER_SERVICO_NEGOCIO";1;"SEQ_R1120";"NUMBER";22;"N";0;7;231295852;0;0,00000000432346707194732;"NO";1;"Sequencial da tabela.";"PK_R1120_INTER_SERVICO_NEGOCIO (PRIMARY KEY, ENABLED); SYS_C00250716 (CHECK, ENABLED)"
+"DIMP";"R1120_INTER_SERVICO_NEGOCIO";2;"SEQ_R1115";"NUMBER";22;"Y";0;7;231295852;0;0,00000000432346707194732;"NO";1;"Sequencial do R1115";"FK_R1115_R_R1120 (FOREIGN KEY, ENABLED)"
+"DIMP";"R1120_INTER_SERVICO_NEGOCIO";3;"COD_UF";"VARCHAR2";2;"Y";;3;28;0;0,0357142857142857;"NO";1;"Informar a UF para qual foi destinada a transação comercial ou de prestação de serviço";" (, )"
+"DIMP";"R1120_INTER_SERVICO_NEGOCIO";4;"NUM_CHAVE_NF";"VARCHAR2";44;"Y";;2;1694208;229413446;0,000000590246297975219;"NO";1;"Informar a chave da NFe ou NFCe";" (, )"
+"DIMP";"R1120_INTER_SERVICO_NEGOCIO";5;"COD_CNPJ";"NUMBER";22;"Y";0;2;8890;227693583;0,000112485939257593;"NO";1;"CNPJ do destinatário da transação";" (, )"
+"DIMP";"R1120_INTER_SERVICO_NEGOCIO";6;"COD_CPF";"NUMBER";22;"Y";0;2;2210304;219617787;0,00000045242645355571;"NO";1;"CPF do destinatário da transação";" (, )"
+"DIMP";"R1120_INTER_SERVICO_NEGOCIO";7;"COD_ID_DEST";"VARCHAR2";20;"Y";;17;20836352;15280334;0,0000000479930459996068;"NO";1;"Identificação de destinatários sem cadastro de CPF ou CNPJ ";" (, )"
+"DIMP";"R1120_INTER_SERVICO_NEGOCIO";8;"NUM_CHAVE_NFSE";"VARCHAR2";44;"Y";;0;0;231295852;0;"NO";0;"Informar a chave da NFS-e N";" (, )"
+"DIMP";"R1120_INTER_SERVICO_NEGOCIO";9;"NUM_CHAVE_DCE";"VARCHAR2";44;"Y";;0;0;231295852;0;"NO";0;"Informar a chave da DC-e  ";" (, )"
+"DIMP";"R1120_INTER_SERVICO_NEGOCIO";10;"NUM_IDENT_PEDIDO";"VARCHAR2";60;"Y";;2;27;221148500;0,037037037037037;"NO";1;"Informar o identificador do pedido gerado no Intermediador da transação comercial ou serviço ";" (, )"
+"DIMP";"R1200_CANCEL_EXTEMPORANEO";1;"SEQ_R1200";"NUMBER";22;"N";0;6;1311278;0;0,000000762614792591655;"NO";1;"Sequencial da tabela cancelamentos R1200 ";"PK_R1200_CANCEL_EXTEMPORANEO (PRIMARY KEY, ENABLED); SYS_C00243421 (CHECK, ENABLED)"
+"DIMP";"R1200_CANCEL_EXTEMPORANEO";2;"SEQ_R0000";"NUMBER";22;"Y";0;5;2985;0;0,000268;"NO";254;"Sequencial único do arquivo";"FK_R0000_R_R1200 (FOREIGN KEY, ENABLED)"
+"DIMP";"R1200_CANCEL_EXTEMPORANEO";3;"COD_IP_PARCEIRA";"VARCHAR2";30;"Y";;2;57;1005379;0,0175438596491228;"NO";1;"Código de identificação da Instituição de Pagamento Parceira (Subadquirente) - (campo 02 do Registro 0300). ";" (, )"
+"DIMP";"R1200_CANCEL_EXTEMPORANEO";4;"COD_CLIENTE";"VARCHAR2";60;"Y";;14;127936;0;0,000007;"NO";254;"Código de identificação do Cliente (campo 02 do Registro 0100) ";" (, )"
+"DIMP";"R1200_CANCEL_EXTEMPORANEO";5;"COD_MCAPTURA";"VARCHAR2";50;"Y";;10;75968;0;0,000005;"NO";254;"Código do Meio de Captura (Campo 02 do Registro 0200) ";" (, )"
+"DIMP";"R1200_CANCEL_EXTEMPORANEO";6;"NUM_NSU";"VARCHAR2";30;"Y";;6;502016;758608;0,00000199196838347782;"NO";1;"Número Sequencial único atribuído pela adquirente da transação original ";" (, )"
+"DIMP";"R1200_CANCEL_EXTEMPORANEO";7;"COD_AUTORIZACAO";"VARCHAR2";30;"Y";;4;271648;861096;0,00000368123453881494;"NO";1;"Identificação do código de autorização atribuído pela Instituição de Pagamento da transação original ";" (, )"
+"DIMP";"R1200_CANCEL_EXTEMPORANEO";8;"DSC_ID_TRANSACAO";"VARCHAR2";30;"Y";;16;918656;186242;0,00000108854674655148;"NO";1;"dentificação da transação de pagamento original, autorizada e atribuído pela Instituição de Pagamento, quando diferente do NSU";" (, )"
+"DIMP";"R1200_CANCEL_EXTEMPORANEO";9;"DAT_OPERACAO";"DATE";7;"Y";;8;2272;0;0,00041;"NO";254;"Data da transação original";" (, )"
+"DIMP";"R1200_CANCEL_EXTEMPORANEO";10;"DAT_CANCELAMENTO";"DATE";7;"Y";;8;2128;0;0,000469924812030075;"NO";1;"Data do cancelamento ";" (, )"
+"DIMP";"R1200_CANCEL_EXTEMPORANEO";11;"TIP_CANCELAMENTO";"NUMBER";22;"Y";0;3;3;0;0,000000381307396295827;"NO";3;"Tipo do cancelamento: 
+0 - chargeback 
+1 - cancelamento operacional 
+2 - correção de lançamento ";"CKC_TIP_CANCELAMENTO_R1200 (CHECK, ENABLED)"
+"DIMP";"R1200_CANCEL_EXTEMPORANEO";12;"VLR_ORIGINAL";"NUMBER";22;"Y";2;5;114160;0;0,00000875963559915907;"NO";1;"Valor original (total) da operação 
+a ser cancelada. ";" (, )"
+"DIMP";"R1200_CANCEL_EXTEMPORANEO";13;"VLR_CANCELAMENTO";"NUMBER";22;"Y";2;5;110672;0;0,00000903570912245193;"NO";1;"Valor cancelado da respectiva 
+operação ";" (, )"
+"DIMP";"R1200_CANCEL_EXTEMPORANEO";14;"COD_NAT_OPERACAO";"NUMBER";22;"Y";0;0;0;1311278;0;"NO";0;"Natureza da operacao
+1 - Cartao de Credito
+2 - Cartao de Debito
+3 - Boleto de transacoes
+proprias
+4 - Transferencia de Recursos
+5 - Pagamento efetuado em
+dinheiro ou por outra estrutura
+6 - PIX (valido para arquivos
+enviados a partir de 11/2021)
+7 - Voucher e cartao pre pago
+8 - Saque ou troco em
+estabelecimento comercial ou
+operacoes de PIX Saque ou Pix
+Troco.
+11 - Recepcao de pagamento de
+boletos, guias emitidos por
+terceiros e recargas de celular
+realizado por estabelecimento
+comercial ou prestador de
+servicos
+12 ¿ PIX Garantido
+";" (, )"
+"DIMP";"R1200_CANCEL_EXTEMPORANEO";15;"TIP_IND_NAT_JUR";"NUMBER";22;"Y";0;0;0;1311278;0;"NO";0;"Natureza Juridica da Origem da
+Operacao:
+0 ¿ CPF (PF)
+1 ¿ CNPJ (PJ)";" (, )"
+"DIMP";"R1200_CANCEL_EXTEMPORANEO";16;"TIP_IND_TIP_PIX";"NUMBER";22;"Y";0;0;0;1311278;0;"NO";0;"Indicador de tipo de PIX:
+0 ¿ Dinamico
+1 ¿ Estatico";" (, )"
+"DIMP";"R1220_CANC_TRANSACAO_INTER";1;"SEQ_R1200";"NUMBER";22;"Y";0;6;625088;0;0,00000159977475171496;"NO";1;"Sequencial da tabela cancelamentos R1200 ";"FK_R1200_R_R1220 (FOREIGN KEY, ENABLED)"
+"DIMP";"R1220_CANC_TRANSACAO_INTER";2;"SEQ_R1220";"NUMBER";22;"N";0;5;632477;0;0,00000158108516199008;"NO";1;"sequencial da tabela R1220";"PK_R1220_CANC_TRANSACAO_INTER (PRIMARY KEY, ENABLED); SYS_C00250719 (CHECK, ENABLED)"
+"DIMP";"R1220_CANC_TRANSACAO_INTER";3;"COD_UF";"VARCHAR2";2;"Y";;3;27;0;0,037037037037037;"NO";1;"Informar a UF para qual foi destinada a transação comercial ou de prestação de serviço ";" (, )"
+"DIMP";"R1220_CANC_TRANSACAO_INTER";4;"NUM_CHAVE_NF";"VARCHAR2";44;"Y";;2;6610;625846;0,000151285930408472;"NO";1;"Informar a chave da NFe ou NFCe ";" (, )"
+"DIMP";"R1220_CANC_TRANSACAO_INTER";5;"COD_CNPJ";"NUMBER";22;"Y";0;2;91;632217;0,010989010989011;"NO";1;"CNPJ do destinatário da transação";" (, )"
+"DIMP";"R1220_CANC_TRANSACAO_INTER";6;"COD_CPF";"NUMBER";22;"Y";0;4;162688;412921;0,00000614673485444532;"NO";1;"CPF do destinatário da transação";" (, )"
+"DIMP";"R1220_CANC_TRANSACAO_INTER";7;"COD_ID_DEST";"VARCHAR2";20;"Y";;8;159968;219816;0,00000625125025005001;"NO";1;"Identificação de destinatários sem cadastro de CPF ou CNPJ";" (, )"
+"DIMP";"R1500_RES_OPERACAO_FINANCEIRA";1;"SEQ_R1500";"NUMBER";22;"N";0;6;54216769;0;0,0000000184444779437152;"NO";1;"Sequencial da tabela cancelamentos R1200 ";"PK_R1500_RES_OPERACAO_FINANCEIRA (PRIMARY KEY, ENABLED); SYS_C00266815 (CHECK, ENABLED)"
+"DIMP";"R1500_RES_OPERACAO_FINANCEIRA";2;"SEQ_R0000";"NUMBER";22;"Y";0;5;2514;0;0,000264;"NO";254;"Sequencial único do arquivo";"FK_R0000_R_R1500 (FOREIGN KEY, ENABLED)"
+"DIMP";"R1500_RES_OPERACAO_FINANCEIRA";3;"COD_IP_PARCEIRA";"VARCHAR2";30;"Y";;0;0;54216769;0;"NO";0;"Código de identificação da Instituição Parceira - (campo 02 do Registro 0300). 
+";" (, )"
+"DIMP";"R1500_RES_OPERACAO_FINANCEIRA";4;"COD_CLIENTE";"VARCHAR2";60;"Y";;17;2056192;0;0,000000486335906374502;"NO";1;"Código de identificação do Cliente (campo 02 do Registro 0100) ";" (, )"
+"DIMP";"R1500_RES_OPERACAO_FINANCEIRA";5;"TIP_IND_COMEX";"NUMBER";22;"Y";0;2;1;0;1;"NO";1;"ndicador de transação de pagamento ao exterior que não se enquadrem no item ¿g¿ da descrição do registro 1500  0 ¿ Não   1 ¿ Sim 
+";" (, )"
+"DIMP";"R1500_RES_OPERACAO_FINANCEIRA";6;"TIP_IND_EXTEMP";"NUMBER";22;"Y";0;3;2;0;0,5;"NO";1;"Indicador de informação extemporânea:  0 ¿ Não  1 ¿ Sim ";" (, )"
+"DIMP";"R1500_RES_OPERACAO_FINANCEIRA";7;"NUM_PERIODO";"NUMBER";22;"Y";0;5;107;0;0,00000000922223897185758;"NO";107;"Período a que se referem as transações consolidadas (AAAAMM) 
+";" (, )"
+"DIMP";"R1500_RES_OPERACAO_FINANCEIRA";8;"VLR_OPERACAO";"NUMBER";22;"Y";2;5;5795840;0;0,000000172537544169611;"NO";1;"Valor total das operações ";" (, )"
+"DIMP";"R1500_RES_OPERACAO_FINANCEIRA";9;"QTD_OPERACAO";"NUMBER";22;"Y";0;4;18304;0;0,0000546328671328671;"NO";1;"Quantidade de operações";" (, )"
+"DIMP";"R1500_RES_OPERACAO_FINANCEIRA";10;"COD_MCAPTURA";"VARCHAR2";50;"Y";;30;10241024;0;0,0000000976464853514649;"NO";1;"Identificação do Código informado no campo 02 do Registro 0200.";" (, )"
+"DIMP";"R1500_RES_OPERACAO_FINANCEIRA";11;"COD_NAT_OPERACAO";"NUMBER";22;"Y";0;3;4;0;0,00000000922223897185758;"NO";4;"Natureza da operação : 3 ¿ Boleto de transações próprias 4 ¿ Transferência de Recursos 6 ¿ PIX 8 ¿ Saque ou troco em estabelecimento comercial ou operações de PIX Saque ou Pix Troco. ";"CKC_COD_NAT_OPERACAO_R1500 (CHECK, ENABLED)"
+"DIMP";"R1500_RES_OPERACAO_FINANCEIRA";12;"TIP_IND_NAT_JUR";"NUMBER";22;"Y";0;3;2;379474;0,00000000928724223607445;"NO";2;"Natureza Jurídica da Origem da Operação:  0 ¿ CPF (PF) ,1 ¿ CNPJ (PJ)
+";" (, )"
+"DIMP";"R1500_RES_OPERACAO_FINANCEIRA";13;"TIP_IND_TIP_PIX";"NUMBER";22;"Y";0;3;2;7251817;0,5;"NO";1;"Indicador de tipo de PIX:  0 ¿ Dinâmico , 1 ¿ Estático";" (, )"
+"DIMP";"R1600_CANCEL_EXTEMPORANEO";1;"SEQ_R1600";"NUMBER";22;"N";0;4;7208;0;0,00013873473917869;"NO";1;"Sequencial da tabela cancelamentos R1600";"PK_R1600_CANCEL_EXTEMPORANEO (PRIMARY KEY, ENABLED); SYS_C00266819 (CHECK, ENABLED)"
+"DIMP";"R1600_CANCEL_EXTEMPORANEO";2;"SEQ_R0000";"NUMBER";22;"Y";0;5;192;0;0,0000693673695893452;"NO";192;"Sequencial único do arquivo";"FK_R0000_R_R1600 (FOREIGN KEY, ENABLED)"
+"DIMP";"R1600_CANCEL_EXTEMPORANEO";3;"COD_IP_PARCEIRA";"VARCHAR2";30;"Y";;0;0;7208;0;"NO";0;"Código de identificação da Instituição Parceira - (campo 02 do Registro 0300). 
+";" (, )"
+"DIMP";"R1600_CANCEL_EXTEMPORANEO";4;"COD_CLIENTE";"VARCHAR2";60;"Y";;21;3238;0;0,000269;"NO";254;"Código de identificação do Cliente (campo 02 do Registro 0100) ";" (, )"
+"DIMP";"R1600_CANCEL_EXTEMPORANEO";5;"NUM_PERIODO";"NUMBER";22;"Y";0;5;47;0;0,0000693673695893452;"NO";47;"Período a que se referem as transações consolidadas (AAAAMM) 
+";" (, )"
+"DIMP";"R1600_CANCEL_EXTEMPORANEO";6;"VLR_CANCELAMENTO";"NUMBER";22;"Y";2;4;3179;0;0,000314564328405159;"NO";1;"Valor cancelado das operações";" (, )"
+"DIMP";"R1600_CANCEL_EXTEMPORANEO";7;"COD_NAT_OPERACAO";"NUMBER";22;"Y";0;3;4;0;0,25;"NO";1;"Natureza da operação : 3 ¿ Boleto de transações próprias 4 ¿ Transferência de Recursos 6 ¿ PIX 8 ¿ Saque ou troco em estabelecimento comercial ou operações de PIX Saque ou Pix Troco. ";"CKC_COD_NAT_OPERACAO_R1600 (CHECK, ENABLED)"
+"DIMP";"R1600_CANCEL_EXTEMPORANEO";8;"COD_MCAPTURA";"VARCHAR2";50;"Y";;24;5076;0;0,000197005516154452;"NO";1;"Identificação do Código informado no campo 02 do Registro 0200.";" (, )"
