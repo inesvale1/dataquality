@@ -14,3 +14,4 @@ python run_model_quality.py --base-folder /path/to/Analise\ Esquemas
 ```
 
 The base folder must contain subfolders with files like `metadados_<scheme>.csv`.
+The files generated with the data model issues are located in the same folder and have the prefix 'issues_metadata_<scheme>.csv`.
