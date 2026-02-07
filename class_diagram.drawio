@@ -1,0 +1,66 @@
+<mxfile host="app.diagrams.net" modified="2026-02-07T00:00:00.000Z" agent="Codex" version="20.8.10" type="device">
+  <diagram id="class-diagram" name="Class Diagram">
+    <mxGraphModel dx="1060" dy="620" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="rule" value="Rule&#xa;—&#xa;code: str&#xa;desc: str&#xa;check(df) -> Series" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#2A5CAA;fillColor=#E9F1FF;" vertex="1" parent="1">
+          <mxGeometry x="60" y="60" width="230" height="120" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="metadata_validator" value="MetadataValidator&#xa;—&#xa;df: DataFrame&#xa;issues_df: DataFrame&#xa;run_all()" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#2A5CAA;fillColor=#E9F1FF;" vertex="1" parent="1">
+          <mxGeometry x="60" y="240" width="230" height="120" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="metadata_calc" value="MetadataQualityMetricsCalculator&#xa;—&#xa;validator: MetadataValidator&#xa;calculate_sections()" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#0F7B6C;fillColor=#E7FAF6;" vertex="1" parent="1">
+          <mxGeometry x="360" y="240" width="280" height="120" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="scheme_loader" value="SchemeLoader&#xa;—&#xa;get_dictionary()" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#7A4E00;fillColor=#FFF2CC;" vertex="1" parent="1">
+          <mxGeometry x="700" y="60" width="200" height="100" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="run_use_case" value="run_model_quality (use case)&#xa;—&#xa;RunOptions&#xa;orchestration" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#7A4E00;fillColor=#FFF2CC;" vertex="1" parent="1">
+          <mxGeometry x="700" y="240" width="240" height="120" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="excel_exporter" value="save_excel_report&#xa;build_section_df" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#7A4E00;fillColor=#FFF2CC;" vertex="1" parent="1">
+          <mxGeometry x="700" y="420" width="200" height="100" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="safe_iqmd" value="safe_iqmd()" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#7A4E00;fillColor=#FFF2CC;" vertex="1" parent="1">
+          <mxGeometry x="700" y="560" width="200" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_rule_metadata_validator" style="endArrow=block;html=1;strokeColor=#2A5CAA;" edge="1" parent="1" source="rule" target="metadata_validator">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_metadata_validator_calc" style="endArrow=block;html=1;strokeColor=#0F7B6C;" edge="1" parent="1" source="metadata_validator" target="metadata_calc">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_loader_usecase" style="endArrow=block;html=1;strokeColor=#7A4E00;" edge="1" parent="1" source="scheme_loader" target="run_use_case">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_usecase_metadata_validator" style="endArrow=block;html=1;strokeColor=#7A4E00;" edge="1" parent="1" source="run_use_case" target="metadata_validator">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_usecase_exporter" style="endArrow=block;html=1;strokeColor=#7A4E00;" edge="1" parent="1" source="run_use_case" target="excel_exporter">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_calc_exporter1" style="endArrow=block;html=1;strokeColor=#7A4E00;" edge="1" parent="1" source="metadata_calc" target="excel_exporter">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_calc_safe_iqmd1" style="endArrow=block;html=1;strokeColor=#7A4E00;" edge="1" parent="1" source="metadata_calc" target="safe_iqmd">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
