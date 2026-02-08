@@ -9,12 +9,12 @@ from typing import Any, Dict, List, Optional
 import pandas as pd
 
 
-class SchemeLoader:
+class schemaLoader:
     """Load metadata CSV files (metadados_*.csv) from a base folder.
 
     The loader walks all subfolders under `base_folder`, finds CSV files matching
-    `metadados_<scheme>.csv`, loads each file into a typed DataFrame, and stores
-    the result in a dictionary keyed by `<scheme>`.
+    `metadados_<schema>.csv`, loads each file into a typed DataFrame, and stores
+    the result in a dictionary keyed by `<schema>`.
 
     This implementation is intentionally CSV-based, so you can later replace it
     with an Oracle-backed loader while keeping the same interface.
@@ -23,6 +23,7 @@ class SchemeLoader:
     REQUIRED = [
         "OWNER",
         "TABLE_NAME",
+        "NUM_ROWS",
         "COLUMN_NAME",
         "DATA_TYPE",
         "NULLABLE",
@@ -33,13 +34,24 @@ class SchemeLoader:
         "IS_UNIQUE",
     ]
 
-    STRING_COLS = ["OWNER", "TABLE_NAME", "COLUMN_NAME", "DATA_TYPE", "COMMENTS", "CONSTRAINTS"]
-    INT_COLS = ["COLUMN_ID", "DATA_LENGTH", "DATA_SCALE", "AVG_COL_LEN", "NUM_DISTINCT", "NUM_NULLS", "NUM_BUCKETS"]
-    DOUBLE_COLS = ["DENSITY"]
+    STRING_COLS = ["OWNER", "TABLE_NAME", "COLUMN_NAME", "DATA_TYPE", "COMMENTS", "CONSTRAINTS", "DUPLICATED"]
+    INT_COLS = [
+        "NUM_ROWS",
+        "COLUMN_ID",
+        "DATA_LENGTH",
+        "DATA_SCALE",
+        "AVG_COL_LEN",
+        "NUM_DISTINCT",
+        "NUM_NULLS",
+        "NUM_BUCKETS",
+        "TABLE_ROWS",
+        "ROW_COUNT",
+    ]
+    DOUBLE_COLS = []
     BOOL_COLS = ["NULLABLE", "DEFAULT_ON_NULL", "IS_PK", "IS_FK", "IS_UNIQUE"]
 
-    _TRUE_TOKENS = {"y", "yes", "sim", "s", "1", "true", "True", "verdadeiro", "t", "on"}
-    _FALSE_TOKENS = {"n", "no", "nao", "não", "0", "false", "False", "falso", "f", "off"}
+    _TRUE_TOKENS = {"Y", "YES", "SIM", "S", "1", "TRUE", "VERDADE", "VERDADEIRO", "T", "ON"}
+    _FALSE_TOKENS = {"N", "NO", "NÃO", "NAO", "0", "FALSE", "FALSO", "F", "OFF"}
 
     def __init__(self, base_folder: Path, columns_to_delete: Optional[List[str]] = None):
         self.base_folder: Path = Path(base_folder)
@@ -75,6 +87,10 @@ class SchemeLoader:
                 if csv_path.suffix.lower() != ".csv":
                     continue
 
+                if fname and "dte" not in fname.lower():
+                    print(f"Skipping file: {csv_path}")
+                    continue
+
                 df = self._load_and_typed_file(csv_path)
 
                 if self.columns_to_delete:
@@ -93,7 +109,7 @@ class SchemeLoader:
     def _to_bool(self, v: Any) -> bool:
         if pd.isna(v):
             return False
-        s = str(v).strip()
+        s = str(v).strip().upper()
         if s in self._TRUE_TOKENS:
             return True
         if s in self._FALSE_TOKENS:

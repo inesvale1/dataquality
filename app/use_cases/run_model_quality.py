@@ -6,7 +6,7 @@ from typing import List, Optional
 
 from dataquality.domain.config.validation_config import ValidationConfig
 from dataquality.domain.validators.metadata_validator import MetadataValidator
-from dataquality.infrastructure.io.csv.scheme_loader import SchemeLoader
+from dataquality.infrastructure.io.csv.schema_loader import schemaLoader
 from dataquality.app.orchestration.metadata_quality_metrics_calculator import MetadataQualityMetricsCalculator
 from dataquality.adapters.outbound.exporters.excel_report import save_excel_report
 
@@ -25,20 +25,20 @@ def run_model_quality(options: RunOptions) -> None:
     
     print("\nSummary:")
        
-    loader = SchemeLoader(Path(options.base_folder), options.columns_to_delete)
+    loader = schemaLoader(Path(options.base_folder), options.columns_to_delete)
     dfs = loader.get_dictionary()
 
     print(f"Total dataframes loaded: {len(dfs)}")
     print(f"Dictionary keys: {list(dfs.keys())}")
 
-    for scheme_name, df in dfs.items():
-        #if scheme_name != "cadastro":  # --- IGNORE FOR TESTS---
+    for schema_name, df in dfs.items():
+        #if schema_name != "cadastro":  # --- IGNORE FOR TESTS---
         #    continue                     # --- IGNORE ---
         
         df_schema_metadata = df.copy() # preserve original for the Excel first sheet
 
         print("\n==============================")
-        print(f"Validating scheme: {scheme_name}")
+        print(f"Validating schema: {schema_name}")
         print("==============================")
         
         validator = MetadataValidator(
@@ -53,13 +53,13 @@ def run_model_quality(options: RunOptions) -> None:
             continue
 
         metadata_calculator = MetadataQualityMetricsCalculator(
-            scheme_name=scheme_name,
+            schema_name=schema_name,
             validator=validator,
             df_schema_metadata=df_schema_metadata
         )
         sections = metadata_calculator.calculate_sections()
 
-        out_path = save_excel_report(options.base_folder, scheme_name, sections)
+        out_path = save_excel_report(options.base_folder, schema_name, sections)
 
         print(f"Issues saved to {out_path}")
 

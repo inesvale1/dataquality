@@ -30,6 +30,7 @@ class MetadataValidator:
         required = {
             "OWNER",
             "TABLE_NAME",
+            "NUM_ROWS",
             "COLUMN_NAME",
             "DATA_TYPE",
             "DATA_LENGTH",
@@ -88,6 +89,48 @@ class MetadataValidator:
     def get_number_number_types(self) -> int:
         return int(self.df["DATA_TYPE"].str.upper().eq("NUMBER").sum())
 
+    def get_rows_by_table(self) -> pd.Series:
+        col = self._get_rows_column()
+        if not col:
+            return pd.Series(dtype=int)
+
+        values = pd.to_numeric(self.df[col], errors="coerce")
+        if values.isna().all():
+            cleaned = (
+                self.df[col]
+                .astype(str)
+                .str.replace(".", "", regex=False)
+                .str.replace(",", "", regex=False)
+            )
+            values = pd.to_numeric(cleaned, errors="coerce")
+
+        rows_by_table = values.groupby(self.df["TABLE_NAME"]).max().fillna(0).astype(int)
+        return rows_by_table
+
+    def get_total_rows_schema(self) -> int:
+        rows_by_table = self.get_rows_by_table()
+        if rows_by_table.empty:
+            return 0
+        return int(rows_by_table.sum())
+
+    def get_total_cells_schema(self) -> int:
+        rows_by_table = self.get_rows_by_table()
+        if rows_by_table.empty:
+            return 0
+        cols_by_table = self.df.groupby("TABLE_NAME")["COLUMN_NAME"].nunique()
+        aligned = rows_by_table.reindex(cols_by_table.index).fillna(0).astype(int)
+        total_cells = (aligned * cols_by_table).sum()
+        return int(total_cells)
+
+    def get_num_nulls_nullable_without_default(self) -> int:
+        if "NUM_NULLS" not in self.df.columns:
+            return 0
+        nullable = self.df["NULLABLE"].astype(bool)
+        default_on_null = self.df["DEFAULT_ON_NULL"].astype(bool)
+        mask = nullable & (~default_on_null)
+        num_nulls = pd.to_numeric(self.df["NUM_NULLS"], errors="coerce").fillna(0)
+        return int(num_nulls[mask].sum())
+
     # ----------------------------- public API -----------------------------
     def run_all(self) -> pd.DataFrame:
         self._validate_tables()
@@ -111,6 +154,12 @@ class MetadataValidator:
     def _is_length_required(self) -> pd.Series:
         return self.df["DATA_TYPE"].str.upper().isin(self.LENGTH_REQUIRED_TYPES)
 
+    def _get_rows_column(self) -> str | None:
+        for candidate in ("NUM_ROWS", "TABLE_ROWS", "ROW_COUNT"):
+            if candidate in self.df.columns:
+                return candidate
+        return None
+
     def _validate_tables(self) -> None:
         plural_mask = self.df["TABLE_NAME"].str.upper().str.endswith("S")
         for _, row in self.df[plural_mask].drop_duplicates(subset=["OWNER", "TABLE_NAME"]).iterrows():
@@ -119,8 +168,8 @@ class MetadataValidator:
                 continue
             self.list_tab_plural.append(
                 {
-                    "rule": "MQME20",
-                    "desc": "Total number of tables with plural names",
+                    "rule": "MQME012",
+                    "desc": "Tables with plural names",
                     "owner": row["OWNER"],
                     "table": row["TABLE_NAME"],
                 }
@@ -130,8 +179,8 @@ class MetadataValidator:
         for _, row in self.df[too_long_mask].drop_duplicates(subset=["OWNER", "TABLE_NAME"]).iterrows():
             self.list_tab_name_too_long.append(
                 {
-                    "rule": "MQME21",
-                    "desc": "Total number of tables with names longer than recommended",
+                    "rule": "MQME013",
+                    "desc": "Tables with names longer than recommended",
                     "owner": row["OWNER"],
                     "table": row["TABLE_NAME"],
                     "length": int(len(row["TABLE_NAME"])),
@@ -145,8 +194,8 @@ class MetadataValidator:
         for _, row in self.df[bad_prefix].iterrows():
             self.list_col_pref_no_standard.append(
                 {
-                    "rule": "MQME22",
-                    "desc": "Total number of tables with non-standard column prefixes",
+                    "rule": "MQME014",
+                    "desc": "Columns with non-standard prefixes",
                     "owner": row["OWNER"],
                     "table": row["TABLE_NAME"],
                     "column": row["COLUMN_NAME"],
@@ -157,8 +206,8 @@ class MetadataValidator:
         for _, row in self.df[too_long].iterrows():
             self.list_col_name_too_long.append(
                 {
-                    "rule": "MQME23",
-                    "desc": "Total number of tables with column names longer than recommended",
+                    "rule": "MQME015",
+                    "desc": "Columns with names longer than recommended",
                     "owner": row["OWNER"],
                     "table": row["TABLE_NAME"],
                     "column": row["COLUMN_NAME"],
@@ -171,7 +220,7 @@ class MetadataValidator:
         for _, row in self.df[missing_comment].iterrows():
             self.list_col_comment_missing.append(
                 {
-                    "rule": "MQME10",
+                    "rule": "MQME008",
                     "desc": "Columns without comments",
                     "owner": row["OWNER"],
                     "table": row["TABLE_NAME"],
@@ -234,7 +283,7 @@ class MetadataValidator:
                     offender = names_to_check[0] if names_to_check else ""
                     self.list_pk_bad_prefix.append(
                         {
-                    "rule": "MQME24",
+                    "rule": "MQME009",
                             "desc": "Total number of tables with non-standard primary key prefixes",
                             "owner": owner,
                             "table": table,
@@ -250,7 +299,7 @@ class MetadataValidator:
                     offender = names_to_check[0] if names_to_check else ""
                     self.list_fk_bad_prefix.append(
                         {
-                    "rule": "MQME25",
+                    "rule": "MQME010",
                             "desc": "Total number of tables with non-standard foreign key prefixes",
                             "owner": owner,
                             "table": table,
@@ -266,7 +315,7 @@ class MetadataValidator:
                     offender = names_to_check[0] if names_to_check else ""
                     self.list_unique_bad_suffix.append(
                         {
-                    "rule": "MQME26",
+                    "rule": "MQME011",
                             "desc": "Total number of tables with non-standard unique key prefixes",
                             "owner": owner,
                             "table": table,
@@ -274,16 +323,16 @@ class MetadataValidator:
                             "constraint_name": offender,
                         }
                     )
-
+    # ------------------------- rule definitions ------------------------
+    # Each rule is defined as a function that takes the full DataFrame and returns a boolean Series indicating which rows violate the rule. The rules are then applied in bulk using the apply_rules function, which adds columns for each rule indicating whether it was violated.
+    # The individual issues are collected into lists during the validation steps, and then combined with the rule-based issues at the end to produce a comprehensive DataFrame of all metadata issues.
+    # TO-DO
     def _build_rules(self) -> List[Rule]:
-        def missing_data_type(df: pd.DataFrame) -> pd.Series:
-            return self._missing_text(df["DATA_TYPE"])
-
-        def length_required_missing(df: pd.DataFrame) -> pd.Series:
-            mask = self._is_length_required()
-            length = df.get("DATA_LENGTH")
-            missing = length.isna() | (length <= 0)
-            return mask & missing
+        #def length_required_missing(df: pd.DataFrame) -> pd.Series:
+        #    mask = self._is_length_required()
+        #    length = df.get("DATA_LENGTH")
+        #    missing = length.isna() | (length <= 0)
+        #    return mask & missing
 
         def data_scale_negative(df: pd.DataFrame) -> pd.Series:
             if "DATA_SCALE" not in df.columns:
@@ -295,23 +344,9 @@ class MetadataValidator:
                 return pd.Series([False] * len(df), index=df.index)
             return df["NUM_DISTINCT"] < 0
 
-        def num_nulls_negative(df: pd.DataFrame) -> pd.Series:
-            if "NUM_NULLS" not in df.columns:
-                return pd.Series([False] * len(df), index=df.index)
-            return df["NUM_NULLS"] < 0
-
-        def density_outside(df: pd.DataFrame) -> pd.Series:
-            if "DENSITY" not in df.columns:
-                return pd.Series([False] * len(df), index=df.index)
-            return (df["DENSITY"] < 0) | (df["DENSITY"] > 1)
-
         return [
-            Rule("MQME11", "Columns without data type", missing_data_type),
-            Rule("MQME12", "Length-required types without data length", length_required_missing),
-            Rule("MQME13", "Negative data scale", data_scale_negative),
-            Rule("MQME14", "Negative num_distinct", num_distinct_negative),
-            Rule("MQME15", "Negative num_nulls", num_nulls_negative),
-            Rule("MQME16", "Density outside [0, 1]", density_outside),
+            Rule("MQME020", "Negative data scale", data_scale_negative),
+            Rule("MQME021", "Negative num_distinct", num_distinct_negative),
         ]
 
     def _combine_issues(self, df_metadata: pd.DataFrame) -> pd.DataFrame:

@@ -17,7 +17,7 @@
           <mxGeometry x="360" y="240" width="280" height="120" as="geometry"/>
         </mxCell>
 
-        <mxCell id="scheme_loader" value="SchemeLoader&#xa;—&#xa;get_dictionary()" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#7A4E00;fillColor=#FFF2CC;" vertex="1" parent="1">
+        <mxCell id="schema_loader" value="schemaLoader&#xa;—&#xa;get_dictionary()" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#7A4E00;fillColor=#FFF2CC;" vertex="1" parent="1">
           <mxGeometry x="700" y="60" width="200" height="100" as="geometry"/>
         </mxCell>
 
@@ -41,7 +41,7 @@
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
-        <mxCell id="edge_loader_usecase" style="endArrow=block;html=1;strokeColor=#7A4E00;" edge="1" parent="1" source="scheme_loader" target="run_use_case">
+        <mxCell id="edge_loader_usecase" style="endArrow=block;html=1;strokeColor=#7A4E00;" edge="1" parent="1" source="schema_loader" target="run_use_case">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
