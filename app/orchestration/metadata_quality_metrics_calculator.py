@@ -41,10 +41,10 @@ class MetadataQualityMetricsCalculator:
 
         measures_specs = [
             ("MQME006", "Total number of length-required columns", self.validator.get_number_length_required),
-            ("MQME016", "Total number of NUMBER columns", self.validator.get_number_number_types),
+            ("MQME007", "Total number of NUMBER columns", self.validator.get_number_number_types),
             ("MQME017", "Total number of rows in schema", self.validator.get_total_rows_schema),
             ("MQME018", "Total number of cells in schema", self.validator.get_total_cells_schema),
-            ("MQME019", "Total number of null values (nullable, no default)", self.validator.get_num_nulls_nullable_without_default),
+            ("MQME019", "Total number of null values (nullable, no default) in schema", self.validator.get_num_nulls_nullable_without_default),
         ]
         mq.update({code: fn() for code, _, fn in measures_specs})
 
@@ -85,7 +85,6 @@ class MetadataQualityMetricsCalculator:
             ("MQID006", "Table with standard PK prefixes", ("MQME009", "MQME003")),
             ("MQID007", "Table with standard FK prefixes", ("MQME010", "MQME004")),
             ("MQID008", "Table with standard UK prefixes", ("MQME011", "MQME005")),
-            ("MQID009", "NUMBER columns with valid scale", ("MQME020", "MQME016")),
             ("MQID010", "Columns with valid num_distinct", ("MQME021", "MQME002")),
             ("MQID011", "Columns with num_nulls", ("MQME019", "MQME018")),
         ]

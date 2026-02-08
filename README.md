@@ -17,8 +17,8 @@ The base folder must contain subfolders with files like `metadados_<schema>.csv`
 The files generated with the data model issues are located in the same folder and have the prefix 'issues_metadata_<schema>.csv`.
 
 ## Output (Excel sheets)
-- `0_SCHEMA_METADATA`: raw input metadata (full CSV content)
-- `schema_MEASURES`: totals for tables, columns, and key counts
+- `SCHEMA_METADATA`: raw input metadata (full CSV content)
+- `SCHEMA_MEASURES`: totals for tables, columns, and key counts
 - `METADATA_ISSUES`: consolidated list of rule violations
 - `METADATA_MEASURES`: metadata-specific totals used as denominators
 - `METADATA_METRICS`: quality indicators calculated from measures
