@@ -13,4 +13,4 @@ This folder is a refactoring of the original `DataModelQuality.ipynb` into a pac
 python run_model_quality.py --base-folder /path/to/Analise\ Esquemas
 ```
 
-The base folder must contain subfolders with files like `metadados_<scheme>.csv`.
+The base folder must contain subfolders with files like `metadados_<schema>.csv`.

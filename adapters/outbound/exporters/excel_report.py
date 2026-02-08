@@ -10,24 +10,24 @@ def build_section_df(rows) -> pd.DataFrame:
     return pd.DataFrame(rows, columns=["Indicator", "Description", "Value"])
 
 
-def save_excel_report(base_folder: Path, scheme_name: str, sections: Dict[str, pd.DataFrame]) -> Path:
+def save_excel_report(base_folder: Path, schema_name: str, sections: Dict[str, pd.DataFrame]) -> Path:
     """Write the Excel report for a schema.
 
-    Output file name: issues_metadados_<scheme>.xlsx in the same folder as the input
-    metadados_<scheme>.csv (as per current notebook behavior).
+    Output file name: issues_metadados_<schema>.xlsx in the same folder as the input
+    metadados_<schema>.csv (as per current notebook behavior).
     """
-    scheme_name_upper = scheme_name[:1].upper() + scheme_name[1:]
-    #file_name_out = Path(base_folder) / f"{scheme_name_upper}/issues_metadados_{scheme_name}.xlsx"
+    schema_name_upper = schema_name[:1].upper() + schema_name[1:]
+    #file_name_out = Path(base_folder) / f"{schema_name_upper}/issues_metadados_{schema_name}.xlsx"
 
     #file_name_out = (
     #    Path(base_folder)
     #    .relative_to(Path.cwd())
-    #    /scheme_name_upper
-    #    / f"issues_metadados_{scheme_name}.xlsx" )
+    #    /schema_name_upper
+    #    / f"issues_metadados_{schema_name}.xlsx" )
     file_name_out = (
         Path(base_folder)
-        / scheme_name_upper
-        / f"issues_metadados_{scheme_name}.xlsx"
+        / schema_name_upper
+        / f"issues_metadados_{schema_name}.xlsx"
     )
 
     file_name_out.parent.mkdir(parents=True, exist_ok=True)
