@@ -7,7 +7,7 @@ from dataquality.app.use_cases.run_model_quality import RunOptions, run_model_qu
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run Data Model Quality validations and metrics.")
-    parser.add_argument("--base-folder", default="dataquality\\schema", type=str, help="Folder that contains schema subfolders with metadados_*.csv output files.")
+    parser.add_argument("--base-folder", default="dataquality\\scheme", type=str, help="Folder that contains schema subfolders with metadados_*.csv output files.")
     parser.add_argument("--delete-cols", nargs="*", default=["COLUMN_ID", "NUM_BUCKETS", "DENSITY"], help="Columns to drop after loading.")
     parser.add_argument("--plural-exceptions", nargs="*", default=["DAS"], help="Table names allowed to end with 'S'.")
     args = parser.parse_args()  
