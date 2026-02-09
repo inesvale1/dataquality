@@ -18,6 +18,7 @@ class RunOptions:
     columns_to_delete: List[str]
     plural_table_exceptions: List[str]
     validation_config: Optional[ValidationConfig] = None
+    db_type: str = "Oracle"
 
 
 def run_model_quality(options: RunOptions) -> None:
@@ -55,7 +56,8 @@ def run_model_quality(options: RunOptions) -> None:
         metadata_calculator = MetadataQualityMetricsCalculator(
             schema_name=schema_name,
             validator=validator,
-            df_schema_metadata=df_schema_metadata
+            df_schema_metadata=df_schema_metadata,
+            db_type=options.db_type,
         )
         sections = metadata_calculator.calculate_sections()
 

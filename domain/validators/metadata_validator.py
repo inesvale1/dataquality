@@ -136,7 +136,7 @@ class MetadataValidator:
         self._validate_tables()
         self._validate_columns()
         self._validate_constraints()
-        #metadata_rules = self._build_rules()
+        metadata_rules = self._build_rules()
         df_metadata = apply_rules(self.df, metadata_rules)
         self.issues_df = self._combine_issues(df_metadata)
         return self.issues_df
@@ -172,6 +172,7 @@ class MetadataValidator:
                     "desc": "Tables with plural names",
                     "owner": row["OWNER"],
                     "table": row["TABLE_NAME"],
+                    "data_type": row.get("DATA_TYPE", ""),
                 }
             )
 
@@ -185,6 +186,7 @@ class MetadataValidator:
                     "table": row["TABLE_NAME"],
                     "length": int(len(row["TABLE_NAME"])),
                     "limit": self.cfg.max_table_len,
+                    "data_type": "",
                 }
             )
 
@@ -199,6 +201,7 @@ class MetadataValidator:
                     "owner": row["OWNER"],
                     "table": row["TABLE_NAME"],
                     "column": row["COLUMN_NAME"],
+                    "data_type": row.get("DATA_TYPE", ""),
                 }
             )
 
@@ -213,6 +216,7 @@ class MetadataValidator:
                     "column": row["COLUMN_NAME"],
                     "length": int(len(row["COLUMN_NAME"])),
                     "limit": self.cfg.max_column_len,
+                    "data_type": row.get("DATA_TYPE", ""),
                 }
             )
 
@@ -225,6 +229,7 @@ class MetadataValidator:
                     "owner": row["OWNER"],
                     "table": row["TABLE_NAME"],
                     "column": row["COLUMN_NAME"],
+                    "data_type": row.get("DATA_TYPE", ""),
                 }
             )
 
@@ -289,6 +294,7 @@ class MetadataValidator:
                             "table": table,
                             "column": column,
                             "constraint_name": offender,
+                            "data_type": row.get("DATA_TYPE", ""),
                         }
                     )
 
@@ -305,6 +311,7 @@ class MetadataValidator:
                             "table": table,
                             "column": column,
                             "constraint_name": offender,
+                            "data_type": row.get("DATA_TYPE", ""),
                         }
                     )
 
@@ -321,6 +328,7 @@ class MetadataValidator:
                             "table": table,
                             "column": column,
                             "constraint_name": offender,
+                            "data_type": row.get("DATA_TYPE", ""),
                         }
                     )
     # ------------------------- rule definitions ------------------------

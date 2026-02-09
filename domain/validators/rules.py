@@ -30,8 +30,9 @@ def apply_rules(df: pd.DataFrame, rules: Iterable[Rule]) -> pd.DataFrame:
                     "constraint_name": "",
                     "length": "",
                     "limit": "",
+                    "data_type": row.get("DATA_TYPE", ""),
                 }
             )
 
-    cols = ["rule", "desc", "owner", "table", "column", "constraint_name", "length", "limit"]
+    cols = ["rule", "desc", "owner", "table", "column", "constraint_name", "length", "limit", "data_type"]
     return pd.DataFrame(rows, columns=cols) if rows else pd.DataFrame(columns=cols)

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from datetime import datetime
 from pathlib import Path
 from typing import Dict
 
@@ -28,10 +29,11 @@ def save_excel_report(base_folder: Path, schema_name: str, sections: Dict[str, p
     #    .relative_to(Path.cwd())
     #    /schema_name_upper
     #    / f"issues_metadados_{schema_name}.xlsx" )
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M")
     file_name_out = (
         Path(base_folder)
         / schema_name_upper
-        / f"issues_metadados_{schema_name}.xlsx"
+        / f"issues_metadados_{schema_name}_{timestamp}.xlsx"
     )
 
     file_name_out.parent.mkdir(parents=True, exist_ok=True)
