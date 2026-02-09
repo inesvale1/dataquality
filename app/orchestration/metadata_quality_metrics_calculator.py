@@ -5,13 +5,21 @@ import pandas as pd
 from dataquality.shared.utils import safe_iqmd
 from dataquality.domain.validators.metadata_validator import MetadataValidator
 from dataquality.adapters.outbound.exporters.excel_report import build_section_df
+from dataquality.domain.suggesters.metadata_issue_suggester import MetadataIssueSuggester
 
 
 class MetadataQualityMetricsCalculator:
-    def __init__(self, schema_name: str, validator: MetadataValidator, df_schema_metadata: pd.DataFrame | None = None):
+    def __init__(
+        self,
+        schema_name: str,
+        validator: MetadataValidator,
+        df_schema_metadata: pd.DataFrame | None = None,
+        db_type: str = "Oracle",
+    ):
         self.schema_name = schema_name
         self.validator = validator
         self.df_schema_metadata = df_schema_metadata
+        self.db_type = db_type
 
     def calculate_sections(self) -> dict[str, pd.DataFrame]:
         """
@@ -24,6 +32,8 @@ class MetadataQualityMetricsCalculator:
 
         df_schema_metadata = (self.df_schema_metadata.copy() if self.df_schema_metadata is not None else pd.DataFrame())
         df_issues = self.validator.issues_df.copy()
+        suggester = MetadataIssueSuggester(db_type=self.db_type)
+        df_issues = suggester.apply(df_issues, df_schema_metadata)
 
         raw_measure_specs = [
             ("MQME001", "Total number of tables", self.validator.get_number_tables),
@@ -32,7 +42,7 @@ class MetadataQualityMetricsCalculator:
             ("MQME004", "Total number of foreign key", self.validator.get_number_foreign_keys),
             ("MQME005", "Total number of unique key", self.validator.get_number_unique_keys),
             ("MQME017", "Total number of rows in schema", self.validator.get_total_rows_schema),
-            ("MQME018", "Total number of cells in schema", self.validator.get_total_cells_schema),
+            ("MQME018", "Total number of cells in schema (sum of columns x rows for each table)", self.validator.get_total_cells_schema),
             ("MQME019", "Total number of null values (nullable, no default) in schema", self.validator.get_num_nulls_nullable_without_default),
         ]
 

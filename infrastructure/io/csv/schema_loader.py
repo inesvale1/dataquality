@@ -87,9 +87,9 @@ class schemaLoader:
                 if csv_path.suffix.lower() != ".csv":
                     continue
 
-                if fname and "sinfa2" in fname.lower():
-                    print(f"Skipping file: {csv_path}")
-                    continue
+                #if fname and "sinfa" not in fname.lower():
+                #    print(f"Skipping file: {csv_path}")
+                #    continue
 
                 df = self._load_and_typed_file(csv_path)
 
