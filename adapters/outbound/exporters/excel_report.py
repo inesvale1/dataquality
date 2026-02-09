@@ -6,8 +6,12 @@ from typing import Dict
 import pandas as pd
 
 def build_section_df(rows) -> pd.DataFrame:
-    """Build a simple (Indicator, Description, Value) section DataFrame."""
-    return pd.DataFrame(rows, columns=["Indicator", "Description", "Value"])
+    """Build a section DataFrame with either 3 or 4 columns."""
+    if rows and len(rows[0]) == 4:
+        columns = ["Indicator", "Category", "Description", "Value"]
+    else:
+        columns = ["Indicator", "Description", "Value"]
+    return pd.DataFrame(rows, columns=columns)
 
 
 def save_excel_report(base_folder: Path, schema_name: str, sections: Dict[str, pd.DataFrame]) -> Path:

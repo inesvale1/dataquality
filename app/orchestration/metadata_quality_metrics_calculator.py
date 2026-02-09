@@ -16,48 +16,47 @@ class MetadataQualityMetricsCalculator:
     def calculate_sections(self) -> dict[str, pd.DataFrame]:
         """
         Returns DataFrames for metadata quality sections.
-        - 0_SCHEMA_METADATA: raw input
-        - schema_MEASURES: totals for schema (tables, columns, keys)
+        - SCHEMA_METADATA: raw input
+        - METADATA_MEASURES: totals for metadata scope (includes schema totals)
         - METADATA_ISSUES: validator.issues_df with standard columns
-        - METADATA_MEASURES: totals for metadata scope
-        - METADATA_METRICS: quality indicators based on issues/denominators
+        - METADATA_METRICS: quality indicators (percentual) for the whole schema
         """
 
-        df_schema = (self.df_schema_metadata.copy() if self.df_schema_metadata is not None else pd.DataFrame())
+        df_schema_metadata = (self.df_schema_metadata.copy() if self.df_schema_metadata is not None else pd.DataFrame())
         df_issues = self.validator.issues_df.copy()
 
-        schema_specs = [
+        raw_measure_specs = [
             ("MQME001", "Total number of tables", self.validator.get_number_tables),
             ("MQME002", "Total number of columns", self.validator.get_number_columns),
             ("MQME003", "Total number of primary key", self.validator.get_number_primary_keys),
             ("MQME004", "Total number of foreign key", self.validator.get_number_foreign_keys),
             ("MQME005", "Total number of unique key", self.validator.get_number_unique_keys),
-        ]
-
-        mq = {code: fn() for code, _, fn in schema_specs}
-        df_schema = build_section_df([(code, desc, mq[code]) for code, desc, _ in schema_specs])
-
-        rows_by_table = self.validator.get_rows_by_table()
-
-        measures_specs = [
-            ("MQME006", "Total number of length-required columns", self.validator.get_number_length_required),
-            ("MQME007", "Total number of NUMBER columns", self.validator.get_number_number_types),
             ("MQME017", "Total number of rows in schema", self.validator.get_total_rows_schema),
             ("MQME018", "Total number of cells in schema", self.validator.get_total_cells_schema),
             ("MQME019", "Total number of null values (nullable, no default) in schema", self.validator.get_num_nulls_nullable_without_default),
         ]
-        mq.update({code: fn() for code, _, fn in measures_specs})
 
-        measure_rows = [
-            (code, desc, mq[code]) for code, desc, _ in measures_specs
+        derived_measure_specs = [
+            ("MQME006", "Total number of length-required columns", self.validator.get_number_length_required),
+            ("MQME007", "Total number of NUMBER columns", self.validator.get_number_number_types),
         ]
+
+        mq = {code: fn() for code, _, fn in raw_measure_specs}
+        mq.update({code: fn() for code, _, fn in derived_measure_specs})
+
+        raw_measure_rows = [(code, "RAW", desc, mq[code]) for code, desc, _ in raw_measure_specs]
+        derived_measure_rows = [(code, "DERIVED", desc, mq[code]) for code, desc, _ in derived_measure_specs]
+
+        rows_by_table = self.validator.get_rows_by_table()
+
+        measure_rows = raw_measure_rows + derived_measure_rows
         if not rows_by_table.empty:
             for table_name, row_count in rows_by_table.items():
                 measure_rows.append(
-                    ("MQME007", f"Total rows for table {table_name}", int(row_count))
+                    ("MQME007", "RAW", f"Total rows for table {table_name}", int(row_count))
                 )
         else:
-            measure_rows.append(("MQME007", "Total rows for table (missing input column)", 0))
+            measure_rows.append(("MQME007", "RAW", "Total rows for table (missing input column)", 0))
 
         df_measures = build_section_df(measure_rows)
 
@@ -85,8 +84,8 @@ class MetadataQualityMetricsCalculator:
             ("MQID006", "Table with standard PK prefixes", ("MQME009", "MQME003")),
             ("MQID007", "Table with standard FK prefixes", ("MQME010", "MQME004")),
             ("MQID008", "Table with standard UK prefixes", ("MQME011", "MQME005")),
-            ("MQID010", "Columns with valid num_distinct", ("MQME021", "MQME002")),
-            ("MQID011", "Columns with num_nulls", ("MQME019", "MQME018")),
+            ("MQID009", "Columns with valid num_distinct", ("MQME021", "MQME002")),
+            ("MQID010", "Columns with num_nulls", ("MQME019", "MQME018")),
         ]
 
         df_metrics_rows = []
@@ -99,9 +98,8 @@ class MetadataQualityMetricsCalculator:
         df_metrics = build_section_df(df_metrics_rows)
 
         return {
-            "0_SCHEMA_METADATA": df_schema,
-            "schema_MEASURES": df_schema,
-            "METADATA_ISSUES": df_issues,
+            "SCHEMA_METADATA": df_schema_metadata,
             "METADATA_MEASURES": df_measures,
+            "METADATA_ISSUES": df_issues,
             "METADATA_METRICS": df_metrics,
         }

@@ -136,7 +136,7 @@ class MetadataValidator:
         self._validate_tables()
         self._validate_columns()
         self._validate_constraints()
-        metadata_rules = self._build_rules()
+        #metadata_rules = self._build_rules()
         df_metadata = apply_rules(self.df, metadata_rules)
         self.issues_df = self._combine_issues(df_metadata)
         return self.issues_df

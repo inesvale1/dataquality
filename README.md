@@ -18,7 +18,6 @@ The files generated with the data model issues are located in the same folder an
 
 ## Output (Excel sheets)
 - `SCHEMA_METADATA`: raw input metadata (full CSV content)
-- `SCHEMA_MEASURES`: totals for tables, columns, and key counts
-- `METADATA_ISSUES`: consolidated list of rule violations
-- `METADATA_MEASURES`: metadata-specific totals used as denominators
-- `METADATA_METRICS`: quality indicators calculated from measures
+- `METADATA_MEASURE`: totals used as denominators (includes schema totals like tables, columns, and key counts)
+- `METADATA_ISSUE`: consolidated list of rule violations
+- `METADATA_METRIC`: quality indicators calculated from measures
