@@ -11,6 +11,7 @@ def main() -> None:
     parser.add_argument("--delete-cols", nargs="*", default=["COLUMN_ID", "NUM_BUCKETS", "DENSITY"], help="Columns to drop after loading.")
     parser.add_argument("--plural-exceptions", nargs="*", default=["DAS","INS","SUBS","ICMS"], help="Table names allowed to end with 'S'.")
     parser.add_argument("--db-type", default="Oracle", type=str, help="Database type for DDL suggestions (e.g., Oracle).")
+    parser.add_argument("--exclude-tables", nargs="*", default=["SUANOTA.NFP_DADOS_CADASTRAIS_HIST_BKP2", "MLOG$_"], help="List of OWNER.TABLE or TABLE fragment to exclude from validation/metrics.")
     args = parser.parse_args()  
 
     opts = RunOptions(
@@ -18,6 +19,7 @@ def main() -> None:
         columns_to_delete=args.delete_cols,
         plural_table_exceptions=args.plural_exceptions,
         db_type=args.db_type,
+        exclude_tables=args.exclude_tables,
     )
     print("Saving to:", args.base_folder)
 
