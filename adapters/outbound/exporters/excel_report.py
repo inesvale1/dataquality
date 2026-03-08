@@ -15,7 +15,12 @@ def build_section_df(rows) -> pd.DataFrame:
     return pd.DataFrame(rows, columns=columns)
 
 
-def save_excel_report(base_folder: Path, schema_name: str, sections: Dict[str, pd.DataFrame]) -> Path:
+def save_excel_report(
+    base_folder: Path,
+    schema_name: str,
+    sections: Dict[str, pd.DataFrame],
+    file_prefix: str = "issues_metadados",
+) -> Path:
     """Write the Excel report for a schema.
 
     Output file name: issues_metadados_<schema>.xlsx in the same folder as the input
@@ -33,7 +38,7 @@ def save_excel_report(base_folder: Path, schema_name: str, sections: Dict[str, p
     file_name_out = (
         Path(base_folder)
         / schema_name_upper
-        / f"issues_metadados_{schema_name}_{timestamp}.xlsx"
+        / f"{file_prefix}_{schema_name}_{timestamp}.xlsx"
     )
 
     file_name_out.parent.mkdir(parents=True, exist_ok=True)

@@ -5,6 +5,7 @@ from typing import Any, Dict, List
 import pandas as pd
 import re
 
+from dataquality.domain.config.data_quality_semantic_config import SEMANTIC_FORMAT_RULES, SemanticFormatRuleSpec
 from dataquality.domain.config.validation_config import ValidationConfig
 from dataquality.domain.validators.rules import Rule, apply_rules
 
@@ -21,6 +22,34 @@ class MetadataValidator:
         "NVARCHAR2",
         "RAW",
     }
+    FORMAT_CONFORMITY_TEXT_TYPES = {
+        "CHAR",
+        "NCHAR",
+        "VARCHAR",
+        "VARCHAR2",
+        "NVARCHAR",
+        "NVARCHAR2",
+        "CLOB",
+        "TEXT",
+        "LONG",
+    }
+    FORMAT_CONFORMITY_DATE_TYPES = {
+        "DATE",
+        "DATETIME",
+        "TIMESTAMP",
+        "TIMESTAMP WITH TIME ZONE",
+        "TIMESTAMP WITH LOCAL TIME ZONE",
+    }
+    FORMAT_CONFORMITY_COLUMNS = (
+        "FORMAT_CONFORMITY_CANDIDATE",
+        "FORMAT_CONFORMITY_METRIC",
+        "FORMAT_CONFORMITY_DIMENSION",
+        "FORMAT_CONFORMITY_SEMANTIC_TAG",
+        "FORMAT_CONFORMITY_RULE_TYPE",
+        "FORMAT_CONFORMITY_EXPECTED_FORMAT",
+        "FORMAT_CONFORMITY_PRIORITY",
+        "FORMAT_CONFORMITY_DESCRIPTION",
+    )
 
     def __init__(self, df: pd.DataFrame, table_plural_exceptions: List[str], config: ValidationConfig | None = None):
         self.df = df.copy()
@@ -130,6 +159,35 @@ class MetadataValidator:
         mask = nullable & (~default_on_null)
         num_nulls = pd.to_numeric(self.df["NUM_NULLS"], errors="coerce").fillna(0)
         return int(num_nulls[mask].sum())
+
+    def annotate_format_conformity_candidates(self, schema_df: pd.DataFrame | None = None) -> pd.DataFrame:
+        df_out = (schema_df.copy() if schema_df is not None else self.df.copy())
+        for col in self.FORMAT_CONFORMITY_COLUMNS:
+            if col not in df_out.columns:
+                df_out[col] = ""
+
+        if df_out.empty or "COLUMN_NAME" not in df_out.columns or "DATA_TYPE" not in df_out.columns:
+            return df_out
+
+        df_out["FORMAT_CONFORMITY_CANDIDATE"] = False
+
+        for idx, row in df_out.iterrows():
+            spec = self._match_format_conformity_rule(
+                column_name=str(row.get("COLUMN_NAME", "")),
+                data_type=str(row.get("DATA_TYPE", "")),
+            )
+            if spec is None:
+                continue
+            df_out.at[idx, "FORMAT_CONFORMITY_CANDIDATE"] = True
+            df_out.at[idx, "FORMAT_CONFORMITY_METRIC"] = spec.metric
+            df_out.at[idx, "FORMAT_CONFORMITY_DIMENSION"] = spec.dimension
+            df_out.at[idx, "FORMAT_CONFORMITY_SEMANTIC_TAG"] = spec.semantic_key
+            df_out.at[idx, "FORMAT_CONFORMITY_RULE_TYPE"] = spec.rule_type
+            df_out.at[idx, "FORMAT_CONFORMITY_EXPECTED_FORMAT"] = spec.expected_format
+            df_out.at[idx, "FORMAT_CONFORMITY_PRIORITY"] = spec.priority
+            df_out.at[idx, "FORMAT_CONFORMITY_DESCRIPTION"] = spec.description
+
+        return df_out
 
     # ----------------------------- public API -----------------------------
     def run_all(self) -> pd.DataFrame:
@@ -356,6 +414,22 @@ class MetadataValidator:
             Rule("MQME020", "Negative data scale", data_scale_negative),
             Rule("MQME021", "Negative num_distinct", num_distinct_negative),
         ]
+
+    def _match_format_conformity_rule(self, column_name: str, data_type: str) -> SemanticFormatRuleSpec | None:
+        normalized_type = str(data_type).strip().upper()
+        if normalized_type not in (self.FORMAT_CONFORMITY_TEXT_TYPES | self.FORMAT_CONFORMITY_DATE_TYPES):
+            return None
+
+        normalized_name = self._normalize_semantic_name(column_name)
+        for spec in SEMANTIC_FORMAT_RULES:
+            for pattern in spec.name_patterns:
+                if re.search(pattern, normalized_name, flags=re.IGNORECASE):
+                    return spec
+        return None
+
+    def _normalize_semantic_name(self, column_name: str) -> str:
+        normalized = re.sub(r"[^A-Z0-9]+", "_", str(column_name).upper())
+        return normalized.strip("_")
 
     def _combine_issues(self, df_metadata: pd.DataFrame) -> pd.DataFrame:
         buckets = [

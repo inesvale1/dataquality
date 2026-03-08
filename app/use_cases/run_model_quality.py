@@ -56,8 +56,7 @@ def run_model_quality(options: RunOptions) -> None:
 
         issues = validator.run_all()
         if issues.empty:
-            print("\n--- No Issue found ---")
-            continue
+            print("\n--- No metadata issue found; generating report with metrics and data-quality candidates ---")
 
         metadata_calculator = MetadataQualityMetricsCalculator(
             schema_name=schema_name,
