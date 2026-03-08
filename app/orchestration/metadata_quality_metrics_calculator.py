@@ -3,6 +3,7 @@ from __future__ import annotations
 import pandas as pd
 
 from dataquality.shared.utils import safe_iqmd
+from dataquality.domain.config.metadata_metric_config import METADATA_INDICATOR_SPECS
 from dataquality.domain.validators.metadata_validator import MetadataValidator
 from dataquality.adapters.outbound.exporters.excel_report import build_section_df
 from dataquality.domain.suggesters.metadata_issue_suggester import MetadataIssueSuggester
@@ -31,6 +32,8 @@ class MetadataQualityMetricsCalculator:
         """
 
         df_schema_metadata = (self.df_schema_metadata.copy() if self.df_schema_metadata is not None else pd.DataFrame())
+        df_schema_metadata = self.validator.annotate_format_conformity_candidates(df_schema_metadata)
+        df_data_quality_candidates = self._build_data_quality_candidates(df_schema_metadata)
         df_issues = self.validator.issues_df.copy()
         suggester = MetadataIssueSuggester(db_type=self.db_type)
         df_issues = suggester.apply(df_issues, df_schema_metadata)
@@ -85,31 +88,46 @@ class MetadataQualityMetricsCalculator:
         for _, row in df_count.iterrows():
             mq[row["Indicator"]] = int(row["Value"])
 
-        indicator_specs = [
-            ("MQID001", "Table names in singular", ("MQME012", "MQME001")),
-            ("MQID002", "Table with recommended name length", ("MQME013", "MQME001")),
-            ("MQID003", "Columns with correct prefixes", ("MQME014", "MQME002")),
-            ("MQID004", "Columns with recommended name size", ("MQME015", "MQME002")),
-            ("MQID005", "Columns with comments", ("MQME008", "MQME002")),
-            ("MQID006", "Table with standard PK prefixes", ("MQME009", "MQME003")),
-            ("MQID007", "Table with standard FK prefixes", ("MQME010", "MQME004")),
-            ("MQID008", "Table with standard UK prefixes", ("MQME011", "MQME005")),
-            ("MQID009", "Columns with valid num_distinct", ("MQME021", "MQME002")),
-            ("MQID010", "Columns with num_nulls", ("MQME019", "MQME018")),
-        ]
-
         df_metrics_rows = []
-        for code, desc, (num_code, den_code) in indicator_specs:
-            num = float(mq.get(num_code, 0))
-            den = float(mq.get(den_code, 0))
+        for spec in METADATA_INDICATOR_SPECS:
+            num = float(mq.get(spec.numerator_measure, 0))
+            den = float(mq.get(spec.denominator_measure, 0))
             value = safe_iqmd(num, den)
-            df_metrics_rows.append((code, desc, f"{value:.2f}%"))
+            df_metrics_rows.append((spec.indicator, spec.dimension, spec.description, f"{value:.2f}%"))
 
-        df_metrics = build_section_df(df_metrics_rows)
+        df_metrics = pd.DataFrame(
+            df_metrics_rows,
+            columns=["Indicator", "Dimension", "Description", "Value"],
+        )
 
         return {
             "SCHEMA_METADATA": df_schema_metadata,
+            "DATA_QUALITY_RULE_CANDIDATES": df_data_quality_candidates,
             "METADATA_MEASURES": df_measures,
             "METADATA_ISSUES": df_issues,
             "METADATA_METRICS": df_metrics,
         }
+
+    def _build_data_quality_candidates(self, df_schema_metadata: pd.DataFrame) -> pd.DataFrame:
+        if df_schema_metadata.empty or "FORMAT_CONFORMITY_CANDIDATE" not in df_schema_metadata.columns:
+            return pd.DataFrame()
+
+        candidate_columns = [
+            "OWNER",
+            "TABLE_NAME",
+            "COLUMN_NAME",
+            "DATA_TYPE",
+            "FORMAT_CONFORMITY_METRIC",
+            "FORMAT_CONFORMITY_DIMENSION",
+            "FORMAT_CONFORMITY_SEMANTIC_TAG",
+            "FORMAT_CONFORMITY_RULE_TYPE",
+            "FORMAT_CONFORMITY_EXPECTED_FORMAT",
+            "FORMAT_CONFORMITY_PRIORITY",
+            "FORMAT_CONFORMITY_DESCRIPTION",
+        ]
+        available_columns = [col for col in candidate_columns if col in df_schema_metadata.columns]
+        df_candidates = df_schema_metadata.loc[
+            df_schema_metadata["FORMAT_CONFORMITY_CANDIDATE"].astype(bool),
+            available_columns,
+        ].copy()
+        return df_candidates.reset_index(drop=True)
