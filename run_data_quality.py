@@ -37,7 +37,7 @@ def main() -> None:
     parser.add_argument("--delete-cols", nargs="*", default=["COLUMN_ID", "NUM_BUCKETS", "DENSITY"], help="Columns to drop after loading metadata.")
     parser.add_argument("--plural-exceptions", nargs="*", default=["DAS", "INS", "SUBS", "ICMS"], help="Table names allowed to end with 'S'.")
     parser.add_argument("--db-type", default="Oracle", type=str, help="Database type for future compatibility.")
-    parser.add_argument("--exclude-tables", nargs="*", default=["SUANOTA.NFP_DADOS_CADASTRAIS_HIST_BKP2", "MLOG$_"], help="List of OWNER.TABLE or TABLE fragment to exclude.")
+    parser.add_argument("--exclude-tables", nargs="*", default=["RUPD$", "VW", "SUANOTA.NFP_DADOS_CADASTRAIS_HIST_BKP2", "MLOG$_"], help="List of OWNER.TABLE or TABLE fragment to exclude.")
     args = parser.parse_args()
     metadata_base_folder = _resolve_folder(args.metadata_base_folder, "schema")
     sample_base_folder = _resolve_folder(args.sample_base_folder, "samples") if args.sample_source == "csv" else None

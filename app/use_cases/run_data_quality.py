@@ -55,13 +55,14 @@ def run_data_quality(options: RunDataQualityOptions) -> None:
             config=options.validation_config or ValidationConfig(),
         )
 
-        annotated_metadata = metadata_validator.annotate_format_conformity_candidates(df_metadata)
+        annotated_metadata = metadata_validator.annotate_data_quality_candidates(df_metadata)
         candidates_df = annotated_metadata.loc[
             annotated_metadata["FORMAT_CONFORMITY_CANDIDATE"].astype(bool)
+            | annotated_metadata["REDUNDANCY_CANDIDATE"].astype(bool)
         ].copy()
         samples_by_table = sample_source.get_samples_for_schema(schema_name, candidates_df)
 
-        sections = dq_validator.validate_format_conformity(
+        sections = dq_validator.validate_candidates(
             schema_name=schema_name,
             candidates_df=candidates_df,
             samples_by_table=samples_by_table,
