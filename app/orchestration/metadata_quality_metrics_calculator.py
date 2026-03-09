@@ -32,7 +32,7 @@ class MetadataQualityMetricsCalculator:
         """
 
         df_schema_metadata = (self.df_schema_metadata.copy() if self.df_schema_metadata is not None else pd.DataFrame())
-        df_schema_metadata = self.validator.annotate_format_conformity_candidates(df_schema_metadata)
+        df_schema_metadata = self.validator.annotate_data_quality_candidates(df_schema_metadata)
         df_data_quality_candidates = self._build_data_quality_candidates(df_schema_metadata)
         df_issues = self.validator.issues_df.copy()
         suggester = MetadataIssueSuggester(db_type=self.db_type)
@@ -61,6 +61,7 @@ class MetadataQualityMetricsCalculator:
         derived_measure_rows = [(code, "DERIVED", desc, mq[code]) for code, desc, _ in derived_measure_specs]
 
         rows_by_table = self.validator.get_rows_by_table()
+        null_percent_by_table = self.validator.get_null_percent_by_table_nullable_without_default()
 
         measure_rows = raw_measure_rows + derived_measure_rows
         if not rows_by_table.empty:
@@ -70,6 +71,12 @@ class MetadataQualityMetricsCalculator:
                 )
         else:
             measure_rows.append(("MQME007", "RAW", "Total rows for table (missing input column)", 0))
+
+        if not null_percent_by_table.empty:
+            for table_name, null_percent in null_percent_by_table.items():
+                measure_rows.append(
+                    ("MQME019", "DERIVED", f"Percent null values for table {table_name}", f"{float(null_percent):.2f}%")
+                )
 
         df_measures = build_section_df(measure_rows)
 
@@ -109,25 +116,118 @@ class MetadataQualityMetricsCalculator:
         }
 
     def _build_data_quality_candidates(self, df_schema_metadata: pd.DataFrame) -> pd.DataFrame:
-        if df_schema_metadata.empty or "FORMAT_CONFORMITY_CANDIDATE" not in df_schema_metadata.columns:
+        if df_schema_metadata.empty:
             return pd.DataFrame()
 
-        candidate_columns = [
-            "OWNER",
-            "TABLE_NAME",
-            "COLUMN_NAME",
-            "DATA_TYPE",
-            "FORMAT_CONFORMITY_METRIC",
-            "FORMAT_CONFORMITY_DIMENSION",
-            "FORMAT_CONFORMITY_SEMANTIC_TAG",
-            "FORMAT_CONFORMITY_RULE_TYPE",
-            "FORMAT_CONFORMITY_EXPECTED_FORMAT",
-            "FORMAT_CONFORMITY_PRIORITY",
-            "FORMAT_CONFORMITY_DESCRIPTION",
-        ]
-        available_columns = [col for col in candidate_columns if col in df_schema_metadata.columns]
-        df_candidates = df_schema_metadata.loc[
-            df_schema_metadata["FORMAT_CONFORMITY_CANDIDATE"].astype(bool),
-            available_columns,
-        ].copy()
-        return df_candidates.reset_index(drop=True)
+        candidate_frames: list[pd.DataFrame] = []
+
+        if "FORMAT_CONFORMITY_CANDIDATE" in df_schema_metadata.columns:
+            df_format = df_schema_metadata.loc[
+                df_schema_metadata["FORMAT_CONFORMITY_CANDIDATE"].astype(bool),
+                [
+                    "OWNER",
+                    "TABLE_NAME",
+                    "COLUMN_NAME",
+                    "DATA_TYPE",
+                    "FORMAT_CONFORMITY_METRIC",
+                    "FORMAT_CONFORMITY_DIMENSION",
+                    "FORMAT_CONFORMITY_SEMANTIC_TAG",
+                    "FORMAT_CONFORMITY_RULE_TYPE",
+                    "FORMAT_CONFORMITY_EXPECTED_FORMAT",
+                    "FORMAT_CONFORMITY_PRIORITY",
+                    "FORMAT_CONFORMITY_DESCRIPTION",
+                ],
+            ].copy()
+            df_format.columns = [
+                "OWNER",
+                "TABLE_NAME",
+                "COLUMN_NAME",
+                "DATA_TYPE",
+                "METRIC",
+                "DIMENSION",
+                "SEMANTIC_TAG",
+                "RULE_TYPE",
+                "EXPECTED_FORMAT",
+                "PRIORITY",
+                "DESCRIPTION",
+            ]
+            df_format["CALCULATION_METHOD"] = "DATA_SCAN_REQUIRED"
+            df_format["NUM_ROWS"] = df_schema_metadata.loc[df_format.index, "NUM_ROWS"].values if "NUM_ROWS" in df_schema_metadata.columns else ""
+            df_format["NUM_NULLS"] = df_schema_metadata.loc[df_format.index, "NUM_NULLS"].values if "NUM_NULLS" in df_schema_metadata.columns else ""
+            df_format["NUM_DISTINCT"] = df_schema_metadata.loc[df_format.index, "NUM_DISTINCT"].values if "NUM_DISTINCT" in df_schema_metadata.columns else ""
+            candidate_frames.append(df_format)
+
+        if "REDUNDANCY_CANDIDATE" in df_schema_metadata.columns:
+            redundancy_columns = [
+                "OWNER",
+                "TABLE_NAME",
+                "COLUMN_NAME",
+                "DATA_TYPE",
+                "REDUNDANCY_METRIC",
+                "REDUNDANCY_DIMENSION",
+                "REDUNDANCY_RULE_TYPE",
+                "REDUNDANCY_PRIORITY",
+                "REDUNDANCY_DESCRIPTION",
+                "REDUNDANCY_CALCULATION_METHOD",
+            ]
+            df_redundancy_source = df_schema_metadata.loc[
+                df_schema_metadata["REDUNDANCY_CANDIDATE"].astype(bool)
+            ].copy()
+            for col in redundancy_columns:
+                if col not in df_redundancy_source.columns:
+                    df_redundancy_source[col] = ""
+            df_redundancy = df_redundancy_source[
+                [
+                    "OWNER",
+                    "TABLE_NAME",
+                    "COLUMN_NAME",
+                    "DATA_TYPE",
+                    "REDUNDANCY_METRIC",
+                    "REDUNDANCY_DIMENSION",
+                    "REDUNDANCY_RULE_TYPE",
+                    "REDUNDANCY_PRIORITY",
+                    "REDUNDANCY_DESCRIPTION",
+                ]
+            ].copy()
+            df_redundancy["SEMANTIC_TAG"] = ""
+            df_redundancy["EXPECTED_FORMAT"] = ""
+            df_redundancy["REDUNDANCY_CALCULATION_METHOD"] = df_redundancy_source["REDUNDANCY_CALCULATION_METHOD"].values
+            df_redundancy = df_redundancy[
+                [
+                    "OWNER",
+                    "TABLE_NAME",
+                    "COLUMN_NAME",
+                    "DATA_TYPE",
+                    "REDUNDANCY_METRIC",
+                    "REDUNDANCY_DIMENSION",
+                    "SEMANTIC_TAG",
+                    "REDUNDANCY_RULE_TYPE",
+                    "EXPECTED_FORMAT",
+                    "REDUNDANCY_PRIORITY",
+                    "REDUNDANCY_DESCRIPTION",
+                    "REDUNDANCY_CALCULATION_METHOD",
+                ]
+            ]
+            df_redundancy.columns = [
+                "OWNER",
+                "TABLE_NAME",
+                "COLUMN_NAME",
+                "DATA_TYPE",
+                "METRIC",
+                "DIMENSION",
+                "SEMANTIC_TAG",
+                "RULE_TYPE",
+                "EXPECTED_FORMAT",
+                "PRIORITY",
+                "DESCRIPTION",
+                "CALCULATION_METHOD",
+            ]
+            df_redundancy["NUM_ROWS"] = df_schema_metadata.loc[df_redundancy.index, "NUM_ROWS"].values if "NUM_ROWS" in df_schema_metadata.columns else ""
+            df_redundancy["NUM_NULLS"] = df_schema_metadata.loc[df_redundancy.index, "NUM_NULLS"].values if "NUM_NULLS" in df_schema_metadata.columns else ""
+            df_redundancy["NUM_DISTINCT"] = df_schema_metadata.loc[df_redundancy.index, "NUM_DISTINCT"].values if "NUM_DISTINCT" in df_schema_metadata.columns else ""
+            candidate_frames.append(df_redundancy)
+
+        if not candidate_frames:
+            return pd.DataFrame()
+
+        return pd.concat(candidate_frames, ignore_index=True)

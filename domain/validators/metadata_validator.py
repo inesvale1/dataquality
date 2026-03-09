@@ -50,6 +50,60 @@ class MetadataValidator:
         "FORMAT_CONFORMITY_PRIORITY",
         "FORMAT_CONFORMITY_DESCRIPTION",
     )
+    REDUNDANCY_COLUMNS = (
+        "REDUNDANCY_CANDIDATE",
+        "REDUNDANCY_METRIC",
+        "REDUNDANCY_DIMENSION",
+        "REDUNDANCY_RULE_TYPE",
+        "REDUNDANCY_PRIORITY",
+        "REDUNDANCY_DESCRIPTION",
+        "REDUNDANCY_CALCULATION_METHOD",
+    )
+    REDUNDANCY_TEXT_TYPES = FORMAT_CONFORMITY_TEXT_TYPES | {"XMLTYPE"}
+    REDUNDANCY_POSITIVE_NAME_TOKENS = {
+        "NOM",
+        "NOME",
+        "DSC",
+        "DESC",
+        "DESCR",
+        "TXT",
+        "TEXTO",
+        "END",
+        "ENDERECO",
+        "LOGRADOURO",
+        "BAIRRO",
+        "CIDADE",
+        "MUNICIPIO",
+        "UF",
+        "EMAIL",
+        "E_MAIL",
+        "IP",
+        "FONE",
+        "TELEFONE",
+        "CEL",
+        "CELULAR",
+    }
+    REDUNDANCY_NEGATIVE_NAME_TOKENS = {
+        "COD",
+        "ID",
+        "CPF",
+        "CNPJ",
+        "CEP",
+        "DAT",
+        "DATA",
+        "DT",
+        "NUM",
+        "SEQ",
+        "QTD",
+        "TOT",
+        "VLR",
+        "SIT",
+        "STA",
+        "TIP",
+        "PK",
+        "FK",
+        "UK",
+    }
 
     def __init__(self, df: pd.DataFrame, table_plural_exceptions: List[str], config: ValidationConfig | None = None):
         self.df = df.copy()
@@ -160,9 +214,55 @@ class MetadataValidator:
         num_nulls = pd.to_numeric(self.df["NUM_NULLS"], errors="coerce").fillna(0)
         return int(num_nulls[mask].sum())
 
-    def annotate_format_conformity_candidates(self, schema_df: pd.DataFrame | None = None) -> pd.DataFrame:
+    def get_num_nulls_by_table_nullable_without_default(self) -> pd.Series:
+        if "NUM_NULLS" not in self.df.columns:
+            return pd.Series(dtype=int)
+        nullable = self.df["NULLABLE"].astype(bool)
+        default_on_null = self.df["DEFAULT_ON_NULL"].astype(bool)
+        mask = nullable & (~default_on_null)
+        num_nulls = pd.to_numeric(self.df["NUM_NULLS"], errors="coerce").fillna(0)
+        return (
+            num_nulls[mask]
+            .groupby(self.df.loc[mask, "TABLE_NAME"])
+            .sum()
+            .fillna(0)
+            .astype(int)
+        )
+
+    def get_null_percent_by_table_nullable_without_default(self) -> pd.Series:
+        num_nulls_by_table = self.get_num_nulls_by_table_nullable_without_default()
+        rows_by_table = self.get_rows_by_table()
+        if num_nulls_by_table.empty or rows_by_table.empty:
+            return pd.Series(dtype=float)
+
+        cols_by_table = self.df.groupby("TABLE_NAME")["COLUMN_NAME"].nunique()
+        total_cells_by_table = (rows_by_table.reindex(cols_by_table.index).fillna(0).astype(int) * cols_by_table)
+        aligned_nulls = num_nulls_by_table.reindex(total_cells_by_table.index, fill_value=0).astype(float)
+        denominator = total_cells_by_table.astype(float).replace(0, float("nan"))
+        null_percent = (aligned_nulls / denominator).mul(100).fillna(0.0)
+        return null_percent
+
+    def annotate_null_percentages(self, schema_df: pd.DataFrame | None = None) -> pd.DataFrame:
         df_out = (schema_df.copy() if schema_df is not None else self.df.copy())
+        if "NULL_PERCENT" not in df_out.columns:
+            df_out["NULL_PERCENT"] = ""
+
+        if df_out.empty or "NUM_ROWS" not in df_out.columns or "NUM_NULLS" not in df_out.columns:
+            return df_out
+
+        num_rows = pd.to_numeric(df_out["NUM_ROWS"], errors="coerce").astype(float)
+        num_nulls = pd.to_numeric(df_out["NUM_NULLS"], errors="coerce").astype(float)
+        denominator = num_rows.replace(0, float("nan"))
+        null_percent = (num_nulls / denominator).mul(100).fillna(0.0)
+        df_out["NULL_PERCENT"] = null_percent.map(lambda value: f"{value:.2f}%")
+        return df_out
+
+    def annotate_data_quality_candidates(self, schema_df: pd.DataFrame | None = None) -> pd.DataFrame:
+        df_out = self.annotate_null_percentages(schema_df)
         for col in self.FORMAT_CONFORMITY_COLUMNS:
+            if col not in df_out.columns:
+                df_out[col] = ""
+        for col in self.REDUNDANCY_COLUMNS:
             if col not in df_out.columns:
                 df_out[col] = ""
 
@@ -170,24 +270,40 @@ class MetadataValidator:
             return df_out
 
         df_out["FORMAT_CONFORMITY_CANDIDATE"] = False
+        df_out["REDUNDANCY_CANDIDATE"] = False
 
         for idx, row in df_out.iterrows():
             spec = self._match_format_conformity_rule(
                 column_name=str(row.get("COLUMN_NAME", "")),
                 data_type=str(row.get("DATA_TYPE", "")),
             )
-            if spec is None:
-                continue
-            df_out.at[idx, "FORMAT_CONFORMITY_CANDIDATE"] = True
-            df_out.at[idx, "FORMAT_CONFORMITY_METRIC"] = spec.metric
-            df_out.at[idx, "FORMAT_CONFORMITY_DIMENSION"] = spec.dimension
-            df_out.at[idx, "FORMAT_CONFORMITY_SEMANTIC_TAG"] = spec.semantic_key
-            df_out.at[idx, "FORMAT_CONFORMITY_RULE_TYPE"] = spec.rule_type
-            df_out.at[idx, "FORMAT_CONFORMITY_EXPECTED_FORMAT"] = spec.expected_format
-            df_out.at[idx, "FORMAT_CONFORMITY_PRIORITY"] = spec.priority
-            df_out.at[idx, "FORMAT_CONFORMITY_DESCRIPTION"] = spec.description
+            if spec is not None:
+                df_out.at[idx, "FORMAT_CONFORMITY_CANDIDATE"] = True
+                df_out.at[idx, "FORMAT_CONFORMITY_METRIC"] = spec.metric
+                df_out.at[idx, "FORMAT_CONFORMITY_DIMENSION"] = spec.dimension
+                df_out.at[idx, "FORMAT_CONFORMITY_SEMANTIC_TAG"] = spec.semantic_key
+                df_out.at[idx, "FORMAT_CONFORMITY_RULE_TYPE"] = spec.rule_type
+                df_out.at[idx, "FORMAT_CONFORMITY_EXPECTED_FORMAT"] = spec.expected_format
+                df_out.at[idx, "FORMAT_CONFORMITY_PRIORITY"] = spec.priority
+                df_out.at[idx, "FORMAT_CONFORMITY_DESCRIPTION"] = spec.description
+
+            if self._is_redundancy_candidate(row):
+                df_out.at[idx, "REDUNDANCY_CANDIDATE"] = True
+                df_out.at[idx, "REDUNDANCY_METRIC"] = "Redundancy detection"
+                df_out.at[idx, "REDUNDANCY_DIMENSION"] = "Uniqueness"
+                df_out.at[idx, "REDUNDANCY_RULE_TYPE"] = "duplicate_ratio"
+                df_out.at[idx, "REDUNDANCY_PRIORITY"] = "medium"
+                df_out.at[idx, "REDUNDANCY_CALCULATION_METHOD"] = (
+                    "METADATA_STATISTICS" if self._has_distinct_statistics(row) else "DATA_SCAN_REQUIRED"
+                )
+                df_out.at[idx, "REDUNDANCY_DESCRIPTION"] = (
+                    "Coluna nao-chave com conteudo descritivo, candidata a deteccao de duplicatas logicas."
+                )
 
         return df_out
+
+    def annotate_format_conformity_candidates(self, schema_df: pd.DataFrame | None = None) -> pd.DataFrame:
+        return self.annotate_data_quality_candidates(schema_df)
 
     # ----------------------------- public API -----------------------------
     def run_all(self) -> pd.DataFrame:
@@ -430,6 +546,30 @@ class MetadataValidator:
     def _normalize_semantic_name(self, column_name: str) -> str:
         normalized = re.sub(r"[^A-Z0-9]+", "_", str(column_name).upper())
         return normalized.strip("_")
+
+    def _is_redundancy_candidate(self, row: pd.Series) -> bool:
+        if bool(row.get("IS_PK", False)) or bool(row.get("IS_UNIQUE", False)):
+            return False
+
+        data_type = str(row.get("DATA_TYPE", "")).strip().upper()
+        if data_type not in self.REDUNDANCY_TEXT_TYPES:
+            return False
+
+        normalized_name = self._normalize_semantic_name(str(row.get("COLUMN_NAME", "")))
+        if not normalized_name:
+            return False
+
+        tokens = {token for token in normalized_name.split("_") if token}
+        if tokens & self.REDUNDANCY_NEGATIVE_NAME_TOKENS:
+            return False
+
+        return bool(tokens & self.REDUNDANCY_POSITIVE_NAME_TOKENS)
+
+    def _has_distinct_statistics(self, row: pd.Series) -> bool:
+        num_rows = pd.to_numeric(pd.Series([row.get("NUM_ROWS", None)]), errors="coerce").iloc[0]
+        num_nulls = pd.to_numeric(pd.Series([row.get("NUM_NULLS", None)]), errors="coerce").iloc[0]
+        num_distinct = pd.to_numeric(pd.Series([row.get("NUM_DISTINCT", None)]), errors="coerce").iloc[0]
+        return pd.notna(num_rows) and pd.notna(num_nulls) and pd.notna(num_distinct) and float(num_rows) > 0
 
     def _combine_issues(self, df_metadata: pd.DataFrame) -> pd.DataFrame:
         buckets = [
