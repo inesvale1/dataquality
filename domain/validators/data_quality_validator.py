@@ -10,6 +10,8 @@ from dataquality.shared.utils import safe_iqmd
 
 
 class DataQualityValidator:
+    _NULL_TEXT_VALUES = {"", "nan", "null", "none"}
+
     def __init__(self, invalid_example_limit: int = 5):
         self.invalid_example_limit = invalid_example_limit
 
@@ -100,7 +102,7 @@ class DataQualityValidator:
             return self._build_metric_row(schema_name, candidate, 0, 0, 0, "NOT_AVAILABLE"), issue
 
         series = sample_df[column_name]
-        non_null_mask = series.notna() & series.astype(str).str.strip().ne("")
+        non_null_mask = self._build_non_null_mask(series)
         evaluated_values = series[non_null_mask].astype(str).str.strip()
         evaluated_rows = int(evaluated_values.shape[0])
 
@@ -174,7 +176,7 @@ class DataQualityValidator:
             return [self._build_metric_row(schema_name, candidate, 0, 0, 0, "NOT_AVAILABLE")], issue
 
         series = sample_df[column_name]
-        evaluated_values = series[series.notna() & series.astype(str).str.strip().ne("")].astype(str).str.strip()
+        evaluated_values = series[self._build_non_null_mask(series)].astype(str).str.strip()
         evaluated_rows = int(evaluated_values.shape[0])
 
         if evaluated_rows == 0:
@@ -328,3 +330,7 @@ class DataQualityValidator:
         if pd.isna(numeric):
             return 0
         return int(numeric)
+
+    def _build_non_null_mask(self, series: pd.Series) -> pd.Series:
+        normalized = series.astype(str).str.strip().str.lower()
+        return series.notna() & ~normalized.isin(self._NULL_TEXT_VALUES)

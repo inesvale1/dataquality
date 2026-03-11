@@ -6,7 +6,7 @@ import pandas as pd
 import re
 
 from dataquality.domain.config.data_quality_semantic_config import SEMANTIC_FORMAT_RULES, SemanticFormatRuleSpec
-from dataquality.domain.config.validation_config import ValidationConfig
+from dataquality.domain.config.validation_config import NamedLengthRule, ValidationConfig
 from dataquality.domain.validators.rules import Rule, apply_rules
 
 
@@ -60,6 +60,20 @@ class MetadataValidator:
         "REDUNDANCY_CALCULATION_METHOD",
     )
     REDUNDANCY_TEXT_TYPES = FORMAT_CONFORMITY_TEXT_TYPES | {"XMLTYPE"}
+    TYPE_NAMING_TEXT_TYPES = FORMAT_CONFORMITY_TEXT_TYPES | {"RAW"}
+    TYPE_NAMING_NUMERIC_TYPES = {
+        "NUMBER",
+        "INTEGER",
+        "INT",
+        "SMALLINT",
+        "BIGINT",
+        "FLOAT",
+        "DECIMAL",
+        "NUMERIC",
+        "BINARY_FLOAT",
+        "BINARY_DOUBLE",
+    }
+    TYPE_NAMING_LARGE_TEXT_TYPES = {"CLOB", "TEXT", "LONG"}
     REDUNDANCY_POSITIVE_NAME_TOKENS = {
         "NOM",
         "NOME",
@@ -147,6 +161,17 @@ class MetadataValidator:
         self.list_pk_bad_prefix: List[Dict[str, Any]] = []
         self.list_fk_bad_prefix: List[Dict[str, Any]] = []
         self.list_unique_bad_suffix: List[Dict[str, Any]] = []
+        self.list_table_without_pk: List[Dict[str, Any]] = []
+        self.list_table_without_integrity_constraint: List[Dict[str, Any]] = []
+        self.list_identifier_not_protected: List[Dict[str, Any]] = []
+        self.list_type_naming_mismatch: List[Dict[str, Any]] = []
+
+        self.number_tables_without_pk = 0
+        self.number_tables_without_pk_or_uk = 0
+        self.number_identifier_like_columns = 0
+        self.number_identifier_like_columns_without_protection = 0
+        self.number_type_naming_candidates = 0
+        self.number_type_naming_noncompliant_columns = 0
 
         self.issues_df: pd.DataFrame | None = None
 
@@ -171,6 +196,24 @@ class MetadataValidator:
 
     def get_number_number_types(self) -> int:
         return int(self.df["DATA_TYPE"].str.upper().eq("NUMBER").sum())
+
+    def get_number_tables_without_pk(self) -> int:
+        return int(self.number_tables_without_pk)
+
+    def get_number_tables_without_pk_or_uk(self) -> int:
+        return int(self.number_tables_without_pk_or_uk)
+
+    def get_number_identifier_like_columns(self) -> int:
+        return int(self.number_identifier_like_columns)
+
+    def get_number_identifier_like_columns_without_protection(self) -> int:
+        return int(self.number_identifier_like_columns_without_protection)
+
+    def get_number_type_naming_candidates(self) -> int:
+        return int(self.number_type_naming_candidates)
+
+    def get_number_type_naming_noncompliant_columns(self) -> int:
+        return int(self.number_type_naming_noncompliant_columns)
 
     def get_rows_by_table(self) -> pd.Series:
         col = self._get_rows_column()
@@ -310,6 +353,9 @@ class MetadataValidator:
         self._validate_tables()
         self._validate_columns()
         self._validate_constraints()
+        self._validate_constraint_coverage()
+        self._validate_identifier_protection()
+        self._validate_type_naming_compliance()
         metadata_rules = self._build_rules()
         df_metadata = apply_rules(self.df, metadata_rules)
         self.issues_df = self._combine_issues(df_metadata)
@@ -333,6 +379,88 @@ class MetadataValidator:
             if candidate in self.df.columns:
                 return candidate
         return None
+
+    def _coerce_bool_value(self, value: Any) -> bool:
+        if pd.isna(value):
+            return False
+        if isinstance(value, bool):
+            return value
+        if isinstance(value, (int, float)):
+            return value != 0
+        text = str(value).strip().lower()
+        if text in {"", "0", "false", "f", "n", "no", "nao", "não"}:
+            return False
+        if text in {"1", "true", "t", "y", "yes", "s", "sim"}:
+            return True
+        return bool(text)
+
+    def _to_number(self, value: Any) -> float | None:
+        numeric = pd.to_numeric(pd.Series([value]), errors="coerce").iloc[0]
+        if pd.isna(numeric):
+            return None
+        return float(numeric)
+
+    def _is_numeric_type(self, data_type: str) -> bool:
+        return str(data_type).strip().upper() in self.TYPE_NAMING_NUMERIC_TYPES
+
+    def _is_text_type(self, data_type: str) -> bool:
+        return str(data_type).strip().upper() in self.TYPE_NAMING_TEXT_TYPES
+
+    def _is_date_type(self, data_type: str) -> bool:
+        return str(data_type).strip().upper() in self.FORMAT_CONFORMITY_DATE_TYPES
+
+    def _is_indicator_compatible_type(self, data_type: str, data_length: float | None, data_scale: float | None) -> bool:
+        normalized_type = str(data_type).strip().upper()
+        indicator_text_lengths = {float(value) for value in self.cfg.type_naming.indicator_text_lengths}
+        indicator_numeric_lengths = {float(value) for value in self.cfg.type_naming.indicator_numeric_lengths}
+        indicator_numeric_scales = {float(value) for value in self.cfg.type_naming.indicator_numeric_scales}
+        if normalized_type in self.TYPE_NAMING_NUMERIC_TYPES:
+            return (
+                data_scale in indicator_numeric_scales
+                and (data_length is None or data_length in indicator_numeric_lengths)
+            )
+        if normalized_type in self.TYPE_NAMING_TEXT_TYPES:
+            return data_length is None or data_length in indicator_text_lengths
+        return False
+
+    def _matches_identifier_profile(self, row: pd.Series) -> bool:
+        normalized_name = self._normalize_semantic_name(str(row.get("COLUMN_NAME", "")))
+        if not normalized_name:
+            return False
+        return any(
+            re.search(pattern, normalized_name, flags=re.IGNORECASE)
+            for pattern in self.cfg.type_naming.identifier_name_patterns
+        )
+
+    def _build_issue_entry(
+        self,
+        rule: str,
+        desc: str,
+        row: pd.Series | None = None,
+        *,
+        owner: str = "",
+        table: str = "",
+        column: str = "",
+        constraint_name: str = "",
+        length: Any = "",
+        limit: Any = "",
+        data_type: str = "",
+    ) -> Dict[str, Any]:
+        owner_value = owner or (row.get("OWNER", "") if row is not None else "")
+        table_value = table or (row.get("TABLE_NAME", "") if row is not None else "")
+        column_value = column or (row.get("COLUMN_NAME", "") if row is not None else "")
+        data_type_value = data_type or (row.get("DATA_TYPE", "") if row is not None else "")
+        return {
+            "rule": rule,
+            "desc": desc,
+            "owner": owner_value,
+            "table": table_value,
+            "column": column_value,
+            "constraint_name": constraint_name,
+            "length": length,
+            "limit": limit,
+            "data_type": data_type_value,
+        }
 
     def _validate_tables(self) -> None:
         plural_mask = self.df["TABLE_NAME"].str.upper().str.endswith("S")
@@ -505,6 +633,196 @@ class MetadataValidator:
                             "data_type": row.get("DATA_TYPE", ""),
                         }
                     )
+
+    def _validate_constraint_coverage(self) -> None:
+        df = self.df.copy()
+        for flag in ["IS_PK", "IS_UNIQUE"]:
+            df[flag] = df[flag].apply(self._coerce_bool_value)
+
+        grouped = (
+            df.groupby(["OWNER", "TABLE_NAME"], dropna=False)
+            .agg(HAS_PK=("IS_PK", "any"), HAS_UK=("IS_UNIQUE", "any"))
+            .reset_index()
+        )
+
+        self.number_tables_without_pk = 0
+        self.number_tables_without_pk_or_uk = 0
+
+        for _, row in grouped.iterrows():
+            if not bool(row["HAS_PK"]):
+                self.number_tables_without_pk += 1
+                self.list_table_without_pk.append(
+                    self._build_issue_entry(
+                        "MQRL011",
+                        "Table without primary key coverage",
+                        owner=str(row["OWNER"]),
+                        table=str(row["TABLE_NAME"]),
+                    )
+                )
+
+            if not (bool(row["HAS_PK"]) or bool(row["HAS_UK"])):
+                self.number_tables_without_pk_or_uk += 1
+                self.list_table_without_integrity_constraint.append(
+                    self._build_issue_entry(
+                        "MQRL012",
+                        "Table without PK or UK integrity constraint",
+                        owner=str(row["OWNER"]),
+                        table=str(row["TABLE_NAME"]),
+                    )
+                )
+
+    def _validate_identifier_protection(self) -> None:
+        protected_count = 0
+        candidate_count = 0
+
+        for _, row in self.df.iterrows():
+            if not self._matches_identifier_profile(row):
+                continue
+
+            candidate_count += 1
+            is_protected = any(
+                self._coerce_bool_value(row.get(flag, False))
+                for flag in ("IS_PK", "IS_FK", "IS_UNIQUE")
+            )
+            if is_protected:
+                protected_count += 1
+                continue
+
+            self.list_identifier_not_protected.append(
+                self._build_issue_entry(
+                    "MQRL013",
+                    "Identifier-like column is not protected by PK, FK, or UK",
+                    row,
+                )
+            )
+
+        self.number_identifier_like_columns = candidate_count
+        self.number_identifier_like_columns_without_protection = max(candidate_count - protected_count, 0)
+
+    def _validate_type_naming_compliance(self) -> None:
+        candidate_indexes: set[Any] = set()
+        offending_indexes: set[Any] = set()
+
+        for idx, row in self.df.iterrows():
+            issues = self._get_type_naming_issues(row)
+            if not issues:
+                continue
+
+            candidate_indexes.add(idx)
+            if any(issue["mismatch"] for issue in issues):
+                offending_indexes.add(idx)
+                for issue in issues:
+                    if issue["mismatch"]:
+                        self.list_type_naming_mismatch.append(
+                            self._build_issue_entry(
+                                "MQRL014",
+                                issue["desc"],
+                                row,
+                                length=issue.get("length", ""),
+                                limit=issue.get("limit", ""),
+                            )
+                        )
+                continue
+
+            candidate_indexes.add(idx)
+
+        self.number_type_naming_candidates = len(candidate_indexes)
+        self.number_type_naming_noncompliant_columns = len(offending_indexes)
+
+    def _get_type_naming_issues(self, row: pd.Series) -> List[Dict[str, Any]]:
+        normalized_name = self._normalize_semantic_name(str(row.get("COLUMN_NAME", "")))
+        if not normalized_name:
+            return []
+
+        data_type = str(row.get("DATA_TYPE", "")).strip().upper()
+        data_length = self._to_number(row.get("DATA_LENGTH", None))
+        data_scale = self._to_number(row.get("DATA_SCALE", None))
+        issues: List[Dict[str, Any]] = []
+
+        def add_issue(desc: str, *, mismatch: bool, limit: Any = "", length: Any = "") -> None:
+            issues.append({"desc": desc, "mismatch": mismatch, "limit": limit, "length": length})
+
+        if self._matches_any_prefix(normalized_name, self.cfg.type_naming.date_prefixes):
+            add_issue(
+                "DAT_ column should use DATE or TIMESTAMP-compatible type",
+                mismatch=not self._is_date_type(data_type),
+                limit="DATE/TIMESTAMP",
+                length=data_type,
+            )
+
+        if self._matches_any_prefix(normalized_name, self.cfg.type_naming.indicator_prefixes):
+            add_issue(
+                "FLG_/IND_ column uses a type incompatible with indicator semantics",
+                mismatch=not self._is_indicator_compatible_type(data_type, data_length, data_scale),
+                limit=self._build_indicator_type_description(),
+                length=f"{data_type}({'' if data_length is None else int(data_length)})",
+            )
+
+        if self._matches_any_prefix(normalized_name, self.cfg.type_naming.value_prefixes):
+            add_issue(
+                "VLR_ column should use a numeric type",
+                mismatch=not self._is_numeric_type(data_type),
+                limit="numeric",
+                length=data_type,
+            )
+
+        if self._matches_any_prefix(normalized_name, self.cfg.type_naming.quantity_prefixes):
+            quantity_scales = {float(value) for value in self.cfg.type_naming.quantity_numeric_scales}
+            add_issue(
+                "QTD_ column should use numeric type with integer scale",
+                mismatch=(not self._is_numeric_type(data_type)) or (data_scale not in quantity_scales),
+                limit=f"numeric scale in {sorted(int(value) for value in quantity_scales)}",
+                length="" if data_scale is None else int(data_scale),
+            )
+
+        if self._matches_any_prefix(normalized_name, self.cfg.type_naming.code_prefixes):
+            is_bad_text_type = data_type in self.TYPE_NAMING_LARGE_TEXT_TYPES
+            is_very_long_text = (
+                self._is_text_type(data_type)
+                and data_length is not None
+                and data_length > self.cfg.type_naming.code_max_text_length
+            )
+            add_issue(
+                "COD_ column should not use very long text type",
+                mismatch=is_bad_text_type or is_very_long_text,
+                limit=f"<= {self.cfg.type_naming.code_max_text_length} chars",
+                length="" if data_length is None else int(data_length),
+            )
+
+        for rule in self.cfg.type_naming.named_length_rules:
+            if not re.search(rf"(^|_){re.escape(rule.token)}($|_)", normalized_name, flags=re.IGNORECASE):
+                continue
+
+            mismatch = not self._is_text_type(data_type)
+            if not mismatch:
+                mismatch = self._violates_named_length_rule(rule, data_length)
+            add_issue(
+                f"{rule.token} column type/size does not match expected convention",
+                mismatch=mismatch,
+                limit=rule.expected_description,
+                length="" if data_length is None else int(data_length),
+            )
+
+        return issues
+
+    def _matches_any_prefix(self, normalized_name: str, prefixes: List[str]) -> bool:
+        upper_name = normalized_name.upper()
+        return any(upper_name.startswith(prefix.upper()) for prefix in prefixes)
+
+    def _build_indicator_type_description(self) -> str:
+        text_lengths = "/".join(str(value) for value in self.cfg.type_naming.indicator_text_lengths)
+        numeric_lengths = "/".join(str(value) for value in self.cfg.type_naming.indicator_numeric_lengths)
+        numeric_scales = "/".join(str(value) for value in self.cfg.type_naming.indicator_numeric_scales)
+        return f"CHAR/VARCHAR2({text_lengths}) or NUMBER({numeric_lengths},{numeric_scales})"
+
+    def _violates_named_length_rule(self, rule: NamedLengthRule, data_length: float | None) -> bool:
+        if data_length is None:
+            return False
+        if rule.allowed_lengths:
+            return int(data_length) not in set(rule.allowed_lengths)
+        if rule.max_length is not None:
+            return int(data_length) > int(rule.max_length)
+        return False
     # ------------------------- rule definitions ------------------------
     # Each rule is defined as a function that takes the full DataFrame and returns a boolean Series indicating which rows violate the rule. The rules are then applied in bulk using the apply_rules function, which adds columns for each rule indicating whether it was violated.
     # The individual issues are collected into lists during the validation steps, and then combined with the rule-based issues at the end to produce a comprehensive DataFrame of all metadata issues.
@@ -581,6 +899,10 @@ class MetadataValidator:
             self.list_pk_bad_prefix,
             self.list_fk_bad_prefix,
             self.list_unique_bad_suffix,
+            self.list_table_without_pk,
+            self.list_table_without_integrity_constraint,
+            self.list_identifier_not_protected,
+            self.list_type_naming_mismatch,
         ]
         rows = []
         for b in buckets:
