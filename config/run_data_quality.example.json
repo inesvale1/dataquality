@@ -1,0 +1,149 @@
+{
+  "metadata_base_folder": "dataquality\\schema",
+  "sample_base_folder": "dataquality\\samples",
+  "sample_source": "csv",
+  "db_connection_uri": null,
+  "db_authentication_type": "username_password",
+  "db_driver_class_name": null,
+  "sample_query_template": null,
+  "sample_limit": 1000,
+  "delete_cols": [
+    "COLUMN_ID",
+    "NUM_BUCKETS",
+    "DENSITY"
+  ],
+  "plural_exceptions": [
+    "DAS",
+    "INS",
+    "SUBS",
+    "ICMS"
+  ],
+  "db_type": "Oracle",
+  "exclude_tables": [
+    "RUPD$",
+    "VW",
+    "SUANOTA.NFP_DADOS_CADASTRAIS_HIST_BKP2",
+    "MLOG$_"
+  ],
+  "validation_config": {
+    "max_table_len": 30,
+    "max_column_len": 30,
+    "prefix_names": [
+      "COD_",
+      "DAT_",
+      "DSC_",
+      "NOM_",
+      "NUM_",
+      "QTD_",
+      "SEQ_",
+      "SIT_",
+      "STA_",
+      "TXT_",
+      "TIP_",
+      "TOT_",
+      "VLR_",
+      "BIN_",
+      "HOR_",
+      "XML_"
+    ],
+    "pk_prefix": "PK_",
+    "fk_prefix": "FK_",
+    "unique_suffix_regex": ".*_UK(\\d+)?$",
+    "type_naming": {
+      "date_prefixes": [
+        "DAT_"
+      ],
+      "indicator_prefixes": [
+        "FLG_",
+        "IND_"
+      ],
+      "value_prefixes": [
+        "VLR_"
+      ],
+      "quantity_prefixes": [
+        "QTD_"
+      ],
+      "code_prefixes": [
+        "COD_"
+      ],
+      "identifier_name_patterns": [
+        "(^|_)ID($|_)",
+        "(^|_)COD($|_)",
+        "(^|_)CPF($|_)",
+        "(^|_)CNPJ($|_)",
+        "(^|_)CEP($|_)",
+        "(^|_)EMAIL($|_)",
+        "(^|_)PLACA($|_)",
+        "(^|_)RENAVAM($|_)",
+        "(^|_)CHASSI($|_)",
+        "(^|_)MATRICULA($|_)",
+        "(^|_)PROTOCOLO($|_)"
+      ],
+      "indicator_text_lengths": [
+        1
+      ],
+      "indicator_numeric_lengths": [
+        1
+      ],
+      "indicator_numeric_scales": [
+        0
+      ],
+      "quantity_numeric_scales": [
+        0
+      ],
+      "code_max_text_length": 64,
+      "named_length_rules": [
+        {
+          "token": "CPF",
+          "allowed_lengths": [
+            11,
+            14
+          ],
+          "max_length": null,
+          "expected_description": "CHAR/VARCHAR2 length 11 or 14"
+        },
+        {
+          "token": "CNPJ",
+          "allowed_lengths": [
+            14,
+            18
+          ],
+          "max_length": null,
+          "expected_description": "CHAR/VARCHAR2 length 14 or 18"
+        },
+        {
+          "token": "CEP",
+          "allowed_lengths": [
+            8,
+            9
+          ],
+          "max_length": null,
+          "expected_description": "CHAR/VARCHAR2 length 8 or 9"
+        },
+        {
+          "token": "UF",
+          "allowed_lengths": [
+            2
+          ],
+          "max_length": null,
+          "expected_description": "CHAR/VARCHAR2 length 2"
+        },
+        {
+          "token": "EMAIL",
+          "allowed_lengths": [],
+          "max_length": 254,
+          "expected_description": "text up to 254 chars"
+        },
+        {
+          "token": "PLACA",
+          "allowed_lengths": [
+            7,
+            8
+          ],
+          "max_length": null,
+          "expected_description": "CHAR/VARCHAR2 length 7 or 8"
+        }
+      ]
+    }
+  }
+}

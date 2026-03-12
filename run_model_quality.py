@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from pathlib import Path
 
@@ -10,6 +11,12 @@ if __package__ in {None, ""}:
         sys.path.insert(0, str(package_parent))
 
 from dataquality.app.use_cases.run_model_quality import RunOptions, run_model_quality
+from dataquality.shared.runtime_config import (
+    build_model_quality_config_template,
+    build_validation_config,
+    get_config_value,
+    load_json_config,
+)
 
 
 def _resolve_base_folder(raw_path: str) -> Path:
@@ -23,19 +30,32 @@ def _resolve_base_folder(raw_path: str) -> Path:
     return candidate
 
 def main() -> None:
+    bootstrap = argparse.ArgumentParser(add_help=False)
+    bootstrap.add_argument("--config-json", default=None, type=str, help="Path to a JSON file with input arguments and validation settings.")
+    bootstrap_args, _ = bootstrap.parse_known_args()
+    json_config = load_json_config(bootstrap_args.config_json)
+
     parser = argparse.ArgumentParser(description="Run Data Model Quality validations and metrics.")
-    parser.add_argument("--base-folder", default="dataquality\\schema", type=str, help="Folder that contains schema subfolders with metadados_*.csv output files.")
-    parser.add_argument("--delete-cols", nargs="*", default=["COLUMN_ID", "NUM_BUCKETS", "DENSITY"], help="Columns to drop after loading.")
-    parser.add_argument("--plural-exceptions", nargs="*", default=["DAS","INS","SUBS","ICMS"], help="Table names allowed to end with 'S'.")
-    parser.add_argument("--db-type", default="Oracle", type=str, help="Database type for DDL suggestions (e.g., Oracle).")
-    parser.add_argument("--exclude-tables", nargs="*", default=["RUPD$", "VW", "SUANOTA.NFP_DADOS_CADASTRAIS_HIST_BKP2", "MLOG$_"], help="List of OWNER.TABLE or TABLE fragment to exclude from validation/metrics.")
+    parser.add_argument("--config-json", default=None, type=str, help="Path to a JSON file with input arguments and validation settings.")
+    parser.add_argument("--print-config-template", action="store_true", help="Print a JSON template with supported input arguments and exit.")
+    parser.add_argument("--base-folder", default=get_config_value(json_config, "base_folder", "dataquality\\schema"), type=str, help="Folder that contains schema subfolders with metadados_*.csv output files.")
+    parser.add_argument("--delete-cols", nargs="*", default=get_config_value(json_config, "delete_cols", ["COLUMN_ID", "NUM_BUCKETS", "DENSITY"]), help="Columns to drop after loading.")
+    parser.add_argument("--plural-exceptions", nargs="*", default=get_config_value(json_config, "plural_exceptions", ["DAS","INS","SUBS","ICMS"]), help="Table names allowed to end with 'S'.")
+    parser.add_argument("--db-type", default=get_config_value(json_config, "db_type", "Oracle"), type=str, help="Database type for DDL suggestions (e.g., Oracle).")
+    parser.add_argument("--exclude-tables", nargs="*", default=get_config_value(json_config, "exclude_tables", ["RUPD$", "VW", "SUANOTA.NFP_DADOS_CADASTRAIS_HIST_BKP2", "MLOG$_"]), help="List of OWNER.TABLE or TABLE fragment to exclude from validation/metrics.")
     args = parser.parse_args()  
+    if args.print_config_template:
+        print(json.dumps(build_model_quality_config_template(), indent=2))
+        return
+
     base_folder = _resolve_base_folder(args.base_folder)
+    validation_config = build_validation_config(get_config_value(json_config, "validation_config", None))
 
     opts = RunOptions(
         base_folder=base_folder,
         columns_to_delete=args.delete_cols,
         plural_table_exceptions=args.plural_exceptions,
+        validation_config=validation_config,
         db_type=args.db_type,
         exclude_tables=args.exclude_tables,
     )
