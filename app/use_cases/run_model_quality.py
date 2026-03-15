@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from contextlib import nullcontext
 from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Optional
@@ -9,6 +10,7 @@ from dataquality.domain.validators.metadata_validator import MetadataValidator
 from dataquality.infrastructure.io.csv.schema_loader import schemaLoader
 from dataquality.app.orchestration.metadata_quality_metrics_calculator import MetadataQualityMetricsCalculator
 from dataquality.adapters.outbound.exporters.excel_report import save_excel_report
+from dataquality.shared.telemetry import get_current_telemetry
 
 import pandas as pd
 
@@ -26,12 +28,17 @@ def run_model_quality(options: RunOptions) -> None:
     """End-to-end runner for the *model quality* phase (schema metadata validation + metrics)."""
     
     print("\nSummary:")
-       
-    loader = schemaLoader(Path(options.base_folder), options.columns_to_delete)
-    dfs = loader.get_dictionary()
+    telemetry = get_current_telemetry()
+
+    with (telemetry.stage("metadata.load") if telemetry is not None else nullcontext()):
+        loader = schemaLoader(Path(options.base_folder), options.columns_to_delete)
+        dfs = loader.get_dictionary()
 
     print(f"Total dataframes loaded: {len(dfs)}")
     print(f"Dictionary keys: {list(dfs.keys())}")
+    if telemetry is not None:
+        telemetry.set_metadata(use_case="run_model_quality")
+        telemetry.set_gauge("schemas_loaded", len(dfs))
 
     exclude_set = _parse_exclude_tables(options.exclude_tables or [])
 
@@ -39,36 +46,48 @@ def run_model_quality(options: RunOptions) -> None:
         #if schema_name != "cadastro":  # --- IGNORE FOR TESTS---
         #    continue                     # --- IGNORE ---
         
-        if exclude_set:
-            df = _filter_excluded_tables(df, exclude_set)
+        with (telemetry.stage("schema.process", schema=schema_name) if telemetry is not None else nullcontext()):
+            if exclude_set:
+                df = _filter_excluded_tables(df, exclude_set)
 
-        df_schema_metadata = df.copy() # preserve original for the Excel first sheet
+            df_schema_metadata = df.copy() # preserve original for the Excel first sheet
 
-        print("\n==============================")
-        print(f"Validating schema: {schema_name}")
-        print("==============================")
-        
-        validator = MetadataValidator(
-            df=df,
-            table_plural_exceptions=options.plural_table_exceptions,
-            config=options.validation_config or ValidationConfig(),
-        )
+            print("\n==============================")
+            print(f"Validating schema: {schema_name}")
+            print("==============================")
+            if telemetry is not None:
+                telemetry.set_gauge("input_columns", int(df.shape[0]), schema=schema_name)
+                telemetry.set_gauge("input_tables", int(df["TABLE_NAME"].nunique()), schema=schema_name)
+                telemetry.increment("tables_read", int(df["TABLE_NAME"].nunique()), schema=schema_name)
+            
+            validator = MetadataValidator(
+                df=df,
+                table_plural_exceptions=options.plural_table_exceptions,
+                config=options.validation_config or ValidationConfig(),
+            )
 
-        issues = validator.run_all()
-        if issues.empty:
-            print("\n--- No metadata issue found; generating report with metrics and data-quality candidates ---")
+            issues = validator.run_all()
+            if telemetry is not None:
+                telemetry.set_gauge("metadata_issue_rows", int(issues.shape[0]), schema=schema_name)
+            if issues.empty:
+                print("\n--- No metadata issue found; generating report with metrics and data-quality candidates ---")
 
-        metadata_calculator = MetadataQualityMetricsCalculator(
-            schema_name=schema_name,
-            validator=validator,
-            df_schema_metadata=df_schema_metadata,
-            db_type=options.db_type,
-        )
-        sections = metadata_calculator.calculate_sections()
+            with (telemetry.stage("metadata.metrics_calculation", schema=schema_name) if telemetry is not None else nullcontext()):
+                metadata_calculator = MetadataQualityMetricsCalculator(
+                    schema_name=schema_name,
+                    validator=validator,
+                    df_schema_metadata=df_schema_metadata,
+                    db_type=options.db_type,
+                )
+                sections = metadata_calculator.calculate_sections()
 
-        out_path = save_excel_report(options.base_folder, schema_name, sections)
+            if telemetry is not None:
+                telemetry.set_gauge("candidates_total", int(sections["DATA_QUALITY_RULE_CANDIDATES"].shape[0]), schema=schema_name)
 
-        print(f"Issues saved to {out_path}")
+            with (telemetry.stage("excel.export", schema=schema_name) if telemetry is not None else nullcontext()):
+                out_path = save_excel_report(options.base_folder, schema_name, sections)
+
+            print(f"Issues saved to {out_path}")
 
 
 def _parse_exclude_tables(items: List[str]) -> list[tuple[str, str | None]]:

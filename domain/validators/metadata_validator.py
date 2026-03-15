@@ -8,6 +8,7 @@ import re
 from dataquality.domain.config.data_quality_semantic_config import SEMANTIC_FORMAT_RULES, SemanticFormatRuleSpec
 from dataquality.domain.config.validation_config import NamedLengthRule, ValidationConfig
 from dataquality.domain.validators.rules import Rule, apply_rules
+from dataquality.shared.telemetry import get_current_telemetry
 
 
 class MetadataValidator:
@@ -350,15 +351,31 @@ class MetadataValidator:
 
     # ----------------------------- public API -----------------------------
     def run_all(self) -> pd.DataFrame:
-        self._validate_tables()
-        self._validate_columns()
-        self._validate_constraints()
-        self._validate_constraint_coverage()
-        self._validate_identifier_protection()
-        self._validate_type_naming_compliance()
-        metadata_rules = self._build_rules()
-        df_metadata = apply_rules(self.df, metadata_rules)
-        self.issues_df = self._combine_issues(df_metadata)
+        telemetry = get_current_telemetry()
+        schema_name = str(self.df["OWNER"].iloc[0]).upper() if not self.df.empty and "OWNER" in self.df.columns else None
+        if telemetry is not None:
+            with telemetry.stage("metadata_validator.run_all", schema=schema_name):
+                self._validate_tables()
+                self._validate_columns()
+                self._validate_constraints()
+                self._validate_constraint_coverage()
+                self._validate_identifier_protection()
+                self._validate_type_naming_compliance()
+                metadata_rules = self._build_rules()
+                df_metadata = apply_rules(self.df, metadata_rules)
+                self.issues_df = self._combine_issues(df_metadata)
+        else:
+            self._validate_tables()
+            self._validate_columns()
+            self._validate_constraints()
+            self._validate_constraint_coverage()
+            self._validate_identifier_protection()
+            self._validate_type_naming_compliance()
+            metadata_rules = self._build_rules()
+            df_metadata = apply_rules(self.df, metadata_rules)
+            self.issues_df = self._combine_issues(df_metadata)
+        if telemetry is not None and self.issues_df is not None:
+            telemetry.set_gauge("metadata_issue_rows", int(self.issues_df.shape[0]), schema=schema_name)
         return self.issues_df
 
     # ------------------------- validation helpers ------------------------

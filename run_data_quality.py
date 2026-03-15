@@ -18,6 +18,12 @@ from dataquality.shared.runtime_config import (
     get_config_value,
     load_json_config,
 )
+from dataquality.shared.telemetry import (
+    TelemetryCollector,
+    build_default_telemetry_path,
+    clear_current_telemetry,
+    set_current_telemetry,
+)
 
 
 def _resolve_folder(raw_path: str, local_folder_name: str) -> Path:
@@ -48,6 +54,7 @@ def main() -> None:
     parser.add_argument("--db-driver-class-name", default=get_config_value(json_config, "db_driver_class_name", None), type=str, help="Driver or dialect name. If the URL has no scheme, this prefix is used to compose it, e.g. oracle+oracledb.")
     parser.add_argument("--sample-query-template", default=get_config_value(json_config, "sample_query_template", None), type=str, help="Optional SQL template with placeholders {owner}, {table}, {limit}.")
     parser.add_argument("--sample-limit", default=get_config_value(json_config, "sample_limit", 1000), type=int, help="Maximum number of rows fetched per table when --sample-source database.")
+    parser.add_argument("--telemetry-output", default=get_config_value(json_config, "telemetry_output", None), type=str, help="Optional path to write telemetry JSON for the execution.")
     parser.add_argument("--delete-cols", nargs="*", default=get_config_value(json_config, "delete_cols", ["COLUMN_ID", "NUM_BUCKETS", "DENSITY"]), help="Columns to drop after loading metadata.")
     parser.add_argument("--plural-exceptions", nargs="*", default=get_config_value(json_config, "plural_exceptions", ["DAS", "INS", "SUBS", "ICMS"]), help="Table names allowed to end with 'S'.")
     parser.add_argument("--db-type", default=get_config_value(json_config, "db_type", "Oracle"), type=str, help="Database type for future compatibility.")
@@ -84,7 +91,26 @@ def main() -> None:
         print("Database type:", args.db_type)
         print("Authentication type:", args.db_authentication_type)
         print("Driver class name:", args.db_driver_class_name or "<from URL>")
-    run_data_quality(opts)
+    telemetry_path = Path(args.telemetry_output) if args.telemetry_output else build_default_telemetry_path(metadata_base_folder, "telemetry_data_quality")
+    collector = TelemetryCollector(run_name="data_quality", output_path=telemetry_path)
+    collector.set_metadata(
+        entrypoint="run_data_quality.py",
+        sample_source=args.sample_source,
+        db_type=args.db_type,
+        metadata_base_folder=str(metadata_base_folder),
+        sample_base_folder=str(sample_base_folder) if sample_base_folder is not None else None,
+    )
+    set_current_telemetry(collector)
+    try:
+        run_data_quality(opts)
+        payload = collector.finalize("SUCCESS")
+    except Exception:
+        payload = collector.finalize("FAILED")
+        raise
+    finally:
+        clear_current_telemetry()
+    print("Telemetry saved to:", telemetry_path)
+    print("Telemetry status:", payload["status"])
 
 
 if __name__ == "__main__":

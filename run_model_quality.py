@@ -17,6 +17,12 @@ from dataquality.shared.runtime_config import (
     get_config_value,
     load_json_config,
 )
+from dataquality.shared.telemetry import (
+    TelemetryCollector,
+    build_default_telemetry_path,
+    clear_current_telemetry,
+    set_current_telemetry,
+)
 
 
 def _resolve_base_folder(raw_path: str) -> Path:
@@ -39,6 +45,7 @@ def main() -> None:
     parser.add_argument("--config-json", default=None, type=str, help="Path to a JSON file with input arguments and validation settings.")
     parser.add_argument("--print-config-template", action="store_true", help="Print a JSON template with supported input arguments and exit.")
     parser.add_argument("--base-folder", default=get_config_value(json_config, "base_folder", "dataquality\\schema"), type=str, help="Folder that contains schema subfolders with metadados_*.csv output files.")
+    parser.add_argument("--telemetry-output", default=get_config_value(json_config, "telemetry_output", None), type=str, help="Optional path to write telemetry JSON for the execution.")
     parser.add_argument("--delete-cols", nargs="*", default=get_config_value(json_config, "delete_cols", ["COLUMN_ID", "NUM_BUCKETS", "DENSITY"]), help="Columns to drop after loading.")
     parser.add_argument("--plural-exceptions", nargs="*", default=get_config_value(json_config, "plural_exceptions", ["DAS","INS","SUBS","ICMS"]), help="Table names allowed to end with 'S'.")
     parser.add_argument("--db-type", default=get_config_value(json_config, "db_type", "Oracle"), type=str, help="Database type for DDL suggestions (e.g., Oracle).")
@@ -60,8 +67,24 @@ def main() -> None:
         exclude_tables=args.exclude_tables,
     )
     print("Saving to:", base_folder)
-
-    run_model_quality(opts)
+    telemetry_path = Path(args.telemetry_output) if args.telemetry_output else build_default_telemetry_path(base_folder, "telemetry_model_quality")
+    collector = TelemetryCollector(run_name="model_quality", output_path=telemetry_path)
+    collector.set_metadata(
+        entrypoint="run_model_quality.py",
+        db_type=args.db_type,
+        base_folder=str(base_folder),
+    )
+    set_current_telemetry(collector)
+    try:
+        run_model_quality(opts)
+        payload = collector.finalize("SUCCESS")
+    except Exception:
+        payload = collector.finalize("FAILED")
+        raise
+    finally:
+        clear_current_telemetry()
+    print("Telemetry saved to:", telemetry_path)
+    print("Telemetry status:", payload["status"])
 
 
 if __name__ == "__main__":

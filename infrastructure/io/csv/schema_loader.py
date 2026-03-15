@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
 
 import pandas as pd
+from dataquality.shared.telemetry import get_current_telemetry
 
 
 class schemaLoader:
@@ -64,6 +65,7 @@ class schemaLoader:
     # ---------------- internal helpers ----------------
 
     def _read_csv_tree(self) -> Dict[str, pd.DataFrame]:
+        telemetry = get_current_telemetry()
         if not self.base_folder.exists():
             raise FileNotFoundError(f"Base folder not found: {self.base_folder}")
 
@@ -100,6 +102,12 @@ class schemaLoader:
                     )
 
                 dfs[suffix] = df
+                if telemetry is not None:
+                    telemetry.increment("metadata_files_loaded")
+                    telemetry.increment("metadata_rows_loaded", int(df.shape[0]))
+                    telemetry.increment("metadata_loader_tables_detected", int(df["TABLE_NAME"].nunique()), schema=suffix)
+                    telemetry.set_gauge("input_columns", int(df.shape[0]), schema=suffix)
+                    telemetry.set_gauge("input_tables", int(df["TABLE_NAME"].nunique()), schema=suffix)
 
         return dfs
 

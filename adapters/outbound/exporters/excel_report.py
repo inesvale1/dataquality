@@ -6,6 +6,7 @@ from typing import Dict
 
 import pandas as pd
 from openpyxl.utils import get_column_letter
+from dataquality.shared.telemetry import get_current_telemetry
 
 def build_section_df(rows) -> pd.DataFrame:
     """Build a section DataFrame with either 3 or 4 columns."""
@@ -43,11 +44,28 @@ def save_excel_report(
     )
 
     file_name_out.parent.mkdir(parents=True, exist_ok=True)
+    telemetry = get_current_telemetry()
 
-    with pd.ExcelWriter(file_name_out, engine="openpyxl", mode="w") as writer:
-        for sheet_name, df in sections.items():
-            df.to_excel(writer, sheet_name=sheet_name, index=False)
-            _autosize_worksheet_columns(writer, sheet_name, df)
+    if telemetry is not None:
+        telemetry.increment("excel_reports_generated", schema=schema_name)
+        with telemetry.stage("excel.save_report", schema=schema_name, extra={"sheet_count": len(sections)}):
+            with pd.ExcelWriter(file_name_out, engine="openpyxl", mode="w") as writer:
+                for sheet_name, df in sections.items():
+                    with telemetry.stage("excel.write_sheet", schema=schema_name, table=sheet_name, extra={"rows": int(df.shape[0]), "columns": int(df.shape[1])}):
+                        df.to_excel(writer, sheet_name=sheet_name, index=False)
+                    with telemetry.stage("excel.autosize_sheet", schema=schema_name, table=sheet_name):
+                        _autosize_worksheet_columns(writer, sheet_name, df)
+    else:
+        with pd.ExcelWriter(file_name_out, engine="openpyxl", mode="w") as writer:
+            for sheet_name, df in sections.items():
+                df.to_excel(writer, sheet_name=sheet_name, index=False)
+                _autosize_worksheet_columns(writer, sheet_name, df)
+
+    if telemetry is not None:
+        try:
+            telemetry.set_gauge("last_excel_file_size_bytes", int(file_name_out.stat().st_size), schema=schema_name)
+        except OSError:
+            pass
 
     return file_name_out
 
