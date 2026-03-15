@@ -81,7 +81,7 @@ class MetadataQualityMetricsCalculator:
         if not null_percent_by_table.empty:
             for table_name, null_percent in null_percent_by_table.items():
                 measure_rows.append(
-                    ("MQME019", "DERIVED", f"Percent null values for table {table_name}", f"{float(null_percent):.2f}%")
+                    ("MQME019", "DERIVED", f"Percent null values for table {table_name}", f"{float(null_percent):.2f}")
                 )
 
         df_measures = build_section_df(measure_rows)
@@ -106,7 +106,7 @@ class MetadataQualityMetricsCalculator:
             num = float(mq.get(spec.numerator_measure, 0))
             den = float(mq.get(spec.denominator_measure, 0))
             value = safe_iqmd(num, den)
-            df_metrics_rows.append((spec.indicator, spec.dimension, spec.description, f"{value:.2f}%"))
+            df_metrics_rows.append((spec.indicator, spec.dimension, spec.description, f"{value:.2f}"))
 
         df_metrics = pd.DataFrame(
             df_metrics_rows,

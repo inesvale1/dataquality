@@ -267,7 +267,7 @@ class DataQualityValidator:
             "EvaluatedRows": evaluated_rows,
             "ValidRows": valid_rows,
             "InvalidRows": invalid_rows,
-            "Value": f"{value:.2f}%" if status.startswith("CALCULATED") else "N/A",
+            "Value": f"{value:.2f}" if status.startswith("CALCULATED") else "N/A",
             "Status": status,
         }
 
@@ -295,7 +295,7 @@ class DataQualityValidator:
             "EvaluatedRows": evaluated_rows,
             "ValidRows": unique_rows,
             "InvalidRows": max(evaluated_rows - unique_rows, 0),
-            "Value": f"{uniqueness:.2f}%" if status.startswith("CALCULATED") else "N/A",
+            "Value": f"{uniqueness:.2f}" if status.startswith("CALCULATED") else "N/A",
             "Status": status,
         }
 

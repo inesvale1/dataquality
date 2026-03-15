@@ -297,7 +297,7 @@ class MetadataValidator:
         num_nulls = pd.to_numeric(df_out["NUM_NULLS"], errors="coerce").astype(float)
         denominator = num_rows.replace(0, float("nan"))
         null_percent = (num_nulls / denominator).mul(100).fillna(0.0)
-        df_out["NULL_PERCENT"] = null_percent.map(lambda value: f"{value:.2f}%")
+        df_out["NULL_PERCENT"] = null_percent.map(lambda value: f"{value:.2f}")
         return df_out
 
     def annotate_data_quality_candidates(self, schema_df: pd.DataFrame | None = None) -> pd.DataFrame:
