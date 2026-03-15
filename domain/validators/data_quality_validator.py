@@ -6,6 +6,7 @@ from typing import Dict
 import pandas as pd
 
 from dataquality.domain.validators.br_documents import is_valid_cnpj, is_valid_cpf
+from dataquality.shared.telemetry import get_current_telemetry
 from dataquality.shared.utils import safe_iqmd
 
 
@@ -21,6 +22,7 @@ class DataQualityValidator:
         candidates_df: pd.DataFrame,
         samples_by_table: Dict[str, pd.DataFrame],
     ) -> dict[str, pd.DataFrame]:
+        telemetry = get_current_telemetry()
         candidate_rows = []
         metric_rows = []
         issue_rows = []
@@ -32,32 +34,66 @@ class DataQualityValidator:
                 "DATA_QUALITY_ISSUES": pd.DataFrame(),
             }
 
-        for _, candidate in candidates_df.iterrows():
-            candidate_rows.append(candidate.to_dict())
-            metric_name = str(candidate.get("METRIC", "")).strip()
+        if telemetry is not None:
+            telemetry.increment("candidates_processed", int(candidates_df.shape[0]), schema=schema_name)
+            with telemetry.stage("data_quality_validator.validate_candidates", schema=schema_name):
+                for _, candidate in candidates_df.iterrows():
+                    candidate_rows.append(candidate.to_dict())
+                    metric_name = str(candidate.get("METRIC", "")).strip()
 
-            if metric_name == "Format Conformity":
-                metric_row, issue_row = self._validate_format_conformity_candidate(schema_name, candidate, samples_by_table)
-                metric_rows.append(metric_row)
-                if issue_row:
-                    issue_rows.append(issue_row)
-                continue
+                    if metric_name == "Format Conformity":
+                        metric_row, issue_row = self._validate_format_conformity_candidate(schema_name, candidate, samples_by_table)
+                        metric_rows.append(metric_row)
+                        if issue_row:
+                            issue_rows.append(issue_row)
+                        continue
 
-            if metric_name == "Redundancy detection":
-                redundancy_metrics, issue_row = self._validate_redundancy_candidate(schema_name, candidate, samples_by_table)
-                metric_rows.extend(redundancy_metrics)
-                if issue_row:
-                    issue_rows.append(issue_row)
-                continue
+                    if metric_name == "Redundancy detection":
+                        redundancy_metrics, issue_row = self._validate_redundancy_candidate(schema_name, candidate, samples_by_table)
+                        metric_rows.extend(redundancy_metrics)
+                        if issue_row:
+                            issue_rows.append(issue_row)
+                        continue
 
-            issue_rows.append(
-                self._build_issue_row(
-                    schema_name=schema_name,
-                    candidate=candidate,
-                    status="UNSUPPORTED_METRIC",
-                    message=f"Metric '{metric_name}' is not supported by the validator.",
+                    issue_rows.append(
+                        self._build_issue_row(
+                            schema_name=schema_name,
+                            candidate=candidate,
+                            status="UNSUPPORTED_METRIC",
+                            message=f"Metric '{metric_name}' is not supported by the validator.",
+                        )
+                    )
+        else:
+            for _, candidate in candidates_df.iterrows():
+                candidate_rows.append(candidate.to_dict())
+                metric_name = str(candidate.get("METRIC", "")).strip()
+
+                if metric_name == "Format Conformity":
+                    metric_row, issue_row = self._validate_format_conformity_candidate(schema_name, candidate, samples_by_table)
+                    metric_rows.append(metric_row)
+                    if issue_row:
+                        issue_rows.append(issue_row)
+                    continue
+
+                if metric_name == "Redundancy detection":
+                    redundancy_metrics, issue_row = self._validate_redundancy_candidate(schema_name, candidate, samples_by_table)
+                    metric_rows.extend(redundancy_metrics)
+                    if issue_row:
+                        issue_rows.append(issue_row)
+                    continue
+
+                issue_rows.append(
+                    self._build_issue_row(
+                        schema_name=schema_name,
+                        candidate=candidate,
+                        status="UNSUPPORTED_METRIC",
+                        message=f"Metric '{metric_name}' is not supported by the validator.",
+                    )
                 )
-            )
+
+        if telemetry is not None:
+            telemetry.set_gauge("data_quality_metric_rows", int(len(metric_rows)), schema=schema_name)
+            telemetry.set_gauge("data_quality_issue_rows", int(len(issue_rows)), schema=schema_name)
 
         return {
             "DATA_QUALITY_RULE_CANDIDATES": pd.DataFrame(candidate_rows),

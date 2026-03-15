@@ -81,6 +81,7 @@ def build_data_quality_config_template() -> dict[str, Any]:
         "db_driver_class_name": None,
         "sample_query_template": None,
         "sample_limit": 1000,
+        "telemetry_output": None,
         "delete_cols": ["COLUMN_ID", "NUM_BUCKETS", "DENSITY"],
         "plural_exceptions": ["DAS", "INS", "SUBS", "ICMS"],
         "db_type": "Oracle",
@@ -92,6 +93,7 @@ def build_data_quality_config_template() -> dict[str, Any]:
 def build_model_quality_config_template() -> dict[str, Any]:
     return {
         "base_folder": "dataquality\\schema",
+        "telemetry_output": None,
         "delete_cols": ["COLUMN_ID", "NUM_BUCKETS", "DENSITY"],
         "plural_exceptions": ["DAS", "INS", "SUBS", "ICMS"],
         "db_type": "Oracle",
