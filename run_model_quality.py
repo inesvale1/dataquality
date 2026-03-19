@@ -35,6 +35,18 @@ def _resolve_base_folder(raw_path: str) -> Path:
         return fallback
     return candidate
 
+
+def _parse_bool(raw_value: str | bool) -> bool:
+    if isinstance(raw_value, bool):
+        return raw_value
+    value = str(raw_value).strip().lower()
+    if value in {"1", "true", "yes", "on", "y"}:
+        return True
+    if value in {"0", "false", "no", "off", "n"}:
+        return False
+    raise ValueError(f"Invalid boolean value: {raw_value}")
+
+
 def main() -> None:
     bootstrap = argparse.ArgumentParser(add_help=False)
     bootstrap.add_argument("--config-json", default=None, type=str, help="Path to a JSON file with input arguments and validation settings.")
@@ -46,6 +58,7 @@ def main() -> None:
     parser.add_argument("--print-config-template", action="store_true", help="Print a JSON template with supported input arguments and exit.")
     parser.add_argument("--base-folder", default=get_config_value(json_config, "base_folder", "dataquality\\schema"), type=str, help="Folder that contains schema subfolders with metadados_*.csv output files.")
     parser.add_argument("--telemetry-output", default=get_config_value(json_config, "telemetry_output", None), type=str, help="Optional path to write telemetry JSON for the execution.")
+    parser.add_argument("--telemetry-enabled", default=get_config_value(json_config, "telemetry_enabled", True), type=_parse_bool, help="Enable or disable telemetry JSON output. Use true/false.")
     parser.add_argument("--delete-cols", nargs="*", default=get_config_value(json_config, "delete_cols", ["COLUMN_ID", "NUM_BUCKETS", "DENSITY"]), help="Columns to drop after loading.")
     parser.add_argument("--plural-exceptions", nargs="*", default=get_config_value(json_config, "plural_exceptions", ["DAS","INS","SUBS","ICMS"]), help="Table names allowed to end with 'S'.")
     parser.add_argument("--db-type", default=get_config_value(json_config, "db_type", "Oracle"), type=str, help="Database type for DDL suggestions (e.g., Oracle).")
@@ -67,24 +80,40 @@ def main() -> None:
         exclude_tables=args.exclude_tables,
     )
     print("Saving to:", base_folder)
-    telemetry_path = Path(args.telemetry_output) if args.telemetry_output else build_default_telemetry_path(base_folder, "telemetry_model_quality")
-    collector = TelemetryCollector(run_name="model_quality", output_path=telemetry_path)
-    collector.set_metadata(
-        entrypoint="run_model_quality.py",
-        db_type=args.db_type,
-        base_folder=str(base_folder),
-    )
-    set_current_telemetry(collector)
+    if args.telemetry_enabled:
+        telemetry_folder = Path(__file__).resolve().parent / "app"
+        telemetry_path = Path(args.telemetry_output) if args.telemetry_output else build_default_telemetry_path(telemetry_folder, "telemetry_model_quality")
+        collector = TelemetryCollector(run_name="model_quality", output_path=telemetry_path)
+        collector.set_metadata(
+            entrypoint="run_model_quality.py",
+            db_type=args.db_type,
+            base_folder=str(base_folder),
+        )
+        set_current_telemetry(collector)
+    else:
+        telemetry_path = None
+        collector = None
+        set_current_telemetry(None)
     try:
         run_model_quality(opts)
-        payload = collector.finalize("SUCCESS")
+        if collector is not None:
+            payload = collector.finalize("SUCCESS")
+        else:
+            payload = {"status": "SUCCESS"}
     except Exception:
-        payload = collector.finalize("FAILED")
+        if collector is not None:
+            payload = collector.finalize("FAILED")
+        else:
+            payload = {"status": "FAILED"}
         raise
     finally:
         clear_current_telemetry()
-    print("Telemetry saved to:", telemetry_path)
-    print("Telemetry status:", payload["status"])
+    if telemetry_path is not None:
+        print("Telemetry saved to:", telemetry_path)
+    else:
+        print("Telemetry disabled")
+    telemetry_status = payload.get("run_summary", {}).get("status", payload.get("status", "UNKNOWN"))
+    print("Telemetry status:", telemetry_status)
 
 
 if __name__ == "__main__":

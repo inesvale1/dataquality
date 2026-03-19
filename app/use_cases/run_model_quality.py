@@ -64,6 +64,7 @@ def run_model_quality(options: RunOptions) -> None:
                 df=df,
                 table_plural_exceptions=options.plural_table_exceptions,
                 config=options.validation_config or ValidationConfig(),
+                schema_name=schema_name,
             )
 
             issues = validator.run_all()

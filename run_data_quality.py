@@ -37,6 +37,17 @@ def _resolve_folder(raw_path: str, local_folder_name: str) -> Path:
     return candidate
 
 
+def _parse_bool(raw_value: str | bool) -> bool:
+    if isinstance(raw_value, bool):
+        return raw_value
+    value = str(raw_value).strip().lower()
+    if value in {"1", "true", "yes", "on", "y"}:
+        return True
+    if value in {"0", "false", "no", "off", "n"}:
+        return False
+    raise ValueError(f"Invalid boolean value: {raw_value}")
+
+
 def main() -> None:
     bootstrap = argparse.ArgumentParser(add_help=False)
     bootstrap.add_argument("--config-json", default=None, type=str, help="Path to a JSON file with input arguments and validation settings.")
@@ -55,6 +66,7 @@ def main() -> None:
     parser.add_argument("--sample-query-template", default=get_config_value(json_config, "sample_query_template", None), type=str, help="Optional SQL template with placeholders {owner}, {table}, {limit}.")
     parser.add_argument("--sample-limit", default=get_config_value(json_config, "sample_limit", 1000), type=int, help="Maximum number of rows fetched per table when --sample-source database.")
     parser.add_argument("--telemetry-output", default=get_config_value(json_config, "telemetry_output", None), type=str, help="Optional path to write telemetry JSON for the execution.")
+    parser.add_argument("--telemetry-enabled", default=get_config_value(json_config, "telemetry_enabled", True), type=_parse_bool, help="Enable or disable telemetry JSON output. Use true/false.")
     parser.add_argument("--delete-cols", nargs="*", default=get_config_value(json_config, "delete_cols", ["COLUMN_ID", "NUM_BUCKETS", "DENSITY"]), help="Columns to drop after loading metadata.")
     parser.add_argument("--plural-exceptions", nargs="*", default=get_config_value(json_config, "plural_exceptions", ["DAS", "INS", "SUBS", "ICMS"]), help="Table names allowed to end with 'S'.")
     parser.add_argument("--db-type", default=get_config_value(json_config, "db_type", "Oracle"), type=str, help="Database type for future compatibility.")
@@ -91,26 +103,42 @@ def main() -> None:
         print("Database type:", args.db_type)
         print("Authentication type:", args.db_authentication_type)
         print("Driver class name:", args.db_driver_class_name or "<from URL>")
-    telemetry_path = Path(args.telemetry_output) if args.telemetry_output else build_default_telemetry_path(metadata_base_folder, "telemetry_data_quality")
-    collector = TelemetryCollector(run_name="data_quality", output_path=telemetry_path)
-    collector.set_metadata(
-        entrypoint="run_data_quality.py",
-        sample_source=args.sample_source,
-        db_type=args.db_type,
-        metadata_base_folder=str(metadata_base_folder),
-        sample_base_folder=str(sample_base_folder) if sample_base_folder is not None else None,
-    )
-    set_current_telemetry(collector)
+    if args.telemetry_enabled:
+        telemetry_folder = Path(__file__).resolve().parent / "app"
+        telemetry_path = Path(args.telemetry_output) if args.telemetry_output else build_default_telemetry_path(telemetry_folder, "telemetry_data_quality")
+        collector = TelemetryCollector(run_name="data_quality", output_path=telemetry_path)
+        collector.set_metadata(
+            entrypoint="run_data_quality.py",
+            sample_source=args.sample_source,
+            db_type=args.db_type,
+            metadata_base_folder=str(metadata_base_folder),
+            sample_base_folder=str(sample_base_folder) if sample_base_folder is not None else None,
+        )
+        set_current_telemetry(collector)
+    else:
+        telemetry_path = None
+        collector = None
+        set_current_telemetry(None)
     try:
         run_data_quality(opts)
-        payload = collector.finalize("SUCCESS")
+        if collector is not None:
+            payload = collector.finalize("SUCCESS")
+        else:
+            payload = {"status": "SUCCESS"}
     except Exception:
-        payload = collector.finalize("FAILED")
+        if collector is not None:
+            payload = collector.finalize("FAILED")
+        else:
+            payload = {"status": "FAILED"}
         raise
     finally:
         clear_current_telemetry()
-    print("Telemetry saved to:", telemetry_path)
-    print("Telemetry status:", payload["status"])
+    if telemetry_path is not None:
+        print("Telemetry saved to:", telemetry_path)
+    else:
+        print("Telemetry disabled")
+    telemetry_status = payload.get("run_summary", {}).get("status", payload.get("status", "UNKNOWN"))
+    print("Telemetry status:", telemetry_status)
 
 
 if __name__ == "__main__":

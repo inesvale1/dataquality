@@ -70,6 +70,7 @@ def run_data_quality(options: RunDataQualityOptions) -> None:
                 df=df_metadata,
                 table_plural_exceptions=options.plural_table_exceptions,
                 config=options.validation_config or ValidationConfig(),
+                schema_name=schema_name,
             )
 
             with (telemetry.stage("metadata.annotate_candidates", schema=schema_name) if telemetry is not None else nullcontext()):

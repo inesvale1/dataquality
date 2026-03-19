@@ -1,0 +1,16 @@
+{
+  "run_name": "test",
+  "status": "SUCCESS",
+  "started_at": "2026-03-19T17:25:04.965962+00:00",
+  "ended_at": "2026-03-19T17:25:05.033446+00:00",
+  "metadata": {},
+  "counters": {},
+  "gauges": {
+    "total_duration_ms": 67.861,
+    "max_process_rss_bytes": 27418624,
+    "max_python_heap_bytes": 613110
+  },
+  "schemas": {},
+  "stages": [],
+  "failures": []
+}
