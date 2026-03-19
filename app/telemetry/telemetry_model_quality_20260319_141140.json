@@ -1,0 +1,5055 @@
+{
+  "run_name": "model_quality",
+  "status": "SUCCESS",
+  "started_at": "2026-03-19T17:11:40.780032+00:00",
+  "ended_at": "2026-03-19T17:15:56.616603+00:00",
+  "metadata": {
+    "entrypoint": "run_model_quality.py",
+    "db_type": "Oracle",
+    "base_folder": "D:\\Users\\49756615\\Documents\\DoutoradoUFC\\Implementation\\dataquality\\schema",
+    "use_case": "run_model_quality"
+  },
+  "counters": {
+    "metadata_files_loaded": 22,
+    "metadata_rows_loaded": 22252,
+    "metadata_loader_tables_detected": 2340,
+    "stage.metadata.load.count": 1,
+    "stage.metadata.load.duration_ms_total": 1784.972,
+    "tables_read": 2197,
+    "stage.metadata_validator.run_all.count": 22,
+    "stage.metadata_validator.run_all.duration_ms_total": 38035.083,
+    "stage.metadata.metrics_calculation.count": 22,
+    "stage.metadata.metrics_calculation.duration_ms_total": 30288.953,
+    "excel_reports_generated": 22,
+    "stage.excel.write_sheet.count": 110,
+    "stage.excel.write_sheet.duration_ms_total": 41685.61700000001,
+    "stage.excel.autosize_sheet.count": 110,
+    "stage.excel.autosize_sheet.duration_ms_total": 7603.2159999999985,
+    "stage.excel.save_report.count": 22,
+    "stage.excel.save_report.duration_ms_total": 185006.336,
+    "stage.excel.export.count": 22,
+    "stage.excel.export.duration_ms_total": 185034.47700000004,
+    "stage.schema.process.count": 22,
+    "stage.schema.process.duration_ms_total": 254034.80999999997
+  },
+  "gauges": {
+    "input_columns": 1139,
+    "input_tables": 143,
+    "max_process_rss_bytes": 0,
+    "max_python_heap_bytes": 127955222,
+    "schemas_loaded": 22,
+    "metadata_issue_rows": 427,
+    "candidates_total": 240,
+    "last_excel_file_size_bytes": 217796,
+    "total_duration_ms": 255836.593
+  },
+  "schemas": {
+    "CADASTRO": {
+      "counters": {
+        "metadata_loader_tables_detected": 90,
+        "tables_read": 68,
+        "stage.metadata_validator.run_all.count": 1,
+        "stage.metadata_validator.run_all.duration_ms_total": 1002.594,
+        "stage.metadata.metrics_calculation.count": 1,
+        "stage.metadata.metrics_calculation.duration_ms_total": 788.337,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 5,
+        "stage.excel.write_sheet.duration_ms_total": 1012.462,
+        "stage.excel.autosize_sheet.count": 5,
+        "stage.excel.autosize_sheet.duration_ms_total": 213.472,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.save_report.duration_ms_total": 4896.809,
+        "stage.excel.export.count": 1,
+        "stage.excel.export.duration_ms_total": 4897.727,
+        "stage.schema.process.count": 1,
+        "stage.schema.process.duration_ms_total": 6708.459
+      },
+      "gauges": {
+        "input_columns": 913,
+        "input_tables": 68,
+        "max_process_rss_bytes": 0,
+        "max_python_heap_bytes": 21005015,
+        "metadata_issue_rows": 612,
+        "candidates_total": 343,
+        "last_excel_file_size_bytes": 222691
+      }
+    },
+    "CONSEG": {
+      "counters": {
+        "metadata_loader_tables_detected": 20,
+        "tables_read": 15,
+        "stage.metadata_validator.run_all.count": 1,
+        "stage.metadata_validator.run_all.duration_ms_total": 233.103,
+        "stage.metadata.metrics_calculation.count": 1,
+        "stage.metadata.metrics_calculation.duration_ms_total": 162.695,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 5,
+        "stage.excel.write_sheet.duration_ms_total": 147.847,
+        "stage.excel.autosize_sheet.count": 5,
+        "stage.excel.autosize_sheet.duration_ms_total": 76.365,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.save_report.duration_ms_total": 981.31,
+        "stage.excel.export.count": 1,
+        "stage.excel.export.duration_ms_total": 982.258,
+        "stage.schema.process.count": 1,
+        "stage.schema.process.duration_ms_total": 1395.251
+      },
+      "gauges": {
+        "input_columns": 115,
+        "input_tables": 15,
+        "max_process_rss_bytes": 0,
+        "max_python_heap_bytes": 21005015,
+        "metadata_issue_rows": 68,
+        "candidates_total": 50,
+        "last_excel_file_size_bytes": 36572
+      }
+    },
+    "CONTA_CORRENTE": {
+      "counters": {
+        "metadata_loader_tables_detected": 21,
+        "tables_read": 21,
+        "stage.metadata_validator.run_all.count": 1,
+        "stage.metadata_validator.run_all.duration_ms_total": 275.454,
+        "stage.metadata.metrics_calculation.count": 1,
+        "stage.metadata.metrics_calculation.duration_ms_total": 181.991,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 5,
+        "stage.excel.write_sheet.duration_ms_total": 264.477,
+        "stage.excel.autosize_sheet.count": 5,
+        "stage.excel.autosize_sheet.duration_ms_total": 77.94800000000001,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.save_report.duration_ms_total": 1424.205,
+        "stage.excel.export.count": 1,
+        "stage.excel.export.duration_ms_total": 1425.173,
+        "stage.schema.process.count": 1,
+        "stage.schema.process.duration_ms_total": 1901.038
+      },
+      "gauges": {
+        "input_columns": 217,
+        "input_tables": 21,
+        "max_process_rss_bytes": 0,
+        "max_python_heap_bytes": 21379341,
+        "metadata_issue_rows": 92,
+        "candidates_total": 42,
+        "last_excel_file_size_bytes": 53219
+      }
+    },
+    "COPAF": {
+      "counters": {
+        "metadata_loader_tables_detected": 16,
+        "tables_read": 16,
+        "stage.metadata_validator.run_all.count": 1,
+        "stage.metadata_validator.run_all.duration_ms_total": 228.639,
+        "stage.metadata.metrics_calculation.count": 1,
+        "stage.metadata.metrics_calculation.duration_ms_total": 164.883,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 5,
+        "stage.excel.write_sheet.duration_ms_total": 149.92299999999997,
+        "stage.excel.autosize_sheet.count": 5,
+        "stage.excel.autosize_sheet.duration_ms_total": 75.37,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.save_report.duration_ms_total": 961.338,
+        "stage.excel.export.count": 1,
+        "stage.excel.export.duration_ms_total": 962.357,
+        "stage.schema.process.count": 1,
+        "stage.schema.process.duration_ms_total": 1378.512
+      },
+      "gauges": {
+        "input_columns": 106,
+        "input_tables": 16,
+        "max_process_rss_bytes": 0,
+        "max_python_heap_bytes": 21379341,
+        "metadata_issue_rows": 43,
+        "candidates_total": 23,
+        "last_excel_file_size_bytes": 32316
+      }
+    },
+    "COPAF_AIX": {
+      "counters": {
+        "metadata_loader_tables_detected": 6,
+        "tables_read": 6,
+        "stage.metadata_validator.run_all.count": 1,
+        "stage.metadata_validator.run_all.duration_ms_total": 346.826,
+        "stage.metadata.metrics_calculation.count": 1,
+        "stage.metadata.metrics_calculation.duration_ms_total": 224.785,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 5,
+        "stage.excel.write_sheet.duration_ms_total": 277.541,
+        "stage.excel.autosize_sheet.count": 5,
+        "stage.excel.autosize_sheet.duration_ms_total": 115.84299999999999,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.save_report.duration_ms_total": 1658.858,
+        "stage.excel.export.count": 1,
+        "stage.excel.export.duration_ms_total": 1660.028,
+        "stage.schema.process.count": 1,
+        "stage.schema.process.duration_ms_total": 2254.589
+      },
+      "gauges": {
+        "input_columns": 246,
+        "input_tables": 6,
+        "max_process_rss_bytes": 0,
+        "max_python_heap_bytes": 21379341,
+        "metadata_issue_rows": 127,
+        "candidates_total": 16,
+        "last_excel_file_size_bytes": 54419
+      }
+    },
+    "DIMP": {
+      "counters": {
+        "metadata_loader_tables_detected": 32,
+        "tables_read": 32,
+        "stage.metadata_validator.run_all.count": 1,
+        "stage.metadata_validator.run_all.duration_ms_total": 428.153,
+        "stage.metadata.metrics_calculation.count": 1,
+        "stage.metadata.metrics_calculation.duration_ms_total": 438.27,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 5,
+        "stage.excel.write_sheet.duration_ms_total": 365.43699999999995,
+        "stage.excel.autosize_sheet.count": 5,
+        "stage.excel.autosize_sheet.duration_ms_total": 108.46300000000001,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.save_report.duration_ms_total": 2059.32,
+        "stage.excel.export.count": 1,
+        "stage.excel.export.duration_ms_total": 2060.309,
+        "stage.schema.process.count": 1,
+        "stage.schema.process.duration_ms_total": 2945.391
+      },
+      "gauges": {
+        "input_columns": 318,
+        "input_tables": 32,
+        "max_process_rss_bytes": 0,
+        "max_python_heap_bytes": 21379341,
+        "metadata_issue_rows": 104,
+        "candidates_total": 123,
+        "last_excel_file_size_bytes": 76842
+      }
+    },
+    "DTE": {
+      "counters": {
+        "metadata_loader_tables_detected": 92,
+        "tables_read": 92,
+        "stage.metadata_validator.run_all.count": 1,
+        "stage.metadata_validator.run_all.duration_ms_total": 1375.851,
+        "stage.metadata.metrics_calculation.count": 1,
+        "stage.metadata.metrics_calculation.duration_ms_total": 1142.232,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 5,
+        "stage.excel.write_sheet.duration_ms_total": 1454.4450000000002,
+        "stage.excel.autosize_sheet.count": 5,
+        "stage.excel.autosize_sheet.duration_ms_total": 282.772,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.save_report.duration_ms_total": 6585.055,
+        "stage.excel.export.count": 1,
+        "stage.excel.export.duration_ms_total": 6586.189,
+        "stage.schema.process.count": 1,
+        "stage.schema.process.duration_ms_total": 9128.271
+      },
+      "gauges": {
+        "input_columns": 956,
+        "input_tables": 92,
+        "max_process_rss_bytes": 0,
+        "max_python_heap_bytes": 30897492,
+        "metadata_issue_rows": 1050,
+        "candidates_total": 174,
+        "last_excel_file_size_bytes": 226080
+      }
+    },
+    "IPVA2": {
+      "counters": {
+        "metadata_loader_tables_detected": 68,
+        "tables_read": 68,
+        "stage.metadata_validator.run_all.count": 1,
+        "stage.metadata_validator.run_all.duration_ms_total": 1338.61,
+        "stage.metadata.metrics_calculation.count": 1,
+        "stage.metadata.metrics_calculation.duration_ms_total": 794.576,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 5,
+        "stage.excel.write_sheet.duration_ms_total": 874.58,
+        "stage.excel.autosize_sheet.count": 5,
+        "stage.excel.autosize_sheet.duration_ms_total": 214.642,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.save_report.duration_ms_total": 4899.669,
+        "stage.excel.export.count": 1,
+        "stage.excel.export.duration_ms_total": 4900.905,
+        "stage.schema.process.count": 1,
+        "stage.schema.process.duration_ms_total": 7058.714
+      },
+      "gauges": {
+        "input_columns": 640,
+        "input_tables": 68,
+        "max_process_rss_bytes": 0,
+        "max_python_heap_bytes": 36240124,
+        "metadata_issue_rows": 157,
+        "candidates_total": 180,
+        "last_excel_file_size_bytes": 133689
+      }
+    },
+    "ITCD2": {
+      "counters": {
+        "metadata_loader_tables_detected": 86,
+        "tables_read": 86,
+        "stage.metadata_validator.run_all.count": 1,
+        "stage.metadata_validator.run_all.duration_ms_total": 1456.541,
+        "stage.metadata.metrics_calculation.count": 1,
+        "stage.metadata.metrics_calculation.duration_ms_total": 794.477,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 5,
+        "stage.excel.write_sheet.duration_ms_total": 1180.0970000000002,
+        "stage.excel.autosize_sheet.count": 5,
+        "stage.excel.autosize_sheet.duration_ms_total": 263.706,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.save_report.duration_ms_total": 6441.854,
+        "stage.excel.export.count": 1,
+        "stage.excel.export.duration_ms_total": 6442.845,
+        "stage.schema.process.count": 1,
+        "stage.schema.process.duration_ms_total": 8726.196
+      },
+      "gauges": {
+        "input_columns": 990,
+        "input_tables": 86,
+        "max_process_rss_bytes": 0,
+        "max_python_heap_bytes": 38150143,
+        "metadata_issue_rows": 167,
+        "candidates_total": 226,
+        "last_excel_file_size_bytes": 186298
+      }
+    },
+    "NFECORP": {
+      "counters": {
+        "metadata_loader_tables_detected": 90,
+        "tables_read": 90,
+        "stage.metadata_validator.run_all.count": 1,
+        "stage.metadata_validator.run_all.duration_ms_total": 1811.825,
+        "stage.metadata.metrics_calculation.count": 1,
+        "stage.metadata.metrics_calculation.duration_ms_total": 1166.72,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 5,
+        "stage.excel.write_sheet.duration_ms_total": 1907.054,
+        "stage.excel.autosize_sheet.count": 5,
+        "stage.excel.autosize_sheet.duration_ms_total": 349.02199999999993,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.save_report.duration_ms_total": 10381.103,
+        "stage.excel.export.count": 1,
+        "stage.excel.export.duration_ms_total": 10382.209,
+        "stage.schema.process.count": 1,
+        "stage.schema.process.duration_ms_total": 13386.453
+      },
+      "gauges": {
+        "input_columns": 1254,
+        "input_tables": 90,
+        "max_process_rss_bytes": 0,
+        "max_python_heap_bytes": 38150143,
+        "metadata_issue_rows": 859,
+        "candidates_total": 237,
+        "last_excel_file_size_bytes": 265245
+      }
+    },
+    "RECEITA2": {
+      "counters": {
+        "metadata_loader_tables_detected": 79,
+        "tables_read": 79,
+        "stage.metadata_validator.run_all.count": 1,
+        "stage.metadata_validator.run_all.duration_ms_total": 1025.492,
+        "stage.metadata.metrics_calculation.count": 1,
+        "stage.metadata.metrics_calculation.duration_ms_total": 726.938,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 5,
+        "stage.excel.write_sheet.duration_ms_total": 985.9219999999998,
+        "stage.excel.autosize_sheet.count": 5,
+        "stage.excel.autosize_sheet.duration_ms_total": 209.38600000000002,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.save_report.duration_ms_total": 4095.436,
+        "stage.excel.export.count": 1,
+        "stage.excel.export.duration_ms_total": 4096.574,
+        "stage.schema.process.count": 1,
+        "stage.schema.process.duration_ms_total": 5873.884
+      },
+      "gauges": {
+        "input_columns": 652,
+        "input_tables": 79,
+        "max_process_rss_bytes": 0,
+        "max_python_heap_bytes": 41060634,
+        "metadata_issue_rows": 183,
+        "candidates_total": 153,
+        "last_excel_file_size_bytes": 142467
+      }
+    },
+    "SETA": {
+      "counters": {
+        "metadata_loader_tables_detected": 179,
+        "tables_read": 105,
+        "stage.metadata_validator.run_all.count": 1,
+        "stage.metadata_validator.run_all.duration_ms_total": 943.068,
+        "stage.metadata.metrics_calculation.count": 1,
+        "stage.metadata.metrics_calculation.duration_ms_total": 747.704,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 5,
+        "stage.excel.write_sheet.duration_ms_total": 965.552,
+        "stage.excel.autosize_sheet.count": 5,
+        "stage.excel.autosize_sheet.duration_ms_total": 180.04399999999998,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.save_report.duration_ms_total": 4351.58,
+        "stage.excel.export.count": 1,
+        "stage.excel.export.duration_ms_total": 4352.576,
+        "stage.schema.process.count": 1,
+        "stage.schema.process.duration_ms_total": 6064.708
+      },
+      "gauges": {
+        "input_columns": 633,
+        "input_tables": 105,
+        "max_process_rss_bytes": 0,
+        "max_python_heap_bytes": 41468254,
+        "metadata_issue_rows": 318,
+        "candidates_total": 253,
+        "last_excel_file_size_bytes": 141167
+      }
+    },
+    "SGT": {
+      "counters": {
+        "metadata_loader_tables_detected": 38,
+        "tables_read": 38,
+        "stage.metadata_validator.run_all.count": 1,
+        "stage.metadata_validator.run_all.duration_ms_total": 580.814,
+        "stage.metadata.metrics_calculation.count": 1,
+        "stage.metadata.metrics_calculation.duration_ms_total": 381.09,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 5,
+        "stage.excel.write_sheet.duration_ms_total": 442.29799999999994,
+        "stage.excel.autosize_sheet.count": 5,
+        "stage.excel.autosize_sheet.duration_ms_total": 115.58999999999999,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.save_report.duration_ms_total": 2365.581,
+        "stage.excel.export.count": 1,
+        "stage.excel.export.duration_ms_total": 2366.802,
+        "stage.schema.process.count": 1,
+        "stage.schema.process.duration_ms_total": 3345.872
+      },
+      "gauges": {
+        "input_columns": 397,
+        "input_tables": 38,
+        "max_process_rss_bytes": 0,
+        "max_python_heap_bytes": 41468254,
+        "metadata_issue_rows": 128,
+        "candidates_total": 106,
+        "last_excel_file_size_bytes": 81358
+      }
+    },
+    "SIGET": {
+      "counters": {
+        "metadata_loader_tables_detected": 789,
+        "tables_read": 761,
+        "stage.metadata_validator.run_all.count": 1,
+        "stage.metadata_validator.run_all.duration_ms_total": 9262.362,
+        "stage.metadata.metrics_calculation.count": 1,
+        "stage.metadata.metrics_calculation.duration_ms_total": 6644.057,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 5,
+        "stage.excel.write_sheet.duration_ms_total": 11092.773,
+        "stage.excel.autosize_sheet.count": 5,
+        "stage.excel.autosize_sheet.duration_ms_total": 1943.6,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.save_report.duration_ms_total": 60017.621,
+        "stage.excel.export.count": 1,
+        "stage.excel.export.duration_ms_total": 60019.474,
+        "stage.schema.process.count": 1,
+        "stage.schema.process.duration_ms_total": 75975.326
+      },
+      "gauges": {
+        "input_columns": 6058,
+        "input_tables": 761,
+        "max_process_rss_bytes": 0,
+        "max_python_heap_bytes": 113256017,
+        "metadata_issue_rows": 6667,
+        "candidates_total": 957,
+        "last_excel_file_size_bytes": 1397568
+      }
+    },
+    "SINFA": {
+      "counters": {
+        "metadata_loader_tables_detected": 43,
+        "tables_read": 43,
+        "stage.metadata_validator.run_all.count": 1,
+        "stage.metadata_validator.run_all.duration_ms_total": 1834.694,
+        "stage.metadata.metrics_calculation.count": 1,
+        "stage.metadata.metrics_calculation.duration_ms_total": 1847.04,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 5,
+        "stage.excel.write_sheet.duration_ms_total": 3273.341,
+        "stage.excel.autosize_sheet.count": 5,
+        "stage.excel.autosize_sheet.duration_ms_total": 608.926,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.save_report.duration_ms_total": 7864.124,
+        "stage.excel.export.count": 1,
+        "stage.excel.export.duration_ms_total": 7866.235,
+        "stage.schema.process.count": 1,
+        "stage.schema.process.duration_ms_total": 11649.386
+      },
+      "gauges": {
+        "input_columns": 606,
+        "input_tables": 43,
+        "max_process_rss_bytes": 0,
+        "max_python_heap_bytes": 113256017,
+        "metadata_issue_rows": 356,
+        "candidates_total": 163,
+        "last_excel_file_size_bytes": 139993
+      }
+    },
+    "SIPAJ": {
+      "counters": {
+        "metadata_loader_tables_detected": 73,
+        "tables_read": 73,
+        "stage.metadata_validator.run_all.count": 1,
+        "stage.metadata_validator.run_all.duration_ms_total": 564.833,
+        "stage.metadata.metrics_calculation.count": 1,
+        "stage.metadata.metrics_calculation.duration_ms_total": 445.04,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 5,
+        "stage.excel.write_sheet.duration_ms_total": 434.553,
+        "stage.excel.autosize_sheet.count": 5,
+        "stage.excel.autosize_sheet.duration_ms_total": 140.609,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.save_report.duration_ms_total": 2347.775,
+        "stage.excel.export.count": 1,
+        "stage.excel.export.duration_ms_total": 2349.269,
+        "stage.schema.process.count": 1,
+        "stage.schema.process.duration_ms_total": 3379.854
+      },
+      "gauges": {
+        "input_columns": 362,
+        "input_tables": 73,
+        "max_process_rss_bytes": 0,
+        "max_python_heap_bytes": 113256017,
+        "metadata_issue_rows": 41,
+        "candidates_total": 106,
+        "last_excel_file_size_bytes": 80121
+      }
+    },
+    "SISAGUA": {
+      "counters": {
+        "metadata_loader_tables_detected": 5,
+        "tables_read": 5,
+        "stage.metadata_validator.run_all.count": 2,
+        "stage.metadata_validator.run_all.duration_ms_total": 211.499,
+        "stage.metadata.metrics_calculation.count": 1,
+        "stage.metadata.metrics_calculation.duration_ms_total": 152.821,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 5,
+        "stage.excel.write_sheet.duration_ms_total": 127.95600000000002,
+        "stage.excel.autosize_sheet.count": 5,
+        "stage.excel.autosize_sheet.duration_ms_total": 104.57500000000002,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.save_report.duration_ms_total": 786.566,
+        "stage.excel.export.count": 1,
+        "stage.excel.export.duration_ms_total": 787.841,
+        "stage.schema.process.count": 1,
+        "stage.schema.process.duration_ms_total": 1055.251
+      },
+      "gauges": {
+        "input_columns": 46,
+        "input_tables": 5,
+        "max_process_rss_bytes": 0,
+        "max_python_heap_bytes": 113256017,
+        "metadata_issue_rows": 23,
+        "candidates_total": 15,
+        "last_excel_file_size_bytes": 19647
+      }
+    },
+    "SISCOEX2": {
+      "counters": {
+        "metadata_loader_tables_detected": 5,
+        "tables_read": 5,
+        "stage.metadata.metrics_calculation.count": 1,
+        "stage.metadata.metrics_calculation.duration_ms_total": 121.784,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 5,
+        "stage.excel.write_sheet.duration_ms_total": 90.564,
+        "stage.excel.autosize_sheet.count": 5,
+        "stage.excel.autosize_sheet.duration_ms_total": 69.68799999999999,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.save_report.duration_ms_total": 767.919,
+        "stage.excel.export.count": 1,
+        "stage.excel.export.duration_ms_total": 769.012,
+        "stage.schema.process.count": 1,
+        "stage.schema.process.duration_ms_total": 1028.731
+      },
+      "gauges": {
+        "input_columns": 46,
+        "input_tables": 5,
+        "metadata_issue_rows": 23,
+        "max_process_rss_bytes": 0,
+        "max_python_heap_bytes": 113256017,
+        "candidates_total": 15,
+        "last_excel_file_size_bytes": 20165
+      }
+    },
+    "SISSEG": {
+      "counters": {
+        "metadata_loader_tables_detected": 43,
+        "tables_read": 35,
+        "stage.metadata_validator.run_all.count": 1,
+        "stage.metadata_validator.run_all.duration_ms_total": 459.821,
+        "stage.metadata.metrics_calculation.count": 1,
+        "stage.metadata.metrics_calculation.duration_ms_total": 542.082,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 5,
+        "stage.excel.write_sheet.duration_ms_total": 617.3159999999999,
+        "stage.excel.autosize_sheet.count": 5,
+        "stage.excel.autosize_sheet.duration_ms_total": 196.25599999999997,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.save_report.duration_ms_total": 2518.334,
+        "stage.excel.export.count": 1,
+        "stage.excel.export.duration_ms_total": 2520.596,
+        "stage.schema.process.count": 1,
+        "stage.schema.process.duration_ms_total": 3548.788
+      },
+      "gauges": {
+        "input_columns": 250,
+        "input_tables": 35,
+        "max_process_rss_bytes": 0,
+        "max_python_heap_bytes": 113256017,
+        "metadata_issue_rows": 69,
+        "candidates_total": 92,
+        "last_excel_file_size_bytes": 62965
+      }
+    },
+    "SITRAM2": {
+      "counters": {
+        "metadata_loader_tables_detected": 88,
+        "tables_read": 87,
+        "stage.metadata_validator.run_all.count": 1,
+        "stage.metadata_validator.run_all.duration_ms_total": 1718.374,
+        "stage.metadata.metrics_calculation.count": 1,
+        "stage.metadata.metrics_calculation.duration_ms_total": 977.213,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 5,
+        "stage.excel.write_sheet.duration_ms_total": 1781.6209999999999,
+        "stage.excel.autosize_sheet.count": 5,
+        "stage.excel.autosize_sheet.duration_ms_total": 518.196,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.save_report.duration_ms_total": 11831.747,
+        "stage.excel.export.count": 1,
+        "stage.excel.export.duration_ms_total": 11832.89,
+        "stage.schema.process.count": 1,
+        "stage.schema.process.duration_ms_total": 14569.524
+      },
+      "gauges": {
+        "input_columns": 1034,
+        "input_tables": 87,
+        "max_process_rss_bytes": 0,
+        "max_python_heap_bytes": 116866436,
+        "metadata_issue_rows": 294,
+        "candidates_total": 207,
+        "last_excel_file_size_bytes": 216483
+      }
+    },
+    "SUANOTA": {
+      "counters": {
+        "metadata_loader_tables_detected": 331,
+        "tables_read": 329,
+        "stage.metadata_validator.run_all.count": 1,
+        "stage.metadata_validator.run_all.duration_ms_total": 10950.305,
+        "stage.metadata.metrics_calculation.count": 1,
+        "stage.metadata.metrics_calculation.duration_ms_total": 10627.769,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 5,
+        "stage.excel.write_sheet.duration_ms_total": 12599.244,
+        "stage.excel.autosize_sheet.count": 5,
+        "stage.excel.autosize_sheet.duration_ms_total": 1438.494,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.save_report.duration_ms_total": 40274.548,
+        "stage.excel.export.count": 1,
+        "stage.excel.export.duration_ms_total": 40276.374,
+        "stage.schema.process.count": 1,
+        "stage.schema.process.duration_ms_total": 61932.046
+      },
+      "gauges": {
+        "input_columns": 4415,
+        "input_tables": 329,
+        "max_process_rss_bytes": 0,
+        "max_python_heap_bytes": 127955222,
+        "metadata_issue_rows": 6065,
+        "candidates_total": 706,
+        "last_excel_file_size_bytes": 1026778
+      }
+    },
+    "TRAMITA": {
+      "counters": {
+        "metadata_loader_tables_detected": 146,
+        "tables_read": 143,
+        "stage.metadata_validator.run_all.count": 1,
+        "stage.metadata_validator.run_all.duration_ms_total": 1986.225,
+        "stage.metadata.metrics_calculation.count": 1,
+        "stage.metadata.metrics_calculation.duration_ms_total": 1216.449,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 5,
+        "stage.excel.write_sheet.duration_ms_total": 1640.6139999999998,
+        "stage.excel.autosize_sheet.count": 5,
+        "stage.excel.autosize_sheet.duration_ms_total": 300.24899999999997,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.save_report.duration_ms_total": 7495.584,
+        "stage.excel.export.count": 1,
+        "stage.excel.export.duration_ms_total": 7496.834,
+        "stage.schema.process.count": 1,
+        "stage.schema.process.duration_ms_total": 10728.566
+      },
+      "gauges": {
+        "input_columns": 1139,
+        "input_tables": 143,
+        "max_process_rss_bytes": 0,
+        "max_python_heap_bytes": 127955222,
+        "metadata_issue_rows": 427,
+        "candidates_total": 240,
+        "last_excel_file_size_bytes": 217796
+      }
+    }
+  },
+  "stages": [
+    {
+      "name": "metadata.load",
+      "schema": null,
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:40.780455+00:00",
+      "ended_at": "2026-03-19T17:11:42.565513+00:00",
+      "duration_ms": 1784.972,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 7856470,
+      "extra": {}
+    },
+    {
+      "name": "metadata_validator.run_all",
+      "schema": "CADASTRO",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:42.585369+00:00",
+      "ended_at": "2026-03-19T17:11:43.587997+00:00",
+      "duration_ms": 1002.594,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 8697465,
+      "extra": {}
+    },
+    {
+      "name": "metadata.metrics_calculation",
+      "schema": "cadastro",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:43.588121+00:00",
+      "ended_at": "2026-03-19T17:11:44.376485+00:00",
+      "duration_ms": 788.337,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 8880426,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "cadastro",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:44.379960+00:00",
+      "ended_at": "2026-03-19T17:11:45.080978+00:00",
+      "duration_ms": 700.984,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 15207038,
+      "extra": {
+        "rows": 913,
+        "columns": 36
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "cadastro",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:45.081035+00:00",
+      "ended_at": "2026-03-19T17:11:45.227728+00:00",
+      "duration_ms": 146.667,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 15332767,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "cadastro",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:45.227792+00:00",
+      "ended_at": "2026-03-19T17:11:45.330370+00:00",
+      "duration_ms": 102.551,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 16343972,
+      "extra": {
+        "rows": 343,
+        "columns": 15
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "cadastro",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:45.330454+00:00",
+      "ended_at": "2026-03-19T17:11:45.355644+00:00",
+      "duration_ms": 25.164,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 16407913,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "cadastro",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:45.355728+00:00",
+      "ended_at": "2026-03-19T17:11:45.368631+00:00",
+      "duration_ms": 12.872,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 16513592,
+      "extra": {
+        "rows": 152,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "cadastro",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:45.368757+00:00",
+      "ended_at": "2026-03-19T17:11:45.374279+00:00",
+      "duration_ms": 5.491,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 16532770,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "cadastro",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:45.374353+00:00",
+      "ended_at": "2026-03-19T17:11:45.566649+00:00",
+      "duration_ms": 192.267,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 18386589,
+      "extra": {
+        "rows": 612,
+        "columns": 14
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "cadastro",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:45.566736+00:00",
+      "ended_at": "2026-03-19T17:11:45.599468+00:00",
+      "duration_ms": 32.706,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 18479331,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "cadastro",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:45.599558+00:00",
+      "ended_at": "2026-03-19T17:11:45.603389+00:00",
+      "duration_ms": 3.788,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 18479331,
+      "extra": {
+        "rows": 14,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "cadastro",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:45.603485+00:00",
+      "ended_at": "2026-03-19T17:11:45.606955+00:00",
+      "duration_ms": 3.444,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 18479331,
+      "extra": {}
+    },
+    {
+      "name": "excel.save_report",
+      "schema": "cadastro",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:44.377156+00:00",
+      "ended_at": "2026-03-19T17:11:49.274008+00:00",
+      "duration_ms": 4896.809,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21005015,
+      "extra": {
+        "sheet_count": 5
+      }
+    },
+    {
+      "name": "excel.export",
+      "schema": "cadastro",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:44.376556+00:00",
+      "ended_at": "2026-03-19T17:11:49.274304+00:00",
+      "duration_ms": 4897.727,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21005015,
+      "extra": {}
+    },
+    {
+      "name": "schema.process",
+      "schema": "cadastro",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:42.566047+00:00",
+      "ended_at": "2026-03-19T17:11:49.274535+00:00",
+      "duration_ms": 6708.459,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21005015,
+      "extra": {}
+    },
+    {
+      "name": "metadata_validator.run_all",
+      "schema": "CONSEG",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:49.291365+00:00",
+      "ended_at": "2026-03-19T17:11:49.524501+00:00",
+      "duration_ms": 233.103,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21005015,
+      "extra": {}
+    },
+    {
+      "name": "metadata.metrics_calculation",
+      "schema": "conseg",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:49.524592+00:00",
+      "ended_at": "2026-03-19T17:11:49.687311+00:00",
+      "duration_ms": 162.695,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21005015,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "conseg",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:49.691037+00:00",
+      "ended_at": "2026-03-19T17:11:49.773244+00:00",
+      "duration_ms": 82.164,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21005015,
+      "extra": {
+        "rows": 115,
+        "columns": 36
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "conseg",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:49.773299+00:00",
+      "ended_at": "2026-03-19T17:11:49.812219+00:00",
+      "duration_ms": 38.893,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21005015,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "conseg",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:49.812312+00:00",
+      "ended_at": "2026-03-19T17:11:49.838001+00:00",
+      "duration_ms": 25.643,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21005015,
+      "extra": {
+        "rows": 50,
+        "columns": 15
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "conseg",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:49.838050+00:00",
+      "ended_at": "2026-03-19T17:11:49.857959+00:00",
+      "duration_ms": 19.879,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21005015,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "conseg",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:49.858034+00:00",
+      "ended_at": "2026-03-19T17:11:49.863946+00:00",
+      "duration_ms": 5.884,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21005015,
+      "extra": {
+        "rows": 46,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "conseg",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:49.863997+00:00",
+      "ended_at": "2026-03-19T17:11:49.867388+00:00",
+      "duration_ms": 3.364,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21005015,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "conseg",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:49.867467+00:00",
+      "ended_at": "2026-03-19T17:11:49.895353+00:00",
+      "duration_ms": 27.841,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21005015,
+      "extra": {
+        "rows": 68,
+        "columns": 14
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "conseg",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:49.895448+00:00",
+      "ended_at": "2026-03-19T17:11:49.906276+00:00",
+      "duration_ms": 10.807,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21005015,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "conseg",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:49.906326+00:00",
+      "ended_at": "2026-03-19T17:11:49.912668+00:00",
+      "duration_ms": 6.315,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21005015,
+      "extra": {
+        "rows": 14,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "conseg",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:49.912717+00:00",
+      "ended_at": "2026-03-19T17:11:49.916162+00:00",
+      "duration_ms": 3.422,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21005015,
+      "extra": {}
+    },
+    {
+      "name": "excel.save_report",
+      "schema": "conseg",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:49.687980+00:00",
+      "ended_at": "2026-03-19T17:11:50.669334+00:00",
+      "duration_ms": 981.31,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21005015,
+      "extra": {
+        "sheet_count": 5
+      }
+    },
+    {
+      "name": "excel.export",
+      "schema": "conseg",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:49.687374+00:00",
+      "ended_at": "2026-03-19T17:11:50.669666+00:00",
+      "duration_ms": 982.258,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21005015,
+      "extra": {}
+    },
+    {
+      "name": "schema.process",
+      "schema": "conseg",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:49.274652+00:00",
+      "ended_at": "2026-03-19T17:11:50.669932+00:00",
+      "duration_ms": 1395.251,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21005015,
+      "extra": {}
+    },
+    {
+      "name": "metadata_validator.run_all",
+      "schema": "CONTA_CORRENTE",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:50.687948+00:00",
+      "ended_at": "2026-03-19T17:11:50.963445+00:00",
+      "duration_ms": 275.454,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21005015,
+      "extra": {}
+    },
+    {
+      "name": "metadata.metrics_calculation",
+      "schema": "conta_corrente",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:50.963520+00:00",
+      "ended_at": "2026-03-19T17:11:51.145537+00:00",
+      "duration_ms": 181.991,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21005015,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "conta_corrente",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:51.148785+00:00",
+      "ended_at": "2026-03-19T17:11:51.292634+00:00",
+      "duration_ms": 143.733,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21005015,
+      "extra": {
+        "rows": 217,
+        "columns": 36
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "conta_corrente",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:51.292760+00:00",
+      "ended_at": "2026-03-19T17:11:51.340320+00:00",
+      "duration_ms": 47.529,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21005015,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "conta_corrente",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:51.340402+00:00",
+      "ended_at": "2026-03-19T17:11:51.360884+00:00",
+      "duration_ms": 20.456,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21005015,
+      "extra": {
+        "rows": 42,
+        "columns": 15
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "conta_corrente",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:51.360936+00:00",
+      "ended_at": "2026-03-19T17:11:51.372371+00:00",
+      "duration_ms": 11.401,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21005015,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "conta_corrente",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:51.372421+00:00",
+      "ended_at": "2026-03-19T17:11:51.379788+00:00",
+      "duration_ms": 7.342,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21058120,
+      "extra": {
+        "rows": 58,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "conta_corrente",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:51.379838+00:00",
+      "ended_at": "2026-03-19T17:11:51.383259+00:00",
+      "duration_ms": 3.402,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21069080,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "conta_corrente",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:51.383310+00:00",
+      "ended_at": "2026-03-19T17:11:51.416447+00:00",
+      "duration_ms": 33.112,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21332365,
+      "extra": {
+        "rows": 92,
+        "columns": 14
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "conta_corrente",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:51.416499+00:00",
+      "ended_at": "2026-03-19T17:11:51.429032+00:00",
+      "duration_ms": 12.509,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21366946,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "conta_corrente",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:51.429088+00:00",
+      "ended_at": "2026-03-19T17:11:51.488948+00:00",
+      "duration_ms": 59.834,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {
+        "rows": 14,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "conta_corrente",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:51.489001+00:00",
+      "ended_at": "2026-03-19T17:11:51.492131+00:00",
+      "duration_ms": 3.107,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "excel.save_report",
+      "schema": "conta_corrente",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:51.146290+00:00",
+      "ended_at": "2026-03-19T17:11:52.570535+00:00",
+      "duration_ms": 1424.205,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {
+        "sheet_count": 5
+      }
+    },
+    {
+      "name": "excel.export",
+      "schema": "conta_corrente",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:51.145615+00:00",
+      "ended_at": "2026-03-19T17:11:52.570809+00:00",
+      "duration_ms": 1425.173,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "schema.process",
+      "schema": "conta_corrente",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:50.670047+00:00",
+      "ended_at": "2026-03-19T17:11:52.571116+00:00",
+      "duration_ms": 1901.038,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "metadata_validator.run_all",
+      "schema": "COPAF",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:52.593190+00:00",
+      "ended_at": "2026-03-19T17:11:52.821894+00:00",
+      "duration_ms": 228.639,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "metadata.metrics_calculation",
+      "schema": "copaf",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:52.822005+00:00",
+      "ended_at": "2026-03-19T17:11:52.986915+00:00",
+      "duration_ms": 164.883,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "copaf",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:52.991318+00:00",
+      "ended_at": "2026-03-19T17:11:53.083623+00:00",
+      "duration_ms": 92.262,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {
+        "rows": 106,
+        "columns": 36
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "copaf",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:53.083686+00:00",
+      "ended_at": "2026-03-19T17:11:53.122273+00:00",
+      "duration_ms": 38.559,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "copaf",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:53.122341+00:00",
+      "ended_at": "2026-03-19T17:11:53.141337+00:00",
+      "duration_ms": 18.965,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {
+        "rows": 23,
+        "columns": 15
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "copaf",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:53.141399+00:00",
+      "ended_at": "2026-03-19T17:11:53.155521+00:00",
+      "duration_ms": 14.094,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "copaf",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:53.155618+00:00",
+      "ended_at": "2026-03-19T17:11:53.164020+00:00",
+      "duration_ms": 8.371,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {
+        "rows": 48,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "copaf",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:53.164083+00:00",
+      "ended_at": "2026-03-19T17:11:53.168727+00:00",
+      "duration_ms": 4.61,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "copaf",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:53.168798+00:00",
+      "ended_at": "2026-03-19T17:11:53.192163+00:00",
+      "duration_ms": 23.333,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {
+        "rows": 43,
+        "columns": 14
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "copaf",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:53.192253+00:00",
+      "ended_at": "2026-03-19T17:11:53.206540+00:00",
+      "duration_ms": 14.258,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "copaf",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:53.206604+00:00",
+      "ended_at": "2026-03-19T17:11:53.213629+00:00",
+      "duration_ms": 6.992,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {
+        "rows": 14,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "copaf",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:53.213707+00:00",
+      "ended_at": "2026-03-19T17:11:53.217593+00:00",
+      "duration_ms": 3.849,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "excel.save_report",
+      "schema": "copaf",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:52.987694+00:00",
+      "ended_at": "2026-03-19T17:11:53.949080+00:00",
+      "duration_ms": 961.338,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {
+        "sheet_count": 5
+      }
+    },
+    {
+      "name": "excel.export",
+      "schema": "copaf",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:52.987011+00:00",
+      "ended_at": "2026-03-19T17:11:53.949391+00:00",
+      "duration_ms": 962.357,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "schema.process",
+      "schema": "copaf",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:52.571221+00:00",
+      "ended_at": "2026-03-19T17:11:53.949771+00:00",
+      "duration_ms": 1378.512,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "metadata_validator.run_all",
+      "schema": "COPAF_AIX",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:53.972303+00:00",
+      "ended_at": "2026-03-19T17:11:54.319165+00:00",
+      "duration_ms": 346.826,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "metadata.metrics_calculation",
+      "schema": "copaf_aix",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:54.319290+00:00",
+      "ended_at": "2026-03-19T17:11:54.544105+00:00",
+      "duration_ms": 224.785,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "copaf_aix",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:54.548784+00:00",
+      "ended_at": "2026-03-19T17:11:54.740678+00:00",
+      "duration_ms": 191.855,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {
+        "rows": 246,
+        "columns": 36
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "copaf_aix",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:54.740750+00:00",
+      "ended_at": "2026-03-19T17:11:54.813965+00:00",
+      "duration_ms": 73.118,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "copaf_aix",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:54.814060+00:00",
+      "ended_at": "2026-03-19T17:11:54.834627+00:00",
+      "duration_ms": 20.527,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {
+        "rows": 16,
+        "columns": 15
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "copaf_aix",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:54.834712+00:00",
+      "ended_at": "2026-03-19T17:11:54.851903+00:00",
+      "duration_ms": 17.15,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "copaf_aix",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:54.852000+00:00",
+      "ended_at": "2026-03-19T17:11:54.859873+00:00",
+      "duration_ms": 7.829,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {
+        "rows": 28,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "copaf_aix",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:54.859940+00:00",
+      "ended_at": "2026-03-19T17:11:54.865238+00:00",
+      "duration_ms": 5.24,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "copaf_aix",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:54.865313+00:00",
+      "ended_at": "2026-03-19T17:11:54.918358+00:00",
+      "duration_ms": 53.014,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {
+        "rows": 127,
+        "columns": 14
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "copaf_aix",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:54.918420+00:00",
+      "ended_at": "2026-03-19T17:11:54.935388+00:00",
+      "duration_ms": 16.942,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "copaf_aix",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:54.935452+00:00",
+      "ended_at": "2026-03-19T17:11:54.939798+00:00",
+      "duration_ms": 4.316,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {
+        "rows": 14,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "copaf_aix",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:54.939849+00:00",
+      "ended_at": "2026-03-19T17:11:54.943264+00:00",
+      "duration_ms": 3.393,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "excel.save_report",
+      "schema": "copaf_aix",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:54.544961+00:00",
+      "ended_at": "2026-03-19T17:11:56.203876+00:00",
+      "duration_ms": 1658.858,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {
+        "sheet_count": 5
+      }
+    },
+    {
+      "name": "excel.export",
+      "schema": "copaf_aix",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:54.544178+00:00",
+      "ended_at": "2026-03-19T17:11:56.204230+00:00",
+      "duration_ms": 1660.028,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "schema.process",
+      "schema": "copaf_aix",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:53.949873+00:00",
+      "ended_at": "2026-03-19T17:11:56.204498+00:00",
+      "duration_ms": 2254.589,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "metadata_validator.run_all",
+      "schema": "DIMP",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:56.222456+00:00",
+      "ended_at": "2026-03-19T17:11:56.650659+00:00",
+      "duration_ms": 428.153,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "metadata.metrics_calculation",
+      "schema": "dimp",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:56.650775+00:00",
+      "ended_at": "2026-03-19T17:11:57.089072+00:00",
+      "duration_ms": 438.27,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "dimp",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:57.092708+00:00",
+      "ended_at": "2026-03-19T17:11:57.353321+00:00",
+      "duration_ms": 260.572,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {
+        "rows": 318,
+        "columns": 36
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "dimp",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:57.353391+00:00",
+      "ended_at": "2026-03-19T17:11:57.418564+00:00",
+      "duration_ms": 65.145,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "dimp",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:57.418635+00:00",
+      "ended_at": "2026-03-19T17:11:57.467294+00:00",
+      "duration_ms": 48.602,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {
+        "rows": 123,
+        "columns": 15
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "dimp",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:57.467362+00:00",
+      "ended_at": "2026-03-19T17:11:57.485152+00:00",
+      "duration_ms": 17.735,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "dimp",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:57.485216+00:00",
+      "ended_at": "2026-03-19T17:11:57.494765+00:00",
+      "duration_ms": 9.525,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {
+        "rows": 80,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "dimp",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:57.494817+00:00",
+      "ended_at": "2026-03-19T17:11:57.500111+00:00",
+      "duration_ms": 5.266,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "dimp",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:57.500173+00:00",
+      "ended_at": "2026-03-19T17:11:57.542536+00:00",
+      "duration_ms": 42.331,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {
+        "rows": 104,
+        "columns": 14
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "dimp",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:57.542620+00:00",
+      "ended_at": "2026-03-19T17:11:57.558978+00:00",
+      "duration_ms": 16.332,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "dimp",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:57.559042+00:00",
+      "ended_at": "2026-03-19T17:11:57.563489+00:00",
+      "duration_ms": 4.407,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {
+        "rows": 14,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "dimp",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:57.563547+00:00",
+      "ended_at": "2026-03-19T17:11:57.567559+00:00",
+      "duration_ms": 3.985,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "excel.save_report",
+      "schema": "dimp",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:57.089797+00:00",
+      "ended_at": "2026-03-19T17:11:59.149167+00:00",
+      "duration_ms": 2059.32,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {
+        "sheet_count": 5
+      }
+    },
+    {
+      "name": "excel.export",
+      "schema": "dimp",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:57.089150+00:00",
+      "ended_at": "2026-03-19T17:11:59.149489+00:00",
+      "duration_ms": 2060.309,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "schema.process",
+      "schema": "dimp",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:56.204603+00:00",
+      "ended_at": "2026-03-19T17:11:59.150038+00:00",
+      "duration_ms": 2945.391,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "metadata_validator.run_all",
+      "schema": "DTE",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:59.173670+00:00",
+      "ended_at": "2026-03-19T17:12:00.549562+00:00",
+      "duration_ms": 1375.851,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "metadata.metrics_calculation",
+      "schema": "dte",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:00.549685+00:00",
+      "ended_at": "2026-03-19T17:12:01.691948+00:00",
+      "duration_ms": 1142.232,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 21379341,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "dte",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:01.696018+00:00",
+      "ended_at": "2026-03-19T17:12:02.642871+00:00",
+      "duration_ms": 946.815,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 24044507,
+      "extra": {
+        "rows": 956,
+        "columns": 36
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "dte",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:02.642939+00:00",
+      "ended_at": "2026-03-19T17:12:02.829979+00:00",
+      "duration_ms": 187.01,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 24170595,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "dte",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:02.830047+00:00",
+      "ended_at": "2026-03-19T17:12:02.896676+00:00",
+      "duration_ms": 66.601,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 24630753,
+      "extra": {
+        "rows": 174,
+        "columns": 15
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "dte",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:02.896736+00:00",
+      "ended_at": "2026-03-19T17:12:02.919285+00:00",
+      "duration_ms": 22.522,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 24675673,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "dte",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:02.919352+00:00",
+      "ended_at": "2026-03-19T17:12:02.941706+00:00",
+      "duration_ms": 22.322,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 24843227,
+      "extra": {
+        "rows": 200,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "dte",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:02.941773+00:00",
+      "ended_at": "2026-03-19T17:12:02.947270+00:00",
+      "duration_ms": 5.474,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 24866583,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "dte",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:02.947344+00:00",
+      "ended_at": "2026-03-19T17:12:03.361767+00:00",
+      "duration_ms": 414.39,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 28194270,
+      "extra": {
+        "rows": 1050,
+        "columns": 14
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "dte",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:03.361837+00:00",
+      "ended_at": "2026-03-19T17:12:03.425490+00:00",
+      "duration_ms": 63.622,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 28335403,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "dte",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:03.425558+00:00",
+      "ended_at": "2026-03-19T17:12:03.429906+00:00",
+      "duration_ms": 4.317,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 28335403,
+      "extra": {
+        "rows": 14,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "dte",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:03.429966+00:00",
+      "ended_at": "2026-03-19T17:12:03.434136+00:00",
+      "duration_ms": 4.144,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 28335403,
+      "extra": {}
+    },
+    {
+      "name": "excel.save_report",
+      "schema": "dte",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:01.692753+00:00",
+      "ended_at": "2026-03-19T17:12:08.277866+00:00",
+      "duration_ms": 6585.055,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 30897492,
+      "extra": {
+        "sheet_count": 5
+      }
+    },
+    {
+      "name": "excel.export",
+      "schema": "dte",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:01.692045+00:00",
+      "ended_at": "2026-03-19T17:12:08.278270+00:00",
+      "duration_ms": 6586.189,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 30897492,
+      "extra": {}
+    },
+    {
+      "name": "schema.process",
+      "schema": "dte",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:11:59.150289+00:00",
+      "ended_at": "2026-03-19T17:12:08.278632+00:00",
+      "duration_ms": 9128.271,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 30897492,
+      "extra": {}
+    },
+    {
+      "name": "metadata_validator.run_all",
+      "schema": "IPVA2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:08.302836+00:00",
+      "ended_at": "2026-03-19T17:12:09.641485+00:00",
+      "duration_ms": 1338.61,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 30897492,
+      "extra": {}
+    },
+    {
+      "name": "metadata.metrics_calculation",
+      "schema": "ipva2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:09.641605+00:00",
+      "ended_at": "2026-03-19T17:12:10.436214+00:00",
+      "duration_ms": 794.576,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 30897492,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "ipva2",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:10.440537+00:00",
+      "ended_at": "2026-03-19T17:12:11.147897+00:00",
+      "duration_ms": 707.063,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 33545467,
+      "extra": {
+        "rows": 640,
+        "columns": 36
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "ipva2",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:11.148327+00:00",
+      "ended_at": "2026-03-19T17:12:11.306087+00:00",
+      "duration_ms": 157.718,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 33545467,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "ipva2",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:11.306159+00:00",
+      "ended_at": "2026-03-19T17:12:11.378382+00:00",
+      "duration_ms": 72.189,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 33782761,
+      "extra": {
+        "rows": 180,
+        "columns": 15
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "ipva2",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:11.378448+00:00",
+      "ended_at": "2026-03-19T17:12:11.401828+00:00",
+      "duration_ms": 23.337,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 33828529,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "ipva2",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:11.401895+00:00",
+      "ended_at": "2026-03-19T17:12:11.419469+00:00",
+      "duration_ms": 17.541,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 33946189,
+      "extra": {
+        "rows": 152,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "ipva2",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:11.419536+00:00",
+      "ended_at": "2026-03-19T17:12:11.425895+00:00",
+      "duration_ms": 6.329,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 33965522,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "ipva2",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:11.425995+00:00",
+      "ended_at": "2026-03-19T17:12:11.498929+00:00",
+      "duration_ms": 72.866,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 34403122,
+      "extra": {
+        "rows": 157,
+        "columns": 14
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "ipva2",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:11.498998+00:00",
+      "ended_at": "2026-03-19T17:12:11.521715+00:00",
+      "duration_ms": 22.679,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 34445184,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "ipva2",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:11.521814+00:00",
+      "ended_at": "2026-03-19T17:12:11.526770+00:00",
+      "duration_ms": 4.921,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 34463096,
+      "extra": {
+        "rows": 14,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "ipva2",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:11.526831+00:00",
+      "ended_at": "2026-03-19T17:12:11.531442+00:00",
+      "duration_ms": 4.579,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 34472821,
+      "extra": {}
+    },
+    {
+      "name": "excel.save_report",
+      "schema": "ipva2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:10.437088+00:00",
+      "ended_at": "2026-03-19T17:12:15.336814+00:00",
+      "duration_ms": 4899.669,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 36240124,
+      "extra": {
+        "sheet_count": 5
+      }
+    },
+    {
+      "name": "excel.export",
+      "schema": "ipva2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:10.436323+00:00",
+      "ended_at": "2026-03-19T17:12:15.337257+00:00",
+      "duration_ms": 4900.905,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 36240124,
+      "extra": {}
+    },
+    {
+      "name": "schema.process",
+      "schema": "ipva2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:08.278844+00:00",
+      "ended_at": "2026-03-19T17:12:15.337610+00:00",
+      "duration_ms": 7058.714,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 36240124,
+      "extra": {}
+    },
+    {
+      "name": "metadata_validator.run_all",
+      "schema": "ITCD2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:15.369482+00:00",
+      "ended_at": "2026-03-19T17:12:16.826064+00:00",
+      "duration_ms": 1456.541,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 36240124,
+      "extra": {}
+    },
+    {
+      "name": "metadata.metrics_calculation",
+      "schema": "itcd2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:16.826159+00:00",
+      "ended_at": "2026-03-19T17:12:17.620677+00:00",
+      "duration_ms": 794.477,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 36818306,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "itcd2",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:17.624341+00:00",
+      "ended_at": "2026-03-19T17:12:18.625190+00:00",
+      "duration_ms": 1000.791,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {
+        "rows": 990,
+        "columns": 36
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "itcd2",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:18.625263+00:00",
+      "ended_at": "2026-03-19T17:12:18.838280+00:00",
+      "duration_ms": 212.984,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "itcd2",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:18.838415+00:00",
+      "ended_at": "2026-03-19T17:12:18.932927+00:00",
+      "duration_ms": 94.473,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {
+        "rows": 226,
+        "columns": 15
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "itcd2",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:18.932990+00:00",
+      "ended_at": "2026-03-19T17:12:18.957984+00:00",
+      "duration_ms": 24.957,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "itcd2",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:18.958074+00:00",
+      "ended_at": "2026-03-19T17:12:18.977608+00:00",
+      "duration_ms": 19.457,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {
+        "rows": 188,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "itcd2",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:18.977678+00:00",
+      "ended_at": "2026-03-19T17:12:18.983170+00:00",
+      "duration_ms": 5.469,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "itcd2",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:18.983243+00:00",
+      "ended_at": "2026-03-19T17:12:19.044310+00:00",
+      "duration_ms": 61.036,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {
+        "rows": 167,
+        "columns": 14
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "itcd2",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:19.044369+00:00",
+      "ended_at": "2026-03-19T17:12:19.061245+00:00",
+      "duration_ms": 16.849,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "itcd2",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:19.061323+00:00",
+      "ended_at": "2026-03-19T17:12:19.065700+00:00",
+      "duration_ms": 4.34,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {
+        "rows": 14,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "itcd2",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:19.065756+00:00",
+      "ended_at": "2026-03-19T17:12:19.069226+00:00",
+      "duration_ms": 3.447,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {}
+    },
+    {
+      "name": "excel.save_report",
+      "schema": "itcd2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:17.621445+00:00",
+      "ended_at": "2026-03-19T17:12:24.063353+00:00",
+      "duration_ms": 6441.854,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {
+        "sheet_count": 5
+      }
+    },
+    {
+      "name": "excel.export",
+      "schema": "itcd2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:17.620793+00:00",
+      "ended_at": "2026-03-19T17:12:24.063662+00:00",
+      "duration_ms": 6442.845,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {}
+    },
+    {
+      "name": "schema.process",
+      "schema": "itcd2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:15.337740+00:00",
+      "ended_at": "2026-03-19T17:12:24.063967+00:00",
+      "duration_ms": 8726.196,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {}
+    },
+    {
+      "name": "metadata_validator.run_all",
+      "schema": "NFECORP",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:24.089236+00:00",
+      "ended_at": "2026-03-19T17:12:25.901105+00:00",
+      "duration_ms": 1811.825,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {}
+    },
+    {
+      "name": "metadata.metrics_calculation",
+      "schema": "nfecorp",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:25.901213+00:00",
+      "ended_at": "2026-03-19T17:12:27.067961+00:00",
+      "duration_ms": 1166.72,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "nfecorp",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:27.071581+00:00",
+      "ended_at": "2026-03-19T17:12:28.330008+00:00",
+      "duration_ms": 1258.39,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {
+        "rows": 1254,
+        "columns": 36
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "nfecorp",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:28.330113+00:00",
+      "ended_at": "2026-03-19T17:12:28.563179+00:00",
+      "duration_ms": 233.025,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "nfecorp",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:28.563287+00:00",
+      "ended_at": "2026-03-19T17:12:28.658825+00:00",
+      "duration_ms": 95.499,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {
+        "rows": 237,
+        "columns": 15
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "nfecorp",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:28.658891+00:00",
+      "ended_at": "2026-03-19T17:12:28.685488+00:00",
+      "duration_ms": 26.562,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "nfecorp",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:28.685624+00:00",
+      "ended_at": "2026-03-19T17:12:28.711523+00:00",
+      "duration_ms": 25.836,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {
+        "rows": 196,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "nfecorp",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:28.711592+00:00",
+      "ended_at": "2026-03-19T17:12:28.718639+00:00",
+      "duration_ms": 7.018,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "nfecorp",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:28.718711+00:00",
+      "ended_at": "2026-03-19T17:12:29.240922+00:00",
+      "duration_ms": 522.173,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {
+        "rows": 859,
+        "columns": 14
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "nfecorp",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:29.241011+00:00",
+      "ended_at": "2026-03-19T17:12:29.318973+00:00",
+      "duration_ms": 77.928,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "nfecorp",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:29.319053+00:00",
+      "ended_at": "2026-03-19T17:12:29.324236+00:00",
+      "duration_ms": 5.156,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {
+        "rows": 14,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "nfecorp",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:29.324318+00:00",
+      "ended_at": "2026-03-19T17:12:29.328835+00:00",
+      "duration_ms": 4.489,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {}
+    },
+    {
+      "name": "excel.save_report",
+      "schema": "nfecorp",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:27.068675+00:00",
+      "ended_at": "2026-03-19T17:12:37.449828+00:00",
+      "duration_ms": 10381.103,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {
+        "sheet_count": 5
+      }
+    },
+    {
+      "name": "excel.export",
+      "schema": "nfecorp",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:27.068033+00:00",
+      "ended_at": "2026-03-19T17:12:37.450268+00:00",
+      "duration_ms": 10382.209,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {}
+    },
+    {
+      "name": "schema.process",
+      "schema": "nfecorp",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:24.064089+00:00",
+      "ended_at": "2026-03-19T17:12:37.450577+00:00",
+      "duration_ms": 13386.453,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {}
+    },
+    {
+      "name": "metadata_validator.run_all",
+      "schema": "RECEITA2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:37.475048+00:00",
+      "ended_at": "2026-03-19T17:12:38.500580+00:00",
+      "duration_ms": 1025.492,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {}
+    },
+    {
+      "name": "metadata.metrics_calculation",
+      "schema": "receita2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:38.500679+00:00",
+      "ended_at": "2026-03-19T17:12:39.227649+00:00",
+      "duration_ms": 726.938,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38150143,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "receita2",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:39.231782+00:00",
+      "ended_at": "2026-03-19T17:12:40.049086+00:00",
+      "duration_ms": 817.262,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38231845,
+      "extra": {
+        "rows": 652,
+        "columns": 36
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "receita2",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:40.049180+00:00",
+      "ended_at": "2026-03-19T17:12:40.202584+00:00",
+      "duration_ms": 153.372,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38231845,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "receita2",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:40.202681+00:00",
+      "ended_at": "2026-03-19T17:12:40.270178+00:00",
+      "duration_ms": 67.463,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38479637,
+      "extra": {
+        "rows": 153,
+        "columns": 15
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "receita2",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:40.270246+00:00",
+      "ended_at": "2026-03-19T17:12:40.294607+00:00",
+      "duration_ms": 24.329,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38522323,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "receita2",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:40.294685+00:00",
+      "ended_at": "2026-03-19T17:12:40.316447+00:00",
+      "duration_ms": 21.727,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38691169,
+      "extra": {
+        "rows": 174,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "receita2",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:40.316514+00:00",
+      "ended_at": "2026-03-19T17:12:40.322910+00:00",
+      "duration_ms": 6.362,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 38697088,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "receita2",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:40.322986+00:00",
+      "ended_at": "2026-03-19T17:12:40.397745+00:00",
+      "duration_ms": 74.719,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 39191869,
+      "extra": {
+        "rows": 183,
+        "columns": 14
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "receita2",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:40.397820+00:00",
+      "ended_at": "2026-03-19T17:12:40.418938+00:00",
+      "duration_ms": 21.085,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 39236740,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "receita2",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:40.419009+00:00",
+      "ended_at": "2026-03-19T17:12:40.423785+00:00",
+      "duration_ms": 4.751,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 39251884,
+      "extra": {
+        "rows": 14,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "receita2",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:40.423839+00:00",
+      "ended_at": "2026-03-19T17:12:40.428111+00:00",
+      "duration_ms": 4.238,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 39261601,
+      "extra": {}
+    },
+    {
+      "name": "excel.save_report",
+      "schema": "receita2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:39.228465+00:00",
+      "ended_at": "2026-03-19T17:12:43.323951+00:00",
+      "duration_ms": 4095.436,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41060634,
+      "extra": {
+        "sheet_count": 5
+      }
+    },
+    {
+      "name": "excel.export",
+      "schema": "receita2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:39.227741+00:00",
+      "ended_at": "2026-03-19T17:12:43.324347+00:00",
+      "duration_ms": 4096.574,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41060634,
+      "extra": {}
+    },
+    {
+      "name": "schema.process",
+      "schema": "receita2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:37.450730+00:00",
+      "ended_at": "2026-03-19T17:12:43.324653+00:00",
+      "duration_ms": 5873.884,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41060634,
+      "extra": {}
+    },
+    {
+      "name": "metadata_validator.run_all",
+      "schema": "SETA",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:43.345617+00:00",
+      "ended_at": "2026-03-19T17:12:44.288732+00:00",
+      "duration_ms": 943.068,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41060634,
+      "extra": {}
+    },
+    {
+      "name": "metadata.metrics_calculation",
+      "schema": "seta",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:44.288824+00:00",
+      "ended_at": "2026-03-19T17:12:45.036554+00:00",
+      "duration_ms": 747.704,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41060634,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "seta",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:45.040117+00:00",
+      "ended_at": "2026-03-19T17:12:45.778349+00:00",
+      "duration_ms": 738.193,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {
+        "rows": 633,
+        "columns": 36
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "seta",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:45.778419+00:00",
+      "ended_at": "2026-03-19T17:12:45.904187+00:00",
+      "duration_ms": 125.738,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "seta",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:45.904255+00:00",
+      "ended_at": "2026-03-19T17:12:45.992804+00:00",
+      "duration_ms": 88.519,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {
+        "rows": 253,
+        "columns": 15
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "seta",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:45.992881+00:00",
+      "ended_at": "2026-03-19T17:12:46.014283+00:00",
+      "duration_ms": 21.366,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "seta",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:46.014352+00:00",
+      "ended_at": "2026-03-19T17:12:46.038013+00:00",
+      "duration_ms": 23.625,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {
+        "rows": 226,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "seta",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:46.038124+00:00",
+      "ended_at": "2026-03-19T17:12:46.043670+00:00",
+      "duration_ms": 5.522,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "seta",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:46.043754+00:00",
+      "ended_at": "2026-03-19T17:12:46.153748+00:00",
+      "duration_ms": 109.962,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {
+        "rows": 318,
+        "columns": 14
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "seta",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:46.153817+00:00",
+      "ended_at": "2026-03-19T17:12:46.177666+00:00",
+      "duration_ms": 23.82,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "seta",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:46.177763+00:00",
+      "ended_at": "2026-03-19T17:12:46.183049+00:00",
+      "duration_ms": 5.253,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {
+        "rows": 14,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "seta",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:46.183166+00:00",
+      "ended_at": "2026-03-19T17:12:46.186829+00:00",
+      "duration_ms": 3.598,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {}
+    },
+    {
+      "name": "excel.save_report",
+      "schema": "seta",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:45.037265+00:00",
+      "ended_at": "2026-03-19T17:12:49.388892+00:00",
+      "duration_ms": 4351.58,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {
+        "sheet_count": 5
+      }
+    },
+    {
+      "name": "excel.export",
+      "schema": "seta",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:45.036626+00:00",
+      "ended_at": "2026-03-19T17:12:49.389224+00:00",
+      "duration_ms": 4352.576,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {}
+    },
+    {
+      "name": "schema.process",
+      "schema": "seta",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:43.324767+00:00",
+      "ended_at": "2026-03-19T17:12:49.389507+00:00",
+      "duration_ms": 6064.708,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {}
+    },
+    {
+      "name": "metadata_validator.run_all",
+      "schema": "SGT",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:49.406253+00:00",
+      "ended_at": "2026-03-19T17:12:49.987101+00:00",
+      "duration_ms": 580.814,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {}
+    },
+    {
+      "name": "metadata.metrics_calculation",
+      "schema": "sgt",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:49.987200+00:00",
+      "ended_at": "2026-03-19T17:12:50.368338+00:00",
+      "duration_ms": 381.09,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sgt",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:50.372325+00:00",
+      "ended_at": "2026-03-19T17:12:50.712679+00:00",
+      "duration_ms": 340.316,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {
+        "rows": 397,
+        "columns": 36
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sgt",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:50.712776+00:00",
+      "ended_at": "2026-03-19T17:12:50.789750+00:00",
+      "duration_ms": 76.946,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sgt",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:50.789814+00:00",
+      "ended_at": "2026-03-19T17:12:50.831459+00:00",
+      "duration_ms": 41.613,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {
+        "rows": 106,
+        "columns": 15
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sgt",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:50.831518+00:00",
+      "ended_at": "2026-03-19T17:12:50.847380+00:00",
+      "duration_ms": 15.833,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sgt",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:50.847465+00:00",
+      "ended_at": "2026-03-19T17:12:50.858026+00:00",
+      "duration_ms": 10.531,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {
+        "rows": 92,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sgt",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:50.858112+00:00",
+      "ended_at": "2026-03-19T17:12:50.862690+00:00",
+      "duration_ms": 4.552,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sgt",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:50.862753+00:00",
+      "ended_at": "2026-03-19T17:12:50.908575+00:00",
+      "duration_ms": 45.792,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {
+        "rows": 128,
+        "columns": 14
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sgt",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:50.908635+00:00",
+      "ended_at": "2026-03-19T17:12:50.923672+00:00",
+      "duration_ms": 15.009,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sgt",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:50.923754+00:00",
+      "ended_at": "2026-03-19T17:12:50.927822+00:00",
+      "duration_ms": 4.046,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {
+        "rows": 14,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sgt",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:50.927869+00:00",
+      "ended_at": "2026-03-19T17:12:50.931139+00:00",
+      "duration_ms": 3.25,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {}
+    },
+    {
+      "name": "excel.save_report",
+      "schema": "sgt",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:50.369317+00:00",
+      "ended_at": "2026-03-19T17:12:52.734960+00:00",
+      "duration_ms": 2365.581,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {
+        "sheet_count": 5
+      }
+    },
+    {
+      "name": "excel.export",
+      "schema": "sgt",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:50.368466+00:00",
+      "ended_at": "2026-03-19T17:12:52.735298+00:00",
+      "duration_ms": 2366.802,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {}
+    },
+    {
+      "name": "schema.process",
+      "schema": "sgt",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:49.389649+00:00",
+      "ended_at": "2026-03-19T17:12:52.735557+00:00",
+      "duration_ms": 3345.872,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {}
+    },
+    {
+      "name": "metadata_validator.run_all",
+      "schema": "SIGET",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:52.783751+00:00",
+      "ended_at": "2026-03-19T17:13:02.046159+00:00",
+      "duration_ms": 9262.362,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {}
+    },
+    {
+      "name": "metadata.metrics_calculation",
+      "schema": "siget",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:13:02.046317+00:00",
+      "ended_at": "2026-03-19T17:13:08.690561+00:00",
+      "duration_ms": 6644.057,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 41468254,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "siget",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:13:08.694358+00:00",
+      "ended_at": "2026-03-19T17:13:15.650692+00:00",
+      "duration_ms": 6956.276,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 68548710,
+      "extra": {
+        "rows": 6058,
+        "columns": 36
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "siget",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:13:15.650789+00:00",
+      "ended_at": "2026-03-19T17:13:16.907124+00:00",
+      "duration_ms": 1256.273,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 69233198,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "siget",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:13:16.907238+00:00",
+      "ended_at": "2026-03-19T17:13:17.305116+00:00",
+      "duration_ms": 397.844,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 71882221,
+      "extra": {
+        "rows": 957,
+        "columns": 15
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "siget",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:13:17.305226+00:00",
+      "ended_at": "2026-03-19T17:13:17.376215+00:00",
+      "duration_ms": 70.96,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 72015029,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "siget",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:13:17.376287+00:00",
+      "ended_at": "2026-03-19T17:13:17.554925+00:00",
+      "duration_ms": 178.604,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 73391357,
+      "extra": {
+        "rows": 1538,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "siget",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:13:17.554995+00:00",
+      "ended_at": "2026-03-19T17:13:17.586319+00:00",
+      "duration_ms": 31.294,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 73518712,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "siget",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:13:17.586423+00:00",
+      "ended_at": "2026-03-19T17:13:21.140699+00:00",
+      "duration_ms": 3554.23,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 98092012,
+      "extra": {
+        "rows": 6667,
+        "columns": 14
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "siget",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:13:21.140822+00:00",
+      "ended_at": "2026-03-19T17:13:21.721049+00:00",
+      "duration_ms": 580.18,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 98092012,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "siget",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:13:21.721139+00:00",
+      "ended_at": "2026-03-19T17:13:21.727009+00:00",
+      "duration_ms": 5.819,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 98092012,
+      "extra": {
+        "rows": 14,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "siget",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:13:21.727081+00:00",
+      "ended_at": "2026-03-19T17:13:21.732007+00:00",
+      "duration_ms": 4.893,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 98092012,
+      "extra": {}
+    },
+    {
+      "name": "excel.save_report",
+      "schema": "siget",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:13:08.691307+00:00",
+      "ended_at": "2026-03-19T17:14:08.709108+00:00",
+      "duration_ms": 60017.621,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "sheet_count": 5
+      }
+    },
+    {
+      "name": "excel.export",
+      "schema": "siget",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:13:08.690647+00:00",
+      "ended_at": "2026-03-19T17:14:08.710190+00:00",
+      "duration_ms": 60019.474,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "schema.process",
+      "schema": "siget",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:12:52.735652+00:00",
+      "ended_at": "2026-03-19T17:14:08.711110+00:00",
+      "duration_ms": 75975.326,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "metadata_validator.run_all",
+      "schema": "SINFA",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:08.812466+00:00",
+      "ended_at": "2026-03-19T17:14:10.647233+00:00",
+      "duration_ms": 1834.694,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "metadata.metrics_calculation",
+      "schema": "sinfa",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:10.647366+00:00",
+      "ended_at": "2026-03-19T17:14:12.494469+00:00",
+      "duration_ms": 1847.04,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sinfa",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:12.509774+00:00",
+      "ended_at": "2026-03-19T17:14:15.023027+00:00",
+      "duration_ms": 2513.174,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 606,
+        "columns": 36
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sinfa",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:15.023135+00:00",
+      "ended_at": "2026-03-19T17:14:15.428877+00:00",
+      "duration_ms": 405.673,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sinfa",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:15.429170+00:00",
+      "ended_at": "2026-03-19T17:14:15.652904+00:00",
+      "duration_ms": 223.663,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 163,
+        "columns": 15
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sinfa",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:15.653049+00:00",
+      "ended_at": "2026-03-19T17:14:15.724507+00:00",
+      "duration_ms": 71.395,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sinfa",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:15.725410+00:00",
+      "ended_at": "2026-03-19T17:14:15.761576+00:00",
+      "duration_ms": 36.089,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 102,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sinfa",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:15.761674+00:00",
+      "ended_at": "2026-03-19T17:14:15.781360+00:00",
+      "duration_ms": 19.624,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sinfa",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:15.781539+00:00",
+      "ended_at": "2026-03-19T17:14:16.261739+00:00",
+      "duration_ms": 480.025,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 356,
+        "columns": 14
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sinfa",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:16.262004+00:00",
+      "ended_at": "2026-03-19T17:14:16.359294+00:00",
+      "duration_ms": 97.21,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sinfa",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:16.359583+00:00",
+      "ended_at": "2026-03-19T17:14:16.380149+00:00",
+      "duration_ms": 20.39,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 14,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sinfa",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:16.380360+00:00",
+      "ended_at": "2026-03-19T17:14:16.395454+00:00",
+      "duration_ms": 15.024,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.save_report",
+      "schema": "sinfa",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:12.496396+00:00",
+      "ended_at": "2026-03-19T17:14:20.360600+00:00",
+      "duration_ms": 7864.124,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "sheet_count": 5
+      }
+    },
+    {
+      "name": "excel.export",
+      "schema": "sinfa",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:12.494659+00:00",
+      "ended_at": "2026-03-19T17:14:20.360937+00:00",
+      "duration_ms": 7866.235,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "schema.process",
+      "schema": "sinfa",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:08.711785+00:00",
+      "ended_at": "2026-03-19T17:14:20.361229+00:00",
+      "duration_ms": 11649.386,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "metadata_validator.run_all",
+      "schema": "SIPAJ",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:20.381529+00:00",
+      "ended_at": "2026-03-19T17:14:20.946413+00:00",
+      "duration_ms": 564.833,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "metadata.metrics_calculation",
+      "schema": "sipaj",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:20.946515+00:00",
+      "ended_at": "2026-03-19T17:14:21.391593+00:00",
+      "duration_ms": 445.04,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sipaj",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:21.397229+00:00",
+      "ended_at": "2026-03-19T17:14:21.731568+00:00",
+      "duration_ms": 334.297,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 362,
+        "columns": 36
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sipaj",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:21.731636+00:00",
+      "ended_at": "2026-03-19T17:14:21.816612+00:00",
+      "duration_ms": 84.94,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sipaj",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:21.816696+00:00",
+      "ended_at": "2026-03-19T17:14:21.868326+00:00",
+      "duration_ms": 51.598,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 106,
+        "columns": 15
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sipaj",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:21.868389+00:00",
+      "ended_at": "2026-03-19T17:14:21.891650+00:00",
+      "duration_ms": 23.231,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sipaj",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:21.891721+00:00",
+      "ended_at": "2026-03-19T17:14:21.912229+00:00",
+      "duration_ms": 20.465,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 162,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sipaj",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:21.912336+00:00",
+      "ended_at": "2026-03-19T17:14:21.918131+00:00",
+      "duration_ms": 5.757,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sipaj",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:21.918198+00:00",
+      "ended_at": "2026-03-19T17:14:21.940896+00:00",
+      "duration_ms": 22.663,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 41,
+        "columns": 14
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sipaj",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:21.940960+00:00",
+      "ended_at": "2026-03-19T17:14:21.963962+00:00",
+      "duration_ms": 22.948,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sipaj",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:21.964090+00:00",
+      "ended_at": "2026-03-19T17:14:21.969662+00:00",
+      "duration_ms": 5.53,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 14,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sipaj",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:21.969723+00:00",
+      "ended_at": "2026-03-19T17:14:21.973484+00:00",
+      "duration_ms": 3.733,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.save_report",
+      "schema": "sipaj",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:21.392805+00:00",
+      "ended_at": "2026-03-19T17:14:23.740651+00:00",
+      "duration_ms": 2347.775,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "sheet_count": 5
+      }
+    },
+    {
+      "name": "excel.export",
+      "schema": "sipaj",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:21.391672+00:00",
+      "ended_at": "2026-03-19T17:14:23.740969+00:00",
+      "duration_ms": 2349.269,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "schema.process",
+      "schema": "sipaj",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:20.361348+00:00",
+      "ended_at": "2026-03-19T17:14:23.741235+00:00",
+      "duration_ms": 3379.854,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "metadata_validator.run_all",
+      "schema": "SISAGUA",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:23.759872+00:00",
+      "ended_at": "2026-03-19T17:14:23.855337+00:00",
+      "duration_ms": 95.429,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "metadata.metrics_calculation",
+      "schema": "sisagua",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:23.855426+00:00",
+      "ended_at": "2026-03-19T17:14:24.008285+00:00",
+      "duration_ms": 152.821,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sisagua",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:24.013716+00:00",
+      "ended_at": "2026-03-19T17:14:24.094376+00:00",
+      "duration_ms": 80.601,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 46,
+        "columns": 36
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sisagua",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:24.094472+00:00",
+      "ended_at": "2026-03-19T17:14:24.153188+00:00",
+      "duration_ms": 58.679,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sisagua",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:24.153268+00:00",
+      "ended_at": "2026-03-19T17:14:24.172548+00:00",
+      "duration_ms": 19.245,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 15,
+        "columns": 15
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sisagua",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:24.172641+00:00",
+      "ended_at": "2026-03-19T17:14:24.191427+00:00",
+      "duration_ms": 18.754,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sisagua",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:24.191501+00:00",
+      "ended_at": "2026-03-19T17:14:24.198214+00:00",
+      "duration_ms": 6.676,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 26,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sisagua",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:24.198289+00:00",
+      "ended_at": "2026-03-19T17:14:24.204202+00:00",
+      "duration_ms": 5.873,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sisagua",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:24.204290+00:00",
+      "ended_at": "2026-03-19T17:14:24.221027+00:00",
+      "duration_ms": 16.701,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 12,
+        "columns": 14
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sisagua",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:24.221095+00:00",
+      "ended_at": "2026-03-19T17:14:24.236991+00:00",
+      "duration_ms": 15.864,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sisagua",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:24.237062+00:00",
+      "ended_at": "2026-03-19T17:14:24.241821+00:00",
+      "duration_ms": 4.733,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 14,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sisagua",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:24.241880+00:00",
+      "ended_at": "2026-03-19T17:14:24.247326+00:00",
+      "duration_ms": 5.405,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.save_report",
+      "schema": "sisagua",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:24.009199+00:00",
+      "ended_at": "2026-03-19T17:14:24.795821+00:00",
+      "duration_ms": 786.566,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "sheet_count": 5
+      }
+    },
+    {
+      "name": "excel.export",
+      "schema": "sisagua",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:24.008381+00:00",
+      "ended_at": "2026-03-19T17:14:24.796259+00:00",
+      "duration_ms": 787.841,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "schema.process",
+      "schema": "sisagua",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:23.741345+00:00",
+      "ended_at": "2026-03-19T17:14:24.796629+00:00",
+      "duration_ms": 1055.251,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "metadata_validator.run_all",
+      "schema": "SISAGUA",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:24.818092+00:00",
+      "ended_at": "2026-03-19T17:14:24.934205+00:00",
+      "duration_ms": 116.07,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "metadata.metrics_calculation",
+      "schema": "siscoex2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:24.934319+00:00",
+      "ended_at": "2026-03-19T17:14:25.056134+00:00",
+      "duration_ms": 121.784,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "siscoex2",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:25.060032+00:00",
+      "ended_at": "2026-03-19T17:14:25.109419+00:00",
+      "duration_ms": 49.348,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 46,
+        "columns": 36
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "siscoex2",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:25.109503+00:00",
+      "ended_at": "2026-03-19T17:14:25.143536+00:00",
+      "duration_ms": 33.998,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "siscoex2",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:25.143603+00:00",
+      "ended_at": "2026-03-19T17:14:25.158352+00:00",
+      "duration_ms": 14.715,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 15,
+        "columns": 15
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "siscoex2",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:25.158415+00:00",
+      "ended_at": "2026-03-19T17:14:25.172458+00:00",
+      "duration_ms": 14.004,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "siscoex2",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:25.172542+00:00",
+      "ended_at": "2026-03-19T17:14:25.177897+00:00",
+      "duration_ms": 5.327,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 26,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "siscoex2",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:25.177956+00:00",
+      "ended_at": "2026-03-19T17:14:25.181926+00:00",
+      "duration_ms": 3.945,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "siscoex2",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:25.181992+00:00",
+      "ended_at": "2026-03-19T17:14:25.198680+00:00",
+      "duration_ms": 16.657,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 23,
+        "columns": 14
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "siscoex2",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:25.198743+00:00",
+      "ended_at": "2026-03-19T17:14:25.211977+00:00",
+      "duration_ms": 13.206,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "siscoex2",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:25.212045+00:00",
+      "ended_at": "2026-03-19T17:14:25.216589+00:00",
+      "duration_ms": 4.517,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 14,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "siscoex2",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:25.216645+00:00",
+      "ended_at": "2026-03-19T17:14:25.221213+00:00",
+      "duration_ms": 4.535,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.save_report",
+      "schema": "siscoex2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:25.056875+00:00",
+      "ended_at": "2026-03-19T17:14:25.824872+00:00",
+      "duration_ms": 767.919,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "sheet_count": 5
+      }
+    },
+    {
+      "name": "excel.export",
+      "schema": "siscoex2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:25.056226+00:00",
+      "ended_at": "2026-03-19T17:14:25.825266+00:00",
+      "duration_ms": 769.012,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "schema.process",
+      "schema": "siscoex2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:24.796798+00:00",
+      "ended_at": "2026-03-19T17:14:25.825578+00:00",
+      "duration_ms": 1028.731,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "metadata_validator.run_all",
+      "schema": "SISSEG",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:25.850852+00:00",
+      "ended_at": "2026-03-19T17:14:26.310709+00:00",
+      "duration_ms": 459.821,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "metadata.metrics_calculation",
+      "schema": "sisseg",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:26.310805+00:00",
+      "ended_at": "2026-03-19T17:14:26.853002+00:00",
+      "duration_ms": 542.082,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sisseg",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:26.860053+00:00",
+      "ended_at": "2026-03-19T17:14:27.301997+00:00",
+      "duration_ms": 441.887,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 250,
+        "columns": 36
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sisseg",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:27.302115+00:00",
+      "ended_at": "2026-03-19T17:14:27.407215+00:00",
+      "duration_ms": 105.041,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sisseg",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:27.407352+00:00",
+      "ended_at": "2026-03-19T17:14:27.483122+00:00",
+      "duration_ms": 75.702,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 92,
+        "columns": 15
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sisseg",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:27.483275+00:00",
+      "ended_at": "2026-03-19T17:14:27.526484+00:00",
+      "duration_ms": 43.153,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sisseg",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:27.526608+00:00",
+      "ended_at": "2026-03-19T17:14:27.549896+00:00",
+      "duration_ms": 23.193,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 86,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sisseg",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:27.550208+00:00",
+      "ended_at": "2026-03-19T17:14:27.561177+00:00",
+      "duration_ms": 10.821,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sisseg",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:27.561298+00:00",
+      "ended_at": "2026-03-19T17:14:27.628377+00:00",
+      "duration_ms": 67.032,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 69,
+        "columns": 14
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sisseg",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:27.628559+00:00",
+      "ended_at": "2026-03-19T17:14:27.659988+00:00",
+      "duration_ms": 31.361,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sisseg",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:27.660122+00:00",
+      "ended_at": "2026-03-19T17:14:27.669690+00:00",
+      "duration_ms": 9.502,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 14,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sisseg",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:27.669787+00:00",
+      "ended_at": "2026-03-19T17:14:27.675713+00:00",
+      "duration_ms": 5.88,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.save_report",
+      "schema": "sisseg",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:26.855209+00:00",
+      "ended_at": "2026-03-19T17:14:29.373646+00:00",
+      "duration_ms": 2518.334,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "sheet_count": 5
+      }
+    },
+    {
+      "name": "excel.export",
+      "schema": "sisseg",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:26.853421+00:00",
+      "ended_at": "2026-03-19T17:14:29.374084+00:00",
+      "duration_ms": 2520.596,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "schema.process",
+      "schema": "sisseg",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:25.825677+00:00",
+      "ended_at": "2026-03-19T17:14:29.374510+00:00",
+      "duration_ms": 3548.788,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "metadata_validator.run_all",
+      "schema": "SITRAM2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:29.414992+00:00",
+      "ended_at": "2026-03-19T17:14:31.133414+00:00",
+      "duration_ms": 1718.374,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "metadata.metrics_calculation",
+      "schema": "sitram2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:31.133527+00:00",
+      "ended_at": "2026-03-19T17:14:32.110784+00:00",
+      "duration_ms": 977.213,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sitram2",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:32.115510+00:00",
+      "ended_at": "2026-03-19T17:14:33.477206+00:00",
+      "duration_ms": 1361.645,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 1034,
+        "columns": 36
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sitram2",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:33.477317+00:00",
+      "ended_at": "2026-03-19T17:14:33.892669+00:00",
+      "duration_ms": 415.267,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sitram2",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:33.892872+00:00",
+      "ended_at": "2026-03-19T17:14:34.029313+00:00",
+      "duration_ms": 136.386,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 207,
+        "columns": 15
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sitram2",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:34.029404+00:00",
+      "ended_at": "2026-03-19T17:14:34.069395+00:00",
+      "duration_ms": 39.942,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sitram2",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:34.069540+00:00",
+      "ended_at": "2026-03-19T17:14:34.110715+00:00",
+      "duration_ms": 41.091,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {
+        "rows": 190,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sitram2",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:34.110852+00:00",
+      "ended_at": "2026-03-19T17:14:34.124623+00:00",
+      "duration_ms": 13.701,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113256017,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sitram2",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:34.124828+00:00",
+      "ended_at": "2026-03-19T17:14:34.359287+00:00",
+      "duration_ms": 234.4,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 113955732,
+      "extra": {
+        "rows": 294,
+        "columns": 14
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sitram2",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:34.359398+00:00",
+      "ended_at": "2026-03-19T17:14:34.400388+00:00",
+      "duration_ms": 40.935,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 114012882,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "sitram2",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:34.400526+00:00",
+      "ended_at": "2026-03-19T17:14:34.408679+00:00",
+      "duration_ms": 8.099,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 114015562,
+      "extra": {
+        "rows": 14,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "sitram2",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:34.408783+00:00",
+      "ended_at": "2026-03-19T17:14:34.417188+00:00",
+      "duration_ms": 8.351,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 114025284,
+      "extra": {}
+    },
+    {
+      "name": "excel.save_report",
+      "schema": "sitram2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:32.111643+00:00",
+      "ended_at": "2026-03-19T17:14:43.943449+00:00",
+      "duration_ms": 11831.747,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 116866436,
+      "extra": {
+        "sheet_count": 5
+      }
+    },
+    {
+      "name": "excel.export",
+      "schema": "sitram2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:32.110921+00:00",
+      "ended_at": "2026-03-19T17:14:43.943843+00:00",
+      "duration_ms": 11832.89,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 116866436,
+      "extra": {}
+    },
+    {
+      "name": "schema.process",
+      "schema": "sitram2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:29.374663+00:00",
+      "ended_at": "2026-03-19T17:14:43.944261+00:00",
+      "duration_ms": 14569.524,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 116866436,
+      "extra": {}
+    },
+    {
+      "name": "metadata_validator.run_all",
+      "schema": "SUANOTA",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:44.021176+00:00",
+      "ended_at": "2026-03-19T17:14:54.971574+00:00",
+      "duration_ms": 10950.305,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 119505608,
+      "extra": {}
+    },
+    {
+      "name": "metadata.metrics_calculation",
+      "schema": "suanota",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:54.971779+00:00",
+      "ended_at": "2026-03-19T17:15:05.599660+00:00",
+      "duration_ms": 10627.769,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "suanota",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:05.613941+00:00",
+      "ended_at": "2026-03-19T17:15:14.753393+00:00",
+      "duration_ms": 9139.359,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {
+        "rows": 4415,
+        "columns": 36
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "suanota",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:14.753463+00:00",
+      "ended_at": "2026-03-19T17:15:15.785835+00:00",
+      "duration_ms": 1032.339,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "suanota",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:15.785916+00:00",
+      "ended_at": "2026-03-19T17:15:16.097569+00:00",
+      "duration_ms": 311.6,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {
+        "rows": 706,
+        "columns": 15
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "suanota",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:16.097677+00:00",
+      "ended_at": "2026-03-19T17:15:16.151108+00:00",
+      "duration_ms": 53.392,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "suanota",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:16.151190+00:00",
+      "ended_at": "2026-03-19T17:15:16.223484+00:00",
+      "duration_ms": 72.261,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {
+        "rows": 674,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "suanota",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:16.223551+00:00",
+      "ended_at": "2026-03-19T17:15:16.236504+00:00",
+      "duration_ms": 12.923,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "suanota",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:16.236598+00:00",
+      "ended_at": "2026-03-19T17:15:19.308412+00:00",
+      "duration_ms": 3071.781,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {
+        "rows": 6065,
+        "columns": 14
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "suanota",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:19.308480+00:00",
+      "ended_at": "2026-03-19T17:15:19.644507+00:00",
+      "duration_ms": 335.999,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "suanota",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:19.644575+00:00",
+      "ended_at": "2026-03-19T17:15:19.648841+00:00",
+      "duration_ms": 4.243,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {
+        "rows": 14,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "suanota",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:19.648890+00:00",
+      "ended_at": "2026-03-19T17:15:19.652761+00:00",
+      "duration_ms": 3.841,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {}
+    },
+    {
+      "name": "excel.save_report",
+      "schema": "suanota",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:05.601359+00:00",
+      "ended_at": "2026-03-19T17:15:45.876005+00:00",
+      "duration_ms": 40274.548,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {
+        "sheet_count": 5
+      }
+    },
+    {
+      "name": "excel.export",
+      "schema": "suanota",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:05.599864+00:00",
+      "ended_at": "2026-03-19T17:15:45.876283+00:00",
+      "duration_ms": 40276.374,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {}
+    },
+    {
+      "name": "schema.process",
+      "schema": "suanota",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:14:43.944507+00:00",
+      "ended_at": "2026-03-19T17:15:45.876600+00:00",
+      "duration_ms": 61932.046,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {}
+    },
+    {
+      "name": "metadata_validator.run_all",
+      "schema": "TRAMITA",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:45.905249+00:00",
+      "ended_at": "2026-03-19T17:15:47.891514+00:00",
+      "duration_ms": 1986.225,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {}
+    },
+    {
+      "name": "metadata.metrics_calculation",
+      "schema": "tramita",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:47.891629+00:00",
+      "ended_at": "2026-03-19T17:15:49.108108+00:00",
+      "duration_ms": 1216.449,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "tramita",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:49.111932+00:00",
+      "ended_at": "2026-03-19T17:15:50.411971+00:00",
+      "duration_ms": 1299.998,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {
+        "rows": 1139,
+        "columns": 36
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "tramita",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:50.412042+00:00",
+      "ended_at": "2026-03-19T17:15:50.637943+00:00",
+      "duration_ms": 225.825,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "tramita",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:50.638062+00:00",
+      "ended_at": "2026-03-19T17:15:50.759533+00:00",
+      "duration_ms": 121.406,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {
+        "rows": 240,
+        "columns": 15
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "tramita",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:50.759617+00:00",
+      "ended_at": "2026-03-19T17:15:50.789168+00:00",
+      "duration_ms": 29.506,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "tramita",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:50.789296+00:00",
+      "ended_at": "2026-03-19T17:15:50.827650+00:00",
+      "duration_ms": 38.319,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {
+        "rows": 302,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "tramita",
+      "table": "METADATA_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:50.827714+00:00",
+      "ended_at": "2026-03-19T17:15:50.836146+00:00",
+      "duration_ms": 8.401,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "tramita",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:50.836221+00:00",
+      "ended_at": "2026-03-19T17:15:51.012219+00:00",
+      "duration_ms": 175.966,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {
+        "rows": 427,
+        "columns": 14
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "tramita",
+      "table": "METADATA_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:51.012290+00:00",
+      "ended_at": "2026-03-19T17:15:51.044315+00:00",
+      "duration_ms": 31.995,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {}
+    },
+    {
+      "name": "excel.write_sheet",
+      "schema": "tramita",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:51.044390+00:00",
+      "ended_at": "2026-03-19T17:15:51.049358+00:00",
+      "duration_ms": 4.925,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {
+        "rows": 14,
+        "columns": 4
+      }
+    },
+    {
+      "name": "excel.autosize_sheet",
+      "schema": "tramita",
+      "table": "METADATA_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:51.049464+00:00",
+      "ended_at": "2026-03-19T17:15:51.054023+00:00",
+      "duration_ms": 4.522,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {}
+    },
+    {
+      "name": "excel.save_report",
+      "schema": "tramita",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:49.109016+00:00",
+      "ended_at": "2026-03-19T17:15:56.604665+00:00",
+      "duration_ms": 7495.584,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {
+        "sheet_count": 5
+      }
+    },
+    {
+      "name": "excel.export",
+      "schema": "tramita",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:49.108192+00:00",
+      "ended_at": "2026-03-19T17:15:56.605136+00:00",
+      "duration_ms": 7496.834,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {}
+    },
+    {
+      "name": "schema.process",
+      "schema": "tramita",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-03-19T17:15:45.876860+00:00",
+      "ended_at": "2026-03-19T17:15:56.605471+00:00",
+      "duration_ms": 10728.566,
+      "process_rss_bytes": 0,
+      "python_heap_peak_bytes": 127955222,
+      "extra": {}
+    }
+  ],
+  "failures": []
+}

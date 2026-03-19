@@ -120,7 +120,13 @@ class MetadataValidator:
         "UK",
     }
 
-    def __init__(self, df: pd.DataFrame, table_plural_exceptions: List[str], config: ValidationConfig | None = None):
+    def __init__(
+        self,
+        df: pd.DataFrame,
+        table_plural_exceptions: List[str],
+        config: ValidationConfig | None = None,
+        schema_name: str | None = None,
+    ):
         self.df = df.copy()
         self.cfg = config or ValidationConfig()
         self.table_plural_exceptions = table_plural_exceptions
@@ -175,6 +181,11 @@ class MetadataValidator:
         self.number_type_naming_noncompliant_columns = 0
 
         self.issues_df: pd.DataFrame | None = None
+        self.schema_name: str | None = str(schema_name).strip().upper() if schema_name else None
+        if self.schema_name is None and "OWNER" in self.df.columns and not self.df.empty:
+            owner = str(self.df["OWNER"].iloc[0]).strip()
+            if owner:
+                self.schema_name = owner.upper()
 
     # ---------------- accessory methods ----------------
     def get_number_tables(self) -> int:
@@ -352,7 +363,7 @@ class MetadataValidator:
     # ----------------------------- public API -----------------------------
     def run_all(self) -> pd.DataFrame:
         telemetry = get_current_telemetry()
-        schema_name = str(self.df["OWNER"].iloc[0]).upper() if not self.df.empty and "OWNER" in self.df.columns else None
+        schema_name = self.schema_name
         if telemetry is not None:
             with telemetry.stage("metadata_validator.run_all", schema=schema_name):
                 self._validate_tables()
