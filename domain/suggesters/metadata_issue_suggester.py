@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from typing import Any, Dict, Optional, Tuple
 
 import pandas as pd
+import inflect
 
 from dataquality.domain.config.validation_config import ValidationConfig
 
@@ -146,15 +147,24 @@ class MetadataIssueSuggester:
                 return llm_comment, "LLM", 0.7
 
         return comment, "RULES", confidence
+    
+    def _singularize_table_name(self, name: str) -> str:
+        p = inflect.engine()
+
+        parts = name.split("_")
+        last = parts[-1]
+
+        singular = p.singular_noun(last)
+        if singular:
+            parts[-1] = singular
+
+        return "_".join(parts)
 
     def _suggest_singular_table(self, table: str) -> Tuple[str, str, float]:
         if not table:
             return "", "", 0.0
-        if table.endswith("ES"):
-            return table[:-2], "RULES", 0.7
-        if table.endswith("S"):
-            return table[:-1], "RULES", 0.7
-        return "", "", 0.0
+
+        return self._singularize_table_name(table), "RULES", 0.9
 
     def _suggest_shorter_name(self, name: str, limit: int) -> Tuple[str, str, float]:
         if not name or len(name) <= limit:

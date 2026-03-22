@@ -9,14 +9,25 @@
     "DAS",
     "INS",
     "SUBS",
-    "ICMS"
+    "ICMS",
+    "FIS",
+    "BUS",
+    "CBS",
+    "IBS",
+    "PIS",
+    "COFINS",
+    "ISS",
+    "HORAS_EXTRAS",
+    "DIAS"
   ],
   "db_type": "Oracle",
   "exclude_tables": [
     "RUPD$",
     "VW",
     "SUANOTA.NFP_DADOS_CADASTRAIS_HIST_BKP2",
-    "MLOG$_"
+    "MLOG$_",
+    "TEMP",
+    "ADVOGADO_20100512"
   ],
   "validation_config": {
     "max_table_len": 30,

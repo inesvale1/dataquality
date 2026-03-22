@@ -149,7 +149,7 @@ class schemaLoader:
     def _load_and_typed_file(self, path: Path) -> pd.DataFrame:
         #df = pd.read_csv(path) if path.suffix.lower()=='.csv' else pd.read_excel(path)
         df = self._read_csv_with_fallback(path) if path.suffix.lower() == ".csv" else pd.read_excel(path)
-        print(path)
+        #print(path)
         # Normalize headers to UPPER + strip
         df.columns = [c.strip().upper() for c in df.columns]
 
