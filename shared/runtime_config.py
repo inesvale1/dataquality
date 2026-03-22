@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from copy import deepcopy
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any
@@ -72,36 +73,20 @@ def build_validation_config(raw: dict[str, Any] | None) -> ValidationConfig | No
 
 
 def build_data_quality_config_template() -> dict[str, Any]:
-    return {
-        "metadata_base_folder": "dataquality\\schema",
-        "sample_base_folder": "dataquality\\samples",
-        "sample_source": "csv",
-        "db_connection_uri": None,
-        "db_authentication_type": "username_password",
-        "db_driver_class_name": None,
-        "sample_query_template": None,
-        "sample_limit": 1000,
-        "telemetry_output": None,
-        "telemetry_enabled": True,
-        "delete_cols": ["COLUMN_ID", "NUM_BUCKETS", "DENSITY"],
-        "plural_exceptions": ["DAS", "INS", "SUBS", "ICMS"],
-        "db_type": "Oracle",
-        "exclude_tables": ["RUPD$", "VW", "SUANOTA.NFP_DADOS_CADASTRAIS_HIST_BKP2", "MLOG$_"],
-        "validation_config": _build_validation_config_template(),
-    }
+    return _load_bundled_config_template("run_data_quality.example.json")
 
 
 def build_model_quality_config_template() -> dict[str, Any]:
-    return {
-        "base_folder": "dataquality\\schema",
-        "telemetry_output": None,
-        "telemetry_enabled": True,
-        "delete_cols": ["COLUMN_ID", "NUM_BUCKETS", "DENSITY"],
-        "plural_exceptions": ["DAS", "INS", "SUBS", "ICMS"],
-        "db_type": "Oracle",
-        "exclude_tables": ["RUPD$", "VW", "SUANOTA.NFP_DADOS_CADASTRAIS_HIST_BKP2", "MLOG$_"],
-        "validation_config": _build_validation_config_template(),
-    }
+    return _load_bundled_config_template("run_model_quality.example.json")
+
+
+def _load_bundled_config_template(filename: str) -> dict[str, Any]:
+    config_path = Path(__file__).resolve().parents[1] / "config" / filename
+    with config_path.open("r", encoding="utf-8") as handle:
+        data = json.load(handle)
+    if not isinstance(data, dict):
+        raise ValueError(f"Bundled config template must be a JSON object: {config_path}")
+    return deepcopy(data)
 
 
 def _build_validation_config_template() -> dict[str, Any]:

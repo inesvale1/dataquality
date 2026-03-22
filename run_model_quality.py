@@ -40,9 +40,9 @@ def _parse_bool(raw_value: str | bool) -> bool:
     if isinstance(raw_value, bool):
         return raw_value
     value = str(raw_value).strip().lower()
-    if value in {"1", "true", "yes", "on", "y"}:
+    if value in {"1", "true", "yes", "on", "y", "s", "verdade"}:
         return True
-    if value in {"0", "false", "no", "off", "n"}:
+    if value in {"0", "false", "no", "off", "n"}, "falso":
         return False
     raise ValueError(f"Invalid boolean value: {raw_value}")
 
@@ -51,21 +51,22 @@ def main() -> None:
     bootstrap = argparse.ArgumentParser(add_help=False)
     bootstrap.add_argument("--config-json", default=None, type=str, help="Path to a JSON file with input arguments and validation settings.")
     bootstrap_args, _ = bootstrap.parse_known_args()
+    template_config = build_model_quality_config_template()
     json_config = load_json_config(bootstrap_args.config_json)
 
     parser = argparse.ArgumentParser(description="Run Data Model Quality validations and metrics.")
     parser.add_argument("--config-json", default=None, type=str, help="Path to a JSON file with input arguments and validation settings.")
     parser.add_argument("--print-config-template", action="store_true", help="Print a JSON template with supported input arguments and exit.")
-    parser.add_argument("--base-folder", default=get_config_value(json_config, "base_folder", "dataquality\\schema"), type=str, help="Folder that contains schema subfolders with metadados_*.csv output files.")
-    parser.add_argument("--telemetry-output", default=get_config_value(json_config, "telemetry_output", None), type=str, help="Optional path to write telemetry JSON for the execution.")
-    parser.add_argument("--telemetry-enabled", default=get_config_value(json_config, "telemetry_enabled", False), type=_parse_bool, help="Enable or disable telemetry JSON output. Use true/false.")
-    parser.add_argument("--delete-cols", nargs="*", default=get_config_value(json_config, "delete_cols", ["COLUMN_ID", "NUM_BUCKETS", "DENSITY"]), help="Columns to drop after loading.")
-    parser.add_argument("--plural-exceptions", nargs="*", default=get_config_value(json_config, "plural_exceptions", ["DAS","INS","SUBS","ICMS"]), help="Table names allowed to end with 'S'.")
-    parser.add_argument("--db-type", default=get_config_value(json_config, "db_type", "Oracle"), type=str, help="Database type for DDL suggestions (e.g., Oracle).")
-    parser.add_argument("--exclude-tables", nargs="*", default=get_config_value(json_config, "exclude_tables", ["TEMP","ADVOGADO_20100512","RUPD$", "VW", "SUANOTA.NFP_DADOS_CADASTRAIS_HIST_BKP2", "MLOG$_"]), help="List of OWNER.TABLE or TABLE fragment to exclude from validation/metrics.")
+    parser.add_argument("--base-folder", default=get_config_value(json_config, "base_folder", template_config["base_folder"]), type=str, help="Folder that contains schema subfolders with metadados_*.csv output files.")
+    parser.add_argument("--telemetry-output", default=get_config_value(json_config, "telemetry_output", template_config.get("telemetry_output")), type=str, help="Optional path to write telemetry JSON for the execution.")
+    parser.add_argument("--telemetry-enabled", default=get_config_value(json_config, "telemetry_enabled", template_config.get("telemetry_enabled", False)), type=_parse_bool, help="Enable or disable telemetry JSON output. Use true/false.")
+    parser.add_argument("--delete-cols", nargs="*", default=get_config_value(json_config, "delete_cols", template_config["delete_cols"]), help="Columns to drop after loading.")
+    parser.add_argument("--plural-exceptions", nargs="*", default=get_config_value(json_config, "plural_exceptions", template_config["plural_exceptions"]), help="Table names allowed to end with 'S'.")
+    parser.add_argument("--db-type", default=get_config_value(json_config, "db_type", template_config["db_type"]), type=str, help="Database type for DDL suggestions (e.g., Oracle).")
+    parser.add_argument("--exclude-tables", nargs="*", default=get_config_value(json_config, "exclude_tables", template_config["exclude_tables"]), help="List of OWNER.TABLE or TABLE fragment to exclude from validation/metrics.")
     args = parser.parse_args()  
     if args.print_config_template:
-        print(json.dumps(build_model_quality_config_template(), indent=2))
+        print(json.dumps(template_config, indent=2))
         return
 
     base_folder = _resolve_base_folder(args.base_folder)

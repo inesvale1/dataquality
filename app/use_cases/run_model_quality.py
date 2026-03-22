@@ -27,7 +27,7 @@ class RunOptions:
 def run_model_quality(options: RunOptions) -> None:
     """End-to-end runner for the *model quality* phase (schema metadata validation + metrics)."""
     
-    print("\nSummary:")
+    #print("\nSummary:")
     telemetry = get_current_telemetry()
 
     with (telemetry.stage("metadata.load") if telemetry is not None else nullcontext()):
