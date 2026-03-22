@@ -24,12 +24,10 @@ class MetadataMetricSpec:
     #                                             (or Consistency,      the best fit is Uniqueness. If it only checks whether the statistic is coherent or available, it could be classified as Consistency.
     #                                           depending on the rule)	                        
     # MQID010	Columns with num_nulls	            Completeness	    Nulls indicate missing expected values.
-    # MQID011   Coverage of restrictions by table   Consistency         If all tables have a PK, then the schema would have 100% for this metric.
-    # MQID012   Tables with at least one integrity  Consistency         If all tables have at least one PK or UK, then the schema would have 100% for this metric. métrica
-    #           constraint  
-    # MQID013	Identifier-like columns protected   Consistency         The table has columns similar to identifiers protected by PK or UK.
+    # MQID011   Tables with at least one integrity  Consistency         If all tables have at least one PK or UK, then the schema would have 100% for this metric.   
+    # MQID012	Identifier-like columns protected   Consistency         The table has columns similar to identifiers protected by PK or UK.
     #           by PK or UK       
-    # MQID014   Compliance between type and naming  Consistency         The table has columns with names that suggest a certain data type (e.g., "date", "id", "amount") 
+    # MQID013   Compliance between type and naming  Consistency         The table has columns with names that suggest a certain data type (e.g., "date", "id", "amount") 
     #           convention                                              and the actual data type of the column is consistent with those expectations.
     
 METADATA_INDICATOR_SPECS: tuple[MetadataMetricSpec, ...] = (
@@ -43,8 +41,7 @@ METADATA_INDICATOR_SPECS: tuple[MetadataMetricSpec, ...] = (
     MetadataMetricSpec("MQID008", "Table with standard UK prefixes", "Consistency", "MQME011", "MQME005"),
     MetadataMetricSpec("MQID009", "Columns with valid num_distinct", "Uniqueness", "MQME021", "MQME002"),
     MetadataMetricSpec("MQID010", "Columns with num_nulls", "Completeness", "MQME019", "MQME018"),
-    MetadataMetricSpec("MQID011", "Coverage of restrictions by table", "Consistency", "MQME022", "MQME001"),
-    MetadataMetricSpec("MQID012", "Tables with at least one integrity constraint", "Consistency", "MQME023", "MQME001"),
-    MetadataMetricSpec("MQID013", "Identifier-like columns protected by PK or UK", "Consistency", "MQME025", "MQME024"),
-    MetadataMetricSpec("MQID014", "Compliance between type and naming convention", "Consistency", "MQME027", "MQME026"),
+    MetadataMetricSpec("MQID011", "Tables with at least one integrity constraint", "Consistency", "MQME022", "MQME001"),
+    MetadataMetricSpec("MQID012", "Identifier-like columns protected by PK or UK", "Consistency", "MQME024", "MQME023"),
+    MetadataMetricSpec("MQID013", "Compliance between type and naming convention", "Consistency", "MQME026", "MQME025"),
 )

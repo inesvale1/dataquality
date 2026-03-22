@@ -58,11 +58,11 @@ def main() -> None:
     parser.add_argument("--print-config-template", action="store_true", help="Print a JSON template with supported input arguments and exit.")
     parser.add_argument("--base-folder", default=get_config_value(json_config, "base_folder", "dataquality\\schema"), type=str, help="Folder that contains schema subfolders with metadados_*.csv output files.")
     parser.add_argument("--telemetry-output", default=get_config_value(json_config, "telemetry_output", None), type=str, help="Optional path to write telemetry JSON for the execution.")
-    parser.add_argument("--telemetry-enabled", default=get_config_value(json_config, "telemetry_enabled", True), type=_parse_bool, help="Enable or disable telemetry JSON output. Use true/false.")
+    parser.add_argument("--telemetry-enabled", default=get_config_value(json_config, "telemetry_enabled", False), type=_parse_bool, help="Enable or disable telemetry JSON output. Use true/false.")
     parser.add_argument("--delete-cols", nargs="*", default=get_config_value(json_config, "delete_cols", ["COLUMN_ID", "NUM_BUCKETS", "DENSITY"]), help="Columns to drop after loading.")
     parser.add_argument("--plural-exceptions", nargs="*", default=get_config_value(json_config, "plural_exceptions", ["DAS","INS","SUBS","ICMS"]), help="Table names allowed to end with 'S'.")
     parser.add_argument("--db-type", default=get_config_value(json_config, "db_type", "Oracle"), type=str, help="Database type for DDL suggestions (e.g., Oracle).")
-    parser.add_argument("--exclude-tables", nargs="*", default=get_config_value(json_config, "exclude_tables", ["RUPD$", "VW", "SUANOTA.NFP_DADOS_CADASTRAIS_HIST_BKP2", "MLOG$_"]), help="List of OWNER.TABLE or TABLE fragment to exclude from validation/metrics.")
+    parser.add_argument("--exclude-tables", nargs="*", default=get_config_value(json_config, "exclude_tables", ["TEMP","ADVOGADO_20100512","RUPD$", "VW", "SUANOTA.NFP_DADOS_CADASTRAIS_HIST_BKP2", "MLOG$_"]), help="List of OWNER.TABLE or TABLE fragment to exclude from validation/metrics.")
     args = parser.parse_args()  
     if args.print_config_template:
         print(json.dumps(build_model_quality_config_template(), indent=2))
