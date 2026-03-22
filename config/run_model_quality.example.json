@@ -27,7 +27,8 @@
     "SUANOTA.NFP_DADOS_CADASTRAIS_HIST_BKP2",
     "MLOG$_",
     "TEMP",
-    "ADVOGADO_20100512"
+    "ADVOGADO_20100512",
+    "20180115"
   ],
   "validation_config": {
     "max_table_len": 30,
