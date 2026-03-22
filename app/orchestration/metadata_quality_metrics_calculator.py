@@ -52,12 +52,11 @@ class MetadataQualityMetricsCalculator:
         derived_measure_specs = [
             ("MQME006", "Total number of length-required columns", self.validator.get_number_length_required),
             ("MQME007", "Total number of NUMBER columns", self.validator.get_number_number_types),
-            ("MQME022", "Total number of tables without PK", self.validator.get_number_tables_without_pk),
-            ("MQME023", "Total number of tables without PK or UK", self.validator.get_number_tables_without_pk_or_uk),
-            ("MQME024", "Total number of identifier-like columns", self.validator.get_number_identifier_like_columns),
-            ("MQME025", "Total number of identifier-like columns without PK/FK/UK", self.validator.get_number_identifier_like_columns_without_protection),
-            ("MQME026", "Total number of type/naming convention candidate columns", self.validator.get_number_type_naming_candidates),
-            ("MQME027", "Total number of non-compliant type/naming convention columns", self.validator.get_number_type_naming_noncompliant_columns),
+            ("MQME022", "Total number of tables without PK or UK", self.validator.get_number_tables_without_pk_or_uk),
+            ("MQME023", "Total number of identifier-like columns", self.validator.get_number_identifier_like_columns),
+            ("MQME024", "Total number of identifier-like columns without PK/FK/UK", self.validator.get_number_identifier_like_columns_without_protection),
+            ("MQME025", "Total number of type/naming convention candidate columns", self.validator.get_number_type_naming_candidates),
+            ("MQME026", "Total number of non-compliant type/naming convention columns", self.validator.get_number_type_naming_noncompliant_columns),
         ]
 
         mq = {code: fn() for code, _, fn in raw_measure_specs}
