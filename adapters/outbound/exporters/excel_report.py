@@ -28,18 +28,9 @@ def save_excel_report(
     Output file name: issues_metadados_<schema>.xlsx in the same folder as the input
     metadados_<schema>.csv (as per current notebook behavior).
     """
-    schema_name_upper = schema_name[:1].upper() + schema_name[1:]
-    #file_name_out = Path(base_folder) / f"{schema_name_upper}/issues_metadados_{schema_name}.xlsx"
-
-    #file_name_out = (
-    #    Path(base_folder)
-    #    .relative_to(Path.cwd())
-    #    /schema_name_upper
-    #    / f"issues_metadados_{schema_name}.xlsx" )
     timestamp = datetime.now().strftime("%Y%m%d_%H%M")
     file_name_out = (
         Path(base_folder)
-        / schema_name_upper
         / f"{file_prefix}_{schema_name}_{timestamp}.xlsx"
     )
 

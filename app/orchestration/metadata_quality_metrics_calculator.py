@@ -57,6 +57,7 @@ class MetadataQualityMetricsCalculator:
             ("MQME024", "Total number of identifier-like columns without PK/FK/UK", self.validator.get_number_identifier_like_columns_without_protection),
             ("MQME025", "Total number of type/naming convention candidate columns", self.validator.get_number_type_naming_candidates),
             ("MQME026", "Total number of non-compliant type/naming convention columns", self.validator.get_number_type_naming_noncompliant_columns),
+            ("MQME027", "Total number of tables without comments", self.validator.get_number_tables_without_comments),
         ]
 
         mq = {code: fn() for code, _, fn in raw_measure_specs}
