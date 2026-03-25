@@ -1,0 +1,5172 @@
+{
+  "schema_name": "conta_corrente",
+  "owner": "CONTA_CORRENTE",
+  "generated_at": "2026-03-25T21:19:05.929407+00:00",
+  "tables": [
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "ARQUIVO_ETL",
+      "table_comment": "Arquivos ETL",
+      "table_type_inference": "cadastro",
+      "primary_keys": [
+        "SEQ_ARQUIVO_ETL"
+      ],
+      "foreign_keys": [],
+      "main_columns": [
+        "SEQ_ARQUIVO_ETL",
+        "NOM_ARQUIVO_ETL",
+        "DAT_CRIACAO_ARQUIVO",
+        "TIP_ARQUIVO"
+      ],
+      "related_tables": [],
+      "row_count": 4067,
+      "column_name_keywords": [
+        "CRIACAO",
+        "ARQUIVO",
+        "ETL"
+      ],
+      "existing_column_comments": {
+        "DAT_CRIACAO_ARQUIVO": "Data/hora de criação do arquivo",
+        "NOM_ARQUIVO_ETL": "Nome do arquivo",
+        "SEQ_ARQUIVO_ETL": "Sequencial da tabela",
+        "TIP_ARQUIVO": "Tipo do Arquivo"
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "AUDITORIA_ENTIDADES",
+      "table_comment": "Guarda as auditorias das entidades",
+      "table_type_inference": "log",
+      "primary_keys": [
+        "SEQ_AUDITORIA"
+      ],
+      "foreign_keys": [],
+      "main_columns": [
+        "SEQ_AUDITORIA",
+        "COD_MATRICULA_USUARIO",
+        "DAT_DATA_MODIFICACAO",
+        "DAT_TIMESTAMP"
+      ],
+      "related_tables": [],
+      "row_count": 56110690,
+      "column_name_keywords": [
+        "MATRICULA",
+        "USUARIO",
+        "DATA",
+        "MODIFICACAO",
+        "TIMESTAMP",
+        "AUDITORIA"
+      ],
+      "existing_column_comments": {
+        "COD_MATRICULA_USUARIO": "guarda o codigo da matricula do usuario",
+        "DAT_DATA_MODIFICACAO": "Data e hora da inclusao/alteracao do registro.",
+        "DAT_TIMESTAMP": "Representacao numerica do campo DAT_DATA_MODIFICACAO, exigido pelo hibernate.",
+        "SEQ_AUDITORIA": "guarda a sequencia da auditoria"
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "CNAE_LEI_DESCONTO",
+      "table_comment": "CNAEs relacionados na Lei dos descontos",
+      "table_type_inference": "associacao",
+      "primary_keys": [
+        "COD_CAE",
+        "SEQ_LEI_DESCONTO"
+      ],
+      "foreign_keys": [
+        "COD_CAE",
+        "SEQ_LEI_DESCONTO"
+      ],
+      "main_columns": [
+        "COD_CAE",
+        "SEQ_LEI_DESCONTO"
+      ],
+      "related_tables": [
+        "LEI_DESCONTO"
+      ],
+      "row_count": 17,
+      "column_name_keywords": [
+        "CAE",
+        "LEI",
+        "DESCONTO"
+      ],
+      "existing_column_comments": {
+        "COD_CAE": "CNAE relacionado na Lei",
+        "SEQ_LEI_DESCONTO": "Sequencial da tabela"
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO",
+      "table_comment": "Tabela para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "table_type_inference": "transacao",
+      "primary_keys": [
+        "SEQ_DEBITO"
+      ],
+      "foreign_keys": [
+        "COD_INDICADOR",
+        "COD_PRODUTO_SERVICO",
+        "COD_RECEITA",
+        "SEQ_DEBITO_ORIGEM",
+        "SEQ_PESSOA"
+      ],
+      "main_columns": [
+        "SEQ_DEBITO",
+        "COD_INDICADOR",
+        "COD_PRODUTO_SERVICO",
+        "COD_RECEITA",
+        "SEQ_DEBITO_ORIGEM"
+      ],
+      "related_tables": [
+        "RECEITA_LEI_DESCONTO"
+      ],
+      "row_count": 91996535,
+      "column_name_keywords": [
+        "INDICADOR",
+        "PRODUTO",
+        "SERVICO",
+        "RECEITA",
+        "CORRECAO",
+        "INCLUSAO",
+        "VENCIMENTO",
+        "ANO",
+        "REFERENCIA",
+        "DOCUMENTO",
+        "ORIGEM",
+        "MES",
+        "TERMO",
+        "NOTIFICACAO",
+        "VERSAO"
+      ],
+      "existing_column_comments": {
+        "COD_INDICADOR": "Código do Indicador Financeiro",
+        "COD_PRODUTO_SERVICO": "Código de produto/serviço ( COD-PRODUTO-SERVICO )",
+        "COD_RECEITA": "Código da receita ( COD-RECEITA-CRD )",
+        "DAT_CORRECAO": "Data para armazenamento da data de correção.",
+        "DAT_INCLUSAO": "Campo com a data de inclusão do débito.",
+        "DAT_VENCIMENTO": "Campo para armazenamento da data de vencimento do débito.",
+        "NUM_ANO_REFERENCIA": "Campo com o ano de referência do débito.",
+        "NUM_DOCUMENTO_ORIGEM": "Número do documento no sistema de origem do Débito, definido no campo TIP_ORIGEM_SISTEMA.\nExemplos:\n1 - IPVA - Número do Chassi\n2 - ITCD - Guia do ITCD\n3 - Auto de Infração - Número do Auto de Infração\n7 - SISAGUA - Número do Pedido de impressão de selos\n8 - COPAF - Sequencial do Parcelamento\n9 - SISCOEX - Número da Declaração de Importação (DI)",
+        "NUM_MES_REFERENCIA": "Campo com o mês de referencia do débito.",
+        "NUM_TERMO_NOTIFICACAO": "Número do termo de notificação do débito ao devedor.",
+        "NUM_VERSAO": "Campo necessario para controle de concorrencia do hibernate.",
+        "SEQ_DEBITO": "Campo chave primaria da tabela que irá utilizar a sequence SEQ_DEBITO.",
+        "SEQ_DEBITO_AIX": "Sequencial do Debito no AIX",
+        "SEQ_DEBITO_ORIGEM": "Campo para armazenamento do valor da sequence do debito de origem.",
+        "SEQ_PESSOA": "Identificador único de instância de Pessoa no Cadastro.",
+        "STA_DEBITO": "Campo com o status do débito.",
+        "TIP_DEBITO": "Tipo de Origem do FECOP\n1  Fecop Normal\n2  Fecop ST",
+        "TIP_ORIGEM_SISTEMA": "Coluna com o tipo de origem do débito.",
+        "VLR_MULTA_ORIGINAL": "Campo com o valor original da multa.",
+        "VLR_PRINCIPAL_ORIGINAL": "Campo com o valor original do débito."
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_AUD",
+      "table_comment": "Tabela de auditoria para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "table_type_inference": "transacao",
+      "primary_keys": [
+        "NUM_REV",
+        "SEQ_DEBITO"
+      ],
+      "foreign_keys": [
+        "NUM_REV"
+      ],
+      "main_columns": [
+        "NUM_REV",
+        "SEQ_DEBITO",
+        "COD_INDICADOR",
+        "COD_PRODUTO_SERVICO",
+        "COD_RECEITA"
+      ],
+      "related_tables": [
+        "LANCAMENTO_AUD"
+      ],
+      "row_count": 13158777,
+      "column_name_keywords": [
+        "INDICADOR",
+        "PRODUTO",
+        "SERVICO",
+        "RECEITA",
+        "CORRECAO",
+        "INCLUSAO",
+        "VENCIMENTO",
+        "ANO",
+        "REFERENCIA",
+        "DOCUMENTO",
+        "ORIGEM",
+        "MES",
+        "REV",
+        "TERMO",
+        "NOTIFICACAO"
+      ],
+      "existing_column_comments": {
+        "COD_INDICADOR": "Código do Indicador Financeiro",
+        "COD_PRODUTO_SERVICO": "Código de produto/serviço ( COD-PRODUTO-SERVICO )",
+        "COD_RECEITA": "Código da receita ( COD-RECEITA-CRD )",
+        "DAT_CORRECAO": "Data para armazenamento da data de correção.",
+        "DAT_INCLUSAO": "Campo com a data de inclusão do débito.",
+        "DAT_VENCIMENTO": "Campo para armazenamento da data de vencimento do débito.",
+        "NUM_ANO_REFERENCIA": "Campo com o ano de referência do débito.",
+        "NUM_DOCUMENTO_ORIGEM": "Número do documento no sistema de origem do Débito, definido no campo TIP_ORIGEM_SISTEMA.\nExemplos:\n1 - IPVA - Número do Chassi\n2 - ITCD - Guia do ITCD\n3 - Auto de Infração - Número do Auto de Infração\n7 - SISAGUA - Número do Pedido de impressão de selos\n8 - COPAF - Sequencial do Parcelamento\n9 - SISCOEX - Número da Declaração de Importação (DI)",
+        "NUM_MES_REFERENCIA": "Campo com o mês de referencia do débito.",
+        "NUM_REV": "Armazena o número da revisao",
+        "NUM_TERMO_NOTIFICACAO": "Número do termo de notificação do débito ao devedor.",
+        "SEQ_DEBITO": "Campo chave primaria da tabela - replica da table debito",
+        "SEQ_DEBITO_AIX": "Sequencial do Debito no AIX",
+        "SEQ_DEBITO_ORIGEM": "Campo para armazenamento do valor da sequence do debito de origem.",
+        "SEQ_PESSOA": "Identificador único de instância de Pessoa no Cadastro.",
+        "STA_DEBITO": "Campo com o status do débito.",
+        "TIP_DEBITO": "TIpo de Debito",
+        "TIP_ORIGEM_SISTEMA": "Coluna com o tipo de origem do débito.",
+        "TIP_REVTYPE": "Armazena o tipo da revisao:\nADD (REVTYPE=0) - INSERT\nMOD (REVTYPE=1) - UPDATE\nDEL (REVTYPE=2) - DELETE",
+        "VLR_MULTA_ORIGINAL": "Campo com o valor original da multa.",
+        "VLR_PRINCIPAL_ORIGINAL": "Campo com o valor original do débito."
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_DOC_CREDITO",
+      "table_comment": "Tabela",
+      "table_type_inference": "transacao",
+      "primary_keys": [
+        "SEQ_DEBITO_DOC_CREDITO"
+      ],
+      "foreign_keys": [
+        "SEQ_DEBITO",
+        "SEQ_DOCUMENTO_CREDITO"
+      ],
+      "main_columns": [
+        "SEQ_DEBITO_DOC_CREDITO",
+        "SEQ_DEBITO",
+        "SEQ_DOCUMENTO_CREDITO",
+        "NUM_VERSAO",
+        "VLR_CREDITO_JUROS"
+      ],
+      "related_tables": [
+        "DEBITO",
+        "DOCUMENTO_CREDITO"
+      ],
+      "row_count": 225117270,
+      "column_name_keywords": [
+        "VERSAO",
+        "DEBITO",
+        "DOC",
+        "CREDITO",
+        "DOCUMENTO",
+        "JUROS",
+        "MULTA",
+        "PRINCIPAL",
+        "DESCONTO"
+      ],
+      "existing_column_comments": {
+        "NUM_VERSAO": "Campo necessario para controle de concorrencia do hibernate.",
+        "SEQ_DEBITO": "Chave estrangeira da tabela DEBITO.",
+        "SEQ_DEBITO_DOC_CREDITO": "CAMPO IDENFICIDADOR DO REGISTRO",
+        "SEQ_DOCUMENTO_CREDITO": "Chave estrangeira da tabela DOCUMENTO_CREDITO.",
+        "VLR_CREDITO_JUROS": "Campo com o valor do juros.",
+        "VLR_CREDITO_MULTA": "Campo com o valor da multa.",
+        "VLR_CREDITO_PRINCIPAL": "Campo com o valor do crédito principal.",
+        "VLR_DESCONTO": "CAMPO INDICATIVO DO VALOR DO DESCONTO DE UM DAE PARA UM DETERMINADO DÉBITO"
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_LEI_DESCONTO",
+      "table_comment": "Associação de uma Lei de Desconto a um Débito para ser aplicado no período de REFIS.",
+      "table_type_inference": "transacao",
+      "primary_keys": [
+        "SEQ_DEBITO_LEI_DESCONTO"
+      ],
+      "foreign_keys": [
+        "SEQ_DEBITO"
+      ],
+      "main_columns": [
+        "SEQ_DEBITO_LEI_DESCONTO",
+        "SEQ_DEBITO",
+        "DAT_FIM",
+        "DAT_INICIO",
+        "SEQ_LEI_DESCONTO"
+      ],
+      "related_tables": [
+        "DEBITO"
+      ],
+      "row_count": 572,
+      "column_name_keywords": [
+        "FIM",
+        "INICIO",
+        "DEBITO",
+        "LEI",
+        "DESCONTO",
+        "USUARIO"
+      ],
+      "existing_column_comments": {
+        "DAT_FIM": "Data final da associação entre débito e lei desconto",
+        "DAT_INICIO": "Data de inclusão da associação entre débito e lei desconto",
+        "SEQ_DEBITO": "Sequencial identificador do débito associado à Lei Desconto",
+        "SEQ_DEBITO_LEI_DESCONTO": "Sequencial identificador de DEBITO_LEI_DESCONTO",
+        "SEQ_LEI_DESCONTO": "Sequencial identificador da Lei Desconto associada ao débito",
+        "SEQ_USUARIO": "Usuário que fez a homologação da associação"
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DOCUMENTO_CREDITO",
+      "table_comment": "Tabela com as informações do documento de crédito.",
+      "table_type_inference": "cadastro",
+      "primary_keys": [
+        "SEQ_DOCUMENTO_CREDITO"
+      ],
+      "foreign_keys": [
+        "SEQ_DAE_EMITIDO",
+        "SEQ_DOCUMENTO_GERADO",
+        "SEQ_LEI_DESCONTO"
+      ],
+      "main_columns": [
+        "SEQ_DOCUMENTO_CREDITO",
+        "SEQ_DAE_EMITIDO",
+        "SEQ_DOCUMENTO_GERADO",
+        "SEQ_LEI_DESCONTO",
+        "NUM_VERSAO"
+      ],
+      "related_tables": [
+        "CNAE_LEI_DESCONTO"
+      ],
+      "row_count": 146165625,
+      "column_name_keywords": [
+        "VERSAO",
+        "DAE",
+        "EMITIDO",
+        "DECRETO",
+        "PARCELAMENTO",
+        "DOCUMENTO",
+        "CREDITO",
+        "GERADO",
+        "LEI",
+        "DESCONTO",
+        "DEBITO"
+      ],
+      "existing_column_comments": {
+        "NUM_VERSAO": "Campo necessario para controle de concorrencia do hibernate.",
+        "SEQ_DAE_EMITIDO": "Sequencial identificador do DAE",
+        "SEQ_DECRETO_PARCELAMENTO": "Sequencial do decreto do parcelamento associada ao documento de crédito.",
+        "SEQ_DOCUMENTO_CREDITO": "Campo chave primaria da tabela que irá utilizar a sequence SEQ_DOCUMENTO_CREDITO.",
+        "SEQ_DOCUMENTO_GERADO": "Chave sequencial do Documento Gerado. Enquanto o novo RECEITA2 conviver com o legado RECEITA AIX/ORACLE, o sequencial será a sequence compartilhada RECEITA.SQ_DAE_EMITIDO. Quando a convivência acabar, será mantida a sequence RECEITA2.SQ_DOCUMENTO_GERADO",
+        "SEQ_LEI_DESCONTO": "Sequencial da lei de desconto associada ao documento de crédito.",
+        "TIP_DEBITO": "1  Fecop Normal\n2 Fecop ST"
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "FAIXA_DESCONTO_LEI_DESCONTO",
+      "table_comment": "Faixas de desconto da Lei",
+      "table_type_inference": "transacao",
+      "primary_keys": [
+        "SEQ_FAIXA_DESCONTO_LEI_DESC"
+      ],
+      "foreign_keys": [
+        "SEQ_LEI_DESCONTO"
+      ],
+      "main_columns": [
+        "SEQ_FAIXA_DESCONTO_LEI_DESC",
+        "SEQ_LEI_DESCONTO",
+        "DAT_INICIO",
+        "DAT_FIM",
+        "VLR_DESCONTO_JUROS"
+      ],
+      "related_tables": [
+        "CNAE_LEI_DESCONTO"
+      ],
+      "row_count": 9,
+      "column_name_keywords": [
+        "FIM",
+        "INICIO",
+        "FAIXA",
+        "DESCONTO",
+        "LEI",
+        "DESC",
+        "JUROS",
+        "MULTA"
+      ],
+      "existing_column_comments": {
+        "DAT_FIM": "Data final da faixa de descontos",
+        "DAT_INICIO": "Data de início da faixa de descontos",
+        "SEQ_FAIXA_DESCONTO_LEI_DESC": "Sequencial da tabela",
+        "SEQ_LEI_DESCONTO": "Sequencial da tabela",
+        "VLR_DESCONTO_JUROS": "Desconto de juros concedido na faixa",
+        "VLR_DESCONTO_MULTA": "Desconto de multa concedido na faixa"
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "HISTORICO_DEBITO",
+      "table_comment": "Tabela para armazenamento do historico de debitos realizados.",
+      "table_type_inference": "log",
+      "primary_keys": [
+        "SEQ_HISTORICO_DEBITO"
+      ],
+      "foreign_keys": [],
+      "main_columns": [
+        "SEQ_HISTORICO_DEBITO",
+        "COD_INDICADOR",
+        "COD_RECEITA",
+        "DAT_INCLUSAO",
+        "DAT_MOVIMENTO"
+      ],
+      "related_tables": [],
+      "row_count": 0,
+      "column_name_keywords": [
+        "INDICADOR",
+        "RECEITA",
+        "CORRECAO",
+        "INCLUSAO",
+        "MOVIMENTO",
+        "VENCIMENTO",
+        "ANO",
+        "REFERENCIA",
+        "MES",
+        "VERSAO",
+        "DEBITO",
+        "ORIGEM",
+        "HISTORICO",
+        "PESSOA",
+        "SISTEMA"
+      ],
+      "existing_column_comments": {
+        "COD_INDICADOR": "Código do Indicador Financeiro",
+        "COD_RECEITA": "Código da receita.",
+        "DAT_CORRECAO": "Data de correção do debito.",
+        "DAT_INCLUSAO": "Campo com a data de inclusão do débito.",
+        "DAT_MOVIMENTO": "Campo com a data de movimento para a tabela de historico.",
+        "DAT_VENCIMENTO": "Data de vencimento do debito.",
+        "NUM_ANO_REFERENCIA": "Campo com o ano de referencia do débito.",
+        "NUM_MES_REFERENCIA": "Campo com o mês de referencia do debito.",
+        "NUM_VERSAO": "Campo necessario para controle de concorrencia do hibernate.",
+        "SEQ_DEBITO_ORIGEM": "Código sequencial do debito de origem.",
+        "SEQ_HISTORICO_DEBITO": "Campo chave primaria da tabela que irá utilizar a sequence SEQ_HISTORICO_DEBITO.",
+        "SEQ_PESSOA": "Codigo da pessoa para registro na tabela de historico.",
+        "STA_DEBITO": "Campo com o status do débito.",
+        "TIP_ORIGEM_SISTEMA": "Campo com o sistema de origem.",
+        "VLR_MULTA_ORIGINAL": "Campo com o valor da multa do débito.",
+        "VLR_PRINCIPAL_ORIGINAL": "Campo com o valor original do débito."
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO",
+      "table_comment": "Tabela para armazenamento os lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "table_type_inference": "transacao",
+      "primary_keys": [
+        "SEQ_LANCAMENTO"
+      ],
+      "foreign_keys": [
+        "COD_RECEITA",
+        "SEQ_DEBITO",
+        "SEQ_DOCUMENTO_CREDITO",
+        "SEQ_PESSOA",
+        "SEQ_TIPO_LANCAMENTO"
+      ],
+      "main_columns": [
+        "SEQ_LANCAMENTO",
+        "COD_RECEITA",
+        "SEQ_DEBITO",
+        "SEQ_DOCUMENTO_CREDITO",
+        "SEQ_PESSOA"
+      ],
+      "related_tables": [
+        "RECEITA_LEI_DESCONTO",
+        "DEBITO",
+        "DOCUMENTO_CREDITO",
+        "TIPO_LANCAMENTO"
+      ],
+      "row_count": 254631073,
+      "column_name_keywords": [
+        "RECEITA",
+        "INCLUSAO",
+        "LANCAMENTO",
+        "VENCIMENTO",
+        "INFORM",
+        "COMPLEMENT",
+        "ANO",
+        "REFERENCIA",
+        "MES",
+        "VERSAO",
+        "DEBITO",
+        "DOCUMENTO",
+        "CREDITO",
+        "PESSOA",
+        "TIPO"
+      ],
+      "existing_column_comments": {
+        "COD_RECEITA": "Código da receita ( COD-RECEITA-CRD )",
+        "DAT_INCLUSAO": "Data de inclusão do lançamento",
+        "DAT_LANCAMENTO": "Campo com a data em que nasceu a linha.",
+        "DAT_VENCIMENTO": "Campo com a data de vencimento.",
+        "DSC_INFORM_COMPLEMENT": "Campo com informações complementares ao lançamento.",
+        "NUM_ANO_REFERENCIA": "Campo com o ano de referencia do lancamento.",
+        "NUM_MES_REFERENCIA": "Campo com o mês de referencia do lançamento.",
+        "NUM_VERSAO": "Campo necessario para controle de concorrencia do hibernate.",
+        "SEQ_DEBITO": "Chave estrangeira da tabela DEBITO.",
+        "SEQ_DOCUMENTO_CREDITO": "Chave estrangeira da tabela DOCUMENTO_CREDITO.",
+        "SEQ_LANCAMENTO": "Campo chave primaria da tabela que irá utilizar a sequence SEQ_LANCAMENTO.",
+        "SEQ_PESSOA": "Identificador único de instância de Pessoa no Cadastro.",
+        "SEQ_TIPO_LANCAMENTO": "Chave estrangeira da tabela TIPO_LANCAMENTO.",
+        "VLR_LANCAMENTO": "Campo com o valor de lançamento."
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_ATUAL",
+      "table_comment": "",
+      "table_type_inference": "cadastro",
+      "primary_keys": [],
+      "foreign_keys": [],
+      "main_columns": [
+        "DAT_LANCAMENTO",
+        "VLR_LANCAMENTO",
+        "COD_RECEITA",
+        "DAT_VENCIMENTO",
+        "DSC_INFORM_COMPLEMENT"
+      ],
+      "related_tables": [],
+      "row_count": 6985,
+      "column_name_keywords": [
+        "RECEITA",
+        "LANCAMENTO",
+        "VENCIMENTO",
+        "INFORM",
+        "COMPLEMENT",
+        "ANO",
+        "REFERENCIA",
+        "MES",
+        "VERSAO",
+        "DEBITO",
+        "DOCUMENTO",
+        "CREDITO",
+        "PESSOA",
+        "TIPO"
+      ],
+      "existing_column_comments": {}
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_AUD",
+      "table_comment": "Tabela para armazenamento da auditoria dos lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "table_type_inference": "transacao",
+      "primary_keys": [
+        "NUM_REV",
+        "SEQ_LANCAMENTO"
+      ],
+      "foreign_keys": [
+        "NUM_REV"
+      ],
+      "main_columns": [
+        "NUM_REV",
+        "SEQ_LANCAMENTO",
+        "DAT_LANCAMENTO",
+        "VLR_LANCAMENTO",
+        "COD_RECEITA"
+      ],
+      "related_tables": [
+        "DEBITO_AUD"
+      ],
+      "row_count": 161554866,
+      "column_name_keywords": [
+        "RECEITA",
+        "LANCAMENTO",
+        "VENCIMENTO",
+        "INFORM",
+        "COMPLEMENT",
+        "ANO",
+        "REFERENCIA",
+        "MES",
+        "REV",
+        "VERSAO",
+        "DEBITO",
+        "DOCUMENTO",
+        "CREDITO",
+        "PESSOA",
+        "TIPO"
+      ],
+      "existing_column_comments": {
+        "COD_RECEITA": "Código da receita ( COD-RECEITA-CRD )",
+        "DAT_LANCAMENTO": "Campo com a data em que nasceu a linha.",
+        "DAT_VENCIMENTO": "Campo com a data de vencimento.",
+        "DSC_INFORM_COMPLEMENT": "Campo com informações complementares ao lançamento.",
+        "NUM_ANO_REFERENCIA": "Campo com o ano de referencia do lancamento.",
+        "NUM_MES_REFERENCIA": "Campo com o mês de referencia do lançamento.",
+        "NUM_REV": "Armazena o número da revisao",
+        "NUM_VERSAO": "Campo necessario para controle de concorrencia do hibernate.",
+        "SEQ_DEBITO": "Chave estrangeira da tabela DEBITO.",
+        "SEQ_DOCUMENTO_CREDITO": "Chave estrangeira da tabela DOCUMENTO_CREDITO.",
+        "SEQ_LANCAMENTO": "Campo chave primaria da tabela que irá utilizar a sequence SEQ_LANCAMENTO.",
+        "SEQ_PESSOA": "Identificador único de instância de Pessoa no Cadastro.",
+        "SEQ_TIPO_LANCAMENTO": "Chave estrangeira da tabela TIPO_LANCAMENTO.",
+        "TIP_REVTYPE": "Armazena o tipo da revisao:\nADD (REVTYPE=0) - INSERT\nMOD (REVTYPE=1) - UPDATE\nDEL (REVTYPE=2) - DELETE",
+        "VLR_LANCAMENTO": "Campo com o valor de lançamento."
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LEI_DESCONTO",
+      "table_comment": "Leis que deram origem aos descontos",
+      "table_type_inference": "referencia",
+      "primary_keys": [
+        "SEQ_LEI_DESCONTO"
+      ],
+      "foreign_keys": [],
+      "main_columns": [
+        "SEQ_LEI_DESCONTO",
+        "COD_SISTEMA_ORIGEM",
+        "DAT_INICIO",
+        "NUM_LEI",
+        "DAT_FIM"
+      ],
+      "related_tables": [],
+      "row_count": 8,
+      "column_name_keywords": [
+        "SISTEMA",
+        "ORIGEM",
+        "FIM",
+        "INICIO",
+        "INFO",
+        "COMPLEMENTAR",
+        "PERIODO",
+        "REFERENCIA",
+        "LEI",
+        "DESCONTO",
+        "CRITICA",
+        "CNAE",
+        "RECEITA"
+      ],
+      "existing_column_comments": {
+        "COD_SISTEMA_ORIGEM": "Sistema de origem",
+        "DAT_FIM": "Data final dos descontos",
+        "DAT_INICIO": "Data de início dos descontos",
+        "DSC_INFO_COMPLEMENTAR": "Informações complementares para o DAE associado à lei de desconto.",
+        "DSC_PERIODO_REFERENCIA_FIM": "Referência final dos descontos",
+        "DSC_PERIODO_REFERENCIA_INICIO": "Referência inicial dos descontos",
+        "NUM_LEI": "Número da lei que deu origem aos descontos",
+        "SEQ_LEI_DESCONTO": "Sequencial da tabela",
+        "TIP_CRITICA_CNAE": "Tipo de crítica a CNAEs",
+        "TIP_CRITICA_RECEITA": "Tipo de crítica a Receitas"
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LINHA_ARQUIVO_ETL",
+      "table_comment": "Registros dos arquivos ETL",
+      "table_type_inference": "cadastro",
+      "primary_keys": [
+        "SEQ_LINHA_ARQUIVO_ETL"
+      ],
+      "foreign_keys": [
+        "SEQ_ARQUIVO_ETL"
+      ],
+      "main_columns": [
+        "SEQ_LINHA_ARQUIVO_ETL",
+        "SEQ_ARQUIVO_ETL",
+        "DSC_CONTEUDO_LINHA_ARQUIVO"
+      ],
+      "related_tables": [
+        "ARQUIVO_ETL"
+      ],
+      "row_count": 55074321,
+      "column_name_keywords": [
+        "CONTEUDO",
+        "LINHA",
+        "ARQUIVO",
+        "ETL"
+      ],
+      "existing_column_comments": {
+        "DSC_CONTEUDO_LINHA_ARQUIVO": "Conteudo do arquivo",
+        "SEQ_ARQUIVO_ETL": "Sequencial da tabela",
+        "SEQ_LINHA_ARQUIVO_ETL": "Sequencial da tabela"
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "MIGRACAO_LEGADO",
+      "table_comment": "Tabela que será populada com os dados de IPVA dos veículos que tem saldo devedor ou credor nos anos anteriores a 2018 . \nEsta tabela servirá como base para a migração destes dados para o novo sistema IPVA (Downsizing)",
+      "table_type_inference": "cadastro",
+      "primary_keys": [],
+      "foreign_keys": [],
+      "main_columns": [
+        "DAT_LANCAMENTO",
+        "DAT_VENCIMENTO",
+        "NUM_ANO_REFERENCIA",
+        "NUM_MES_REFERENCIA",
+        "VLR_LANCAMENTO"
+      ],
+      "related_tables": [],
+      "row_count": 694469,
+      "column_name_keywords": [
+        "CHASSI",
+        "VEICULO",
+        "DEVEDOR",
+        "INSCRICAO",
+        "LANCAMENTO",
+        "RECEITA",
+        "INSC",
+        "PARC",
+        "VENCIMENTO",
+        "ANO",
+        "REFERENCIA",
+        "DOCUMENTO",
+        "ORIGEM",
+        "MES",
+        "PARCELA"
+      ],
+      "existing_column_comments": {
+        "COD_CHASSI_VEICULO": "Chassi do veiculo",
+        "COD_DEVEDOR": "Documento identificador do devedor do débito (de acordo com o definido em TIP_DEVEDOR)",
+        "COD_INSCRICAO": "Codigo da Inscrição da Divida Ativa",
+        "COD_LANCAMENTO": "Codigo do lançamento . Será um lançamento de credito ou de débito",
+        "COD_RECEITA": "Código da receita",
+        "DAT_INSC_PARC": "Data de inscrição no parcelamento",
+        "DAT_LANCAMENTO": "Campo para armazenamento da data de vencimento do débito.",
+        "DAT_VENCIMENTO": "Campo para armazenamento da data de vencimento do débito.",
+        "NUM_ANO_REFERENCIA": "Campo com o ano de referência do débito.",
+        "NUM_DOCUMENTO_ORIGEM": "Número do documento que originou o débito. Exemplo: guia de ITCD",
+        "NUM_MES_REFERENCIA": "Campo com o mês de referencia do débito.",
+        "NUM_PARCELA": "Numero da parcela em aberto",
+        "SEQ_DEBITO_AIX": "Sequencial do Débito no COPAF do AIX",
+        "SEQ_DEBITO_AIX_PARC": "Sequencial do débito do parcelamento no AIX",
+        "SEQ_PARCELAMENTO": "Sequencial do Parcelamento",
+        "STA_SITUACAO": "Status da Situação do ipva quando estiver inscrito ou parcelado",
+        "TIP_DEBITO": "Tipo do débito migrado",
+        "TIP_DEVEDOR": "Tipo do documento que identifica o devedor do débito:\n1 - CGF\n2 - CNPJ\n3 - CPF\n4 - Código identificador gerado no CADASTRO.PESSOA FÍSICA JURÍDICA",
+        "VLR_INSC_PARC": "Valor inscrito no parcelamento",
+        "VLR_LANCAMENTO": "Valor do saldo devedor ou credor"
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "RECEITA_LEI_DESCONTO",
+      "table_comment": "Receitas relacionadas na Lei dos descontos",
+      "table_type_inference": "associacao",
+      "primary_keys": [
+        "COD_RECEITA",
+        "SEQ_LEI_DESCONTO"
+      ],
+      "foreign_keys": [
+        "COD_RECEITA",
+        "SEQ_LEI_DESCONTO"
+      ],
+      "main_columns": [
+        "COD_RECEITA",
+        "SEQ_LEI_DESCONTO"
+      ],
+      "related_tables": [
+        "CNAE_LEI_DESCONTO"
+      ],
+      "row_count": 10,
+      "column_name_keywords": [
+        "RECEITA",
+        "LEI",
+        "DESCONTO"
+      ],
+      "existing_column_comments": {
+        "COD_RECEITA": "Receita relacionada na Lei",
+        "SEQ_LEI_DESCONTO": "Sequencial da tabela"
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "TIPO_LANCAMENTO",
+      "table_comment": "Tabela com as informações do tipo de lançamentos existentes.",
+      "table_type_inference": "referencia",
+      "primary_keys": [
+        "SEQ_TIPO_LANCAMENTO"
+      ],
+      "foreign_keys": [],
+      "main_columns": [
+        "SEQ_TIPO_LANCAMENTO",
+        "COD_LANCAMENTO",
+        "DSC_LANCAMENTO",
+        "TIP_LANCAMENTO"
+      ],
+      "related_tables": [],
+      "row_count": 48,
+      "column_name_keywords": [
+        "LANCAMENTO",
+        "TIPO"
+      ],
+      "existing_column_comments": {
+        "COD_LANCAMENTO": "Campo com o código do tipo de lançamento.",
+        "DSC_LANCAMENTO": "Campo com a descrição do lançamento.",
+        "SEQ_TIPO_LANCAMENTO": "Campo chave primaria da tabela que irá utilizar a sequence SEQ_TIPO_LANCAMENTO.",
+        "TIP_LANCAMENTO": "INDICA DE UM LANÇAMENTO É DE CRÉDITO OU DÉBITO\nC :CRÉDITO\nD:DEBITO"
+      }
+    }
+  ],
+  "columns": [
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "ARQUIVO_ETL",
+      "table_comment": "Arquivos ETL",
+      "column_name": "DAT_CRIACAO_ARQUIVO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NOM_ARQUIVO_ETL",
+        "SEQ_ARQUIVO_ETL"
+      ],
+      "profile": {
+        "num_distinct": 1439,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "ARQUIVO_ETL",
+      "table_comment": "Arquivos ETL",
+      "column_name": "NOM_ARQUIVO_ETL",
+      "data_type": "VARCHAR2(100)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_CRIACAO_ARQUIVO",
+        "SEQ_ARQUIVO_ETL",
+        "TIP_ARQUIVO"
+      ],
+      "profile": {
+        "num_distinct": 3908,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "ARQUIVO_ETL",
+      "table_comment": "Arquivos ETL",
+      "column_name": "SEQ_ARQUIVO_ETL",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_CRIACAO_ARQUIVO",
+        "NOM_ARQUIVO_ETL",
+        "TIP_ARQUIVO"
+      ],
+      "profile": {
+        "num_distinct": 4067,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "ARQUIVO_ETL",
+      "table_comment": "Arquivos ETL",
+      "column_name": "TIP_ARQUIVO",
+      "data_type": "VARCHAR2(30)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NOM_ARQUIVO_ETL",
+        "SEQ_ARQUIVO_ETL"
+      ],
+      "profile": {
+        "num_distinct": 8,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "AUDITORIA_ENTIDADES",
+      "table_comment": "Guarda as auditorias das entidades",
+      "column_name": "COD_MATRICULA_USUARIO",
+      "data_type": "VARCHAR2(255)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_DATA_MODIFICACAO",
+        "DAT_TIMESTAMP"
+      ],
+      "profile": {
+        "num_distinct": 1037,
+        "null_ratio": 0.786506,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "AUDITORIA_ENTIDADES",
+      "table_comment": "Guarda as auditorias das entidades",
+      "column_name": "DAT_DATA_MODIFICACAO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_MATRICULA_USUARIO",
+        "DAT_TIMESTAMP",
+        "SEQ_AUDITORIA"
+      ],
+      "profile": {
+        "num_distinct": 8630272,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "AUDITORIA_ENTIDADES",
+      "table_comment": "Guarda as auditorias das entidades",
+      "column_name": "DAT_TIMESTAMP",
+      "data_type": "TIMESTAMP(6)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_MATRICULA_USUARIO",
+        "DAT_DATA_MODIFICACAO",
+        "SEQ_AUDITORIA"
+      ],
+      "profile": {
+        "num_distinct": 55341056,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "AUDITORIA_ENTIDADES",
+      "table_comment": "Guarda as auditorias das entidades",
+      "column_name": "SEQ_AUDITORIA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_DATA_MODIFICACAO",
+        "DAT_TIMESTAMP"
+      ],
+      "profile": {
+        "num_distinct": 56110690,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "CNAE_LEI_DESCONTO",
+      "table_comment": "CNAEs relacionados na Lei dos descontos",
+      "column_name": "COD_CAE",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_LEI_DESCONTO"
+      ],
+      "profile": {
+        "num_distinct": 17,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "CNAE_LEI_DESCONTO",
+      "table_comment": "CNAEs relacionados na Lei dos descontos",
+      "column_name": "SEQ_LEI_DESCONTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "LEI_DESCONTO",
+        "column": "SEQ_LEI_DESCONTO"
+      },
+      "column_neighbors": [
+        "COD_CAE"
+      ],
+      "profile": {
+        "num_distinct": 1,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO",
+      "table_comment": "Tabela para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "COD_INDICADOR",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_PRODUTO_SERVICO",
+        "COD_RECEITA"
+      ],
+      "profile": {
+        "num_distinct": 1,
+        "null_ratio": 0.001035,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO",
+      "table_comment": "Tabela para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "COD_PRODUTO_SERVICO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_INDICADOR",
+        "COD_RECEITA",
+        "DAT_CORRECAO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": 1.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO",
+      "table_comment": "Tabela para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "COD_RECEITA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "RECEITA_LEI_DESCONTO",
+        "column": "COD_RECEITA"
+      },
+      "column_neighbors": [
+        "COD_INDICADOR",
+        "COD_PRODUTO_SERVICO",
+        "DAT_CORRECAO",
+        "DAT_INCLUSAO"
+      ],
+      "profile": {
+        "num_distinct": 17,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO",
+      "table_comment": "Tabela para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "DAT_CORRECAO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_PRODUTO_SERVICO",
+        "COD_RECEITA",
+        "DAT_INCLUSAO",
+        "DAT_VENCIMENTO"
+      ],
+      "profile": {
+        "num_distinct": 5206,
+        "null_ratio": 0.819973,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO",
+      "table_comment": "Tabela para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "DAT_INCLUSAO",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_RECEITA",
+        "DAT_CORRECAO",
+        "DAT_VENCIMENTO",
+        "NUM_ANO_REFERENCIA"
+      ],
+      "profile": {
+        "num_distinct": 7384,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO",
+      "table_comment": "Tabela para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "DAT_VENCIMENTO",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_CORRECAO",
+        "DAT_INCLUSAO",
+        "NUM_ANO_REFERENCIA",
+        "NUM_DOCUMENTO_ORIGEM"
+      ],
+      "profile": {
+        "num_distinct": 5187,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO",
+      "table_comment": "Tabela para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "NUM_ANO_REFERENCIA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_INCLUSAO",
+        "DAT_VENCIMENTO",
+        "NUM_DOCUMENTO_ORIGEM",
+        "NUM_MES_REFERENCIA"
+      ],
+      "profile": {
+        "num_distinct": 36,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO",
+      "table_comment": "Tabela para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "NUM_DOCUMENTO_ORIGEM",
+      "data_type": "VARCHAR2(50)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_VENCIMENTO",
+        "NUM_ANO_REFERENCIA",
+        "NUM_MES_REFERENCIA",
+        "NUM_TERMO_NOTIFICACAO"
+      ],
+      "profile": {
+        "num_distinct": 4277760,
+        "null_ratio": 0.007585,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO",
+      "table_comment": "Tabela para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "NUM_MES_REFERENCIA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_ANO_REFERENCIA",
+        "NUM_DOCUMENTO_ORIGEM",
+        "NUM_TERMO_NOTIFICACAO",
+        "NUM_VERSAO"
+      ],
+      "profile": {
+        "num_distinct": 12,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO",
+      "table_comment": "Tabela para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "NUM_TERMO_NOTIFICACAO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_DOCUMENTO_ORIGEM",
+        "NUM_MES_REFERENCIA",
+        "NUM_VERSAO",
+        "SEQ_DEBITO"
+      ],
+      "profile": {
+        "num_distinct": 180,
+        "null_ratio": 0.99903,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO",
+      "table_comment": "Tabela para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "NUM_VERSAO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_MES_REFERENCIA",
+        "NUM_TERMO_NOTIFICACAO",
+        "SEQ_DEBITO",
+        "SEQ_DEBITO_AIX"
+      ],
+      "profile": {
+        "num_distinct": 18,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO",
+      "table_comment": "Tabela para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "SEQ_DEBITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "DEBITO_AUD",
+        "column": "SEQ_DEBITO"
+      },
+      "column_neighbors": [
+        "NUM_TERMO_NOTIFICACAO",
+        "NUM_VERSAO",
+        "SEQ_DEBITO_AIX",
+        "SEQ_DEBITO_ORIGEM"
+      ],
+      "profile": {
+        "num_distinct": 91996535,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO",
+      "table_comment": "Tabela para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "SEQ_DEBITO_AIX",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_VERSAO",
+        "SEQ_DEBITO",
+        "SEQ_DEBITO_ORIGEM",
+        "SEQ_PESSOA"
+      ],
+      "profile": {
+        "num_distinct": 716480,
+        "null_ratio": 0.992158,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO",
+      "table_comment": "Tabela para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "SEQ_DEBITO_ORIGEM",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DEBITO",
+        "SEQ_DEBITO_AIX",
+        "SEQ_PESSOA",
+        "STA_DEBITO"
+      ],
+      "profile": {
+        "num_distinct": 51564,
+        "null_ratio": 0.999324,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO",
+      "table_comment": "Tabela para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "SEQ_PESSOA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DEBITO_AIX",
+        "SEQ_DEBITO_ORIGEM",
+        "STA_DEBITO",
+        "TIP_DEBITO"
+      ],
+      "profile": {
+        "num_distinct": 2907136,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO",
+      "table_comment": "Tabela para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "STA_DEBITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DEBITO_ORIGEM",
+        "SEQ_PESSOA",
+        "TIP_DEBITO",
+        "TIP_ORIGEM_SISTEMA"
+      ],
+      "profile": {
+        "num_distinct": 10,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO",
+      "table_comment": "Tabela para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "TIP_DEBITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_PESSOA",
+        "STA_DEBITO",
+        "TIP_ORIGEM_SISTEMA",
+        "VLR_MULTA_ORIGINAL"
+      ],
+      "profile": {
+        "num_distinct": 3,
+        "null_ratio": 0.993888,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO",
+      "table_comment": "Tabela para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "TIP_ORIGEM_SISTEMA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "STA_DEBITO",
+        "TIP_DEBITO",
+        "VLR_MULTA_ORIGINAL",
+        "VLR_PRINCIPAL_ORIGINAL"
+      ],
+      "profile": {
+        "num_distinct": 7,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO",
+      "table_comment": "Tabela para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "VLR_MULTA_ORIGINAL",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "TIP_DEBITO",
+        "TIP_ORIGEM_SISTEMA",
+        "VLR_PRINCIPAL_ORIGINAL"
+      ],
+      "profile": {
+        "num_distinct": 2136,
+        "null_ratio": 0.997068,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO",
+      "table_comment": "Tabela para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "VLR_PRINCIPAL_ORIGINAL",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "TIP_ORIGEM_SISTEMA",
+        "VLR_MULTA_ORIGINAL"
+      ],
+      "profile": {
+        "num_distinct": 588160,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_AUD",
+      "table_comment": "Tabela de auditoria para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "COD_INDICADOR",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_PRODUTO_SERVICO",
+        "COD_RECEITA"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": 1.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_AUD",
+      "table_comment": "Tabela de auditoria para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "COD_PRODUTO_SERVICO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_INDICADOR",
+        "COD_RECEITA",
+        "DAT_CORRECAO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": 1.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_AUD",
+      "table_comment": "Tabela de auditoria para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "COD_RECEITA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "RECEITA_LEI_DESCONTO",
+        "column": "COD_RECEITA"
+      },
+      "column_neighbors": [
+        "COD_INDICADOR",
+        "COD_PRODUTO_SERVICO",
+        "DAT_CORRECAO",
+        "DAT_INCLUSAO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": 1.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_AUD",
+      "table_comment": "Tabela de auditoria para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "DAT_CORRECAO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_PRODUTO_SERVICO",
+        "COD_RECEITA",
+        "DAT_INCLUSAO",
+        "DAT_VENCIMENTO"
+      ],
+      "profile": {
+        "num_distinct": 3802,
+        "null_ratio": 0.015574,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_AUD",
+      "table_comment": "Tabela de auditoria para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "DAT_INCLUSAO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_RECEITA",
+        "DAT_CORRECAO",
+        "DAT_VENCIMENTO",
+        "NUM_ANO_REFERENCIA"
+      ],
+      "profile": {
+        "num_distinct": 2879,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_AUD",
+      "table_comment": "Tabela de auditoria para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "DAT_VENCIMENTO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_CORRECAO",
+        "DAT_INCLUSAO",
+        "NUM_ANO_REFERENCIA",
+        "NUM_DOCUMENTO_ORIGEM"
+      ],
+      "profile": {
+        "num_distinct": 3804,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_AUD",
+      "table_comment": "Tabela de auditoria para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "NUM_ANO_REFERENCIA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_INCLUSAO",
+        "DAT_VENCIMENTO",
+        "NUM_DOCUMENTO_ORIGEM",
+        "NUM_MES_REFERENCIA"
+      ],
+      "profile": {
+        "num_distinct": 32,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_AUD",
+      "table_comment": "Tabela de auditoria para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "NUM_DOCUMENTO_ORIGEM",
+      "data_type": "VARCHAR2(50)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_VENCIMENTO",
+        "NUM_ANO_REFERENCIA",
+        "NUM_MES_REFERENCIA",
+        "NUM_REV"
+      ],
+      "profile": {
+        "num_distinct": 2693376,
+        "null_ratio": 0.040343,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_AUD",
+      "table_comment": "Tabela de auditoria para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "NUM_MES_REFERENCIA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_ANO_REFERENCIA",
+        "NUM_DOCUMENTO_ORIGEM",
+        "NUM_REV",
+        "NUM_TERMO_NOTIFICACAO"
+      ],
+      "profile": {
+        "num_distinct": 12,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_AUD",
+      "table_comment": "Tabela de auditoria para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "NUM_REV",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "LANCAMENTO_AUD",
+        "column": "NUM_REV"
+      },
+      "column_neighbors": [
+        "NUM_DOCUMENTO_ORIGEM",
+        "NUM_MES_REFERENCIA",
+        "NUM_TERMO_NOTIFICACAO",
+        "SEQ_DEBITO"
+      ],
+      "profile": {
+        "num_distinct": 12753920,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_AUD",
+      "table_comment": "Tabela de auditoria para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "NUM_TERMO_NOTIFICACAO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_MES_REFERENCIA",
+        "NUM_REV",
+        "SEQ_DEBITO",
+        "SEQ_DEBITO_AIX"
+      ],
+      "profile": {
+        "num_distinct": 1,
+        "null_ratio": 0.999997,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_AUD",
+      "table_comment": "Tabela de auditoria para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "SEQ_DEBITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "DEBITO",
+        "column": "SEQ_DEBITO"
+      },
+      "column_neighbors": [
+        "NUM_REV",
+        "NUM_TERMO_NOTIFICACAO",
+        "SEQ_DEBITO_AIX",
+        "SEQ_DEBITO_ORIGEM"
+      ],
+      "profile": {
+        "num_distinct": 12814336,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_AUD",
+      "table_comment": "Tabela de auditoria para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "SEQ_DEBITO_AIX",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_TERMO_NOTIFICACAO",
+        "SEQ_DEBITO",
+        "SEQ_DEBITO_ORIGEM",
+        "SEQ_PESSOA"
+      ],
+      "profile": {
+        "num_distinct": 8611,
+        "null_ratio": 0.999279,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_AUD",
+      "table_comment": "Tabela de auditoria para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "SEQ_DEBITO_ORIGEM",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DEBITO",
+        "SEQ_DEBITO_AIX",
+        "SEQ_PESSOA",
+        "STA_DEBITO"
+      ],
+      "profile": {
+        "num_distinct": 21316,
+        "null_ratio": 0.997622,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_AUD",
+      "table_comment": "Tabela de auditoria para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "SEQ_PESSOA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DEBITO_AIX",
+        "SEQ_DEBITO_ORIGEM",
+        "STA_DEBITO",
+        "TIP_DEBITO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": 1.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_AUD",
+      "table_comment": "Tabela de auditoria para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "STA_DEBITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DEBITO_ORIGEM",
+        "SEQ_PESSOA",
+        "TIP_DEBITO",
+        "TIP_ORIGEM_SISTEMA"
+      ],
+      "profile": {
+        "num_distinct": 7,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_AUD",
+      "table_comment": "Tabela de auditoria para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "TIP_DEBITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_PESSOA",
+        "STA_DEBITO",
+        "TIP_ORIGEM_SISTEMA",
+        "TIP_REVTYPE"
+      ],
+      "profile": {
+        "num_distinct": 3,
+        "null_ratio": 0.991065,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_AUD",
+      "table_comment": "Tabela de auditoria para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "TIP_ORIGEM_SISTEMA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "STA_DEBITO",
+        "TIP_DEBITO",
+        "TIP_REVTYPE",
+        "VLR_MULTA_ORIGINAL"
+      ],
+      "profile": {
+        "num_distinct": 7,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_AUD",
+      "table_comment": "Tabela de auditoria para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "TIP_REVTYPE",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "TIP_DEBITO",
+        "TIP_ORIGEM_SISTEMA",
+        "VLR_MULTA_ORIGINAL",
+        "VLR_PRINCIPAL_ORIGINAL"
+      ],
+      "profile": {
+        "num_distinct": 3,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_AUD",
+      "table_comment": "Tabela de auditoria para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "VLR_MULTA_ORIGINAL",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "TIP_ORIGEM_SISTEMA",
+        "TIP_REVTYPE",
+        "VLR_PRINCIPAL_ORIGINAL"
+      ],
+      "profile": {
+        "num_distinct": 2165,
+        "null_ratio": 0.98574,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_AUD",
+      "table_comment": "Tabela de auditoria para armazenamento da geração de debitos na base de dados da SEFAZ.",
+      "column_name": "VLR_PRINCIPAL_ORIGINAL",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "TIP_REVTYPE",
+        "VLR_MULTA_ORIGINAL"
+      ],
+      "profile": {
+        "num_distinct": 301856,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_DOC_CREDITO",
+      "table_comment": "Tabela",
+      "column_name": "NUM_VERSAO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DEBITO",
+        "SEQ_DEBITO_DOC_CREDITO"
+      ],
+      "profile": {
+        "num_distinct": 1,
+        "null_ratio": 0.999994,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_DOC_CREDITO",
+      "table_comment": "Tabela",
+      "column_name": "SEQ_DEBITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "DEBITO",
+        "column": "SEQ_DEBITO"
+      },
+      "column_neighbors": [
+        "NUM_VERSAO",
+        "SEQ_DEBITO_DOC_CREDITO",
+        "SEQ_DOCUMENTO_CREDITO"
+      ],
+      "profile": {
+        "num_distinct": 72351744,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_DOC_CREDITO",
+      "table_comment": "Tabela",
+      "column_name": "SEQ_DEBITO_DOC_CREDITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_VERSAO",
+        "SEQ_DEBITO",
+        "SEQ_DOCUMENTO_CREDITO",
+        "VLR_CREDITO_JUROS"
+      ],
+      "profile": {
+        "num_distinct": 225117270,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_DOC_CREDITO",
+      "table_comment": "Tabela",
+      "column_name": "SEQ_DOCUMENTO_CREDITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "DOCUMENTO_CREDITO",
+        "column": "SEQ_DOCUMENTO_CREDITO"
+      },
+      "column_neighbors": [
+        "SEQ_DEBITO",
+        "SEQ_DEBITO_DOC_CREDITO",
+        "VLR_CREDITO_JUROS",
+        "VLR_CREDITO_MULTA"
+      ],
+      "profile": {
+        "num_distinct": 144179200,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_DOC_CREDITO",
+      "table_comment": "Tabela",
+      "column_name": "VLR_CREDITO_JUROS",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DEBITO_DOC_CREDITO",
+        "SEQ_DOCUMENTO_CREDITO",
+        "VLR_CREDITO_MULTA",
+        "VLR_CREDITO_PRINCIPAL"
+      ],
+      "profile": {
+        "num_distinct": 76192,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_DOC_CREDITO",
+      "table_comment": "Tabela",
+      "column_name": "VLR_CREDITO_MULTA",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DOCUMENTO_CREDITO",
+        "VLR_CREDITO_JUROS",
+        "VLR_CREDITO_PRINCIPAL",
+        "VLR_DESCONTO"
+      ],
+      "profile": {
+        "num_distinct": 66288,
+        "null_ratio": 0.000705,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_DOC_CREDITO",
+      "table_comment": "Tabela",
+      "column_name": "VLR_CREDITO_PRINCIPAL",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "VLR_CREDITO_JUROS",
+        "VLR_CREDITO_MULTA",
+        "VLR_DESCONTO"
+      ],
+      "profile": {
+        "num_distinct": 579840,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_DOC_CREDITO",
+      "table_comment": "Tabela",
+      "column_name": "VLR_DESCONTO",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "VLR_CREDITO_MULTA",
+        "VLR_CREDITO_PRINCIPAL"
+      ],
+      "profile": {
+        "num_distinct": 35168,
+        "null_ratio": 3.1e-05,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_LEI_DESCONTO",
+      "table_comment": "Associação de uma Lei de Desconto a um Débito para ser aplicado no período de REFIS.",
+      "column_name": "DAT_FIM",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_INICIO",
+        "SEQ_DEBITO"
+      ],
+      "profile": {
+        "num_distinct": 3,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_LEI_DESCONTO",
+      "table_comment": "Associação de uma Lei de Desconto a um Débito para ser aplicado no período de REFIS.",
+      "column_name": "DAT_INICIO",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_FIM",
+        "SEQ_DEBITO",
+        "SEQ_DEBITO_LEI_DESCONTO"
+      ],
+      "profile": {
+        "num_distinct": 10,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_LEI_DESCONTO",
+      "table_comment": "Associação de uma Lei de Desconto a um Débito para ser aplicado no período de REFIS.",
+      "column_name": "SEQ_DEBITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "DEBITO",
+        "column": "SEQ_DEBITO"
+      },
+      "column_neighbors": [
+        "DAT_FIM",
+        "DAT_INICIO",
+        "SEQ_DEBITO_LEI_DESCONTO",
+        "SEQ_LEI_DESCONTO"
+      ],
+      "profile": {
+        "num_distinct": 572,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_LEI_DESCONTO",
+      "table_comment": "Associação de uma Lei de Desconto a um Débito para ser aplicado no período de REFIS.",
+      "column_name": "SEQ_DEBITO_LEI_DESCONTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_INICIO",
+        "SEQ_DEBITO",
+        "SEQ_LEI_DESCONTO",
+        "SEQ_USUARIO"
+      ],
+      "profile": {
+        "num_distinct": 572,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_LEI_DESCONTO",
+      "table_comment": "Associação de uma Lei de Desconto a um Débito para ser aplicado no período de REFIS.",
+      "column_name": "SEQ_LEI_DESCONTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "CNAE_LEI_DESCONTO",
+        "column": "SEQ_LEI_DESCONTO"
+      },
+      "column_neighbors": [
+        "SEQ_DEBITO",
+        "SEQ_DEBITO_LEI_DESCONTO",
+        "SEQ_USUARIO"
+      ],
+      "profile": {
+        "num_distinct": 1,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DEBITO_LEI_DESCONTO",
+      "table_comment": "Associação de uma Lei de Desconto a um Débito para ser aplicado no período de REFIS.",
+      "column_name": "SEQ_USUARIO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DEBITO_LEI_DESCONTO",
+        "SEQ_LEI_DESCONTO"
+      ],
+      "profile": {
+        "num_distinct": 17,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DOCUMENTO_CREDITO",
+      "table_comment": "Tabela com as informações do documento de crédito.",
+      "column_name": "NUM_VERSAO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DAE_EMITIDO",
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 1,
+        "null_ratio": 0.006444,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DOCUMENTO_CREDITO",
+      "table_comment": "Tabela com as informações do documento de crédito.",
+      "column_name": "SEQ_DAE_EMITIDO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_VERSAO",
+        "SEQ_DECRETO_PARCELAMENTO",
+        "SEQ_DOCUMENTO_CREDITO"
+      ],
+      "profile": {
+        "num_distinct": 101113856,
+        "null_ratio": 0.296762,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DOCUMENTO_CREDITO",
+      "table_comment": "Tabela com as informações do documento de crédito.",
+      "column_name": "SEQ_DECRETO_PARCELAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_VERSAO",
+        "SEQ_DAE_EMITIDO",
+        "SEQ_DOCUMENTO_CREDITO",
+        "SEQ_DOCUMENTO_GERADO"
+      ],
+      "profile": {
+        "num_distinct": 5,
+        "null_ratio": 0.999995,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DOCUMENTO_CREDITO",
+      "table_comment": "Tabela com as informações do documento de crédito.",
+      "column_name": "SEQ_DOCUMENTO_CREDITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DAE_EMITIDO",
+        "SEQ_DECRETO_PARCELAMENTO",
+        "SEQ_DOCUMENTO_GERADO",
+        "SEQ_LEI_DESCONTO"
+      ],
+      "profile": {
+        "num_distinct": 146165625,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DOCUMENTO_CREDITO",
+      "table_comment": "Tabela com as informações do documento de crédito.",
+      "column_name": "SEQ_DOCUMENTO_GERADO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DECRETO_PARCELAMENTO",
+        "SEQ_DOCUMENTO_CREDITO",
+        "SEQ_LEI_DESCONTO",
+        "TIP_DEBITO"
+      ],
+      "profile": {
+        "num_distinct": 136096,
+        "null_ratio": 0.999038,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DOCUMENTO_CREDITO",
+      "table_comment": "Tabela com as informações do documento de crédito.",
+      "column_name": "SEQ_LEI_DESCONTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "CNAE_LEI_DESCONTO",
+        "column": "SEQ_LEI_DESCONTO"
+      },
+      "column_neighbors": [
+        "SEQ_DOCUMENTO_CREDITO",
+        "SEQ_DOCUMENTO_GERADO",
+        "TIP_DEBITO"
+      ],
+      "profile": {
+        "num_distinct": 3,
+        "null_ratio": 0.999275,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "DOCUMENTO_CREDITO",
+      "table_comment": "Tabela com as informações do documento de crédito.",
+      "column_name": "TIP_DEBITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DOCUMENTO_GERADO",
+        "SEQ_LEI_DESCONTO"
+      ],
+      "profile": {
+        "num_distinct": 4,
+        "null_ratio": 0.992977,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "FAIXA_DESCONTO_LEI_DESCONTO",
+      "table_comment": "Faixas de desconto da Lei",
+      "column_name": "DAT_FIM",
+      "data_type": "TIMESTAMP(6)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_INICIO",
+        "SEQ_FAIXA_DESCONTO_LEI_DESC"
+      ],
+      "profile": {
+        "num_distinct": 6,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "FAIXA_DESCONTO_LEI_DESCONTO",
+      "table_comment": "Faixas de desconto da Lei",
+      "column_name": "DAT_INICIO",
+      "data_type": "TIMESTAMP(6)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_FIM",
+        "SEQ_FAIXA_DESCONTO_LEI_DESC",
+        "SEQ_LEI_DESCONTO"
+      ],
+      "profile": {
+        "num_distinct": 6,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "FAIXA_DESCONTO_LEI_DESCONTO",
+      "table_comment": "Faixas de desconto da Lei",
+      "column_name": "SEQ_FAIXA_DESCONTO_LEI_DESC",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_FIM",
+        "DAT_INICIO",
+        "SEQ_LEI_DESCONTO",
+        "VLR_DESCONTO_JUROS"
+      ],
+      "profile": {
+        "num_distinct": 9,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "FAIXA_DESCONTO_LEI_DESCONTO",
+      "table_comment": "Faixas de desconto da Lei",
+      "column_name": "SEQ_LEI_DESCONTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "CNAE_LEI_DESCONTO",
+        "column": "SEQ_LEI_DESCONTO"
+      },
+      "column_neighbors": [
+        "DAT_INICIO",
+        "SEQ_FAIXA_DESCONTO_LEI_DESC",
+        "VLR_DESCONTO_JUROS",
+        "VLR_DESCONTO_MULTA"
+      ],
+      "profile": {
+        "num_distinct": 8,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "FAIXA_DESCONTO_LEI_DESCONTO",
+      "table_comment": "Faixas de desconto da Lei",
+      "column_name": "VLR_DESCONTO_JUROS",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_FAIXA_DESCONTO_LEI_DESC",
+        "SEQ_LEI_DESCONTO",
+        "VLR_DESCONTO_MULTA"
+      ],
+      "profile": {
+        "num_distinct": 3,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "FAIXA_DESCONTO_LEI_DESCONTO",
+      "table_comment": "Faixas de desconto da Lei",
+      "column_name": "VLR_DESCONTO_MULTA",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_LEI_DESCONTO",
+        "VLR_DESCONTO_JUROS"
+      ],
+      "profile": {
+        "num_distinct": 3,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "HISTORICO_DEBITO",
+      "table_comment": "Tabela para armazenamento do historico de debitos realizados.",
+      "column_name": "COD_INDICADOR",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_RECEITA",
+        "DAT_CORRECAO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "HISTORICO_DEBITO",
+      "table_comment": "Tabela para armazenamento do historico de debitos realizados.",
+      "column_name": "COD_RECEITA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "RECEITA_LEI_DESCONTO",
+        "column": "COD_RECEITA"
+      },
+      "column_neighbors": [
+        "COD_INDICADOR",
+        "DAT_CORRECAO",
+        "DAT_INCLUSAO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "HISTORICO_DEBITO",
+      "table_comment": "Tabela para armazenamento do historico de debitos realizados.",
+      "column_name": "DAT_CORRECAO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_INDICADOR",
+        "COD_RECEITA",
+        "DAT_INCLUSAO",
+        "DAT_MOVIMENTO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "HISTORICO_DEBITO",
+      "table_comment": "Tabela para armazenamento do historico de debitos realizados.",
+      "column_name": "DAT_INCLUSAO",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_RECEITA",
+        "DAT_CORRECAO",
+        "DAT_MOVIMENTO",
+        "DAT_VENCIMENTO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "HISTORICO_DEBITO",
+      "table_comment": "Tabela para armazenamento do historico de debitos realizados.",
+      "column_name": "DAT_MOVIMENTO",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_CORRECAO",
+        "DAT_INCLUSAO",
+        "DAT_VENCIMENTO",
+        "NUM_ANO_REFERENCIA"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "HISTORICO_DEBITO",
+      "table_comment": "Tabela para armazenamento do historico de debitos realizados.",
+      "column_name": "DAT_VENCIMENTO",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_INCLUSAO",
+        "DAT_MOVIMENTO",
+        "NUM_ANO_REFERENCIA",
+        "NUM_MES_REFERENCIA"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "HISTORICO_DEBITO",
+      "table_comment": "Tabela para armazenamento do historico de debitos realizados.",
+      "column_name": "NUM_ANO_REFERENCIA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_MOVIMENTO",
+        "DAT_VENCIMENTO",
+        "NUM_MES_REFERENCIA",
+        "NUM_VERSAO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "HISTORICO_DEBITO",
+      "table_comment": "Tabela para armazenamento do historico de debitos realizados.",
+      "column_name": "NUM_MES_REFERENCIA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_VENCIMENTO",
+        "NUM_ANO_REFERENCIA",
+        "NUM_VERSAO",
+        "SEQ_DEBITO_ORIGEM"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "HISTORICO_DEBITO",
+      "table_comment": "Tabela para armazenamento do historico de debitos realizados.",
+      "column_name": "NUM_VERSAO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_ANO_REFERENCIA",
+        "NUM_MES_REFERENCIA",
+        "SEQ_DEBITO_ORIGEM",
+        "SEQ_HISTORICO_DEBITO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "HISTORICO_DEBITO",
+      "table_comment": "Tabela para armazenamento do historico de debitos realizados.",
+      "column_name": "SEQ_DEBITO_ORIGEM",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_MES_REFERENCIA",
+        "NUM_VERSAO",
+        "SEQ_HISTORICO_DEBITO",
+        "SEQ_PESSOA"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "HISTORICO_DEBITO",
+      "table_comment": "Tabela para armazenamento do historico de debitos realizados.",
+      "column_name": "SEQ_HISTORICO_DEBITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_VERSAO",
+        "SEQ_DEBITO_ORIGEM",
+        "SEQ_PESSOA",
+        "STA_DEBITO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "HISTORICO_DEBITO",
+      "table_comment": "Tabela para armazenamento do historico de debitos realizados.",
+      "column_name": "SEQ_PESSOA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DEBITO_ORIGEM",
+        "SEQ_HISTORICO_DEBITO",
+        "STA_DEBITO",
+        "TIP_ORIGEM_SISTEMA"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "HISTORICO_DEBITO",
+      "table_comment": "Tabela para armazenamento do historico de debitos realizados.",
+      "column_name": "STA_DEBITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_HISTORICO_DEBITO",
+        "SEQ_PESSOA",
+        "TIP_ORIGEM_SISTEMA",
+        "VLR_MULTA_ORIGINAL"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "HISTORICO_DEBITO",
+      "table_comment": "Tabela para armazenamento do historico de debitos realizados.",
+      "column_name": "TIP_ORIGEM_SISTEMA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_PESSOA",
+        "STA_DEBITO",
+        "VLR_MULTA_ORIGINAL",
+        "VLR_PRINCIPAL_ORIGINAL"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "HISTORICO_DEBITO",
+      "table_comment": "Tabela para armazenamento do historico de debitos realizados.",
+      "column_name": "VLR_MULTA_ORIGINAL",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "STA_DEBITO",
+        "TIP_ORIGEM_SISTEMA",
+        "VLR_PRINCIPAL_ORIGINAL"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "HISTORICO_DEBITO",
+      "table_comment": "Tabela para armazenamento do historico de debitos realizados.",
+      "column_name": "VLR_PRINCIPAL_ORIGINAL",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "TIP_ORIGEM_SISTEMA",
+        "VLR_MULTA_ORIGINAL"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO",
+      "table_comment": "Tabela para armazenamento os lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "COD_RECEITA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "RECEITA_LEI_DESCONTO",
+        "column": "COD_RECEITA"
+      },
+      "column_neighbors": [
+        "DAT_INCLUSAO",
+        "DAT_LANCAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 17,
+        "null_ratio": 0.012351,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO",
+      "table_comment": "Tabela para armazenamento os lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "DAT_INCLUSAO",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_RECEITA",
+        "DAT_LANCAMENTO",
+        "DAT_VENCIMENTO"
+      ],
+      "profile": {
+        "num_distinct": 645120,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO",
+      "table_comment": "Tabela para armazenamento os lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "DAT_LANCAMENTO",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_RECEITA",
+        "DAT_INCLUSAO",
+        "DAT_VENCIMENTO",
+        "DSC_INFORM_COMPLEMENT"
+      ],
+      "profile": {
+        "num_distinct": 7100,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO",
+      "table_comment": "Tabela para armazenamento os lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "DAT_VENCIMENTO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_INCLUSAO",
+        "DAT_LANCAMENTO",
+        "DSC_INFORM_COMPLEMENT",
+        "NUM_ANO_REFERENCIA"
+      ],
+      "profile": {
+        "num_distinct": 5344,
+        "null_ratio": 0.611808,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO",
+      "table_comment": "Tabela para armazenamento os lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "DSC_INFORM_COMPLEMENT",
+      "data_type": "VARCHAR2(500)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_LANCAMENTO",
+        "DAT_VENCIMENTO",
+        "NUM_ANO_REFERENCIA",
+        "NUM_MES_REFERENCIA"
+      ],
+      "profile": {
+        "num_distinct": 12296,
+        "null_ratio": 0.969434,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO",
+      "table_comment": "Tabela para armazenamento os lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "NUM_ANO_REFERENCIA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_VENCIMENTO",
+        "DSC_INFORM_COMPLEMENT",
+        "NUM_MES_REFERENCIA",
+        "NUM_VERSAO"
+      ],
+      "profile": {
+        "num_distinct": 35,
+        "null_ratio": 0.575655,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO",
+      "table_comment": "Tabela para armazenamento os lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "NUM_MES_REFERENCIA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DSC_INFORM_COMPLEMENT",
+        "NUM_ANO_REFERENCIA",
+        "NUM_VERSAO",
+        "SEQ_DEBITO"
+      ],
+      "profile": {
+        "num_distinct": 12,
+        "null_ratio": 0.575655,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO",
+      "table_comment": "Tabela para armazenamento os lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "NUM_VERSAO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_ANO_REFERENCIA",
+        "NUM_MES_REFERENCIA",
+        "SEQ_DEBITO",
+        "SEQ_DOCUMENTO_CREDITO"
+      ],
+      "profile": {
+        "num_distinct": 13,
+        "null_ratio": 0.021171,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO",
+      "table_comment": "Tabela para armazenamento os lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "SEQ_DEBITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "DEBITO",
+        "column": "SEQ_DEBITO"
+      },
+      "column_neighbors": [
+        "NUM_MES_REFERENCIA",
+        "NUM_VERSAO",
+        "SEQ_DOCUMENTO_CREDITO",
+        "SEQ_LANCAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 91529216,
+        "null_ratio": 0.000366,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO",
+      "table_comment": "Tabela para armazenamento os lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "SEQ_DOCUMENTO_CREDITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "DOCUMENTO_CREDITO",
+        "column": "SEQ_DOCUMENTO_CREDITO"
+      },
+      "column_neighbors": [
+        "NUM_VERSAO",
+        "SEQ_DEBITO",
+        "SEQ_LANCAMENTO",
+        "SEQ_PESSOA"
+      ],
+      "profile": {
+        "num_distinct": 39124992,
+        "null_ratio": 0.431956,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO",
+      "table_comment": "Tabela para armazenamento os lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "SEQ_LANCAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "LANCAMENTO_AUD",
+        "column": "SEQ_LANCAMENTO"
+      },
+      "column_neighbors": [
+        "SEQ_DEBITO",
+        "SEQ_DOCUMENTO_CREDITO",
+        "SEQ_PESSOA",
+        "SEQ_TIPO_LANCAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 254631073,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO",
+      "table_comment": "Tabela para armazenamento os lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "SEQ_PESSOA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DOCUMENTO_CREDITO",
+        "SEQ_LANCAMENTO",
+        "SEQ_TIPO_LANCAMENTO",
+        "VLR_LANCAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 2899968,
+        "null_ratio": 0.05121,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO",
+      "table_comment": "Tabela para armazenamento os lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "SEQ_TIPO_LANCAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "TIPO_LANCAMENTO",
+        "column": "SEQ_TIPO_LANCAMENTO"
+      },
+      "column_neighbors": [
+        "SEQ_LANCAMENTO",
+        "SEQ_PESSOA",
+        "VLR_LANCAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 36,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO",
+      "table_comment": "Tabela para armazenamento os lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "VLR_LANCAMENTO",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_PESSOA",
+        "SEQ_TIPO_LANCAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 780800,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_ATUAL",
+      "table_comment": "",
+      "column_name": "COD_RECEITA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "RECEITA_LEI_DESCONTO",
+        "column": "COD_RECEITA"
+      },
+      "column_neighbors": [
+        "DAT_LANCAMENTO",
+        "DAT_VENCIMENTO"
+      ],
+      "profile": {
+        "num_distinct": 1,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_ATUAL",
+      "table_comment": "",
+      "column_name": "DAT_LANCAMENTO",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_RECEITA",
+        "DAT_VENCIMENTO",
+        "DSC_INFORM_COMPLEMENT"
+      ],
+      "profile": {
+        "num_distinct": 1,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_ATUAL",
+      "table_comment": "",
+      "column_name": "DAT_VENCIMENTO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_RECEITA",
+        "DAT_LANCAMENTO",
+        "DSC_INFORM_COMPLEMENT",
+        "NUM_ANO_REFERENCIA"
+      ],
+      "profile": {
+        "num_distinct": 14,
+        "null_ratio": 0.992985,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_ATUAL",
+      "table_comment": "",
+      "column_name": "DSC_INFORM_COMPLEMENT",
+      "data_type": "VARCHAR2(500)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_LANCAMENTO",
+        "DAT_VENCIMENTO",
+        "NUM_ANO_REFERENCIA",
+        "NUM_MES_REFERENCIA"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": 1.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_ATUAL",
+      "table_comment": "",
+      "column_name": "NUM_ANO_REFERENCIA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_VENCIMENTO",
+        "DSC_INFORM_COMPLEMENT",
+        "NUM_MES_REFERENCIA",
+        "NUM_VERSAO"
+      ],
+      "profile": {
+        "num_distinct": 3,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_ATUAL",
+      "table_comment": "",
+      "column_name": "NUM_MES_REFERENCIA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DSC_INFORM_COMPLEMENT",
+        "NUM_ANO_REFERENCIA",
+        "NUM_VERSAO",
+        "SEQ_DEBITO"
+      ],
+      "profile": {
+        "num_distinct": 8,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_ATUAL",
+      "table_comment": "",
+      "column_name": "NUM_VERSAO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_ANO_REFERENCIA",
+        "NUM_MES_REFERENCIA",
+        "SEQ_DEBITO",
+        "SEQ_DOCUMENTO_CREDITO"
+      ],
+      "profile": {
+        "num_distinct": 1,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_ATUAL",
+      "table_comment": "",
+      "column_name": "SEQ_DEBITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "DEBITO",
+        "column": "SEQ_DEBITO"
+      },
+      "column_neighbors": [
+        "NUM_MES_REFERENCIA",
+        "NUM_VERSAO",
+        "SEQ_DOCUMENTO_CREDITO",
+        "SEQ_LANCAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 5807,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_ATUAL",
+      "table_comment": "",
+      "column_name": "SEQ_DOCUMENTO_CREDITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "DOCUMENTO_CREDITO",
+        "column": "SEQ_DOCUMENTO_CREDITO"
+      },
+      "column_neighbors": [
+        "NUM_VERSAO",
+        "SEQ_DEBITO",
+        "SEQ_LANCAMENTO",
+        "SEQ_PESSOA"
+      ],
+      "profile": {
+        "num_distinct": 1295,
+        "null_ratio": 0.007015,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_ATUAL",
+      "table_comment": "",
+      "column_name": "SEQ_LANCAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "LANCAMENTO",
+        "column": "SEQ_LANCAMENTO"
+      },
+      "column_neighbors": [
+        "SEQ_DEBITO",
+        "SEQ_DOCUMENTO_CREDITO",
+        "SEQ_PESSOA",
+        "SEQ_TIPO_LANCAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 6985,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_ATUAL",
+      "table_comment": "",
+      "column_name": "SEQ_PESSOA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DOCUMENTO_CREDITO",
+        "SEQ_LANCAMENTO",
+        "SEQ_TIPO_LANCAMENTO",
+        "VLR_LANCAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 1192,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_ATUAL",
+      "table_comment": "",
+      "column_name": "SEQ_TIPO_LANCAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "TIPO_LANCAMENTO",
+        "column": "SEQ_TIPO_LANCAMENTO"
+      },
+      "column_neighbors": [
+        "SEQ_LANCAMENTO",
+        "SEQ_PESSOA",
+        "VLR_LANCAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 4,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_ATUAL",
+      "table_comment": "",
+      "column_name": "VLR_LANCAMENTO",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_PESSOA",
+        "SEQ_TIPO_LANCAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 1389,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_AUD",
+      "table_comment": "Tabela para armazenamento da auditoria dos lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "COD_RECEITA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "RECEITA_LEI_DESCONTO",
+        "column": "COD_RECEITA"
+      },
+      "column_neighbors": [
+        "DAT_LANCAMENTO",
+        "DAT_VENCIMENTO"
+      ],
+      "profile": {
+        "num_distinct": 17,
+        "null_ratio": 2e-06,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_AUD",
+      "table_comment": "Tabela para armazenamento da auditoria dos lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "DAT_LANCAMENTO",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_RECEITA",
+        "DAT_VENCIMENTO",
+        "DSC_INFORM_COMPLEMENT"
+      ],
+      "profile": {
+        "num_distinct": 3262,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_AUD",
+      "table_comment": "Tabela para armazenamento da auditoria dos lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "DAT_VENCIMENTO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_RECEITA",
+        "DAT_LANCAMENTO",
+        "DSC_INFORM_COMPLEMENT",
+        "NUM_ANO_REFERENCIA"
+      ],
+      "profile": {
+        "num_distinct": 4062,
+        "null_ratio": 0.906653,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_AUD",
+      "table_comment": "Tabela para armazenamento da auditoria dos lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "DSC_INFORM_COMPLEMENT",
+      "data_type": "VARCHAR2(500)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_LANCAMENTO",
+        "DAT_VENCIMENTO",
+        "NUM_ANO_REFERENCIA",
+        "NUM_MES_REFERENCIA"
+      ],
+      "profile": {
+        "num_distinct": 10742,
+        "null_ratio": 0.986707,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_AUD",
+      "table_comment": "Tabela para armazenamento da auditoria dos lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "NUM_ANO_REFERENCIA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_VENCIMENTO",
+        "DSC_INFORM_COMPLEMENT",
+        "NUM_MES_REFERENCIA",
+        "NUM_REV"
+      ],
+      "profile": {
+        "num_distinct": 33,
+        "null_ratio": 0.889673,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_AUD",
+      "table_comment": "Tabela para armazenamento da auditoria dos lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "NUM_MES_REFERENCIA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DSC_INFORM_COMPLEMENT",
+        "NUM_ANO_REFERENCIA",
+        "NUM_REV",
+        "NUM_VERSAO"
+      ],
+      "profile": {
+        "num_distinct": 12,
+        "null_ratio": 0.889673,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_AUD",
+      "table_comment": "Tabela para armazenamento da auditoria dos lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "NUM_REV",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "DEBITO_AUD",
+        "column": "NUM_REV"
+      },
+      "column_neighbors": [
+        "NUM_ANO_REFERENCIA",
+        "NUM_MES_REFERENCIA",
+        "NUM_VERSAO",
+        "SEQ_DEBITO"
+      ],
+      "profile": {
+        "num_distinct": 55623680,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_AUD",
+      "table_comment": "Tabela para armazenamento da auditoria dos lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "NUM_VERSAO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_MES_REFERENCIA",
+        "NUM_REV",
+        "SEQ_DEBITO",
+        "SEQ_DOCUMENTO_CREDITO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": 1.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_AUD",
+      "table_comment": "Tabela para armazenamento da auditoria dos lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "SEQ_DEBITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "DEBITO",
+        "column": "SEQ_DEBITO"
+      },
+      "column_neighbors": [
+        "NUM_REV",
+        "NUM_VERSAO",
+        "SEQ_DOCUMENTO_CREDITO",
+        "SEQ_LANCAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 75341824,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_AUD",
+      "table_comment": "Tabela para armazenamento da auditoria dos lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "SEQ_DOCUMENTO_CREDITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "DOCUMENTO_CREDITO",
+        "column": "SEQ_DOCUMENTO_CREDITO"
+      },
+      "column_neighbors": [
+        "NUM_VERSAO",
+        "SEQ_DEBITO",
+        "SEQ_LANCAMENTO",
+        "SEQ_PESSOA"
+      ],
+      "profile": {
+        "num_distinct": 36388864,
+        "null_ratio": 0.158438,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_AUD",
+      "table_comment": "Tabela para armazenamento da auditoria dos lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "SEQ_LANCAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "LANCAMENTO",
+        "column": "SEQ_LANCAMENTO"
+      },
+      "column_neighbors": [
+        "SEQ_DEBITO",
+        "SEQ_DOCUMENTO_CREDITO",
+        "SEQ_PESSOA",
+        "SEQ_TIPO_LANCAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 157368320,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_AUD",
+      "table_comment": "Tabela para armazenamento da auditoria dos lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "SEQ_PESSOA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DOCUMENTO_CREDITO",
+        "SEQ_LANCAMENTO",
+        "SEQ_TIPO_LANCAMENTO",
+        "TIP_REVTYPE"
+      ],
+      "profile": {
+        "num_distinct": 2566144,
+        "null_ratio": 0.064199,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_AUD",
+      "table_comment": "Tabela para armazenamento da auditoria dos lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "SEQ_TIPO_LANCAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "TIPO_LANCAMENTO",
+        "column": "SEQ_TIPO_LANCAMENTO"
+      },
+      "column_neighbors": [
+        "SEQ_LANCAMENTO",
+        "SEQ_PESSOA",
+        "TIP_REVTYPE",
+        "VLR_LANCAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 34,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_AUD",
+      "table_comment": "Tabela para armazenamento da auditoria dos lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "TIP_REVTYPE",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_PESSOA",
+        "SEQ_TIPO_LANCAMENTO",
+        "VLR_LANCAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 3,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LANCAMENTO_AUD",
+      "table_comment": "Tabela para armazenamento da auditoria dos lançamentos de débito ou crédito na base de dados da SEFAZ.",
+      "column_name": "VLR_LANCAMENTO",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_TIPO_LANCAMENTO",
+        "TIP_REVTYPE"
+      ],
+      "profile": {
+        "num_distinct": 452096,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LEI_DESCONTO",
+      "table_comment": "Leis que deram origem aos descontos",
+      "column_name": "COD_SISTEMA_ORIGEM",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_FIM",
+        "DAT_INICIO"
+      ],
+      "profile": {
+        "num_distinct": 4,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LEI_DESCONTO",
+      "table_comment": "Leis que deram origem aos descontos",
+      "column_name": "DAT_FIM",
+      "data_type": "TIMESTAMP(6)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_SISTEMA_ORIGEM",
+        "DAT_INICIO",
+        "DSC_INFO_COMPLEMENTAR"
+      ],
+      "profile": {
+        "num_distinct": 5,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LEI_DESCONTO",
+      "table_comment": "Leis que deram origem aos descontos",
+      "column_name": "DAT_INICIO",
+      "data_type": "TIMESTAMP(6)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_SISTEMA_ORIGEM",
+        "DAT_FIM",
+        "DSC_INFO_COMPLEMENTAR",
+        "DSC_PERIODO_REFERENCIA_FIM"
+      ],
+      "profile": {
+        "num_distinct": 5,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LEI_DESCONTO",
+      "table_comment": "Leis que deram origem aos descontos",
+      "column_name": "DSC_INFO_COMPLEMENTAR",
+      "data_type": "VARCHAR2(200)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_FIM",
+        "DAT_INICIO",
+        "DSC_PERIODO_REFERENCIA_FIM",
+        "DSC_PERIODO_REFERENCIA_INICIO"
+      ],
+      "profile": {
+        "num_distinct": 1,
+        "null_ratio": 0.5,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LEI_DESCONTO",
+      "table_comment": "Leis que deram origem aos descontos",
+      "column_name": "DSC_PERIODO_REFERENCIA_FIM",
+      "data_type": "VARCHAR2(7)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_INICIO",
+        "DSC_INFO_COMPLEMENTAR",
+        "DSC_PERIODO_REFERENCIA_INICIO",
+        "NUM_LEI"
+      ],
+      "profile": {
+        "num_distinct": 4,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LEI_DESCONTO",
+      "table_comment": "Leis que deram origem aos descontos",
+      "column_name": "DSC_PERIODO_REFERENCIA_INICIO",
+      "data_type": "VARCHAR2(7)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DSC_INFO_COMPLEMENTAR",
+        "DSC_PERIODO_REFERENCIA_FIM",
+        "NUM_LEI",
+        "SEQ_LEI_DESCONTO"
+      ],
+      "profile": {
+        "num_distinct": 1,
+        "null_ratio": 0.875,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LEI_DESCONTO",
+      "table_comment": "Leis que deram origem aos descontos",
+      "column_name": "NUM_LEI",
+      "data_type": "VARCHAR2(256)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DSC_PERIODO_REFERENCIA_FIM",
+        "DSC_PERIODO_REFERENCIA_INICIO",
+        "SEQ_LEI_DESCONTO",
+        "TIP_CRITICA_CNAE"
+      ],
+      "profile": {
+        "num_distinct": 5,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LEI_DESCONTO",
+      "table_comment": "Leis que deram origem aos descontos",
+      "column_name": "SEQ_LEI_DESCONTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "CNAE_LEI_DESCONTO",
+        "column": "SEQ_LEI_DESCONTO"
+      },
+      "column_neighbors": [
+        "DSC_PERIODO_REFERENCIA_INICIO",
+        "NUM_LEI",
+        "TIP_CRITICA_CNAE",
+        "TIP_CRITICA_RECEITA"
+      ],
+      "profile": {
+        "num_distinct": 8,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LEI_DESCONTO",
+      "table_comment": "Leis que deram origem aos descontos",
+      "column_name": "TIP_CRITICA_CNAE",
+      "data_type": "CHAR(1)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_LEI",
+        "SEQ_LEI_DESCONTO",
+        "TIP_CRITICA_RECEITA"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LEI_DESCONTO",
+      "table_comment": "Leis que deram origem aos descontos",
+      "column_name": "TIP_CRITICA_RECEITA",
+      "data_type": "CHAR(1)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_LEI_DESCONTO",
+        "TIP_CRITICA_CNAE"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LINHA_ARQUIVO_ETL",
+      "table_comment": "Registros dos arquivos ETL",
+      "column_name": "DSC_CONTEUDO_LINHA_ARQUIVO",
+      "data_type": "VARCHAR2(4000)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_ARQUIVO_ETL",
+        "SEQ_LINHA_ARQUIVO_ETL"
+      ],
+      "profile": {
+        "num_distinct": 7138304,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LINHA_ARQUIVO_ETL",
+      "table_comment": "Registros dos arquivos ETL",
+      "column_name": "SEQ_ARQUIVO_ETL",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "ARQUIVO_ETL",
+        "column": "SEQ_ARQUIVO_ETL"
+      },
+      "column_neighbors": [
+        "DSC_CONTEUDO_LINHA_ARQUIVO",
+        "SEQ_LINHA_ARQUIVO_ETL"
+      ],
+      "profile": {
+        "num_distinct": 3975,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "LINHA_ARQUIVO_ETL",
+      "table_comment": "Registros dos arquivos ETL",
+      "column_name": "SEQ_LINHA_ARQUIVO_ETL",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DSC_CONTEUDO_LINHA_ARQUIVO",
+        "SEQ_ARQUIVO_ETL"
+      ],
+      "profile": {
+        "num_distinct": 55074321,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "MIGRACAO_LEGADO",
+      "table_comment": "Tabela que será populada com os dados de IPVA dos veículos que tem saldo devedor ou credor nos anos anteriores a 2018 . \nEsta tabela servirá como base para a migração destes dados para o novo sistema IPVA (Downsizing)",
+      "column_name": "COD_CHASSI_VEICULO",
+      "data_type": "VARCHAR2(25)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_DEVEDOR",
+        "COD_INSCRICAO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": 1.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "MIGRACAO_LEGADO",
+      "table_comment": "Tabela que será populada com os dados de IPVA dos veículos que tem saldo devedor ou credor nos anos anteriores a 2018 . \nEsta tabela servirá como base para a migração destes dados para o novo sistema IPVA (Downsizing)",
+      "column_name": "COD_DEVEDOR",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_CHASSI_VEICULO",
+        "COD_INSCRICAO",
+        "COD_LANCAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 27188,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "MIGRACAO_LEGADO",
+      "table_comment": "Tabela que será populada com os dados de IPVA dos veículos que tem saldo devedor ou credor nos anos anteriores a 2018 . \nEsta tabela servirá como base para a migração destes dados para o novo sistema IPVA (Downsizing)",
+      "column_name": "COD_INSCRICAO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_CHASSI_VEICULO",
+        "COD_DEVEDOR",
+        "COD_LANCAMENTO",
+        "COD_RECEITA"
+      ],
+      "profile": {
+        "num_distinct": 11355,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "MIGRACAO_LEGADO",
+      "table_comment": "Tabela que será populada com os dados de IPVA dos veículos que tem saldo devedor ou credor nos anos anteriores a 2018 . \nEsta tabela servirá como base para a migração destes dados para o novo sistema IPVA (Downsizing)",
+      "column_name": "COD_LANCAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_DEVEDOR",
+        "COD_INSCRICAO",
+        "COD_RECEITA",
+        "DAT_INSC_PARC"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "MIGRACAO_LEGADO",
+      "table_comment": "Tabela que será populada com os dados de IPVA dos veículos que tem saldo devedor ou credor nos anos anteriores a 2018 . \nEsta tabela servirá como base para a migração destes dados para o novo sistema IPVA (Downsizing)",
+      "column_name": "COD_RECEITA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "RECEITA_LEI_DESCONTO",
+        "column": "COD_RECEITA"
+      },
+      "column_neighbors": [
+        "COD_INSCRICAO",
+        "COD_LANCAMENTO",
+        "DAT_INSC_PARC",
+        "DAT_LANCAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 12,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "MIGRACAO_LEGADO",
+      "table_comment": "Tabela que será populada com os dados de IPVA dos veículos que tem saldo devedor ou credor nos anos anteriores a 2018 . \nEsta tabela servirá como base para a migração destes dados para o novo sistema IPVA (Downsizing)",
+      "column_name": "DAT_INSC_PARC",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_LANCAMENTO",
+        "COD_RECEITA",
+        "DAT_LANCAMENTO",
+        "DAT_VENCIMENTO"
+      ],
+      "profile": {
+        "num_distinct": 2225,
+        "null_ratio": 0.789936,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "MIGRACAO_LEGADO",
+      "table_comment": "Tabela que será populada com os dados de IPVA dos veículos que tem saldo devedor ou credor nos anos anteriores a 2018 . \nEsta tabela servirá como base para a migração destes dados para o novo sistema IPVA (Downsizing)",
+      "column_name": "DAT_LANCAMENTO",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_RECEITA",
+        "DAT_INSC_PARC",
+        "DAT_VENCIMENTO",
+        "NUM_ANO_REFERENCIA"
+      ],
+      "profile": {
+        "num_distinct": 2835,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "MIGRACAO_LEGADO",
+      "table_comment": "Tabela que será populada com os dados de IPVA dos veículos que tem saldo devedor ou credor nos anos anteriores a 2018 . \nEsta tabela servirá como base para a migração destes dados para o novo sistema IPVA (Downsizing)",
+      "column_name": "DAT_VENCIMENTO",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_INSC_PARC",
+        "DAT_LANCAMENTO",
+        "NUM_ANO_REFERENCIA",
+        "NUM_DOCUMENTO_ORIGEM"
+      ],
+      "profile": {
+        "num_distinct": 3002,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "MIGRACAO_LEGADO",
+      "table_comment": "Tabela que será populada com os dados de IPVA dos veículos que tem saldo devedor ou credor nos anos anteriores a 2018 . \nEsta tabela servirá como base para a migração destes dados para o novo sistema IPVA (Downsizing)",
+      "column_name": "NUM_ANO_REFERENCIA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_LANCAMENTO",
+        "DAT_VENCIMENTO",
+        "NUM_DOCUMENTO_ORIGEM",
+        "NUM_MES_REFERENCIA"
+      ],
+      "profile": {
+        "num_distinct": 24,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "MIGRACAO_LEGADO",
+      "table_comment": "Tabela que será populada com os dados de IPVA dos veículos que tem saldo devedor ou credor nos anos anteriores a 2018 . \nEsta tabela servirá como base para a migração destes dados para o novo sistema IPVA (Downsizing)",
+      "column_name": "NUM_DOCUMENTO_ORIGEM",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_VENCIMENTO",
+        "NUM_ANO_REFERENCIA",
+        "NUM_MES_REFERENCIA",
+        "NUM_PARCELA"
+      ],
+      "profile": {
+        "num_distinct": 180,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "MIGRACAO_LEGADO",
+      "table_comment": "Tabela que será populada com os dados de IPVA dos veículos que tem saldo devedor ou credor nos anos anteriores a 2018 . \nEsta tabela servirá como base para a migração destes dados para o novo sistema IPVA (Downsizing)",
+      "column_name": "NUM_MES_REFERENCIA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_ANO_REFERENCIA",
+        "NUM_DOCUMENTO_ORIGEM",
+        "NUM_PARCELA",
+        "SEQ_DEBITO_AIX"
+      ],
+      "profile": {
+        "num_distinct": 12,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "MIGRACAO_LEGADO",
+      "table_comment": "Tabela que será populada com os dados de IPVA dos veículos que tem saldo devedor ou credor nos anos anteriores a 2018 . \nEsta tabela servirá como base para a migração destes dados para o novo sistema IPVA (Downsizing)",
+      "column_name": "NUM_PARCELA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_DOCUMENTO_ORIGEM",
+        "NUM_MES_REFERENCIA",
+        "SEQ_DEBITO_AIX",
+        "SEQ_DEBITO_AIX_PARC"
+      ],
+      "profile": {
+        "num_distinct": 1,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "MIGRACAO_LEGADO",
+      "table_comment": "Tabela que será populada com os dados de IPVA dos veículos que tem saldo devedor ou credor nos anos anteriores a 2018 . \nEsta tabela servirá como base para a migração destes dados para o novo sistema IPVA (Downsizing)",
+      "column_name": "SEQ_DEBITO_AIX",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_MES_REFERENCIA",
+        "NUM_PARCELA",
+        "SEQ_DEBITO_AIX_PARC",
+        "SEQ_PARCELAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 623616,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "MIGRACAO_LEGADO",
+      "table_comment": "Tabela que será populada com os dados de IPVA dos veículos que tem saldo devedor ou credor nos anos anteriores a 2018 . \nEsta tabela servirá como base para a migração destes dados para o novo sistema IPVA (Downsizing)",
+      "column_name": "SEQ_DEBITO_AIX_PARC",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_PARCELA",
+        "SEQ_DEBITO_AIX",
+        "SEQ_PARCELAMENTO",
+        "STA_SITUACAO"
+      ],
+      "profile": {
+        "num_distinct": 88624,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "MIGRACAO_LEGADO",
+      "table_comment": "Tabela que será populada com os dados de IPVA dos veículos que tem saldo devedor ou credor nos anos anteriores a 2018 . \nEsta tabela servirá como base para a migração destes dados para o novo sistema IPVA (Downsizing)",
+      "column_name": "SEQ_PARCELAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DEBITO_AIX",
+        "SEQ_DEBITO_AIX_PARC",
+        "STA_SITUACAO",
+        "TIP_DEBITO"
+      ],
+      "profile": {
+        "num_distinct": 10447,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "MIGRACAO_LEGADO",
+      "table_comment": "Tabela que será populada com os dados de IPVA dos veículos que tem saldo devedor ou credor nos anos anteriores a 2018 . \nEsta tabela servirá como base para a migração destes dados para o novo sistema IPVA (Downsizing)",
+      "column_name": "STA_SITUACAO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DEBITO_AIX_PARC",
+        "SEQ_PARCELAMENTO",
+        "TIP_DEBITO",
+        "TIP_DEVEDOR"
+      ],
+      "profile": {
+        "num_distinct": 11,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "MIGRACAO_LEGADO",
+      "table_comment": "Tabela que será populada com os dados de IPVA dos veículos que tem saldo devedor ou credor nos anos anteriores a 2018 . \nEsta tabela servirá como base para a migração destes dados para o novo sistema IPVA (Downsizing)",
+      "column_name": "TIP_DEBITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_PARCELAMENTO",
+        "STA_SITUACAO",
+        "TIP_DEVEDOR",
+        "VLR_INSC_PARC"
+      ],
+      "profile": {
+        "num_distinct": 3,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "MIGRACAO_LEGADO",
+      "table_comment": "Tabela que será populada com os dados de IPVA dos veículos que tem saldo devedor ou credor nos anos anteriores a 2018 . \nEsta tabela servirá como base para a migração destes dados para o novo sistema IPVA (Downsizing)",
+      "column_name": "TIP_DEVEDOR",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "STA_SITUACAO",
+        "TIP_DEBITO",
+        "VLR_INSC_PARC",
+        "VLR_LANCAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "MIGRACAO_LEGADO",
+      "table_comment": "Tabela que será populada com os dados de IPVA dos veículos que tem saldo devedor ou credor nos anos anteriores a 2018 . \nEsta tabela servirá como base para a migração destes dados para o novo sistema IPVA (Downsizing)",
+      "column_name": "VLR_INSC_PARC",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "TIP_DEBITO",
+        "TIP_DEVEDOR",
+        "VLR_LANCAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 81352,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "MIGRACAO_LEGADO",
+      "table_comment": "Tabela que será populada com os dados de IPVA dos veículos que tem saldo devedor ou credor nos anos anteriores a 2018 . \nEsta tabela servirá como base para a migração destes dados para o novo sistema IPVA (Downsizing)",
+      "column_name": "VLR_LANCAMENTO",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "TIP_DEVEDOR",
+        "VLR_INSC_PARC"
+      ],
+      "profile": {
+        "num_distinct": 392832,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "RECEITA_LEI_DESCONTO",
+      "table_comment": "Receitas relacionadas na Lei dos descontos",
+      "column_name": "COD_RECEITA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_LEI_DESCONTO"
+      ],
+      "profile": {
+        "num_distinct": 7,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "RECEITA_LEI_DESCONTO",
+      "table_comment": "Receitas relacionadas na Lei dos descontos",
+      "column_name": "SEQ_LEI_DESCONTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "CNAE_LEI_DESCONTO",
+        "column": "SEQ_LEI_DESCONTO"
+      },
+      "column_neighbors": [
+        "COD_RECEITA"
+      ],
+      "profile": {
+        "num_distinct": 8,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "TIPO_LANCAMENTO",
+      "table_comment": "Tabela com as informações do tipo de lançamentos existentes.",
+      "column_name": "COD_LANCAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DSC_LANCAMENTO",
+        "SEQ_TIPO_LANCAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 48,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "TIPO_LANCAMENTO",
+      "table_comment": "Tabela com as informações do tipo de lançamentos existentes.",
+      "column_name": "DSC_LANCAMENTO",
+      "data_type": "VARCHAR2(120)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_LANCAMENTO",
+        "SEQ_TIPO_LANCAMENTO",
+        "TIP_LANCAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 45,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "TIPO_LANCAMENTO",
+      "table_comment": "Tabela com as informações do tipo de lançamentos existentes.",
+      "column_name": "SEQ_TIPO_LANCAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_LANCAMENTO",
+        "DSC_LANCAMENTO",
+        "TIP_LANCAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 48,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONTA_CORRENTE",
+      "table_name": "TIPO_LANCAMENTO",
+      "table_comment": "Tabela com as informações do tipo de lançamentos existentes.",
+      "column_name": "TIP_LANCAMENTO",
+      "data_type": "VARCHAR2(1)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DSC_LANCAMENTO",
+        "SEQ_TIPO_LANCAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    }
+  ]
+}

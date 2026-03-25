@@ -6,6 +6,7 @@ from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
+from dataquality.domain.config.llm_comment_config import LLMCommentConfig
 from dataquality.domain.config.validation_config import NamedLengthRule, TypeNamingRuleConfig, ValidationConfig
 
 
@@ -70,6 +71,17 @@ def build_validation_config(raw: dict[str, Any] | None) -> ValidationConfig | No
     type_kwargs["named_length_rules"] = named_rules
     validation_kwargs["type_naming"] = TypeNamingRuleConfig(**type_kwargs)
     return ValidationConfig(**validation_kwargs)
+
+
+def build_llm_comment_config(raw: dict[str, Any] | None) -> LLMCommentConfig | None:
+    if not raw:
+        return None
+
+    defaults = asdict(LLMCommentConfig())
+    kwargs: dict[str, Any] = {}
+    for key, default in defaults.items():
+        kwargs[key] = get_config_value(raw, key, default)
+    return LLMCommentConfig(**kwargs)
 
 
 def build_data_quality_config_template() -> dict[str, Any]:
