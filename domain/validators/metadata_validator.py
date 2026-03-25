@@ -151,8 +151,10 @@ class MetadataValidator:
 
         for col in ("OWNER", "TABLE_NAME", "COLUMN_NAME", "DATA_TYPE"):
             self.df[col] = self.df[col].astype(str).str.strip()
-        if "COMMENTS" in self.df.columns:
-            self.df["COMMENTS"] = self.df["COMMENTS"].astype(str)
+        if "COL_COMMENTS" in self.df.columns:
+            self.df["COL_COMMENTS"] = self.df["COL_COMMENTS"].astype(str)
+        if "TAB_COMMENTS" in self.df.columns:
+            self.df["TAB_COMMENTS"] = self.df["TAB_COMMENTS"].astype(str)
 
         self.number_tables = self.df["TABLE_NAME"].nunique()
         self.number_columns = self.df.shape[0]
@@ -165,6 +167,7 @@ class MetadataValidator:
         self.list_col_pref_no_standard: List[Dict[str, Any]] = []
         self.list_col_name_too_long: List[Dict[str, Any]] = []
         self.list_col_comment_missing: List[Dict[str, Any]] = []
+        self.list_table_comment_missing: List[Dict[str, Any]] = []
         self.list_pk_bad_prefix: List[Dict[str, Any]] = []
         self.list_fk_bad_prefix: List[Dict[str, Any]] = []
         self.list_unique_bad_suffix: List[Dict[str, Any]] = []
@@ -175,6 +178,7 @@ class MetadataValidator:
 
         self.number_tables_without_pk = 0
         self.number_tables_without_pk_or_uk = 0
+        self.number_tables_without_comments = 0
         self.number_identifier_like_columns = 0
         self.number_identifier_like_columns_without_protection = 0
         self.number_type_naming_candidates = 0
@@ -214,6 +218,9 @@ class MetadataValidator:
 
     def get_number_tables_without_pk_or_uk(self) -> int:
         return int(self.number_tables_without_pk_or_uk)
+
+    def get_number_tables_without_comments(self) -> int:
+        return int(self.number_tables_without_comments)
 
     def get_number_identifier_like_columns(self) -> int:
         return int(self.number_identifier_like_columns)
@@ -506,6 +513,26 @@ class MetadataValidator:
                 }
             )
 
+        if "TAB_COMMENTS" in self.df.columns:
+            table_comments = (
+                self.df[["OWNER", "TABLE_NAME", "TAB_COMMENTS"]]
+                .drop_duplicates(subset=["OWNER", "TABLE_NAME"])
+            )
+            missing_table_comment = self._missing_text(table_comments["TAB_COMMENTS"])
+            self.number_tables_without_comments = int(missing_table_comment.sum())
+            for _, row in table_comments[missing_table_comment].iterrows():
+                self.list_table_comment_missing.append(
+                    {
+                        "rule": "MQME027",
+                        "desc": "Tables without comments",
+                        "owner": row["OWNER"],
+                        "table": row["TABLE_NAME"],
+                        "data_type": "",
+                    }
+                )
+        else:
+            self.number_tables_without_comments = 0
+
         too_long_mask = self.df["TABLE_NAME"].str.len() > self.cfg.max_table_len
         for _, row in self.df[too_long_mask].drop_duplicates(subset=["OWNER", "TABLE_NAME"]).iterrows():
             self.list_tab_name_too_long.append(
@@ -550,7 +577,7 @@ class MetadataValidator:
                 }
             )
 
-        missing_comment = self._missing_text(self.df["COMMENTS"])
+        missing_comment = self._missing_text(self.df["COL_COMMENTS"])
         for _, row in self.df[missing_comment].iterrows():
             self.list_col_comment_missing.append(
                 {
@@ -921,6 +948,7 @@ class MetadataValidator:
         buckets = [
             self.list_tab_plural,
             self.list_tab_name_too_long,
+            self.list_table_comment_missing,
             self.list_col_pref_no_standard,
             self.list_col_name_too_long,
             self.list_col_comment_missing,

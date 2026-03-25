@@ -29,6 +29,7 @@ class MetadataMetricSpec:
     #           by PK or UK       
     # MQID013   Compliance between type and naming  Consistency         The table has columns with names that suggest a certain data type (e.g., "date", "id", "amount") 
     #           convention                                              and the actual data type of the column is consistent with those expectations.
+    # MQID014   Tables with comments                Completeness        Measures whether table-level documentation has been filled in.
     
 METADATA_INDICATOR_SPECS: tuple[MetadataMetricSpec, ...] = (
     MetadataMetricSpec("MQID001", "Table names in singular", "Consistency", "MQME012", "MQME001"),
@@ -44,4 +45,5 @@ METADATA_INDICATOR_SPECS: tuple[MetadataMetricSpec, ...] = (
     MetadataMetricSpec("MQID011", "Tables with at least one integrity constraint", "Consistency", "MQME022", "MQME001"),
     MetadataMetricSpec("MQID012", "Identifier-like columns protected by PK or UK", "Consistency", "MQME024", "MQME023"),
     MetadataMetricSpec("MQID013", "Compliance between type and naming convention", "Consistency", "MQME026", "MQME025"),
+    MetadataMetricSpec("MQID014", "Tables with comments", "Completeness", "MQME027", "MQME001"),
 )

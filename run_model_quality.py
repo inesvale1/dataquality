@@ -42,7 +42,7 @@ def _parse_bool(raw_value: str | bool) -> bool:
     value = str(raw_value).strip().lower()
     if value in {"1", "true", "yes", "on", "y", "s", "verdade"}:
         return True
-    if value in {"0", "false", "no", "off", "n"}, "falso":
+    if value in {"0", "false", "no", "off", "n", "falso"}:
         return False
     raise ValueError(f"Invalid boolean value: {raw_value}")
 
@@ -57,7 +57,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Run Data Model Quality validations and metrics.")
     parser.add_argument("--config-json", default=None, type=str, help="Path to a JSON file with input arguments and validation settings.")
     parser.add_argument("--print-config-template", action="store_true", help="Print a JSON template with supported input arguments and exit.")
-    parser.add_argument("--base-folder", default=get_config_value(json_config, "base_folder", template_config["base_folder"]), type=str, help="Folder that contains schema subfolders with metadados_*.csv output files.")
+    parser.add_argument("--base-folder", default=get_config_value(json_config, "base_folder", template_config["base_folder"]), type=str, help="Folder that contains either metadados.csv or metadados_<schema>.csv files.")
     parser.add_argument("--telemetry-output", default=get_config_value(json_config, "telemetry_output", template_config.get("telemetry_output")), type=str, help="Optional path to write telemetry JSON for the execution.")
     parser.add_argument("--telemetry-enabled", default=get_config_value(json_config, "telemetry_enabled", template_config.get("telemetry_enabled", False)), type=_parse_bool, help="Enable or disable telemetry JSON output. Use true/false.")
     parser.add_argument("--delete-cols", nargs="*", default=get_config_value(json_config, "delete_cols", template_config["delete_cols"]), help="Columns to drop after loading.")

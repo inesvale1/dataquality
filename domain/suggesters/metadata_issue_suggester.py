@@ -89,6 +89,8 @@ class MetadataIssueSuggester:
             suggested_value, source, confidence = self._suggest_column_prefix(column, table, column_type)
         elif rule == "MQME008":
             suggested_value, source, confidence = self._suggest_comment(table, column, column_type)
+        elif rule == "MQME027":
+            suggested_value, source, confidence = self._suggest_table_comment(table)
         elif rule == "MQME012":
             suggested_value, source, confidence = self._suggest_singular_table(table)
         elif rule == "MQME013":
@@ -209,6 +211,9 @@ class MetadataIssueSuggester:
         if rule == "MQME008":
             comment = suggested_value.replace("'", "''")
             return f"COMMENT ON COLUMN {qualified_table}.{column} IS '{comment}';"
+        if rule == "MQME027":
+            comment = suggested_value.replace("'", "''")
+            return f"COMMENT ON TABLE {qualified_table} IS '{comment}';"
         if rule in ("MQME009", "MQME010", "MQME011"):
             if not constraint_name:
                 return ""
@@ -349,3 +354,7 @@ class MetadataIssueSuggester:
             return "evento"
         parts = [p.lower() for p in table.split("_") if p]
         return " ".join(parts) if parts else "evento"
+
+    def _suggest_table_comment(self, table: str) -> Tuple[str, str, float]:
+        context = self._table_context(table)
+        return f"Armazena informacoes de {context}.", "RULES", 0.75

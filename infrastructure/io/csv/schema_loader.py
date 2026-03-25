@@ -3,7 +3,6 @@ from __future__ import annotations
 import os
 import re
 from pathlib import Path
-from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
 
 import pandas as pd
@@ -35,7 +34,16 @@ class schemaLoader:
         "IS_UNIQUE",
     ]
 
-    STRING_COLS = ["OWNER", "TABLE_NAME", "COLUMN_NAME", "DATA_TYPE", "COMMENTS", "CONSTRAINTS", "DUPLICATED"]
+    STRING_COLS = [
+        "OWNER",
+        "TABLE_NAME",
+        "COLUMN_NAME",
+        "DATA_TYPE",
+        "COL_COMMENTS",
+        "TAB_COMMENTS",
+        "CONSTRAINTS",
+        "DUPLICATED",
+    ]
     INT_COLS = [
         "NUM_ROWS",
         "COLUMN_ID",
@@ -65,11 +73,14 @@ class schemaLoader:
     # ---------------- internal helpers ----------------
 
     def _read_csv_tree(self) -> Dict[str, pd.DataFrame]:
-        telemetry = get_current_telemetry()
         if not self.base_folder.exists():
             raise FileNotFoundError(f"Base folder not found: {self.base_folder}")
 
         dfs: Dict[str, pd.DataFrame] = {}
+        unified_csv = self.base_folder / "metadados.csv"
+        if unified_csv.exists():
+            df_all = self._load_and_typed_file(unified_csv)
+            return self._split_dataframe_by_schema(df_all)
 
         # Agora o padrão aceita apenas CSV
         pattern = re.compile(r"^metadados_(.+)\.csv$", flags=re.IGNORECASE)
@@ -95,21 +106,43 @@ class schemaLoader:
 
                 df = self._load_and_typed_file(csv_path)
 
-                if self.columns_to_delete:
-                    df = df.drop(
-                        columns=[c for c in self.columns_to_delete if c in df.columns],
-                        errors="ignore"
-                    )
-
+                df = self._finalize_dataframe(df)
                 dfs[suffix] = df
-                if telemetry is not None:
-                    telemetry.increment("metadata_files_loaded")
-                    telemetry.increment("metadata_rows_loaded", int(df.shape[0]))
-                    telemetry.increment("metadata_loader_tables_detected", int(df["TABLE_NAME"].nunique()), schema=suffix)
-                    telemetry.set_gauge("input_columns", int(df.shape[0]), schema=suffix)
-                    telemetry.set_gauge("input_tables", int(df["TABLE_NAME"].nunique()), schema=suffix)
+                self._register_dataframe_telemetry(df, suffix)
 
         return dfs
+
+    def _split_dataframe_by_schema(self, df_all: pd.DataFrame) -> Dict[str, pd.DataFrame]:
+        owners = df_all["OWNER"].astype(str).str.strip()
+        valid_mask = owners.ne("") & owners.str.lower().ne("nan")
+        if not valid_mask.any():
+            raise ValueError("Unified metadata file does not contain valid OWNER values.")
+
+        dfs: Dict[str, pd.DataFrame] = {}
+        for owner_name, owner_df in df_all.loc[valid_mask].groupby(owners.loc[valid_mask].str.upper(), sort=True):
+            suffix = self._sanitize_suffix(str(owner_name))
+            df = self._finalize_dataframe(owner_df.copy())
+            dfs[suffix] = df
+            self._register_dataframe_telemetry(df, suffix)
+        return dfs
+
+    def _finalize_dataframe(self, df: pd.DataFrame) -> pd.DataFrame:
+        if self.columns_to_delete:
+            df = df.drop(
+                columns=[c for c in self.columns_to_delete if c in df.columns],
+                errors="ignore"
+            )
+        return df
+
+    def _register_dataframe_telemetry(self, df: pd.DataFrame, schema_name: str) -> None:
+        telemetry = get_current_telemetry()
+        if telemetry is None:
+            return
+        telemetry.increment("metadata_files_loaded")
+        telemetry.increment("metadata_rows_loaded", int(df.shape[0]))
+        telemetry.increment("metadata_loader_tables_detected", int(df["TABLE_NAME"].nunique()), schema=schema_name)
+        telemetry.set_gauge("input_columns", int(df.shape[0]), schema=schema_name)
+        telemetry.set_gauge("input_tables", int(df["TABLE_NAME"].nunique()), schema=schema_name)
 
     def _sanitize_suffix(self, suffix: str) -> str:
         return re.sub(r"[^0-9a-zA-Z_]+", "_", suffix).strip("_").lower()
@@ -152,6 +185,11 @@ class schemaLoader:
         #print(path)
         # Normalize headers to UPPER + strip
         df.columns = [c.strip().upper() for c in df.columns]
+
+        if "COL_COMMENTS" not in df.columns:
+            df["COL_COMMENTS"] = pd.NA
+        if "TAB_COMMENTS" not in df.columns:
+            df["TAB_COMMENTS"] = pd.NA
 
         # Normalizar: converter para string e maiusculas
         df['CONSTRAINTS_NORM'] = df['CONSTRAINTS'].astype(str).str.upper().fillna("")
