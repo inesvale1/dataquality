@@ -11,7 +11,9 @@ if __package__ in {None, ""}:
         sys.path.insert(0, str(package_parent))
 
 from dataquality.app.use_cases.run_model_quality import RunOptions, run_model_quality
+from dataquality.domain.config.llm_comment_config import LLMCommentConfig
 from dataquality.shared.runtime_config import (
+    build_llm_comment_config,
     build_model_quality_config_template,
     build_validation_config,
     get_config_value,
@@ -60,6 +62,7 @@ def main() -> None:
     parser.add_argument("--base-folder", default=get_config_value(json_config, "base_folder", template_config["base_folder"]), type=str, help="Folder that contains either metadados.csv or metadados_<schema>.csv files.")
     parser.add_argument("--telemetry-output", default=get_config_value(json_config, "telemetry_output", template_config.get("telemetry_output")), type=str, help="Optional path to write telemetry JSON for the execution.")
     parser.add_argument("--telemetry-enabled", default=get_config_value(json_config, "telemetry_enabled", template_config.get("telemetry_enabled", False)), type=_parse_bool, help="Enable or disable telemetry JSON output. Use true/false.")
+    parser.add_argument("--save-context-json", default=get_config_value(json_config, "save_context_json", template_config.get("save_context_json", True)), type=_parse_bool, help="Enable or disable writing context_<schema>.json files. Use true/false.")
     parser.add_argument("--delete-cols", nargs="*", default=get_config_value(json_config, "delete_cols", template_config["delete_cols"]), help="Columns to drop after loading.")
     parser.add_argument("--plural-exceptions", nargs="*", default=get_config_value(json_config, "plural_exceptions", template_config["plural_exceptions"]), help="Table names allowed to end with 'S'.")
     parser.add_argument("--db-type", default=get_config_value(json_config, "db_type", template_config["db_type"]), type=str, help="Database type for DDL suggestions (e.g., Oracle).")
@@ -71,6 +74,12 @@ def main() -> None:
 
     base_folder = _resolve_base_folder(args.base_folder)
     validation_config = build_validation_config(get_config_value(json_config, "validation_config", None))
+    llm_comment_raw = get_config_value(
+        json_config,
+        "llm_comment_generation",
+        template_config.get("llm_comment_generation"),
+    )
+    llm_comment_config = build_llm_comment_config(llm_comment_raw)
 
     opts = RunOptions(
         base_folder=base_folder,
@@ -79,6 +88,9 @@ def main() -> None:
         validation_config=validation_config,
         db_type=args.db_type,
         exclude_tables=args.exclude_tables,
+        llm_comment_config=llm_comment_config or LLMCommentConfig(),
+        context_output_dir=Path(__file__).resolve().parent / "config",
+        save_context_json=args.save_context_json,
     )
     print("Saving to:", base_folder)
     if args.telemetry_enabled:

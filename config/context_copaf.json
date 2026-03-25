@@ -1,0 +1,3226 @@
+{
+  "schema_name": "copaf",
+  "owner": "COPAF",
+  "generated_at": "2026-03-25T21:19:07.449337+00:00",
+  "tables": [
+    {
+      "owner": "COPAF",
+      "table_name": "CNAE_DECRETO_PARCELAMENTO",
+      "table_comment": "Relação dos CNAEs associados ao Decreto de Parcelamento",
+      "table_type_inference": "associacao",
+      "primary_keys": [
+        "COD_CAE",
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "foreign_keys": [
+        "COD_CAE",
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "main_columns": [
+        "COD_CAE",
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "related_tables": [
+        "DECRETO_PARCELAMENTO"
+      ],
+      "row_count": 2,
+      "column_name_keywords": [
+        "CAE",
+        "DECRETO",
+        "PARCELAMENTO"
+      ],
+      "existing_column_comments": {
+        "COD_CAE": "CNAE associado ao Decreto de Parcelamento",
+        "SEQ_DECRETO_PARCELAMENTO": "Sequencial identificador do Decreto de Parcelamento"
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DEBITO_DECRETO",
+      "table_comment": "",
+      "table_type_inference": "transacao",
+      "primary_keys": [
+        "SEQ_DEBITO",
+        "SEQ_DECRETO"
+      ],
+      "foreign_keys": [
+        "SEQ_DEBITO",
+        "SEQ_DECRETO"
+      ],
+      "main_columns": [
+        "SEQ_DEBITO",
+        "SEQ_DECRETO",
+        "DAT_FIM",
+        "DAT_INICIO",
+        "SEQ_DEBITO_DECRETO"
+      ],
+      "related_tables": [
+        "DEBITO_PARCELAMENTO"
+      ],
+      "row_count": 0,
+      "column_name_keywords": [
+        "FIM",
+        "INICIO",
+        "DEBITO",
+        "DECRETO",
+        "PARCELAMENTO",
+        "USUARIO"
+      ],
+      "existing_column_comments": {}
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DEBITO_DECRETO_PARCELAMENTO",
+      "table_comment": "",
+      "table_type_inference": "transacao",
+      "primary_keys": [
+        "SEQ_DEBITO_DECRETO_PARCELAMENTO"
+      ],
+      "foreign_keys": [
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "main_columns": [
+        "SEQ_DEBITO_DECRETO_PARCELAMENTO",
+        "SEQ_DECRETO_PARCELAMENTO",
+        "DAT_FIM",
+        "DAT_INICIO",
+        "SEQ_DEBITO"
+      ],
+      "related_tables": [
+        "CNAE_DECRETO_PARCELAMENTO"
+      ],
+      "row_count": 788,
+      "column_name_keywords": [
+        "FIM",
+        "INICIO",
+        "DEBITO",
+        "DECRETO",
+        "PARCELAMENTO",
+        "USUARIO"
+      ],
+      "existing_column_comments": {}
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DEBITO_PARCELAMENTO",
+      "table_comment": "Débitos baixados através do Parcelamento",
+      "table_type_inference": "associacao",
+      "primary_keys": [
+        "SEQ_DEBITO",
+        "SEQ_PARCELAMENTO"
+      ],
+      "foreign_keys": [
+        "SEQ_DEBITO",
+        "SEQ_PARCELAMENTO"
+      ],
+      "main_columns": [
+        "SEQ_DEBITO",
+        "SEQ_PARCELAMENTO"
+      ],
+      "related_tables": [
+        "DEBITO_DECRETO",
+        "PARCELAMENTO"
+      ],
+      "row_count": 242762,
+      "column_name_keywords": [
+        "DEBITO",
+        "PARCELAMENTO"
+      ],
+      "existing_column_comments": {
+        "SEQ_DEBITO": "Sequencial identificador do Débito baixado através do Parcelamento",
+        "SEQ_PARCELAMENTO": "Sequencial identificador do Parcelamento"
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DECRETO_PARCELAMENTO",
+      "table_comment": "Decreto estadual que regulamenta o parcelamento de débitos dos Contribuintes (seja Pessoa Física ou Jurídica, de qualquer tributo), elencando as condições para que tais débitos sejam parcelados",
+      "table_type_inference": "referencia",
+      "primary_keys": [
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "foreign_keys": [],
+      "main_columns": [
+        "SEQ_DECRETO_PARCELAMENTO",
+        "COD_ORIGEM_DECRETO",
+        "COD_TIPO_DECRETO",
+        "DAT_INICIO",
+        "NUM_DECRETO"
+      ],
+      "related_tables": [],
+      "row_count": 43,
+      "column_name_keywords": [
+        "INDICADOR",
+        "MINIMO",
+        "PARCELA",
+        "ORIGEM",
+        "DECRETO",
+        "TIPO",
+        "ATUALIZACAO",
+        "VENCIMENTO",
+        "FIM",
+        "INICIO",
+        "ANO",
+        "MES",
+        "PRIM",
+        "PERIODO",
+        "REFERENCIA"
+      ],
+      "existing_column_comments": {
+        "COD_INDICADOR_MINIMO_PARCELA": "Código do indicar financeiro para o campo VLR_MINIMO_PARCELA",
+        "COD_ORIGEM_DECRETO": "Sistema de origem do Débito. Mesma codificação do campo CONTA_CORRENTE.DEBITO.TIP_ORIGEM_SISTEMA",
+        "COD_TIPO_ATUALIZACAO_PARCELA": "Tipo de atualização da parcela",
+        "COD_TIPO_DECRETO": "Tipo do Decreto",
+        "COD_TIPO_VENCIMENTO": "Codigo do tipo vencimento\n1- Ultimo dia util\n2- Data da abertura",
+        "DAT_FIM": "Data final da vigência do decreto",
+        "DAT_INICIO": "Data de início da vigência do decreto",
+        "DSC_ANO_MES_PRIM_PARCELA": "Mês e Ano (MM/AAAA) de vencimento definido para a primeira parcela dos parcelamentos",
+        "DSC_PERIODO_REFERENCIA_FIM": "Mês e Ano (MM/AAAA) final a que se referem os débitos passíveis de serem parcelados",
+        "DSC_PERIODO_REFERENCIA_INICIO": "Mês e Ano (MM/AAAA) inicial a que se referem os débitos passíveis de serem parcelados",
+        "DSC_PER_REF_INICIO_MESES_CONSE": "Período de referência inicial. Ano e Mês",
+        "NUM_DECRETO": "Número do Decreto de Parcelamento",
+        "NUM_MAXIMO_DIAS_ATRASO": "Número máximo de dias de atraso permitido no pagamento das parcelas deste novo parcelamento",
+        "NUM_PERCENTUAL_1A_PARCELA": "Percentual utilizado para 1a parcela",
+        "QTD_PARCELAS": "Quantidade de parcelas a serem aplicadas, como definidas no decreto",
+        "SEQ_DECRETO_PARCELAMENTO": "Sequencial identificador do Decreto de Parcelamento",
+        "TIP_CRITICA_CNAE": "Tipo de crítica para CNAE:\n'I' - Inclusão\n'E' - Exclusão",
+        "TIP_CRITICA_RECEITA": "Tipo de crítica para Código de Receita:\n'I' - Inclusão\n'E' - Exclusão",
+        "VLR_MINIMO_PARCELA": "Valor mínimo de cada parcela"
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DESCONTO_REFIS_DAE_MIGRADO",
+      "table_comment": "Descontos de REFIS migrados do COPAF legado",
+      "table_type_inference": "transacao",
+      "primary_keys": [
+        "SEQ_DESCONTO_REFIS_DAE_MIGRADO"
+      ],
+      "foreign_keys": [
+        "SEQ_DOCUMENTO_CREDITO"
+      ],
+      "main_columns": [
+        "SEQ_DESCONTO_REFIS_DAE_MIGRADO",
+        "SEQ_DOCUMENTO_CREDITO",
+        "VLR_DESCONTO_JUROS",
+        "VLR_DESCONTO_MULTA",
+        "VLR_DESCONTO_PRINCIPAL"
+      ],
+      "related_tables": [],
+      "row_count": 35324,
+      "column_name_keywords": [
+        "DESCONTO",
+        "REFIS",
+        "DAE",
+        "MIGRADO",
+        "DOCUMENTO",
+        "CREDITO",
+        "JUROS",
+        "MULTA",
+        "PRINCIPAL"
+      ],
+      "existing_column_comments": {
+        "SEQ_DESCONTO_REFIS_DAE_MIGRADO": "Sequencial identificador do registro de Desconto",
+        "SEQ_DOCUMENTO_CREDITO": "Campo chave primaria da tabela que irá utilizar a sequence SEQ_DOCUMENTO_CREDITO.",
+        "VLR_DESCONTO_JUROS": "Valor de desconto sobre juros",
+        "VLR_DESCONTO_MULTA": "Valor de desconto sobre multa",
+        "VLR_DESCONTO_PRINCIPAL": "Valor de desconto sobre valor principal"
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "FAIXA_DESCONTO",
+      "table_comment": "Relaciona as faixas de desconto sobre multas e juros previstas no Decreto de Parcelamento",
+      "table_type_inference": "transacao",
+      "primary_keys": [
+        "SEQ_FAIXA_DESCONTO"
+      ],
+      "foreign_keys": [
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "main_columns": [
+        "SEQ_FAIXA_DESCONTO",
+        "SEQ_DECRETO_PARCELAMENTO",
+        "NUM_QUANTIDADE_MAX_PARCELAS",
+        "NUM_QUANTIDADE_MIN_PARCELAS",
+        "DAT_FIM_ADESAO"
+      ],
+      "related_tables": [
+        "CNAE_DECRETO_PARCELAMENTO"
+      ],
+      "row_count": 129,
+      "column_name_keywords": [
+        "FIM",
+        "ADESAO",
+        "INICIO",
+        "QUANTIDADE",
+        "MAX",
+        "PARCELAS",
+        "MIN",
+        "DECRETO",
+        "PARCELAMENTO",
+        "FAIXA",
+        "DESCONTO",
+        "JUROS",
+        "MULTA"
+      ],
+      "existing_column_comments": {
+        "NUM_QUANTIDADE_MAX_PARCELAS": "Quantidade máxima de parcelas para entrar nesta faixa de desconto",
+        "NUM_QUANTIDADE_MIN_PARCELAS": "Quantidade mínima de parcelas para entrar nesta faixa de desconto",
+        "SEQ_DECRETO_PARCELAMENTO": "Sequencial identificador do Decreto de Parcelamento",
+        "SEQ_FAIXA_DESCONTO": "Sequencial identificador da faixa de desconto",
+        "VLR_DESCONTO_JUROS": "Percentual de desconto de juros para esta faixa de descontos",
+        "VLR_DESCONTO_MULTA": "Percentual de desconto de multas para esta faixa de descontos"
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "FAIXA_PERCENTUAL_1A_PARCELA",
+      "table_comment": "Relaciona as faixas de percentual da 1a parcela de acordo com a quantidade de parcelas",
+      "table_type_inference": "transacao",
+      "primary_keys": [
+        "SEQ_FAIXA_PERC_1A_PARCELA"
+      ],
+      "foreign_keys": [
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "main_columns": [
+        "SEQ_FAIXA_PERC_1A_PARCELA",
+        "SEQ_DECRETO_PARCELAMENTO",
+        "NUM_QUANTIDADE_MAX_PARCELAS",
+        "NUM_QUANTIDADE_MIN_PARCELAS",
+        "VLR_PERCENTUAL_1A_PARCELA"
+      ],
+      "related_tables": [
+        "CNAE_DECRETO_PARCELAMENTO"
+      ],
+      "row_count": 26,
+      "column_name_keywords": [
+        "QUANTIDADE",
+        "MAX",
+        "PARCELAS",
+        "MIN",
+        "DECRETO",
+        "PARCELAMENTO",
+        "FAIXA",
+        "PERC",
+        "PARCELA",
+        "PERCENTUAL"
+      ],
+      "existing_column_comments": {
+        "NUM_QUANTIDADE_MAX_PARCELAS": "Número máximo de quantidade de parcelas",
+        "NUM_QUANTIDADE_MIN_PARCELAS": "Número Mínimo de Quantidade de Parcelas",
+        "SEQ_DECRETO_PARCELAMENTO": "Sequencial identificador do Decreto de Parcelamento",
+        "SEQ_FAIXA_PERC_1A_PARCELA": "Sequencial identificador da faixa de desconto",
+        "VLR_PERCENTUAL_1A_PARCELA": "Valor do percentual da 1a parcela"
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "LOG_EVENTO",
+      "table_comment": "Registro de eventos realizados sobre as entidades DECRETO_PARCELAMENTO e PARCELAMENTO. Cada registro de evento se aplica ou a DECRETO_PARCELAMENTO ou a PARCELAMENTO",
+      "table_type_inference": "log",
+      "primary_keys": [
+        "SEQ_LOG_EVENTO"
+      ],
+      "foreign_keys": [
+        "SEQ_PARCELAMENTO",
+        "SEQ_USUARIO"
+      ],
+      "main_columns": [
+        "SEQ_LOG_EVENTO",
+        "SEQ_PARCELAMENTO",
+        "SEQ_USUARIO",
+        "DAT_LOG_EVENTO",
+        "TIP_EVENTO"
+      ],
+      "related_tables": [
+        "DEBITO_PARCELAMENTO"
+      ],
+      "row_count": 31998,
+      "column_name_keywords": [
+        "LOG",
+        "EVENTO",
+        "MENSAGEM",
+        "VALOR",
+        "DECRETO",
+        "PARCELAMENTO",
+        "USUARIO"
+      ],
+      "existing_column_comments": {
+        "DAT_LOG_EVENTO": "Data/hora de ocorrência do evento",
+        "SEQ_DECRETO_PARCELAMENTO": "Sequencial identificador do Decreto de Parcelamento",
+        "SEQ_LOG_EVENTO": "Sequencial identificador do registro de log",
+        "SEQ_PARCELAMENTO": "Sequencial identificador do Parcelamento",
+        "SEQ_USUARIO": "Usuário responsável pelo evento",
+        "TIP_EVENTO": "Tipo do evento"
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "MENSAGEM_DEBITOS",
+      "table_comment": "",
+      "table_type_inference": "cadastro",
+      "primary_keys": [
+        "SEQ_MENSAGEM_DEBITOS"
+      ],
+      "foreign_keys": [],
+      "main_columns": [
+        "SEQ_MENSAGEM_DEBITOS",
+        "DAT_MENSAGEM",
+        "DSC_IDENTIFICADOR",
+        "DSC_VALOR"
+      ],
+      "related_tables": [],
+      "row_count": 1967,
+      "column_name_keywords": [
+        "MENSAGEM",
+        "IDENTIFICADOR",
+        "VALOR",
+        "DEBITOS"
+      ],
+      "existing_column_comments": {}
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELA",
+      "table_comment": "Parcelas geradas por um Parcelamento de Débitos",
+      "table_type_inference": "transacao",
+      "primary_keys": [
+        "SEQ_PARCELA"
+      ],
+      "foreign_keys": [
+        "COD_RECEITA",
+        "SEQ_DOCUMENTO_CREDITO",
+        "SEQ_PARCELAMENTO"
+      ],
+      "main_columns": [
+        "SEQ_PARCELA",
+        "COD_RECEITA",
+        "SEQ_DOCUMENTO_CREDITO",
+        "SEQ_PARCELAMENTO",
+        "DAT_VENCIMENTO"
+      ],
+      "related_tables": [
+        "RECEITA_DECRETO_PARCELAMENTO",
+        "DEBITO_PARCELAMENTO"
+      ],
+      "row_count": 472409,
+      "column_name_keywords": [
+        "RECEITA",
+        "VENCIMENTO",
+        "PARCELA",
+        "PERCENTUAL",
+        "DOCUMENTO",
+        "CREDITO",
+        "PARCELAMENTO"
+      ],
+      "existing_column_comments": {
+        "COD_RECEITA": "Código da Receita",
+        "DAT_VENCIMENTO": "Data de vencimento da Parcela",
+        "NUM_PARCELA": "Número da parcela no Parcelamento",
+        "NUM_PERCENTUAL": "Percentual do valor total do Parcelamento representado por esta parcela, onde 1 representa 100%",
+        "SEQ_DOCUMENTO_CREDITO": "Sequencial identificador do Documento de Crédito",
+        "SEQ_PARCELA": "Sequencial identificador de uma Parcela",
+        "SEQ_PARCELAMENTO": "Sequencial identificador do Parcelamento"
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELAMENTO",
+      "table_comment": "Parcelamento dos débitos de um Contribuinte com o Estado do Ceará, de acordo com as regras definidas no Decreto de Parcelamento",
+      "table_type_inference": "transacao",
+      "primary_keys": [
+        "SEQ_PARCELAMENTO"
+      ],
+      "foreign_keys": [
+        "COD_ORGAO_LOCAL",
+        "COD_ORGAO_LOCAL_INC",
+        "SEQ_DECRETO_PARCELAMENTO",
+        "SEQ_DECRETO_REFIS_A_VISTA",
+        "SEQ_PESSOA"
+      ],
+      "main_columns": [
+        "SEQ_PARCELAMENTO",
+        "COD_ORGAO_LOCAL",
+        "COD_ORGAO_LOCAL_INC",
+        "SEQ_DECRETO_PARCELAMENTO",
+        "SEQ_DECRETO_REFIS_A_VISTA"
+      ],
+      "related_tables": [
+        "CNAE_DECRETO_PARCELAMENTO"
+      ],
+      "row_count": 21983,
+      "column_name_keywords": [
+        "ORGAO",
+        "LOCAL",
+        "INC",
+        "ABERTURA",
+        "FINAL",
+        "HASH",
+        "DOCUMENTO",
+        "ALFRESCO",
+        "ARQUIVO",
+        "TERMO",
+        "OBSERVACAO",
+        "URL",
+        "PROCESSO",
+        "NOTIFICACAO",
+        "PERDA"
+      ],
+      "existing_column_comments": {
+        "COD_ORGAO_LOCAL": "Código do Órgão Local associado ao Contribuinte (caso seja Contribuinte cadastrado de ICMS)",
+        "COD_ORGAO_LOCAL_INC": "Código do Órgão Local de criação do Parcelamento",
+        "DAT_ABERTURA": "Data de abertura do Parcelamento",
+        "DAT_FINAL": "Data final do parcelamento",
+        "DSC_HASH_DOCUMENTO_ALFRESCO": "HASH para verificar a integridade do arquivo do Alfresco",
+        "DSC_ID_ARQUIVO_TERMO_ALFRESCO": "ID do arquivo do Termo de Parcelamento, localizado no Alfresco",
+        "DSC_OBSERVACAO": "Observação registrada sobre o parcelamento",
+        "DSC_URL_TERMO_ALFRESCO": "URL referente ao Termo de Parcelamento, localizado no Alfresco",
+        "NUM_PROCESSO": "Número de processo associado ao Parcelamento",
+        "NUM_TERMO_NOTIFICACAO_PERDA": "Termo de Notificação",
+        "QTD_PARCELAS": "Quantidade de parcelas do parcelamento",
+        "SEQ_DECRETO_PARCELAMENTO": "Sequencial identificador do Decreto de Parcelamento que regulamenta este parcelamento",
+        "SEQ_PARCELAMENTO": "Sequencial identificador do Parcelamento",
+        "SEQ_PESSOA": "Contribuinte para o qual foi criado este Parcelamento",
+        "STA_PARCELAMENTO": "Situação do parcelamento",
+        "STA_PARCELAMENTO_INTERNET": "Indica se o Parcelamento foi feito na Internet"
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELA_S345565",
+      "table_comment": "",
+      "table_type_inference": "cadastro",
+      "primary_keys": [
+        "SEQ_PARCELA"
+      ],
+      "foreign_keys": [],
+      "main_columns": [
+        "SEQ_PARCELA",
+        "COD_RECEITA",
+        "DAT_VENCIMENTO",
+        "NUM_PARCELA",
+        "NUM_PERCENTUAL"
+      ],
+      "related_tables": [],
+      "row_count": 382935,
+      "column_name_keywords": [
+        "RECEITA",
+        "VENCIMENTO",
+        "PARCELA",
+        "PERCENTUAL",
+        "DOCUMENTO",
+        "CREDITO",
+        "PARCELAMENTO"
+      ],
+      "existing_column_comments": {}
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "RECEITA_DECRETO_PARCELAMENTO",
+      "table_comment": "Receitas relacionadas a um Decreto de Parcelamento",
+      "table_type_inference": "associacao",
+      "primary_keys": [
+        "COD_RECEITA",
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "foreign_keys": [
+        "COD_RECEITA",
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "main_columns": [
+        "COD_RECEITA",
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "related_tables": [
+        "CNAE_DECRETO_PARCELAMENTO"
+      ],
+      "row_count": 58,
+      "column_name_keywords": [
+        "RECEITA",
+        "DECRETO",
+        "PARCELAMENTO"
+      ],
+      "existing_column_comments": {
+        "COD_RECEITA": "Código da Receita",
+        "SEQ_DECRETO_PARCELAMENTO": "Sequencial identificador do Decreto de Parcelamento"
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "REGIME_DECRETO_PARCELAMENTO",
+      "table_comment": "Relação dos Regimes de Recolhimento associados ao Decreto de Parcelamento",
+      "table_type_inference": "associacao",
+      "primary_keys": [
+        "COD_REGIME_RECOLHIMENTO",
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "foreign_keys": [
+        "COD_REGIME_RECOLHIMENTO",
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "main_columns": [
+        "COD_REGIME_RECOLHIMENTO",
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "related_tables": [
+        "CNAE_DECRETO_PARCELAMENTO"
+      ],
+      "row_count": 1,
+      "column_name_keywords": [
+        "REGIME",
+        "RECOLHIMENTO",
+        "DECRETO",
+        "PARCELAMENTO"
+      ],
+      "existing_column_comments": {
+        "COD_REGIME_RECOLHIMENTO": "Código do Regime de Recolhimento associado ao Decreto de Parcelamento",
+        "SEQ_DECRETO_PARCELAMENTO": "Sequencial identificador do Decreto de Parcelamento"
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "TABELA_TESTE",
+      "table_comment": "",
+      "table_type_inference": "referencia",
+      "primary_keys": [
+        "SEQ_TABELA_TESTE"
+      ],
+      "foreign_keys": [],
+      "main_columns": [
+        "SEQ_TABELA_TESTE"
+      ],
+      "related_tables": [],
+      "row_count": 0,
+      "column_name_keywords": [
+        "TABELA",
+        "TESTE"
+      ],
+      "existing_column_comments": {}
+    }
+  ],
+  "columns": [
+    {
+      "owner": "COPAF",
+      "table_name": "CNAE_DECRETO_PARCELAMENTO",
+      "table_comment": "Relação dos CNAEs associados ao Decreto de Parcelamento",
+      "column_name": "COD_CAE",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 1,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "CNAE_DECRETO_PARCELAMENTO",
+      "table_comment": "Relação dos CNAEs associados ao Decreto de Parcelamento",
+      "column_name": "SEQ_DECRETO_PARCELAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "DECRETO_PARCELAMENTO",
+        "column": "SEQ_DECRETO_PARCELAMENTO"
+      },
+      "column_neighbors": [
+        "COD_CAE"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DEBITO_DECRETO",
+      "table_comment": "",
+      "column_name": "DAT_FIM",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_INICIO",
+        "SEQ_DEBITO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DEBITO_DECRETO",
+      "table_comment": "",
+      "column_name": "DAT_INICIO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_FIM",
+        "SEQ_DEBITO",
+        "SEQ_DEBITO_DECRETO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DEBITO_DECRETO",
+      "table_comment": "",
+      "column_name": "SEQ_DEBITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": true,
+      "references": {
+        "table": "DEBITO_PARCELAMENTO",
+        "column": "SEQ_DEBITO"
+      },
+      "column_neighbors": [
+        "DAT_FIM",
+        "DAT_INICIO",
+        "SEQ_DEBITO_DECRETO",
+        "SEQ_DECRETO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DEBITO_DECRETO",
+      "table_comment": "",
+      "column_name": "SEQ_DEBITO_DECRETO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_INICIO",
+        "SEQ_DEBITO",
+        "SEQ_DECRETO",
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DEBITO_DECRETO",
+      "table_comment": "",
+      "column_name": "SEQ_DECRETO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DEBITO",
+        "SEQ_DEBITO_DECRETO",
+        "SEQ_DECRETO_PARCELAMENTO",
+        "SEQ_USUARIO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DEBITO_DECRETO",
+      "table_comment": "",
+      "column_name": "SEQ_DECRETO_PARCELAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": true,
+      "references": {
+        "table": "CNAE_DECRETO_PARCELAMENTO",
+        "column": "SEQ_DECRETO_PARCELAMENTO"
+      },
+      "column_neighbors": [
+        "SEQ_DEBITO_DECRETO",
+        "SEQ_DECRETO",
+        "SEQ_USUARIO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DEBITO_DECRETO",
+      "table_comment": "",
+      "column_name": "SEQ_USUARIO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DECRETO",
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DEBITO_DECRETO_PARCELAMENTO",
+      "table_comment": "",
+      "column_name": "DAT_FIM",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_INICIO",
+        "SEQ_DEBITO"
+      ],
+      "profile": {
+        "num_distinct": 1,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DEBITO_DECRETO_PARCELAMENTO",
+      "table_comment": "",
+      "column_name": "DAT_INICIO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_FIM",
+        "SEQ_DEBITO",
+        "SEQ_DEBITO_DECRETO_PARCELAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 7,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DEBITO_DECRETO_PARCELAMENTO",
+      "table_comment": "",
+      "column_name": "SEQ_DEBITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "DEBITO_DECRETO",
+        "column": "SEQ_DEBITO"
+      },
+      "column_neighbors": [
+        "DAT_FIM",
+        "DAT_INICIO",
+        "SEQ_DEBITO_DECRETO_PARCELAMENTO",
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 525,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DEBITO_DECRETO_PARCELAMENTO",
+      "table_comment": "",
+      "column_name": "SEQ_DEBITO_DECRETO_PARCELAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_INICIO",
+        "SEQ_DEBITO",
+        "SEQ_DECRETO_PARCELAMENTO",
+        "SEQ_USUARIO"
+      ],
+      "profile": {
+        "num_distinct": 788,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DEBITO_DECRETO_PARCELAMENTO",
+      "table_comment": "",
+      "column_name": "SEQ_DECRETO_PARCELAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "CNAE_DECRETO_PARCELAMENTO",
+        "column": "SEQ_DECRETO_PARCELAMENTO"
+      },
+      "column_neighbors": [
+        "SEQ_DEBITO",
+        "SEQ_DEBITO_DECRETO_PARCELAMENTO",
+        "SEQ_USUARIO"
+      ],
+      "profile": {
+        "num_distinct": 1,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DEBITO_DECRETO_PARCELAMENTO",
+      "table_comment": "",
+      "column_name": "SEQ_USUARIO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DEBITO_DECRETO_PARCELAMENTO",
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 16,
+        "null_ratio": 0.321066,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DEBITO_PARCELAMENTO",
+      "table_comment": "Débitos baixados através do Parcelamento",
+      "column_name": "SEQ_DEBITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "DEBITO_DECRETO",
+        "column": "SEQ_DEBITO"
+      },
+      "column_neighbors": [
+        "SEQ_PARCELAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 242304,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DEBITO_PARCELAMENTO",
+      "table_comment": "Débitos baixados através do Parcelamento",
+      "column_name": "SEQ_PARCELAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "PARCELAMENTO",
+        "column": "SEQ_PARCELAMENTO"
+      },
+      "column_neighbors": [
+        "SEQ_DEBITO"
+      ],
+      "profile": {
+        "num_distinct": 21310,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DECRETO_PARCELAMENTO",
+      "table_comment": "Decreto estadual que regulamenta o parcelamento de débitos dos Contribuintes (seja Pessoa Física ou Jurídica, de qualquer tributo), elencando as condições para que tais débitos sejam parcelados",
+      "column_name": "COD_INDICADOR_MINIMO_PARCELA",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_ORIGEM_DECRETO",
+        "COD_TIPO_ATUALIZACAO_PARCELA"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DECRETO_PARCELAMENTO",
+      "table_comment": "Decreto estadual que regulamenta o parcelamento de débitos dos Contribuintes (seja Pessoa Física ou Jurídica, de qualquer tributo), elencando as condições para que tais débitos sejam parcelados",
+      "column_name": "COD_ORIGEM_DECRETO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": true,
+      "references": {},
+      "column_neighbors": [
+        "COD_INDICADOR_MINIMO_PARCELA",
+        "COD_TIPO_ATUALIZACAO_PARCELA",
+        "COD_TIPO_DECRETO"
+      ],
+      "profile": {
+        "num_distinct": 9,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DECRETO_PARCELAMENTO",
+      "table_comment": "Decreto estadual que regulamenta o parcelamento de débitos dos Contribuintes (seja Pessoa Física ou Jurídica, de qualquer tributo), elencando as condições para que tais débitos sejam parcelados",
+      "column_name": "COD_TIPO_ATUALIZACAO_PARCELA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_INDICADOR_MINIMO_PARCELA",
+        "COD_ORIGEM_DECRETO",
+        "COD_TIPO_DECRETO",
+        "COD_TIPO_VENCIMENTO"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DECRETO_PARCELAMENTO",
+      "table_comment": "Decreto estadual que regulamenta o parcelamento de débitos dos Contribuintes (seja Pessoa Física ou Jurídica, de qualquer tributo), elencando as condições para que tais débitos sejam parcelados",
+      "column_name": "COD_TIPO_DECRETO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": true,
+      "references": {},
+      "column_neighbors": [
+        "COD_ORIGEM_DECRETO",
+        "COD_TIPO_ATUALIZACAO_PARCELA",
+        "COD_TIPO_VENCIMENTO",
+        "DAT_FIM"
+      ],
+      "profile": {
+        "num_distinct": 3,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DECRETO_PARCELAMENTO",
+      "table_comment": "Decreto estadual que regulamenta o parcelamento de débitos dos Contribuintes (seja Pessoa Física ou Jurídica, de qualquer tributo), elencando as condições para que tais débitos sejam parcelados",
+      "column_name": "COD_TIPO_VENCIMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_TIPO_ATUALIZACAO_PARCELA",
+        "COD_TIPO_DECRETO",
+        "DAT_FIM",
+        "DAT_INICIO"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DECRETO_PARCELAMENTO",
+      "table_comment": "Decreto estadual que regulamenta o parcelamento de débitos dos Contribuintes (seja Pessoa Física ou Jurídica, de qualquer tributo), elencando as condições para que tais débitos sejam parcelados",
+      "column_name": "DAT_FIM",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_TIPO_DECRETO",
+        "COD_TIPO_VENCIMENTO",
+        "DAT_INICIO",
+        "DSC_ANO_MES_PRIM_PARCELA"
+      ],
+      "profile": {
+        "num_distinct": 13,
+        "null_ratio": 0.209302,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DECRETO_PARCELAMENTO",
+      "table_comment": "Decreto estadual que regulamenta o parcelamento de débitos dos Contribuintes (seja Pessoa Física ou Jurídica, de qualquer tributo), elencando as condições para que tais débitos sejam parcelados",
+      "column_name": "DAT_INICIO",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_TIPO_VENCIMENTO",
+        "DAT_FIM",
+        "DSC_ANO_MES_PRIM_PARCELA",
+        "DSC_PERIODO_REFERENCIA_FIM"
+      ],
+      "profile": {
+        "num_distinct": 18,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DECRETO_PARCELAMENTO",
+      "table_comment": "Decreto estadual que regulamenta o parcelamento de débitos dos Contribuintes (seja Pessoa Física ou Jurídica, de qualquer tributo), elencando as condições para que tais débitos sejam parcelados",
+      "column_name": "DSC_ANO_MES_PRIM_PARCELA",
+      "data_type": "VARCHAR2(7)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_FIM",
+        "DAT_INICIO",
+        "DSC_PERIODO_REFERENCIA_FIM",
+        "DSC_PERIODO_REFERENCIA_INICIO"
+      ],
+      "profile": {
+        "num_distinct": 1,
+        "null_ratio": 0.976744,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DECRETO_PARCELAMENTO",
+      "table_comment": "Decreto estadual que regulamenta o parcelamento de débitos dos Contribuintes (seja Pessoa Física ou Jurídica, de qualquer tributo), elencando as condições para que tais débitos sejam parcelados",
+      "column_name": "DSC_PERIODO_REFERENCIA_FIM",
+      "data_type": "VARCHAR2(7)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_INICIO",
+        "DSC_ANO_MES_PRIM_PARCELA",
+        "DSC_PERIODO_REFERENCIA_INICIO",
+        "DSC_PER_REF_INICIO_MESES_CONSE"
+      ],
+      "profile": {
+        "num_distinct": 11,
+        "null_ratio": 0.302326,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DECRETO_PARCELAMENTO",
+      "table_comment": "Decreto estadual que regulamenta o parcelamento de débitos dos Contribuintes (seja Pessoa Física ou Jurídica, de qualquer tributo), elencando as condições para que tais débitos sejam parcelados",
+      "column_name": "DSC_PERIODO_REFERENCIA_INICIO",
+      "data_type": "VARCHAR2(7)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DSC_ANO_MES_PRIM_PARCELA",
+        "DSC_PERIODO_REFERENCIA_FIM",
+        "DSC_PER_REF_INICIO_MESES_CONSE",
+        "NUM_DECRETO"
+      ],
+      "profile": {
+        "num_distinct": 4,
+        "null_ratio": 0.906977,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DECRETO_PARCELAMENTO",
+      "table_comment": "Decreto estadual que regulamenta o parcelamento de débitos dos Contribuintes (seja Pessoa Física ou Jurídica, de qualquer tributo), elencando as condições para que tais débitos sejam parcelados",
+      "column_name": "DSC_PER_REF_INICIO_MESES_CONSE",
+      "data_type": "VARCHAR2(7)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DSC_PERIODO_REFERENCIA_FIM",
+        "DSC_PERIODO_REFERENCIA_INICIO",
+        "NUM_DECRETO",
+        "NUM_MAXIMO_DIAS_ATRASO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": 1.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DECRETO_PARCELAMENTO",
+      "table_comment": "Decreto estadual que regulamenta o parcelamento de débitos dos Contribuintes (seja Pessoa Física ou Jurídica, de qualquer tributo), elencando as condições para que tais débitos sejam parcelados",
+      "column_name": "NUM_DECRETO",
+      "data_type": "VARCHAR2(256)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": true,
+      "references": {},
+      "column_neighbors": [
+        "DSC_PERIODO_REFERENCIA_INICIO",
+        "DSC_PER_REF_INICIO_MESES_CONSE",
+        "NUM_MAXIMO_DIAS_ATRASO",
+        "NUM_PERCENTUAL_1A_PARCELA"
+      ],
+      "profile": {
+        "num_distinct": 17,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DECRETO_PARCELAMENTO",
+      "table_comment": "Decreto estadual que regulamenta o parcelamento de débitos dos Contribuintes (seja Pessoa Física ou Jurídica, de qualquer tributo), elencando as condições para que tais débitos sejam parcelados",
+      "column_name": "NUM_MAXIMO_DIAS_ATRASO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DSC_PER_REF_INICIO_MESES_CONSE",
+        "NUM_DECRETO",
+        "NUM_PERCENTUAL_1A_PARCELA",
+        "NUM_PERIODOS_CONSEC_ATRASO"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DECRETO_PARCELAMENTO",
+      "table_comment": "Decreto estadual que regulamenta o parcelamento de débitos dos Contribuintes (seja Pessoa Física ou Jurídica, de qualquer tributo), elencando as condições para que tais débitos sejam parcelados",
+      "column_name": "NUM_PERCENTUAL_1A_PARCELA",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_DECRETO",
+        "NUM_MAXIMO_DIAS_ATRASO",
+        "NUM_PERIODOS_CONSEC_ATRASO",
+        "QTD_PARCELAS"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": 1.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DECRETO_PARCELAMENTO",
+      "table_comment": "Decreto estadual que regulamenta o parcelamento de débitos dos Contribuintes (seja Pessoa Física ou Jurídica, de qualquer tributo), elencando as condições para que tais débitos sejam parcelados",
+      "column_name": "NUM_PERIODOS_CONSEC_ATRASO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_MAXIMO_DIAS_ATRASO",
+        "NUM_PERCENTUAL_1A_PARCELA",
+        "QTD_PARCELAS",
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.55814,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DECRETO_PARCELAMENTO",
+      "table_comment": "Decreto estadual que regulamenta o parcelamento de débitos dos Contribuintes (seja Pessoa Física ou Jurídica, de qualquer tributo), elencando as condições para que tais débitos sejam parcelados",
+      "column_name": "QTD_PARCELAS",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_PERCENTUAL_1A_PARCELA",
+        "NUM_PERIODOS_CONSEC_ATRASO",
+        "SEQ_DECRETO_PARCELAMENTO",
+        "STA_VERIFICA_3_MESES_CONSEC"
+      ],
+      "profile": {
+        "num_distinct": 9,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DECRETO_PARCELAMENTO",
+      "table_comment": "Decreto estadual que regulamenta o parcelamento de débitos dos Contribuintes (seja Pessoa Física ou Jurídica, de qualquer tributo), elencando as condições para que tais débitos sejam parcelados",
+      "column_name": "SEQ_DECRETO_PARCELAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "CNAE_DECRETO_PARCELAMENTO",
+        "column": "SEQ_DECRETO_PARCELAMENTO"
+      },
+      "column_neighbors": [
+        "NUM_PERIODOS_CONSEC_ATRASO",
+        "QTD_PARCELAS",
+        "STA_VERIFICA_3_MESES_CONSEC",
+        "TIP_CRITICA_CNAE"
+      ],
+      "profile": {
+        "num_distinct": 43,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DECRETO_PARCELAMENTO",
+      "table_comment": "Decreto estadual que regulamenta o parcelamento de débitos dos Contribuintes (seja Pessoa Física ou Jurídica, de qualquer tributo), elencando as condições para que tais débitos sejam parcelados",
+      "column_name": "STA_VERIFICA_3_MESES_CONSEC",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "QTD_PARCELAS",
+        "SEQ_DECRETO_PARCELAMENTO",
+        "TIP_CRITICA_CNAE",
+        "TIP_CRITICA_RECEITA"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.302326,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DECRETO_PARCELAMENTO",
+      "table_comment": "Decreto estadual que regulamenta o parcelamento de débitos dos Contribuintes (seja Pessoa Física ou Jurídica, de qualquer tributo), elencando as condições para que tais débitos sejam parcelados",
+      "column_name": "TIP_CRITICA_CNAE",
+      "data_type": "VARCHAR2(1)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DECRETO_PARCELAMENTO",
+        "STA_VERIFICA_3_MESES_CONSEC",
+        "TIP_CRITICA_RECEITA",
+        "TIP_LEGISLACAO"
+      ],
+      "profile": {
+        "num_distinct": 1,
+        "null_ratio": 0.069767,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DECRETO_PARCELAMENTO",
+      "table_comment": "Decreto estadual que regulamenta o parcelamento de débitos dos Contribuintes (seja Pessoa Física ou Jurídica, de qualquer tributo), elencando as condições para que tais débitos sejam parcelados",
+      "column_name": "TIP_CRITICA_RECEITA",
+      "data_type": "VARCHAR2(1)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "STA_VERIFICA_3_MESES_CONSEC",
+        "TIP_CRITICA_CNAE",
+        "TIP_LEGISLACAO",
+        "VLR_MINIMO_PARCELA"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.069767,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DECRETO_PARCELAMENTO",
+      "table_comment": "Decreto estadual que regulamenta o parcelamento de débitos dos Contribuintes (seja Pessoa Física ou Jurídica, de qualquer tributo), elencando as condições para que tais débitos sejam parcelados",
+      "column_name": "TIP_LEGISLACAO",
+      "data_type": "VARCHAR2(255)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "TIP_CRITICA_CNAE",
+        "TIP_CRITICA_RECEITA",
+        "VLR_MINIMO_PARCELA"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DECRETO_PARCELAMENTO",
+      "table_comment": "Decreto estadual que regulamenta o parcelamento de débitos dos Contribuintes (seja Pessoa Física ou Jurídica, de qualquer tributo), elencando as condições para que tais débitos sejam parcelados",
+      "column_name": "VLR_MINIMO_PARCELA",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "TIP_CRITICA_RECEITA",
+        "TIP_LEGISLACAO"
+      ],
+      "profile": {
+        "num_distinct": 4,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DESCONTO_REFIS_DAE_MIGRADO",
+      "table_comment": "Descontos de REFIS migrados do COPAF legado",
+      "column_name": "SEQ_DESCONTO_REFIS_DAE_MIGRADO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DOCUMENTO_CREDITO",
+        "VLR_DESCONTO_JUROS"
+      ],
+      "profile": {
+        "num_distinct": 35324,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DESCONTO_REFIS_DAE_MIGRADO",
+      "table_comment": "Descontos de REFIS migrados do COPAF legado",
+      "column_name": "SEQ_DOCUMENTO_CREDITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DESCONTO_REFIS_DAE_MIGRADO",
+        "VLR_DESCONTO_JUROS",
+        "VLR_DESCONTO_MULTA"
+      ],
+      "profile": {
+        "num_distinct": 35272,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DESCONTO_REFIS_DAE_MIGRADO",
+      "table_comment": "Descontos de REFIS migrados do COPAF legado",
+      "column_name": "VLR_DESCONTO_JUROS",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DESCONTO_REFIS_DAE_MIGRADO",
+        "SEQ_DOCUMENTO_CREDITO",
+        "VLR_DESCONTO_MULTA",
+        "VLR_DESCONTO_PRINCIPAL"
+      ],
+      "profile": {
+        "num_distinct": 19988,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DESCONTO_REFIS_DAE_MIGRADO",
+      "table_comment": "Descontos de REFIS migrados do COPAF legado",
+      "column_name": "VLR_DESCONTO_MULTA",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DOCUMENTO_CREDITO",
+        "VLR_DESCONTO_JUROS",
+        "VLR_DESCONTO_PRINCIPAL"
+      ],
+      "profile": {
+        "num_distinct": 6106,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "DESCONTO_REFIS_DAE_MIGRADO",
+      "table_comment": "Descontos de REFIS migrados do COPAF legado",
+      "column_name": "VLR_DESCONTO_PRINCIPAL",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "VLR_DESCONTO_JUROS",
+        "VLR_DESCONTO_MULTA"
+      ],
+      "profile": {
+        "num_distinct": 79,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "FAIXA_DESCONTO",
+      "table_comment": "Relaciona as faixas de desconto sobre multas e juros previstas no Decreto de Parcelamento",
+      "column_name": "DAT_FIM_ADESAO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_INICIO_ADESAO",
+        "NUM_QUANTIDADE_MAX_PARCELAS"
+      ],
+      "profile": {
+        "num_distinct": 15,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "FAIXA_DESCONTO",
+      "table_comment": "Relaciona as faixas de desconto sobre multas e juros previstas no Decreto de Parcelamento",
+      "column_name": "DAT_INICIO_ADESAO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_FIM_ADESAO",
+        "NUM_QUANTIDADE_MAX_PARCELAS",
+        "NUM_QUANTIDADE_MIN_PARCELAS"
+      ],
+      "profile": {
+        "num_distinct": 15,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "FAIXA_DESCONTO",
+      "table_comment": "Relaciona as faixas de desconto sobre multas e juros previstas no Decreto de Parcelamento",
+      "column_name": "NUM_QUANTIDADE_MAX_PARCELAS",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_FIM_ADESAO",
+        "DAT_INICIO_ADESAO",
+        "NUM_QUANTIDADE_MIN_PARCELAS",
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 14,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "FAIXA_DESCONTO",
+      "table_comment": "Relaciona as faixas de desconto sobre multas e juros previstas no Decreto de Parcelamento",
+      "column_name": "NUM_QUANTIDADE_MIN_PARCELAS",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_INICIO_ADESAO",
+        "NUM_QUANTIDADE_MAX_PARCELAS",
+        "SEQ_DECRETO_PARCELAMENTO",
+        "SEQ_FAIXA_DESCONTO"
+      ],
+      "profile": {
+        "num_distinct": 11,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "FAIXA_DESCONTO",
+      "table_comment": "Relaciona as faixas de desconto sobre multas e juros previstas no Decreto de Parcelamento",
+      "column_name": "SEQ_DECRETO_PARCELAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "CNAE_DECRETO_PARCELAMENTO",
+        "column": "SEQ_DECRETO_PARCELAMENTO"
+      },
+      "column_neighbors": [
+        "NUM_QUANTIDADE_MAX_PARCELAS",
+        "NUM_QUANTIDADE_MIN_PARCELAS",
+        "SEQ_FAIXA_DESCONTO",
+        "VLR_DESCONTO_JUROS"
+      ],
+      "profile": {
+        "num_distinct": 32,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "FAIXA_DESCONTO",
+      "table_comment": "Relaciona as faixas de desconto sobre multas e juros previstas no Decreto de Parcelamento",
+      "column_name": "SEQ_FAIXA_DESCONTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_QUANTIDADE_MIN_PARCELAS",
+        "SEQ_DECRETO_PARCELAMENTO",
+        "VLR_DESCONTO_JUROS",
+        "VLR_DESCONTO_MULTA"
+      ],
+      "profile": {
+        "num_distinct": 129,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "FAIXA_DESCONTO",
+      "table_comment": "Relaciona as faixas de desconto sobre multas e juros previstas no Decreto de Parcelamento",
+      "column_name": "VLR_DESCONTO_JUROS",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DECRETO_PARCELAMENTO",
+        "SEQ_FAIXA_DESCONTO",
+        "VLR_DESCONTO_MULTA"
+      ],
+      "profile": {
+        "num_distinct": 13,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "FAIXA_DESCONTO",
+      "table_comment": "Relaciona as faixas de desconto sobre multas e juros previstas no Decreto de Parcelamento",
+      "column_name": "VLR_DESCONTO_MULTA",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_FAIXA_DESCONTO",
+        "VLR_DESCONTO_JUROS"
+      ],
+      "profile": {
+        "num_distinct": 13,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "FAIXA_PERCENTUAL_1A_PARCELA",
+      "table_comment": "Relaciona as faixas de percentual da 1a parcela de acordo com a quantidade de parcelas",
+      "column_name": "NUM_QUANTIDADE_MAX_PARCELAS",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_QUANTIDADE_MIN_PARCELAS",
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 5,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "FAIXA_PERCENTUAL_1A_PARCELA",
+      "table_comment": "Relaciona as faixas de percentual da 1a parcela de acordo com a quantidade de parcelas",
+      "column_name": "NUM_QUANTIDADE_MIN_PARCELAS",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_QUANTIDADE_MAX_PARCELAS",
+        "SEQ_DECRETO_PARCELAMENTO",
+        "SEQ_FAIXA_PERC_1A_PARCELA"
+      ],
+      "profile": {
+        "num_distinct": 6,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "FAIXA_PERCENTUAL_1A_PARCELA",
+      "table_comment": "Relaciona as faixas de percentual da 1a parcela de acordo com a quantidade de parcelas",
+      "column_name": "SEQ_DECRETO_PARCELAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "CNAE_DECRETO_PARCELAMENTO",
+        "column": "SEQ_DECRETO_PARCELAMENTO"
+      },
+      "column_neighbors": [
+        "NUM_QUANTIDADE_MAX_PARCELAS",
+        "NUM_QUANTIDADE_MIN_PARCELAS",
+        "SEQ_FAIXA_PERC_1A_PARCELA",
+        "VLR_PERCENTUAL_1A_PARCELA"
+      ],
+      "profile": {
+        "num_distinct": 11,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "FAIXA_PERCENTUAL_1A_PARCELA",
+      "table_comment": "Relaciona as faixas de percentual da 1a parcela de acordo com a quantidade de parcelas",
+      "column_name": "SEQ_FAIXA_PERC_1A_PARCELA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_QUANTIDADE_MIN_PARCELAS",
+        "SEQ_DECRETO_PARCELAMENTO",
+        "VLR_PERCENTUAL_1A_PARCELA"
+      ],
+      "profile": {
+        "num_distinct": 26,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "FAIXA_PERCENTUAL_1A_PARCELA",
+      "table_comment": "Relaciona as faixas de percentual da 1a parcela de acordo com a quantidade de parcelas",
+      "column_name": "VLR_PERCENTUAL_1A_PARCELA",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DECRETO_PARCELAMENTO",
+        "SEQ_FAIXA_PERC_1A_PARCELA"
+      ],
+      "profile": {
+        "num_distinct": 5,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "LOG_EVENTO",
+      "table_comment": "Registro de eventos realizados sobre as entidades DECRETO_PARCELAMENTO e PARCELAMENTO. Cada registro de evento se aplica ou a DECRETO_PARCELAMENTO ou a PARCELAMENTO",
+      "column_name": "DAT_LOG_EVENTO",
+      "data_type": "TIMESTAMP(6)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DSC_MENSAGEM",
+        "DSC_VALOR"
+      ],
+      "profile": {
+        "num_distinct": 24186,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "LOG_EVENTO",
+      "table_comment": "Registro de eventos realizados sobre as entidades DECRETO_PARCELAMENTO e PARCELAMENTO. Cada registro de evento se aplica ou a DECRETO_PARCELAMENTO ou a PARCELAMENTO",
+      "column_name": "DSC_MENSAGEM",
+      "data_type": "CLOB",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_LOG_EVENTO",
+        "DSC_VALOR",
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": 0.710232,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "LOG_EVENTO",
+      "table_comment": "Registro de eventos realizados sobre as entidades DECRETO_PARCELAMENTO e PARCELAMENTO. Cada registro de evento se aplica ou a DECRETO_PARCELAMENTO ou a PARCELAMENTO",
+      "column_name": "DSC_VALOR",
+      "data_type": "CLOB",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_LOG_EVENTO",
+        "DSC_MENSAGEM",
+        "SEQ_DECRETO_PARCELAMENTO",
+        "SEQ_LOG_EVENTO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "LOG_EVENTO",
+      "table_comment": "Registro de eventos realizados sobre as entidades DECRETO_PARCELAMENTO e PARCELAMENTO. Cada registro de evento se aplica ou a DECRETO_PARCELAMENTO ou a PARCELAMENTO",
+      "column_name": "SEQ_DECRETO_PARCELAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "CNAE_DECRETO_PARCELAMENTO",
+        "column": "SEQ_DECRETO_PARCELAMENTO"
+      },
+      "column_neighbors": [
+        "DSC_MENSAGEM",
+        "DSC_VALOR",
+        "SEQ_LOG_EVENTO",
+        "SEQ_PARCELAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 44,
+        "null_ratio": 0.998594,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "LOG_EVENTO",
+      "table_comment": "Registro de eventos realizados sobre as entidades DECRETO_PARCELAMENTO e PARCELAMENTO. Cada registro de evento se aplica ou a DECRETO_PARCELAMENTO ou a PARCELAMENTO",
+      "column_name": "SEQ_LOG_EVENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DSC_VALOR",
+        "SEQ_DECRETO_PARCELAMENTO",
+        "SEQ_PARCELAMENTO",
+        "SEQ_USUARIO"
+      ],
+      "profile": {
+        "num_distinct": 31998,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "LOG_EVENTO",
+      "table_comment": "Registro de eventos realizados sobre as entidades DECRETO_PARCELAMENTO e PARCELAMENTO. Cada registro de evento se aplica ou a DECRETO_PARCELAMENTO ou a PARCELAMENTO",
+      "column_name": "SEQ_PARCELAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "DEBITO_PARCELAMENTO",
+        "column": "SEQ_PARCELAMENTO"
+      },
+      "column_neighbors": [
+        "SEQ_DECRETO_PARCELAMENTO",
+        "SEQ_LOG_EVENTO",
+        "SEQ_USUARIO",
+        "TIP_EVENTO"
+      ],
+      "profile": {
+        "num_distinct": 21858,
+        "null_ratio": 0.001406,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "LOG_EVENTO",
+      "table_comment": "Registro de eventos realizados sobre as entidades DECRETO_PARCELAMENTO e PARCELAMENTO. Cada registro de evento se aplica ou a DECRETO_PARCELAMENTO ou a PARCELAMENTO",
+      "column_name": "SEQ_USUARIO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_LOG_EVENTO",
+        "SEQ_PARCELAMENTO",
+        "TIP_EVENTO"
+      ],
+      "profile": {
+        "num_distinct": 140,
+        "null_ratio": 0.950278,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "LOG_EVENTO",
+      "table_comment": "Registro de eventos realizados sobre as entidades DECRETO_PARCELAMENTO e PARCELAMENTO. Cada registro de evento se aplica ou a DECRETO_PARCELAMENTO ou a PARCELAMENTO",
+      "column_name": "TIP_EVENTO",
+      "data_type": "VARCHAR2(255)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_PARCELAMENTO",
+        "SEQ_USUARIO"
+      ],
+      "profile": {
+        "num_distinct": 10,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "MENSAGEM_DEBITOS",
+      "table_comment": "",
+      "column_name": "DAT_MENSAGEM",
+      "data_type": "TIMESTAMP(6)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DSC_IDENTIFICADOR",
+        "DSC_VALOR"
+      ],
+      "profile": {
+        "num_distinct": 1967,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "MENSAGEM_DEBITOS",
+      "table_comment": "",
+      "column_name": "DSC_IDENTIFICADOR",
+      "data_type": "VARCHAR2(255)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_MENSAGEM",
+        "DSC_VALOR",
+        "SEQ_MENSAGEM_DEBITOS"
+      ],
+      "profile": {
+        "num_distinct": 1967,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "MENSAGEM_DEBITOS",
+      "table_comment": "",
+      "column_name": "DSC_VALOR",
+      "data_type": "CLOB",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_MENSAGEM",
+        "DSC_IDENTIFICADOR",
+        "SEQ_MENSAGEM_DEBITOS"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "MENSAGEM_DEBITOS",
+      "table_comment": "",
+      "column_name": "SEQ_MENSAGEM_DEBITOS",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DSC_IDENTIFICADOR",
+        "DSC_VALOR"
+      ],
+      "profile": {
+        "num_distinct": 1967,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELA",
+      "table_comment": "Parcelas geradas por um Parcelamento de Débitos",
+      "column_name": "COD_RECEITA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "RECEITA_DECRETO_PARCELAMENTO",
+        "column": "COD_RECEITA"
+      },
+      "column_neighbors": [
+        "DAT_VENCIMENTO",
+        "NUM_PARCELA"
+      ],
+      "profile": {
+        "num_distinct": 5,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELA",
+      "table_comment": "Parcelas geradas por um Parcelamento de Débitos",
+      "column_name": "DAT_VENCIMENTO",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_RECEITA",
+        "NUM_PARCELA",
+        "NUM_PERCENTUAL"
+      ],
+      "profile": {
+        "num_distinct": 6583,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELA",
+      "table_comment": "Parcelas geradas por um Parcelamento de Débitos",
+      "column_name": "NUM_PARCELA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_RECEITA",
+        "DAT_VENCIMENTO",
+        "NUM_PERCENTUAL",
+        "SEQ_DOCUMENTO_CREDITO"
+      ],
+      "profile": {
+        "num_distinct": 120,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELA",
+      "table_comment": "Parcelas geradas por um Parcelamento de Débitos",
+      "column_name": "NUM_PERCENTUAL",
+      "data_type": "NUMBER(22,8)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_VENCIMENTO",
+        "NUM_PARCELA",
+        "SEQ_DOCUMENTO_CREDITO",
+        "SEQ_PARCELA"
+      ],
+      "profile": {
+        "num_distinct": 25662,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELA",
+      "table_comment": "Parcelas geradas por um Parcelamento de Débitos",
+      "column_name": "SEQ_DOCUMENTO_CREDITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_PARCELA",
+        "NUM_PERCENTUAL",
+        "SEQ_PARCELA",
+        "SEQ_PARCELAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 137280,
+        "null_ratio": 0.695311,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELA",
+      "table_comment": "Parcelas geradas por um Parcelamento de Débitos",
+      "column_name": "SEQ_PARCELA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "PARCELA_S345565",
+        "column": "SEQ_PARCELA"
+      },
+      "column_neighbors": [
+        "NUM_PERCENTUAL",
+        "SEQ_DOCUMENTO_CREDITO",
+        "SEQ_PARCELAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 472409,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELA",
+      "table_comment": "Parcelas geradas por um Parcelamento de Débitos",
+      "column_name": "SEQ_PARCELAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "DEBITO_PARCELAMENTO",
+        "column": "SEQ_PARCELAMENTO"
+      },
+      "column_neighbors": [
+        "SEQ_DOCUMENTO_CREDITO",
+        "SEQ_PARCELA"
+      ],
+      "profile": {
+        "num_distinct": 22026,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELAMENTO",
+      "table_comment": "Parcelamento dos débitos de um Contribuinte com o Estado do Ceará, de acordo com as regras definidas no Decreto de Parcelamento",
+      "column_name": "COD_ORGAO_LOCAL",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_ORGAO_LOCAL_INC",
+        "DAT_ABERTURA"
+      ],
+      "profile": {
+        "num_distinct": 23,
+        "null_ratio": 0.001183,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELAMENTO",
+      "table_comment": "Parcelamento dos débitos de um Contribuinte com o Estado do Ceará, de acordo com as regras definidas no Decreto de Parcelamento",
+      "column_name": "COD_ORGAO_LOCAL_INC",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_ORGAO_LOCAL",
+        "DAT_ABERTURA",
+        "DAT_FINAL"
+      ],
+      "profile": {
+        "num_distinct": 34,
+        "null_ratio": 0.517536,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELAMENTO",
+      "table_comment": "Parcelamento dos débitos de um Contribuinte com o Estado do Ceará, de acordo com as regras definidas no Decreto de Parcelamento",
+      "column_name": "DAT_ABERTURA",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_ORGAO_LOCAL",
+        "COD_ORGAO_LOCAL_INC",
+        "DAT_FINAL",
+        "DSC_HASH_DOCUMENTO_ALFRESCO"
+      ],
+      "profile": {
+        "num_distinct": 2441,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELAMENTO",
+      "table_comment": "Parcelamento dos débitos de um Contribuinte com o Estado do Ceará, de acordo com as regras definidas no Decreto de Parcelamento",
+      "column_name": "DAT_FINAL",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_ORGAO_LOCAL_INC",
+        "DAT_ABERTURA",
+        "DSC_HASH_DOCUMENTO_ALFRESCO",
+        "DSC_ID_ARQUIVO_TERMO_ALFRESCO"
+      ],
+      "profile": {
+        "num_distinct": 2179,
+        "null_ratio": 0.378929,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELAMENTO",
+      "table_comment": "Parcelamento dos débitos de um Contribuinte com o Estado do Ceará, de acordo com as regras definidas no Decreto de Parcelamento",
+      "column_name": "DSC_HASH_DOCUMENTO_ALFRESCO",
+      "data_type": "VARCHAR2(128)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_ABERTURA",
+        "DAT_FINAL",
+        "DSC_ID_ARQUIVO_TERMO_ALFRESCO",
+        "DSC_OBSERVACAO"
+      ],
+      "profile": {
+        "num_distinct": 12155,
+        "null_ratio": 0.447073,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELAMENTO",
+      "table_comment": "Parcelamento dos débitos de um Contribuinte com o Estado do Ceará, de acordo com as regras definidas no Decreto de Parcelamento",
+      "column_name": "DSC_ID_ARQUIVO_TERMO_ALFRESCO",
+      "data_type": "VARCHAR2(256)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_FINAL",
+        "DSC_HASH_DOCUMENTO_ALFRESCO",
+        "DSC_OBSERVACAO",
+        "DSC_URL_TERMO_ALFRESCO"
+      ],
+      "profile": {
+        "num_distinct": 181,
+        "null_ratio": 0.991766,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELAMENTO",
+      "table_comment": "Parcelamento dos débitos de um Contribuinte com o Estado do Ceará, de acordo com as regras definidas no Decreto de Parcelamento",
+      "column_name": "DSC_OBSERVACAO",
+      "data_type": "VARCHAR2(4000)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DSC_HASH_DOCUMENTO_ALFRESCO",
+        "DSC_ID_ARQUIVO_TERMO_ALFRESCO",
+        "DSC_URL_TERMO_ALFRESCO",
+        "NUM_PROCESSO"
+      ],
+      "profile": {
+        "num_distinct": 307,
+        "null_ratio": 0.982805,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELAMENTO",
+      "table_comment": "Parcelamento dos débitos de um Contribuinte com o Estado do Ceará, de acordo com as regras definidas no Decreto de Parcelamento",
+      "column_name": "DSC_URL_TERMO_ALFRESCO",
+      "data_type": "VARCHAR2(1000)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DSC_ID_ARQUIVO_TERMO_ALFRESCO",
+        "DSC_OBSERVACAO",
+        "NUM_PROCESSO",
+        "NUM_TERMO_NOTIFICACAO_PERDA"
+      ],
+      "profile": {
+        "num_distinct": 181,
+        "null_ratio": 0.991766,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELAMENTO",
+      "table_comment": "Parcelamento dos débitos de um Contribuinte com o Estado do Ceará, de acordo com as regras definidas no Decreto de Parcelamento",
+      "column_name": "NUM_PROCESSO",
+      "data_type": "VARCHAR2(256)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DSC_OBSERVACAO",
+        "DSC_URL_TERMO_ALFRESCO",
+        "NUM_TERMO_NOTIFICACAO_PERDA",
+        "QTD_PARCELAS"
+      ],
+      "profile": {
+        "num_distinct": 586,
+        "null_ratio": 0.523177,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELAMENTO",
+      "table_comment": "Parcelamento dos débitos de um Contribuinte com o Estado do Ceará, de acordo com as regras definidas no Decreto de Parcelamento",
+      "column_name": "NUM_TERMO_NOTIFICACAO_PERDA",
+      "data_type": "VARCHAR2(9)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DSC_URL_TERMO_ALFRESCO",
+        "NUM_PROCESSO",
+        "QTD_PARCELAS",
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 4,
+        "null_ratio": 0.999773,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELAMENTO",
+      "table_comment": "Parcelamento dos débitos de um Contribuinte com o Estado do Ceará, de acordo com as regras definidas no Decreto de Parcelamento",
+      "column_name": "QTD_PARCELAS",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_PROCESSO",
+        "NUM_TERMO_NOTIFICACAO_PERDA",
+        "SEQ_DECRETO_PARCELAMENTO",
+        "SEQ_DECRETO_REFIS_A_VISTA"
+      ],
+      "profile": {
+        "num_distinct": 71,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELAMENTO",
+      "table_comment": "Parcelamento dos débitos de um Contribuinte com o Estado do Ceará, de acordo com as regras definidas no Decreto de Parcelamento",
+      "column_name": "SEQ_DECRETO_PARCELAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "CNAE_DECRETO_PARCELAMENTO",
+        "column": "SEQ_DECRETO_PARCELAMENTO"
+      },
+      "column_neighbors": [
+        "NUM_TERMO_NOTIFICACAO_PERDA",
+        "QTD_PARCELAS",
+        "SEQ_DECRETO_REFIS_A_VISTA",
+        "SEQ_PARCELAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 38,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELAMENTO",
+      "table_comment": "Parcelamento dos débitos de um Contribuinte com o Estado do Ceará, de acordo com as regras definidas no Decreto de Parcelamento",
+      "column_name": "SEQ_DECRETO_REFIS_A_VISTA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "QTD_PARCELAS",
+        "SEQ_DECRETO_PARCELAMENTO",
+        "SEQ_PARCELAMENTO",
+        "SEQ_PARCELAMENTO_ORIGINAL"
+      ],
+      "profile": {
+        "num_distinct": 6,
+        "null_ratio": 0.816176,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELAMENTO",
+      "table_comment": "Parcelamento dos débitos de um Contribuinte com o Estado do Ceará, de acordo com as regras definidas no Decreto de Parcelamento",
+      "column_name": "SEQ_PARCELAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "DEBITO_PARCELAMENTO",
+        "column": "SEQ_PARCELAMENTO"
+      },
+      "column_neighbors": [
+        "SEQ_DECRETO_PARCELAMENTO",
+        "SEQ_DECRETO_REFIS_A_VISTA",
+        "SEQ_PARCELAMENTO_ORIGINAL",
+        "SEQ_PESSOA"
+      ],
+      "profile": {
+        "num_distinct": 21983,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELAMENTO",
+      "table_comment": "Parcelamento dos débitos de um Contribuinte com o Estado do Ceará, de acordo com as regras definidas no Decreto de Parcelamento",
+      "column_name": "SEQ_PARCELAMENTO_ORIGINAL",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DECRETO_REFIS_A_VISTA",
+        "SEQ_PARCELAMENTO",
+        "SEQ_PESSOA",
+        "STA_PARCELAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 743,
+        "null_ratio": 0.960833,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELAMENTO",
+      "table_comment": "Parcelamento dos débitos de um Contribuinte com o Estado do Ceará, de acordo com as regras definidas no Decreto de Parcelamento",
+      "column_name": "SEQ_PESSOA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_PARCELAMENTO",
+        "SEQ_PARCELAMENTO_ORIGINAL",
+        "STA_PARCELAMENTO",
+        "STA_PARCELAMENTO_INTERNET"
+      ],
+      "profile": {
+        "num_distinct": 11337,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELAMENTO",
+      "table_comment": "Parcelamento dos débitos de um Contribuinte com o Estado do Ceará, de acordo com as regras definidas no Decreto de Parcelamento",
+      "column_name": "STA_PARCELAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_PARCELAMENTO_ORIGINAL",
+        "SEQ_PESSOA",
+        "STA_PARCELAMENTO_INTERNET"
+      ],
+      "profile": {
+        "num_distinct": 8,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELAMENTO",
+      "table_comment": "Parcelamento dos débitos de um Contribuinte com o Estado do Ceará, de acordo com as regras definidas no Decreto de Parcelamento",
+      "column_name": "STA_PARCELAMENTO_INTERNET",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_PESSOA",
+        "STA_PARCELAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELA_S345565",
+      "table_comment": "",
+      "column_name": "COD_RECEITA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "RECEITA_DECRETO_PARCELAMENTO",
+        "column": "COD_RECEITA"
+      },
+      "column_neighbors": [
+        "DAT_VENCIMENTO",
+        "NUM_PARCELA"
+      ],
+      "profile": {
+        "num_distinct": 5,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELA_S345565",
+      "table_comment": "",
+      "column_name": "DAT_VENCIMENTO",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_RECEITA",
+        "NUM_PARCELA",
+        "NUM_PERCENTUAL"
+      ],
+      "profile": {
+        "num_distinct": 6526,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELA_S345565",
+      "table_comment": "",
+      "column_name": "NUM_PARCELA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_RECEITA",
+        "DAT_VENCIMENTO",
+        "NUM_PERCENTUAL",
+        "SEQ_DOCUMENTO_CREDITO"
+      ],
+      "profile": {
+        "num_distinct": 120,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELA_S345565",
+      "table_comment": "",
+      "column_name": "NUM_PERCENTUAL",
+      "data_type": "NUMBER(22,8)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_VENCIMENTO",
+        "NUM_PARCELA",
+        "SEQ_DOCUMENTO_CREDITO",
+        "SEQ_PARCELA"
+      ],
+      "profile": {
+        "num_distinct": 19418,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELA_S345565",
+      "table_comment": "",
+      "column_name": "SEQ_DOCUMENTO_CREDITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_PARCELA",
+        "NUM_PERCENTUAL",
+        "SEQ_PARCELA",
+        "SEQ_PARCELAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 121528,
+        "null_ratio": 0.669325,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELA_S345565",
+      "table_comment": "",
+      "column_name": "SEQ_PARCELA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "PARCELA",
+        "column": "SEQ_PARCELA"
+      },
+      "column_neighbors": [
+        "NUM_PERCENTUAL",
+        "SEQ_DOCUMENTO_CREDITO",
+        "SEQ_PARCELAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 382935,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "PARCELA_S345565",
+      "table_comment": "",
+      "column_name": "SEQ_PARCELAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "DEBITO_PARCELAMENTO",
+        "column": "SEQ_PARCELAMENTO"
+      },
+      "column_neighbors": [
+        "SEQ_DOCUMENTO_CREDITO",
+        "SEQ_PARCELA"
+      ],
+      "profile": {
+        "num_distinct": 16866,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "RECEITA_DECRETO_PARCELAMENTO",
+      "table_comment": "Receitas relacionadas a um Decreto de Parcelamento",
+      "column_name": "COD_RECEITA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 11,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "RECEITA_DECRETO_PARCELAMENTO",
+      "table_comment": "Receitas relacionadas a um Decreto de Parcelamento",
+      "column_name": "SEQ_DECRETO_PARCELAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "CNAE_DECRETO_PARCELAMENTO",
+        "column": "SEQ_DECRETO_PARCELAMENTO"
+      },
+      "column_neighbors": [
+        "COD_RECEITA"
+      ],
+      "profile": {
+        "num_distinct": 26,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "REGIME_DECRETO_PARCELAMENTO",
+      "table_comment": "Relação dos Regimes de Recolhimento associados ao Decreto de Parcelamento",
+      "column_name": "COD_REGIME_RECOLHIMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DECRETO_PARCELAMENTO"
+      ],
+      "profile": {
+        "num_distinct": 1,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "REGIME_DECRETO_PARCELAMENTO",
+      "table_comment": "Relação dos Regimes de Recolhimento associados ao Decreto de Parcelamento",
+      "column_name": "SEQ_DECRETO_PARCELAMENTO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "CNAE_DECRETO_PARCELAMENTO",
+        "column": "SEQ_DECRETO_PARCELAMENTO"
+      },
+      "column_neighbors": [
+        "COD_REGIME_RECOLHIMENTO"
+      ],
+      "profile": {
+        "num_distinct": 1,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "COPAF",
+      "table_name": "TABELA_TESTE",
+      "table_comment": "",
+      "column_name": "SEQ_TABELA_TESTE",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    }
+  ]
+}

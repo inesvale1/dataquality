@@ -1,0 +1,3462 @@
+{
+  "schema_name": "conseg",
+  "owner": "CONSEG",
+  "generated_at": "2026-03-25T21:19:04.371208+00:00",
+  "tables": [
+    {
+      "owner": "CONSEG",
+      "table_name": "ACESSO",
+      "table_comment": "",
+      "table_type_inference": "transacao",
+      "primary_keys": [
+        "SEQ_ACESSO"
+      ],
+      "foreign_keys": [
+        "NOM_SISTEMA",
+        "SEQ_USUARIO"
+      ],
+      "main_columns": [
+        "SEQ_ACESSO",
+        "NOM_SISTEMA",
+        "SEQ_USUARIO",
+        "DAT_CONEXAO",
+        "NOM_MAQUINA_NT"
+      ],
+      "related_tables": [
+        "SISTEMA",
+        "USUARIO"
+      ],
+      "row_count": 392377,
+      "column_name_keywords": [
+        "CONEXAO",
+        "DESCONEXAO",
+        "MAQUINA",
+        "SISTEMA",
+        "USUARIO",
+        "ACESSO"
+      ],
+      "existing_column_comments": {
+        "DAT_CONEXAO": "Data da entrada no sistema",
+        "DAT_DESCONEXAO": "Data da saída do sistema",
+        "NOM_SISTEMA": "Nome do sistema aplicativo (CADASTRO,COMETA,SID)",
+        "SEQ_USUARIO": "Sequencial do usuário"
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "CARGO_PERMITIDO_GRUPO",
+      "table_comment": "",
+      "table_type_inference": "associacao",
+      "primary_keys": [
+        "NOM_GRUPO",
+        "SEQ_CARGO_FUNCAO"
+      ],
+      "foreign_keys": [
+        "NOM_GRUPO",
+        "SEQ_CARGO_FUNCAO"
+      ],
+      "main_columns": [
+        "NOM_GRUPO",
+        "SEQ_CARGO_FUNCAO",
+        "SEQ_ACESSO"
+      ],
+      "related_tables": [
+        "GRUPO"
+      ],
+      "row_count": 0,
+      "column_name_keywords": [
+        "GRUPO",
+        "ACESSO",
+        "CARGO",
+        "FUNCAO"
+      ],
+      "existing_column_comments": {
+        "NOM_GRUPO": "Nome do Grupo",
+        "SEQ_ACESSO": "Seqüencial da conexão onde foi alterado ou criado o registro"
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "DESATIVADOS_AD",
+      "table_comment": "",
+      "table_type_inference": "cadastro",
+      "primary_keys": [],
+      "foreign_keys": [],
+      "main_columns": [
+        "MATRICULA"
+      ],
+      "related_tables": [],
+      "row_count": 5504,
+      "column_name_keywords": [
+        "MATRICULA"
+      ],
+      "existing_column_comments": {}
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "GRUPO",
+      "table_comment": "",
+      "table_type_inference": "transacao",
+      "primary_keys": [
+        "NOM_GRUPO"
+      ],
+      "foreign_keys": [
+        "NOM_SISTEMA"
+      ],
+      "main_columns": [
+        "NOM_GRUPO",
+        "NOM_SISTEMA",
+        "DSC_GRUPO",
+        "NOM_ROLE",
+        "STA_GESTOR"
+      ],
+      "related_tables": [
+        "SISTEMA"
+      ],
+      "row_count": 60,
+      "column_name_keywords": [
+        "GRUPO",
+        "ROLE",
+        "SISTEMA",
+        "ACESSO",
+        "GESTOR"
+      ],
+      "existing_column_comments": {
+        "DSC_GRUPO": "Descrição do Grupo",
+        "NOM_GRUPO": "Nome do Grupo",
+        "NOM_ROLE": "Nome da role que será setada na aplicação para os usuários do grupo",
+        "NOM_SISTEMA": "Nome do Sistema aplicativo (CADASTRO,COMETA,SID)",
+        "SEQ_ACESSO": "Sequencial da conexão onde foi alterado ou criado o registro",
+        "STA_GESTOR": "Status que indica se esse é um grupo de gestores ou não",
+        "STA_GRUPO": "Status do grupo"
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "RECURSO_REDE",
+      "table_comment": "",
+      "table_type_inference": "referencia",
+      "primary_keys": [
+        "SEQ_RECURSO_REDE"
+      ],
+      "foreign_keys": [],
+      "main_columns": [
+        "SEQ_RECURSO_REDE",
+        "DAT_ATIVACAO",
+        "NOM_GRUPO_REDE",
+        "NOM_RECURSO_REDE",
+        "DAT_DESATIVACAO"
+      ],
+      "related_tables": [],
+      "row_count": 0,
+      "column_name_keywords": [
+        "ATIVACAO",
+        "DESATIVACAO",
+        "GRUPO",
+        "REDE",
+        "RECURSO",
+        "ACESSO"
+      ],
+      "existing_column_comments": {}
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SISTEMA",
+      "table_comment": "",
+      "table_type_inference": "referencia",
+      "primary_keys": [
+        "NOM_SISTEMA"
+      ],
+      "foreign_keys": [],
+      "main_columns": [
+        "NOM_SISTEMA",
+        "DAT_ULTIMA_VERSAO",
+        "DSC_OBJETIVO_SISTEMA",
+        "DSC_SISTEMA",
+        "NOM_PATH"
+      ],
+      "related_tables": [],
+      "row_count": 22,
+      "column_name_keywords": [
+        "FIM",
+        "PRODUCAO",
+        "INICIO",
+        "ULTIMA",
+        "VERSAO",
+        "OBJETIVO",
+        "SISTEMA",
+        "PATH",
+        "PROGRAMA",
+        "ACESSO"
+      ],
+      "existing_column_comments": {
+        "DAT_FIM_PRODUCAO": "Data final de operação do sistema",
+        "DAT_INICIO_PRODUCAO": "Data de início da operação",
+        "DAT_ULTIMA_VERSAO": "Data da última versão do sistema. Usado para solicitar que o usuário solicite nova cópia do sistema",
+        "DSC_OBJETIVO_SISTEMA": "Objetivo do Sistema",
+        "DSC_SISTEMA": "Descrição do sistema",
+        "NOM_PATH": "Path onde estará instalado o programa (fmx ou exe)",
+        "NOM_PROGRAMA": "Nome do arquivo de programa (EXE/FMX)",
+        "NOM_SISTEMA": "Nome do sistema aplicativo (CADASTRO,COMETA,SID)",
+        "SEQ_ACESSO": "Sequencial da conexão onde foi alterado ou criado o registro",
+        "STA_SISTEMA": "Status do sistema"
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO",
+      "table_comment": "",
+      "table_type_inference": "transacao",
+      "primary_keys": [
+        "SEQ_SOLICITACAO"
+      ],
+      "foreign_keys": [
+        "NOM_GRUPO_ATENDIDO",
+        "NOM_GRUPO_ATUAL",
+        "NOM_GRUPO_SOLICITADO",
+        "NOM_SISTEMA",
+        "SEQ_USUARIO_GESTOR",
+        "SEQ_USUARIO_SOLICITADO",
+        "SEQ_USUARIO_SOLICITANTE"
+      ],
+      "main_columns": [
+        "SEQ_SOLICITACAO",
+        "NOM_GRUPO_ATENDIDO",
+        "NOM_GRUPO_ATUAL",
+        "NOM_GRUPO_SOLICITADO",
+        "NOM_SISTEMA"
+      ],
+      "related_tables": [
+        "SISTEMA"
+      ],
+      "row_count": 12129,
+      "column_name_keywords": [
+        "ORGAO",
+        "LOCAL",
+        "SOLICITADO",
+        "SOLICITANTE",
+        "SOLICITACAO",
+        "ULTIMA",
+        "MUDANCA",
+        "STATUS",
+        "GRUPO",
+        "ATENDIDO",
+        "ATUAL",
+        "SISTEMA",
+        "ACESSO",
+        "USUARIO",
+        "GESTOR"
+      ],
+      "existing_column_comments": {
+        "DAT_SOLICITACAO": "Data da solicitação",
+        "DAT_ULTIMA_MUDANCA_STATUS": "Data da última mudança de status da solicitação",
+        "NOM_GRUPO_ATENDIDO": "Nome do Grupo",
+        "NOM_GRUPO_ATUAL": "Nome do Grupo",
+        "NOM_GRUPO_SOLICITADO": "Nome do Grupo",
+        "NOM_SISTEMA": "Nome do sistema aplicativo (CADASTRO,COMETA,SID)",
+        "SEQ_ACESSO": "Sequencial da conexão onde foi alterado ou criado o registro",
+        "SEQ_SOLICITACAO": "Sequencial da solicitação",
+        "SEQ_USUARIO_GESTOR": "Seqüencial do usuário",
+        "SEQ_USUARIO_SOLICITADO": "Seqüencial do usuário",
+        "SEQ_USUARIO_SOLICITANTE": "Seqüencial do usuário",
+        "STA_SOLICITACAO": "Status da solicitação",
+        "TIP_SOLICITACAO": "Tipo da solicitação",
+        "TXT_OBSERVACAO_GESTOR": "Observação do gestor sobre a solicitação",
+        "TXT_OBSERVACAO_SOLICITANTE": "Observação do solicitante sobre a solicitação"
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO_REDE",
+      "table_comment": "",
+      "table_type_inference": "transacao",
+      "primary_keys": [
+        "SEQ_SOLICITACAO_REDE"
+      ],
+      "foreign_keys": [
+        "SEQ_RECURSO_REDE",
+        "SEQ_USUARIO_GESTOR",
+        "SEQ_USUARIO_SOLICITADO",
+        "SEQ_USUARIO_SOLICITANTE"
+      ],
+      "main_columns": [
+        "SEQ_SOLICITACAO_REDE",
+        "SEQ_RECURSO_REDE",
+        "SEQ_USUARIO_GESTOR",
+        "SEQ_USUARIO_SOLICITADO",
+        "SEQ_USUARIO_SOLICITANTE"
+      ],
+      "related_tables": [
+        "RECURSO_REDE"
+      ],
+      "row_count": 170,
+      "column_name_keywords": [
+        "SOLICITACAO",
+        "ULTIMA",
+        "MUDANCA",
+        "STATUS",
+        "SENHA",
+        "REDE",
+        "ACESSO",
+        "RECURSO",
+        "USUARIO",
+        "GESTOR",
+        "SOLICITADO",
+        "SOLICITANTE",
+        "OBSERVACAO"
+      ],
+      "existing_column_comments": {
+        "SEQ_USUARIO_GESTOR": "Seqüencial do usuário",
+        "SEQ_USUARIO_SOLICITADO": "Seqüencial do usuário",
+        "SEQ_USUARIO_SOLICITANTE": "Seqüencial do usuário",
+        "STA_SOLICITACAO": "Status de uma solicitação"
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "TESTES_GESTORES",
+      "table_comment": "",
+      "table_type_inference": "referencia",
+      "primary_keys": [],
+      "foreign_keys": [],
+      "main_columns": [
+        "NOME",
+        "SISTEMA"
+      ],
+      "related_tables": [],
+      "row_count": 0,
+      "column_name_keywords": [
+        "NOME",
+        "SISTEMA"
+      ],
+      "existing_column_comments": {}
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "TRANSACAO",
+      "table_comment": "",
+      "table_type_inference": "transacao",
+      "primary_keys": [
+        "NOM_SISTEMA",
+        "NOM_TRANSACAO"
+      ],
+      "foreign_keys": [
+        "NOM_SISTEMA"
+      ],
+      "main_columns": [
+        "NOM_SISTEMA",
+        "NOM_TRANSACAO",
+        "NOM_MENU",
+        "STA_TRANSACAO",
+        "DAT_FIM_PRODUCAO"
+      ],
+      "related_tables": [
+        "SISTEMA"
+      ],
+      "row_count": 269,
+      "column_name_keywords": [
+        "FIM",
+        "PRODUCAO",
+        "INICIO",
+        "PARAMETROS",
+        "MENU",
+        "SISTEMA",
+        "TRANSACAO",
+        "ACESSO"
+      ],
+      "existing_column_comments": {
+        "DAT_FIM_PRODUCAO": "Data do fim da Operação",
+        "DAT_INICIO_PRODUCAO": "Data de início da Operação",
+        "NOM_MENU": "Nome do menu que fará a chamada à transação",
+        "NOM_SISTEMA": "Nome do Sistema aplicativo (CADASTRO,COMETA,SID)",
+        "NOM_TRANSACAO": "Nome da Transação",
+        "SEQ_ACESSO": "Seqüencial da conexão onde foi alterado ou criado o registro",
+        "STA_TRANSACAO": "Status da transação"
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "TRANSACAO_GRUPO",
+      "table_comment": "",
+      "table_type_inference": "transacao",
+      "primary_keys": [
+        "DAT_INCLUSAO_GRUPO",
+        "NOM_GRUPO",
+        "NOM_SISTEMA",
+        "NOM_TRANSACAO"
+      ],
+      "foreign_keys": [
+        "NOM_GRUPO",
+        "NOM_SISTEMA",
+        "NOM_TRANSACAO"
+      ],
+      "main_columns": [
+        "DAT_INCLUSAO_GRUPO",
+        "NOM_GRUPO",
+        "NOM_SISTEMA",
+        "NOM_TRANSACAO",
+        "STA_PERMITE_ALTERACAO"
+      ],
+      "related_tables": [
+        "CARGO_PERMITIDO_GRUPO",
+        "SISTEMA",
+        "TRANSACAO"
+      ],
+      "row_count": 776,
+      "column_name_keywords": [
+        "EXCLUSAO",
+        "GRUPO",
+        "INCLUSAO",
+        "SISTEMA",
+        "TRANSACAO",
+        "ACESSO",
+        "PERMITE",
+        "ALTERACAO",
+        "CONSULTA"
+      ],
+      "existing_column_comments": {
+        "DAT_EXCLUSAO_GRUPO": "Data de exclusão da transação no grupo",
+        "DAT_INCLUSAO_GRUPO": "Data de inclusão da transação no grupo",
+        "NOM_GRUPO": "Nome do Grupo",
+        "NOM_SISTEMA": "Nome do sistema aplicativo (CADASTRO,COMETA,SID)",
+        "NOM_TRANSACAO": "Nome da transação",
+        "SEQ_ACESSO": "Sequencial da conexão onde foi alterado ou criado o registro",
+        "STA_PERMITE_ALTERACAO": "Indica se o grupo pode realizar alterações na transação",
+        "STA_PERMITE_CONSULTA": "Indica se o grupo pode realizar consultas na transação",
+        "STA_PERMITE_EXCLUSAO": "Indica se o grupo pode realizar exclusões na transação",
+        "STA_PERMITE_INCLUSAO": "Indica se o grupo pode realizar inclusões na transação",
+        "STA_TRANSACAO_GRUPO": "Status da transação no grupo (indica se os usuários do grupo podem ou não ter acesso à transação"
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO",
+      "table_comment": "",
+      "table_type_inference": "transacao",
+      "primary_keys": [
+        "SEQ_USUARIO"
+      ],
+      "foreign_keys": [
+        "SEQ_CARGO_FUNCAO_CARREIRA",
+        "SEQ_CARGO_FUNCAO_COMISSAO"
+      ],
+      "main_columns": [
+        "SEQ_USUARIO",
+        "SEQ_CARGO_FUNCAO_CARREIRA",
+        "SEQ_CARGO_FUNCAO_COMISSAO",
+        "COD_ORGAO_LOCAL",
+        "DAT_EXPIRACAO_SENHA"
+      ],
+      "related_tables": [],
+      "row_count": 14816,
+      "column_name_keywords": [
+        "CPF",
+        "ORGAO",
+        "LOCAL",
+        "EXPIRACAO",
+        "SENHA",
+        "INCLUSAO",
+        "USUARIO",
+        "EMAIL",
+        "MATRICULA",
+        "TELEFONE",
+        "CARGO",
+        "FUNCAO",
+        "CARREIRA",
+        "COMISSAO",
+        "NOVO"
+      ],
+      "existing_column_comments": {
+        "COD_CPF": "CPF do usuário.",
+        "COD_ORGAO_LOCAL": "Órgão local do usuário",
+        "DAT_INCLUSAO_USUARIO": "Data de inclusão do usuário",
+        "NOM_USUARIO": "Nome do usuário",
+        "NUM_MATRICULA": "Matricula do usuário",
+        "NUM_TELEFONE": "Telefone do usuário",
+        "SEQ_USUARIO": "Seqüencial do usuário",
+        "STA_USUARIO": "Status do usuário",
+        "TIP_USUARIO": "Tipo do usuário : 1 - Fazendario / 2 - Locado / 3 - Externo / 4 - Estagiario / 5 - Atendimento / 6 - Todos (gateway) / 7 - Consultor / 9 - Serviço"
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIOS_CEGET",
+      "table_comment": "",
+      "table_type_inference": "cadastro",
+      "primary_keys": [],
+      "foreign_keys": [],
+      "main_columns": [
+        "NUM_CPF",
+        "LOTACAO",
+        "NOME"
+      ],
+      "related_tables": [],
+      "row_count": 1023,
+      "column_name_keywords": [
+        "LOTACAO",
+        "NOME",
+        "CPF"
+      ],
+      "existing_column_comments": {}
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO_GRUPO",
+      "table_comment": "",
+      "table_type_inference": "associacao",
+      "primary_keys": [
+        "DAT_INCLUSAO_USUARIO",
+        "NOM_GRUPO",
+        "SEQ_USUARIO"
+      ],
+      "foreign_keys": [
+        "NOM_GRUPO",
+        "SEQ_USUARIO"
+      ],
+      "main_columns": [
+        "DAT_INCLUSAO_USUARIO",
+        "NOM_GRUPO",
+        "SEQ_USUARIO",
+        "STA_USUARIO_GRUPO",
+        "DAT_EXCLUSAO_USUARIO"
+      ],
+      "related_tables": [
+        "CARGO_PERMITIDO_GRUPO",
+        "USUARIO"
+      ],
+      "row_count": 2184,
+      "column_name_keywords": [
+        "EXCLUSAO",
+        "USUARIO",
+        "INCLUSAO",
+        "GRUPO",
+        "ACESSO"
+      ],
+      "existing_column_comments": {
+        "DAT_EXCLUSAO_USUARIO": "Data de exclusão do usuário",
+        "DAT_INCLUSAO_USUARIO": "Data de inclusão do usuário no grupo",
+        "NOM_GRUPO": "Nome do Grupo",
+        "SEQ_ACESSO": "Sequencial da conexão onde foi alterado ou criado o registro",
+        "SEQ_USUARIO": "Sequencial do usuário",
+        "STA_USUARIO_GRUPO": "Este flag foi criado para facilitar a pesquisa de usuários ativos no grupo a fim de não usar a data de exclusao = Nulo"
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO_RECURSO_REDE",
+      "table_comment": "",
+      "table_type_inference": "associacao",
+      "primary_keys": [
+        "DAT_CONCESSAO_RECURSO",
+        "SEQ_RECURSO_REDE",
+        "SEQ_USUARIO"
+      ],
+      "foreign_keys": [
+        "SEQ_RECURSO_REDE",
+        "SEQ_USUARIO"
+      ],
+      "main_columns": [
+        "DAT_CONCESSAO_RECURSO",
+        "SEQ_RECURSO_REDE",
+        "SEQ_USUARIO",
+        "STA_USUARIO_RECURSO",
+        "DAT_DESATIVACAO_RECURSO"
+      ],
+      "related_tables": [
+        "RECURSO_REDE",
+        "USUARIO"
+      ],
+      "row_count": 0,
+      "column_name_keywords": [
+        "CONCESSAO",
+        "RECURSO",
+        "DESATIVACAO",
+        "ACESSO",
+        "REDE",
+        "USUARIO"
+      ],
+      "existing_column_comments": {
+        "SEQ_USUARIO": "Seqüencial do usuário",
+        "STA_USUARIO_RECURSO": "Status usado para Sistema, Grupo, Transacao, Transacao_Grupo"
+      }
+    }
+  ],
+  "columns": [
+    {
+      "owner": "CONSEG",
+      "table_name": "ACESSO",
+      "table_comment": "",
+      "column_name": "DAT_CONEXAO",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_DESCONEXAO",
+        "NOM_MAQUINA_NT"
+      ],
+      "profile": {
+        "num_distinct": 392192,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "ACESSO",
+      "table_comment": "",
+      "column_name": "DAT_DESCONEXAO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_CONEXAO",
+        "NOM_MAQUINA_NT",
+        "NOM_SISTEMA"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": 1.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "ACESSO",
+      "table_comment": "",
+      "column_name": "NOM_MAQUINA_NT",
+      "data_type": "VARCHAR2(30)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_CONEXAO",
+        "DAT_DESCONEXAO",
+        "NOM_SISTEMA",
+        "NOM_USUARIO_NT"
+      ],
+      "profile": {
+        "num_distinct": 1342,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "ACESSO",
+      "table_comment": "",
+      "column_name": "NOM_SISTEMA",
+      "data_type": "VARCHAR2(10)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "SISTEMA",
+        "column": "NOM_SISTEMA"
+      },
+      "column_neighbors": [
+        "DAT_DESCONEXAO",
+        "NOM_MAQUINA_NT",
+        "NOM_USUARIO_NT",
+        "SEQ_ACESSO"
+      ],
+      "profile": {
+        "num_distinct": 12,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "ACESSO",
+      "table_comment": "",
+      "column_name": "NOM_USUARIO_NT",
+      "data_type": "VARCHAR2(30)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NOM_MAQUINA_NT",
+        "NOM_SISTEMA",
+        "SEQ_ACESSO",
+        "SEQ_USUARIO"
+      ],
+      "profile": {
+        "num_distinct": 1400,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "ACESSO",
+      "table_comment": "",
+      "column_name": "SEQ_ACESSO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NOM_SISTEMA",
+        "NOM_USUARIO_NT",
+        "SEQ_USUARIO"
+      ],
+      "profile": {
+        "num_distinct": 392377,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "ACESSO",
+      "table_comment": "",
+      "column_name": "SEQ_USUARIO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "USUARIO",
+        "column": "SEQ_USUARIO"
+      },
+      "column_neighbors": [
+        "NOM_USUARIO_NT",
+        "SEQ_ACESSO"
+      ],
+      "profile": {
+        "num_distinct": 696,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "CARGO_PERMITIDO_GRUPO",
+      "table_comment": "",
+      "column_name": "NOM_GRUPO",
+      "data_type": "VARCHAR2(12)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "GRUPO",
+        "column": "NOM_GRUPO"
+      },
+      "column_neighbors": [
+        "SEQ_ACESSO",
+        "SEQ_CARGO_FUNCAO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "CARGO_PERMITIDO_GRUPO",
+      "table_comment": "",
+      "column_name": "SEQ_ACESSO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "ACESSO",
+        "column": "SEQ_ACESSO"
+      },
+      "column_neighbors": [
+        "NOM_GRUPO",
+        "SEQ_CARGO_FUNCAO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "CARGO_PERMITIDO_GRUPO",
+      "table_comment": "",
+      "column_name": "SEQ_CARGO_FUNCAO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NOM_GRUPO",
+        "SEQ_ACESSO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "DESATIVADOS_AD",
+      "table_comment": "",
+      "column_name": "MATRICULA",
+      "data_type": "CHAR(8)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [],
+      "profile": {
+        "num_distinct": 5504,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "GRUPO",
+      "table_comment": "",
+      "column_name": "DSC_GRUPO",
+      "data_type": "VARCHAR2(240)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NOM_GRUPO",
+        "NOM_ROLE"
+      ],
+      "profile": {
+        "num_distinct": 52,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "GRUPO",
+      "table_comment": "",
+      "column_name": "NOM_GRUPO",
+      "data_type": "VARCHAR2(12)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "CARGO_PERMITIDO_GRUPO",
+        "column": "NOM_GRUPO"
+      },
+      "column_neighbors": [
+        "DSC_GRUPO",
+        "NOM_ROLE",
+        "NOM_SISTEMA"
+      ],
+      "profile": {
+        "num_distinct": 60,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "GRUPO",
+      "table_comment": "",
+      "column_name": "NOM_ROLE",
+      "data_type": "VARCHAR2(40)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DSC_GRUPO",
+        "NOM_GRUPO",
+        "NOM_SISTEMA",
+        "SEQ_ACESSO"
+      ],
+      "profile": {
+        "num_distinct": 58,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "GRUPO",
+      "table_comment": "",
+      "column_name": "NOM_SISTEMA",
+      "data_type": "VARCHAR2(10)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "SISTEMA",
+        "column": "NOM_SISTEMA"
+      },
+      "column_neighbors": [
+        "NOM_GRUPO",
+        "NOM_ROLE",
+        "SEQ_ACESSO",
+        "STA_GESTOR"
+      ],
+      "profile": {
+        "num_distinct": 16,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "GRUPO",
+      "table_comment": "",
+      "column_name": "SEQ_ACESSO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "ACESSO",
+        "column": "SEQ_ACESSO"
+      },
+      "column_neighbors": [
+        "NOM_ROLE",
+        "NOM_SISTEMA",
+        "STA_GESTOR",
+        "STA_GRUPO"
+      ],
+      "profile": {
+        "num_distinct": 31,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "GRUPO",
+      "table_comment": "",
+      "column_name": "STA_GESTOR",
+      "data_type": "VARCHAR2(1)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NOM_SISTEMA",
+        "SEQ_ACESSO",
+        "STA_GRUPO"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "GRUPO",
+      "table_comment": "",
+      "column_name": "STA_GRUPO",
+      "data_type": "VARCHAR2(1)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_ACESSO",
+        "STA_GESTOR"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "RECURSO_REDE",
+      "table_comment": "",
+      "column_name": "DAT_ATIVACAO",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_DESATIVACAO",
+        "NOM_GRUPO_REDE"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "RECURSO_REDE",
+      "table_comment": "",
+      "column_name": "DAT_DESATIVACAO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_ATIVACAO",
+        "NOM_GRUPO_REDE",
+        "NOM_RECURSO_REDE"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "RECURSO_REDE",
+      "table_comment": "",
+      "column_name": "NOM_GRUPO_REDE",
+      "data_type": "VARCHAR2(20)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_ATIVACAO",
+        "DAT_DESATIVACAO",
+        "NOM_RECURSO_REDE",
+        "SEQ_ACESSO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "RECURSO_REDE",
+      "table_comment": "",
+      "column_name": "NOM_RECURSO_REDE",
+      "data_type": "VARCHAR2(50)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_DESATIVACAO",
+        "NOM_GRUPO_REDE",
+        "SEQ_ACESSO",
+        "SEQ_RECURSO_REDE"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "RECURSO_REDE",
+      "table_comment": "",
+      "column_name": "SEQ_ACESSO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "ACESSO",
+        "column": "SEQ_ACESSO"
+      },
+      "column_neighbors": [
+        "NOM_GRUPO_REDE",
+        "NOM_RECURSO_REDE",
+        "SEQ_RECURSO_REDE"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "RECURSO_REDE",
+      "table_comment": "",
+      "column_name": "SEQ_RECURSO_REDE",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "USUARIO_RECURSO_REDE",
+        "column": "SEQ_RECURSO_REDE"
+      },
+      "column_neighbors": [
+        "NOM_RECURSO_REDE",
+        "SEQ_ACESSO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SISTEMA",
+      "table_comment": "",
+      "column_name": "DAT_FIM_PRODUCAO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_INICIO_PRODUCAO",
+        "DAT_ULTIMA_VERSAO"
+      ],
+      "profile": {
+        "num_distinct": 1,
+        "null_ratio": 0.954545,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SISTEMA",
+      "table_comment": "",
+      "column_name": "DAT_INICIO_PRODUCAO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_FIM_PRODUCAO",
+        "DAT_ULTIMA_VERSAO",
+        "DSC_OBJETIVO_SISTEMA"
+      ],
+      "profile": {
+        "num_distinct": 18,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SISTEMA",
+      "table_comment": "",
+      "column_name": "DAT_ULTIMA_VERSAO",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_FIM_PRODUCAO",
+        "DAT_INICIO_PRODUCAO",
+        "DSC_OBJETIVO_SISTEMA",
+        "DSC_SISTEMA"
+      ],
+      "profile": {
+        "num_distinct": 18,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SISTEMA",
+      "table_comment": "",
+      "column_name": "DSC_OBJETIVO_SISTEMA",
+      "data_type": "VARCHAR2(180)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_INICIO_PRODUCAO",
+        "DAT_ULTIMA_VERSAO",
+        "DSC_SISTEMA",
+        "NOM_PATH"
+      ],
+      "profile": {
+        "num_distinct": 22,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SISTEMA",
+      "table_comment": "",
+      "column_name": "DSC_SISTEMA",
+      "data_type": "VARCHAR2(30)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_ULTIMA_VERSAO",
+        "DSC_OBJETIVO_SISTEMA",
+        "NOM_PATH",
+        "NOM_PROGRAMA"
+      ],
+      "profile": {
+        "num_distinct": 22,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SISTEMA",
+      "table_comment": "",
+      "column_name": "NOM_PATH",
+      "data_type": "VARCHAR2(255)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DSC_OBJETIVO_SISTEMA",
+        "DSC_SISTEMA",
+        "NOM_PROGRAMA",
+        "NOM_SISTEMA"
+      ],
+      "profile": {
+        "num_distinct": 21,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SISTEMA",
+      "table_comment": "",
+      "column_name": "NOM_PROGRAMA",
+      "data_type": "VARCHAR2(30)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DSC_SISTEMA",
+        "NOM_PATH",
+        "NOM_SISTEMA",
+        "SEQ_ACESSO"
+      ],
+      "profile": {
+        "num_distinct": 22,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SISTEMA",
+      "table_comment": "",
+      "column_name": "NOM_SISTEMA",
+      "data_type": "VARCHAR2(10)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "TRANSACAO",
+        "column": "NOM_SISTEMA"
+      },
+      "column_neighbors": [
+        "NOM_PATH",
+        "NOM_PROGRAMA",
+        "SEQ_ACESSO",
+        "STA_SISTEMA"
+      ],
+      "profile": {
+        "num_distinct": 22,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SISTEMA",
+      "table_comment": "",
+      "column_name": "SEQ_ACESSO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "ACESSO",
+        "column": "SEQ_ACESSO"
+      },
+      "column_neighbors": [
+        "NOM_PROGRAMA",
+        "NOM_SISTEMA",
+        "STA_SISTEMA"
+      ],
+      "profile": {
+        "num_distinct": 18,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SISTEMA",
+      "table_comment": "",
+      "column_name": "STA_SISTEMA",
+      "data_type": "VARCHAR2(1)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NOM_SISTEMA",
+        "SEQ_ACESSO"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO",
+      "table_comment": "",
+      "column_name": "COD_ORGAO_LOCAL_SOLICITADO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_ORGAO_LOCAL_SOLICITANTE",
+        "DAT_SOLICITACAO"
+      ],
+      "profile": {
+        "num_distinct": 151,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO",
+      "table_comment": "",
+      "column_name": "COD_ORGAO_LOCAL_SOLICITANTE",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_ORGAO_LOCAL_SOLICITADO",
+        "DAT_SOLICITACAO",
+        "DAT_ULTIMA_MUDANCA_STATUS"
+      ],
+      "profile": {
+        "num_distinct": 3,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO",
+      "table_comment": "",
+      "column_name": "DAT_SOLICITACAO",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_ORGAO_LOCAL_SOLICITADO",
+        "COD_ORGAO_LOCAL_SOLICITANTE",
+        "DAT_ULTIMA_MUDANCA_STATUS",
+        "NOM_GRUPO_ATENDIDO"
+      ],
+      "profile": {
+        "num_distinct": 12129,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO",
+      "table_comment": "",
+      "column_name": "DAT_ULTIMA_MUDANCA_STATUS",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_ORGAO_LOCAL_SOLICITANTE",
+        "DAT_SOLICITACAO",
+        "NOM_GRUPO_ATENDIDO",
+        "NOM_GRUPO_ATUAL"
+      ],
+      "profile": {
+        "num_distinct": 2450,
+        "null_ratio": 0.798005,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO",
+      "table_comment": "",
+      "column_name": "NOM_GRUPO_ATENDIDO",
+      "data_type": "VARCHAR2(12)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_SOLICITACAO",
+        "DAT_ULTIMA_MUDANCA_STATUS",
+        "NOM_GRUPO_ATUAL",
+        "NOM_GRUPO_SOLICITADO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": 1.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO",
+      "table_comment": "",
+      "column_name": "NOM_GRUPO_ATUAL",
+      "data_type": "VARCHAR2(12)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_ULTIMA_MUDANCA_STATUS",
+        "NOM_GRUPO_ATENDIDO",
+        "NOM_GRUPO_SOLICITADO",
+        "NOM_SISTEMA"
+      ],
+      "profile": {
+        "num_distinct": 30,
+        "null_ratio": 0.982769,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO",
+      "table_comment": "",
+      "column_name": "NOM_GRUPO_SOLICITADO",
+      "data_type": "VARCHAR2(12)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NOM_GRUPO_ATENDIDO",
+        "NOM_GRUPO_ATUAL",
+        "NOM_SISTEMA",
+        "SEQ_ACESSO"
+      ],
+      "profile": {
+        "num_distinct": 49,
+        "null_ratio": 0.805343,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO",
+      "table_comment": "",
+      "column_name": "NOM_SISTEMA",
+      "data_type": "VARCHAR2(10)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "SISTEMA",
+        "column": "NOM_SISTEMA"
+      },
+      "column_neighbors": [
+        "NOM_GRUPO_ATUAL",
+        "NOM_GRUPO_SOLICITADO",
+        "SEQ_ACESSO",
+        "SEQ_SOLICITACAO"
+      ],
+      "profile": {
+        "num_distinct": 15,
+        "null_ratio": 0.797922,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO",
+      "table_comment": "",
+      "column_name": "SEQ_ACESSO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "ACESSO",
+        "column": "SEQ_ACESSO"
+      },
+      "column_neighbors": [
+        "NOM_GRUPO_SOLICITADO",
+        "NOM_SISTEMA",
+        "SEQ_SOLICITACAO",
+        "SEQ_USUARIO_GESTOR"
+      ],
+      "profile": {
+        "num_distinct": 4924,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO",
+      "table_comment": "",
+      "column_name": "SEQ_SOLICITACAO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NOM_SISTEMA",
+        "SEQ_ACESSO",
+        "SEQ_USUARIO_GESTOR",
+        "SEQ_USUARIO_SOLICITADO"
+      ],
+      "profile": {
+        "num_distinct": 12129,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO",
+      "table_comment": "",
+      "column_name": "SEQ_USUARIO_GESTOR",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_ACESSO",
+        "SEQ_SOLICITACAO",
+        "SEQ_USUARIO_SOLICITADO",
+        "SEQ_USUARIO_SOLICITANTE"
+      ],
+      "profile": {
+        "num_distinct": 9,
+        "null_ratio": 0.799489,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO",
+      "table_comment": "",
+      "column_name": "SEQ_USUARIO_SOLICITADO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_SOLICITACAO",
+        "SEQ_USUARIO_GESTOR",
+        "SEQ_USUARIO_SOLICITANTE",
+        "STA_SOLICITACAO"
+      ],
+      "profile": {
+        "num_distinct": 1165,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO",
+      "table_comment": "",
+      "column_name": "SEQ_USUARIO_SOLICITANTE",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_USUARIO_GESTOR",
+        "SEQ_USUARIO_SOLICITADO",
+        "STA_SOLICITACAO",
+        "TIP_SOLICITACAO"
+      ],
+      "profile": {
+        "num_distinct": 13,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO",
+      "table_comment": "",
+      "column_name": "STA_SOLICITACAO",
+      "data_type": "VARCHAR2(2)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_USUARIO_SOLICITADO",
+        "SEQ_USUARIO_SOLICITANTE",
+        "TIP_SOLICITACAO",
+        "TXT_OBSERVACAO_GESTOR"
+      ],
+      "profile": {
+        "num_distinct": 4,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO",
+      "table_comment": "",
+      "column_name": "TIP_SOLICITACAO",
+      "data_type": "VARCHAR2(2)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_USUARIO_SOLICITANTE",
+        "STA_SOLICITACAO",
+        "TXT_OBSERVACAO_GESTOR",
+        "TXT_OBSERVACAO_SOLICITANTE"
+      ],
+      "profile": {
+        "num_distinct": 4,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO",
+      "table_comment": "",
+      "column_name": "TXT_OBSERVACAO_GESTOR",
+      "data_type": "VARCHAR2(250)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "STA_SOLICITACAO",
+        "TIP_SOLICITACAO",
+        "TXT_OBSERVACAO_SOLICITANTE"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": 1.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO",
+      "table_comment": "",
+      "column_name": "TXT_OBSERVACAO_SOLICITANTE",
+      "data_type": "VARCHAR2(250)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "TIP_SOLICITACAO",
+        "TXT_OBSERVACAO_GESTOR"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.99967,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO_REDE",
+      "table_comment": "",
+      "column_name": "DAT_SOLICITACAO",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_ULTIMA_MUDANCA_STATUS",
+        "NOM_SENHA_REDE"
+      ],
+      "profile": {
+        "num_distinct": 170,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO_REDE",
+      "table_comment": "",
+      "column_name": "DAT_ULTIMA_MUDANCA_STATUS",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_SOLICITACAO",
+        "NOM_SENHA_REDE",
+        "SEQ_ACESSO"
+      ],
+      "profile": {
+        "num_distinct": 94,
+        "null_ratio": 0.447059,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO_REDE",
+      "table_comment": "",
+      "column_name": "NOM_SENHA_REDE",
+      "data_type": "VARCHAR2(14)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_SOLICITACAO",
+        "DAT_ULTIMA_MUDANCA_STATUS",
+        "SEQ_ACESSO",
+        "SEQ_RECURSO_REDE"
+      ],
+      "profile": {
+        "num_distinct": 143,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO_REDE",
+      "table_comment": "",
+      "column_name": "SEQ_ACESSO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "ACESSO",
+        "column": "SEQ_ACESSO"
+      },
+      "column_neighbors": [
+        "DAT_ULTIMA_MUDANCA_STATUS",
+        "NOM_SENHA_REDE",
+        "SEQ_RECURSO_REDE",
+        "SEQ_SOLICITACAO_REDE"
+      ],
+      "profile": {
+        "num_distinct": 124,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO_REDE",
+      "table_comment": "",
+      "column_name": "SEQ_RECURSO_REDE",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "RECURSO_REDE",
+        "column": "SEQ_RECURSO_REDE"
+      },
+      "column_neighbors": [
+        "NOM_SENHA_REDE",
+        "SEQ_ACESSO",
+        "SEQ_SOLICITACAO_REDE",
+        "SEQ_USUARIO_GESTOR"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": 1.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO_REDE",
+      "table_comment": "",
+      "column_name": "SEQ_SOLICITACAO_REDE",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_ACESSO",
+        "SEQ_RECURSO_REDE",
+        "SEQ_USUARIO_GESTOR",
+        "SEQ_USUARIO_SOLICITADO"
+      ],
+      "profile": {
+        "num_distinct": 170,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO_REDE",
+      "table_comment": "",
+      "column_name": "SEQ_USUARIO_GESTOR",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_RECURSO_REDE",
+        "SEQ_SOLICITACAO_REDE",
+        "SEQ_USUARIO_SOLICITADO",
+        "SEQ_USUARIO_SOLICITANTE"
+      ],
+      "profile": {
+        "num_distinct": 6,
+        "null_ratio": 0.447059,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO_REDE",
+      "table_comment": "",
+      "column_name": "SEQ_USUARIO_SOLICITADO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_SOLICITACAO_REDE",
+        "SEQ_USUARIO_GESTOR",
+        "SEQ_USUARIO_SOLICITANTE",
+        "STA_SOLICITACAO"
+      ],
+      "profile": {
+        "num_distinct": 134,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO_REDE",
+      "table_comment": "",
+      "column_name": "SEQ_USUARIO_SOLICITANTE",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_USUARIO_GESTOR",
+        "SEQ_USUARIO_SOLICITADO",
+        "STA_SOLICITACAO",
+        "TIP_SOLICITACAO"
+      ],
+      "profile": {
+        "num_distinct": 9,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO_REDE",
+      "table_comment": "",
+      "column_name": "STA_SOLICITACAO",
+      "data_type": "VARCHAR2(2)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_USUARIO_SOLICITADO",
+        "SEQ_USUARIO_SOLICITANTE",
+        "TIP_SOLICITACAO",
+        "TXT_OBSERVACAO_GESTOR"
+      ],
+      "profile": {
+        "num_distinct": 3,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO_REDE",
+      "table_comment": "",
+      "column_name": "TIP_SOLICITACAO",
+      "data_type": "VARCHAR2(2)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_USUARIO_SOLICITANTE",
+        "STA_SOLICITACAO",
+        "TXT_OBSERVACAO_GESTOR",
+        "TXT_OBSERVACAO_SOLICITANTE"
+      ],
+      "profile": {
+        "num_distinct": 1,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO_REDE",
+      "table_comment": "",
+      "column_name": "TXT_OBSERVACAO_GESTOR",
+      "data_type": "VARCHAR2(250)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "STA_SOLICITACAO",
+        "TIP_SOLICITACAO",
+        "TXT_OBSERVACAO_SOLICITANTE"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": 1.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "SOLICITACAO_REDE",
+      "table_comment": "",
+      "column_name": "TXT_OBSERVACAO_SOLICITANTE",
+      "data_type": "VARCHAR2(250)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "TIP_SOLICITACAO",
+        "TXT_OBSERVACAO_GESTOR"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": 1.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "TESTES_GESTORES",
+      "table_comment": "",
+      "column_name": "NOME",
+      "data_type": "VARCHAR2(60)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SISTEMA"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "TESTES_GESTORES",
+      "table_comment": "",
+      "column_name": "SISTEMA",
+      "data_type": "VARCHAR2(30)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NOME"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "TRANSACAO",
+      "table_comment": "",
+      "column_name": "DAT_FIM_PRODUCAO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_INICIO_PRODUCAO",
+        "DSC_PARAMETROS"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": 1.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "TRANSACAO",
+      "table_comment": "",
+      "column_name": "DAT_INICIO_PRODUCAO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_FIM_PRODUCAO",
+        "DSC_PARAMETROS",
+        "NOM_MENU"
+      ],
+      "profile": {
+        "num_distinct": 76,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "TRANSACAO",
+      "table_comment": "",
+      "column_name": "DSC_PARAMETROS",
+      "data_type": "VARCHAR2(600)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_FIM_PRODUCAO",
+        "DAT_INICIO_PRODUCAO",
+        "NOM_MENU",
+        "NOM_SISTEMA"
+      ],
+      "profile": {
+        "num_distinct": 56,
+        "null_ratio": 0.747212,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "TRANSACAO",
+      "table_comment": "",
+      "column_name": "NOM_MENU",
+      "data_type": "VARCHAR2(30)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_INICIO_PRODUCAO",
+        "DSC_PARAMETROS",
+        "NOM_SISTEMA",
+        "NOM_TRANSACAO"
+      ],
+      "profile": {
+        "num_distinct": 43,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "TRANSACAO",
+      "table_comment": "",
+      "column_name": "NOM_SISTEMA",
+      "data_type": "VARCHAR2(10)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "SISTEMA",
+        "column": "NOM_SISTEMA"
+      },
+      "column_neighbors": [
+        "DSC_PARAMETROS",
+        "NOM_MENU",
+        "NOM_TRANSACAO",
+        "SEQ_ACESSO"
+      ],
+      "profile": {
+        "num_distinct": 12,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "TRANSACAO",
+      "table_comment": "",
+      "column_name": "NOM_TRANSACAO",
+      "data_type": "VARCHAR2(40)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "TRANSACAO_GRUPO",
+        "column": "NOM_TRANSACAO"
+      },
+      "column_neighbors": [
+        "NOM_MENU",
+        "NOM_SISTEMA",
+        "SEQ_ACESSO",
+        "STA_TRANSACAO"
+      ],
+      "profile": {
+        "num_distinct": 267,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "TRANSACAO",
+      "table_comment": "",
+      "column_name": "SEQ_ACESSO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "ACESSO",
+        "column": "SEQ_ACESSO"
+      },
+      "column_neighbors": [
+        "NOM_SISTEMA",
+        "NOM_TRANSACAO",
+        "STA_TRANSACAO"
+      ],
+      "profile": {
+        "num_distinct": 66,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "TRANSACAO",
+      "table_comment": "",
+      "column_name": "STA_TRANSACAO",
+      "data_type": "VARCHAR2(1)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NOM_TRANSACAO",
+        "SEQ_ACESSO"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "TRANSACAO_GRUPO",
+      "table_comment": "",
+      "column_name": "DAT_EXCLUSAO_GRUPO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_INCLUSAO_GRUPO",
+        "NOM_GRUPO"
+      ],
+      "profile": {
+        "num_distinct": 1,
+        "null_ratio": 0.994845,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "TRANSACAO_GRUPO",
+      "table_comment": "",
+      "column_name": "DAT_INCLUSAO_GRUPO",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_EXCLUSAO_GRUPO",
+        "NOM_GRUPO",
+        "NOM_SISTEMA"
+      ],
+      "profile": {
+        "num_distinct": 58,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "TRANSACAO_GRUPO",
+      "table_comment": "",
+      "column_name": "NOM_GRUPO",
+      "data_type": "VARCHAR2(12)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "CARGO_PERMITIDO_GRUPO",
+        "column": "NOM_GRUPO"
+      },
+      "column_neighbors": [
+        "DAT_EXCLUSAO_GRUPO",
+        "DAT_INCLUSAO_GRUPO",
+        "NOM_SISTEMA",
+        "NOM_TRANSACAO"
+      ],
+      "profile": {
+        "num_distinct": 47,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "TRANSACAO_GRUPO",
+      "table_comment": "",
+      "column_name": "NOM_SISTEMA",
+      "data_type": "VARCHAR2(10)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "SISTEMA",
+        "column": "NOM_SISTEMA"
+      },
+      "column_neighbors": [
+        "DAT_INCLUSAO_GRUPO",
+        "NOM_GRUPO",
+        "NOM_TRANSACAO",
+        "SEQ_ACESSO"
+      ],
+      "profile": {
+        "num_distinct": 11,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "TRANSACAO_GRUPO",
+      "table_comment": "",
+      "column_name": "NOM_TRANSACAO",
+      "data_type": "VARCHAR2(40)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "TRANSACAO",
+        "column": "NOM_TRANSACAO"
+      },
+      "column_neighbors": [
+        "NOM_GRUPO",
+        "NOM_SISTEMA",
+        "SEQ_ACESSO",
+        "STA_PERMITE_ALTERACAO"
+      ],
+      "profile": {
+        "num_distinct": 202,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "TRANSACAO_GRUPO",
+      "table_comment": "",
+      "column_name": "SEQ_ACESSO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "ACESSO",
+        "column": "SEQ_ACESSO"
+      },
+      "column_neighbors": [
+        "NOM_SISTEMA",
+        "NOM_TRANSACAO",
+        "STA_PERMITE_ALTERACAO",
+        "STA_PERMITE_CONSULTA"
+      ],
+      "profile": {
+        "num_distinct": 27,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "TRANSACAO_GRUPO",
+      "table_comment": "",
+      "column_name": "STA_PERMITE_ALTERACAO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NOM_TRANSACAO",
+        "SEQ_ACESSO",
+        "STA_PERMITE_CONSULTA",
+        "STA_PERMITE_EXCLUSAO"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "TRANSACAO_GRUPO",
+      "table_comment": "",
+      "column_name": "STA_PERMITE_CONSULTA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_ACESSO",
+        "STA_PERMITE_ALTERACAO",
+        "STA_PERMITE_EXCLUSAO",
+        "STA_PERMITE_INCLUSAO"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "TRANSACAO_GRUPO",
+      "table_comment": "",
+      "column_name": "STA_PERMITE_EXCLUSAO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "STA_PERMITE_ALTERACAO",
+        "STA_PERMITE_CONSULTA",
+        "STA_PERMITE_INCLUSAO",
+        "STA_TRANSACAO_GRUPO"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "TRANSACAO_GRUPO",
+      "table_comment": "",
+      "column_name": "STA_PERMITE_INCLUSAO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "STA_PERMITE_CONSULTA",
+        "STA_PERMITE_EXCLUSAO",
+        "STA_TRANSACAO_GRUPO"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "TRANSACAO_GRUPO",
+      "table_comment": "",
+      "column_name": "STA_TRANSACAO_GRUPO",
+      "data_type": "VARCHAR2(1)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "STA_PERMITE_EXCLUSAO",
+        "STA_PERMITE_INCLUSAO"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO",
+      "table_comment": "",
+      "column_name": "COD_CPF",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_ORGAO_LOCAL",
+        "DAT_EXPIRACAO_SENHA"
+      ],
+      "profile": {
+        "num_distinct": 4992,
+        "null_ratio": 0.000135,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO",
+      "table_comment": "",
+      "column_name": "COD_ORGAO_LOCAL",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_CPF",
+        "DAT_EXPIRACAO_SENHA",
+        "DAT_INCLUSAO_USUARIO"
+      ],
+      "profile": {
+        "num_distinct": 502,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO",
+      "table_comment": "",
+      "column_name": "DAT_EXPIRACAO_SENHA",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_CPF",
+        "COD_ORGAO_LOCAL",
+        "DAT_INCLUSAO_USUARIO",
+        "NOM_EMAIL"
+      ],
+      "profile": {
+        "num_distinct": 3008,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO",
+      "table_comment": "",
+      "column_name": "DAT_INCLUSAO_USUARIO",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "USUARIO_GRUPO",
+        "column": "DAT_INCLUSAO_USUARIO"
+      },
+      "column_neighbors": [
+        "COD_ORGAO_LOCAL",
+        "DAT_EXPIRACAO_SENHA",
+        "NOM_EMAIL",
+        "NOM_USUARIO"
+      ],
+      "profile": {
+        "num_distinct": 3175,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO",
+      "table_comment": "",
+      "column_name": "NOM_EMAIL",
+      "data_type": "VARCHAR2(50)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_EXPIRACAO_SENHA",
+        "DAT_INCLUSAO_USUARIO",
+        "NOM_USUARIO",
+        "NUM_MATRICULA"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": 1.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO",
+      "table_comment": "",
+      "column_name": "NOM_USUARIO",
+      "data_type": "VARCHAR2(50)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_INCLUSAO_USUARIO",
+        "NOM_EMAIL",
+        "NUM_MATRICULA",
+        "NUM_TELEFONE"
+      ],
+      "profile": {
+        "num_distinct": 12561,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO",
+      "table_comment": "",
+      "column_name": "NUM_MATRICULA",
+      "data_type": "VARCHAR2(8)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": true,
+      "references": {},
+      "column_neighbors": [
+        "NOM_EMAIL",
+        "NOM_USUARIO",
+        "NUM_TELEFONE",
+        "SEQ_CARGO_FUNCAO_CARREIRA"
+      ],
+      "profile": {
+        "num_distinct": 14816,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO",
+      "table_comment": "",
+      "column_name": "NUM_TELEFONE",
+      "data_type": "VARCHAR2(12)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NOM_USUARIO",
+        "NUM_MATRICULA",
+        "SEQ_CARGO_FUNCAO_CARREIRA",
+        "SEQ_CARGO_FUNCAO_COMISSAO"
+      ],
+      "profile": {
+        "num_distinct": 3000,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO",
+      "table_comment": "",
+      "column_name": "SEQ_CARGO_FUNCAO_CARREIRA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_MATRICULA",
+        "NUM_TELEFONE",
+        "SEQ_CARGO_FUNCAO_COMISSAO",
+        "SEQ_USUARIO"
+      ],
+      "profile": {
+        "num_distinct": 43,
+        "null_ratio": 0.40814,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO",
+      "table_comment": "",
+      "column_name": "SEQ_CARGO_FUNCAO_COMISSAO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_TELEFONE",
+        "SEQ_CARGO_FUNCAO_CARREIRA",
+        "SEQ_USUARIO",
+        "STA_NOVO_BANCO"
+      ],
+      "profile": {
+        "num_distinct": 127,
+        "null_ratio": 0.373245,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO",
+      "table_comment": "",
+      "column_name": "SEQ_USUARIO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "USUARIO_GRUPO",
+        "column": "SEQ_USUARIO"
+      },
+      "column_neighbors": [
+        "SEQ_CARGO_FUNCAO_CARREIRA",
+        "SEQ_CARGO_FUNCAO_COMISSAO",
+        "STA_NOVO_BANCO",
+        "STA_NOVO_REDE"
+      ],
+      "profile": {
+        "num_distinct": 14816,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO",
+      "table_comment": "",
+      "column_name": "STA_NOVO_BANCO",
+      "data_type": "VARCHAR2(1)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_CARGO_FUNCAO_COMISSAO",
+        "SEQ_USUARIO",
+        "STA_NOVO_REDE",
+        "STA_USUARIO"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO",
+      "table_comment": "",
+      "column_name": "STA_NOVO_REDE",
+      "data_type": "VARCHAR2(1)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_USUARIO",
+        "STA_NOVO_BANCO",
+        "STA_USUARIO",
+        "TIP_USUARIO"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO",
+      "table_comment": "",
+      "column_name": "STA_USUARIO",
+      "data_type": "VARCHAR2(1)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "STA_NOVO_BANCO",
+        "STA_NOVO_REDE",
+        "TIP_USUARIO"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO",
+      "table_comment": "",
+      "column_name": "TIP_USUARIO",
+      "data_type": "VARCHAR2(1)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "STA_NOVO_REDE",
+        "STA_USUARIO"
+      ],
+      "profile": {
+        "num_distinct": 7,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIOS_CEGET",
+      "table_comment": "",
+      "column_name": "LOTACAO",
+      "data_type": "VARCHAR2(30)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NOME",
+        "NUM_CPF"
+      ],
+      "profile": {
+        "num_distinct": 108,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIOS_CEGET",
+      "table_comment": "",
+      "column_name": "NOME",
+      "data_type": "VARCHAR2(60)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "LOTACAO",
+        "NUM_CPF"
+      ],
+      "profile": {
+        "num_distinct": 1023,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIOS_CEGET",
+      "table_comment": "",
+      "column_name": "NUM_CPF",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "LOTACAO",
+        "NOME"
+      ],
+      "profile": {
+        "num_distinct": 1022,
+        "null_ratio": 0.000978,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO_GRUPO",
+      "table_comment": "",
+      "column_name": "DAT_EXCLUSAO_USUARIO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_INCLUSAO_USUARIO",
+        "NOM_GRUPO"
+      ],
+      "profile": {
+        "num_distinct": 1569,
+        "null_ratio": 0.08837,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO_GRUPO",
+      "table_comment": "",
+      "column_name": "DAT_INCLUSAO_USUARIO",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_EXCLUSAO_USUARIO",
+        "NOM_GRUPO",
+        "SEQ_ACESSO"
+      ],
+      "profile": {
+        "num_distinct": 2184,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO_GRUPO",
+      "table_comment": "",
+      "column_name": "NOM_GRUPO",
+      "data_type": "VARCHAR2(12)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "CARGO_PERMITIDO_GRUPO",
+        "column": "NOM_GRUPO"
+      },
+      "column_neighbors": [
+        "DAT_EXCLUSAO_USUARIO",
+        "DAT_INCLUSAO_USUARIO",
+        "SEQ_ACESSO",
+        "SEQ_USUARIO"
+      ],
+      "profile": {
+        "num_distinct": 46,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO_GRUPO",
+      "table_comment": "",
+      "column_name": "SEQ_ACESSO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "ACESSO",
+        "column": "SEQ_ACESSO"
+      },
+      "column_neighbors": [
+        "DAT_INCLUSAO_USUARIO",
+        "NOM_GRUPO",
+        "SEQ_USUARIO",
+        "STA_USUARIO_GRUPO"
+      ],
+      "profile": {
+        "num_distinct": 795,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO_GRUPO",
+      "table_comment": "",
+      "column_name": "SEQ_USUARIO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "USUARIO",
+        "column": "SEQ_USUARIO"
+      },
+      "column_neighbors": [
+        "NOM_GRUPO",
+        "SEQ_ACESSO",
+        "STA_USUARIO_GRUPO"
+      ],
+      "profile": {
+        "num_distinct": 1109,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO_GRUPO",
+      "table_comment": "",
+      "column_name": "STA_USUARIO_GRUPO",
+      "data_type": "VARCHAR2(1)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_ACESSO",
+        "SEQ_USUARIO"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO_RECURSO_REDE",
+      "table_comment": "",
+      "column_name": "DAT_CONCESSAO_RECURSO",
+      "data_type": "DATE",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_DESATIVACAO_RECURSO",
+        "SEQ_ACESSO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO_RECURSO_REDE",
+      "table_comment": "",
+      "column_name": "DAT_DESATIVACAO_RECURSO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_CONCESSAO_RECURSO",
+        "SEQ_ACESSO",
+        "SEQ_RECURSO_REDE"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO_RECURSO_REDE",
+      "table_comment": "",
+      "column_name": "SEQ_ACESSO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {
+        "table": "ACESSO",
+        "column": "SEQ_ACESSO"
+      },
+      "column_neighbors": [
+        "DAT_CONCESSAO_RECURSO",
+        "DAT_DESATIVACAO_RECURSO",
+        "SEQ_RECURSO_REDE",
+        "SEQ_USUARIO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO_RECURSO_REDE",
+      "table_comment": "",
+      "column_name": "SEQ_RECURSO_REDE",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "RECURSO_REDE",
+        "column": "SEQ_RECURSO_REDE"
+      },
+      "column_neighbors": [
+        "DAT_DESATIVACAO_RECURSO",
+        "SEQ_ACESSO",
+        "SEQ_USUARIO",
+        "STA_USUARIO_RECURSO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO_RECURSO_REDE",
+      "table_comment": "",
+      "column_name": "SEQ_USUARIO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "USUARIO",
+        "column": "SEQ_USUARIO"
+      },
+      "column_neighbors": [
+        "SEQ_ACESSO",
+        "SEQ_RECURSO_REDE",
+        "STA_USUARIO_RECURSO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "CONSEG",
+      "table_name": "USUARIO_RECURSO_REDE",
+      "table_comment": "",
+      "column_name": "STA_USUARIO_RECURSO",
+      "data_type": "VARCHAR2(1)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_RECURSO_REDE",
+        "SEQ_USUARIO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": null,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    }
+  ]
+}

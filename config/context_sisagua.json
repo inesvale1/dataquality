@@ -1,0 +1,1356 @@
+{
+  "schema_name": "sisagua",
+  "owner": "SISAGUA",
+  "generated_at": "2026-03-25T21:19:47.285309+00:00",
+  "tables": [
+    {
+      "owner": "SISAGUA",
+      "table_name": "GRAFICA",
+      "table_comment": "TABELA QUE REGISTRA AS GRAFICAS HABILITADAS PARA GERAÇÃO DE PEDIDOS DE SELOS E IMPRESSÃO DE SELOS",
+      "table_type_inference": "referencia",
+      "primary_keys": [
+        "SEQ_GRAFICA"
+      ],
+      "foreign_keys": [],
+      "main_columns": [
+        "SEQ_GRAFICA",
+        "COD_CNPJ",
+        "NOM_GRAFICA",
+        "DAT_FIM",
+        "DAT_INICIO"
+      ],
+      "related_tables": [],
+      "row_count": 2,
+      "column_name_keywords": [
+        "CNPJ",
+        "FIM",
+        "INICIO",
+        "GRAFICA",
+        "SENHA",
+        "URL",
+        "USUARIO",
+        "ATIVA"
+      ],
+      "existing_column_comments": {
+        "COD_CNPJ": "cod cnpj da gráfica",
+        "DAT_FIM": "Data de fim de atuação da gráfica para emissão de selos",
+        "DAT_INICIO": "Data de início de atuação da gráfica para emissão de selos",
+        "NOM_GRAFICA": "nome da gráfica",
+        "NOM_SENHA": "senha de usuário do sistema que terá acesso aos serviços da sefaz",
+        "NOM_URL": "URL dos serviços disponibilizados pela gráfica para acesso pela SEFAZ-CE",
+        "NOM_USUARIO": "nome de usuário do sistema que terá acesso aos serviços da sefaz",
+        "SEQ_GRAFICA": "CAMPO CHAVE DA TABELA",
+        "STA_ATIVA": "status que indica se a gráfica está atualmente habilitada a emitir selos"
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO",
+      "table_comment": "TABELA QUE REGISTRA OS PEDIDOS DE IMPRESSÃO DE SELEOS REALIZADOS NO SISTEMA DA GRÁFICA",
+      "table_type_inference": "transacao",
+      "primary_keys": [
+        "SEQ_PEDIDO"
+      ],
+      "foreign_keys": [
+        "SEQ_DEBITO_CC",
+        "SEQ_GRAFICA"
+      ],
+      "main_columns": [
+        "SEQ_PEDIDO",
+        "SEQ_DEBITO_CC",
+        "SEQ_GRAFICA",
+        "COD_CNPJ",
+        "COD_PEDIDO"
+      ],
+      "related_tables": [
+        "GRAFICA"
+      ],
+      "row_count": 18049,
+      "column_name_keywords": [
+        "CNPJ",
+        "DEBITO",
+        "PEDIDO",
+        "VENCIMENTO",
+        "CHAVE",
+        "NFE",
+        "SELOS",
+        "GRAFICA",
+        "CREDENCIADO",
+        "REGIME",
+        "ESPECIAL",
+        "AGUA",
+        "UID",
+        "GERACAO",
+        "SELO"
+      ],
+      "existing_column_comments": {
+        "COD_CNPJ": "cnpj da empresa solicitante",
+        "COD_DEBITO": "código do débito gerado no copaf",
+        "COD_PEDIDO": "código do pedido enviado pela gráfica",
+        "DAT_PEDIDO": "Data do Pedido",
+        "DAT_VENCIMENTO": "Data do vencimento do débito gerado",
+        "NUM_CHAVE_NFE": "Chave da NFE referente ao pedido de selos",
+        "QTD_SELOS": "quantidade de selos do pedido",
+        "SEQ_DEBITO_CC": "Campo chave primaria da tabela que irá utilizar a sequence SEQ_DEBITO.",
+        "SEQ_GRAFICA": "chave estrangeira - sequencial da gráfica onde o pedido foi originado",
+        "SEQ_PEDIDO": "SEQUENCIAL CHAVE DA TABELA",
+        "STA_CREDENCIADO": "INDICATIVO SE O SOLICITANTE É CREDENCIADO\n0-Não Credenciado\n1-Credenciado",
+        "STA_PEDIDO": "status do pedido\nNOVO(1),\nAUTORIZADO(2),\nAUTORIZACAO_PENDENTE(3),\nCANCELADO_A_PEDIDO(4),\nPAGO(5),\nCANCELADO_POR_PRAZO(6);",
+        "STA_REGIME_ESPECIAL": "INDICATIVO SE O SOLICITANTE POSSUI REGIME ESPECIAL\n0-Não Possui Regime Especial\n1-Possui Regime Especial",
+        "TIP_AGUA": "Tipo de água\n1-Mineral\n2-Adicionada de sais",
+        "UID_GERACAO_DEBITO": "Campo responsável por identificar uma solicitação de criação de débito  no sistema de conta corrente.",
+        "VLR_PEDIDO": "Valor total do pedido",
+        "VLR_SELO": "Valor unitário do Selo para o pedido"
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO_FLUXO",
+      "table_comment": "Tabela com os fluxos dos pedidos",
+      "table_type_inference": "transacao",
+      "primary_keys": [],
+      "foreign_keys": [
+        "SEQ_PEDIDO_GRAFICA"
+      ],
+      "main_columns": [
+        "SEQ_PEDIDO_GRAFICA",
+        "DAT_FLUXO",
+        "DAT_PROCESSAMENTO",
+        "DSC_FLUXO"
+      ],
+      "related_tables": [
+        "PEDIDO_GRAFICA"
+      ],
+      "row_count": 32920523,
+      "column_name_keywords": [
+        "FLUXO",
+        "PROCESSAMENTO",
+        "PEDIDO",
+        "GRAFICA"
+      ],
+      "existing_column_comments": {
+        "DAT_FLUXO": "DATA A AÇÃO DO FLUXO",
+        "DAT_PROCESSAMENTO": "Data do processamento do fluxo.",
+        "DSC_FLUXO": "DESCRIÇÃO DA AÇÃO DO FLUXO",
+        "SEQ_PEDIDO_GRAFICA": "CHAVE ESTRANGEIRA DO PEDIDO"
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO_GRAFICA",
+      "table_comment": "Todos os pedidos recebidos pela gráfica",
+      "table_type_inference": "transacao",
+      "primary_keys": [
+        "SEQ_PEDIDO_GRAFICA"
+      ],
+      "foreign_keys": [
+        "SEQ_GRAFICA"
+      ],
+      "main_columns": [
+        "SEQ_PEDIDO_GRAFICA",
+        "SEQ_GRAFICA",
+        "COD_CNPJ",
+        "COD_PEDIDO",
+        "DAT_PEDIDO"
+      ],
+      "related_tables": [
+        "GRAFICA"
+      ],
+      "row_count": 3159,
+      "column_name_keywords": [
+        "CNPJ",
+        "PEDIDO",
+        "VALIDADE",
+        "SELO",
+        "OBSERVACAO",
+        "RAZAO",
+        "SOCIAL",
+        "SELOS",
+        "GRAFICA",
+        "TOTAL",
+        "UNITARIO"
+      ],
+      "existing_column_comments": {
+        "COD_CNPJ": "CNPJ DO SOLICITANTE",
+        "COD_PEDIDO": "CÓDIGO DO PEDIDO",
+        "DAT_PEDIDO": "DATA DO PEDIDO",
+        "DAT_VALIDADE_SELO": "DATA DE VALIDADE DOS SELOS DO PEDIDO",
+        "DSC_OBSERVACAO": "OBSERVAÇÃO",
+        "DSC_RAZAO_SOCIAL": "RAQZÃO SOCIAL DO SOLICITANTE",
+        "QTD_SELOS": "QUANTIDADE DE SELOS DO PEDIDO",
+        "SEQ_GRAFICA": "chave estrangeira - gráfica onde o pedido foi originado",
+        "SEQ_PEDIDO_GRAFICA": "SEQUENCIAL DO PEDIDO",
+        "STA_PEDIDO": "STATUS DO PEDIDO",
+        "VLR_TOTAL": "VALOR TOTAL DO PEDIDO",
+        "VLR_UNITARIO": "VALOR DE CADA SELO"
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "SELO",
+      "table_comment": "Tabela de selos",
+      "table_type_inference": "cadastro",
+      "primary_keys": [
+        "SEQ_SELO"
+      ],
+      "foreign_keys": [
+        "SEQ_PEDIDO"
+      ],
+      "main_columns": [
+        "SEQ_SELO",
+        "SEQ_PEDIDO",
+        "NUM_ALEATORIO",
+        "NUM_SELO"
+      ],
+      "related_tables": [
+        "PEDIDO"
+      ],
+      "row_count": 140121017,
+      "column_name_keywords": [
+        "ALEATORIO",
+        "SELO",
+        "PEDIDO"
+      ],
+      "existing_column_comments": {
+        "NUM_ALEATORIO": "Número Aleatório do SELO",
+        "NUM_SELO": "numero de cada selo gerado para o pedido",
+        "SEQ_PEDIDO": "Sequenciado do pedido relacionado",
+        "SEQ_SELO": "campo chave"
+      }
+    }
+  ],
+  "columns": [
+    {
+      "owner": "SISAGUA",
+      "table_name": "GRAFICA",
+      "table_comment": "TABELA QUE REGISTRA AS GRAFICAS HABILITADAS PARA GERAÇÃO DE PEDIDOS DE SELOS E IMPRESSÃO DE SELOS",
+      "column_name": "COD_CNPJ",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_FIM",
+        "DAT_INICIO"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "GRAFICA",
+      "table_comment": "TABELA QUE REGISTRA AS GRAFICAS HABILITADAS PARA GERAÇÃO DE PEDIDOS DE SELOS E IMPRESSÃO DE SELOS",
+      "column_name": "DAT_FIM",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_CNPJ",
+        "DAT_INICIO",
+        "NOM_GRAFICA"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": 1.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "GRAFICA",
+      "table_comment": "TABELA QUE REGISTRA AS GRAFICAS HABILITADAS PARA GERAÇÃO DE PEDIDOS DE SELOS E IMPRESSÃO DE SELOS",
+      "column_name": "DAT_INICIO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_CNPJ",
+        "DAT_FIM",
+        "NOM_GRAFICA",
+        "NOM_SENHA"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "GRAFICA",
+      "table_comment": "TABELA QUE REGISTRA AS GRAFICAS HABILITADAS PARA GERAÇÃO DE PEDIDOS DE SELOS E IMPRESSÃO DE SELOS",
+      "column_name": "NOM_GRAFICA",
+      "data_type": "VARCHAR2(80)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_FIM",
+        "DAT_INICIO",
+        "NOM_SENHA",
+        "NOM_URL"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "GRAFICA",
+      "table_comment": "TABELA QUE REGISTRA AS GRAFICAS HABILITADAS PARA GERAÇÃO DE PEDIDOS DE SELOS E IMPRESSÃO DE SELOS",
+      "column_name": "NOM_SENHA",
+      "data_type": "VARCHAR2(25)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_INICIO",
+        "NOM_GRAFICA",
+        "NOM_URL",
+        "NOM_USUARIO"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "GRAFICA",
+      "table_comment": "TABELA QUE REGISTRA AS GRAFICAS HABILITADAS PARA GERAÇÃO DE PEDIDOS DE SELOS E IMPRESSÃO DE SELOS",
+      "column_name": "NOM_URL",
+      "data_type": "VARCHAR2(300)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NOM_GRAFICA",
+        "NOM_SENHA",
+        "NOM_USUARIO",
+        "SEQ_GRAFICA"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "GRAFICA",
+      "table_comment": "TABELA QUE REGISTRA AS GRAFICAS HABILITADAS PARA GERAÇÃO DE PEDIDOS DE SELOS E IMPRESSÃO DE SELOS",
+      "column_name": "NOM_USUARIO",
+      "data_type": "VARCHAR2(40)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NOM_SENHA",
+        "NOM_URL",
+        "SEQ_GRAFICA",
+        "STA_ATIVA"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "GRAFICA",
+      "table_comment": "TABELA QUE REGISTRA AS GRAFICAS HABILITADAS PARA GERAÇÃO DE PEDIDOS DE SELOS E IMPRESSÃO DE SELOS",
+      "column_name": "SEQ_GRAFICA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NOM_URL",
+        "NOM_USUARIO",
+        "STA_ATIVA"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "GRAFICA",
+      "table_comment": "TABELA QUE REGISTRA AS GRAFICAS HABILITADAS PARA GERAÇÃO DE PEDIDOS DE SELOS E IMPRESSÃO DE SELOS",
+      "column_name": "STA_ATIVA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NOM_USUARIO",
+        "SEQ_GRAFICA"
+      ],
+      "profile": {
+        "num_distinct": 1,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO",
+      "table_comment": "TABELA QUE REGISTRA OS PEDIDOS DE IMPRESSÃO DE SELEOS REALIZADOS NO SISTEMA DA GRÁFICA",
+      "column_name": "COD_CNPJ",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_DEBITO",
+        "COD_PEDIDO"
+      ],
+      "profile": {
+        "num_distinct": 251,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO",
+      "table_comment": "TABELA QUE REGISTRA OS PEDIDOS DE IMPRESSÃO DE SELEOS REALIZADOS NO SISTEMA DA GRÁFICA",
+      "column_name": "COD_DEBITO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_CNPJ",
+        "COD_PEDIDO",
+        "DAT_PEDIDO"
+      ],
+      "profile": {
+        "num_distinct": 9071,
+        "null_ratio": 0.497424,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO",
+      "table_comment": "TABELA QUE REGISTRA OS PEDIDOS DE IMPRESSÃO DE SELEOS REALIZADOS NO SISTEMA DA GRÁFICA",
+      "column_name": "COD_PEDIDO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_CNPJ",
+        "COD_DEBITO",
+        "DAT_PEDIDO",
+        "DAT_VENCIMENTO"
+      ],
+      "profile": {
+        "num_distinct": 18049,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO",
+      "table_comment": "TABELA QUE REGISTRA OS PEDIDOS DE IMPRESSÃO DE SELEOS REALIZADOS NO SISTEMA DA GRÁFICA",
+      "column_name": "DAT_PEDIDO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_DEBITO",
+        "COD_PEDIDO",
+        "DAT_VENCIMENTO",
+        "NUM_CHAVE_NFE"
+      ],
+      "profile": {
+        "num_distinct": 18049,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO",
+      "table_comment": "TABELA QUE REGISTRA OS PEDIDOS DE IMPRESSÃO DE SELEOS REALIZADOS NO SISTEMA DA GRÁFICA",
+      "column_name": "DAT_VENCIMENTO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_PEDIDO",
+        "DAT_PEDIDO",
+        "NUM_CHAVE_NFE",
+        "QTD_SELOS"
+      ],
+      "profile": {
+        "num_distinct": 1981,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO",
+      "table_comment": "TABELA QUE REGISTRA OS PEDIDOS DE IMPRESSÃO DE SELEOS REALIZADOS NO SISTEMA DA GRÁFICA",
+      "column_name": "NUM_CHAVE_NFE",
+      "data_type": "VARCHAR2(44)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_PEDIDO",
+        "DAT_VENCIMENTO",
+        "QTD_SELOS",
+        "SEQ_DEBITO_CC"
+      ],
+      "profile": {
+        "num_distinct": 14394,
+        "null_ratio": 0.201285,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO",
+      "table_comment": "TABELA QUE REGISTRA OS PEDIDOS DE IMPRESSÃO DE SELEOS REALIZADOS NO SISTEMA DA GRÁFICA",
+      "column_name": "QTD_SELOS",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_VENCIMENTO",
+        "NUM_CHAVE_NFE",
+        "SEQ_DEBITO_CC",
+        "SEQ_GRAFICA"
+      ],
+      "profile": {
+        "num_distinct": 123,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO",
+      "table_comment": "TABELA QUE REGISTRA OS PEDIDOS DE IMPRESSÃO DE SELEOS REALIZADOS NO SISTEMA DA GRÁFICA",
+      "column_name": "SEQ_DEBITO_CC",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_CHAVE_NFE",
+        "QTD_SELOS",
+        "SEQ_GRAFICA",
+        "SEQ_PEDIDO"
+      ],
+      "profile": {
+        "num_distinct": 9097,
+        "null_ratio": 0.495983,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO",
+      "table_comment": "TABELA QUE REGISTRA OS PEDIDOS DE IMPRESSÃO DE SELEOS REALIZADOS NO SISTEMA DA GRÁFICA",
+      "column_name": "SEQ_GRAFICA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "GRAFICA",
+        "column": "SEQ_GRAFICA"
+      },
+      "column_neighbors": [
+        "QTD_SELOS",
+        "SEQ_DEBITO_CC",
+        "SEQ_PEDIDO",
+        "STA_CREDENCIADO"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO",
+      "table_comment": "TABELA QUE REGISTRA OS PEDIDOS DE IMPRESSÃO DE SELEOS REALIZADOS NO SISTEMA DA GRÁFICA",
+      "column_name": "SEQ_PEDIDO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_DEBITO_CC",
+        "SEQ_GRAFICA",
+        "STA_CREDENCIADO",
+        "STA_PEDIDO"
+      ],
+      "profile": {
+        "num_distinct": 18049,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO",
+      "table_comment": "TABELA QUE REGISTRA OS PEDIDOS DE IMPRESSÃO DE SELEOS REALIZADOS NO SISTEMA DA GRÁFICA",
+      "column_name": "STA_CREDENCIADO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_GRAFICA",
+        "SEQ_PEDIDO",
+        "STA_PEDIDO",
+        "STA_REGIME_ESPECIAL"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO",
+      "table_comment": "TABELA QUE REGISTRA OS PEDIDOS DE IMPRESSÃO DE SELEOS REALIZADOS NO SISTEMA DA GRÁFICA",
+      "column_name": "STA_PEDIDO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_PEDIDO",
+        "STA_CREDENCIADO",
+        "STA_REGIME_ESPECIAL",
+        "TIP_AGUA"
+      ],
+      "profile": {
+        "num_distinct": 5,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO",
+      "table_comment": "TABELA QUE REGISTRA OS PEDIDOS DE IMPRESSÃO DE SELEOS REALIZADOS NO SISTEMA DA GRÁFICA",
+      "column_name": "STA_REGIME_ESPECIAL",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "STA_CREDENCIADO",
+        "STA_PEDIDO",
+        "TIP_AGUA",
+        "UID_GERACAO_DEBITO"
+      ],
+      "profile": {
+        "num_distinct": 2,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO",
+      "table_comment": "TABELA QUE REGISTRA OS PEDIDOS DE IMPRESSÃO DE SELEOS REALIZADOS NO SISTEMA DA GRÁFICA",
+      "column_name": "TIP_AGUA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "STA_PEDIDO",
+        "STA_REGIME_ESPECIAL",
+        "UID_GERACAO_DEBITO",
+        "VLR_PEDIDO"
+      ],
+      "profile": {
+        "num_distinct": 3,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO",
+      "table_comment": "TABELA QUE REGISTRA OS PEDIDOS DE IMPRESSÃO DE SELEOS REALIZADOS NO SISTEMA DA GRÁFICA",
+      "column_name": "UID_GERACAO_DEBITO",
+      "data_type": "VARCHAR2(36)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "STA_REGIME_ESPECIAL",
+        "TIP_AGUA",
+        "VLR_PEDIDO",
+        "VLR_SELO"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": 1.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO",
+      "table_comment": "TABELA QUE REGISTRA OS PEDIDOS DE IMPRESSÃO DE SELEOS REALIZADOS NO SISTEMA DA GRÁFICA",
+      "column_name": "VLR_PEDIDO",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "TIP_AGUA",
+        "UID_GERACAO_DEBITO",
+        "VLR_SELO"
+      ],
+      "profile": {
+        "num_distinct": 246,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO",
+      "table_comment": "TABELA QUE REGISTRA OS PEDIDOS DE IMPRESSÃO DE SELEOS REALIZADOS NO SISTEMA DA GRÁFICA",
+      "column_name": "VLR_SELO",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "UID_GERACAO_DEBITO",
+        "VLR_PEDIDO"
+      ],
+      "profile": {
+        "num_distinct": 8,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO_FLUXO",
+      "table_comment": "Tabela com os fluxos dos pedidos",
+      "column_name": "DAT_FLUXO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_PROCESSAMENTO",
+        "DSC_FLUXO"
+      ],
+      "profile": {
+        "num_distinct": 19440,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO_FLUXO",
+      "table_comment": "Tabela com os fluxos dos pedidos",
+      "column_name": "DAT_PROCESSAMENTO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_FLUXO",
+        "DSC_FLUXO",
+        "SEQ_PEDIDO_GRAFICA"
+      ],
+      "profile": {
+        "num_distinct": 394,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO_FLUXO",
+      "table_comment": "Tabela com os fluxos dos pedidos",
+      "column_name": "DSC_FLUXO",
+      "data_type": "VARCHAR2(2000)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_FLUXO",
+        "DAT_PROCESSAMENTO",
+        "SEQ_PEDIDO_GRAFICA"
+      ],
+      "profile": {
+        "num_distinct": 2956,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO_FLUXO",
+      "table_comment": "Tabela com os fluxos dos pedidos",
+      "column_name": "SEQ_PEDIDO_GRAFICA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "PEDIDO_GRAFICA",
+        "column": "SEQ_PEDIDO_GRAFICA"
+      },
+      "column_neighbors": [
+        "DAT_PROCESSAMENTO",
+        "DSC_FLUXO"
+      ],
+      "profile": {
+        "num_distinct": 3159,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO_GRAFICA",
+      "table_comment": "Todos os pedidos recebidos pela gráfica",
+      "column_name": "COD_CNPJ",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_PEDIDO",
+        "DAT_PEDIDO"
+      ],
+      "profile": {
+        "num_distinct": 183,
+        "null_ratio": 0.000317,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO_GRAFICA",
+      "table_comment": "Todos os pedidos recebidos pela gráfica",
+      "column_name": "COD_PEDIDO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_CNPJ",
+        "DAT_PEDIDO",
+        "DAT_VALIDADE_SELO"
+      ],
+      "profile": {
+        "num_distinct": 3159,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO_GRAFICA",
+      "table_comment": "Todos os pedidos recebidos pela gráfica",
+      "column_name": "DAT_PEDIDO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_CNPJ",
+        "COD_PEDIDO",
+        "DAT_VALIDADE_SELO",
+        "DSC_OBSERVACAO"
+      ],
+      "profile": {
+        "num_distinct": 3081,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO_GRAFICA",
+      "table_comment": "Todos os pedidos recebidos pela gráfica",
+      "column_name": "DAT_VALIDADE_SELO",
+      "data_type": "DATE",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "COD_PEDIDO",
+        "DAT_PEDIDO",
+        "DSC_OBSERVACAO",
+        "DSC_RAZAO_SOCIAL"
+      ],
+      "profile": {
+        "num_distinct": 0,
+        "null_ratio": 1.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO_GRAFICA",
+      "table_comment": "Todos os pedidos recebidos pela gráfica",
+      "column_name": "DSC_OBSERVACAO",
+      "data_type": "VARCHAR2(500)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_PEDIDO",
+        "DAT_VALIDADE_SELO",
+        "DSC_RAZAO_SOCIAL",
+        "QTD_SELOS"
+      ],
+      "profile": {
+        "num_distinct": 13,
+        "null_ratio": 0.995885,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO_GRAFICA",
+      "table_comment": "Todos os pedidos recebidos pela gráfica",
+      "column_name": "DSC_RAZAO_SOCIAL",
+      "data_type": "VARCHAR2(200)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DAT_VALIDADE_SELO",
+        "DSC_OBSERVACAO",
+        "QTD_SELOS",
+        "SEQ_GRAFICA"
+      ],
+      "profile": {
+        "num_distinct": 182,
+        "null_ratio": 0.000317,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO_GRAFICA",
+      "table_comment": "Todos os pedidos recebidos pela gráfica",
+      "column_name": "QTD_SELOS",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "DSC_OBSERVACAO",
+        "DSC_RAZAO_SOCIAL",
+        "SEQ_GRAFICA",
+        "SEQ_PEDIDO_GRAFICA"
+      ],
+      "profile": {
+        "num_distinct": 73,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO_GRAFICA",
+      "table_comment": "Todos os pedidos recebidos pela gráfica",
+      "column_name": "SEQ_GRAFICA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "GRAFICA",
+        "column": "SEQ_GRAFICA"
+      },
+      "column_neighbors": [
+        "DSC_RAZAO_SOCIAL",
+        "QTD_SELOS",
+        "SEQ_PEDIDO_GRAFICA",
+        "STA_PEDIDO"
+      ],
+      "profile": {
+        "num_distinct": 1,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO_GRAFICA",
+      "table_comment": "Todos os pedidos recebidos pela gráfica",
+      "column_name": "SEQ_PEDIDO_GRAFICA",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "QTD_SELOS",
+        "SEQ_GRAFICA",
+        "STA_PEDIDO",
+        "VLR_TOTAL"
+      ],
+      "profile": {
+        "num_distinct": 3159,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO_GRAFICA",
+      "table_comment": "Todos os pedidos recebidos pela gráfica",
+      "column_name": "STA_PEDIDO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_GRAFICA",
+        "SEQ_PEDIDO_GRAFICA",
+        "VLR_TOTAL",
+        "VLR_UNITARIO"
+      ],
+      "profile": {
+        "num_distinct": 4,
+        "null_ratio": 0.000317,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO_GRAFICA",
+      "table_comment": "Todos os pedidos recebidos pela gráfica",
+      "column_name": "VLR_TOTAL",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "SEQ_PEDIDO_GRAFICA",
+        "STA_PEDIDO",
+        "VLR_UNITARIO"
+      ],
+      "profile": {
+        "num_distinct": 46,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "PEDIDO_GRAFICA",
+      "table_comment": "Todos os pedidos recebidos pela gráfica",
+      "column_name": "VLR_UNITARIO",
+      "data_type": "NUMBER(22,2)",
+      "nullable": "Y",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "STA_PEDIDO",
+        "VLR_TOTAL"
+      ],
+      "profile": {
+        "num_distinct": 9,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "SELO",
+      "table_comment": "Tabela de selos",
+      "column_name": "NUM_ALEATORIO",
+      "data_type": "VARCHAR2(8)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_SELO",
+        "SEQ_PEDIDO"
+      ],
+      "profile": {
+        "num_distinct": 107462656,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "SELO",
+      "table_comment": "Tabela de selos",
+      "column_name": "NUM_SELO",
+      "data_type": "VARCHAR2(20)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_ALEATORIO",
+        "SEQ_PEDIDO",
+        "SEQ_SELO"
+      ],
+      "profile": {
+        "num_distinct": 112164864,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "SELO",
+      "table_comment": "Tabela de selos",
+      "column_name": "SEQ_PEDIDO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": false,
+      "is_fk": true,
+      "is_uk": false,
+      "references": {
+        "table": "PEDIDO",
+        "column": "SEQ_PEDIDO"
+      },
+      "column_neighbors": [
+        "NUM_ALEATORIO",
+        "NUM_SELO",
+        "SEQ_SELO"
+      ],
+      "profile": {
+        "num_distinct": 1888,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    },
+    {
+      "owner": "SISAGUA",
+      "table_name": "SELO",
+      "table_comment": "Tabela de selos",
+      "column_name": "SEQ_SELO",
+      "data_type": "NUMBER(22,0)",
+      "nullable": "N",
+      "is_pk": true,
+      "is_fk": false,
+      "is_uk": false,
+      "references": {},
+      "column_neighbors": [
+        "NUM_SELO",
+        "SEQ_PEDIDO"
+      ],
+      "profile": {
+        "num_distinct": 140121017,
+        "null_ratio": 0.0,
+        "min_value": null,
+        "max_value": null,
+        "sample_values": []
+      }
+    }
+  ]
+}

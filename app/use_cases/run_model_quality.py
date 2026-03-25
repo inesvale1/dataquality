@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Optional
 
+from dataquality.domain.config.llm_comment_config import LLMCommentConfig
 from dataquality.domain.config.validation_config import ValidationConfig
 from dataquality.domain.validators.metadata_validator import MetadataValidator
 from dataquality.infrastructure.io.csv.schema_loader import schemaLoader
@@ -22,6 +23,9 @@ class RunOptions:
     validation_config: Optional[ValidationConfig] = None
     db_type: str = "Oracle"
     exclude_tables: List[str] | None = None
+    llm_comment_config: LLMCommentConfig | None = None
+    context_output_dir: Path | None = None
+    save_context_json: bool = True
 
 
 def run_model_quality(options: RunOptions) -> None:
@@ -43,8 +47,8 @@ def run_model_quality(options: RunOptions) -> None:
     exclude_set = _parse_exclude_tables(options.exclude_tables or [])
 
     for schema_name, df in dfs.items():
-        #if schema_name != "cadastro":  # --- IGNORE FOR TESTS---
-        #    continue                     # --- IGNORE ---
+        if schema_name != "cadastro":  # --- IGNORE FOR TESTS---
+            continue                     # --- IGNORE ---
         
         with (telemetry.stage("schema.process", schema=schema_name) if telemetry is not None else nullcontext()):
             if exclude_set:
@@ -79,6 +83,9 @@ def run_model_quality(options: RunOptions) -> None:
                     validator=validator,
                     df_schema_metadata=df_schema_metadata,
                     db_type=options.db_type,
+                    llm_comment_config=options.llm_comment_config,
+                    context_output_dir=options.context_output_dir,
+                    save_context_json=options.save_context_json,
                 )
                 sections = metadata_calculator.calculate_sections()
 
@@ -128,4 +135,3 @@ def _filter_excluded_tables(df: "pd.DataFrame", exclude_set: list[tuple[str | No
         table_mask = tables.str.contains(pattern, na=False, regex=False)
         mask_exclude |= owner_mask & table_mask
     return df.loc[~mask_exclude].copy()
-

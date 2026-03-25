@@ -1,12 +1,20 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 import pandas as pd
 
+from dataquality.app.orchestration.metadata_context_builder import MetadataContextBuilder
+from dataquality.domain.config.llm_comment_config import LLMCommentConfig
 from dataquality.shared.utils import safe_iqmd
 from dataquality.domain.config.metadata_metric_config import METADATA_INDICATOR_SPECS
 from dataquality.domain.validators.metadata_validator import MetadataValidator
 from dataquality.adapters.outbound.exporters.excel_report import build_section_df
-from dataquality.domain.suggesters.metadata_issue_suggester import MetadataIssueSuggester
+from dataquality.domain.suggesters.metadata_issue_suggester import (
+    LLMCommentSuggester,
+    MetadataIssueSuggester,
+    OpenAICompatibleCommentSuggester,
+)
 
 
 class MetadataQualityMetricsCalculator:
@@ -16,11 +24,17 @@ class MetadataQualityMetricsCalculator:
         validator: MetadataValidator,
         df_schema_metadata: pd.DataFrame | None = None,
         db_type: str = "Oracle",
+        llm_comment_config: LLMCommentConfig | None = None,
+        context_output_dir: Path | None = None,
+        save_context_json: bool = True,
     ):
         self.schema_name = schema_name
         self.validator = validator
         self.df_schema_metadata = df_schema_metadata
         self.db_type = db_type
+        self.llm_comment_config = llm_comment_config or LLMCommentConfig()
+        self.context_output_dir = context_output_dir or Path(__file__).resolve().parents[2] / "config"
+        self.save_context_json = bool(save_context_json)
 
     def calculate_sections(self) -> dict[str, pd.DataFrame]:
         """
@@ -33,9 +47,21 @@ class MetadataQualityMetricsCalculator:
 
         df_schema_metadata = (self.df_schema_metadata.copy() if self.df_schema_metadata is not None else pd.DataFrame())
         df_schema_metadata = self.validator.annotate_data_quality_candidates(df_schema_metadata)
+        context_builder = MetadataContextBuilder(
+            schema_name=self.schema_name,
+            df_schema_metadata=df_schema_metadata,
+            output_dir=self.context_output_dir,
+        )
+        schema_context = context_builder.build()
+        if self.save_context_json:
+            context_builder.build_and_save(schema_context)
         df_data_quality_candidates = self._build_data_quality_candidates(df_schema_metadata)
         df_issues = self.validator.issues_df.copy()
-        suggester = MetadataIssueSuggester(db_type=self.db_type)
+        suggester = MetadataIssueSuggester(
+            db_type=self.db_type,
+            schema_context=schema_context,
+            llm_comment_suggester=self._build_llm_suggester(),
+        )
         df_issues = suggester.apply(df_issues, df_schema_metadata)
 
         raw_measure_specs = [
@@ -120,6 +146,11 @@ class MetadataQualityMetricsCalculator:
             "METADATA_ISSUES": df_issues,
             "METADATA_METRICS": df_metrics,
         }
+
+    def _build_llm_suggester(self) -> LLMCommentSuggester:
+        if not self.llm_comment_config.enabled:
+            return LLMCommentSuggester(enabled=False)
+        return OpenAICompatibleCommentSuggester.from_config(self.llm_comment_config)
 
     def _build_data_quality_candidates(self, df_schema_metadata: pd.DataFrame) -> pd.DataFrame:
         if df_schema_metadata.empty:
