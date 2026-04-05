@@ -40,11 +40,12 @@ class OpenAICompatibleCommentSuggester(LLMCommentSuggester):
 
     @classmethod
     def from_config(cls, config: LLMCommentConfig) -> "OpenAICompatibleCommentSuggester":
-        api_key = os.getenv(config.api_key_env, "")
-        enabled = bool(config.enabled and api_key and config.model)
+        api_key = os.getenv(config.api_key_env, "") if getattr(config, "api_key_env", "") else ""
+        requires_api_key = bool(getattr(config, "require_api_key", True))
+        enabled = bool(config.enabled and config.model and (api_key or not requires_api_key))
         if not config.enabled:
             disabled_reason = "LLM_DISABLED"
-        elif not api_key:
+        elif requires_api_key and not api_key:
             disabled_reason = "LLM_MISSING_API_KEY"
         elif not config.model:
             disabled_reason = "LLM_MISSING_MODEL"
@@ -95,9 +96,10 @@ class OpenAICompatibleCommentSuggester(LLMCommentSuggester):
             return self.response_cache[cache_key]
 
         system_prompt = (
+            "Você é um assistente especializado em documentação de dados."
             "O comentario deve ter uma unica frase, em portugues, com foco de negocio, objetivo e claro."
             "Utilize um estilo profissional de dicionário de dados."
-            "Seja específico, porém conciso."
+            "Seja específico, porém conciso. Prefira uma sentença."
             "Não invente significados comerciais além do contexto fornecido."
             "Se o contexto for insuficiente, gere um comentário técnico adequado."
             "Dê preferência a descrições que expliquem a função, o significado e o uso de referência."
@@ -138,10 +140,7 @@ class OpenAICompatibleCommentSuggester(LLMCommentSuggester):
             req = request.Request(
                 endpoint,
                 data=json.dumps(payload).encode("utf-8"),
-                headers={
-                    "Authorization": f"Bearer {self.api_key}",
-                    "Content-Type": "application/json",
-                },
+                headers=self._build_headers(),
                 method="POST",
             )
             with request.urlopen(req, timeout=self.timeout_seconds) as response:
@@ -256,6 +255,12 @@ class OpenAICompatibleCommentSuggester(LLMCommentSuggester):
         summary = f"HTTP {status} {reason}".strip()
         return f"{summary}: {detail}".strip(": ")
 
+    def _build_headers(self) -> Dict[str, str]:
+        headers = {"Content-Type": "application/json"}
+        if self.api_key:
+            headers["Authorization"] = f"Bearer {self.api_key}"
+        return headers
+
 
 class MetadataIssueSuggester:
     def __init__(
@@ -264,11 +269,13 @@ class MetadataIssueSuggester:
         config: Optional[ValidationConfig] = None,
         llm_comment_suggester: Optional[LLMCommentSuggester] = None,
         schema_context: Optional[Dict[str, Any]] = None,
+        comment_generation_strategy: str = "rules",
     ):
         self.db_type = (db_type or "").strip()
         self.config = config or ValidationConfig()
         self.llm_comment_suggester = llm_comment_suggester or LLMCommentSuggester(enabled=False)
         self.schema_context = schema_context or {}
+        self.comment_generation_strategy = (comment_generation_strategy or "rules").strip().lower()
         self.table_context_lookup = self._build_table_context_lookup(self.schema_context)
         self.column_context_lookup = self._build_column_context_lookup(self.schema_context)
 
@@ -391,6 +398,8 @@ class MetadataIssueSuggester:
 
     def _suggest_column_comment(self, owner: str, table: str, column: str) -> Tuple[str, str, float]:
         context = self.column_context_lookup.get((owner, table, column), {})
+        if self.comment_generation_strategy != "llm":
+            return self._suggest_column_comment_by_rules(owner, table, column, context)
         if not context:
             return "", "LLM_CONTEXT_MISSING", 0.0
         llm_comment = self.llm_comment_suggester.suggest_column_comment(context)
@@ -573,6 +582,8 @@ class MetadataIssueSuggester:
 
     def _suggest_table_comment(self, owner: str, table: str) -> Tuple[str, str, float]:
         context = self.table_context_lookup.get((owner, table), {})
+        if self.comment_generation_strategy != "llm":
+            return self._suggest_table_comment_by_rules(owner, table, context)
         if not context:
             return "", "LLM_CONTEXT_MISSING", 0.0
         llm_comment = self.llm_comment_suggester.suggest_table_comment(context)
@@ -580,6 +591,88 @@ class MetadataIssueSuggester:
             source = self._resolve_llm_failure_source()
             return "", source, 0.0
         return llm_comment, "LLM", 0.9
+
+    def _suggest_column_comment_by_rules(
+        self,
+        owner: str,
+        table: str,
+        column: str,
+        context: Dict[str, Any],
+    ) -> Tuple[str, str, float]:
+        if not column:
+            return "", "", 0.0
+        references = context.get("references", {}) if isinstance(context, dict) else {}
+        if not isinstance(references, dict):
+            references = {}
+        ref_table = self._clean_str(references.get("table", "")).upper()
+        ref_column = self._clean_str(references.get("column", "")).upper()
+        table_comment = self._clean_str(context.get("table_comment", "")) if isinstance(context, dict) else ""
+
+        base_tokens = self._meaningful_tokens(column)
+        all_tokens = self._all_tokens(column)
+        entity_label = self._friendly_identifier(column)
+        table_label = self._friendly_identifier(table)
+        if ref_table:
+            ref_label = self._friendly_identifier(ref_table)
+            ref_col_label = self._friendly_identifier(ref_column or column)
+            return (
+                f"Identificador de {ref_col_label} relacionado ao registro de {ref_label}.",
+                "RULES",
+                0.75,
+            )
+        if self._has_any_token(all_tokens, {"DAT", "DATA"}):
+            return (f"Data associada ao registro de {table_label}.", "RULES", 0.72)
+        if self._has_any_token(all_tokens, {"HORA", "HOR", "HR"}):
+            return (f"Horário associado ao registro de {table_label}.", "RULES", 0.72)
+        if self._has_any_token(all_tokens, {"VLR", "VALOR", "TOTAL", "TOT"}):
+            return (f"Valor registrado para {entity_label} do registro.", "RULES", 0.72)
+        if self._has_any_token(all_tokens, {"QTD", "QTDE", "QUANTIDADE", "QUANT"}):
+            return (f"Quantidade registrada para {entity_label} no contexto de {table_label}.", "RULES", 0.72)
+        if self._has_any_token(all_tokens, {"COD", "ID", "SEQ", "NUM"}):
+            return (f"Código que identifica {entity_label} no contexto de {table_label}.", "RULES", 0.7)
+        if self._has_any_token(all_tokens, {"TIP", "TIPO"}):
+            return (f"Tipo de {entity_label} associado ao registro.", "RULES", 0.7)
+        if self._has_any_token(all_tokens, {"SIT", "STATUS", "STA"}):
+            return (f"Situação de {entity_label} associada ao registro.", "RULES", 0.7)
+        if self._has_any_token(all_tokens, {"NOM", "NOME"}):
+            return (f"Nome de {entity_label} associado ao registro.", "RULES", 0.7)
+        if self._has_any_token(all_tokens, {"DSC", "DESC", "DESCRICAO", "DESCR"}):
+            return (f"Descrição de {entity_label} associada ao registro.", "RULES", 0.7)
+        if table_comment:
+            return (f"Informação de {entity_label} relacionada a {self._sentence_case(table_comment)}", "RULES", 0.68)
+        return (f"Informação de {entity_label} associada ao registro de {table_label}.", "RULES", 0.65)
+
+    def _suggest_table_comment_by_rules(
+        self,
+        owner: str,
+        table: str,
+        context: Dict[str, Any],
+    ) -> Tuple[str, str, float]:
+        if not table:
+            return "", "", 0.0
+        context = context or {}
+        table_type = self._clean_str(context.get("table_type_inference", "")).lower()
+        related_tables = context.get("related_tables", []) if isinstance(context.get("related_tables", []), list) else []
+        main_columns = context.get("main_columns", []) if isinstance(context.get("main_columns", []), list) else []
+        table_label = self._friendly_identifier(table)
+
+        if table_type == "log":
+            return (f"Tabela de histórico ou auditoria dos eventos relacionados a {table_label}.", "RULES", 0.76)
+        if table_type == "referencia":
+            return (f"Tabela de referência para cadastro e classificação de {table_label}.", "RULES", 0.76)
+        if table_type == "associacao":
+            return (f"Tabela de associação entre entidades relacionadas a {table_label}.", "RULES", 0.76)
+        if table_type == "transacao":
+            return (f"Tabela para registro das transações ou movimentações de {table_label}.", "RULES", 0.76)
+        if table_type == "detalhe":
+            return (f"Tabela de detalhamento das informações de {table_label}.", "RULES", 0.76)
+        if related_tables:
+            related_label = self._friendly_identifier(str(related_tables[0]))
+            return (f"Tabela com informações de {table_label} relacionadas a {related_label}.", "RULES", 0.72)
+        if main_columns:
+            main_label = self._friendly_identifier(str(main_columns[0]))
+            return (f"Tabela para armazenamento das informações de {table_label}, com destaque para {main_label}.", "RULES", 0.7)
+        return (f"Tabela para armazenamento das informações de {table_label}.", "RULES", 0.68)
 
     def _resolve_llm_failure_source(self) -> str:
         if not self.llm_comment_suggester.enabled:
@@ -597,3 +690,28 @@ class MetadataIssueSuggester:
         if len(detail) > 300:
             detail = detail[:297].rstrip() + "..."
         return detail
+
+    def _meaningful_tokens(self, value: str) -> list[str]:
+        stop_tokens = {"DE", "DA", "DO", "DOS", "DAS", "R", "TAB", "TBL"}
+        prefix_tokens = {"COD", "DAT", "DSC", "NOM", "NUM", "QTD", "SEQ", "SIT", "STA", "TXT", "TIP", "TOT", "VLR", "BIN", "HOR", "XML", "ID"}
+        tokens = self._all_tokens(value)
+        return [token for token in tokens if token not in stop_tokens and token not in prefix_tokens]
+
+    def _has_any_token(self, tokens: list[str], expected: set[str]) -> bool:
+        return any(token in expected for token in tokens)
+
+    def _all_tokens(self, value: str) -> list[str]:
+        return [token for token in re.split(r"[^A-Z0-9]+", str(value).upper()) if token]
+
+    def _friendly_identifier(self, value: str) -> str:
+        tokens = self._meaningful_tokens(value)
+        if not tokens:
+            tokens = [token for token in re.split(r"[^A-Z0-9]+", str(value).upper()) if token]
+        friendly = " ".join(token.lower() for token in tokens if token)
+        return friendly or str(value).strip().lower()
+
+    def _sentence_case(self, value: str) -> str:
+        text = self._clean_str(value)
+        if not text:
+            return ""
+        return text[0].lower() + text[1:] if len(text) > 1 else text.lower()

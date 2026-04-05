@@ -21,15 +21,19 @@
     "DIAS"
   ],
   "db_type": "Oracle",
+  "telemetry_enabled": false,
+  "telemetry_output": false,
   "save_context_json": false,
   "llm_comment_generation": {
     "enabled": true,
-    "api_key_env": "OPENAI_API_KEY",
-    "model": "gpt-5.4-nano",
-    "base_url": "https://api.openai.com/v1",
-    "timeout_seconds": 60,
+    "comment_generation_strategy": "rules",
+    "api_key_env": "",
+    "require_api_key": false,
+    "model": "qwen2.5:7b",
+    "base_url": "http://localhost:11434/v1",
+    "timeout_seconds": 20,
     "temperature": 0.2,
-    "max_output_tokens": 180
+    "max_output_tokens": 120
   },
   "exclude_tables": [
     "RUPD$",

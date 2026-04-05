@@ -1,12 +1,6 @@
 {
-  "metadata_base_folder": "dataquality\\schema",
-  "sample_base_folder": "dataquality\\samples",
-  "sample_source": "csv",
-  "db_connection_uri": null,
-  "db_authentication_type": "username_password",
-  "db_driver_class_name": null,
-  "sample_query_template": null,
-  "sample_limit": 1000,
+  "run_model_quality": true,
+  "run_data_quality": false,
   "telemetry_enabled": false,
   "telemetry_output": false,
   "delete_cols": [
@@ -18,15 +12,39 @@
     "DAS",
     "INS",
     "SUBS",
-    "ICMS"
+    "ICMS",
+    "FIS",
+    "BUS",
+    "CBS",
+    "IBS",
+    "PIS",
+    "COFINS",
+    "ISS",
+    "HORAS_EXTRAS",
+    "DIAS"
   ],
   "db_type": "Oracle",
   "exclude_tables": [
     "RUPD$",
     "VW",
     "SUANOTA.NFP_DADOS_CADASTRAIS_HIST_BKP2",
-    "MLOG$_"
+    "MLOG$_",
+    "TEMP",
+    "ADVOGADO_20100512",
+    "20180115"
   ],
+  "save_context_json": false,
+  "llm_comment_generation": {
+    "enabled": true,
+    "comment_generation_strategy": "rules",
+    "api_key_env": "",
+    "require_api_key": false,
+    "model": "qwen2.5:7b",
+    "base_url": "http://localhost:11434/v1",
+    "timeout_seconds": 20,
+    "temperature": 0.2,
+    "max_output_tokens": 120
+  },
   "validation_config": {
     "max_table_len": 30,
     "max_column_len": 30,
@@ -147,5 +165,18 @@
         }
       ]
     }
+  },
+  "model_quality": {
+    "base_folder": "dataquality\\schema"
+  },
+  "data_quality": {
+    "metadata_base_folder": "dataquality\\schema",
+    "sample_base_folder": "dataquality\\samples",
+    "sample_source": "csv",
+    "db_connection_uri": null,
+    "db_authentication_type": "username_password",
+    "db_driver_class_name": null,
+    "sample_query_template": null,
+    "sample_limit": 1000
   }
 }

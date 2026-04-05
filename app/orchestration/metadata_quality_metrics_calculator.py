@@ -61,6 +61,7 @@ class MetadataQualityMetricsCalculator:
             db_type=self.db_type,
             schema_context=schema_context,
             llm_comment_suggester=self._build_llm_suggester(),
+            comment_generation_strategy=getattr(self.llm_comment_config, "comment_generation_strategy", "rules"),
         )
         df_issues = suggester.apply(df_issues, df_schema_metadata)
 
@@ -148,6 +149,9 @@ class MetadataQualityMetricsCalculator:
         }
 
     def _build_llm_suggester(self) -> LLMCommentSuggester:
+        strategy = str(getattr(self.llm_comment_config, "comment_generation_strategy", "rules")).strip().lower()
+        if strategy != "llm":
+            return LLMCommentSuggester(enabled=False)
         if not self.llm_comment_config.enabled:
             return LLMCommentSuggester(enabled=False)
         return OpenAICompatibleCommentSuggester.from_config(self.llm_comment_config)

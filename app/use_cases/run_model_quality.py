@@ -90,6 +90,7 @@ def run_model_quality(options: RunOptions) -> None:
                 sections = metadata_calculator.calculate_sections()
 
             if telemetry is not None:
+                print("dentro telemetry")
                 telemetry.set_gauge("candidates_total", int(sections["DATA_QUALITY_RULE_CANDIDATES"].shape[0]), schema=schema_name)
 
             with (telemetry.stage("excel.export", schema=schema_name) if telemetry is not None else nullcontext()):

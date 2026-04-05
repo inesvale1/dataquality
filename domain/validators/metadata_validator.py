@@ -392,6 +392,7 @@ class MetadataValidator:
             metadata_rules = self._build_rules()
             df_metadata = apply_rules(self.df, metadata_rules)
             self.issues_df = self._combine_issues(df_metadata)
+
         if telemetry is not None and self.issues_df is not None:
             telemetry.set_gauge("metadata_issue_rows", int(self.issues_df.shape[0]), schema=schema_name)
         return self.issues_df
@@ -548,6 +549,7 @@ class MetadataValidator:
             )
 
     def _validate_columns(self) -> None:
+        
         allowed = tuple(self.cfg.prefix_names)
         bad_prefix = ~self.df["COLUMN_NAME"].str.upper().str.startswith(allowed)
         for _, row in self.df[bad_prefix].iterrows():

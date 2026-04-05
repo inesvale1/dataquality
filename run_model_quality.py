@@ -16,6 +16,7 @@ from dataquality.shared.runtime_config import (
     build_llm_comment_config,
     build_model_quality_config_template,
     build_validation_config,
+    get_phase_config,
     get_config_value,
     load_json_config,
 )
@@ -54,7 +55,7 @@ def main() -> None:
     bootstrap.add_argument("--config-json", default=None, type=str, help="Path to a JSON file with input arguments and validation settings.")
     bootstrap_args, _ = bootstrap.parse_known_args()
     template_config = build_model_quality_config_template()
-    json_config = load_json_config(bootstrap_args.config_json)
+    json_config = get_phase_config(load_json_config(bootstrap_args.config_json), "model_quality")
 
     parser = argparse.ArgumentParser(description="Run Data Model Quality validations and metrics.")
     parser.add_argument("--config-json", default=None, type=str, help="Path to a JSON file with input arguments and validation settings.")

@@ -92,6 +92,25 @@ def build_model_quality_config_template() -> dict[str, Any]:
     return _load_bundled_config_template("run_model_quality.example.json")
 
 
+def build_quality_config_template() -> dict[str, Any]:
+    return _load_bundled_config_template("run_quality.example.json")
+
+
+def get_phase_config(config: dict[str, Any], phase_key: str) -> dict[str, Any]:
+    if not config:
+        return {}
+
+    merged = deepcopy(config)
+    phase_config = get_config_value(config, phase_key, {})
+    if phase_config in (None, False):
+        return merged
+    if not isinstance(phase_config, dict):
+        raise ValueError(f"{phase_key} must be a JSON object.")
+
+    merged.update(phase_config)
+    return merged
+
+
 def _load_bundled_config_template(filename: str) -> dict[str, Any]:
     config_path = Path(__file__).resolve().parents[1] / "config" / filename
     with config_path.open("r", encoding="utf-8") as handle:
