@@ -33,7 +33,10 @@ def _resolve_base_folder(raw_path: str) -> Path:
     if candidate.exists():
         return candidate
     script_dir = Path(__file__).resolve().parent
+    inputs_fallback = script_dir / "schema" / "inputs"
     fallback = script_dir / "schema"
+    if candidate == Path("dataquality\\schema\\inputs") and inputs_fallback.exists():
+        return inputs_fallback
     if candidate == Path("dataquality\\schema") and fallback.exists():
         return fallback
     return candidate

@@ -25,12 +25,13 @@ def save_excel_report(
 ) -> Path:
     """Write the Excel report for a schema.
 
-    Output file name: issues_metadados_<schema>.xlsx in the same folder as the input
-    metadados_<schema>.csv (as per current notebook behavior).
+    Output file name: issues_metadados_<schema>.xlsx in schema/outputs when the
+    input metadata lives in schema/inputs. Otherwise, writes to the provided folder.
     """
     timestamp = datetime.now().strftime("%Y%m%d_%H%M")
+    output_folder = _resolve_output_folder(Path(base_folder))
     file_name_out = (
-        Path(base_folder)
+        output_folder
         / f"{file_prefix}_{schema_name}_{timestamp}.xlsx"
     )
 
@@ -60,6 +61,13 @@ def save_excel_report(
 
 
     return file_name_out
+
+
+def _resolve_output_folder(base_folder: Path) -> Path:
+    base_folder = Path(base_folder)
+    if base_folder.name.lower() == "inputs":
+        return base_folder.parent / "outputs"
+    return base_folder
 
 
 def _autosize_worksheet_columns(writer: pd.ExcelWriter, sheet_name: str, df: pd.DataFrame) -> None:

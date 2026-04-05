@@ -1,5 +1,5 @@
 {
-  "base_folder": "dataquality\\schema",
+  "base_folder": "dataquality\\schema\\inputs",
   "delete_cols": [
     "COLUMN_ID",
     "NUM_BUCKETS",
@@ -42,7 +42,8 @@
     "MLOG$_",
     "TEMP",
     "ADVOGADO_20100512",
-    "20180115"
+    "20180115",
+    "ARUBAAUTH"
   ],
   "validation_config": {
     "max_table_len": 30,
