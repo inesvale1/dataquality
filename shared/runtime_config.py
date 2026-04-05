@@ -85,11 +85,11 @@ def build_llm_comment_config(raw: dict[str, Any] | None) -> LLMCommentConfig | N
 
 
 def build_data_quality_config_template() -> dict[str, Any]:
-    return _load_bundled_config_template("run_data_quality.example.json")
+    return get_phase_config(build_quality_config_template(), "data_quality")
 
 
 def build_model_quality_config_template() -> dict[str, Any]:
-    return _load_bundled_config_template("run_model_quality.example.json")
+    return get_phase_config(build_quality_config_template(), "model_quality")
 
 
 def build_quality_config_template() -> dict[str, Any]:

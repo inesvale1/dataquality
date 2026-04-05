@@ -477,7 +477,7 @@ Sem esses dados, a analise de desempenho fica limitada a observacoes empiricas.
 
 Ponto principal:
 
-- [run_data_quality.py](/d:/Users/49756615/Documents/DoutoradoUFC/Implementation/dataquality/run_data_quality.py#L34)
+- [run_quality.py](/d:/Users/49756615/Documents/DoutoradoUFC/Implementation/dataquality/run_quality.py#L220)
   Medir no inicio e no fim de `main()`.
 
 Pontos complementares:
@@ -607,7 +607,7 @@ apos cada `pd.read_sql`, registrar:
 
 Pontos principais:
 
-- [run_data_quality.py](/d:/Users/49756615/Documents/DoutoradoUFC/Implementation/dataquality/run_data_quality.py#L34)
+- [run_quality.py](/d:/Users/49756615/Documents/DoutoradoUFC/Implementation/dataquality/run_quality.py#L220)
 - [app/use_cases/run_data_quality.py](/d:/Users/49756615/Documents/DoutoradoUFC/Implementation/dataquality/app/use_cases/run_data_quality.py#L34)
 - [app/use_cases/run_model_quality.py](/d:/Users/49756615/Documents/DoutoradoUFC/Implementation/dataquality/app/use_cases/run_model_quality.py#L25)
 

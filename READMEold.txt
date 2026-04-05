@@ -10,7 +10,7 @@ This folder is a refactoring of the original `DataModelQuality.ipynb` into a pac
 
 ## Run
 ```bash
-python run_model_quality.py --base-folder /path/to/Analise\ Esquemas
+python run_quality.py --config-json config/run_quality.example.json
 ```
 
 The base folder must contain subfolders with files like `metadados_<schema>.csv`.
