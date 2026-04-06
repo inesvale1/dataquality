@@ -4,6 +4,7 @@ from pathlib import Path
 
 import pandas as pd
 
+from dataquality.app.orchestration.document_code_quality_analyzer import DocumentCodeQualityAnalyzer
 from dataquality.app.orchestration.metadata_context_builder import MetadataContextBuilder
 from dataquality.domain.config.llm_comment_config import LLMCommentConfig
 from dataquality.shared.utils import safe_iqmd
@@ -57,6 +58,7 @@ class MetadataQualityMetricsCalculator:
             context_builder.build_and_save(schema_context)
         df_data_quality_candidates = self._build_data_quality_candidates(df_schema_metadata)
         df_issues = self.validator.issues_df.copy()
+        code_analysis = self._analyze_document_codes()
         suggester = MetadataIssueSuggester(
             db_type=self.db_type,
             schema_context=schema_context,
@@ -97,6 +99,14 @@ class MetadataQualityMetricsCalculator:
         null_percent_by_table = self.validator.get_null_percent_by_table_nullable_without_default()
 
         measure_rows = raw_measure_rows + derived_measure_rows
+        mq["MQME028"] = int(code_analysis.total_distinct_codes)
+        mq["MQME029"] = int(code_analysis.invalid_or_ambiguous_distinct_codes)
+        measure_rows.extend(
+            [
+                ("MQME028", "RAW", "Total number of distinct CPF/CNPJ codes found", mq["MQME028"]),
+                ("MQME029", "RAW", "Total number of invalid or ambiguous CPF/CNPJ codes found", mq["MQME029"]),
+            ]
+        )
         if not rows_by_table.empty:
             for table_name, row_count in rows_by_table.items():
                 measure_rows.append(
@@ -145,7 +155,8 @@ class MetadataQualityMetricsCalculator:
             "DATA_QUALITY_RULE_CANDIDATES": df_data_quality_candidates,
             "METADATA_MEASURES": df_measures,
             "METADATA_ISSUES": df_issues,
-            "METADATA_METRICS": df_metrics,
+            "DATA_ISSUES": code_analysis.issues_df,
+            "METRICS": df_metrics,
         }
 
     def _build_llm_suggester(self) -> LLMCommentSuggester:
@@ -272,3 +283,8 @@ class MetadataQualityMetricsCalculator:
             return pd.DataFrame()
 
         return pd.concat(candidate_frames, ignore_index=True)
+
+    def _analyze_document_codes(self):
+        base_folder = self.context_output_dir.parent / "schema" / "inputs"
+        analyzer = DocumentCodeQualityAnalyzer(base_folder)
+        return analyzer.analyze_schema(self.schema_name)
