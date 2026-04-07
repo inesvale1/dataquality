@@ -11,6 +11,20 @@ def clean_numeric_document(value: str) -> str:
     return re.sub(r"\D", "", str(value or ""))
 
 
+def normalize_numeric_cpf_for_validation(value: str) -> str:
+    cpf_clean = clean_numeric_document(value)
+    if not cpf_clean or len(cpf_clean) > 11:
+        return cpf_clean
+    return cpf_clean.zfill(11)
+
+
+def normalize_numeric_cnpj_for_validation(value: str) -> str:
+    cnpj_clean = clean_numeric_document(value)
+    if not cnpj_clean or len(cnpj_clean) > 14:
+        return cnpj_clean
+    return cnpj_clean.zfill(14)
+
+
 def calculate_cpf_dv(cpf_base: str) -> str:
     cpf_clean = clean_numeric_document(cpf_base)
     if len(cpf_clean) != 9:
@@ -28,7 +42,7 @@ def calculate_cpf_dv(cpf_base: str) -> str:
 
 
 def is_valid_cpf(cpf: str) -> bool:
-    cpf_clean = clean_numeric_document(cpf)
+    cpf_clean = normalize_numeric_cpf_for_validation(cpf)
     if len(cpf_clean) != 11:
         return False
     if len(set(cpf_clean)) == 1:
@@ -60,7 +74,7 @@ def calculate_cnpj_numeric_dv(cnpj_base: str) -> str:
 
 
 def is_valid_cnpj_numeric(cnpj: str) -> bool:
-    cnpj_clean = clean_numeric_document(cnpj)
+    cnpj_clean = normalize_numeric_cnpj_for_validation(cnpj)
     if len(cnpj_clean) != 14:
         return False
     if len(set(cnpj_clean)) == 1:
@@ -130,8 +144,8 @@ def is_valid_cnpj_alphanumeric(cnpj: str) -> bool:
 
 def is_valid_cnpj(cnpj: str) -> bool:
     cnpj_clean = clean_alphanumeric_document(cnpj)
-    if len(cnpj_clean) != 14:
-        return False
     if cnpj_clean.isdigit():
         return is_valid_cnpj_numeric(cnpj_clean)
+    if len(cnpj_clean) != 14:
+        return False
     return is_valid_cnpj_alphanumeric(cnpj_clean)

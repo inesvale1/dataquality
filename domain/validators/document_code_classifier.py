@@ -4,12 +4,12 @@ from dataclasses import dataclass
 import re
 
 from dataquality.domain.validators.br_documents import (
-    calculate_cnpj_numeric_dv,
-    calculate_cpf_dv,
     clean_alphanumeric_document,
     clean_numeric_document,
     is_valid_cnpj,
     is_valid_cpf,
+    normalize_numeric_cnpj_for_validation,
+    normalize_numeric_cpf_for_validation,
 )
 
 
@@ -53,6 +53,18 @@ def classify_document_code(column_name: str, value: object) -> DocumentCodeClass
     else:
         classification = "INVALIDO"
 
+    if classification == "CNPJ" and numeric_value and normalized_value.isdigit():
+        canonical_cnpj = normalize_numeric_cnpj_for_validation(numeric_value)
+        if len(canonical_cnpj) == 14:
+            normalized_value = canonical_cnpj
+            numeric_value = canonical_cnpj
+
+    if classification == "CPF" and numeric_value and normalized_value.isdigit():
+        canonical_cpf = normalize_numeric_cpf_for_validation(numeric_value)
+        if len(canonical_cpf) == 11:
+            normalized_value = canonical_cpf
+            numeric_value = canonical_cpf
+
     confidence = _infer_confidence(classification, numeric_value, normalized_value)
     return DocumentCodeClassification(
         classification=classification,
@@ -81,19 +93,9 @@ def _infer_validation_strategy(column_name: str) -> str:
 
 def _is_valid_cpf_candidate(value: object) -> bool:
     digits = clean_numeric_document(value)
-    if not digits or len(digits) > 11 or len(set(digits)) == 1:
+    if not digits or len(digits) > 11:
         return False
-    if len(digits) == 11:
-        return is_valid_cpf(digits)
-    if len(digits) == 10:
-        return calculate_cpf_dv(digits[:9]).startswith(digits[9])
-    if len(digits) == 9:
-        try:
-            calculate_cpf_dv(digits)
-            return True
-        except ValueError:
-            return False
-    return False
+    return is_valid_cpf(digits)
 
 
 def _is_valid_cnpj_candidate(value: object) -> bool:
@@ -105,19 +107,9 @@ def _is_valid_cnpj_candidate(value: object) -> bool:
         return False
 
     if numeric_value and normalized_value.isdigit():
-        if len(numeric_value) > 14 or len(set(numeric_value)) == 1:
+        if len(numeric_value) > 14:
             return False
-        if len(numeric_value) == 14:
-            return is_valid_cnpj(numeric_value)
-        if len(numeric_value) == 13:
-            return calculate_cnpj_numeric_dv(numeric_value[:12]).startswith(numeric_value[12])
-        if len(numeric_value) == 12:
-            try:
-                calculate_cnpj_numeric_dv(numeric_value)
-                return True
-            except ValueError:
-                return False
-        return False
+        return is_valid_cnpj(numeric_value)
 
     if len(normalized_value) == 14:
         return is_valid_cnpj(normalized_value)
