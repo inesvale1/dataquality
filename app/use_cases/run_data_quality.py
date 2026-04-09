@@ -9,8 +9,9 @@ from dataquality.adapters.outbound.exporters.excel_report import save_excel_repo
 from dataquality.domain.config.validation_config import ValidationConfig
 from dataquality.domain.validators.data_quality_validator import DataQualityValidator
 from dataquality.domain.validators.metadata_validator import MetadataValidator
-from dataquality.infrastructure.io.csv.schema_loader import schemaLoader
-from dataquality.infrastructure.io.sample_sources import CsvSampleSource, DatabaseSampleSource, SampleSource
+from dataquality.infrastructure.io.metadata_sources import build_metadata_source
+from dataquality.infrastructure.io.sample_sources import CsvSampleSource, DatabaseSampleSource, S3SampleSource, SampleSource
+from dataquality.infrastructure.io.secure_credentials import DatabaseConnectionSettings
 from dataquality.shared.telemetry import get_current_telemetry
 
 import pandas as pd
@@ -25,10 +26,24 @@ class RunDataQualityOptions:
     validation_config: Optional[ValidationConfig] = None
     db_type: str = "Oracle"
     exclude_tables: List[str] | None = None
+    metadata_source_type: str = "csv"
     sample_source_type: str = "csv"
     db_connection_uri: str | None = None
     db_authentication_type: str = "username_password"
     db_driver_class_name: str | None = None
+    db_username: str | None = None
+    db_host: str | None = None
+    db_port: int | None = None
+    db_service_name: str | None = None
+    db_sid: str | None = None
+    db_dsn: str | None = None
+    db_password_keyring_service: str | None = None
+    db_password_keyring_username: str | None = None
+    metadata_db_schemas: List[str] | None = None
+    metadata_query_template: str | None = None
+    metadata_s3_uri: str | None = None
+    sample_s3_uri: str | None = None
+    s3_storage_options: dict[str, object] | None = None
     sample_query_template: str | None = None
     sample_limit: int = 1000
 
@@ -38,8 +53,8 @@ def run_data_quality(options: RunDataQualityOptions) -> None:
     telemetry = get_current_telemetry()
 
     with (telemetry.stage("metadata.load") if telemetry is not None else nullcontext()):
-        metadata_loader = schemaLoader(Path(options.metadata_base_folder), options.columns_to_delete)
-        metadata_by_schema = metadata_loader.get_dictionary()
+        metadata_source = _build_metadata_source(options)
+        metadata_by_schema = metadata_source.get_metadata_by_schema()
     sample_source = _build_sample_source(options)
 
     exclude_set = _parse_exclude_tables(options.exclude_tables or [])
@@ -49,6 +64,7 @@ def run_data_quality(options: RunDataQualityOptions) -> None:
     if telemetry is not None:
         telemetry.set_metadata(
             use_case="run_data_quality",
+            metadata_source_type=options.metadata_source_type,
             sample_source_type=options.sample_source_type,
             sample_limit=options.sample_limit,
         )
@@ -126,18 +142,47 @@ def _build_sample_source(options: RunDataQualityOptions) -> SampleSource:
         if options.sample_base_folder is None:
             raise ValueError("sample_base_folder is required when sample_source_type='csv'")
         return CsvSampleSource(Path(options.sample_base_folder))
-    if source_type == "database":
-        if not options.db_connection_uri:
-            raise ValueError("db_connection_uri is required when sample_source_type='database'")
+    if source_type in {"database", "db", "oracle"}:
         return DatabaseSampleSource(
-            connection_uri=options.db_connection_uri,
+            connection_settings=_build_connection_settings(options),
             db_type=options.db_type,
             authentication_type=options.db_authentication_type,
             driver_class_name=options.db_driver_class_name,
             sample_limit=options.sample_limit,
             query_template=options.sample_query_template,
         )
+    if source_type == "s3":
+        return S3SampleSource(str(options.sample_s3_uri or ""), options.s3_storage_options)
     raise ValueError(f"Unsupported sample_source_type: {options.sample_source_type}")
+
+
+def _build_metadata_source(options: RunDataQualityOptions):
+    return build_metadata_source(
+        source_type=options.metadata_source_type,
+        base_folder=Path(options.metadata_base_folder),
+        columns_to_delete=options.columns_to_delete,
+        connection_settings=_build_connection_settings(options),
+        schemas=options.metadata_db_schemas,
+        db_type=options.db_type,
+        query_template=options.metadata_query_template,
+        s3_uri=options.metadata_s3_uri,
+        s3_storage_options=options.s3_storage_options,
+    )
+
+
+def _build_connection_settings(options: RunDataQualityOptions) -> DatabaseConnectionSettings:
+    return DatabaseConnectionSettings(
+        connection_uri=options.db_connection_uri,
+        driver_class_name=options.db_driver_class_name,
+        username=options.db_username,
+        host=options.db_host,
+        port=options.db_port,
+        service_name=options.db_service_name,
+        sid=options.db_sid,
+        dsn=options.db_dsn,
+        password_keyring_service=options.db_password_keyring_service,
+        password_keyring_username=options.db_password_keyring_username,
+    )
 
 
 def _parse_exclude_tables(items: List[str]) -> list[tuple[str | None, str]]:

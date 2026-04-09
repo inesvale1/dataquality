@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import re
 from pathlib import Path
 from typing import Protocol
 
 import pandas as pd
 
 from dataquality.infrastructure.io.csv.sample_loader import SampleDataLoader
+from dataquality.infrastructure.io.secure_credentials import DatabaseConnectionSettings, build_database_connection_uri
 from dataquality.shared.telemetry import get_current_telemetry
 
 
@@ -37,14 +39,15 @@ class CsvSampleSource:
 class DatabaseSampleSource:
     def __init__(
         self,
-        connection_uri: str,
+        connection_uri: str | None = None,
+        connection_settings: DatabaseConnectionSettings | None = None,
         db_type: str = "Oracle",
         authentication_type: str = "username_password",
         driver_class_name: str | None = None,
         sample_limit: int = 1000,
         query_template: str | None = None,
     ):
-        self.connection_uri = self._normalize_connection_uri(connection_uri, driver_class_name)
+        self.connection_uri = self._build_connection_uri(connection_uri, connection_settings, driver_class_name)
         self.db_type = db_type
         self.authentication_type = authentication_type
         self.driver_class_name = driver_class_name
@@ -124,6 +127,18 @@ class DatabaseSampleSource:
             return uri
         return f"{driver_class_name}://{uri}"
 
+    def _build_connection_uri(
+        self,
+        connection_uri: str | None,
+        connection_settings: DatabaseConnectionSettings | None,
+        driver_class_name: str | None,
+    ) -> str:
+        if connection_settings is not None:
+            return build_database_connection_uri(connection_settings)
+        if not connection_uri:
+            raise ValueError("connection_uri or connection_settings is required for database sample source.")
+        return self._normalize_connection_uri(connection_uri, driver_class_name)
+
     def _build_connect_args(self) -> dict[str, object]:
         auth_type = str(self.authentication_type).strip().lower()
         if auth_type in {"username_password", "password", "basic", ""}:
@@ -131,3 +146,68 @@ class DatabaseSampleSource:
         if auth_type in {"external", "kerberos", "iam"}:
             return {}
         raise ValueError(f"Unsupported authentication_type: {self.authentication_type}")
+
+
+class S3SampleSource:
+    SAMPLE_PREFIXES = ("sample_", "samples_", "amostra_", "dados_", "data_")
+
+    def __init__(self, uri: str, storage_options: dict[str, object] | None = None):
+        self.uri = str(uri).strip().rstrip("/")
+        self.storage_options = storage_options or {}
+        self._cache: dict[str, dict[str, pd.DataFrame]] | None = None
+
+    def get_samples_for_schema(self, schema_name: str, candidates_df: pd.DataFrame) -> dict[str, pd.DataFrame]:
+        if not self.uri:
+            raise ValueError("sample_s3_uri is required when sample_source='s3'.")
+        if self._cache is None:
+            self._cache = self._load_cache()
+        return self._cache.get(str(schema_name).upper(), {})
+
+    def _load_cache(self) -> dict[str, dict[str, pd.DataFrame]]:
+        try:
+            import fsspec
+        except ImportError as exc:
+            raise RuntimeError("S3 sample source requires fsspec/s3fs. Install it with: pip install s3fs") from exc
+
+        fs, _, paths = fsspec.get_fs_token_paths(self.uri, storage_options=self.storage_options)
+        base_path = paths[0].rstrip("/")
+        matches = fs.glob(f"{base_path}/**/*.csv")
+        result: dict[str, dict[str, pd.DataFrame]] = {}
+        for path in matches:
+            uri = f"s3://{path}" if not str(path).startswith("s3://") else str(path)
+            parsed = self._parse_sample_filename(uri)
+            if parsed is None:
+                continue
+            owner, table = parsed
+            df = pd.read_csv(uri, storage_options=self.storage_options)
+            df.columns = [str(column).strip().upper() for column in df.columns]
+            result.setdefault(owner, {})[table] = df
+        return result
+
+    def _parse_sample_filename(self, uri: str) -> tuple[str, str] | None:
+        path_text = str(uri).replace("\\", "/")
+        file_name = path_text.rstrip("/").split("/")[-1]
+        parent_name = path_text.rstrip("/").split("/")[-2] if "/" in path_text.rstrip("/") else ""
+        stem = Path(file_name).stem.upper()
+        if stem.startswith("METADADOS_"):
+            return None
+
+        dot_parts = [part.strip() for part in stem.split(".") if part.strip()]
+        if len(dot_parts) >= 3:
+            return self._sanitize_name(dot_parts[-3]), self._sanitize_name(dot_parts[-2])
+
+        table_name = stem
+        for prefix in self.SAMPLE_PREFIXES:
+            prefix_upper = prefix.upper()
+            if table_name.startswith(prefix_upper):
+                table_name = table_name[len(prefix_upper):]
+                break
+
+        owner = self._sanitize_name(parent_name)
+        table = self._sanitize_name(table_name)
+        if not owner or not table:
+            return None
+        return owner, table
+
+    def _sanitize_name(self, name: str) -> str:
+        return re.sub(r"[^0-9A-Z_]+", "_", str(name).upper()).strip("_")

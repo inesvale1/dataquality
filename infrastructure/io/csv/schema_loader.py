@@ -62,13 +62,59 @@ class schemaLoader:
     _TRUE_TOKENS = {"Y", "YES", "SIM", "S", "1", "TRUE", "VERDADE", "VERDADEIRO", "T", "ON"}
     _FALSE_TOKENS = {"N", "NO", "NÃO", "NAO", "0", "FALSE", "FALSO", "F", "OFF"}
 
-    def __init__(self, base_folder: Path, columns_to_delete: Optional[List[str]] = None):
+    def __init__(self, base_folder: Path, columns_to_delete: Optional[List[str]] = None, auto_load: bool = True):
         self.base_folder: Path = Path(base_folder)
         self.columns_to_delete = columns_to_delete or []
-        self.dictionary: Dict[str, pd.DataFrame] = self._read_csv_tree()
+        self.dictionary: Dict[str, pd.DataFrame] = self._read_csv_tree() if auto_load else {}
 
     def get_dictionary(self) -> Dict[str, pd.DataFrame]:
         return self.dictionary
+
+    def normalize_metadata_dataframe(self, df: pd.DataFrame, source_name: str = "<dataframe>") -> pd.DataFrame:
+        df = df.copy()
+        df.columns = [str(c).strip().upper() for c in df.columns]
+
+        if "COL_COMMENTS" not in df.columns:
+            df["COL_COMMENTS"] = pd.NA
+        if "TAB_COMMENTS" not in df.columns:
+            df["TAB_COMMENTS"] = pd.NA
+        if "CONSTRAINTS" not in df.columns:
+            df["CONSTRAINTS"] = ""
+
+        df["CONSTRAINTS_NORM"] = df["CONSTRAINTS"].astype(str).str.upper().fillna("")
+
+        df["IS_PK"] = df["CONSTRAINTS_NORM"].str.contains("PRIMARY KEY", na=False)
+        df["IS_FK"] = df["CONSTRAINTS_NORM"].str.contains("FOREIGN KEY", na=False)
+        df["IS_UNIQUE"] = df["CONSTRAINTS_NORM"].str.contains("UNIQUE", na=False)
+
+        missing = [c for c in self.REQUIRED if c not in df.columns]
+        if missing:
+            raise ValueError(f"Metadata source {source_name} is missing required columns: {missing}")
+
+        df.drop(columns=["CONSTRAINTS_NORM"], inplace=True)
+
+        for c in (set(self.STRING_COLS + self.INT_COLS + self.DOUBLE_COLS + self.BOOL_COLS) - set(df.columns)):
+            df[c] = pd.NA
+
+        for c in self.STRING_COLS:
+            if c in df.columns:
+                df[c] = df[c].astype(str)
+
+        for c in self.INT_COLS:
+            if c in df.columns:
+                df[c] = pd.to_numeric(df[c], errors="coerce").fillna(0).astype(int)
+
+        for c in self.DOUBLE_COLS:
+            if c in df.columns:
+                df[c] = pd.to_numeric(df[c], errors="coerce").fillna(0.0).astype(float)
+
+        for c in self.BOOL_COLS:
+            if c in df.columns:
+                df[c] = df[c].map(self._to_bool).astype(bool)
+
+        desired = self.STRING_COLS + self.INT_COLS + self.DOUBLE_COLS + self.BOOL_COLS
+        ordered = [c for c in desired if c in df.columns] + [c for c in df.columns if c not in desired]
+        return df[ordered]
 
     # ---------------- internal helpers ----------------
 
@@ -183,52 +229,4 @@ class schemaLoader:
         #df = pd.read_csv(path) if path.suffix.lower()=='.csv' else pd.read_excel(path)
         df = self._read_csv_with_fallback(path) if path.suffix.lower() == ".csv" else pd.read_excel(path)
         #print(path)
-        # Normalize headers to UPPER + strip
-        df.columns = [c.strip().upper() for c in df.columns]
-
-        if "COL_COMMENTS" not in df.columns:
-            df["COL_COMMENTS"] = pd.NA
-        if "TAB_COMMENTS" not in df.columns:
-            df["TAB_COMMENTS"] = pd.NA
-
-        # Normalizar: converter para string e maiusculas
-        df['CONSTRAINTS_NORM'] = df['CONSTRAINTS'].astype(str).str.upper().fillna("")
-
-        #print(f"Loaded {path} with columns: {df.columns.tolist()}")
-
-        # Criar as flags
-        df['IS_PK']     = df['CONSTRAINTS_NORM'].str.contains('PRIMARY KEY', na=False)
-        df['IS_FK']     = df['CONSTRAINTS_NORM'].str.contains('FOREIGN KEY', na=False)
-        df['IS_UNIQUE'] = df['CONSTRAINTS_NORM'].str.contains('UNIQUE', na=False)
-
-        missing = [c for c in self.REQUIRED if c not in df.columns]
-        if missing:
-            raise ValueError(f"File {path.name} is missing required columns: {missing}")
-
-        # (Optional) delete auxiliary column
-        df.drop(columns=['CONSTRAINTS_NORM'], inplace=True)
-        
-        # Ensure optional cols exist
-        for c in (set(self.STRING_COLS + self.INT_COLS + self.DOUBLE_COLS + self.BOOL_COLS) - set(df.columns)):
-            df[c] = pd.NA
-
-        # Coerce types
-        for c in self.STRING_COLS:
-            if c in df.columns:
-                df[c] = df[c].astype(str)
-
-        for c in self.INT_COLS:
-            if c in df.columns:
-                df[c] = pd.to_numeric(df[c], errors="coerce").fillna(0).astype(int)
-
-        for c in self.DOUBLE_COLS:
-            if c in df.columns:
-                df[c] = pd.to_numeric(df[c], errors="coerce").fillna(0.0).astype(float)
-
-        for c in self.BOOL_COLS:
-            if c in df.columns:
-                df[c] = df[c].map(self._to_bool).astype(bool)
-
-        desired = self.STRING_COLS + self.INT_COLS + self.DOUBLE_COLS + self.BOOL_COLS
-        ordered = [c for c in desired if c in df.columns] + [c for c in df.columns if c not in desired]
-        return df[ordered]
+        return self.normalize_metadata_dataframe(df, path.name)

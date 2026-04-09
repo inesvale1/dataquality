@@ -8,7 +8,8 @@ from typing import List, Optional
 from dataquality.domain.config.llm_comment_config import LLMCommentConfig
 from dataquality.domain.config.validation_config import ValidationConfig
 from dataquality.domain.validators.metadata_validator import MetadataValidator
-from dataquality.infrastructure.io.csv.schema_loader import schemaLoader
+from dataquality.infrastructure.io.metadata_sources import build_metadata_source
+from dataquality.infrastructure.io.secure_credentials import DatabaseConnectionSettings
 from dataquality.app.orchestration.metadata_quality_metrics_calculator import MetadataQualityMetricsCalculator
 from dataquality.adapters.outbound.exporters.excel_report import save_excel_report
 from dataquality.shared.telemetry import get_current_telemetry
@@ -26,6 +27,21 @@ class RunOptions:
     llm_comment_config: LLMCommentConfig | None = None
     context_output_dir: Path | None = None
     save_context_json: bool = True
+    metadata_source_type: str = "csv"
+    db_connection_uri: str | None = None
+    db_driver_class_name: str | None = None
+    db_username: str | None = None
+    db_host: str | None = None
+    db_port: int | None = None
+    db_service_name: str | None = None
+    db_sid: str | None = None
+    db_dsn: str | None = None
+    db_password_keyring_service: str | None = None
+    db_password_keyring_username: str | None = None
+    metadata_db_schemas: List[str] | None = None
+    metadata_query_template: str | None = None
+    metadata_s3_uri: str | None = None
+    s3_storage_options: dict[str, object] | None = None
 
 
 def run_model_quality(options: RunOptions) -> None:
@@ -35,13 +51,23 @@ def run_model_quality(options: RunOptions) -> None:
     telemetry = get_current_telemetry()
 
     with (telemetry.stage("metadata.load") if telemetry is not None else nullcontext()):
-        loader = schemaLoader(Path(options.base_folder), options.columns_to_delete)
-        dfs = loader.get_dictionary()
+        metadata_source = build_metadata_source(
+            source_type=options.metadata_source_type,
+            base_folder=Path(options.base_folder),
+            columns_to_delete=options.columns_to_delete,
+            connection_settings=_build_connection_settings(options),
+            schemas=options.metadata_db_schemas,
+            db_type=options.db_type,
+            query_template=options.metadata_query_template,
+            s3_uri=options.metadata_s3_uri,
+            s3_storage_options=options.s3_storage_options,
+        )
+        dfs = metadata_source.get_metadata_by_schema()
 
     print(f"Total dataframes loaded: {len(dfs)}")
     print(f"Dictionary keys: {list(dfs.keys())}")
     if telemetry is not None:
-        telemetry.set_metadata(use_case="run_model_quality")
+        telemetry.set_metadata(use_case="run_model_quality", metadata_source_type=options.metadata_source_type)
         telemetry.set_gauge("schemas_loaded", len(dfs))
 
     exclude_set = _parse_exclude_tables(options.exclude_tables or [])
@@ -136,3 +162,18 @@ def _filter_excluded_tables(df: "pd.DataFrame", exclude_set: list[tuple[str | No
         table_mask = tables.str.contains(pattern, na=False, regex=False)
         mask_exclude |= owner_mask & table_mask
     return df.loc[~mask_exclude].copy()
+
+
+def _build_connection_settings(options: RunOptions) -> DatabaseConnectionSettings:
+    return DatabaseConnectionSettings(
+        connection_uri=options.db_connection_uri,
+        driver_class_name=options.db_driver_class_name,
+        username=options.db_username,
+        host=options.db_host,
+        port=options.db_port,
+        service_name=options.db_service_name,
+        sid=options.db_sid,
+        dsn=options.db_dsn,
+        password_keyring_service=options.db_password_keyring_service,
+        password_keyring_username=options.db_password_keyring_username,
+    )

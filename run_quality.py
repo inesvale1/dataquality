@@ -91,6 +91,7 @@ def _run_model_phase(config: dict[str, object], multiple_phases: bool) -> None:
 
     base_folder = _resolve_model_base_folder(str(get_config_value(phase_config, "base_folder", template_config["base_folder"])))
     validation_config = build_validation_config(get_config_value(phase_config, "validation_config", None))
+    metadata_source = str(get_config_value(phase_config, "metadata_source", template_config.get("metadata_source", "csv")))
     llm_comment_raw = get_config_value(
         phase_config,
         "llm_comment_generation",
@@ -111,6 +112,29 @@ def _run_model_phase(config: dict[str, object], multiple_phases: bool) -> None:
         llm_comment_config=llm_comment_config or LLMCommentConfig(),
         context_output_dir=Path(__file__).resolve().parent / "config",
         save_context_json=save_context_json,
+        metadata_source_type=metadata_source,
+        db_connection_uri=get_config_value(phase_config, "db_connection_uri", template_config.get("db_connection_uri")),
+        db_driver_class_name=get_config_value(phase_config, "db_driver_class_name", template_config.get("db_driver_class_name")),
+        db_username=get_config_value(phase_config, "db_username", template_config.get("db_username")),
+        db_host=get_config_value(phase_config, "db_host", template_config.get("db_host")),
+        db_port=_optional_int(get_config_value(phase_config, "db_port", template_config.get("db_port"))),
+        db_service_name=get_config_value(phase_config, "db_service_name", template_config.get("db_service_name")),
+        db_sid=get_config_value(phase_config, "db_sid", template_config.get("db_sid")),
+        db_dsn=get_config_value(phase_config, "db_dsn", template_config.get("db_dsn")),
+        db_password_keyring_service=get_config_value(
+            phase_config,
+            "db_password_keyring_service",
+            template_config.get("db_password_keyring_service"),
+        ),
+        db_password_keyring_username=get_config_value(
+            phase_config,
+            "db_password_keyring_username",
+            template_config.get("db_password_keyring_username"),
+        ),
+        metadata_db_schemas=list(get_config_value(phase_config, "metadata_db_schemas", template_config.get("metadata_db_schemas", [])) or []),
+        metadata_query_template=get_config_value(phase_config, "metadata_query_template", template_config.get("metadata_query_template")),
+        metadata_s3_uri=get_config_value(phase_config, "metadata_s3_uri", template_config.get("metadata_s3_uri")),
+        s3_storage_options=dict(get_config_value(phase_config, "s3_storage_options", template_config.get("s3_storage_options", {})) or {}),
     )
 
     print("=== Model Quality ===")
@@ -124,6 +148,7 @@ def _run_model_phase(config: dict[str, object], multiple_phases: bool) -> None:
             phase="model_quality",
             db_type=opts.db_type,
             base_folder=str(base_folder),
+            metadata_source=metadata_source,
         )
         set_current_telemetry(collector)
     else:
@@ -152,13 +177,14 @@ def _run_data_phase(config: dict[str, object], multiple_phases: bool) -> None:
     template_config = build_data_quality_config_template()
     phase_config = get_phase_config(config, "data_quality")
 
+    metadata_source = str(get_config_value(phase_config, "metadata_source", template_config.get("metadata_source", "csv")))
     sample_source = str(get_config_value(phase_config, "sample_source", template_config["sample_source"]))
     metadata_base_folder = _resolve_folder(
         str(get_config_value(phase_config, "metadata_base_folder", template_config["metadata_base_folder"])),
         "schema",
     )
     sample_base_folder = None
-    if sample_source == "csv":
+    if sample_source.strip().lower() == "csv":
         sample_base_folder = _resolve_folder(
             str(get_config_value(phase_config, "sample_base_folder", template_config["sample_base_folder"])),
             "samples",
@@ -176,10 +202,32 @@ def _run_data_phase(config: dict[str, object], multiple_phases: bool) -> None:
         validation_config=validation_config,
         db_type=str(get_config_value(phase_config, "db_type", template_config["db_type"])),
         exclude_tables=list(get_config_value(phase_config, "exclude_tables", template_config["exclude_tables"])),
+        metadata_source_type=metadata_source,
         sample_source_type=sample_source,
         db_connection_uri=get_config_value(phase_config, "db_connection_uri", template_config.get("db_connection_uri")),
         db_authentication_type=str(get_config_value(phase_config, "db_authentication_type", template_config["db_authentication_type"])),
         db_driver_class_name=get_config_value(phase_config, "db_driver_class_name", template_config.get("db_driver_class_name")),
+        db_username=get_config_value(phase_config, "db_username", template_config.get("db_username")),
+        db_host=get_config_value(phase_config, "db_host", template_config.get("db_host")),
+        db_port=_optional_int(get_config_value(phase_config, "db_port", template_config.get("db_port"))),
+        db_service_name=get_config_value(phase_config, "db_service_name", template_config.get("db_service_name")),
+        db_sid=get_config_value(phase_config, "db_sid", template_config.get("db_sid")),
+        db_dsn=get_config_value(phase_config, "db_dsn", template_config.get("db_dsn")),
+        db_password_keyring_service=get_config_value(
+            phase_config,
+            "db_password_keyring_service",
+            template_config.get("db_password_keyring_service"),
+        ),
+        db_password_keyring_username=get_config_value(
+            phase_config,
+            "db_password_keyring_username",
+            template_config.get("db_password_keyring_username"),
+        ),
+        metadata_db_schemas=list(get_config_value(phase_config, "metadata_db_schemas", template_config.get("metadata_db_schemas", [])) or []),
+        metadata_query_template=get_config_value(phase_config, "metadata_query_template", template_config.get("metadata_query_template")),
+        metadata_s3_uri=get_config_value(phase_config, "metadata_s3_uri", template_config.get("metadata_s3_uri")),
+        sample_s3_uri=get_config_value(phase_config, "sample_s3_uri", template_config.get("sample_s3_uri")),
+        s3_storage_options=dict(get_config_value(phase_config, "s3_storage_options", template_config.get("s3_storage_options", {})) or {}),
         sample_query_template=get_config_value(phase_config, "sample_query_template", template_config.get("sample_query_template")),
         sample_limit=int(get_config_value(phase_config, "sample_limit", template_config["sample_limit"])),
     )
@@ -188,6 +236,7 @@ def _run_data_phase(config: dict[str, object], multiple_phases: bool) -> None:
     print("Metadata folder:", metadata_base_folder)
     if sample_base_folder is not None:
         print("Sample folder:", sample_base_folder)
+    print("Metadata source:", metadata_source)
     print("Sample source:", sample_source)
 
     if telemetry_enabled:
@@ -196,6 +245,7 @@ def _run_data_phase(config: dict[str, object], multiple_phases: bool) -> None:
         collector.set_metadata(
             entrypoint="run_quality.py",
             phase="data_quality",
+            metadata_source=metadata_source,
             sample_source=sample_source,
             db_type=opts.db_type,
             metadata_base_folder=str(metadata_base_folder),
@@ -260,6 +310,12 @@ def main() -> None:
         _run_model_phase(json_config, multiple_phases)
     if args.run_data_quality:
         _run_data_phase(json_config, multiple_phases)
+
+
+def _optional_int(value: object) -> int | None:
+    if value in (None, ""):
+        return None
+    return int(value)
 
 
 if __name__ == "__main__":
