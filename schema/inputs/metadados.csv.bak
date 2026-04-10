@@ -1503,6 +1503,7 @@ e o conteudo do campo no xTexto";6877421;"N";3;"TXT_TEXTO";"VARCHAR2";60;"Y";;27
 "NFECORP";"XML_ITEM_IRREGULARID_FISC";"Tabela utilizada para guardar o xml de autorização e cancelamento";0;"N";1;"SEQ_XML_ITEM_IRRE_FIS";"NUMBER";22;"N";0;0;0;0;"NO";"Sequencial da tabela";"PK_XML_ITEM_IRRE_FIS (PRIMARY KEY: ENABLED)- SYS_C00188591 (C: ENABLED)"
 "NFECORP";"XML_ITEM_IRREGULARID_FISC";"Tabela utilizada para guardar o xml de autorização e cancelamento";0;"N";2;"TXT_XML_AUTORIZACAO";"CLOB";4000;"Y";;0;0;0;"NO";"Xml de autorização";" (: )"
 "NFECORP";"XML_ITEM_IRREGULARID_FISC";"Tabela utilizada para guardar o xml de autorização e cancelamento";0;"N";3;"TXT_XML_CANCELAMENTO";"CLOB";4000;"Y";;0;0;0;"NO";"Xml de autorização";" (: )"
+"OWNER";"TABLE_NAME";"TAB_COMMENTS";"NUM_ROWS";"DUPLICATED";"COLUMN_ID";"COLUMN_NAME";"DATA_TYPE";"DATA_LENGTH";"NULLABLE";"DATA_SCALE";"AVG_COL_LEN";"NUM_DISTINCT";"NUM_NULLS";"DEFAULT_ON_NULL";"COL_COMMENTS";"CONSTRAINTS"
 "SPED";"APURACAO_CFOP";"";105447652;"N";3;"COD_CFOP";"NUMBER";22;"N";0;4;615;0;"NO";"C?digo do CFOP";"SYS_C0013124 (C: ENABLED)"
 "SPED";"APURACAO_CFOP";"";105447652;"N";4;"COD_CST";"NUMBER";22;"N";0;3;144;0;"NO";"C?digo do CST";"SYS_C0013125 (C: ENABLED)"
 "SPED";"APURACAO_CFOP";"";105447652;"N";1;"SEQ_APURACAO_CFOP";"NUMBER";22;"N";0;7;105447652;0;"NO";"Chave primaria.";"APURACAO_CFOP_PK (PRIMARY KEY: ENABLED)- SYS_C0013123 (C: ENABLED)"
@@ -5062,6 +5063,7 @@ ELETRÔNICOS (VÁLIDO A PARTIR DE 01/01/2022)";2942562;"N";5;"VLR_TOT_VS";"NUMBE
 3 - Omisso
 4 - Incopmleto
 5 - No prazo";" (: )"
+"OWNER";"TABLE_NAME";"TAB_COMMENTS";"NUM_ROWS";"DUPLICATED";"COLUMN_ID";"COLUMN_NAME";"DATA_TYPE";"DATA_LENGTH";"NULLABLE";"DATA_SCALE";"AVG_COL_LEN";"NUM_DISTINCT";"NUM_NULLS";"DEFAULT_ON_NULL";"COL_COMMENTS";"CONSTRAINTS"
 "CADASTRO";"ADVOGADO";"Tabela de advogados.";30213;"N";4;"COD_UF";"NUMBER";22;"N";0;3;27;0;"NO";"Codigo da UF do advogado";"FK_ADVOGADO_R_UF (FOREIGN KEY: ENABLED)- SYS_C00105382 (C: ENABLED)"
 "CADASTRO";"ADVOGADO";"Tabela de advogados.";30213;"N";11;"DAT_MOVIMENTO";"DATE";7;"Y";;5;13035;16885;"NO";"Data da movimentação";" (: )"
 "CADASTRO";"ADVOGADO";"Tabela de advogados.";30213;"N";3;"NOM_ADVOGADO";"VARCHAR2";60;"N";;28;29448;0;"NO";"Nome do Advogado
@@ -13410,6 +13412,7 @@ formulário representado em código de barras.";" (: )"
 "SITRAM2";"VERSAO_CRITERIO";"Dados sobre uma versao de critério.";59;"N";2;"SEQ_CRITERIO";"NUMBER";22;"Y";0;3;15;0;"NO";"Identificador único de um Criterio.";"FK_CRI_R_VER_CRI (FOREIGN KEY: ENABLED)"
 "SITRAM2";"VERSAO_CRITERIO";"Dados sobre uma versao de critério.";59;"N";5;"SEQ_USUARIO";"NUMBER";22;"Y";0;6;4;0;"NO";"Seqüencial do usuário";"FK_USU_R_VER_CRI (FOREIGN KEY: ENABLED)"
 "SITRAM2";"VERSAO_CRITERIO";"Dados sobre uma versao de critério.";59;"N";1;"SEQ_VERSAO_CRITERIO";"NUMBER";22;"N";0;3;59;0;"NO";"Identificador único de uma versão de critério.";"PK_VERSAO_CRITERIO (PRIMARY KEY: ENABLED)- SYS_C001034551 (C: ENABLED)"
+"OWNER";"TABLE_NAME";"TAB_COMMENTS";"NUM_ROWS";"DUPLICATED";"COLUMN_ID";"COLUMN_NAME";"DATA_TYPE";"DATA_LENGTH";"NULLABLE";"DATA_SCALE";"AVG_COL_LEN";"NUM_DISTINCT";"NUM_NULLS";"DEFAULT_ON_NULL";"COL_COMMENTS";"CONSTRAINTS"
 "DIMP";"DIMP";"Este registro deve ser gerado patotalizados por meio de captura. ";177464832;"N";3;"COD_MCAPTURA";"VARCHAR2";30;"Y";;15;5796352;0;"NO";"Código do meio de captura (campo 02 do Registro 0200).";" (: )"
 "DIMP";"DIMP";"Este registro deve ser gerado patotalizados por meio de captura. ";177464832;"N";4;"DAT_OPERACAO";"DATE";7;"Y";;8;1734;0;"NO";"Data da operação ";" (: )"
 "DIMP";"DIMP";"Este registro deve ser gerado patotalizados por meio de captura. ";177464832;"N";7;"NUM_CNPJ_ADQUIRENTE";"NUMBER";22;"Y";0;7;4985;66224578;"NO";"CNPJ da Adquirente ou subadquirente que autorizou a transação, em branco para quando o declarante for o próprio 
