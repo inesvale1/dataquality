@@ -34,6 +34,8 @@ class OpenAICompatibleCommentSuggester(LLMCommentSuggester):
     timeout_seconds: int = 60
     temperature: float = 0.2
     max_output_tokens: int = 180
+    api_type: str = "openai"
+    api_version: str = ""
     disabled_reason: str = ""
     last_error: str = ""
     response_cache: dict[str, Optional[str]] = field(default_factory=dict)
@@ -59,6 +61,8 @@ class OpenAICompatibleCommentSuggester(LLMCommentSuggester):
             timeout_seconds=int(config.timeout_seconds),
             temperature=float(config.temperature),
             max_output_tokens=int(config.max_output_tokens),
+            api_type=getattr(config, "api_type", "openai"),
+            api_version=getattr(config, "api_version", ""),
             disabled_reason=disabled_reason,
         )
 
@@ -133,10 +137,21 @@ class OpenAICompatibleCommentSuggester(LLMCommentSuggester):
         self.response_cache[cache_key] = comment
         return comment
 
+    def _build_endpoint(self) -> str:
+        base = self.base_url.rstrip("/")
+        api_version = getattr(self, "api_version", "")
+        if getattr(self, "api_type", "openai").lower() == "azure":
+            # Azure format: {endpoint}/openai/deployments/{model}/chat/completions?api-version=...
+            url = f"{base}/openai/deployments/{self.model}/chat/completions"
+            if api_version:
+                url += f"?api-version={api_version}"
+            return url
+        return base + "/chat/completions"
+
     def _post_json(self, payload: Dict[str, Any]) -> str | None:
         try:
             self.last_error = ""
-            endpoint = self.base_url.rstrip("/") + "/chat/completions"
+            endpoint = self._build_endpoint()
             req = request.Request(
                 endpoint,
                 data=json.dumps(payload).encode("utf-8"),
@@ -258,7 +273,10 @@ class OpenAICompatibleCommentSuggester(LLMCommentSuggester):
     def _build_headers(self) -> Dict[str, str]:
         headers = {"Content-Type": "application/json"}
         if self.api_key:
-            headers["Authorization"] = f"Bearer {self.api_key}"
+            if getattr(self, "api_type", "openai").lower() == "azure":
+                headers["api-key"] = self.api_key
+            else:
+                headers["Authorization"] = f"Bearer {self.api_key}"
         return headers
 
 

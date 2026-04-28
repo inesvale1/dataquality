@@ -1,0 +1,12 @@
+pandas>=2.0
+openpyxl>=3.1
+inflect>=7.0
+
+# Oracle / database connectivity (needed when metadata_source or sample_source = "db")
+sqlalchemy>=2.0
+
+# Windows credential store (needed when db_password_keyring_service is set)
+keyring>=25.0
+
+# Memory telemetry (optional — telemetry.py imports with try/except)
+psutil>=5.9

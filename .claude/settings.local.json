@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(& \"d:\\\\Users\\\\49756615\\\\Documents\\\\DoutoradoUFC\\\\Implementation\\\\dataquality\\\\.venv\\\\Scripts\\\\python.exe\" -m pip list 2>&1)"
+    ]
+  }
+}

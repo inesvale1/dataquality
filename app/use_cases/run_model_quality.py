@@ -73,7 +73,7 @@ def run_model_quality(options: RunOptions) -> None:
     exclude_set = _parse_exclude_tables(options.exclude_tables or [])
 
     for schema_name, df in dfs.items():
-        if schema_name != "sitram2":  # --- IGNORE FOR TESTS---
+        if schema_name != "cadastro":  # --- IGNORE FOR TESTS---
             continue                     # --- IGNORE ---
         
         with (telemetry.stage("schema.process", schema=schema_name) if telemetry is not None else nullcontext()):
