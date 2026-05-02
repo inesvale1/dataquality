@@ -118,16 +118,20 @@ class schemaLoader:
 
     # ---------------- internal helpers ----------------
 
+    def save_individual_csvs(self, base_folder: Optional[Path] = None) -> None:
+        """Save each schema's DataFrame as metadados_<schema>.csv inside its own subfolder."""
+        output_root = Path(base_folder) if base_folder else self.base_folder
+        for schema_name, df in self.dictionary.items():
+            schema_dir = output_root / schema_name
+            schema_dir.mkdir(parents=True, exist_ok=True)
+            csv_path = schema_dir / f"metadados_{schema_name}.csv"
+            df.to_csv(csv_path, index=False, sep=";", encoding="utf-8-sig")
+
     def _read_csv_tree(self) -> Dict[str, pd.DataFrame]:
         if not self.base_folder.exists():
             raise FileNotFoundError(f"Base folder not found: {self.base_folder}")
 
         dfs: Dict[str, pd.DataFrame] = {}
-        unified_csv = self.base_folder / "metadados.csv"
-        if unified_csv.exists():
-            df_all = self._load_and_typed_file(unified_csv)
-            return self._split_dataframe_by_schema(df_all)
-
         # Agora o padrão aceita apenas CSV
         pattern = re.compile(r"^metadados_(.+)\.csv$", flags=re.IGNORECASE)
 

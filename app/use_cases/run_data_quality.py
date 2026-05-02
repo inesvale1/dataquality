@@ -46,6 +46,7 @@ class RunDataQualityOptions:
     s3_storage_options: dict[str, object] | None = None
     sample_query_template: str | None = None
     sample_limit: int = 1000
+    include_schemas: List[str] | None = None
 
 
 def run_data_quality(options: RunDataQualityOptions) -> None:
@@ -55,6 +56,8 @@ def run_data_quality(options: RunDataQualityOptions) -> None:
     with (telemetry.stage("metadata.load") if telemetry is not None else nullcontext()):
         metadata_source = _build_metadata_source(options)
         metadata_by_schema = metadata_source.get_metadata_by_schema()
+
+    metadata_by_schema = _filter_schemas(metadata_by_schema, options.include_schemas)
     sample_source = _build_sample_source(options)
 
     exclude_set = _parse_exclude_tables(options.exclude_tables or [])
@@ -134,6 +137,13 @@ def run_data_quality(options: RunDataQualityOptions) -> None:
                     file_prefix="issues_dados",
                 )
             print(f"Data quality report saved to {out_path}")
+
+
+def _filter_schemas(dfs: dict, include_schemas: List[str] | None) -> dict:
+    if not include_schemas:
+        return dfs
+    allowed = {s.strip().lower() for s in include_schemas if s.strip()}
+    return {k: v for k, v in dfs.items() if k.lower() in allowed}
 
 
 def _build_sample_source(options: RunDataQualityOptions) -> SampleSource:

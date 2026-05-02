@@ -1,0 +1,431 @@
+OWNER;TABLE_NAME;TAB_COMMENTS;NUM_ROWS;DUPLICATED;COLUMN_ID;COLUMN_NAME;DATA_TYPE;DATA_LENGTH;NULLABLE;DATA_SCALE;AVG_COL_LEN;NUM_DISTINCT;NUM_NULLS;DEFAULT_ON_NULL;COL_COMMENTS;CONSTRAINTS
+DIMP;DIMP;Este registro deve ser gerado patotalizados por meio de captura. ;177464832.0;N;3.0;COD_MCAPTURA;VARCHAR2;30;Y;;15.0;5796352.0;0.0;NO;C�digo do meio de captura (campo 02 do Registro 0200).; (: )
+DIMP;DIMP;Este registro deve ser gerado patotalizados por meio de captura. ;177464832.0;N;4.0;DAT_OPERACAO;DATE;7;Y;;8.0;1734.0;0.0;NO;Data da opera��o ; (: )
+DIMP;DIMP;Este registro deve ser gerado patotalizados por meio de captura. ;177464832.0;N;7.0;NUM_CNPJ_ADQUIRENTE;NUMBER;22;Y;0.0;7.0;4985.0;66224578.0;NO;"CNPJ da Adquirente ou subadquirente que autorizou a transa��o, em branco para quando o declarante for o pr�prio 
+adquirente. "; (: )
+DIMP;DIMP;Este registro deve ser gerado patotalizados por meio de captura. ;177464832.0;N;6.0;QTD_OPERACAO;NUMBER;22;Y;0.0;4.0;5505.0;0.0;NO;Quantidade total di�ria de opera��es realizadas na data; (: )
+DIMP;DIMP;Este registro deve ser gerado patotalizados por meio de captura. ;177464832.0;N;2.0;SEQ_R1100;NUMBER;22;Y;0.0;6.0;20678656.0;0.0;NO;Sequencial da tabela R1100; (: )
+DIMP;DIMP;Este registro deve ser gerado patotalizados por meio de captura. ;177464832.0;N;1.0;SEQ_R1110;NUMBER;22;N;0.0;7.0;175702016.0;0.0;NO;Sequencial do arquivo R1110;SYS_C00264788 (C: ENABLED)
+DIMP;DIMP;Este registro deve ser gerado patotalizados por meio de captura. ;177464832.0;N;5.0;VLR_OPERACAO;NUMBER;22;Y;2.0;5.0;2413312.0;0.0;NO;Valor total di�rio das opera��es realizadas na data ; (: )
+DIMP;DIMP_RECUPERACAO;Tabela tempor�ria para incorpora��o dos dados da DIMP;855719683.0;N;5.0;DSC_CAMPO_01;VARCHAR2;300;Y;;5.0;199606272.0;531328049.0;NO;descri��o do campo 01; (: )
+DIMP;DIMP_RECUPERACAO;Tabela tempor�ria para incorpora��o dos dados da DIMP;855719683.0;N;6.0;DSC_CAMPO_02;VARCHAR2;300;Y;;3.0;64634880.0;717301282.0;NO;descri��o do campo 02; (: )
+DIMP;DIMP_RECUPERACAO;Tabela tempor�ria para incorpora��o dos dados da DIMP;855719683.0;N;7.0;DSC_CAMPO_03;VARCHAR2;300;Y;;28.0;763232256.0;78142327.0;NO;descri��o do campo 03; (: )
+DIMP;DIMP_RECUPERACAO;Tabela tempor�ria para incorpora��o dos dados da DIMP;855719683.0;N;8.0;DSC_CAMPO_04;VARCHAR2;300;Y;;2.0;2.0;0.0;NO;descri��o do campo 04; (: )
+DIMP;DIMP_RECUPERACAO;Tabela tempor�ria para incorpora��o dos dados da DIMP;855719683.0;N;9.0;DSC_CAMPO_05;VARCHAR2;300;Y;;3.0;13.0;77859497.0;NO;descri��o do campo 05; (: )
+DIMP;DIMP_RECUPERACAO;Tabela tempor�ria para incorpora��o dos dados da DIMP;855719683.0;N;10.0;DSC_CAMPO_06;VARCHAR2;300;Y;;7.0;89344.0;0.0;NO;descri��o do campo 06; (: )
+DIMP;DIMP_RECUPERACAO;Tabela tempor�ria para incorpora��o dos dados da DIMP;855719683.0;N;11.0;DSC_CAMPO_07;VARCHAR2;300;Y;;7.0;1245952.0;0.0;NO;descri��o do campo 07; (: )
+DIMP;DIMP_RECUPERACAO;Tabela tempor�ria para incorpora��o dos dados da DIMP;855719683.0;N;12.0;DSC_CAMPO_08;VARCHAR2;300;Y;;3.0;8.0;0.0;NO;descri��o do campo 08; (: )
+DIMP;DIMP_RECUPERACAO;Tabela tempor�ria para incorpora��o dos dados da DIMP;855719683.0;N;13.0;DSC_CAMPO_09;VARCHAR2;300;Y;;0.0;0.0;855719683.0;NO;descri��o do campo 09; (: )
+DIMP;DIMP_RECUPERACAO;Tabela tempor�ria para incorpora��o dos dados da DIMP;855719683.0;N;14.0;DSC_CAMPO_10;VARCHAR2;300;Y;;2.0;2.0;286133710.0;NO;descri��o do campo 10; (: )
+DIMP;DIMP_RECUPERACAO;Tabela tempor�ria para incorpora��o dos dados da DIMP;855719683.0;N;15.0;DSC_CAMPO_11;VARCHAR2;300;Y;;2.0;2.0;288236153.0;NO;descri��o do campo 11; (: )
+DIMP;DIMP_RECUPERACAO;Tabela tempor�ria para incorpora��o dos dados da DIMP;855719683.0;N;16.0;DSC_CAMPO_12;VARCHAR2;300;Y;;0.0;0.0;855719683.0;NO;descri��o do campo 12; (: )
+DIMP;DIMP_RECUPERACAO;Tabela tempor�ria para incorpora��o dos dados da DIMP;855719683.0;N;17.0;DSC_CAMPO_13;VARCHAR2;300;Y;;27.0;4.0;0.0;NO;descri��o do campo 13; (: )
+DIMP;DIMP_RECUPERACAO;Tabela tempor�ria para incorpora��o dos dados da DIMP;855719683.0;N;18.0;DSC_CAMPO_14;VARCHAR2;300;Y;;0.0;0.0;855719683.0;NO;descri��o do campo 14; (: )
+DIMP;DIMP_RECUPERACAO;Tabela tempor�ria para incorpora��o dos dados da DIMP;855719683.0;N;19.0;DSC_CAMPO_15;VARCHAR2;300;Y;;0.0;0.0;855719683.0;NO;descri��o do campo 15; (: )
+DIMP;DIMP_RECUPERACAO;Tabela tempor�ria para incorpora��o dos dados da DIMP;855719683.0;N;20.0;DSC_CAMPO_16;VARCHAR2;300;Y;;0.0;0.0;855719683.0;NO;descri��o do campo 16; (: )
+DIMP;DIMP_RECUPERACAO;Tabela tempor�ria para incorpora��o dos dados da DIMP;855719683.0;N;21.0;DSC_CAMPO_17;VARCHAR2;300;Y;;0.0;0.0;855719683.0;NO;descri��o do campo 17; (: )
+DIMP;DIMP_RECUPERACAO;Tabela tempor�ria para incorpora��o dos dados da DIMP;855719683.0;N;22.0;DSC_CAMPO_18;VARCHAR2;300;Y;;0.0;0.0;855719683.0;NO;descri��o do campo 18; (: )
+DIMP;DIMP_RECUPERACAO;Tabela tempor�ria para incorpora��o dos dados da DIMP;855719683.0;N;23.0;DSC_CAMPO_19;VARCHAR2;300;Y;;0.0;0.0;855719683.0;NO;descri��o do campo 19; (: )
+DIMP;DIMP_RECUPERACAO;Tabela tempor�ria para incorpora��o dos dados da DIMP;855719683.0;N;24.0;DSC_CAMPO_20;VARCHAR2;300;Y;;0.0;0.0;855719683.0;NO;descri��o do campo 20; (: )
+DIMP;DIMP_RECUPERACAO;Tabela tempor�ria para incorpora��o dos dados da DIMP;855719683.0;N;4.0;NOM_ARQUIVO;VARCHAR2;300;Y;;17.0;61.0;0.0;NO;Nome do arquivo incorporado; (: )
+DIMP;DIMP_RECUPERACAO;Tabela tempor�ria para incorpora��o dos dados da DIMP;855719683.0;N;2.0;SEQ_REGISTRO;NUMBER;22;Y;0.0;0.0;0.0;855719683.0;NO;sequencial do registro filho; (: )
+DIMP;DIMP_RECUPERACAO;Tabela tempor�ria para incorpora��o dos dados da DIMP;855719683.0;N;3.0;SEQ_REGISTRO_PAI;NUMBER;22;Y;0.0;0.0;0.0;855719683.0;NO;sequencial do registro pai; (: )
+DIMP;DIMP_RECUPERACAO;Tabela tempor�ria para incorpora��o dos dados da DIMP;855719683.0;N;1.0;SEQ_REGISTRO_TEMPORARIO;NUMBER;22;N;0.0;7.0;855719683.0;0.0;NO;Sequencial da tabela REGISTRO_TEMPORARIO;PK_DIMP_RECUPERACAO (PRIMARY KEY: ENABLED)- SYS_C00284212 (C: ENABLED)
+DIMP;INDICADOR_MOVIMENTO;"Este registro deve ser gerado para abertura do bloco 0,1 e 9 e indica se h� informa��es 
+previstas para estes blocos.";79337.0;N;1.0;SEQ_R0000;NUMBER;22;N;0.0;5.0;79337.0;0.0;NO;Sequencial �nico do arquivo;FK_R0000_R_INDICADOR_MOVIMENTO (FOREIGN KEY: ENABLED)- PK_INDICADOR_MOVIMENTO (PRIMARY KEY: ENABLED)- SYS_C00245707 (C: ENABLED)
+DIMP;INDICADOR_MOVIMENTO;"Este registro deve ser gerado para abertura do bloco 0,1 e 9 e indica se h� informa��es 
+previstas para estes blocos.";79337.0;N;2.0;TIP_IND_MOV_R0001;NUMBER;22;Y;0.0;3.0;1.0;0.0;NO;"Indicador de movimento: (R0001)
+0 - Bloco sem dados informados 1 - Bloco com dados informados."; (: )
+DIMP;INDICADOR_MOVIMENTO;"Este registro deve ser gerado para abertura do bloco 0,1 e 9 e indica se h� informa��es 
+previstas para estes blocos.";79337.0;N;3.0;TIP_IND_MOV_R1001;NUMBER;22;Y;0.0;3.0;2.0;0.0;NO;"Indicador de movimento: (R1001)
+0 - Bloco sem dados informados 1 - Bloco com dados informados."; (: )
+DIMP;INDICADOR_MOVIMENTO;"Este registro deve ser gerado para abertura do bloco 0,1 e 9 e indica se h� informa��es 
+previstas para estes blocos.";79337.0;N;4.0;TIP_IND_MOV_R9001;NUMBER;22;Y;0.0;3.0;1.0;0.0;NO;"Indicador de movimento: (R9001)
+0 - Bloco sem dados informados 1 - Bloco com dados informados."; (: )
+DIMP;RA_MESTRE;"Este registro  A - MESTRE
+";78740.0;N;6.0;COD_CNPJ;NUMBER;22;Y;0.0;9.0;358.0;0.0;NO;"N�mero da inscri��o do CNPJ	-	0000_05	
+"; (: )
+DIMP;RA_MESTRE;"Este registro  A - MESTRE
+";78740.0;N;4.0;COD_FIN;NUMBER;22;Y;0.0;3.0;8.0;0.0;NO;"C�digo de finalidade do arquivo. -	0000_03	
+"; (: )
+DIMP;RA_MESTRE;"Este registro  A - MESTRE
+";78740.0;N;12.0;COD_UF;VARCHAR2;2;Y;;3.0;14.0;0.0;NO;"Sigla da Unidade da Federa��o	-	0005_06	
+"; (: )
+DIMP;RA_MESTRE;"Este registro  A - MESTRE
+";78740.0;N;5.0;COD_UF_FISCO;VARCHAR2;2;Y;;3.0;1.0;0.0;NO;"Sigla da unidade da federa��o do Fisco para o qual est� sendo prestada a informa��o	-	0000_04	
+"; (: )
+DIMP;RA_MESTRE;"Este registro  A - MESTRE
+";78740.0;N;3.0;COD_VER;NUMBER;22;Y;0.0;3.0;2.0;0.0;NO;"C�digo da vers�o do leiaute da DIMP --	0000_02	
+"; (: )
+DIMP;RA_MESTRE;"Este registro  A - MESTRE
+";78740.0;N;2.0;COD_VER_RCAD;NUMBER;22;Y;0.0;3.0;4.0;0.0;NO;"C�digo da vers�o do leiaute do RCAD �01� 				
+"; (: )
+DIMP;RA_MESTRE;"Este registro  A - MESTRE
+";78740.0;N;9.0;DAT_FIN;DATE;7;Y;;8.0;92.0;0.0;NO;"Data Final da Informa��es prestadas			0000_08	
+"; (: )
+DIMP;RA_MESTRE;"Este registro  A - MESTRE
+";78740.0;N;19.0;DAT_INCORPORACAO;DATE;7;Y;;8.0;656.0;0.0;NO;Data em que o ETL incorporou os dados; (: )
+DIMP;RA_MESTRE;"Este registro  A - MESTRE
+";78740.0;N;8.0;DAT_INI;DATE;7;Y;;8.0;92.0;0.0;NO;"Data Inicial da Informa��es prestadas			0000_07	
+"; (: )
+DIMP;RA_MESTRE;"Este registro  A - MESTRE
+";78740.0;N;15.0;DSC_EMAIL;VARCHAR2;150;Y;;32.0;378.0;0.0;NO;Endere�o Eletr�nico oficial para atendimento de solicita��es -			0005_09; (: )
+DIMP;RA_MESTRE;"Este registro  A - MESTRE
+";78740.0;N;7.0;DSC_NOME;VARCHAR2;150;Y;;33.0;434.0;0.0;NO;"Nome Empresarial (Raz�o Social/denomina��o) da Institui��o de pagamento. 		-	-	0000_06	
+"; (: )
+DIMP;RA_MESTRE;"Este registro  A - MESTRE
+";78740.0;N;18.0;NOM_ARQUIVO;VARCHAR2;260;Y;;17.0;77096.0;0.0;NO;nome do arquivo; (: )
+DIMP;RA_MESTRE;"Este registro  A - MESTRE
+";78740.0;N;13.0;NOM_RESP;VARCHAR2;150;Y;;16.0;357.0;0.0;NO;Nome da Pessoa Respons�vel pelo Contato	-			0005_07	; (: )
+DIMP;RA_MESTRE;"Este registro  A - MESTRE
+";78740.0;N;14.0;NUM_FONE;NUMBER;22;Y;0.0;8.0;357.0;0.0;NO;N�mero do telefone para contato	-		0005_08; (: )
+DIMP;RA_MESTRE;"Este registro  A - MESTRE
+";78740.0;N;11.0;NUM_MES_VAL;NUMBER;22;Y;0.0;5.0;34.0;0.0;NO;"Ano e m�s que o arquivo DIMP foi validado	-		0000_10	
+"; (: )
+DIMP;RA_MESTRE;"Este registro  A - MESTRE
+";78740.0;N;1.0;SEQ_RA;NUMBER;22;N;0.0;5.0;78740.0;0.0;NO;Sequencial �nico do arquivo;PK_RA_MESTRE (PRIMARY KEY: ENABLED)- SYS_C00258063 (C: ENABLED)
+DIMP;RA_MESTRE;"Este registro  A - MESTRE
+";78740.0;N;10.0;TIP_AMB;NUMBER;22;Y;0.0;3.0;2.0;0.0;NO;"Tipo de Ambiente	-		0000_09	
+"; (: )
+DIMP;RA_MESTRE;"Este registro  A - MESTRE
+";78740.0;N;17.0;TIP_COMEX;NUMBER;22;Y;0.0;3.0;2.0;0.0;NO;Indicador que existe  Comex neste arquivo.  Caso exista pelo menos 1 Registro 1100_04 marcado sim (1) 0 � n�o / 1 � sim			1100_04	; (: )
+DIMP;RA_MESTRE;"Este registro  A - MESTRE
+";78740.0;N;16.0;TIP_NACIONAL;NUMBER;22;Y;0.0;3.0;2.0;0.0;NO;"Indicador que existe transa��o nacional neste arquivo. 
+Caso exista pelo menos 1 Registro 1100_04 marcado n�o (0) 0 � n�o / 1 � sim	1100_04"; (: )
+DIMP;RB_BENEFICIARIO;"REGISTRO B- BENEFICI�RIOS DE PAGAMENTO
+OBS 
+N por arquivo ( 1 por registro 0100 entregue). 	
+";27404049.0;N;3.0;COD_CNPJ;NUMBER;22;Y;0.0;6.0;524032.0;13266089.0;NO;"CNPJ do cliente		-	0100_03
+"; (: )
+DIMP;RB_BENEFICIARIO;"REGISTRO B- BENEFICI�RIOS DE PAGAMENTO
+OBS 
+N por arquivo ( 1 por registro 0100 entregue). 	
+";27404049.0;N;4.0;COD_CPF;NUMBER;22;Y;0.0;5.0;1648128.0;14137960.0;NO;"CPF do cliente 		-	0100_04	
+"; (: )
+DIMP;RB_BENEFICIARIO;"REGISTRO B- BENEFICI�RIOS DE PAGAMENTO
+OBS 
+N por arquivo ( 1 por registro 0100 entregue). 	
+";27404049.0;N;5.0;DAT_CREDENCIAMENTO;DATE;7;Y;;8.0;12584.0;0.0;NO;"Data do Credenciamento do Benefici�rio de pagamento na IP	- 0100_13	
+"; (: )
+DIMP;RB_BENEFICIARIO;"REGISTRO B- BENEFICI�RIOS DE PAGAMENTO
+OBS 
+N por arquivo ( 1 por registro 0100 entregue). 	
+";27404049.0;N;2.0;SEQ_RA;NUMBER;22;Y;0.0;5.0;7071.0;0.0;NO;Sequencial �nico do arquivo;FK_RA_R_RB (FOREIGN KEY: ENABLED)
+DIMP;RB_BENEFICIARIO;"REGISTRO B- BENEFICI�RIOS DE PAGAMENTO
+OBS 
+N por arquivo ( 1 por registro 0100 entregue). 	
+";27404049.0;N;1.0;SEQ_RB;NUMBER;22;N;0.0;6.0;27404049.0;0.0;NO;Sequencial �nico do arquivo;PK_RB_BENEFICIARIO (PRIMARY KEY: ENABLED)- SYS_C00258065 (C: ENABLED)
+DIMP;RC_VAN;"REGISTRO C � VAN OBS
+N por arquivo (1 registro para cada CNPJ distinto na tabela 0105 do arquivo).";3029.0;N;3.0;COD_CNPJ;NUMBER;22;Y;0.0;9.0;94.0;0.0;NO;CNPJ da VAN	-	0105_02; (: )
+DIMP;RC_VAN;"REGISTRO C � VAN OBS
+N por arquivo (1 registro para cada CNPJ distinto na tabela 0105 do arquivo).";3029.0;N;4.0;NOM_VAN;VARCHAR2;150;Y;;20.0;172.0;0.0;NO;Nome da VAN	-	0105_03	; (: )
+DIMP;RC_VAN;"REGISTRO C � VAN OBS
+N por arquivo (1 registro para cada CNPJ distinto na tabela 0105 do arquivo).";3029.0;N;2.0;SEQ_RA;NUMBER;22;Y;0.0;5.0;482.0;0.0;NO;Sequencial �nico do arquivo;FK_RA_R_RC (FOREIGN KEY: ENABLED)
+DIMP;RC_VAN;"REGISTRO C � VAN OBS
+N por arquivo (1 registro para cada CNPJ distinto na tabela 0105 do arquivo).";3029.0;N;1.0;SEQ_RC;NUMBER;22;N;0.0;4.0;3029.0;0.0;NO;Sequencial �nico do arquivo;PK_RC_VAN (PRIMARY KEY: ENABLED)- SYS_C00258068 (C: ENABLED)
+DIMP;RD_CAPTURA;"REGISTRO D � MEIO DE CAPTURA
+OBS
+N por arquivo (1 registro para cada conjunto distinto de TIPO_TECN, TERM_PROP, MARCA.) 
+";3503485.0;N;5.0;DSC_MARCA;VARCHAR2;30;Y;;5.0;1630.0;1519551.0;NO;"Marca indicando a institui��o de pagamento no comprovante. - 		0200_06	
+"; (: )
+DIMP;RD_CAPTURA;"REGISTRO D � MEIO DE CAPTURA
+OBS
+N por arquivo (1 registro para cada conjunto distinto de TIPO_TECN, TERM_PROP, MARCA.) 
+";3503485.0;N;2.0;SEQ_RA;NUMBER;22;Y;0.0;4.0;6239.0;0.0;NO;Sequencial �nico do arquivo;FK_RA_R_RD (FOREIGN KEY: ENABLED)
+DIMP;RD_CAPTURA;"REGISTRO D � MEIO DE CAPTURA
+OBS
+N por arquivo (1 registro para cada conjunto distinto de TIPO_TECN, TERM_PROP, MARCA.) 
+";3503485.0;N;1.0;SEQ_RD;NUMBER;22;N;0.0;6.0;3503485.0;0.0;NO;Sequencial �nico do arquivo;PK_RD_CAPTURA (PRIMARY KEY: ENABLED)- SYS_C00258071 (C: ENABLED)
+DIMP;RD_CAPTURA;"REGISTRO D � MEIO DE CAPTURA
+OBS
+N por arquivo (1 registro para cada conjunto distinto de TIPO_TECN, TERM_PROP, MARCA.) 
+";3503485.0;N;3.0;TIP_TECNOLOGIA;NUMBER;22;Y;0.0;3.0;9.0;0.0;NO;"TIPO DE TECNOLOGIA		-	0200_04	
+"; (: )
+DIMP;RD_CAPTURA;"REGISTRO D � MEIO DE CAPTURA
+OBS
+N por arquivo (1 registro para cada conjunto distinto de TIPO_TECN, TERM_PROP, MARCA.) 
+";3503485.0;N;4.0;TIP_TERM_PROPRIO;NUMBER;22;Y;0.0;3.0;2.0;0.0;NO;"TERMINAL PR�PRIO		-	0200_05	
+"; (: )
+DIMP;RE_IPPARCEIRA;"REGISTRO E � IP PARCEIRA
+OBS
+N Registros por Arquivo ( 1 registro por registro 0300 do arquivo).";6057.0;N;3.0;COD_CNPJ;NUMBER;22;Y;0.0;9.0;505.0;0.0;NO;N�mero da inscri��o do CNPJ	N		-	0300_03; (: )
+DIMP;RE_IPPARCEIRA;"REGISTRO E � IP PARCEIRA
+OBS
+N Registros por Arquivo ( 1 registro por registro 0300 do arquivo).";6057.0;N;7.0;DSC_EMAIL;VARCHAR2;150;Y;;5.0;33.0;5216.0;NO;Endere�o Eletr�nico oficial para atendimento de solicita��es	 -			0300_11; (: )
+DIMP;RE_IPPARCEIRA;"REGISTRO E � IP PARCEIRA
+OBS
+N Registros por Arquivo ( 1 registro por registro 0300 do arquivo).";6057.0;N;4.0;DSC_NOME;VARCHAR2;150;Y;;21.0;506.0;0.0;NO;Nome Empresarial (Raz�o Social/denomina��o) da Institui��o de pagamento. 	-	0300_04; (: )
+DIMP;RE_IPPARCEIRA;"REGISTRO E � IP PARCEIRA
+OBS
+N Registros por Arquivo ( 1 registro por registro 0300 do arquivo).";6057.0;N;5.0;NOM_RESPONSAVEL;VARCHAR2;150;Y;;5.0;50.0;4877.0;NO;"Nome da Pessoa Respons�vel pelo Contato -		0300_09
+"; (: )
+DIMP;RE_IPPARCEIRA;"REGISTRO E � IP PARCEIRA
+OBS
+N Registros por Arquivo ( 1 registro por registro 0300 do arquivo).";6057.0;N;6.0;NUM_FONE;NUMBER;22;Y;0.0;3.0;78.0;4515.0;NO;N�mero do telefone para contato	-			0300_10; (: )
+DIMP;RE_IPPARCEIRA;"REGISTRO E � IP PARCEIRA
+OBS
+N Registros por Arquivo ( 1 registro por registro 0300 do arquivo).";6057.0;N;2.0;SEQ_RA;NUMBER;22;Y;0.0;5.0;688.0;0.0;NO;Sequencial �nico do arquivo;FK_RA_R_RA (FOREIGN KEY: ENABLED)
+DIMP;RE_IPPARCEIRA;"REGISTRO E � IP PARCEIRA
+OBS
+N Registros por Arquivo ( 1 registro por registro 0300 do arquivo).";6057.0;N;1.0;SEQ_RE;NUMBER;22;N;0.0;4.0;6057.0;0.0;NO;Sequencial �nico do arquivo;PK_RE_IPPARCEIRA (PRIMARY KEY: ENABLED)- SYS_C00258074 (C: ENABLED)
+DIMP;RF_ADQUIRENCIA;"REGISTRO F � ADQUIR�NCIA.
+OBS
+N Registro por Arquivo (1 Registro por CNPJ_ADQUI distinto) ";105635.0;N;3.0;COD_CNPJ_ADQUI;NUMBER;22;Y;0.0;9.0;6496.0;0.0;NO;"N�mero da inscri��o do CNPJ ou subadquirente		-	1110_06
+"; (: )
+DIMP;RF_ADQUIRENCIA;"REGISTRO F � ADQUIR�NCIA.
+OBS
+N Registro por Arquivo (1 Registro por CNPJ_ADQUI distinto) ";105635.0;N;2.0;SEQ_RA;NUMBER;22;Y;0.0;5.0;5943.0;0.0;NO;Sequencial �nico do arquivo;FK_RA_R_RF (FOREIGN KEY: ENABLED)
+DIMP;RF_ADQUIRENCIA;"REGISTRO F � ADQUIR�NCIA.
+OBS
+N Registro por Arquivo (1 Registro por CNPJ_ADQUI distinto) ";105635.0;N;1.0;SEQ_RF;NUMBER;22;N;0.0;5.0;105635.0;0.0;NO;Sequencial �nico do arquivo;PK_RF_ADQUIRENCIA (PRIMARY KEY: ENABLED)- SYS_C00258079 (C: ENABLED)
+DIMP;RG_UF_DEST_MERC_SERV;"REGISTRO G �UF DESTINAT�RIO DA MERCADORIA/SERVI�O. 
+OBS
+N Registro por Arquivo (1 Registro por UF distinto) 
+";14834.0;N;3.0;COD_UF;VARCHAR2;2;Y;;3.0;27.0;0.0;NO;"UF do destinat�rio da mercadoria/servi�o		-	1120_02
+"; (: )
+DIMP;RG_UF_DEST_MERC_SERV;"REGISTRO G �UF DESTINAT�RIO DA MERCADORIA/SERVI�O. 
+OBS
+N Registro por Arquivo (1 Registro por UF distinto) 
+";14834.0;N;4.0;NUM_QTD;NUMBER;22;Y;0.0;4.0;2838.0;0.0;NO;"Quantidade de transa��es por UF Destino		quantidade de 1120 para a UF_DEST no arquivo
+"; (: )
+DIMP;RG_UF_DEST_MERC_SERV;"REGISTRO G �UF DESTINAT�RIO DA MERCADORIA/SERVI�O. 
+OBS
+N Registro por Arquivo (1 Registro por UF distinto) 
+";14834.0;N;2.0;SEQ_RA;NUMBER;22;Y;0.0;5.0;1076.0;0.0;NO;Sequencial �nico do arquivo;FK_RA_R_RG (FOREIGN KEY: ENABLED)
+DIMP;RG_UF_DEST_MERC_SERV;"REGISTRO G �UF DESTINAT�RIO DA MERCADORIA/SERVI�O. 
+OBS
+N Registro por Arquivo (1 Registro por UF distinto) 
+";14834.0;N;1.0;SEQ_RG;NUMBER;22;N;0.0;5.0;14834.0;0.0;NO;Sequencial �nico do arquivo;PK_RG_UF_DEST_MERC_SERV (PRIMARY KEY: ENABLED)- SYS_C00258082 (C: ENABLED)
+DIMP;RH_AUTORIZ_PARCEIRA;"REGISTRO H �AUTORIZA�??O PARA INSTITUI��O PARCEIRA
+Obs N Registro por Arquivo (1 Registro por 0600) ";89.0;N;4.0;COD_CNPJ;NUMBER;22;Y;0.0;9.0;2.0;0.0;NO;"CNPJ da institui��o autorizada  -			0600_03
+"; (: )
+DIMP;RH_AUTORIZ_PARCEIRA;"REGISTRO H �AUTORIZA�??O PARA INSTITUI��O PARCEIRA
+Obs N Registro por Arquivo (1 Registro por 0600) ";89.0;N;7.0;DAT_FIM_AUT;DATE;7;Y;;2.0;6.0;77.0;NO;Data de cancelamento da habilita��o da institui��o autorizada como detentora de autonomia exclusiva para envio das informa��es  -	0600_14; (: )
+DIMP;RH_AUTORIZ_PARCEIRA;"REGISTRO H �AUTORIZA�??O PARA INSTITUI��O PARCEIRA
+Obs N Registro por Arquivo (1 Registro por 0600) ";89.0;N;6.0;DAT_INI_AUT;DATE;7;Y;;8.0;9.0;0.0;NO;"Data de habilita��o da institui��o autorizada como detentora de autonomia exclusiva para envio das informa��es			0600_13
+"; (: )
+DIMP;RH_AUTORIZ_PARCEIRA;"REGISTRO H �AUTORIZA�??O PARA INSTITUI��O PARCEIRA
+Obs N Registro por Arquivo (1 Registro por 0600) ";89.0;N;2.0;SEQ_RA;NUMBER;22;Y;0.0;4.0;89.0;0.0;NO;Sequencial �nico do arquivo;FK_RA_R_RH (FOREIGN KEY: ENABLED)
+DIMP;RH_AUTORIZ_PARCEIRA;"REGISTRO H �AUTORIZA�??O PARA INSTITUI��O PARCEIRA
+Obs N Registro por Arquivo (1 Registro por 0600) ";89.0;N;1.0;SEQ_RH;NUMBER;22;N;0.0;3.0;89.0;0.0;NO;Sequencial �nico do arquivo;PK_RH_AUTORIZ_PARCEIRA (PRIMARY KEY: ENABLED)- SYS_C00258085 (C: ENABLED)
+DIMP;RH_AUTORIZ_PARCEIRA;"REGISTRO H �AUTORIZA�??O PARA INSTITUI��O PARCEIRA
+Obs N Registro por Arquivo (1 Registro por 0600) ";89.0;N;3.0;TIP_AUTORIZ;NUMBER;22;Y;0.0;3.0;1.0;0.0;NO;"Tipo de registro de autoriza��o  1 � Inclus�o 2 � Exclus�o		-	0600_02
+"; (: )
+DIMP;RH_AUTORIZ_PARCEIRA;"REGISTRO H �AUTORIZA�??O PARA INSTITUI��O PARCEIRA
+Obs N Registro por Arquivo (1 Registro por 0600) ";89.0;N;5.0;TIP_TRANSAC;NUMBER;22;Y;0.0;3.0;2.0;0.0;NO;"Existir�o transa��es comerciais (registros 1120) 0 � N�o 1 � Sim	-		0600_04
+"; (: )
+DIMP;R0000_INSTITUICAO_PAGADORA;REGISTRO TIPO 0000: ABERTURA DO ARQUIVO DIGITAL E IDENTIFICA��O DA INSTITUI��O DE PAGAMENTO ;77191.0;N;5.0;COD_CNPJ;NUMBER;22;Y;0.0;9.0;420.0;0.0;NO;N�mero de inscri��o no CNPJ ; (: )
+DIMP;R0000_INSTITUICAO_PAGADORA;REGISTRO TIPO 0000: ABERTURA DO ARQUIVO DIGITAL E IDENTIFICA��O DA INSTITUI��O DE PAGAMENTO ;77191.0;N;3.0;COD_FINALIDADE;NUMBER;22;Y;0.0;3.0;8.0;0.0;NO;"C�digo da finalidade do arquivo�
+1 � Remessa de arquivo normal�
+2 � Remessa de arquivo retificador�
+3 � Remessa de arquivo para atender notifica��o�
+4 � Remessa de arquivo zerado�
+5 � Remessa de arquivo de encerramento de atividades�
+6 � Autoriza��o para Institui��o Parceira�
+7 � Realiza apenas opera��es dispensadas do envio da DIMP�
+8 � N�o realiza opera��es na UF de destino do arquivo
+9 - Apenas transa��es como ""white-label"" (intermedi�rio de transa��o que n�o efetua a liquida��o com cliente)";CKC_COD_FINALIDADE_R0000 (C: ENABLED)
+DIMP;R0000_INSTITUICAO_PAGADORA;REGISTRO TIPO 0000: ABERTURA DO ARQUIVO DIGITAL E IDENTIFICA��O DA INSTITUI��O DE PAGAMENTO ;77191.0;N;4.0;COD_UF;VARCHAR2;2;Y;;3.0;1.0;0.0;NO;Sigla da Unidade da Federa��o do Fisco para o qual est� sendo prestada a informa��o ; (: )
+DIMP;R0000_INSTITUICAO_PAGADORA;REGISTRO TIPO 0000: ABERTURA DO ARQUIVO DIGITAL E IDENTIFICA��O DA INSTITUI��O DE PAGAMENTO ;77191.0;N;2.0;COD_VERSAO;NUMBER;22;Y;0.0;3.0;7.0;0.0;NO;"C�digo da vers�o do leiaute
+"; (: )
+DIMP;R0000_INSTITUICAO_PAGADORA;REGISTRO TIPO 0000: ABERTURA DO ARQUIVO DIGITAL E IDENTIFICA��O DA INSTITUI��O DE PAGAMENTO ;77191.0;N;8.0;DAT_FINAL;DATE;7;Y;;8.0;105.0;0.0;NO;Data do fim do per�odo referente �s informa��es prestadas ; (: )
+DIMP;R0000_INSTITUICAO_PAGADORA;REGISTRO TIPO 0000: ABERTURA DO ARQUIVO DIGITAL E IDENTIFICA��O DA INSTITUI��O DE PAGAMENTO ;77191.0;N;11.0;DAT_INCORPORACAO;DATE;7;Y;;8.0;1412.0;0.0;NO;Data em que o ETL incorpora os dados; (: )
+DIMP;R0000_INSTITUICAO_PAGADORA;REGISTRO TIPO 0000: ABERTURA DO ARQUIVO DIGITAL E IDENTIFICA��O DA INSTITUI��O DE PAGAMENTO ;77191.0;N;7.0;DAT_INICIO;DATE;7;Y;;8.0;103.0;0.0;NO;Data do in�cio do per�odo referente �s informa��es prestadas ; (: )
+DIMP;R0000_INSTITUICAO_PAGADORA;REGISTRO TIPO 0000: ABERTURA DO ARQUIVO DIGITAL E IDENTIFICA��O DA INSTITUI��O DE PAGAMENTO ;77191.0;N;6.0;DSC_RAZAO_SOCIAL;VARCHAR2;150;Y;;33.0;539.0;0.0;NO;Nome Empresarial (Raz�o Social/denomina��o) da Institui��o de Pagamento ; (: )
+DIMP;R0000_INSTITUICAO_PAGADORA;REGISTRO TIPO 0000: ABERTURA DO ARQUIVO DIGITAL E IDENTIFICA��O DA INSTITUI��O DE PAGAMENTO ;77191.0;N;10.0;NOM_ARQUIVO;VARCHAR2;260;Y;;17.0;77191.0;0.0;NO;Nome do Arquivo processado; (: )
+DIMP;R0000_INSTITUICAO_PAGADORA;REGISTRO TIPO 0000: ABERTURA DO ARQUIVO DIGITAL E IDENTIFICA��O DA INSTITUI��O DE PAGAMENTO ;77191.0;N;13.0;NUM_MES_VAL;NUMBER;22;Y;0.0;5.0;43.0;2323.0;NO;Informar ano e m�s em que o arquivo foi validado (AAAAMM); (: )
+DIMP;R0000_INSTITUICAO_PAGADORA;REGISTRO TIPO 0000: ABERTURA DO ARQUIVO DIGITAL E IDENTIFICA��O DA INSTITUI��O DE PAGAMENTO ;77191.0;N;1.0;SEQ_R0000;NUMBER;22;N;0.0;5.0;77191.0;0.0;NO;Sequencial �nico do arquivo;PK_R0000_INSTITUICAO_PAGADORA (PRIMARY KEY: ENABLED)- SYS_C00243390 (C: ENABLED)
+DIMP;R0000_INSTITUICAO_PAGADORA;REGISTRO TIPO 0000: ABERTURA DO ARQUIVO DIGITAL E IDENTIFICA��O DA INSTITUI��O DE PAGAMENTO ;77191.0;N;12.0;STA_RETIFICADO;VARCHAR2;1;Y;;2.0;2.0;0.0;NO;"Indica se arquivo foi notificado (N-n�o retificado; S-retificado)";CKC_STA_RETIFICADO_R0000 (C: ENABLED)
+DIMP;R0000_INSTITUICAO_PAGADORA;REGISTRO TIPO 0000: ABERTURA DO ARQUIVO DIGITAL E IDENTIFICA��O DA INSTITUI��O DE PAGAMENTO ;77191.0;N;9.0;TIP_AMBIENTE;NUMBER;22;Y;0.0;3.0;2.0;0.0;NO;"Tipo de Ambiente: 
+1 - produ��o 
+2 � homologa��o ";CKC_TIP_AMBIENTE_R0000 (C: ENABLED)
+DIMP;R0005_DADOS_INSTITUICAO;DADOS COMPLEMENTARES DA INSTITUI��O DE PAGAMENTO ;79338.0;N;5.0;COD_MUNICIPIO;NUMBER;22;Y;0.0;6.0;103.0;277.0;NO;C�digo do Munic�pio de domic�lio daInstitui��o de Pagamento, conforme Tabela do IBGE ; (: )
+DIMP;R0005_DADOS_INSTITUICAO;DADOS COMPLEMENTARES DA INSTITUI��O DE PAGAMENTO ;79338.0;N;6.0;COD_UF;VARCHAR2;2;Y;;3.0;18.0;0.0;NO;Sigla da Unidade da Federa��o em que est� situada a institui��o autora do arquivo ; (: )
+DIMP;R0005_DADOS_INSTITUICAO;DADOS COMPLEMENTARES DA INSTITUI��O DE PAGAMENTO ;79338.0;N;9.0;DSC_EMAIL;VARCHAR2;60;Y;;32.0;549.0;0.0;NO;Endere�o do correio eletr�nico oficial para atendimento de solicita��es ; (: )
+DIMP;R0005_DADOS_INSTITUICAO;DADOS COMPLEMENTARES DA INSTITUI��O DE PAGAMENTO ;79338.0;N;3.0;DSC_ENDERECO;VARCHAR2;300;Y;;20.0;655.0;0.0;NO;Endere�o completo da institui��o de pagamento; (: )
+DIMP;R0005_DADOS_INSTITUICAO;DADOS COMPLEMENTARES DA INSTITUI��O DE PAGAMENTO ;79338.0;N;2.0;DSC_FANTASIA;VARCHAR2;150;Y;;30.0;562.0;0.0;NO;Nome Fantasia Conforme informado no equipamento ou site de pagamento; (: )
+DIMP;R0005_DADOS_INSTITUICAO;DADOS COMPLEMENTARES DA INSTITUI��O DE PAGAMENTO ;79338.0;N;7.0;NOM_RESPONSAVEL;VARCHAR2;150;Y;;17.0;536.0;0.0;NO;Nome da Pessoa respons�vel para contato ; (: )
+DIMP;R0005_DADOS_INSTITUICAO;DADOS COMPLEMENTARES DA INSTITUI��O DE PAGAMENTO ;79338.0;N;4.0;NUM_CEP;NUMBER;22;Y;0.0;6.0;375.0;0.0;NO;C�digo de Endere�amento Postal ; (: )
+DIMP;R0005_DADOS_INSTITUICAO;DADOS COMPLEMENTARES DA INSTITUI��O DE PAGAMENTO ;79338.0;N;8.0;NUM_TELEFONE;NUMBER;22;Y;0.0;8.0;503.0;0.0;NO;N�mero de telefone para contato ; (: )
+DIMP;R0005_DADOS_INSTITUICAO;DADOS COMPLEMENTARES DA INSTITUI��O DE PAGAMENTO ;79338.0;N;1.0;SEQ_R0000;NUMBER;22;N;0.0;5.0;79338.0;0.0;NO;Sequencial �nico do arquivo;FK_R0000_R_R0005 (FOREIGN KEY: ENABLED)- PK_R0005_DADOS_INSTITUICAO (PRIMARY KEY: ENABLED)- SYS_C00243395 (C: ENABLED)
+DIMP;R0006_CONTATO_GERACAO_ARQUIVO;Registro facultativo utilizado para complementar as informa��es de contato dos respons�veis pela gera��o do arquivo. Caso a Institui��o n�o pretenda informar o contato do t�cnico respons�vel, n�o � obrigat�rio informar este registro. Se a institui��o optar por informar o registro, todos os campos s�o obrigat�rios. ;4916.0;N;4.0;DSC_EMAIL;VARCHAR2;60;Y;;29.0;155.0;0.0;NO;Endere�o do correio eletr�nico oficial para atendimento de solicita��es; (: )
+DIMP;R0006_CONTATO_GERACAO_ARQUIVO;Registro facultativo utilizado para complementar as informa��es de contato dos respons�veis pela gera��o do arquivo. Caso a Institui��o n�o pretenda informar o contato do t�cnico respons�vel, n�o � obrigat�rio informar este registro. Se a institui��o optar por informar o registro, todos os campos s�o obrigat�rios. ;4916.0;N;2.0;DSC_TECNICO;VARCHAR2;150;Y;;23.0;161.0;0.0;NO;"Nome do respons�vel t�cnico para contato 
+"; (: )
+DIMP;R0006_CONTATO_GERACAO_ARQUIVO;Registro facultativo utilizado para complementar as informa��es de contato dos respons�veis pela gera��o do arquivo. Caso a Institui��o n�o pretenda informar o contato do t�cnico respons�vel, n�o � obrigat�rio informar este registro. Se a institui��o optar por informar o registro, todos os campos s�o obrigat�rios. ;4916.0;N;3.0;NUM_TELEFONE;NUMBER;22;Y;0.0;8.0;132.0;0.0;NO;N�mero de telefone para contato; (: )
+DIMP;R0006_CONTATO_GERACAO_ARQUIVO;Registro facultativo utilizado para complementar as informa��es de contato dos respons�veis pela gera��o do arquivo. Caso a Institui��o n�o pretenda informar o contato do t�cnico respons�vel, n�o � obrigat�rio informar este registro. Se a institui��o optar por informar o registro, todos os campos s�o obrigat�rios. ;4916.0;N;1.0;SEQ_R0000;NUMBER;22;N;0.0;5.0;4556.0;0.0;NO;Sequencial �nico do arquivo;FK_R0000_R_R0006 (FOREIGN KEY: ENABLED)- SYS_C00266806 (C: ENABLED)
+DIMP;R0006_CONTATO_GERACAO_ARQUIVO;Registro facultativo utilizado para complementar as informa��es de contato dos respons�veis pela gera��o do arquivo. Caso a Institui��o n�o pretenda informar o contato do t�cnico respons�vel, n�o � obrigat�rio informar este registro. Se a institui��o optar por informar o registro, todos os campos s�o obrigat�rios. ;4916.0;N;5.0;SEQ_R0006;NUMBER;22;N;0.0;4.0;4916.0;0.0;NO;Sequencial do arquivo;PK_R0006_CONTATO_GERACAO_ARQUIVO (PRIMARY KEY: ENABLED)- SYS_C00270050 (C: ENABLED)
+DIMP;R0100_CLIENTE;REGISTRO TIPO 0100: TABELA DE CADASTRO DO CLIENTE;78593316.0;N;3.0;COD_CLIENTE;VARCHAR2;60;Y;;19.0;9046016.0;0.0;NO;C�digo do cliente ; (: )
+DIMP;R0100_CLIENTE;REGISTRO TIPO 0100: TABELA DE CADASTRO DO CLIENTE;78593316.0;N;4.0;COD_CNPJ;NUMBER;22;Y;0.0;5.0;770048.0;48018363.0;NO;CNPJ do Estabelecimento Credenciado, ou do Importador (COMEX) ; (: )
+DIMP;R0100_CLIENTE;REGISTRO TIPO 0100: TABELA DE CADASTRO DO CLIENTE;78593316.0;N;5.0;COD_CPF;NUMBER;22;Y;0.0;5.0;3395584.0;30574953.0;NO;CPF do Benefici�rio do Pagou do Importador (Comex) ; (: )
+DIMP;R0100_CLIENTE;REGISTRO TIPO 0100: TABELA DE CADASTRO DO CLIENTE;78593316.0;N;9.0;COD_MUNICIPIO;NUMBER;22;Y;0.0;6.0;3530.0;8374405.0;NO;C�digo do munic�pio do estabelecimento ou do usu�rio, de acordo com tabela de munic�pios do IBGE ; (: )
+DIMP;R0100_CLIENTE;REGISTRO TIPO 0100: TABELA DE CADASTRO DO CLIENTE;78593316.0;N;10.0;COD_UF;VARCHAR2;2;Y;;3.0;27.0;1.0;NO;Sigla da Unidade da Federa��o ; (: )
+DIMP;R0100_CLIENTE;REGISTRO TIPO 0100: TABELA DE CADASTRO DO CLIENTE;78593316.0;N;14.0;DAT_CREDENCIAMENTO;DATE;7;Y;;8.0;14200.0;1.0;NO;Data do credenciamento do Benefici�rio de pagamento na IP; (: )
+DIMP;R0100_CLIENTE;REGISTRO TIPO 0100: TABELA DE CADASTRO DO CLIENTE;78593316.0;N;13.0;DSC_EMAIL_CONTATO;VARCHAR2;60;Y;;12.0;2708480.0;45636106.0;NO;E-mail do contato ou respons�vel pelo estabelecimento ou do usu�rio ; (: )
+DIMP;R0100_CLIENTE;REGISTRO TIPO 0100: TABELA DE CADASTRO DO CLIENTE;78593316.0;N;7.0;DSC_ENDERECO;VARCHAR2;300;Y;;36.0;7264256.0;121.0;NO;Endere�o do estabelecimento ou do usu�rio ; (: )
+DIMP;R0100_CLIENTE;REGISTRO TIPO 0100: TABELA DE CADASTRO DO CLIENTE;78593316.0;N;6.0;DSC_FANTASIA;VARCHAR2;150;Y;;27.0;6178816.0;10.0;NO;Nome Empresarial do estabelecimento ou nome do usu�rio conforme comprovante da transa��o; (: )
+DIMP;R0100_CLIENTE;REGISTRO TIPO 0100: TABELA DE CADASTRO DO CLIENTE;78593316.0;N;11.0;NOM_RESPONSAVEL;VARCHAR2;150;Y;;9.0;2047488.0;52556436.0;NO;Nome de contato ou respons�vel no estabelecimento ou do usu�rio ; (: )
+DIMP;R0100_CLIENTE;REGISTRO TIPO 0100: TABELA DE CADASTRO DO CLIENTE;78593316.0;N;8.0;NUM_CEP;NUMBER;22;Y;0.0;6.0;265664.0;1.0;NO;C�digo de Endere�o Postal do estabelecimento ou do usu�rio ; (: )
+DIMP;R0100_CLIENTE;REGISTRO TIPO 0100: TABELA DE CADASTRO DO CLIENTE;78593316.0;N;12.0;NUM_FONE_CONTATO;NUMBER;22;Y;0.0;4.0;2232832.0;47398855.0;NO;Telefone do contato (DDD+FONE) ; (: )
+DIMP;R0100_CLIENTE;REGISTRO TIPO 0100: TABELA DE CADASTRO DO CLIENTE;78593316.0;N;2.0;SEQ_R0000;NUMBER;22;N;0.0;5.0;12984.0;0.0;NO;"Sequencial �nico do arquivo
+";FK_R0000_R_R0100 (FOREIGN KEY: ENABLED)- SYS_C00243398 (C: ENABLED)
+DIMP;R0100_CLIENTE;REGISTRO TIPO 0100: TABELA DE CADASTRO DO CLIENTE;78593316.0;N;1.0;SEQ_R0100;NUMBER;22;N;0.0;6.0;78593316.0;0.0;NO;Sequencial R010_CLIENTE;PK_R0100_CLIENTE (PRIMARY KEY: ENABLED)- SYS_C00243397 (C: ENABLED)
+DIMP;R0100_CLIENTE;REGISTRO TIPO 0100: TABELA DE CADASTRO DO CLIENTE;78593316.0;N;15.0;TIP_IND_SUB;NUMBER;22;Y;0.0;0.0;0.0;78593316.0;NO;"Indicador de opera��o de intermedia��o comercial e/ou de pagamentos 0 � N�o realiza intermedia��o ou servi�o de subadquir�ncia para transa��es de terceiros 1 � Realiza intermedia��o ou servi�o de subadquir�ncia para transa��es de terceiros.
+"; (: )
+DIMP;R0105_VAN_CLIENTE;TABELA DE VAN DO CLIENTE ;58944376.0;N;3.0;COD_CNPJ;VARCHAR2;14;Y;;15.0;3285.0;0.0;NO;C�digo do CNPJ da VAN; (: )
+DIMP;R0105_VAN_CLIENTE;TABELA DE VAN DO CLIENTE ;58944376.0;N;4.0;NOM_COMERCIAL_VAN;VARCHAR2;150;Y;;18.0;294.0;0.0;NO;Nome comercial da VAN ; (: )
+DIMP;R0105_VAN_CLIENTE;TABELA DE VAN DO CLIENTE ;58944376.0;N;5.0;QTD_TRANSACAO_CLIE;NUMBER;22;Y;0.0;2.0;5622.0;57977192.0;NO;Quantidade de transa��es do Cliente; (: )
+DIMP;R0105_VAN_CLIENTE;TABELA DE VAN DO CLIENTE ;58944376.0;N;2.0;SEQ_R0100;NUMBER;22;Y;0.0;6.0;1743872.0;0.0;NO;Sequencial da tabela R0100_CLIENTE;FK_R0100_R_R0105 (FOREIGN KEY: ENABLED)
+DIMP;R0105_VAN_CLIENTE;TABELA DE VAN DO CLIENTE ;58944376.0;N;1.0;SEQ_R0105;NUMBER;22;N;0.0;6.0;58944376.0;0.0;NO;Sequencial da R0105_VAN_CLIENTE;PK_R0105_VAN_CLIENTE (PRIMARY KEY: ENABLED)- SYS_C00243400 (C: ENABLED)
+DIMP;R0200_MEIO_CAPTURA;"Este registro tem por objetivo identificar os meios de captura utilizados como meio de pagamentos das transa��es no per�odo ou per�odos anteriores desde que utilizado 
+exclusivamente para informar cancelamentos e/ou opera��es extempor�neas.�";234411893.0;N;3.0;COD_MCAPTURA;VARCHAR2;80;Y;;45.0;161300480.0;0.0;NO;C�digo do Meio de Captura ; (: )
+DIMP;R0200_MEIO_CAPTURA;"Este registro tem por objetivo identificar os meios de captura utilizados como meio de pagamentos das transa��es no per�odo ou per�odos anteriores desde que utilizado 
+exclusivamente para informar cancelamentos e/ou opera��es extempor�neas.�";234411893.0;N;7.0;DSC_MARCA;VARCHAR2;40;Y;;21.0;2459.0;58739715.0;NO;Marca indicando a Institui��o de Pagamento identificada no comprovante ; (: )
+DIMP;R0200_MEIO_CAPTURA;"Este registro tem por objetivo identificar os meios de captura utilizados como meio de pagamentos das transa��es no per�odo ou per�odos anteriores desde que utilizado 
+exclusivamente para informar cancelamentos e/ou opera��es extempor�neas.�";234411893.0;N;2.0;SEQ_R0000;NUMBER;22;Y;0.0;5.0;12984.0;0.0;NO;Sequencial �nico do arquivo;FK_R0000_R_R0200 (FOREIGN KEY: ENABLED)
+DIMP;R0200_MEIO_CAPTURA;"Este registro tem por objetivo identificar os meios de captura utilizados como meio de pagamentos das transa��es no per�odo ou per�odos anteriores desde que utilizado 
+exclusivamente para informar cancelamentos e/ou opera��es extempor�neas.�";234411893.0;N;1.0;SEQ_R0200;NUMBER;22;N;0.0;7.0;234411893.0;0.0;NO;Sequencial da tabela de captura;PK_R0200_MEIO_CAPTURA (PRIMARY KEY: ENABLED)- SYS_C00243402 (C: ENABLED)
+DIMP;R0200_MEIO_CAPTURA;"Este registro tem por objetivo identificar os meios de captura utilizados como meio de pagamentos das transa��es no per�odo ou per�odos anteriores desde que utilizado 
+exclusivamente para informar cancelamentos e/ou opera��es extempor�neas.�";234411893.0;N;5.0;TIP_TECNOLOGIA;NUMBER;22;Y;0.0;3.0;9.0;0.0;NO;"Tipo de tecnologia utilizada: 1 - TEF-POS INTEGRADOS; 2 - MOBILE; 3 - POS; 4 - E-commerce; 5 - Demais tecnologias; 6 - URA / MOTO; 7-  Pagamento efetuado em dinheiro ou por outra estrutura; 8 � Conta de titularidade individual 9 � Conta Conjunta .
+";CKC_TIP_TECNOLOGIA_R0200 (C: ENABLED)
+DIMP;R0200_MEIO_CAPTURA;"Este registro tem por objetivo identificar os meios de captura utilizados como meio de pagamentos das transa��es no per�odo ou per�odos anteriores desde que utilizado 
+exclusivamente para informar cancelamentos e/ou opera��es extempor�neas.�";234411893.0;N;6.0;TIP_TERM_PROPRIO;NUMBER;22;Y;0.0;3.0;2.0;0.0;NO;"0 - terminal pr�prio 
+1 - terminal de terceiro ";CKC_TIP_TERM_PROPRIO_R0200 (C: ENABLED)
+DIMP;R0200_MEIO_CAPTURA;"Este registro tem por objetivo identificar os meios de captura utilizados como meio de pagamentos das transa��es no per�odo ou per�odos anteriores desde que utilizado 
+exclusivamente para informar cancelamentos e/ou opera��es extempor�neas.�";234411893.0;N;4.0;TXT_NUM_LOG;VARCHAR2;40;Y;;24.0;16283648.0;0.0;NO;N�mero L�gico do Meio de Captura. ; (: )
+DIMP;R0201_TITULAR_CONTA_CONJUNTA;Registro de preenchimento obrigat�rio caso seja informado o tipo de tecnologia �9� no campo 04 do Registro 0200;3874758.0;N;3.0;COD_CLIENTE;VARCHAR2;60;Y;;17.0;229760.0;0.0;NO;Identifica��o do C�digo do Cliente Informado no Registro 0100 ; (: )
+DIMP;R0201_TITULAR_CONTA_CONJUNTA;Registro de preenchimento obrigat�rio caso seja informado o tipo de tecnologia �9� no campo 04 do Registro 0200;3874758.0;N;2.0;SEQ_R0200;NUMBER;22;Y;0.0;7.0;3834368.0;0.0;NO;Sequencial da tabela de captura;FK_R0200_R_R0201 (FOREIGN KEY: ENABLED)
+DIMP;R0201_TITULAR_CONTA_CONJUNTA;Registro de preenchimento obrigat�rio caso seja informado o tipo de tecnologia �9� no campo 04 do Registro 0200;3874758.0;N;1.0;SEQ_R0201;NUMBER;22;N;0.0;6.0;3874758.0;0.0;NO;Sequencial da tabela de titular de conta conjunta;PK_R0201_TITULAR_CONTA_CONJUNT (PRIMARY KEY: ENABLED)- SYS_C00266809 (C: ENABLED)
+DIMP;R0300_INSTITUICAO_PARCEIRA;"Este registro tem por objetivo identificar as institui��es de pagamento parceiras, no caso em que alguma institui��o fique respons�vel pelo fornecimento das 
+informa��es de outra IP.  Somente � obrigat�rio se existir a parceria que torna uma delas respons�veis pela transmiss�o da informa��o. ";8624.0;N;4.0;COD_CNPJ;NUMBER;22;Y;0.0;9.0;563.0;0.0;NO;N�mero de inscri��o no CNPJ ; (: )
+DIMP;R0300_INSTITUICAO_PARCEIRA;"Este registro tem por objetivo identificar as institui��es de pagamento parceiras, no caso em que alguma institui��o fique respons�vel pelo fornecimento das 
+informa��es de outra IP.  Somente � obrigat�rio se existir a parceria que torna uma delas respons�veis pela transmiss�o da informa��o. ";8624.0;N;3.0;COD_IP_PARCEIRA;VARCHAR2;30;Y;;11.0;594.0;0.0;NO;C�digo de identifica��o da Institui��o de Pagamento Parceira (Subadquirente ou VAN) ; (: )
+DIMP;R0300_INSTITUICAO_PARCEIRA;"Este registro tem por objetivo identificar as institui��es de pagamento parceiras, no caso em que alguma institui��o fique respons�vel pelo fornecimento das 
+informa��es de outra IP.  Somente � obrigat�rio se existir a parceria que torna uma delas respons�veis pela transmiss�o da informa��o. ";8624.0;N;8.0;COD_MUNICIPIO;NUMBER;22;Y;0.0;6.0;77.0;76.0;NO;C�digo do munic�pio do estabelecimento ou do usu�rio, de acordo com tabela de munic�pios do IBGE ; (: )
+DIMP;R0300_INSTITUICAO_PARCEIRA;"Este registro tem por objetivo identificar as institui��es de pagamento parceiras, no caso em que alguma institui��o fique respons�vel pelo fornecimento das 
+informa��es de outra IP.  Somente � obrigat�rio se existir a parceria que torna uma delas respons�veis pela transmiss�o da informa��o. ";8624.0;N;9.0;COD_UF;VARCHAR2;2;Y;;3.0;15.0;0.0;NO;Sigla da Unidade da Federa��o ; (: )
+DIMP;R0300_INSTITUICAO_PARCEIRA;"Este registro tem por objetivo identificar as institui��es de pagamento parceiras, no caso em que alguma institui��o fique respons�vel pelo fornecimento das 
+informa��es de outra IP.  Somente � obrigat�rio se existir a parceria que torna uma delas respons�veis pela transmiss�o da informa��o. ";8624.0;N;12.0;DSC_EMAIL_CONTATO;VARCHAR2;60;Y;;5.0;40.0;7461.0;NO;e-mail do contato para atendimento de solicita��es; (: )
+DIMP;R0300_INSTITUICAO_PARCEIRA;"Este registro tem por objetivo identificar as institui��es de pagamento parceiras, no caso em que alguma institui��o fique respons�vel pelo fornecimento das 
+informa��es de outra IP.  Somente � obrigat�rio se existir a parceria que torna uma delas respons�veis pela transmiss�o da informa��o. ";8624.0;N;6.0;DSC_ENDERECO;VARCHAR2;300;Y;;30.0;515.0;0.0;NO;Endere�o completo da institui��o de pagamento; (: )
+DIMP;R0300_INSTITUICAO_PARCEIRA;"Este registro tem por objetivo identificar as institui��es de pagamento parceiras, no caso em que alguma institui��o fique respons�vel pelo fornecimento das 
+informa��es de outra IP.  Somente � obrigat�rio se existir a parceria que torna uma delas respons�veis pela transmiss�o da informa��o. ";8624.0;N;5.0;NOM_EMPRESARIAL;VARCHAR2;150;Y;;22.0;570.0;0.0;NO;Nome Empresarial (Raz�o Social/denomina��o) da Institui��o de Pagamento ; (: )
+DIMP;R0300_INSTITUICAO_PARCEIRA;"Este registro tem por objetivo identificar as institui��es de pagamento parceiras, no caso em que alguma institui��o fique respons�vel pelo fornecimento das 
+informa��es de outra IP.  Somente � obrigat�rio se existir a parceria que torna uma delas respons�veis pela transmiss�o da informa��o. ";8624.0;N;10.0;NOM_RESPONSAVEL;VARCHAR2;150;Y;;6.0;95.0;6587.0;NO;Nome da Pessoa respons�vel para contato ; (: )
+DIMP;R0300_INSTITUICAO_PARCEIRA;"Este registro tem por objetivo identificar as institui��es de pagamento parceiras, no caso em que alguma institui��o fique respons�vel pelo fornecimento das 
+informa��es de outra IP.  Somente � obrigat�rio se existir a parceria que torna uma delas respons�veis pela transmiss�o da informa��o. ";8624.0;N;7.0;NUM_CEP;NUMBER;22;Y;0.0;6.0;449.0;0.0;NO;C�digo de Endere�amento Postal ; (: )
+DIMP;R0300_INSTITUICAO_PARCEIRA;"Este registro tem por objetivo identificar as institui��es de pagamento parceiras, no caso em que alguma institui��o fique respons�vel pelo fornecimento das 
+informa��es de outra IP.  Somente � obrigat�rio se existir a parceria que torna uma delas respons�veis pela transmiss�o da informa��o. ";8624.0;N;11.0;NUM_FONE_CONTATO;NUMBER;22;Y;0.0;4.0;127.0;5816.0;NO;N�mero de telefone para contato (DDD+FONE) ; (: )
+DIMP;R0300_INSTITUICAO_PARCEIRA;"Este registro tem por objetivo identificar as institui��es de pagamento parceiras, no caso em que alguma institui��o fique respons�vel pelo fornecimento das 
+informa��es de outra IP.  Somente � obrigat�rio se existir a parceria que torna uma delas respons�veis pela transmiss�o da informa��o. ";8624.0;N;2.0;SEQ_R0000;NUMBER;22;Y;0.0;5.0;1063.0;0.0;NO;Sequencial �nico do arquivo;FK_R0000_R_R0300 (FOREIGN KEY: ENABLED)
+DIMP;R0300_INSTITUICAO_PARCEIRA;"Este registro tem por objetivo identificar as institui��es de pagamento parceiras, no caso em que alguma institui��o fique respons�vel pelo fornecimento das 
+informa��es de outra IP.  Somente � obrigat�rio se existir a parceria que torna uma delas respons�veis pela transmiss�o da informa��o. ";8624.0;N;1.0;SEQ_R0300;NUMBER;22;N;0.0;4.0;8624.0;0.0;NO;Sequencial registro r300;PK_R0300_INSTITUICAO_PARCEIRA (PRIMARY KEY: ENABLED)- SYS_C00243411 (C: ENABLED)
+DIMP;R0600_AUT_INSTITUICAO_PARCEIRA;"Esse registro somente poder� ser informado quando a finalidade do arquivo for do tipo 6 � Autoriza��o Para Institui��o Parceira� no campo 03 do registro 0000. A outorga de autoriza��o n�o transfere a responsabilidade pelo cumprimento de obriga��es tribut�rias. A autoriza��o � aplic�vel aos casos em que uma institui��o de pagamento envia as transa��es de outra utilizando-se do registro 0300 para identificar a parceira autorizadora. A partir da data da emiss�o da autoriza��o, a outorgante n�o poder� mais enviar arquivos com suas transa��es, concedendo essa autonomia �s parceiras, exceto para as transa��es realizadas antes da data de registro da autoriza��o. As parceiras autorizadas dever�o reportar todos os detalhes da transa��o, inclusive os que comp�em o registro 1120 quando for uma transa��o realizada via intermediador (marketplace). Para retifica��o de arquivos, as transa��es dever�o ser enviadas obedecendo as regras aplic�veis �s transa��es enviadas por institui��es parceiras, sendo reportadas no arquivo 
+de retifica��o total da parceira autorizada. ";99.0;N;4.0;COD_CNPJ;NUMBER;22;Y;0.0;9.0;4.0;0.0;NO;CNPJ da institui��o autorizada ; (: )
+DIMP;R0600_AUT_INSTITUICAO_PARCEIRA;"Esse registro somente poder� ser informado quando a finalidade do arquivo for do tipo 6 � Autoriza��o Para Institui��o Parceira� no campo 03 do registro 0000. A outorga de autoriza��o n�o transfere a responsabilidade pelo cumprimento de obriga��es tribut�rias. A autoriza��o � aplic�vel aos casos em que uma institui��o de pagamento envia as transa��es de outra utilizando-se do registro 0300 para identificar a parceira autorizadora. A partir da data da emiss�o da autoriza��o, a outorgante n�o poder� mais enviar arquivos com suas transa��es, concedendo essa autonomia �s parceiras, exceto para as transa��es realizadas antes da data de registro da autoriza��o. As parceiras autorizadas dever�o reportar todos os detalhes da transa��o, inclusive os que comp�em o registro 1120 quando for uma transa��o realizada via intermediador (marketplace). Para retifica��o de arquivos, as transa��es dever�o ser enviadas obedecendo as regras aplic�veis �s transa��es enviadas por institui��es parceiras, sendo reportadas no arquivo 
+de retifica��o total da parceira autorizada. ";99.0;N;9.0;COD_MUNICIPIO;NUMBER;22;Y;0.0;6.0;2.0;0.0;NO;C�digo do munic�pio da institui��o autorizada, de acordo com tabela de munic�pios do IBGE ; (: )
+DIMP;R0600_AUT_INSTITUICAO_PARCEIRA;"Esse registro somente poder� ser informado quando a finalidade do arquivo for do tipo 6 � Autoriza��o Para Institui��o Parceira� no campo 03 do registro 0000. A outorga de autoriza��o n�o transfere a responsabilidade pelo cumprimento de obriga��es tribut�rias. A autoriza��o � aplic�vel aos casos em que uma institui��o de pagamento envia as transa��es de outra utilizando-se do registro 0300 para identificar a parceira autorizadora. A partir da data da emiss�o da autoriza��o, a outorgante n�o poder� mais enviar arquivos com suas transa��es, concedendo essa autonomia �s parceiras, exceto para as transa��es realizadas antes da data de registro da autoriza��o. As parceiras autorizadas dever�o reportar todos os detalhes da transa��o, inclusive os que comp�em o registro 1120 quando for uma transa��o realizada via intermediador (marketplace). Para retifica��o de arquivos, as transa��es dever�o ser enviadas obedecendo as regras aplic�veis �s transa��es enviadas por institui��es parceiras, sendo reportadas no arquivo 
+de retifica��o total da parceira autorizada. ";99.0;N;10.0;COD_UF;VARCHAR2;2;Y;;3.0;2.0;0.0;NO;Sigla da Unidade da Federa��o; (: )
+DIMP;R0600_AUT_INSTITUICAO_PARCEIRA;"Esse registro somente poder� ser informado quando a finalidade do arquivo for do tipo 6 � Autoriza��o Para Institui��o Parceira� no campo 03 do registro 0000. A outorga de autoriza��o n�o transfere a responsabilidade pelo cumprimento de obriga��es tribut�rias. A autoriza��o � aplic�vel aos casos em que uma institui��o de pagamento envia as transa��es de outra utilizando-se do registro 0300 para identificar a parceira autorizadora. A partir da data da emiss�o da autoriza��o, a outorgante n�o poder� mais enviar arquivos com suas transa��es, concedendo essa autonomia �s parceiras, exceto para as transa��es realizadas antes da data de registro da autoriza��o. As parceiras autorizadas dever�o reportar todos os detalhes da transa��o, inclusive os que comp�em o registro 1120 quando for uma transa��o realizada via intermediador (marketplace). Para retifica��o de arquivos, as transa��es dever�o ser enviadas obedecendo as regras aplic�veis �s transa��es enviadas por institui��es parceiras, sendo reportadas no arquivo 
+de retifica��o total da parceira autorizada. ";99.0;N;15.0;DAT_FINAL_ATU;DATE;7;Y;;1.0;0.0;99.0;NO;Data de cancelamento habilita��o da institui��o autorizada como detentora de autonomia exclusiva para envio das informa��es ; (: )
+DIMP;R0600_AUT_INSTITUICAO_PARCEIRA;"Esse registro somente poder� ser informado quando a finalidade do arquivo for do tipo 6 � Autoriza��o Para Institui��o Parceira� no campo 03 do registro 0000. A outorga de autoriza��o n�o transfere a responsabilidade pelo cumprimento de obriga��es tribut�rias. A autoriza��o � aplic�vel aos casos em que uma institui��o de pagamento envia as transa��es de outra utilizando-se do registro 0300 para identificar a parceira autorizadora. A partir da data da emiss�o da autoriza��o, a outorgante n�o poder� mais enviar arquivos com suas transa��es, concedendo essa autonomia �s parceiras, exceto para as transa��es realizadas antes da data de registro da autoriza��o. As parceiras autorizadas dever�o reportar todos os detalhes da transa��o, inclusive os que comp�em o registro 1120 quando for uma transa��o realizada via intermediador (marketplace). Para retifica��o de arquivos, as transa��es dever�o ser enviadas obedecendo as regras aplic�veis �s transa��es enviadas por institui��es parceiras, sendo reportadas no arquivo 
+de retifica��o total da parceira autorizada. ";99.0;N;14.0;DAT_INICIO_ATU;DATE;7;Y;;8.0;15.0;0.0;NO;Data de habilita��o da institui��o autorizada como detentora de autonomia exclusiva para envio das informa��es ; (: )
+DIMP;R0600_AUT_INSTITUICAO_PARCEIRA;"Esse registro somente poder� ser informado quando a finalidade do arquivo for do tipo 6 � Autoriza��o Para Institui��o Parceira� no campo 03 do registro 0000. A outorga de autoriza��o n�o transfere a responsabilidade pelo cumprimento de obriga��es tribut�rias. A autoriza��o � aplic�vel aos casos em que uma institui��o de pagamento envia as transa��es de outra utilizando-se do registro 0300 para identificar a parceira autorizadora. A partir da data da emiss�o da autoriza��o, a outorgante n�o poder� mais enviar arquivos com suas transa��es, concedendo essa autonomia �s parceiras, exceto para as transa��es realizadas antes da data de registro da autoriza��o. As parceiras autorizadas dever�o reportar todos os detalhes da transa��o, inclusive os que comp�em o registro 1120 quando for uma transa��o realizada via intermediador (marketplace). Para retifica��o de arquivos, as transa��es dever�o ser enviadas obedecendo as regras aplic�veis �s transa��es enviadas por institui��es parceiras, sendo reportadas no arquivo 
+de retifica��o total da parceira autorizada. ";99.0;N;7.0;DSC_ENDERECO;VARCHAR2;300;Y;;43.0;5.0;0.0;NO;Endere�o da institui��o autorizada; (: )
+DIMP;R0600_AUT_INSTITUICAO_PARCEIRA;"Esse registro somente poder� ser informado quando a finalidade do arquivo for do tipo 6 � Autoriza��o Para Institui��o Parceira� no campo 03 do registro 0000. A outorga de autoriza��o n�o transfere a responsabilidade pelo cumprimento de obriga��es tribut�rias. A autoriza��o � aplic�vel aos casos em que uma institui��o de pagamento envia as transa��es de outra utilizando-se do registro 0300 para identificar a parceira autorizadora. A partir da data da emiss�o da autoriza��o, a outorgante n�o poder� mais enviar arquivos com suas transa��es, concedendo essa autonomia �s parceiras, exceto para as transa��es realizadas antes da data de registro da autoriza��o. As parceiras autorizadas dever�o reportar todos os detalhes da transa��o, inclusive os que comp�em o registro 1120 quando for uma transa��o realizada via intermediador (marketplace). Para retifica��o de arquivos, as transa��es dever�o ser enviadas obedecendo as regras aplic�veis �s transa��es enviadas por institui��es parceiras, sendo reportadas no arquivo 
+de retifica��o total da parceira autorizada. ";99.0;N;6.0;DSC_FANTASIA;VARCHAR2;150;Y;;19.0;4.0;0.0;NO;Nome fantasia da institui��o autorizada ; (: )
+DIMP;R0600_AUT_INSTITUICAO_PARCEIRA;"Esse registro somente poder� ser informado quando a finalidade do arquivo for do tipo 6 � Autoriza��o Para Institui��o Parceira� no campo 03 do registro 0000. A outorga de autoriza��o n�o transfere a responsabilidade pelo cumprimento de obriga��es tribut�rias. A autoriza��o � aplic�vel aos casos em que uma institui��o de pagamento envia as transa��es de outra utilizando-se do registro 0300 para identificar a parceira autorizadora. A partir da data da emiss�o da autoriza��o, a outorgante n�o poder� mais enviar arquivos com suas transa��es, concedendo essa autonomia �s parceiras, exceto para as transa��es realizadas antes da data de registro da autoriza��o. As parceiras autorizadas dever�o reportar todos os detalhes da transa��o, inclusive os que comp�em o registro 1120 quando for uma transa��o realizada via intermediador (marketplace). Para retifica��o de arquivos, as transa��es dever�o ser enviadas obedecendo as regras aplic�veis �s transa��es enviadas por institui��es parceiras, sendo reportadas no arquivo 
+de retifica��o total da parceira autorizada. ";99.0;N;13.0;DSC_MAIL;VARCHAR2;60;Y;;26.0;5.0;0.0;NO;E-mail do contato ou respons�vel pelo estabelecimento ou do usu�rio; (: )
+DIMP;R0600_AUT_INSTITUICAO_PARCEIRA;"Esse registro somente poder� ser informado quando a finalidade do arquivo for do tipo 6 � Autoriza��o Para Institui��o Parceira� no campo 03 do registro 0000. A outorga de autoriza��o n�o transfere a responsabilidade pelo cumprimento de obriga��es tribut�rias. A autoriza��o � aplic�vel aos casos em que uma institui��o de pagamento envia as transa��es de outra utilizando-se do registro 0300 para identificar a parceira autorizadora. A partir da data da emiss�o da autoriza��o, a outorgante n�o poder� mais enviar arquivos com suas transa��es, concedendo essa autonomia �s parceiras, exceto para as transa��es realizadas antes da data de registro da autoriza��o. As parceiras autorizadas dever�o reportar todos os detalhes da transa��o, inclusive os que comp�em o registro 1120 quando for uma transa��o realizada via intermediador (marketplace). Para retifica��o de arquivos, as transa��es dever�o ser enviadas obedecendo as regras aplic�veis �s transa��es enviadas por institui��es parceiras, sendo reportadas no arquivo 
+de retifica��o total da parceira autorizada. ";99.0;N;11.0;NOM_RESPONSAVEL;VARCHAR2;150;Y;;29.0;4.0;0.0;NO;Nome de contato ou respons�vel no estabelecimento ou do usu�rio ; (: )
+DIMP;R0600_AUT_INSTITUICAO_PARCEIRA;"Esse registro somente poder� ser informado quando a finalidade do arquivo for do tipo 6 � Autoriza��o Para Institui��o Parceira� no campo 03 do registro 0000. A outorga de autoriza��o n�o transfere a responsabilidade pelo cumprimento de obriga��es tribut�rias. A autoriza��o � aplic�vel aos casos em que uma institui��o de pagamento envia as transa��es de outra utilizando-se do registro 0300 para identificar a parceira autorizadora. A partir da data da emiss�o da autoriza��o, a outorgante n�o poder� mais enviar arquivos com suas transa��es, concedendo essa autonomia �s parceiras, exceto para as transa��es realizadas antes da data de registro da autoriza��o. As parceiras autorizadas dever�o reportar todos os detalhes da transa��o, inclusive os que comp�em o registro 1120 quando for uma transa��o realizada via intermediador (marketplace). Para retifica��o de arquivos, as transa��es dever�o ser enviadas obedecendo as regras aplic�veis �s transa��es enviadas por institui��es parceiras, sendo reportadas no arquivo 
+de retifica��o total da parceira autorizada. ";99.0;N;8.0;NUM_CEP;NUMBER;22;Y;0.0;6.0;4.0;0.0;NO;C�digo de Endere�o Postal da institui��o autorizada; (: )
+DIMP;R0600_AUT_INSTITUICAO_PARCEIRA;"Esse registro somente poder� ser informado quando a finalidade do arquivo for do tipo 6 � Autoriza��o Para Institui��o Parceira� no campo 03 do registro 0000. A outorga de autoriza��o n�o transfere a responsabilidade pelo cumprimento de obriga��es tribut�rias. A autoriza��o � aplic�vel aos casos em que uma institui��o de pagamento envia as transa��es de outra utilizando-se do registro 0300 para identificar a parceira autorizadora. A partir da data da emiss�o da autoriza��o, a outorgante n�o poder� mais enviar arquivos com suas transa��es, concedendo essa autonomia �s parceiras, exceto para as transa��es realizadas antes da data de registro da autoriza��o. As parceiras autorizadas dever�o reportar todos os detalhes da transa��o, inclusive os que comp�em o registro 1120 quando for uma transa��o realizada via intermediador (marketplace). Para retifica��o de arquivos, as transa��es dever�o ser enviadas obedecendo as regras aplic�veis �s transa��es enviadas por institui��es parceiras, sendo reportadas no arquivo 
+de retifica��o total da parceira autorizada. ";99.0;N;12.0;NUM_TELEFONE;NUMBER;22;Y;0.0;7.0;4.0;0.0;NO;Telefone do contato (DDD+FONE); (: )
+DIMP;R0600_AUT_INSTITUICAO_PARCEIRA;"Esse registro somente poder� ser informado quando a finalidade do arquivo for do tipo 6 � Autoriza��o Para Institui��o Parceira� no campo 03 do registro 0000. A outorga de autoriza��o n�o transfere a responsabilidade pelo cumprimento de obriga��es tribut�rias. A autoriza��o � aplic�vel aos casos em que uma institui��o de pagamento envia as transa��es de outra utilizando-se do registro 0300 para identificar a parceira autorizadora. A partir da data da emiss�o da autoriza��o, a outorgante n�o poder� mais enviar arquivos com suas transa��es, concedendo essa autonomia �s parceiras, exceto para as transa��es realizadas antes da data de registro da autoriza��o. As parceiras autorizadas dever�o reportar todos os detalhes da transa��o, inclusive os que comp�em o registro 1120 quando for uma transa��o realizada via intermediador (marketplace). Para retifica��o de arquivos, as transa��es dever�o ser enviadas obedecendo as regras aplic�veis �s transa��es enviadas por institui��es parceiras, sendo reportadas no arquivo 
+de retifica��o total da parceira autorizada. ";99.0;N;2.0;SEQ_R0000;NUMBER;22;Y;0.0;5.0;99.0;0.0;NO;Sequencial �nico do arquivo;FK_R0000_R_R0600 (FOREIGN KEY: ENABLED)
+DIMP;R0600_AUT_INSTITUICAO_PARCEIRA;"Esse registro somente poder� ser informado quando a finalidade do arquivo for do tipo 6 � Autoriza��o Para Institui��o Parceira� no campo 03 do registro 0000. A outorga de autoriza��o n�o transfere a responsabilidade pelo cumprimento de obriga��es tribut�rias. A autoriza��o � aplic�vel aos casos em que uma institui��o de pagamento envia as transa��es de outra utilizando-se do registro 0300 para identificar a parceira autorizadora. A partir da data da emiss�o da autoriza��o, a outorgante n�o poder� mais enviar arquivos com suas transa��es, concedendo essa autonomia �s parceiras, exceto para as transa��es realizadas antes da data de registro da autoriza��o. As parceiras autorizadas dever�o reportar todos os detalhes da transa��o, inclusive os que comp�em o registro 1120 quando for uma transa��o realizada via intermediador (marketplace). Para retifica��o de arquivos, as transa��es dever�o ser enviadas obedecendo as regras aplic�veis �s transa��es enviadas por institui��es parceiras, sendo reportadas no arquivo 
+de retifica��o total da parceira autorizada. ";99.0;N;1.0;SEQ_R0600;NUMBER;22;N;0.0;3.0;99.0;0.0;NO;Sequencial da tabela cancelamentos R0600;PK_R0600_AUT_INSTITUICAO_PARCEIRA (PRIMARY KEY: ENABLED)- SYS_C00252202 (C: ENABLED)
+DIMP;R0600_AUT_INSTITUICAO_PARCEIRA;"Esse registro somente poder� ser informado quando a finalidade do arquivo for do tipo 6 � Autoriza��o Para Institui��o Parceira� no campo 03 do registro 0000. A outorga de autoriza��o n�o transfere a responsabilidade pelo cumprimento de obriga��es tribut�rias. A autoriza��o � aplic�vel aos casos em que uma institui��o de pagamento envia as transa��es de outra utilizando-se do registro 0300 para identificar a parceira autorizadora. A partir da data da emiss�o da autoriza��o, a outorgante n�o poder� mais enviar arquivos com suas transa��es, concedendo essa autonomia �s parceiras, exceto para as transa��es realizadas antes da data de registro da autoriza��o. As parceiras autorizadas dever�o reportar todos os detalhes da transa��o, inclusive os que comp�em o registro 1120 quando for uma transa��o realizada via intermediador (marketplace). Para retifica��o de arquivos, as transa��es dever�o ser enviadas obedecendo as regras aplic�veis �s transa��es enviadas por institui��es parceiras, sendo reportadas no arquivo 
+de retifica��o total da parceira autorizada. ";99.0;N;3.0;TIP_AUTORIZACAO;NUMBER;22;Y;0.0;3.0;1.0;0.0;NO;Tipo de registro de autoriza��o 1 - Inclus�o   2 - Exclus�o ;CKC_TIP_AUTORIZ_R0600_AUT_PARCEIRA (C: ENABLED)
+DIMP;R0600_AUT_INSTITUICAO_PARCEIRA;"Esse registro somente poder� ser informado quando a finalidade do arquivo for do tipo 6 � Autoriza��o Para Institui��o Parceira� no campo 03 do registro 0000. A outorga de autoriza��o n�o transfere a responsabilidade pelo cumprimento de obriga��es tribut�rias. A autoriza��o � aplic�vel aos casos em que uma institui��o de pagamento envia as transa��es de outra utilizando-se do registro 0300 para identificar a parceira autorizadora. A partir da data da emiss�o da autoriza��o, a outorgante n�o poder� mais enviar arquivos com suas transa��es, concedendo essa autonomia �s parceiras, exceto para as transa��es realizadas antes da data de registro da autoriza��o. As parceiras autorizadas dever�o reportar todos os detalhes da transa��o, inclusive os que comp�em o registro 1120 quando for uma transa��o realizada via intermediador (marketplace). Para retifica��o de arquivos, as transa��es dever�o ser enviadas obedecendo as regras aplic�veis �s transa��es enviadas por institui��es parceiras, sendo reportadas no arquivo 
+de retifica��o total da parceira autorizada. ";99.0;N;5.0;TIP_TRANSACAO;NUMBER;22;Y;0.0;3.0;2.0;0.0;NO;Existir�o transa��es comerciais (registros 1120);CKC_TIP_TRANSACAO_R0600_AUT_PARCEIRA (C: ENABLED)
+DIMP;R0700_IDENTIFICACAO_INTIMACAO;Este Registro deve ser informado apenas quando for selecionada a finalidade �3� no campo 03 do Registro 0000. Se a institui��o informar o registro, todos os campos s�o obrigat�rios;1.0;N;3.0;NUM_IDENT_PROCESSO;VARCHAR2;60;Y;;36.0;1.0;0.0;NO;Identifica��o do Processo Administrativo ou Procedimento Fiscal ; (: )
+DIMP;R0700_IDENTIFICACAO_INTIMACAO;Este Registro deve ser informado apenas quando for selecionada a finalidade �3� no campo 03 do Registro 0000. Se a institui��o informar o registro, todos os campos s�o obrigat�rios;1.0;N;2.0;SEQ_R0000;NUMBER;22;Y;0.0;4.0;1.0;0.0;NO;Sequencial �nico do arquivo;FK_R0000_R_R0700 (FOREIGN KEY: ENABLED)
+DIMP;R0700_IDENTIFICACAO_INTIMACAO;Este Registro deve ser informado apenas quando for selecionada a finalidade �3� no campo 03 do Registro 0000. Se a institui��o informar o registro, todos os campos s�o obrigat�rios;1.0;N;1.0;SEQ_R0700;NUMBER;22;N;0.0;3.0;1.0;0.0;NO;Sequencial da tabela de identifica��o de intima��o;PK_R0700_IDENTIFICACAO_INTIMACAO (PRIMARY KEY: ENABLED)- SYS_C00266812 (C: ENABLED)
+DIMP;R1100_RESUMO_MENSAL; Informar as opera��es mensais de cr�dito e d�bito, totalizados por COD_CLIENTE, e por IND_COMEX (Indicador de transa��o de pagamento ao exterior).;76433346.0;N;4.0;COD_CLIENTE;VARCHAR2;60;Y;;18.0;7532544.0;0.0;NO;C�digo de identifica��o do Cliente (campo 02 do Registro 0100) ; (: )
+DIMP;R1100_RESUMO_MENSAL; Informar as opera��es mensais de cr�dito e d�bito, totalizados por COD_CLIENTE, e por IND_COMEX (Indicador de transa��o de pagamento ao exterior).;76433346.0;N;3.0;COD_IP_PARCEIRA;VARCHAR2;30;Y;;2.0;91.0;69969968.0;NO;C�digo de identifica��o da Institui��o de Pagamento Parceira (Subadquirente) - (campo 02 do Registro 0300). ; (: )
+DIMP;R1100_RESUMO_MENSAL; Informar as opera��es mensais de cr�dito e d�bito, totalizados por COD_CLIENTE, e por IND_COMEX (Indicador de transa��o de pagamento ao exterior).;76433346.0;N;8.0;DAT_FINAL;DATE;7;Y;;8.0;2368.0;0.0;NO;Data Final das informa��es para este CNPJ/CPF; (: )
+DIMP;R1100_RESUMO_MENSAL; Informar as opera��es mensais de cr�dito e d�bito, totalizados por COD_CLIENTE, e por IND_COMEX (Indicador de transa��o de pagamento ao exterior).;76433346.0;N;7.0;DAT_INICIO;DATE;7;Y;;8.0;2290.0;0.0;NO;Data Inicial das informa��es para este CNPJ/CPF ; (: )
+DIMP;R1100_RESUMO_MENSAL; Informar as opera��es mensais de cr�dito e d�bito, totalizados por COD_CLIENTE, e por IND_COMEX (Indicador de transa��o de pagamento ao exterior).;76433346.0;N;10.0;QTD_OPERACAO;NUMBER;22;Y;0.0;4.0;30232.0;0.0;NO;Quantidade de opera��es ; (: )
+DIMP;R1100_RESUMO_MENSAL; Informar as opera��es mensais de cr�dito e d�bito, totalizados por COD_CLIENTE, e por IND_COMEX (Indicador de transa��o de pagamento ao exterior).;76433346.0;N;2.0;SEQ_R0000;NUMBER;22;Y;0.0;5.0;10999.0;0.0;NO;Sequencial �nico do arquivo;FK_R0000_R_R1100 (FOREIGN KEY: ENABLED)
+DIMP;R1100_RESUMO_MENSAL; Informar as opera��es mensais de cr�dito e d�bito, totalizados por COD_CLIENTE, e por IND_COMEX (Indicador de transa��o de pagamento ao exterior).;76433346.0;N;1.0;SEQ_R1100;NUMBER;22;N;0.0;6.0;76433346.0;0.0;NO;Sequencial da tabela;PK_R1100_RESUMO_MENSAL (PRIMARY KEY: ENABLED)- SYS_C00243413 (C: ENABLED)
+DIMP;R1100_RESUMO_MENSAL; Informar as opera��es mensais de cr�dito e d�bito, totalizados por COD_CLIENTE, e por IND_COMEX (Indicador de transa��o de pagamento ao exterior).;76433346.0;N;11.0;STA_RETIFICADO;VARCHAR2;1;Y;;2.0;2.0;0.0;NO;"Indica se arquivo foi notificado (N-n�o retificado; S-retificado)";CKC_STA_RETIFICADO_R1100 (C: ENABLED)
+DIMP;R1100_RESUMO_MENSAL; Informar as opera��es mensais de cr�dito e d�bito, totalizados por COD_CLIENTE, e por IND_COMEX (Indicador de transa��o de pagamento ao exterior).;76433346.0;N;5.0;TIP_IND_COMEX;NUMBER;22;Y;0.0;3.0;2.0;0.0;NO;Indicador de transa��o de pagamento ao exterior 0 - N�o 1 - Sim; (: )
+DIMP;R1100_RESUMO_MENSAL; Informar as opera��es mensais de cr�dito e d�bito, totalizados por COD_CLIENTE, e por IND_COMEX (Indicador de transa��o de pagamento ao exterior).;76433346.0;N;6.0;TIP_IND_EXTEMP;NUMBER;22;Y;0.0;3.0;2.0;0.0;NO;Indicador de informa��o extempor�nea: 0 - N�o 1 - Sim ; (: )
+DIMP;R1100_RESUMO_MENSAL; Informar as opera��es mensais de cr�dito e d�bito, totalizados por COD_CLIENTE, e por IND_COMEX (Indicador de transa��o de pagamento ao exterior).;76433346.0;N;9.0;VLR_OPERACAO;NUMBER;22;Y;2.0;5.0;5766144.0;0.0;NO;Valor total das opera��es ; (: )
+DIMP;R1110_OPERACAO_DIARIA;Este registro deve ser gerado patotalizados por meio de captura. ;754095594.0;N;3.0;COD_MCAPTURA;VARCHAR2;80;Y;;25.0;82149376.0;0.0;NO;C�digo do meio de captura (campo 02 do Registro 0200).; (: )
+DIMP;R1110_OPERACAO_DIARIA;Este registro deve ser gerado patotalizados por meio de captura. ;754095594.0;N;4.0;DAT_OPERACAO;DATE;7;Y;;8.0;2933.0;0.0;NO;Data da opera��o ; (: )
+DIMP;R1110_OPERACAO_DIARIA;Este registro deve ser gerado patotalizados por meio de captura. ;754095594.0;N;7.0;NUM_CNPJ_ADQUIRENTE;NUMBER;22;Y;0.0;8.0;7588.0;81528521.0;NO;CNPJ da Adquirente ou subadquirente que autorizou a transa��o, em branco para quando o declarante for o pr�prio adquirente. ; (: )
+DIMP;R1110_OPERACAO_DIARIA;Este registro deve ser gerado patotalizados por meio de captura. ;754095594.0;N;6.0;QTD_OPERACAO;NUMBER;22;Y;0.0;4.0;11006.0;0.0;NO;Quantidade total di�ria de opera��es realizadas na data; (: )
+DIMP;R1110_OPERACAO_DIARIA;Este registro deve ser gerado patotalizados por meio de captura. ;754095594.0;N;2.0;SEQ_R1100;NUMBER;22;Y;0.0;6.0;66433024.0;0.0;NO;Sequencial da tabela R1100;FK_R1100_R_R1110 (FOREIGN KEY: ENABLED)
+DIMP;R1110_OPERACAO_DIARIA;Este registro deve ser gerado patotalizados por meio de captura. ;754095594.0;N;1.0;SEQ_R1110;NUMBER;22;N;0.0;7.0;754095594.0;0.0;NO;Sequencial do arquivo R1110;PK_R1110_OPERACAO_DIARIA (PRIMARY KEY: ENABLED)- SYS_C00264793 (C: ENABLED)
+DIMP;R1110_OPERACAO_DIARIA;Este registro deve ser gerado patotalizados por meio de captura. ;754095594.0;N;5.0;VLR_OPERACAO;NUMBER;22;Y;2.0;5.0;4334592.0;0.0;NO;Valor total di�rio das opera��es realizadas na data ; (: )
+DIMP;R1115_OPERACAO_COMPROVANTE;Este registro deve ser gerado para informar as opera��es de pagamento, totalizados por comprovante. ;7323176659.0;N;4.0;COD_AUTORIZACAO;VARCHAR2;30;Y;;5.0;367296512.0;3947310871.0;NO;Identifica��o do c�digo de autoriza��o atribu�do pela Institui��o de Pagamento. ; (: )
+DIMP;R1115_OPERACAO_COMPROVANTE;Este registro deve ser gerado para informar as opera��es de pagamento, totalizados por comprovante. ;7323176659.0;N;10.0;COD_NAT_OPERACAO;NUMBER;22;Y;0.0;3.0;11.0;0.0;NO;"  informar a natureza da opera��o realizada no comprovante de pagamento referenciado. Valores V�lidos:[1,2,3,4,5,6,7,8,9,10,11]
+1 � Cr�dito
+2 � D�bito
+3 � Boleto de transa��es pr�prias
+4 � Transfer�ncia de Recursos
+5 � Pagamento efetuado em dinheiro ou por outra estrutura
+6 � PIX  (v�lido para arquivos enviados a partir de 11/2021) 7 � Voucher
+8 � Saque em estabelecimento comercial
+9 � Outros (v�lido para arquivos enviados at� 11/2021)
+10  � Dep�sito
+11 � Recep��o de pagamento de boletos, guias emitidos por terceiros e recargas de celular
+";CKC_COD_NAT_OPERACAO_R1115 (C: ENABLED)
+DIMP;R1115_OPERACAO_COMPROVANTE;Este registro deve ser gerado para informar as opera��es de pagamento, totalizados por comprovante. ;7323176659.0;N;12.0;DAT_OPERACAO;DATE;7;Y;;2.0;396.0;7264671382.0;NO;Data da operacao do registro R1110.; (: )
+DIMP;R1115_OPERACAO_COMPROVANTE;Este registro deve ser gerado para informar as opera��es de pagamento, totalizados por comprovante. ;7323176659.0;N;11.0;DSC_GEO;VARCHAR2;60;Y;;2.0;3.0;7312722931.0;NO;Antena de Celular que autorizou a opera��o; (: )
+DIMP;R1115_OPERACAO_COMPROVANTE;Este registro deve ser gerado para informar as opera��es de pagamento, totalizados por comprovante. ;7323176659.0;N;5.0;DSC_ID_TRANSACAO;VARCHAR2;30;Y;;15.0;4075814912.0;2553383415.0;NO;Identifica��o da transa��o de pagamento autorizada e atribu�do pela Institui��o de Pagamento ou Identificador do Pedido atribuido pelo intermediador de transa��es (marketplace), quando diferente do NSU ; (: )
+DIMP;R1115_OPERACAO_COMPROVANTE;Este registro deve ser gerado para informar as opera��es de pagamento, totalizados por comprovante. ;7323176659.0;N;7.0;NUM_BANDEIRA;NUMBER;22;Y;0.0;3.0;31.0;510872235.0;NO;Bandeira do Cart�o do Cliente ; (: )
+DIMP;R1115_OPERACAO_COMPROVANTE;Este registro deve ser gerado para informar as opera��es de pagamento, totalizados por comprovante. ;7323176659.0;N;8.0;NUM_HORA_TRANSACAO;NUMBER;22;Y;0.0;5.0;86080.0;0.0;NO;informar a hora da opera��o.  Valida��o: [hhmmss] ; (: )
+DIMP;R1115_OPERACAO_COMPROVANTE;Este registro deve ser gerado para informar as opera��es de pagamento, totalizados por comprovante. ;7323176659.0;N;3.0;NUM_NSU;VARCHAR2;30;Y;;9.0;1690566656.0;2426319063.0;NO;N�mero sequencial �nico atribu�do pela adquirente.  Valida��o:Se NSU ficar em branco obrigat�rio o preenchimento do ID_TRANSAC. ; (: )
+DIMP;R1115_OPERACAO_COMPROVANTE;Este registro deve ser gerado para informar as opera��es de pagamento, totalizados por comprovante. ;7323176659.0;N;2.0;SEQ_R1110;NUMBER;22;Y;0.0;7.0;968556544.0;0.0;NO;Sequencial do arquivo;FK_R1110_R_R1115 (FOREIGN KEY: ENABLED)
+DIMP;R1115_OPERACAO_COMPROVANTE;Este registro deve ser gerado para informar as opera��es de pagamento, totalizados por comprovante. ;7323176659.0;N;1.0;SEQ_R1115;NUMBER;22;N;0.0;7.0;7323176659.0;0.0;NO;Sequencial do R1115;PK_R1115_OPERACAO_COMPROVANTE (PRIMARY KEY: ENABLED)- SYS_C00243417 (C: ENABLED)
+DIMP;R1115_OPERACAO_COMPROVANTE;Este registro deve ser gerado para informar as opera��es de pagamento, totalizados por comprovante. ;7323176659.0;N;13.0;TIP_IND_NAT_JUR;NUMBER;22;Y;0.0;2.0;2.0;6490430678.0;NO;Natureza Jur�dica da Origem da Opera��o:  0 � CPF (PF), 1 � CNPJ (PJ); (: )
+DIMP;R1115_OPERACAO_COMPROVANTE;Este registro deve ser gerado para informar as opera��es de pagamento, totalizados por comprovante. ;7323176659.0;N;6.0;TIP_IND_SPLIT;NUMBER;22;Y;0.0;3.0;2.0;0.0;NO;informar se a opera��o sofre split de pagamento. Valores V�lidos: [0,1] Campo 06  (BANDEIRA)  ;CKC_TIP_IND_SPLIT_R1115 (C: ENABLED)
+DIMP;R1115_OPERACAO_COMPROVANTE;Este registro deve ser gerado para informar as opera��es de pagamento, totalizados por comprovante. ;7323176659.0;N;14.0;TIP_IND_TIP_PIX;NUMBER;22;Y;0.0;2.0;2.0;6648542777.0;NO;ndicador de tipo de PIX:  0 � Din�mico ,1 � Est�tico; (: )
+DIMP;R1115_OPERACAO_COMPROVANTE;Este registro deve ser gerado para informar as opera��es de pagamento, totalizados por comprovante. ;7323176659.0;N;9.0;VLR_OPERACAO;NUMBER;22;Y;2.0;4.0;2208768.0;0.0;NO;valor da opera��o; (: )
+DIMP;R1120_INTER_SERVICO_NEGOCIO;Este registro � obrigat�rio e exclusivo para as institui��es que atuam na intermedia��o de transa��es comerciais e de servi�os. Visa identificar a ocorr�ncia de transa��es com a intermedia��o de terceiros. Nos arquivos gerados por institui��es de pagamento em nome dos Intermediadores de Servi�os e Neg�cios, as transa��es das institui��es parceiras s�o agrupadas conforme o campo 02 do registro 1100 (COD_IP_PAR).;250668293.0;N;5.0;COD_CNPJ;NUMBER;22;Y;0.0;2.0;9024.0;246935855.0;NO;CNPJ do destinat�rio da transa��o; (: )
+DIMP;R1120_INTER_SERVICO_NEGOCIO;Este registro � obrigat�rio e exclusivo para as institui��es que atuam na intermedia��o de transa��es comerciais e de servi�os. Visa identificar a ocorr�ncia de transa��es com a intermedia��o de terceiros. Nos arquivos gerados por institui��es de pagamento em nome dos Intermediadores de Servi�os e Neg�cios, as transa��es das institui��es parceiras s�o agrupadas conforme o campo 02 do registro 1100 (COD_IP_PAR).;250668293.0;N;6.0;COD_CPF;NUMBER;22;Y;0.0;2.0;2472960.0;236880334.0;NO;CPF do destinat�rio da transa��o; (: )
+DIMP;R1120_INTER_SERVICO_NEGOCIO;Este registro � obrigat�rio e exclusivo para as institui��es que atuam na intermedia��o de transa��es comerciais e de servi�os. Visa identificar a ocorr�ncia de transa��es com a intermedia��o de terceiros. Nos arquivos gerados por institui��es de pagamento em nome dos Intermediadores de Servi�os e Neg�cios, as transa��es das institui��es parceiras s�o agrupadas conforme o campo 02 do registro 1100 (COD_IP_PAR).;250668293.0;N;7.0;COD_ID_DEST;VARCHAR2;20;Y;;17.0;23044096.0;17520397.0;NO;Identifica��o de destinat�rios sem cadastro de CPF ou CNPJ ; (: )
+DIMP;R1120_INTER_SERVICO_NEGOCIO;Este registro � obrigat�rio e exclusivo para as institui��es que atuam na intermedia��o de transa��es comerciais e de servi�os. Visa identificar a ocorr�ncia de transa��es com a intermedia��o de terceiros. Nos arquivos gerados por institui��es de pagamento em nome dos Intermediadores de Servi�os e Neg�cios, as transa��es das institui��es parceiras s�o agrupadas conforme o campo 02 do registro 1100 (COD_IP_PAR).;250668293.0;N;3.0;COD_UF;VARCHAR2;2;Y;;3.0;28.0;0.0;NO;Informar a UF para qual foi destinada a transa��o comercial ou de presta��o de servi�o; (: )
+DIMP;R1120_INTER_SERVICO_NEGOCIO;Este registro � obrigat�rio e exclusivo para as institui��es que atuam na intermedia��o de transa��es comerciais e de servi�os. Visa identificar a ocorr�ncia de transa��es com a intermedia��o de terceiros. Nos arquivos gerados por institui��es de pagamento em nome dos Intermediadores de Servi�os e Neg�cios, as transa��es das institui��es parceiras s�o agrupadas conforme o campo 02 do registro 1100 (COD_IP_PAR).;250668293.0;N;9.0;NUM_CHAVE_DCE;VARCHAR2;44;Y;;0.0;0.0;250668293.0;NO;Informar a chave da DC-e  ; (: )
+DIMP;R1120_INTER_SERVICO_NEGOCIO;Este registro � obrigat�rio e exclusivo para as institui��es que atuam na intermedia��o de transa��es comerciais e de servi�os. Visa identificar a ocorr�ncia de transa��es com a intermedia��o de terceiros. Nos arquivos gerados por institui��es de pagamento em nome dos Intermediadores de Servi�os e Neg�cios, as transa��es das institui��es parceiras s�o agrupadas conforme o campo 02 do registro 1100 (COD_IP_PAR).;250668293.0;N;4.0;NUM_CHAVE_NF;VARCHAR2;44;Y;;2.0;2362112.0;248124958.0;NO;Informar a chave da NFe ou NFCe; (: )
+DIMP;R1120_INTER_SERVICO_NEGOCIO;Este registro � obrigat�rio e exclusivo para as institui��es que atuam na intermedia��o de transa��es comerciais e de servi�os. Visa identificar a ocorr�ncia de transa��es com a intermedia��o de terceiros. Nos arquivos gerados por institui��es de pagamento em nome dos Intermediadores de Servi�os e Neg�cios, as transa��es das institui��es parceiras s�o agrupadas conforme o campo 02 do registro 1100 (COD_IP_PAR).;250668293.0;N;8.0;NUM_CHAVE_NFSE;VARCHAR2;44;Y;;0.0;0.0;250668293.0;NO;Informar a chave da NFS-e N; (: )
+DIMP;R1120_INTER_SERVICO_NEGOCIO;Este registro � obrigat�rio e exclusivo para as institui��es que atuam na intermedia��o de transa��es comerciais e de servi�os. Visa identificar a ocorr�ncia de transa��es com a intermedia��o de terceiros. Nos arquivos gerados por institui��es de pagamento em nome dos Intermediadores de Servi�os e Neg�cios, as transa��es das institui��es parceiras s�o agrupadas conforme o campo 02 do registro 1100 (COD_IP_PAR).;250668293.0;N;10.0;NUM_IDENT_PEDIDO;VARCHAR2;60;Y;;2.0;27.0;238374032.0;NO;Informar o identificador do pedido gerado no Intermediador da transa��o comercial ou servi�o ; (: )
+DIMP;R1120_INTER_SERVICO_NEGOCIO;Este registro � obrigat�rio e exclusivo para as institui��es que atuam na intermedia��o de transa��es comerciais e de servi�os. Visa identificar a ocorr�ncia de transa��es com a intermedia��o de terceiros. Nos arquivos gerados por institui��es de pagamento em nome dos Intermediadores de Servi�os e Neg�cios, as transa��es das institui��es parceiras s�o agrupadas conforme o campo 02 do registro 1100 (COD_IP_PAR).;250668293.0;N;2.0;SEQ_R1115;NUMBER;22;Y;0.0;7.0;250668293.0;0.0;NO;Sequencial do R1115;FK_R1115_R_R1120 (FOREIGN KEY: ENABLED)
+DIMP;R1120_INTER_SERVICO_NEGOCIO;Este registro � obrigat�rio e exclusivo para as institui��es que atuam na intermedia��o de transa��es comerciais e de servi�os. Visa identificar a ocorr�ncia de transa��es com a intermedia��o de terceiros. Nos arquivos gerados por institui��es de pagamento em nome dos Intermediadores de Servi�os e Neg�cios, as transa��es das institui��es parceiras s�o agrupadas conforme o campo 02 do registro 1100 (COD_IP_PAR).;250668293.0;N;1.0;SEQ_R1120;NUMBER;22;N;0.0;7.0;250668293.0;0.0;NO;Sequencial da tabela.;PK_R1120_INTER_SERVICO_NEGOCIO (PRIMARY KEY: ENABLED)- SYS_C00250716 (C: ENABLED)
+DIMP;R1220_CANC_TRANSACAO_INTER;Este registro deve ser gerado para informar os cancelamentos das transa��es realizadas por meio de intermediadores de servi�os e neg�cios. Caso a transa��o cancelada tenha sido destinada a outra UF, os registro 0100, 1200 e 1220 dever�o ser enviados tamb�m � UF correspondente;776829.0;N;5.0;COD_CNPJ;NUMBER;22;Y;0.0;2.0;95.0;776519.0;NO;CNPJ do destinat�rio da transa��o; (: )
+DIMP;R1220_CANC_TRANSACAO_INTER;Este registro deve ser gerado para informar os cancelamentos das transa��es realizadas por meio de intermediadores de servi�os e neg�cios. Caso a transa��o cancelada tenha sido destinada a outra UF, os registro 0100, 1200 e 1220 dever�o ser enviados tamb�m � UF correspondente;776829.0;N;6.0;COD_CPF;NUMBER;22;Y;0.0;4.0;204496.0;493596.0;NO;CPF do destinat�rio da transa��o; (: )
+DIMP;R1220_CANC_TRANSACAO_INTER;Este registro deve ser gerado para informar os cancelamentos das transa��es realizadas por meio de intermediadores de servi�os e neg�cios. Caso a transa��o cancelada tenha sido destinada a outra UF, os registro 0100, 1200 e 1220 dever�o ser enviados tamb�m � UF correspondente;776829.0;N;7.0;COD_ID_DEST;VARCHAR2;20;Y;;8.0;185824.0;283543.0;NO;Identifica��o de destinat�rios sem cadastro de CPF ou CNPJ; (: )
+DIMP;R1220_CANC_TRANSACAO_INTER;Este registro deve ser gerado para informar os cancelamentos das transa��es realizadas por meio de intermediadores de servi�os e neg�cios. Caso a transa��o cancelada tenha sido destinada a outra UF, os registro 0100, 1200 e 1220 dever�o ser enviados tamb�m � UF correspondente;776829.0;N;3.0;COD_UF;VARCHAR2;2;Y;;3.0;27.0;0.0;NO;Informar a UF para qual foi destinada a transa��o comercial ou de presta��o de servi�o ; (: )
+DIMP;R1220_CANC_TRANSACAO_INTER;Este registro deve ser gerado para informar os cancelamentos das transa��es realizadas por meio de intermediadores de servi�os e neg�cios. Caso a transa��o cancelada tenha sido destinada a outra UF, os registro 0100, 1200 e 1220 dever�o ser enviados tamb�m � UF correspondente;776829.0;N;4.0;NUM_CHAVE_NF;VARCHAR2;44;Y;;3.0;23026.0;750918.0;NO;Informar a chave da NFe ou NFCe ; (: )
+DIMP;R1220_CANC_TRANSACAO_INTER;Este registro deve ser gerado para informar os cancelamentos das transa��es realizadas por meio de intermediadores de servi�os e neg�cios. Caso a transa��o cancelada tenha sido destinada a outra UF, os registro 0100, 1200 e 1220 dever�o ser enviados tamb�m � UF correspondente;776829.0;N;1.0;SEQ_R1200;NUMBER;22;Y;0.0;6.0;771840.0;0.0;NO;Sequencial da tabela cancelamentos R1200 ;FK_R1200_R_R1220 (FOREIGN KEY: ENABLED)
+DIMP;R1220_CANC_TRANSACAO_INTER;Este registro deve ser gerado para informar os cancelamentos das transa��es realizadas por meio de intermediadores de servi�os e neg�cios. Caso a transa��o cancelada tenha sido destinada a outra UF, os registro 0100, 1200 e 1220 dever�o ser enviados tamb�m � UF correspondente;776829.0;N;2.0;SEQ_R1220;NUMBER;22;N;0.0;5.0;776829.0;0.0;NO;sequencial da tabela R1220;PK_R1220_CANC_TRANSACAO_INTER (PRIMARY KEY: ENABLED)- SYS_C00250719 (C: ENABLED)
+DIMP;R1500_RES_OPERACAO_FINANCEIRA;Este registro deve ser gerado para informar as transa��es mensais totalizadas por COD_CLIENTE, por IND_COMEX, por NAT_OPER ou por ID_CONTA. Dessa forma, caso o COD_CLIENTE tenha transa��es nacionais e internacionais, ser�o iniciados dois registros 1500 para ele.;57887668.0;N;4.0;COD_CLIENTE;VARCHAR2;60;Y;;17.0;2140672.0;0.0;NO;C�digo de identifica��o do Cliente (campo 02 do Registro 0100) ; (: )
+DIMP;R1500_RES_OPERACAO_FINANCEIRA;Este registro deve ser gerado para informar as transa��es mensais totalizadas por COD_CLIENTE, por IND_COMEX, por NAT_OPER ou por ID_CONTA. Dessa forma, caso o COD_CLIENTE tenha transa��es nacionais e internacionais, ser�o iniciados dois registros 1500 para ele.;57887668.0;N;3.0;COD_IP_PARCEIRA;VARCHAR2;30;Y;;0.0;0.0;57887668.0;NO;"C�digo de identifica��o da Institui��o Parceira - (campo 02 do Registro 0300). 
+"; (: )
+DIMP;R1500_RES_OPERACAO_FINANCEIRA;Este registro deve ser gerado para informar as transa��es mensais totalizadas por COD_CLIENTE, por IND_COMEX, por NAT_OPER ou por ID_CONTA. Dessa forma, caso o COD_CLIENTE tenha transa��es nacionais e internacionais, ser�o iniciados dois registros 1500 para ele.;57887668.0;N;10.0;COD_MCAPTURA;VARCHAR2;50;Y;;30.0;10597376.0;0.0;NO;Identifica��o do C�digo informado no campo 02 do Registro 0200.; (: )
+DIMP;R1500_RES_OPERACAO_FINANCEIRA;Este registro deve ser gerado para informar as transa��es mensais totalizadas por COD_CLIENTE, por IND_COMEX, por NAT_OPER ou por ID_CONTA. Dessa forma, caso o COD_CLIENTE tenha transa��es nacionais e internacionais, ser�o iniciados dois registros 1500 para ele.;57887668.0;N;11.0;COD_NAT_OPERACAO;NUMBER;22;Y;0.0;3.0;4.0;0.0;NO;Natureza da opera��o : 3 � Boleto de transa��es pr�prias 4 � Transfer�ncia de Recursos 6 � PIX 8 � Saque ou troco em estabelecimento comercial ou opera��es de PIX Saque ou Pix Troco. ;CKC_COD_NAT_OPERACAO_R1500 (C: ENABLED)
+DIMP;R1500_RES_OPERACAO_FINANCEIRA;Este registro deve ser gerado para informar as transa��es mensais totalizadas por COD_CLIENTE, por IND_COMEX, por NAT_OPER ou por ID_CONTA. Dessa forma, caso o COD_CLIENTE tenha transa��es nacionais e internacionais, ser�o iniciados dois registros 1500 para ele.;57887668.0;N;7.0;NUM_PERIODO;NUMBER;22;Y;0.0;5.0;109.0;0.0;NO;"Per�odo a que se referem as transa��es consolidadas (AAAAMM) 
+"; (: )
+DIMP;R1500_RES_OPERACAO_FINANCEIRA;Este registro deve ser gerado para informar as transa��es mensais totalizadas por COD_CLIENTE, por IND_COMEX, por NAT_OPER ou por ID_CONTA. Dessa forma, caso o COD_CLIENTE tenha transa��es nacionais e internacionais, ser�o iniciados dois registros 1500 para ele.;57887668.0;N;9.0;QTD_OPERACAO;NUMBER;22;Y;0.0;4.0;18776.0;0.0;NO;Quantidade de opera��es; (: )
+DIMP;R1500_RES_OPERACAO_FINANCEIRA;Este registro deve ser gerado para informar as transa��es mensais totalizadas por COD_CLIENTE, por IND_COMEX, por NAT_OPER ou por ID_CONTA. Dessa forma, caso o COD_CLIENTE tenha transa��es nacionais e internacionais, ser�o iniciados dois registros 1500 para ele.;57887668.0;N;2.0;SEQ_R0000;NUMBER;22;Y;0.0;5.0;2652.0;0.0;NO;Sequencial �nico do arquivo;FK_R0000_R_R1500 (FOREIGN KEY: ENABLED)
+DIMP;R1500_RES_OPERACAO_FINANCEIRA;Este registro deve ser gerado para informar as transa��es mensais totalizadas por COD_CLIENTE, por IND_COMEX, por NAT_OPER ou por ID_CONTA. Dessa forma, caso o COD_CLIENTE tenha transa��es nacionais e internacionais, ser�o iniciados dois registros 1500 para ele.;57887668.0;N;1.0;SEQ_R1500;NUMBER;22;N;0.0;6.0;57887668.0;0.0;NO;Sequencial da tabela cancelamentos R1200 ;PK_R1500_RES_OPERACAO_FINANCEIRA (PRIMARY KEY: ENABLED)- SYS_C00266815 (C: ENABLED)
+DIMP;R1500_RES_OPERACAO_FINANCEIRA;Este registro deve ser gerado para informar as transa��es mensais totalizadas por COD_CLIENTE, por IND_COMEX, por NAT_OPER ou por ID_CONTA. Dessa forma, caso o COD_CLIENTE tenha transa��es nacionais e internacionais, ser�o iniciados dois registros 1500 para ele.;57887668.0;N;5.0;TIP_IND_COMEX;NUMBER;22;Y;0.0;2.0;1.0;0.0;NO;"ndicador de transa��o de pagamento ao exterior que n�o se enquadrem no item �g� da descri��o do registro 1500  0 � N�o   1 � Sim 
+"; (: )
+DIMP;R1500_RES_OPERACAO_FINANCEIRA;Este registro deve ser gerado para informar as transa��es mensais totalizadas por COD_CLIENTE, por IND_COMEX, por NAT_OPER ou por ID_CONTA. Dessa forma, caso o COD_CLIENTE tenha transa��es nacionais e internacionais, ser�o iniciados dois registros 1500 para ele.;57887668.0;N;6.0;TIP_IND_EXTEMP;NUMBER;22;Y;0.0;3.0;2.0;0.0;NO;Indicador de informa��o extempor�nea:  0 � N�o  1 � Sim ; (: )
+DIMP;R1500_RES_OPERACAO_FINANCEIRA;Este registro deve ser gerado para informar as transa��es mensais totalizadas por COD_CLIENTE, por IND_COMEX, por NAT_OPER ou por ID_CONTA. Dessa forma, caso o COD_CLIENTE tenha transa��es nacionais e internacionais, ser�o iniciados dois registros 1500 para ele.;57887668.0;N;12.0;TIP_IND_NAT_JUR;NUMBER;22;Y;0.0;3.0;2.0;397040.0;NO;"Natureza Jur�dica da Origem da Opera��o:  0 � CPF (PF) ,1 � CNPJ (PJ)
+"; (: )
+DIMP;R1500_RES_OPERACAO_FINANCEIRA;Este registro deve ser gerado para informar as transa��es mensais totalizadas por COD_CLIENTE, por IND_COMEX, por NAT_OPER ou por ID_CONTA. Dessa forma, caso o COD_CLIENTE tenha transa��es nacionais e internacionais, ser�o iniciados dois registros 1500 para ele.;57887668.0;N;13.0;TIP_IND_TIP_PIX;NUMBER;22;Y;0.0;3.0;2.0;7507913.0;NO;Indicador de tipo de PIX:  0 � Din�mico , 1 � Est�tico; (: )
+DIMP;R1500_RES_OPERACAO_FINANCEIRA;Este registro deve ser gerado para informar as transa��es mensais totalizadas por COD_CLIENTE, por IND_COMEX, por NAT_OPER ou por ID_CONTA. Dessa forma, caso o COD_CLIENTE tenha transa��es nacionais e internacionais, ser�o iniciados dois registros 1500 para ele.;57887668.0;N;8.0;VLR_OPERACAO;NUMBER;22;Y;2.0;5.0;6082560.0;0.0;NO;Valor total das opera��es ; (: )

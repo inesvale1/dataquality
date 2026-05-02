@@ -1,0 +1,1250 @@
+OWNER;TABLE_NAME;TAB_COMMENTS;NUM_ROWS;DUPLICATED;COLUMN_ID;COLUMN_NAME;DATA_TYPE;DATA_LENGTH;NULLABLE;DATA_SCALE;AVG_COL_LEN;NUM_DISTINCT;NUM_NULLS;DEFAULT_ON_NULL;COL_COMMENTS;CONSTRAINTS
+CADASTRO;ADVOGADO;Tabela de advogados.;30213.0;N;4.0;COD_UF;NUMBER;22;N;0.0;3.0;27.0;0.0;NO;Codigo da UF do advogado;FK_ADVOGADO_R_UF (FOREIGN KEY: ENABLED)- SYS_C00105382 (C: ENABLED)
+CADASTRO;ADVOGADO;Tabela de advogados.;30213.0;N;11.0;DAT_MOVIMENTO;DATE;7;Y;;5.0;13035.0;16885.0;NO;Data da movimenta��o; (: )
+CADASTRO;ADVOGADO;Tabela de advogados.;30213.0;N;3.0;NOM_ADVOGADO;VARCHAR2;60;N;;28.0;29448.0;0.0;NO;"Nome do Advogado
+";SYS_C00105381 (C: ENABLED)
+CADASTRO;ADVOGADO;Tabela de advogados.;30213.0;N;7.0;NOM_EMAIL;VARCHAR2;150;Y;;15.0;15431.0;14189.0;NO;E-mail do Advogado; (: )
+CADASTRO;ADVOGADO;Tabela de advogados.;30213.0;N;8.0;NUM_CELULAR;VARCHAR2;12;Y;;7.0;14494.0;15145.0;NO;Numero do telefone celular do advogado; (: )
+CADASTRO;ADVOGADO;Tabela de advogados.;30213.0;N;5.0;NUM_CPF_ADVOGADO;NUMBER;22;Y;0.0;7.0;25588.0;3779.0;NO;Numero do CPF do advogado; (: )
+CADASTRO;ADVOGADO;Tabela de advogados.;30213.0;N;2.0;NUM_INSCRICAO_OAB;VARCHAR2;10;Y;;6.0;27978.0;94.0;NO;Numero da inscri��o da OAB; (: )
+CADASTRO;ADVOGADO;Tabela de advogados.;30213.0;N;6.0;NUM_TELEFONE;VARCHAR2;12;Y;;7.0;14636.0;13969.0;NO;Numero do telefone do Advogado; (: )
+CADASTRO;ADVOGADO;Tabela de advogados.;30213.0;N;1.0;SEQ_ADVOGADO;NUMBER;22;N;0.0;5.0;30213.0;0.0;NO;Sequencial do Advogado;PK_ADVOGADO (PRIMARY KEY: ENABLED)- SYS_C00105379 (C: ENABLED)
+CADASTRO;ADVOGADO;Tabela de advogados.;30213.0;N;9.0;SEQ_USUARIO;NUMBER;22;Y;0.0;3.0;170.0;17177.0;NO;Seq�encial do usu�rio;FK_ADVOGADO_R_USUARIO (FOREIGN KEY: ENABLED)
+CADASTRO;ADVOGADO;Tabela de advogados.;30213.0;N;10.0;STA_DEFENSOR_PUBLICO;VARCHAR2;1;Y;;2.0;2.0;0.0;NO;"Status que indica se o advogado � Defensor Publico
+S- � defensor p�blico
+N- n�o � defensor p�blico";CKC_STA_DEFENSOR_PUBL_ADVOGADO (C: ENABLED)
+CADASTRO;AUTORIZ_ALTER_ORGAO_CONTR;Mant�m as autoriza��es para altera��o do domic�lio fiscal (indicado pelo �rg�o Local associado) de um Contribuinte;0.0;N;3.0;COD_ORGAO_LOCAL_DESTINO;NUMBER;22;N;0.0;0.0;0.0;0.0;NO;�rg�o Local para o qual o Contribuinte ser� vinculado, ap�s a autoriza��o;FK_ORG_LOC_R_AUT_ALT_ORG_DEST (FOREIGN KEY: ENABLED)- SYS_C001525540 (C: ENABLED)
+CADASTRO;AUTORIZ_ALTER_ORGAO_CONTR;Mant�m as autoriza��es para altera��o do domic�lio fiscal (indicado pelo �rg�o Local associado) de um Contribuinte;0.0;N;2.0;COD_ORGAO_LOCAL_ORIGEM;NUMBER;22;N;0.0;0.0;0.0;0.0;NO;�rg�o Local atualmente vinculado ao Contribuinte;FK_ORG_LOC_R_AUT_ALT_ORG_ORI (FOREIGN KEY: ENABLED)- SYS_C001525539 (C: ENABLED)
+CADASTRO;AUTORIZ_ALTER_ORGAO_CONTR;Mant�m as autoriza��es para altera��o do domic�lio fiscal (indicado pelo �rg�o Local associado) de um Contribuinte;0.0;N;7.0;COD_USUARIO;VARCHAR2;8;Y;;0.0;0.0;0.0;NO;C�digo do usu�rio que autorizou a altera��o de domic�lio fiscal do Contribuinte. Usu�rio deve pertencer ao �rg�o Local atual do Contribuinte; (: )
+CADASTRO;AUTORIZ_ALTER_ORGAO_CONTR;Mant�m as autoriza��es para altera��o do domic�lio fiscal (indicado pelo �rg�o Local associado) de um Contribuinte;0.0;N;5.0;DAT_AUTORIZACAO;DATE;7;Y;;0.0;0.0;0.0;NO;Data em que altera��o de domic�lio fiscal do Contribuinte foi autorizada; (: )
+CADASTRO;AUTORIZ_ALTER_ORGAO_CONTR;Mant�m as autoriza��es para altera��o do domic�lio fiscal (indicado pelo �rg�o Local associado) de um Contribuinte;0.0;N;1.0;SEQ_AUTORIZ_ALTER_ORGAO_CONTR;NUMBER;22;N;0.0;0.0;0.0;0.0;NO;Sequencial identificador do registro;PK_AUTORIZ_ALTER_ORGAO_CONTR (PRIMARY KEY: ENABLED)- SYS_C001525538 (C: ENABLED)
+CADASTRO;AUTORIZ_ALTER_ORGAO_CONTR;Mant�m as autoriza��es para altera��o do domic�lio fiscal (indicado pelo �rg�o Local associado) de um Contribuinte;0.0;N;4.0;SEQ_CONTRIBUINTE;NUMBER;22;N;0.0;0.0;0.0;0.0;NO;Sequencial identificador do Contribuinte cujo domic�lio fiscal est� sendo alterado;FK_CONTRIB_R_AUT_ALT_ORG_CONT (FOREIGN KEY: ENABLED)- SYS_C001525541 (C: ENABLED)
+CADASTRO;AUTORIZ_ALTER_ORGAO_CONTR;Mant�m as autoriza��es para altera��o do domic�lio fiscal (indicado pelo �rg�o Local associado) de um Contribuinte;0.0;N;6.0;STA_AUTORIZACAO;NUMBER;22;N;0.0;0.0;0.0;0.0;NO;"Indica se a mudan�a do �rg�o Local do Contribuinte foi autorizada:
+1 - Autoriza��o pendente
+2 - Autoriza��o realizada (Contribuinte alterado para novo domic�lio fiscal)";CKC_STA_AUTORIZ_AUT_ALTER_ORG (C: ENABLED)- SYS_C001525542 (C: ENABLED)
+CADASTRO;CNAE_CONTRIBUINTE;Tabela que mant�m a informa��o dos v�nculos de CNAE e Contribuinte, incluindo os CNAE que deixaram de ser vinculados ao Contribuinte;4840919.0;N;2.0;COD_CAE;NUMBER;22;N;0.0;6.0;3352.0;0.0;NO;C�digo de Atividade Econ�mica;FK_CAE_R_CNAE_CONTRIB (FOREIGN KEY: ENABLED)- SYS_C001525491 (C: ENABLED)
+CADASTRO;CNAE_CONTRIBUINTE;Tabela que mant�m a informa��o dos v�nculos de CNAE e Contribuinte, incluindo os CNAE que deixaram de ser vinculados ao Contribuinte;4840919.0;N;6.0;DAT_FIM;DATE;7;Y;;4.0;9058.0;3239470.0;NO;Data de fim do v�nculo do CNAE com o Contribuinte, equivalente a data de deferimento da altera��o do cadastral do Contribuinte; (: )
+CADASTRO;CNAE_CONTRIBUINTE;Tabela que mant�m a informa��o dos v�nculos de CNAE e Contribuinte, incluindo os CNAE que deixaram de ser vinculados ao Contribuinte;4840919.0;N;9.0;DAT_FIM_MOV;DATE;7;Y;;4.0;222976.0;3239470.0;NO;Data e hora do movimento do HISTORICO_CONTRIBUINTE que representa o fim deste v�nculo. Campo tempor�rio para processamento da CARGA. Ser� removido no futuro pr�ximo.; (: )
+CADASTRO;CNAE_CONTRIBUINTE;Tabela que mant�m a informa��o dos v�nculos de CNAE e Contribuinte, incluindo os CNAE que deixaram de ser vinculados ao Contribuinte;4840919.0;N;5.0;DAT_INICIO;DATE;7;N;;8.0;11051.0;0.0;NO;Data de in�cio do v�nculo do CNAE com o Contribuinte, equivalente a data de deferimento da altera��o do cadastral do Contribuinte;SYS_C001525494 (C: ENABLED)
+CADASTRO;CNAE_CONTRIBUINTE;Tabela que mant�m a informa��o dos v�nculos de CNAE e Contribuinte, incluindo os CNAE que deixaram de ser vinculados ao Contribuinte;4840919.0;N;8.0;DAT_INICIO_MOV;DATE;7;Y;;8.0;925696.0;0.0;NO;Data e hora do movimento do HISTORICO_CONTRIBUINTE que representa o in�cio deste v�nculo. Campo tempor�rio para processamento da CARGA. Ser� removido no futuro pr�ximo.; (: )
+CADASTRO;CNAE_CONTRIBUINTE;Tabela que mant�m a informa��o dos v�nculos de CNAE e Contribuinte, incluindo os CNAE que deixaram de ser vinculados ao Contribuinte;4840919.0;N;1.0;SEQ_CNAE_CONTRIBUINTE;NUMBER;22;N;0.0;6.0;4840919.0;0.0;NO;Sequencial identificador do registro;PK_CNAE_CONTRIBUINTE (PRIMARY KEY: ENABLED)- SYS_C001525490 (C: ENABLED)
+CADASTRO;CNAE_CONTRIBUINTE;Tabela que mant�m a informa��o dos v�nculos de CNAE e Contribuinte, incluindo os CNAE que deixaram de ser vinculados ao Contribuinte;4840919.0;N;3.0;SEQ_CONTRIBUINTE;NUMBER;22;N;0.0;6.0;1139712.0;0.0;NO;Sequencial identificador do Contribuinte;FK_CONTRIB_R_CNAE_CONTRIB (FOREIGN KEY: ENABLED)- SYS_C001525492 (C: ENABLED)
+CADASTRO;CNAE_CONTRIBUINTE;Tabela que mant�m a informa��o dos v�nculos de CNAE e Contribuinte, incluindo os CNAE que deixaram de ser vinculados ao Contribuinte;4840919.0;N;7.0;STA_CNAE_CTB_ORIGINAL;NUMBER;22;Y;0.0;3.0;2.0;0.0;NO;"Indica se este CNAE � um dos CNAEs originais da solu��o anterior do CADASTRO, limitada a 4 CNAEs por Contribuinte:
+0 - N�o
+1 - Sim";CKC_STA_CNAE_CTB_ORIG_CAE_CONT (C: ENABLED)
+CADASTRO;CNAE_CONTRIBUINTE;Tabela que mant�m a informa��o dos v�nculos de CNAE e Contribuinte, incluindo os CNAE que deixaram de ser vinculados ao Contribuinte;4840919.0;N;4.0;TIP_CNAE_CONTRIBUINTE;NUMBER;22;N;0.0;3.0;3.0;0.0;NO;"Identifica o v�nculo do CNAE com o Contribuinte:
+1 - Principal
+2 - Nacional
+3 - Secund�rio";CKC_TIP_CNAE_CONTRIB_CAE_CONT (C: ENABLED)- SYS_C001525493 (C: ENABLED)
+CADASTRO;CNAE_RFB;Tabela Dom�nio 08 da Receita Federal do Brasil - C�digo Nacional de Atividade Econ�mica;1358.0;N;1.0;COD_CNAE;NUMBER;22;N;0.0;6.0;1358.0;0.0;NO;C�digo da Atividade Econ�mica;PK_CNAE_RFB (PRIMARY KEY: ENABLED)- SYS_C001532819 (C: ENABLED)
+CADASTRO;CNAE_RFB;Tabela Dom�nio 08 da Receita Federal do Brasil - C�digo Nacional de Atividade Econ�mica;1358.0;N;2.0;DSC_CNAE;VARCHAR2;200;N;;53.0;1354.0;0.0;NO;Descri��o do CNAE;SYS_C001532820 (C: ENABLED)
+CADASTRO;CNAE_SECUNDARIO_RFB;Tabela de CNAEs de um Estabelecimento, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;66236152.0;N;5.0;COD_CNAE_SECUNDARIO;NUMBER;22;N;0.0;6.0;1350.0;0.0;NO;C�digo CNAE Secund�rio associado ao Estabelecimento;SYS_C001532946 (C: ENABLED)
+CADASTRO;CNAE_SECUNDARIO_RFB;Tabela de CNAEs de um Estabelecimento, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;66236152.0;N;3.0;COD_CNPJ;NUMBER;22;N;0.0;9.0;21454848.0;0.0;NO;N�mero do CNPJ vinculado ao CNAE;SYS_C001532944 (C: ENABLED)
+CADASTRO;CNAE_SECUNDARIO_RFB;Tabela de CNAEs de um Estabelecimento, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;66236152.0;N;4.0;COD_CNPJ_BASE;NUMBER;22;N;0.0;6.0;19972096.0;0.0;NO;N�mero do CNPJ Base vinculado ao CNAE;SYS_C001532945 (C: ENABLED)
+CADASTRO;CNAE_SECUNDARIO_RFB;Tabela de CNAEs de um Estabelecimento, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;66236152.0;N;6.0;DAT_CARGA;DATE;7;Y;;8.0;1.0;0.0;NO;Data de carga do registro, pela ferramenta ETL da SEFAZ; (: )
+CADASTRO;CNAE_SECUNDARIO_RFB;Tabela de CNAEs de um Estabelecimento, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;66236152.0;N;1.0;SEQ_CNAE_SECUNDARIO_RFB;NUMBER;22;N;0.0;6.0;66236152.0;0.0;NO;Sequencial identificador da CNAE Secund�rio;PK_CNAE_SECUNDARIO_RFB (PRIMARY KEY: ENABLED)- SYS_C001532943 (C: ENABLED)
+CADASTRO;CNAE_SECUNDARIO_RFB;Tabela de CNAEs de um Estabelecimento, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;66236152.0;N;2.0;SEQ_ESTABELECIMENTO_RFB;NUMBER;22;Y;0.0;6.0;20398080.0;2824678.0;NO;Sequencial identificador da Estabelecimento; (: )
+CADASTRO;CNPJ_BASE_OPCAO_RFB;Tabela de registros de enquadramentos jur�dicos e tribut�rios das Empresas, baseado nos seus CNPJ Base, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;50936929.0;N;3.0;COD_CNPJ_BASE;NUMBER;22;N;0.0;6.0;28715008.0;0.0;NO;N�mero do CNPJ Base vinculado a uma op��o de enquadramento jur�dico e tribut�rio;SYS_C001532956 (C: ENABLED)
+CADASTRO;CNPJ_BASE_OPCAO_RFB;Tabela de registros de enquadramentos jur�dicos e tribut�rios das Empresas, baseado nos seus CNPJ Base, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;50936929.0;N;7.0;DAT_CARGA;DATE;7;Y;;8.0;1.0;0.0;NO;Data de carga do registro, pela ferramenta ETL da SEFAZ; (: )
+CADASTRO;CNPJ_BASE_OPCAO_RFB;Tabela de registros de enquadramentos jur�dicos e tribut�rios das Empresas, baseado nos seus CNPJ Base, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;50936929.0;N;6.0;DAT_FIM;DATE;7;Y;;4.0;5113.0;31303396.0;NO;Data de fim do per�odo, caso tenha encerrado; (: )
+CADASTRO;CNPJ_BASE_OPCAO_RFB;Tabela de registros de enquadramentos jur�dicos e tribut�rios das Empresas, baseado nos seus CNPJ Base, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;50936929.0;N;5.0;DAT_INICIO;DATE;7;N;;8.0;5144.0;0.0;NO;Data de in�cio do per�odo;SYS_C001532958 (C: ENABLED)
+CADASTRO;CNPJ_BASE_OPCAO_RFB;Tabela de registros de enquadramentos jur�dicos e tribut�rios das Empresas, baseado nos seus CNPJ Base, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;50936929.0;N;1.0;SEQ_CNPJ_BASE_OPCAO_RFB;NUMBER;22;N;0.0;6.0;50936929.0;0.0;NO;Sequencial identificador do registro;PK_CNPJ_BASE_OPCAO_RFB (PRIMARY KEY: ENABLED)- SYS_C001532955 (C: ENABLED)
+CADASTRO;CNPJ_BASE_OPCAO_RFB;Tabela de registros de enquadramentos jur�dicos e tribut�rios das Empresas, baseado nos seus CNPJ Base, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;50936929.0;N;2.0;SEQ_EMPRESA_RFB;NUMBER;22;Y;0.0;6.0;28577792.0;117595.0;NO;Sequencial identificador da Empresa; (: )
+CADASTRO;CNPJ_BASE_OPCAO_RFB;Tabela de registros de enquadramentos jur�dicos e tribut�rios das Empresas, baseado nos seus CNPJ Base, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;50936929.0;N;4.0;TIP_OPCAO;CHAR;2;N;;3.0;2.0;0.0;NO;"Op��o definida para o CNPJ Base:
+SN - Op��o pelo Simples Nacional
+ME - Op��o por enquadramento no MEI";SYS_C001532957 (C: ENABLED)
+CADASTRO;CONTADOR;;22649.0;N;1.0;COD_CONTADOR;NUMBER;22;N;0.0;8.0;22649.0;0.0;NO;;CONTADOR_PK (PRIMARY KEY: ENABLED)- SYS_C00105388 (C: ENABLED)
+CADASTRO;CONTADOR;;22649.0;N;6.0;COD_IDENTIDADE;VARCHAR2;25;Y;;17.0;17130.0;5024.0;NO;; (: )
+CADASTRO;CONTADOR;;22649.0;N;17.0;COD_MUNICIPIO;NUMBER;22;Y;0.0;4.0;801.0;1212.0;NO;C�digo do munic�pio do endere�o do Contador; (: )
+CADASTRO;CONTADOR;;22649.0;N;2.0;COD_UF;NUMBER;22;N;0.0;3.0;30.0;0.0;NO;;CONTADOR_UF_FK (FOREIGN KEY: ENABLED)- SYS_C00105389 (C: ENABLED)
+CADASTRO;CONTADOR;;22649.0;N;18.0;DAT_EMISSAO_RG;DATE;7;Y;;1.0;0.0;22649.0;NO;Data de emiss�o do documento de Identidade do Contador; (: )
+CADASTRO;CONTADOR;;22649.0;N;13.0;DAT_EXPIRA_BLOQUEIO;DATE;7;Y;;2.0;1.0;22648.0;NO;DATA DE EXPIRACAO DO BLOQUEIO DO CONTADOR; (: )
+CADASTRO;CONTADOR;;22649.0;N;19.0;DAT_ULTIMA_ALTERACAO;DATE;7;Y;;8.0;19618.0;4.0;NO;Data da �ltima altera��o nos dados do Contador; (: )
+CADASTRO;CONTADOR;;22649.0;N;16.0;NOM_BAIRRO;VARCHAR2;80;Y;;7.0;2681.0;10570.0;NO;Nome do bairro do endere�o do contador.; (: )
+CADASTRO;CONTADOR;;22649.0;N;20.0;NOM_COMPLEMENTO;VARCHAR2;150;Y;;2.0;1029.0;21003.0;NO;Descri��o do complemento do endere�o do Contador; (: )
+CADASTRO;CONTADOR;;22649.0;N;5.0;NOM_CONTADOR;VARCHAR2;150;N;;27.0;21442.0;0.0;NO;Nome do contador;SYS_C00105392 (C: ENABLED)
+CADASTRO;CONTADOR;;22649.0;N;14.0;NOM_EMAIL;VARCHAR2;150;Y;;19.0;14233.0;7155.0;NO;; (: )
+CADASTRO;CONTADOR;;22649.0;N;7.0;NOM_ENDERECO;VARCHAR2;150;Y;;23.0;18708.0;0.0;NO;; (: )
+CADASTRO;CONTADOR;;22649.0;N;8.0;NOM_MUNICIPIO;VARCHAR2;30;Y;;9.0;1146.0;4585.0;NO;; (: )
+CADASTRO;CONTADOR;;22649.0;N;9.0;NUM_CEP;NUMBER;22;Y;0.0;6.0;11448.0;3.0;NO;; (: )
+CADASTRO;CONTADOR;;22649.0;N;4.0;NUM_CRC;VARCHAR2;10;N;;11.0;21632.0;0.0;NO;;SYS_C00105391 (C: ENABLED)
+CADASTRO;CONTADOR;;22649.0;N;21.0;NUM_ENDERECO;VARCHAR2;5;Y;;3.0;2579.0;9365.0;NO;N�mero do endere�o do Contador; (: )
+CADASTRO;CONTADOR;;22649.0;N;15.0;NUM_LOGRADOURO;VARCHAR2;5;Y;;6.0;2527.0;4.0;NO;N�mero do logradouro do endere�o do contador.; (: )
+CADASTRO;CONTADOR;;22649.0;N;10.0;NUM_TELEFONE_COMERCIAL;VARCHAR2;12;Y;;9.0;12716.0;9147.0;NO;; (: )
+CADASTRO;CONTADOR;;22649.0;N;22.0;NUM_TELEFONE_OUTRO;VARCHAR2;12;Y;;3.0;3086.0;19474.0;NO;N�mero de outro telefone do Contador; (: )
+CADASTRO;CONTADOR;;22649.0;N;11.0;NUM_TELEFONE_RESIDENCIAL;VARCHAR2;12;Y;;12.0;18140.0;3043.0;NO;; (: )
+CADASTRO;CONTADOR;;22649.0;N;23.0;STA_ALTERACAO_CADASTRAL;NUMBER;22;Y;0.0;3.0;3.0;3.0;NO;"Indicador de status da altera��o cadastral.
+1 - Em Inclus�o
+2 - Em Altera��o
+3 - Digitado";STA_ALTERACAO_CADASTRAL_CONTAD (C: ENABLED)
+CADASTRO;CONTADOR;;22649.0;N;12.0;STA_CONTADOR;VARCHAR2;1;Y;;0.0;0.0;22649.0;NO;STATUS DO CONTADOR; (: )
+CADASTRO;CONTADOR;;22649.0;N;3.0;TIP_CODIGO_CONTADOR;VARCHAR2;1;N;;2.0;2.0;0.0;NO;;SYS_C00105390 (C: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;48.0;COD_ANCORA;NUMBER;22;N;0.0;3.0;3.0;0.0;NO;"Indica se o Contribuinte � �ncora ou n�o:
+0 - N�o � �ncora (e nunca foi)
+1 - � �ncora
+2 - N�o � �ncora (mas j� foi)";CKC_COD_ANCORA_CONTRIBU (C: ENABLED)- SYS_C001526974 (C: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;30.0;COD_CAE_NACIONAL;NUMBER;22;Y;0.0;6.0;1332.0;160723.0;NO;; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;20.0;COD_CAE_PRIMARIO;NUMBER;22;Y;0.0;5.0;1315.0;160722.0;NO;; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;21.0;COD_CAE_SECUNDARIO;NUMBER;22;Y;0.0;3.0;1289.0;857832.0;NO;; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;29.0;COD_CAE_SECUNDARIO2;NUMBER;22;Y;0.0;2.0;1206.0;1042977.0;NO;; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;44.0;COD_CAFIR;VARCHAR2;8;Y;;2.0;1512.0;1317998.0;NO;C�digo CAFIR para produtor Rural; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;19.0;COD_CATEGORIA_ESTABELECIMENTO;NUMBER;22;Y;0.0;3.0;7.0;86574.0;NO;; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;2.0;COD_CGF;NUMBER;22;N;0.0;6.0;1319661.0;0.0;NO;;CAD_CONT_CGF_UK (UNIQUE: ENABLED)- SYS_C00105395 (C: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;32.0;COD_CGF_ESTAB_VINCULADO;NUMBER;22;Y;0.0;2.0;2437.0;1316836.0;NO;; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;7.0;COD_CNPJ;NUMBER;22;Y;0.0;9.0;1183360.0;109065.0;NO;; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;27.0;COD_CONTADOR;NUMBER;22;Y;0.0;4.0;18296.0;865451.0;NO;;CAD_CONT_CONTADOR_FK (FOREIGN KEY: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;53.0;COD_CTE;NUMBER;22;N;0.0;3.0;2.0;0.0;NO;"Indica a obrigatoriedade de uso do CTE pelo Contribuinte:
+0 - N�o � obrigado
+1 - � obrigado";CKC_COD_CTE_CONTRIBU (C: ENABLED)- SYS_C001526968 (C: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;25.0;COD_DISTRITO;NUMBER;22;Y;0.0;2.0;55.0;938308.0;NO;; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;37.0;COD_EFD;NUMBER;22;N;0.0;3.0;3.0;0.0;NO;"Identifica a obrigatoriedade de Escrituracao Fiscal Digital
+0-N�o Obrigado
+1-Obrigado
+2-Deixou de ser obrigado";CKC_COD_EFD_CONTRIBU (C: ENABLED)- SYS_C00105400 (C: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;71.0;COD_EVENTO_MEI;NUMBER;22;Y;0.0;3.0;69.0;622974.0;NO;C�digo do evento do SIMEI;FK_EVEN_MEI_R_CONTRIB (FOREIGN KEY: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;69.0;COD_EVENTO_SN;NUMBER;22;Y;0.0;4.0;79.0;426754.0;NO;C�digo do evento do Simples Nacional;FK_EVEN_SIM_NAC_R_CONTRIB (FOREIGN KEY: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;46.0;COD_FDI;NUMBER;22;N;0.0;3.0;2.0;0.0;NO;"Indica se o Contribuinte est� inscrito no FDI (Fundo de Desenvolvimento Industrial):
+1 - Contribuinte ativo no FDI
+0 - Contribuinte n�o est� no FDI";CKC_COD_FDI_CONTRIBU (C: ENABLED)- SYS_C001526970 (C: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;61.0;COD_INCRA;NUMBER;22;Y;0.0;3.0;294976.0;1012528.0;NO;Inscri��o do produtor rural no INSS. N�o precisa de CGC; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;45.0;COD_INSS_CEI;VARCHAR2;12;Y;;2.0;1574.0;1317998.0;NO;C�digo do INSS; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;54.0;COD_LOGRADOURO;NUMBER;22;Y;0.0;4.0;15172.0;786343.0;NO;; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;59.0;COD_MANDADO_JUDICIAL;NUMBER;22;N;0.0;3.0;2.0;0.0;NO;"Indicativo de que a empresa tem restri��o por ter sido cadastrada via mandado judicial. O valor inicial ser� igual ao j� contido no hist�rico:
+0 - N�o tem essa restri��o
+1 - Sim, tem restri��o";CKC_COD_MANDADO_JUDIC_CONTRIBU (C: ENABLED)- SYS_C001526972 (C: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;76.0;COD_MFE;NUMBER;22;Y;0.0;0.0;0.0;1319661.0;NO;"Indica a obrigatoriedade de uso do MFE pelo Contribuinte:
+0 - N�o � obrigado
+1 - � obrigado
+2 - J� foi obrigado";CKC_COD_MFE_CONTRIB (C: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;6.0;COD_MUNICIPIO;NUMBER;22;N;0.0;4.0;856.0;0.0;NO;;SYS_C00105399 (C: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;72.0;COD_NATUREZA_EVENTO_MEI;NUMBER;22;Y;0.0;3.0;4.0;622974.0;NO;"Natureza de evento do MEI:
+1 - Medida Judicial
+2 - Ato Administrativo
+3 - Op��o do Contribuinte";CKC_NATUREZA_EVENTO_ME_CONTRIB (C: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;70.0;COD_NATUREZA_EVENTO_SN;NUMBER;22;Y;0.0;3.0;4.0;426764.0;NO;"Natureza de evento do Simples Nacional:
+1 - Medida Judicial
+2 - Ato Administrativo
+3 - Op��o do Contribuinte";CKC_NATUREZA_EVENTO_SN_CONTRIB (C: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;18.0;COD_NATUREZA_JURIDICA;NUMBER;22;Y;0.0;3.0;27.0;29663.0;NO;; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;78.0;COD_NATUREZA_JURIDICA_RFB;VARCHAR2;5;Y;;5.0;28.0;145249.0;NO;C�DIGO DA NATUREZA JUR�DICA RFB; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;38.0;COD_NFE;NUMBER;22;N;0.0;3.0;2.0;0.0;NO;"Flag que indica se o contribuitne e obriado a emitir NF-e.
+0-N?o Obrigado
+1-Obrigado";CKC_COD_NFE_CONTRIBU (C: ENABLED)- SYS_C00105401 (C: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;55.0;COD_OPCAO_MEI;NUMBER;22;N;0.0;3.0;3.0;0.0;NO;"Indicador de Contribuinte optante do MEI (Microempreendedor Individual):
+1 - Optou por ser MEI
+2 - Optou por n�o entrar no MEI ou sua entrada n�o foi deferida
+0 - N�o fez op��o nenhuma";CKC_COD_OPCAO_MEI_CONTRIBU (C: ENABLED)- SYS_C001526965 (C: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;35.0;COD_OPCAO_SIMPLES;NUMBER;22;N;0.0;3.0;3.0;0.0;NO;Flag que diz se o contribuinte fez ou n�o op��o pelo Simpels Nacional.;CKC_COD_OPCAO_SIMPLES_CONTRIBU (C: ENABLED)- SYS_C001526966 (C: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;50.0;COD_ORGAO_FISC_PLENA;NUMBER;22;Y;0.0;6.0;29.0;77729.0;NO;C�digo do Org�o Local de Fiscaliza��o Plena.; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;51.0;COD_ORGAO_FISC_RESTRITA;NUMBER;22;Y;0.0;6.0;30.0;77728.0;NO;C�digo do Org�o Local de Fiscaliza��o Restrita.; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;26.0;COD_ORGAO_LOCAL;NUMBER;22;Y;0.0;6.0;32.0;76508.0;NO;;CAD_CONT_ORG_LOCAL_FK (FOREIGN KEY: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;49.0;COD_ORGAO_MONITORAMENTO;NUMBER;22;Y;0.0;6.0;30.0;77728.0;NO;C�digo do Org�o Local de Monitoramento do Contribuinte.; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;43.0;COD_PERFIL_EFD;VARCHAR2;1;Y;;2.0;2.0;1060010.0;NO;"Perfil no SPED fiscal.Pode ser A, B ou C
+"; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;23.0;COD_REGIME_RECOLHIMENTO;NUMBER;22;Y;0.0;3.0;11.0;80132.0;NO;; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;22.0;COD_SITUACAO_CONTRIBUINTE;NUMBER;22;Y;0.0;3.0;11.0;0.0;NO;; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;24.0;COD_TIPO_CONTRIBUINTE;NUMBER;22;Y;0.0;2.0;12.0;1319596.0;NO;; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;5.0;COD_UF;NUMBER;22;N;0.0;3.0;29.0;0.0;NO;;SYS_C00105398 (C: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;31.0;COD_UNIDADE_AUXILIAR;NUMBER;22;Y;0.0;2.0;10.0;1315961.0;NO;;FK_CONTRIBUINTE_R_UNID_AUX (FOREIGN KEY: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;42.0;DAT_EXCLUSAO_EFD;DATE;7;Y;;2.0;1892.0;1169738.0;NO;data da exclus�o no SPED fiscal; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;57.0;DAT_EXCLUSAO_MEI;DATE;7;Y;;3.0;3802.0;1124162.0;NO;Data de Exclus�o do MEI; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;34.0;DAT_EXCLUSAO_SIMPLES;DATE;7;Y;;3.0;5414.0;1084865.0;NO;Data de Exclus�o do simples nacional; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;41.0;DAT_INCLUSAO_EFD;DATE;7;Y;;2.0;3730.0;1209931.0;NO;data da Inclus�o no SPED fiscal; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;56.0;DAT_INCLUSAO_MEI;DATE;7;Y;;4.0;5764.0;818472.0;NO;Data de Inclus�o do MEI; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;33.0;DAT_INCLUSAO_SIMPLES;DATE;7;Y;;5.0;6468.0;619350.0;NO;Data de Inclus�o no simples nacional; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;8.0;DAT_INICIO_ATIVIDADE;DATE;7;Y;;8.0;20320.0;36595.0;NO;; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;47.0;DAT_INICIO_EFD;DATE;7;Y;;3.0;4221.0;1059465.0;NO;Data da Primeira vez que o contribuinte ficou obrigado a EFD; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;52.0;DAT_OBRIGATORIEDADE_CTE;DATE;7;Y;;2.0;1427.0;1311637.0;NO;DATA QUE A EMPRESA � OBRIGADA AO CTE; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;77.0;DAT_OBRIGATORIEDADE_MFE;DATE;7;Y;;1.0;0.0;1319661.0;NO;Data em que o Contribuinte foi obrigado a usar o MFE; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;40.0;DAT_OBRIGATORIEDADE_NFE;DATE;7;Y;;2.0;3641.0;1144560.0;NO;; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;9.0;DAT_ULTIMA_ALTERACAO;DATE;7;Y;;8.0;329920.0;0.0;NO;; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;65.0;DSC_PONTO_REFERENCIA;VARCHAR2;150;Y;;2.0;10534.0;1305734.0;NO;Ponto de refer�ncia para encontrar o endere�o do Contribuinte; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;14.0;NOM_BAIRRO;VARCHAR2;80;Y;;11.0;29204.0;95190.0;NO;; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;13.0;NOM_COMPLEMENTO;VARCHAR2;150;Y;;4.0;97736.0;938872.0;NO;Complemento do endere�o do contribuinte; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;36.0;NOM_EMAIL;VARCHAR2;150;Y;;16.0;580288.0;578754.0;NO;E-mail do contribuinte.; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;16.0;NOM_FANTASIA;VARCHAR2;150;Y;;10.0;510048.0;665195.0;NO;; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;10.0;NOM_LOGRADOURO;VARCHAR2;150;Y;;19.0;172208.0;18506.0;NO;; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;3.0;NOM_RAZAO_SOCIAL;VARCHAR2;150;N;;36.0;1226368.0;0.0;NO;;SYS_C00105396 (C: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;11.0;NUM_CEP;NUMBER;22;Y;0.0;5.0;36448.0;2451.0;NO;; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;28.0;NUM_INSCRICAO_JUCEC;VARCHAR2;11;Y;;11.0;1178200.0;141461.0;NO;; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;12.0;NUM_LOGRADOURO;VARCHAR2;5;Y;;6.0;22788.0;176248.0;NO;; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;62.0;NUM_MATRICULA_CENTRAL_FACIL;VARCHAR2;8;Y;;2.0;3.0;1316977.0;NO;Faz referencia ao n�mero de matricula do usu�rio da tabela CONSEG.USUARIO; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;75.0;NUM_SOLICITACAO_CADASTRO;VARCHAR2;15;Y;;10.0;903842.0;415819.0;NO;N�mero da solicita��o que originou o cadastro inicial do Contribuinte (podendo ser da Internet ou da REDESIM); (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;15.0;NUM_TELEFONE;VARCHAR2;12;Y;;10.0;810560.0;351389.0;NO;; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;64.0;NUM_TELEFONE2;VARCHAR2;12;Y;;2.0;14222.0;1287815.0;NO;2o N�mero de telefone do Contribuinte; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;58.0;QTD_ECF;NUMBER;22;Y;0.0;2.0;26.0;1289734.0;NO;Quantidade de ECF do contribuinte.; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;1.0;SEQ_CONTRIBUINTE;NUMBER;22;N;0.0;6.0;1319661.0;0.0;NO;;CAD_CONT_PK (PRIMARY KEY: ENABLED)- SYS_C00105394 (C: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;60.0;STA_ALTERACAO_CADASTRAL;NUMBER;22;Y;0.0;3.0;2.0;0.0;NO;Indicador de status da altera��o cadastral. 1 - Em Inclus�o, 2 - Em Altera��o, 3 - Digitado.;CKC_STA_ALTER_CADAST_CONTRIB (C: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;68.0;STA_ALTERACAO_CNPJ;NUMBER;22;Y;0.0;2.0;4.0;1318352.0;NO;"Indica o tipo de opera��o ocorrida em rela��o a altera��o do CNPJ:
+1 - Incorpora��o
+2 - Fus�o
+3 - Cis�o
+4 - Corre��o";CKC_STA_ALTER_CNPJ_CONTRIB (C: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;67.0;STA_ALTERACAO_ORGAO_LOCAL;NUMBER;22;Y;0.0;2.0;2.0;934532.0;NO;"Indicativo de que houve mudan�a no �rg�o Local ou Regime de Recolhimento normal:
+1 - SIM (Houve mudan�a)
+2 - N�O (N�o houve mudan�a)
+(Utilizado no SEPROCE - Sistema GIM)";CKC_STA_ALTERACAO_ORG_CONTRIBU (C: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;17.0;STA_CGF_CENTRAL;VARCHAR2;1;Y;;2.0;2.0;860822.0;NO;;AVCON_CONTR_STA_C_000 (C: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;79.0;STA_COWORKING;VARCHAR2;1;Y;;2.0;3.0;1292239.0;NO;"Campo para indicar se o endere�o da empresa � em um coworking ou n�o:
+0 - n�o est�
+1 - est�"; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;80.0;STA_EXCECAO_ORGAOS;VARCHAR2;1;Y;;2.0;1.0;1199652.0;NO;"0 - N�O � EXCE��O (SEGUE AS REGRAS)
+1 - EXCE��O (N�O ENTRA NAS REGRAS)"; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;66.0;STA_IMPEDIR_EDITAL;NUMBER;22;Y;0.0;2.0;2.0;1319648.0;NO;"Status para impedir colocar em edital pela IN 11/2015.
+0 - Pode ser colocado EDITAL
+1 - N�O pode ser colocado em EDITAL";CKC_STA_IMPEDIR_EDITAL_CONTR (C: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;81.0;STA_OPERADOR_LOGISTICO;NUMBER;22;Y;0.0;0.0;0.0;1319661.0;NO;"Indica se o contribuinte � operador log�stico:
+0 - n�o � operador log�stico
+1- � operador log�stico"; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;39.0;STA_REG_ESPECIAL_FISCAL;NUMBER;22;Y;0.0;2.0;2.0;1042851.0;NO;Indica se contribuinte est� em regime especial de fiscaliza��o. Informa��o vinda do COMETA via mapa ETL.;CKC_STA_REG_ESPECIAL__CONTRIBU (C: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;73.0;TIP_LOGRADOURO;VARCHAR2;10;Y;;2.0;386.0;809982.0;NO;Tipo de logradouro do endere�o do Contribuinte; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;74.0;TIP_SOLICITACAO_CADASTRO;NUMBER;22;Y;0.0;3.0;3.0;414903.0;NO;"Identifica o tipo de solicita��o que originou o cadastro inicial do Contribuinte:
+1 - Internet
+2 - REDESIM
+3 - Receita Federal";TIP_SOLIC_CADAS_CONTRIB (C: ENABLED)
+CADASTRO;CONTRIBUINTE;;1319661.0;N;63.0;VLR_CAPITAL_SOCIAL;NUMBER;22;Y;2.0;3.0;9384.0;371740.0;NO;Valor do Capital Social do Contribuinte; (: )
+CADASTRO;CONTRIBUINTE;;1319661.0;N;4.0;VLR_QUANTIDADE_UFIR;NUMBER;22;N;0.0;3.0;484.0;0.0;NO;;SYS_C00105397 (C: ENABLED)
+CADASTRO;CONTRIBUINTE_INSCRICAO_UNICA;Tabela associativa entre o CGF cadastrado na SEFAZ e os CNPJs utilizados por contribuitnes de inscri��o �nica;746.0;N;9.0;COD_CNPJ;VARCHAR2;14;N;;15.0;733.0;0.0;NO;CNPJ da inscri��o �nica;SYS_C001560761 (C: ENABLED)
+CADASTRO;CONTRIBUINTE_INSCRICAO_UNICA;Tabela associativa entre o CGF cadastrado na SEFAZ e os CNPJs utilizados por contribuitnes de inscri��o �nica;746.0;N;4.0;COD_MUNICIPIO;NUMBER;22;Y;0.0;4.0;184.0;237.0;NO;C�DIGO DO MUNIC�PIO.; (: )
+CADASTRO;CONTRIBUINTE_INSCRICAO_UNICA;Tabela associativa entre o CGF cadastrado na SEFAZ e os CNPJs utilizados por contribuitnes de inscri��o �nica;746.0;N;5.0;COD_UF;NUMBER;22;Y;0.0;3.0;1.0;327.0;NO;C�digo da Unidade da Federa��o do CNPJ Inscri��o �nica; (: )
+CADASTRO;CONTRIBUINTE_INSCRICAO_UNICA;Tabela associativa entre o CGF cadastrado na SEFAZ e os CNPJs utilizados por contribuitnes de inscri��o �nica;746.0;N;8.0;COD_USUARIO_EXCLUSAO;VARCHAR2;8;Y;;2.0;1.0;737.0;NO;C�digo do usu�rio respons�vel pela exclus�o do registro de Inscri��o �nica; (: )
+CADASTRO;CONTRIBUINTE_INSCRICAO_UNICA;Tabela associativa entre o CGF cadastrado na SEFAZ e os CNPJs utilizados por contribuitnes de inscri��o �nica;746.0;N;7.0;COD_USUARIO_INCLUSAO;VARCHAR2;8;Y;;2.0;2.0;659.0;NO;C�digo do usu�rio respons�vel pela inclus�o do registro de Inscri��o �nica; (: )
+CADASTRO;CONTRIBUINTE_INSCRICAO_UNICA;Tabela associativa entre o CGF cadastrado na SEFAZ e os CNPJs utilizados por contribuitnes de inscri��o �nica;746.0;N;3.0;DAT_EXCLUSAO;DATE;7;Y;;2.0;10.0;733.0;NO;Data de exclusao do CNPJ; (: )
+CADASTRO;CONTRIBUINTE_INSCRICAO_UNICA;Tabela associativa entre o CGF cadastrado na SEFAZ e os CNPJs utilizados por contribuitnes de inscri��o �nica;746.0;N;6.0;DAT_INCLUSAO;DATE;7;Y;;2.0;83.0;656.0;NO;Data de inclus�o do CNPJ associado ao Contribuinte; (: )
+CADASTRO;CONTRIBUINTE_INSCRICAO_UNICA;Tabela associativa entre o CGF cadastrado na SEFAZ e os CNPJs utilizados por contribuitnes de inscri��o �nica;746.0;N;2.0;SEQ_CONTRIBUINTE;NUMBER;22;Y;0.0;6.0;23.0;0.0;NO;SEQUENCIAL DA TABELA CONTRIBUINTE;FK_CONTRIBUINTE_R_CTB_INSC (FOREIGN KEY: ENABLED)
+CADASTRO;CONTRIBUINTE_INSCRICAO_UNICA;Tabela associativa entre o CGF cadastrado na SEFAZ e os CNPJs utilizados por contribuitnes de inscri��o �nica;746.0;N;1.0;SEQ_CTB_INSCRICAO_UNICA;NUMBER;22;N;0.0;4.0;746.0;0.0;NO;Chave prim�ria;PK_CONTRIBUINTE_INSCRICAO_UNIC (PRIMARY KEY: ENABLED)- SYS_C00105408 (C: ENABLED)
+CADASTRO;CONTRIBUINTE_JUCEC;Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;2.0;COD_EMPRESA;NUMBER;22;Y;0.0;0.0;0.0;0.0;NO;C�digo identificador do Contribuinte na JUCEC; (: )
+CADASTRO;CONTRIBUINTE_JUCEC;Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;3.0;COD_INSCRICAO_JUNTA;VARCHAR2;11;Y;;0.0;0.0;0.0;NO;Inscri��o na Junta Comercial (NIRE); (: )
+CADASTRO;CONTRIBUINTE_JUCEC;Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;16.0;COD_INSCRICAO_JUNTA_ANTERIOR;VARCHAR2;11;Y;;0.0;0.0;0.0;NO;Se a empresa mudar o tipo juridico mudar� tamb�m a inscri��o. Este campo cont�m o c�igo da inscri��o da junta do tipo juridico anterior; (: )
+CADASTRO;CONTRIBUINTE_JUCEC;Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;8.0;COD_TIPO_JURIDICO;NUMBER;22;Y;0.0;0.0;0.0;0.0;NO;"Tipo jur�dico do Contribuinte conforme definido na JUCEC:
+1 - Firma Individual
+2 - Sociedade Limitada - LTDA
+3 - Sociedade An�nima - SA
+4 - Cooperativa
+5 - Sociedade em Nome Coletivo
+6 - Sociedade Comandita Simples
+7 - Sociedade Capital Ind�stria
+8 - Sociedade Comandita p/ A��es
+    G - Grupo
+    C - Cons�rcio
+    0 - Empresa Publica
+9 - Sociedade de Economia Mista"; (: )
+CADASTRO;CONTRIBUINTE_JUCEC;Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;14.0;COD_TIPO_JURIDICO_JUCEC;VARCHAR2;5;Y;;0.0;0.0;0.0;NO;C�digo que identifica o tipo jur�dico do Contribuinte, de acordo com a tabela de Tipos Jur�dicos da JUCEC; (: )
+CADASTRO;CONTRIBUINTE_JUCEC;Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;13.0;DAT_ATUALIZACAO;DATE;7;Y;;0.0;0.0;0.0;NO;Data da �ltima atualiza��o na SEFAZ; (: )
+CADASTRO;CONTRIBUINTE_JUCEC;Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;10.0;DAT_CONSTITUICAO;DATE;7;Y;;0.0;0.0;0.0;NO;Data da constitui��o do Contribuinte; (: )
+CADASTRO;CONTRIBUINTE_JUCEC;Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;12.0;DAT_DIGITACAO;DATE;7;Y;;0.0;0.0;0.0;NO;Data de digita��o; (: )
+CADASTRO;CONTRIBUINTE_JUCEC;Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;11.0;DAT_INICIO_ATIVIDADE;DATE;7;Y;;0.0;0.0;0.0;NO;Data de in�cio da atividade do Contribuinte, de acordo com a JUCEC; (: )
+CADASTRO;CONTRIBUINTE_JUCEC;Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;6.0;NOM_BAIRRO;VARCHAR2;80;Y;;0.0;0.0;0.0;NO;Nome do bairro do endere�o do Contribuinte; (: )
+CADASTRO;CONTRIBUINTE_JUCEC;Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;15.0;NOM_CIDADE;VARCHAR2;80;Y;;0.0;0.0;0.0;NO;Nome do Munic�pio do endere�o do Contribuinte; (: )
+CADASTRO;CONTRIBUINTE_JUCEC;Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;5.0;NOM_ENDERECO;VARCHAR2;150;Y;;0.0;0.0;0.0;NO;Endere�o do Contribuinte; (: )
+CADASTRO;CONTRIBUINTE_JUCEC;Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;4.0;NOM_RAZAO_SOCIAL;VARCHAR2;150;Y;;0.0;0.0;0.0;NO;Raz�o Social do Contribuinte; (: )
+CADASTRO;CONTRIBUINTE_JUCEC;Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;9.0;NUM_CAPITAL_SOCIAL;NUMBER;22;Y;2.0;0.0;0.0;0.0;NO;Valor do capital social; (: )
+CADASTRO;CONTRIBUINTE_JUCEC;Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;7.0;NUM_CEP;NUMBER;22;Y;0.0;0.0;0.0;0.0;NO;N�mero do CEP do endere�o do Contribuinte; (: )
+CADASTRO;CONTRIBUINTE_JUCEC;Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;1.0;SEQ_CONTRIBUINTE_JUCEC;NUMBER;22;N;0.0;0.0;0.0;0.0;NO;Sequencial identificador do registro;PK_CONTRIBUINTE_JUCEC (PRIMARY KEY: ENABLED)- SYS_C001525559 (C: ENABLED)
+CADASTRO;CRC;;44357.0;N;14.0;COD_CONTADOR;VARCHAR2;14;N;;13.0;43776.0;0.0;NO;CPF/CNPJ do contador;SYS_C001564109 (C: ENABLED)
+CADASTRO;CRC;;44357.0;N;2.0;COD_CONTADOR_N;NUMBER;22;Y;0.0;8.0;42048.0;1976.0;NO;; (: )
+CADASTRO;CRC;;44357.0;N;9.0;COD_MUNICIPIO;NUMBER;22;Y;0.0;2.0;260.0;30290.0;NO;C�digo do munic�pio do endere�o do Contador;FK_MUNICIPIO_R_CRC (FOREIGN KEY: ENABLED)
+CADASTRO;CRC;;44357.0;N;8.0;COD_UF;NUMBER;22;Y;0.0;2.0;24.0;30290.0;NO;C�digo da UF do endere�o do Contador;FK_MUNICIPIO_R_CRC (FOREIGN KEY: ENABLED)
+CADASTRO;CRC;;44357.0;N;7.0;DAT_ATUALIZACAO;DATE;7;Y;;8.0;8341.0;26.0;NO;Date e hora da atualiza��o do registro; (: )
+CADASTRO;CRC;;44357.0;N;6.0;DAT_DESATIVACAO;DATE;7;Y;;3.0;2885.0;34887.0;NO;; (: )
+CADASTRO;CRC;;44357.0;N;13.0;NOM_COMPLEMENTO;VARCHAR2;150;Y;;3.0;4172.0;37257.0;NO;Descri��o do complemento do endere�o do Contador; (: )
+CADASTRO;CRC;;44357.0;N;4.0;NOM_CONTADOR;VARCHAR2;150;N;;28.0;43968.0;0.0;NO;;SYS_C00105413 (C: ENABLED)
+CADASTRO;CRC;;44357.0;N;10.0;NOM_ENDERECO;VARCHAR2;150;Y;;8.0;7892.0;22890.0;NO;Nome do endere�o do Contador; (: )
+CADASTRO;CRC;;44357.0;N;12.0;NUM_CEP;NUMBER;22;Y;0.0;3.0;4989.0;30176.0;NO;N�mero do CEP do endere�o do Contador; (: )
+CADASTRO;CRC;;44357.0;N;5.0;NUM_CRC;VARCHAR2;10;N;;11.0;44357.0;0.0;NO;;CRC_NUM_CRC_UK (UNIQUE: ENABLED)- SYS_C00105414 (C: ENABLED)
+CADASTRO;CRC;;44357.0;N;11.0;NUM_ENDERECO;VARCHAR2;5;Y;;2.0;1.0;44356.0;NO;N�mero do endere�o do Contador; (: )
+CADASTRO;CRC;;44357.0;N;1.0;SEQ_CRC;NUMBER;22;N;0.0;5.0;44357.0;0.0;NO;;CRC_PK (PRIMARY KEY: ENABLED)- SYS_C00105410 (C: ENABLED)
+CADASTRO;CRC;;44357.0;N;3.0;TIP_CODIGO;VARCHAR2;1;N;;2.0;2.0;0.0;NO;;AVCON_416544_TIP_C_000 (C: ENABLED)- SYS_C00105412 (C: ENABLED)
+CADASTRO;CREDENCIAMENTO_TRANSMISSOR;;1002773.0;N;4.0;DAT_CREDENCIAMENTO;DATE;7;N;;8.0;162400.0;0.0;NO;;SYS_C00105422 (C: ENABLED)
+CADASTRO;CREDENCIAMENTO_TRANSMISSOR;;1002773.0;N;7.0;DAT_DESATIVACAO;DATE;7;Y;;7.0;118816.0;253780.0;NO;;CRED_TRAN_SEQ_DAT_DES_UK (UNIQUE: ENABLED)
+CADASTRO;CREDENCIAMENTO_TRANSMISSOR;;1002773.0;N;8.0;DSC_MOTIVO_DESATIVACAO;VARCHAR2;200;Y;;48.0;26.0;219345.0;NO;; (: )
+CADASTRO;CREDENCIAMENTO_TRANSMISSOR;;1002773.0;N;5.0;SEQ_ACESSO;NUMBER;22;N;0.0;4.0;21156.0;0.0;NO;CONSEG;SYS_C00105423 (C: ENABLED)
+CADASTRO;CREDENCIAMENTO_TRANSMISSOR;;1002773.0;N;3.0;SEQ_CONTRIBUINTE;NUMBER;22;N;0.0;6.0;373568.0;0.0;NO;;CRED_TRAN_CAD_CONT_FK (FOREIGN KEY: ENABLED)- CRED_TRAN_SEQ_DAT_DES_UK (UNIQUE: ENABLED)- SYS_C00105421 (C: ENABLED)
+CADASTRO;CREDENCIAMENTO_TRANSMISSOR;;1002773.0;N;1.0;SEQ_CREDENCIAMENTO;NUMBER;22;N;0.0;5.0;1002773.0;0.0;NO;;CRED_TRAN_PK (PRIMARY KEY: ENABLED)- SYS_C00105419 (C: ENABLED)
+CADASTRO;CREDENCIAMENTO_TRANSMISSOR;;1002773.0;N;6.0;SEQ_SOCIO;NUMBER;22;Y;0.0;0.0;0.0;1002773.0;NO;;CRED_TRAN_SOCIO_FK (FOREIGN KEY: ENABLED)
+CADASTRO;CREDENCIAMENTO_TRANSMISSOR;;1002773.0;N;2.0;SEQ_TRANSMISSOR;NUMBER;22;N;0.0;5.0;27104.0;0.0;NO;;CRED_TRAN_TRANSMISSO_FK (FOREIGN KEY: ENABLED)- SYS_C00105420 (C: ENABLED)
+CADASTRO;CREDENCIAMENTO_TRANSMISSOR;;1002773.0;N;9.0;TIP_TRANSMISSOR;VARCHAR2;1;N;;2.0;2.0;0.0;NO;;AVCON_211538_TIP_T_000 (C: ENABLED)- CRED_TRAN_SEQ_DAT_DES_UK (UNIQUE: ENABLED)- SYS_C00105424 (C: ENABLED)
+CADASTRO;DILIGENCIA;Tabela que mant�m as dilig�ncias do contribuinte.;54034.0;N;6.0;COD_USUARIO;VARCHAR2;8;N;;9.0;371.0;0.0;NO;C�digo do usu�rio respons�vel pelo registro da Dilig�ncia;SYS_C001525480 (C: ENABLED)
+CADASTRO;DILIGENCIA;Tabela que mant�m as dilig�ncias do contribuinte.;54034.0;N;3.0;DAT_DILIGENCIA;DATE;7;N;;8.0;3994.0;0.0;NO;Data a que a dilig�ncia faz refer�ncia.;SYS_C001525477 (C: ENABLED)
+CADASTRO;DILIGENCIA;Tabela que mant�m as dilig�ncias do contribuinte.;54034.0;N;5.0;DAT_INCLUSAO_DILIGENCIA;DATE;7;N;;8.0;4026.0;0.0;NO;Data em que a dilig�ncia foi inclu�da no sistema.;SYS_C001525479 (C: ENABLED)
+CADASTRO;DILIGENCIA;Tabela que mant�m as dilig�ncias do contribuinte.;54034.0;N;4.0;DSC_DILIGENCIA;VARCHAR2;500;N;;334.0;29608.0;0.0;NO;Observa��o informada no cadastramento da dilig�ncia.;SYS_C001525478 (C: ENABLED)
+CADASTRO;DILIGENCIA;Tabela que mant�m as dilig�ncias do contribuinte.;54034.0;N;2.0;SEQ_CONTRIBUINTE;NUMBER;22;N;0.0;5.0;54034.0;0.0;NO;Seq�encial do contribuinte. Chave estrangeira para a tabela CONTRIBUINTE.;FK_CONTRIBUINTE_R_DILIGENCIA (FOREIGN KEY: ENABLED)- SYS_C001525476 (C: ENABLED)
+CADASTRO;DILIGENCIA;Tabela que mant�m as dilig�ncias do contribuinte.;54034.0;N;1.0;SEQ_DILIGENCIA;NUMBER;22;N;0.0;5.0;54034.0;0.0;NO;Sequencial da tabela;PK_DILIGENCIA (PRIMARY KEY: ENABLED)- SYS_C001525475 (C: ENABLED)
+CADASTRO;EDITAL_ORGAO;Tabela com o �ltimo n�mero de edital usado em cada �rg�o local.;20.0;N;2.0;COD_ORGAO_LOCAL;NUMBER;22;N;0.0;6.0;20.0;0.0;NO;�rg�o local que vai conter o n�mero do �ltimo edital.;EDITAL_ORGAO_UK1 (UNIQUE: ENABLED)- FK_EDITAL_O_FK_ORGAO__ORGAO_LO (FOREIGN KEY: ENABLED)- SYS_C001559742 (C: ENABLED)
+CADASTRO;EDITAL_ORGAO;Tabela com o �ltimo n�mero de edital usado em cada �rg�o local.;20.0;N;4.0;NUM_ATO_DECLARATORIO;NUMBER;22;N;0.0;6.0;14.0;0.0;NO;N�mero do ato declarat�rio de cada �rg�o local, no formato AAAANNNN, onde AAAA = ano atual e NNNN = sequencial.;SYS_C001559809 (C: ENABLED)
+CADASTRO;EDITAL_ORGAO;Tabela com o �ltimo n�mero de edital usado em cada �rg�o local.;20.0;N;3.0;NUM_EDITAL;NUMBER;22;N;0.0;6.0;18.0;0.0;NO;N�mero do �ltimo edital de cada �rg�o local, no formato AAAANNNN, onde AAAA = ano atual e NNNN = sequencial.;SYS_C001559743 (C: ENABLED)
+CADASTRO;EDITAL_ORGAO;Tabela com o �ltimo n�mero de edital usado em cada �rg�o local.;20.0;N;1.0;SEQ_EDITAL_ORGAO;NUMBER;22;N;0.0;3.0;20.0;0.0;NO;Sequencial da tabela;PK_EDITAL_ORGAO (PRIMARY KEY: ENABLED)- SYS_C001559741 (C: ENABLED)
+CADASTRO;EMPRESA_RFB;Tabela de Empresas, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;47079091.0;N;2.0;COD_CNPJ;NUMBER;22;N;0.0;9.0;47079091.0;0.0;NO;N�mero do CNPJ da Empresa;EMPRESA_RFB_UK1 (UNIQUE: ENABLED)- SYS_C001529153 (C: ENABLED)
+CADASTRO;EMPRESA_RFB;Tabela de Empresas, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;47079091.0;N;3.0;COD_CNPJ_BASE;NUMBER;22;N;0.0;6.0;47009792.0;0.0;NO;N�mero do CNPJ Base da Empresa;SYS_C001529154 (C: ENABLED)
+CADASTRO;EMPRESA_RFB;Tabela de Empresas, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;47079091.0;N;6.0;COD_CPF_RESPONSAVEL;NUMBER;22;N;0.0;8.0;35647488.0;0.0;NO;CPF do respons�vel pela empresa;SYS_C001529157 (C: ENABLED)
+CADASTRO;EMPRESA_RFB;Tabela de Empresas, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;47079091.0;N;5.0;COD_NATUREZA_JURIDICA;NUMBER;22;N;0.0;4.0;86.0;0.0;NO;C�digo da Natureza Jur�dica da Empresa, conforme tabela de dom�nio;SYS_C001529156 (C: ENABLED)
+CADASTRO;EMPRESA_RFB;Tabela de Empresas, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;47079091.0;N;7.0;COD_PORTE_EMPRESA;CHAR;2;Y;;3.0;3.0;60770.0;NO;C�digo do porte da Empresa, conforme tabela de dom�nio; (: )
+CADASTRO;EMPRESA_RFB;Tabela de Empresas, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;47079091.0;N;9.0;DAT_CARGA;DATE;7;Y;;8.0;20.0;0.0;NO;Data de carga do registro, pela ferramenta ETL da SEFAZ; (: )
+CADASTRO;EMPRESA_RFB;Tabela de Empresas, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;47079091.0;N;4.0;NOM_NOME_EMPRESARIAL;VARCHAR2;150;N;;36.0;43798528.0;0.0;NO;Nome empresarial deste CNPJ;SYS_C001529155 (C: ENABLED)
+CADASTRO;EMPRESA_RFB;Tabela de Empresas, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;47079091.0;N;1.0;SEQ_EMPRESA_RFB;NUMBER;22;N;0.0;6.0;47079091.0;0.0;NO;Sequencial identificador da Empresa;PK_EMPRESA_RFB (PRIMARY KEY: ENABLED)- SYS_C001529152 (C: ENABLED)
+CADASTRO;EMPRESA_RFB;Tabela de Empresas, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;47079091.0;N;8.0;VLR_CAPITAL_SOCIAL;NUMBER;22;Y;2.0;3.0;194336.0;0.0;NO;Valor do capital social da Empresa; (: )
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;21.0;COD_CEP;NUMBER;22;Y;0.0;6.0;961344.0;0.0;NO;CEP do endere�o do Estabelecimento; (: )
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;13.0;COD_CNAE_FISCAL;NUMBER;22;Y;0.0;6.0;1343.0;0.0;NO;C�digo CNAE da atividade econ�mica principal do Estabelecimento; (: )
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;3.0;COD_CNPJ;NUMBER;22;N;0.0;9.0;49612998.0;0.0;NO;N�mero do CNPJ do Estabelecimento;ESTABELECIMENTO_RFB_UK1 (UNIQUE: ENABLED)- SYS_C001532937 (C: ENABLED)
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;4.0;COD_CNPJ_BASE;NUMBER;22;N;0.0;6.0;46891008.0;0.0;NO;N�mero do CNPJ Base do Estabelecimento;SYS_C001532938 (C: ENABLED)
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;8.0;COD_MOTIVO_SITUACAO_CADASTRAL;NUMBER;22;Y;0.0;3.0;55.0;0.0;NO;C�digo do motivo da situa��o cadastral atual do Estabelecimento, conforme tabela de dom�nio; (: )
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;20.0;COD_MUNICIPIO;NUMBER;22;Y;0.0;4.0;5571.0;0.0;NO;C�digo do Munic�pio do endere�o do Estabelecimento; (: )
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;23.0;COD_PAIS_ESTABELECIMENTO;NUMBER;22;Y;0.0;3.0;196.0;0.0;NO;C�digo do pa�s do Estabelecimento, caso seja no exterior; (: )
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;19.0;COD_UF;CHAR;2;Y;;3.0;29.0;0.0;NO;Sigla da Unidade da Federa��o do endere�o do Estabelecimento (Valor 'EX' caso seja no exterior); (: )
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;12.0;DAT_CADASTRO;DATE;7;Y;;8.0;23202.0;0.0;NO;Data de cadastro do Estabelecimento; (: )
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;29.0;DAT_CARGA;DATE;7;Y;;8.0;38.0;0.0;NO;Data de carga do registro, pela ferramenta ETL da SEFAZ; (: )
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;9.0;DAT_SITUACAO_CADASTRAL;DATE;7;Y;;8.0;19910.0;48904.0;NO;Data da �ltima altera��o cadastral do Estabelecimento; (: )
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;11.0;DAT_SITUACAO_ESPECIAL;DATE;7;Y;;2.0;70.0;49612913.0;NO;Data da situa��o especial; (: )
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;17.0;DSC_COMPLEMENTO;VARCHAR2;156;Y;;6.0;3900928.0;28959455.0;NO;Informa��o complementar do endere�o do Estabelecimento; (: )
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;10.0;DSC_SITUACAO_ESPECIAL;VARCHAR2;25;Y;;2.0;5.0;49612913.0;NO;Descri��o da situa��o especial do Estabelecimento; (: )
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;18.0;NOM_BAIRRO;VARCHAR2;50;Y;;13.0;943552.0;381212.0;NO;Bairro do endere�o do Estabelecimento; (: )
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;22.0;NOM_CIDADE_EXTERIOR;VARCHAR2;55;Y;;2.0;4767.0;49585133.0;NO;Nome da cidade no exterior, onde fica o Estabelecimento; (: )
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;28.0;NOM_EMAIL;VARCHAR2;115;Y;;15.0;16760832.0;22903338.0;NO;Email do Estabelecimento; (: )
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;6.0;NOM_FANTASIA;VARCHAR2;80;Y;;12.0;18155520.0;20369704.0;NO;Nome de fantasia do Estabelecimento; (: )
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;15.0;NOM_LOGRADOURO;VARCHAR2;60;Y;;17.0;4390400.0;2019.0;NO;Logradouro do endere�o do Estabelecimento; (: )
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;24.0;NUM_DDD_TEL1;VARCHAR2;4;Y;;3.0;1739.0;12489207.0;NO;DDD do Telefone 1; (: )
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;26.0;NUM_DDD_TEL2;VARCHAR2;4;Y;;2.0;162.0;45467185.0;NO;DDD do Telefone 2; (: )
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;16.0;NUM_ENDERECO;VARCHAR2;6;Y;;4.0;249728.0;205110.0;NO;N�mero do endere�o do Estabelecimento; (: )
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;25.0;NUM_TELEFONE1;VARCHAR2;8;Y;;7.0;15366144.0;12489154.0;NO;N�mero do Telefone 1; (: )
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;27.0;NUM_TELEFONE2;VARCHAR2;8;Y;;2.0;1651712.0;45474675.0;NO;N�mero do Telefone 2; (: )
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;2.0;SEQ_EMPRESA_RFB;NUMBER;22;Y;0.0;6.0;46919680.0;7807.0;NO;Sequencial identificador da Empresa; (: )
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;1.0;SEQ_ESTABELECIMENTO_RFB;NUMBER;22;N;0.0;6.0;49612998.0;0.0;NO;Sequencial identificador da Estabelecimento;PK_ESTABELECIMENTO_RFB (PRIMARY KEY: ENABLED)- SYS_C001532936 (C: ENABLED)
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;7.0;STA_SITUACAO_CADASTRAL;NUMBER;22;N;0.0;3.0;5.0;0.0;NO;C�digo da situa��o cadastral do Estabelecimento, conforme tabela de dom�nio;SYS_C001532940 (C: ENABLED)
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;5.0;TIP_ESTABELECIMENTO;NUMBER;22;N;0.0;3.0;2.0;0.0;NO;"Identifica se o Estabelecimento � Matriz ou Filial:
+1 � MATRIZ
+2 � FILIAL";SYS_C001532939 (C: ENABLED)
+CADASTRO;ESTABELECIMENTO_RFB;Tabela de Estabelecimentos vinculados a uma Empresa, conforme aquivo de CNPJs exportado pela Receita Federal do Brasil;49612998.0;N;14.0;TIP_LOGRADOURO;VARCHAR2;20;Y;;6.0;383.0;908187.0;NO;Tipo de logradouro do endere�o do Estabelecimento; (: )
+CADASTRO;EVENTOS_REDESIM;Eventos que chegam pelo REDESMIM;198.0;N;1.0;COD_EVENTO;NUMBER;22;N;0.0;4.0;198.0;0.0;NO;C�digo do evento;PK_EVENTOS_REDESIM (PRIMARY KEY: ENABLED)- SYS_C001550658 (C: ENABLED)
+CADASTRO;EVENTOS_REDESIM;Eventos que chegam pelo REDESMIM;198.0;N;2.0;DSC_EVENTO;VARCHAR2;150;N;;45.0;196.0;0.0;NO;Descri��o do evento;SYS_C001550659 (C: ENABLED)
+CADASTRO;EVENTOS_REDESIM;Eventos que chegam pelo REDESMIM;198.0;N;3.0;STA_TRATADO_SEFAZ;CHAR;1;N;;2.0;2.0;0.0;NO;"Diz se a Sefaz trata o evento.
+S-SIM
+N-N�O";SYS_C001550660 (C: ENABLED)
+CADASTRO;EXCECAO_ORGAOS;Tabela que tem os CNPJs base que ser�o exce��o �s regras de �rg�os de monitoramento e fiscaliza��o (plena e restrita).;113822.0;N;2.0;COD_CNPJ_BASE;VARCHAR2;8;N;;9.0;113822.0;0.0;NO;CNPJ base que ser� exce��o, exceto os CGFs da CESUT;SYS_C001548712 (C: ENABLED)
+CADASTRO;EXCECAO_ORGAOS;Tabela que tem os CNPJs base que ser�o exce��o �s regras de �rg�os de monitoramento e fiscaliza��o (plena e restrita).;113822.0;N;5.0;COD_ORGAO_FISC_PLENA;NUMBER;22;N;0.0;6.0;11.0;0.0;NO;C�digo do �rg�o de fiscaliza��o plena dessa exce��o;FK_ORG_LOC_R_EXC_ORG_FISC_PLE (FOREIGN KEY: ENABLED)- SYS_C001548715 (C: ENABLED)
+CADASTRO;EXCECAO_ORGAOS;Tabela que tem os CNPJs base que ser�o exce��o �s regras de �rg�os de monitoramento e fiscaliza��o (plena e restrita).;113822.0;N;4.0;COD_ORGAO_FISC_RESTRITA;NUMBER;22;N;0.0;6.0;24.0;0.0;NO;C�digo do �rg�o de fiscaliza��o restrita dessa exce��o;FK_ORG_LOC_R_EXC_ORG_FISC_REST (FOREIGN KEY: ENABLED)- SYS_C001548714 (C: ENABLED)
+CADASTRO;EXCECAO_ORGAOS;Tabela que tem os CNPJs base que ser�o exce��o �s regras de �rg�os de monitoramento e fiscaliza��o (plena e restrita).;113822.0;N;3.0;COD_ORGAO_MONITORAMENTO;NUMBER;22;N;0.0;6.0;24.0;0.0;NO;C�digo do �rg�o de monitoramento dessa exce��o;FK_ORG_LOC_R_EXC_ORG_MONIT (FOREIGN KEY: ENABLED)- SYS_C001548713 (C: ENABLED)
+CADASTRO;EXCECAO_ORGAOS;Tabela que tem os CNPJs base que ser�o exce��o �s regras de �rg�os de monitoramento e fiscaliza��o (plena e restrita).;113822.0;N;9.0;COD_USUARIO_FIM;VARCHAR2;8;Y;;2.0;2.0;113777.0;NO;Matr�cula do usu�rio que terminou essa exce��o; (: )
+CADASTRO;EXCECAO_ORGAOS;Tabela que tem os CNPJs base que ser�o exce��o �s regras de �rg�os de monitoramento e fiscaliza��o (plena e restrita).;113822.0;N;7.0;COD_USUARIO_INICIO;VARCHAR2;8;N;;8.0;3.0;0.0;NO;Matr�cula do usu�rio que iniciou essa exce��o;SYS_C001548717 (C: ENABLED)
+CADASTRO;EXCECAO_ORGAOS;Tabela que tem os CNPJs base que ser�o exce��o �s regras de �rg�os de monitoramento e fiscaliza��o (plena e restrita).;113822.0;N;8.0;DAT_FIM_EXCECAO;DATE;7;Y;;2.0;15.0;113777.0;NO;Data e hora em que terminou essa exce��o; (: )
+CADASTRO;EXCECAO_ORGAOS;Tabela que tem os CNPJs base que ser�o exce��o �s regras de �rg�os de monitoramento e fiscaliza��o (plena e restrita).;113822.0;N;6.0;DAT_INICIO_EXCECAO;DATE;7;N;;8.0;111.0;0.0;NO;Data e hora em que come�ou essa exce��o;SYS_C001548716 (C: ENABLED)
+CADASTRO;EXCECAO_ORGAOS;Tabela que tem os CNPJs base que ser�o exce��o �s regras de �rg�os de monitoramento e fiscaliza��o (plena e restrita).;113822.0;N;1.0;SEQ_EXCECAO_ORGAOS;NUMBER;22;N;0.0;5.0;113822.0;0.0;NO;Sequencial da tabela;PK_EXCECAO_ORGAOS (PRIMARY KEY: ENABLED)- SYS_C001548711 (C: ENABLED)
+CADASTRO;HIST_CONTRIBUINTE_JUCEC;Hist�rico de Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;2.0;COD_EMPRESA;NUMBER;22;Y;0.0;0.0;0.0;0.0;NO;C�digo identificador do Contribuinte na JUCEC; (: )
+CADASTRO;HIST_CONTRIBUINTE_JUCEC;Hist�rico de Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;3.0;COD_INSCRICAO_JUNTA;VARCHAR2;11;Y;;0.0;0.0;0.0;NO;Inscri��o na Junta Comercial (NIRE); (: )
+CADASTRO;HIST_CONTRIBUINTE_JUCEC;Hist�rico de Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;16.0;COD_INSCRICAO_JUNTA_ANTERIOR;VARCHAR2;11;Y;;0.0;0.0;0.0;NO;Se a empresa mudar o tipo juridico mudar� tamb�m a inscri��o. Este campo cont�m o c�igo da inscri��o da junta do tipo juridico anterior; (: )
+CADASTRO;HIST_CONTRIBUINTE_JUCEC;Hist�rico de Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;8.0;COD_TIPO_JURIDICO;NUMBER;22;Y;0.0;0.0;0.0;0.0;NO;"Tipo jur�dico do Contribuinte conforme definido na JUCEC:
+1 - Firma Individual
+2 - Sociedade Limitada - LTDA
+3 - Sociedade An�nima - SA
+4 - Cooperativa
+5 - Sociedade em Nome Coletivo
+6 - Sociedade Comandita Simples
+7 - Sociedade Capital Ind�stria
+8 - Sociedade Comandita p/ A��es
+    G - Grupo
+    C - Cons�rcio
+    0 - Empresa Publica
+9 - Sociedade de Economia Mista"; (: )
+CADASTRO;HIST_CONTRIBUINTE_JUCEC;Hist�rico de Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;14.0;COD_TIPO_JURIDICO_JUCEC;VARCHAR2;5;Y;;0.0;0.0;0.0;NO;C�digo que identifica o tipo jur�dico do Contribuinte, de acordo com a tabela de Tipos Jur�dicos da JUCEC; (: )
+CADASTRO;HIST_CONTRIBUINTE_JUCEC;Hist�rico de Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;13.0;DAT_ATUALIZACAO;DATE;7;Y;;0.0;0.0;0.0;NO;Data da �ltima atualiza��o na SEFAZ; (: )
+CADASTRO;HIST_CONTRIBUINTE_JUCEC;Hist�rico de Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;10.0;DAT_CONSTITUICAO;DATE;7;Y;;0.0;0.0;0.0;NO;Data da constitui��o do Contribuinte; (: )
+CADASTRO;HIST_CONTRIBUINTE_JUCEC;Hist�rico de Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;12.0;DAT_DIGITACAO;DATE;7;Y;;0.0;0.0;0.0;NO;Data de digita��o; (: )
+CADASTRO;HIST_CONTRIBUINTE_JUCEC;Hist�rico de Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;11.0;DAT_INICIO_ATIVIDADE;DATE;7;Y;;0.0;0.0;0.0;NO;Data de in�cio da atividade do Contribuinte, de acordo com a JUCEC; (: )
+CADASTRO;HIST_CONTRIBUINTE_JUCEC;Hist�rico de Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;6.0;NOM_BAIRRO;VARCHAR2;80;Y;;0.0;0.0;0.0;NO;Nome do bairro do endere�o do Contribuinte; (: )
+CADASTRO;HIST_CONTRIBUINTE_JUCEC;Hist�rico de Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;15.0;NOM_CIDADE;VARCHAR2;80;Y;;0.0;0.0;0.0;NO;Nome do Munic�pio do endere�o do Contribuinte; (: )
+CADASTRO;HIST_CONTRIBUINTE_JUCEC;Hist�rico de Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;5.0;NOM_ENDERECO;VARCHAR2;150;Y;;0.0;0.0;0.0;NO;Endere�o do Contribuinte; (: )
+CADASTRO;HIST_CONTRIBUINTE_JUCEC;Hist�rico de Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;4.0;NOM_RAZAO_SOCIAL;VARCHAR2;150;Y;;0.0;0.0;0.0;NO;Raz�o Social do Contribuinte; (: )
+CADASTRO;HIST_CONTRIBUINTE_JUCEC;Hist�rico de Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;9.0;NUM_CAPITAL_SOCIAL;NUMBER;22;Y;2.0;0.0;0.0;0.0;NO;Valor do capital social; (: )
+CADASTRO;HIST_CONTRIBUINTE_JUCEC;Hist�rico de Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;7.0;NUM_CEP;NUMBER;22;Y;0.0;0.0;0.0;0.0;NO;N�mero do CEP do endere�o do Contribuinte; (: )
+CADASTRO;HIST_CONTRIBUINTE_JUCEC;Hist�rico de Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;1.0;SEQ_HIST_CONTRIBUINTE_JUCEC;NUMBER;22;N;0.0;0.0;0.0;0.0;NO;Sequencial identificador do registro;PK_HIST_CONTRIBUINTE_JUCEC (PRIMARY KEY: ENABLED)- SYS_C001525561 (C: ENABLED)
+CADASTRO;HIST_ORGAO_PUBLICO;Tabela contendo todas as altera��es de ORGAO_PUBLICO.;179.0;N;7.0;COD_CNPJ;VARCHAR2;14;N;;15.0;178.0;0.0;NO;CNPJ do �rg�o p�blico;SYS_C001559679 (C: ENABLED)
+CADASTRO;HIST_ORGAO_PUBLICO;Tabela contendo todas as altera��es de ORGAO_PUBLICO.;179.0;N;2.0;COD_CNPJ_N;NUMBER;22;Y;0.0;9.0;162.0;17.0;NO;CNPJ do �rg�o p�blico; (: )
+CADASTRO;HIST_ORGAO_PUBLICO;Tabela contendo todas as altera��es de ORGAO_PUBLICO.;179.0;N;4.0;COD_SITUACAO;NUMBER;22;Y;0.0;3.0;1.0;1.0;NO;"Situa��o do �rg�o p�blico:
+1 - ativo
+2 - inativo"; (: )
+CADASTRO;HIST_ORGAO_PUBLICO;Tabela contendo todas as altera��es de ORGAO_PUBLICO.;179.0;N;6.0;COD_USUARIO;VARCHAR2;30;N;;8.0;6.0;0.0;NO;Matr�cula ou sistema que fez a inclus�o/altera��o;SYS_C001559680 (C: ENABLED)
+CADASTRO;HIST_ORGAO_PUBLICO;Tabela contendo todas as altera��es de ORGAO_PUBLICO.;179.0;N;5.0;DAT_ATUALIZACAO;DATE;7;N;;8.0;23.0;0.0;NO;Data da inclus�o e das altera��es;HIST_ORG_PUBL_PK (PRIMARY KEY: ENABLED)
+CADASTRO;HIST_ORGAO_PUBLICO;Tabela contendo todas as altera��es de ORGAO_PUBLICO.;179.0;N;3.0;NOM_RAZAO_SOCIAL;VARCHAR2;150;Y;;48.0;178.0;0.0;NO;Raz�o Social do �rg�o p�blico; (: )
+CADASTRO;HIST_ORGAO_PUBLICO;Tabela contendo todas as altera��es de ORGAO_PUBLICO.;179.0;N;1.0;SEQ_ORGAO_PUBLICO;NUMBER;22;N;0.0;4.0;178.0;0.0;NO;Sequencial da tabela ORGAO_PUBLICO;FK_HIST_ORG_HIST_ORG__ORGAO_PU (FOREIGN KEY: ENABLED)- HIST_ORG_PUBL_PK (PRIMARY KEY: ENABLED)
+CADASTRO;HISTORICO_CNAE_CONTRIB;Tabela detalhe da tabela HISTORICO_CONTRIBUINTE, que relaciona os v�nculos Contribuinte x CNAE alterados em um determinado movimento de hist�rico. A informa��o do CNAE e o tipo de v�nculo s�o relacionados atrav�s da tabela CNAE_CONTRIBUINTE;5711720.0;N;3.0;DAT_MOVIMENTO;DATE;7;N;;8.0;793152.0;0.0;NO;Data e hora do registro da altera��o no cadastro do Contribuinte;FK_HIST_CONTRIB_R_HIS_CNAE_CTB (FOREIGN KEY: ENABLED)- SYS_C001525569 (C: ENABLED)
+CADASTRO;HISTORICO_CNAE_CONTRIB;Tabela detalhe da tabela HISTORICO_CONTRIBUINTE, que relaciona os v�nculos Contribuinte x CNAE alterados em um determinado movimento de hist�rico. A informa��o do CNAE e o tipo de v�nculo s�o relacionados atrav�s da tabela CNAE_CONTRIBUINTE;5711720.0;N;4.0;SEQ_CNAE_CONTRIBUINTE;NUMBER;22;N;0.0;6.0;4193024.0;0.0;NO;Sequencial identificador do v�nculo CONTRIBUINTE X CNAE alterado;FK_CNAE_CONTRIB_R_HIS_CNAE_CTB (FOREIGN KEY: ENABLED)- SYS_C001525570 (C: ENABLED)
+CADASTRO;HISTORICO_CNAE_CONTRIB;Tabela detalhe da tabela HISTORICO_CONTRIBUINTE, que relaciona os v�nculos Contribuinte x CNAE alterados em um determinado movimento de hist�rico. A informa��o do CNAE e o tipo de v�nculo s�o relacionados atrav�s da tabela CNAE_CONTRIBUINTE;5711720.0;N;2.0;SEQ_CONTRIBUINTE;NUMBER;22;N;0.0;6.0;1049216.0;0.0;NO;Sequencial identificador do Contribuinte;FK_HIST_CONTRIB_R_HIS_CNAE_CTB (FOREIGN KEY: ENABLED)- SYS_C001525568 (C: ENABLED)
+CADASTRO;HISTORICO_CNAE_CONTRIB;Tabela detalhe da tabela HISTORICO_CONTRIBUINTE, que relaciona os v�nculos Contribuinte x CNAE alterados em um determinado movimento de hist�rico. A informa��o do CNAE e o tipo de v�nculo s�o relacionados atrav�s da tabela CNAE_CONTRIBUINTE;5711720.0;N;1.0;SEQ_HISTORICO_CNAE_CONTRIB;NUMBER;22;N;0.0;6.0;5711720.0;0.0;NO;Sequencial identificador do registro;PK_HISTORICO_CNAE_CONTRIB (PRIMARY KEY: ENABLED)- SYS_C001525567 (C: ENABLED)
+CADASTRO;HISTORICO_CNAE_CONTRIB;Tabela detalhe da tabela HISTORICO_CONTRIBUINTE, que relaciona os v�nculos Contribuinte x CNAE alterados em um determinado movimento de hist�rico. A informa��o do CNAE e o tipo de v�nculo s�o relacionados atrav�s da tabela CNAE_CONTRIBUINTE;5711720.0;N;5.0;TIP_MOVIMENTO_CNAE;CHAR;1;N;;2.0;2.0;0.0;NO;"Tipo de movimento do CNAE vinculado a um Contribuinte:
+I - Inclus�o
+E - Exclus�o";CKC_TIP_MOV_CNAE_HIST_CNAE_CTB (C: ENABLED)- SYS_C001525571 (C: ENABLED)
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;16.0;COD_CGF;NUMBER;22;Y;0.0;6.0;447168.0;45861.0;NO;N�mero do CGF do Contribuinte ao qual o Contador foi inclu�do (vinculado) ou exclu�do (desvinculado);FK_CONTRIB_R_HIST_CONTAD (FOREIGN KEY: ENABLED)
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;2.0;COD_CONTADOR;NUMBER;22;N;0.0;8.0;22600.0;0.0;NO;CPF ou CNPJ que identifica o Contador, dependendo deste ser Pessoa F�sica ou Pessoa Jur�dica, respectivamente, de acordo com o campo TIP_CODIGO_CONTADOR;FK_CONTAD_R_HIST_CONTAD (FOREIGN KEY: ENABLED)- SYS_C001522807 (C: ENABLED)
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;13.0;COD_IDENTIDADE;VARCHAR2;25;Y;;2.0;25738.0;1018539.0;NO;N�mero de Identidade do Contador (do tipo Pessoa F�sica), incluindo Org�o Expedidor e UF; (: )
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;23.0;COD_MUNICIPIO;NUMBER;22;Y;0.0;2.0;347.0;1064555.0;NO;C�digo do munic�pio do endere�o do Contador; (: )
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;15.0;COD_OPERACAO;CHAR;1;Y;;2.0;3.0;61029.0;NO;"Indica a opera��o realizada neste hist�rico do Contador:
+""I"" - Inclu�do
+""E"" - Exclu�do
+""A"" - Alterado";CKC_COD_OPERACAO_HIST_CONTAD (C: ENABLED)
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;5.0;COD_UF;NUMBER;22;Y;0.0;2.0;32.0;1067657.0;NO;C�digo da UF do endere�o do Contador; (: )
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;24.0;DAT_EMISSAO_RG;DATE;7;Y;;1.0;0.0;1068844.0;NO;Data de emiss�o do documento de Identidade do Contador; (: )
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;3.0;DAT_MOVIMENTO;DATE;7;N;;8.0;866496.0;0.0;NO;Data da movimenta��o, em que aconteceu o registro de hist�rico;SYS_C001522808 (C: ENABLED)
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;19.0;NOM_BAIRRO;VARCHAR2;80;Y;;2.0;2582.0;1048448.0;NO;Nome do bairro do endere�o do Contador; (: )
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;22.0;NOM_COMPLEMENTO;VARCHAR2;150;Y;;2.0;1074.0;1062788.0;NO;Descri��o do complemento do endere�o do Contador; (: )
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;10.0;NOM_CONTADOR;VARCHAR2;150;Y;;2.0;3107.0;1065139.0;NO;Nome do Contador ou Escrit�rio de Contabilidade; (: )
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;18.0;NOM_EMAIL;VARCHAR2;150;Y;;3.0;21202.0;1013556.0;NO;E-mail do Contador; (: )
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;11.0;NOM_ENDERECO;VARCHAR2;150;Y;;3.0;40476.0;995842.0;NO;Nome do endere�o do Contador; (: )
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;12.0;NOM_MUNICIPIO;VARCHAR2;30;Y;;2.0;382.0;1066506.0;NO;Nome do munic�pio do endere�o do Contador; (: )
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;6.0;NUM_CEP;NUMBER;22;Y;0.0;2.0;7684.0;1037932.0;NO;N�mero do CEP do endere�o do Contador; (: )
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;8.0;NUM_CRC;VARCHAR2;10;Y;;2.0;12220.0;1049565.0;NO;N�mero do registro do Contador em sua entidade de classe (CRC); (: )
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;20.0;NUM_ENDERECO;VARCHAR2;5;Y;;2.0;3337.0;1028288.0;NO;N�mero do endere�o do Contador; (: )
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;21.0;NUM_LOGRADOURO;VARCHAR2;5;Y;;2.0;2966.0;1002817.0;NO;N�mero do logradouro do endere�o do Contador; (: )
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;4.0;NUM_MATRICULA_DIGITADOR;VARCHAR2;8;Y;;9.0;1244.0;1291.0;NO;N�mero de matricula do digitador da altera��o. Faz refer�ncia a tabela CONSEG.USUARIO; (: )
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;9.0;NUM_TELEFONE_COMERCIAL;VARCHAR2;12;Y;;2.0;28360.0;1016429.0;NO;N�mero do telefone comercial do Contador; (: )
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;17.0;NUM_TELEFONE_OUTRO;VARCHAR2;12;Y;;2.0;4236.0;1058484.0;NO;N�mero de outro telefone do Contador; (: )
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;7.0;NUM_TELEFONE_RESIDENCIAL;VARCHAR2;12;Y;;2.0;35780.0;980571.0;NO;N�mero do telefone residencial do Contador; (: )
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;1.0;SEQ_HISTORICO_CONTADOR;NUMBER;22;N;0.0;6.0;1068844.0;0.0;NO;Sequencial identificador do registro;PK_HISTORICO_CONTADOR (PRIMARY KEY: ENABLED)- SYS_C001522806 (C: ENABLED)
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;25.0;STA_ALTERACAO_CADASTRAL;NUMBER;22;Y;0.0;3.0;3.0;0.0;NO;"Indicador de status da altera��o cadastral:
+1 - Em Inclus�o
+2 - Em Altera��o
+3 - Digitado";STA_ALTER_CADAST_HIST_CONTAD (C: ENABLED)
+CADASTRO;HISTORICO_CONTADOR;Hist�rico do cadastro de contadores;1068844.0;N;14.0;TIP_CODIGO_CONTADOR;CHAR;1;Y;;2.0;3.0;221743.0;NO;"Indica se o Contador � do tipo Pessoa F�sica ou Pessoa Jur�dica:
+""0"" - Indefinido
+""1"" - Pessoa F�sica
+""2"" - Pessoa Jur�dica"; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;30.0;COD_ANCORA;NUMBER;22;Y;0.0;2.0;3.0;12078160.0;NO;Indica se o contribuinte � �ncora ou n�o.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;20.0;COD_CAE_NACIONAL;NUMBER;22;Y;0.0;2.0;2169.0;11578153.0;NO;; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;11.0;COD_CAE_PRIMARIO;NUMBER;22;Y;0.0;2.0;2992.0;11319944.0;NO;; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;12.0;COD_CAE_SECUNDARIO;NUMBER;22;Y;0.0;2.0;2763.0;11751604.0;NO;; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;19.0;COD_CAE_SECUNDARIO2;NUMBER;22;Y;0.0;2.0;1673.0;11969108.0;NO;; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;41.0;COD_CAFIR;VARCHAR2;8;Y;;2.0;26.0;12096651.0;NO;C�digo CAFIR cadastro de Im�veis Rurais.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;7.0;COD_CATEGORIA_ESTABELECIMENTO;NUMBER;22;Y;0.0;2.0;8.0;12090736.0;NO;; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;2.0;COD_CGF;NUMBER;22;N;0.0;6.0;1325696.0;0.0;NO;;SYS_C00105431 (C: ENABLED)
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;22.0;COD_CGF_ESTAB_VINCULADO;NUMBER;22;Y;0.0;2.0;390.0;12096037.0;NO;; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;13.0;COD_CNPJ;NUMBER;22;Y;0.0;2.0;7526.0;12069934.0;NO;; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;29.0;COD_CONTADOR;NUMBER;22;Y;0.0;2.0;18260.0;11494074.0;NO;CPF OU CNPJ DO CONTADOR QUE FOI ALTERADO.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;32.0;COD_CTE;NUMBER;22;Y;0.0;2.0;2.0;12087766.0;NO;Hist�rico do campo COD_CTE.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;42.0;COD_DISTRITO;NUMBER;22;Y;0.0;2.0;41.0;11982275.0;NO;C�digo de Distrito. Chave estrangeira para a tabela SETA.DISTRITO.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;26.0;COD_EFD;NUMBER;22;Y;0.0;2.0;4.0;11584316.0;NO;C�digo de Obrigat�riedade do SPED; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;71.0;COD_EVENTO_MEI;NUMBER;22;Y;0.0;2.0;58.0;11542645.0;NO;C�digo do evento do SIMEI; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;75.0;COD_EVENTO_SN;NUMBER;22;Y;0.0;2.0;68.0;11261881.0;NO;C�digo do evento do Simples Nacional; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;43.0;COD_FDI;NUMBER;22;Y;0.0;2.0;2.0;12096088.0;NO;Indica se o Contribuinte � participante do FDI (Fundo de Desenvolvimento Industrial) ou n�o. 1 - Contribuinte ativo no FDI, 2 - Contribuinte desativado no FDI.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;44.0;COD_INCRA;NUMBER;22;Y;0.0;2.0;1301.0;12094993.0;NO;Inscri��o no INSS do produtor rural. N�o precisa de CGC.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;45.0;COD_INSS_CEI;VARCHAR2;12;Y;;2.0;47.0;12096630.0;NO;C�digo do INSS usado no Produtor Rural.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;46.0;COD_LOGRADOURO;NUMBER;22;Y;0.0;2.0;11610.0;11937315.0;NO;C�digo do Logradouro do Endere�o do Contribuinte. Chave estrangeira para a tabela SETA.LOGRADOURO.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;34.0;COD_MANDADO_JUDICIAL;NUMBER;22;Y;0.0;2.0;2.0;11828858.0;NO;Indicador se a atualiza��o no hist�rico foi feita por meio de mandado judicial.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;79.0;COD_MFE;NUMBER;22;Y;0.0;0.0;0.0;12096726.0;NO;"Indica a obrigatoriedade de uso do MFE pelo Contribuinte:
+0 - N�o � obrigado
+1 - � obrigado
+2 - J� foi obrigado"; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;5.0;COD_MUNICIPIO;NUMBER;22;Y;0.0;2.0;325.0;12044526.0;NO;; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;4.0;COD_NATUREZA_ATUALIZACAO;NUMBER;22;N;0.0;3.0;27.0;0.0;NO;;SYS_C00105433 (C: ENABLED)
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;72.0;COD_NATUREZA_EVENTO_MEI;NUMBER;22;Y;0.0;2.0;6.0;11597657.0;NO;"Natureza de evento do MEI:
+1 - Medida Judicial
+2 - Ato Administrativo
+3 - Op��o do Contribuinte"; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;70.0;COD_NATUREZA_EVENTO_SN;NUMBER;22;Y;0.0;2.0;5.0;11286484.0;NO;"Natureza de evento do Simples Nacional:
+1 - Medida Judicial
+2 - Ato Administrativo
+3 - Op��o do Contribuinte"; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;38.0;COD_NATUREZA_JURIDICA;NUMBER;22;Y;0.0;2.0;23.0;11850718.0;NO;C�DIGO DA NATUREZA JUR�DICA; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;88.0;COD_NATUREZA_JURIDICA_RFB;VARCHAR2;5;Y;;2.0;17.0;11212702.0;NO;C�DIGO DA NATUREZA JUR�DICA RFB; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;47.0;COD_NFE;NUMBER;22;Y;0.0;2.0;2.0;11874092.0;NO;Identifica a obrigatoriedade de Nota Fiscal Eletr�nica. 0 - N�o � obrigado, 1 - � obrigado.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;35.0;COD_OPCAO_MEI;NUMBER;22;Y;0.0;2.0;3.0;11532921.0;NO;INDICADOR DE OP��O DO MEI; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;25.0;COD_OPCAO_SIMPLES;NUMBER;22;Y;0.0;2.0;4.0;11098718.0;NO;Flag que indica se o contribuinte fez ou n�o op��o pelo simples nacional; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;48.0;COD_ORGAO_FISC_PLENA;NUMBER;22;Y;0.0;2.0;38.0;10684309.0;NO;C�digo do Org�o Local de Fiscaliza��o Plena.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;49.0;COD_ORGAO_FISC_RESTRITA;NUMBER;22;Y;0.0;2.0;39.0;10923959.0;NO;C�digo do Org�o Local de Fiscaliza��o Restrita.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;50.0;COD_ORGAO_LOCAL;NUMBER;22;Y;0.0;2.0;284.0;11089070.0;NO;C�digo do Org�o Local. Chave Estrangeira para tabela SETA.COD_ORGAO_LOCAL.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;84.0;COD_ORGAO_LOCAL_EDITAL;NUMBER;22;Y;0.0;2.0;253.0;11748030.0;NO;C�digo do �rg�o Local que gerou o ato declarat�rio da atualiza��o do cadastro do Contribuinte; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;51.0;COD_ORGAO_MONITORAMENTO;NUMBER;22;Y;0.0;2.0;41.0;10923946.0;NO;C�digo do Org�o Local de Monitoramento do Contribuinte.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;52.0;COD_PERFIL_EFD;VARCHAR2;1;Y;;2.0;4.0;12071668.0;NO;Perfil do Contribuinte no EFD (Escritura��o Fiscal Digital - SPED): A, B ou C.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;8.0;COD_REGIME_RECOLHIMENTO;NUMBER;22;Y;0.0;2.0;13.0;11353032.0;NO;; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;9.0;COD_SITUACAO_CONTRIBUINTE;NUMBER;22;Y;0.0;2.0;17.0;10227467.0;NO;; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;10.0;COD_TIPO_CONTRIBUINTE;NUMBER;22;Y;0.0;2.0;43.0;11765585.0;NO;; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;6.0;COD_UF;NUMBER;22;Y;0.0;2.0;24.0;12058760.0;NO;; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;21.0;COD_UNIDADE_AUXILIAR;NUMBER;22;Y;0.0;2.0;6.0;12096227.0;NO;; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;31.0;COD_USUARIO;VARCHAR2;8;Y;;8.0;1281.0;15646.0;NO;C�digo do Usu�rio Respons�vel pela altera��o.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;17.0;DAT_DEFERIMENTO;DATE;7;N;;8.0;16592.0;0.0;NO;;SYS_C00105434 (C: ENABLED)
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;28.0;DAT_EXCLUSAO_EFD;DATE;7;Y;;2.0;1881.0;11814176.0;NO;Data de Exclus�o do SPED fiscal; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;37.0;DAT_EXCLUSAO_MEI;DATE;7;Y;;2.0;818.0;11872043.0;NO;DATA DE EXCLUS�O DO MEI; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;24.0;DAT_EXCLUSAO_SIMPLES;DATE;7;Y;;2.0;695.0;11711154.0;NO;Data de Exclus�o do simples nacional; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;27.0;DAT_INCLUSAO_EFD;DATE;7;Y;;2.0;3936.0;11584662.0;NO;data de Inclus�o no SPED fiscal; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;36.0;DAT_INCLUSAO_MEI;DATE;7;Y;;2.0;5761.0;11542269.0;NO;DATA DE INCLUS�O DO MEI; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;23.0;DAT_INCLUSAO_SIMPLES;DATE;7;Y;;2.0;6304.0;11177705.0;NO;Data de Inclus�o no simples nacional; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;53.0;DAT_INICIO_ATIVIDADE;DATE;7;Y;;1.0;0.0;12096726.0;NO;Data de in�cio de atividade do Contribuinte e dever� coincidir com a data do primeiro deferimento.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;54.0;DAT_INICIO_EFD;DATE;7;Y;;2.0;54.0;11857902.0;NO;Data da primeira vez que o contribuinte ficou obrigado a enviar EFD - SPED.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;3.0;DAT_MOVIMENTO;DATE;7;N;;8.0;3657216.0;0.0;NO;;HST_CONTRI_PK (PRIMARY KEY: ENABLED)- SYS_C00105432 (C: ENABLED)
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;33.0;DAT_OBRIGATORIEDADE_CTE;DATE;7;Y;;2.0;363.0;12089044.0;NO;Hist�rico da data em que o contribuinte foi obrigado � CTE.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;80.0;DAT_OBRIGATORIEDADE_MFE;DATE;7;Y;;1.0;0.0;12096726.0;NO;Data em que o Contribuinte foi obrigado a usar o MFE; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;55.0;DAT_OBRIGATORIEDADE_NFE;DATE;7;Y;;2.0;2546.0;11874788.0;NO;Data em que o contribuinte foi obrigado � NFE.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;56.0;DSC_PONTO_REFERENCIA;VARCHAR2;150;Y;;2.0;1241.0;12081469.0;NO;Descri��o do ponto de refer�ncia do endere�o do Contribuinte.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;57.0;NOM_BAIRRO;VARCHAR2;80;Y;;2.0;12434.0;11903238.0;NO;Nome do Bairro no Endere�o do Contribuinte.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;58.0;NOM_COMPLEMENTO;VARCHAR2;150;Y;;2.0;35828.0;11933979.0;NO;Informa��o complementar do endere�o do Contribuinte.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;59.0;NOM_EMAIL;VARCHAR2;150;Y;;2.0;68016.0;11927095.0;NO;E-mail do contribuinte.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;16.0;NOM_FANTASIA;VARCHAR2;150;Y;;2.0;184336.0;11831006.0;NO;; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;60.0;NOM_LOGRADOURO;VARCHAR2;150;Y;;2.0;83136.0;11796180.0;NO;Nome do logradouro do endere�o do Contribuinte.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;15.0;NOM_RAZAO_SOCIAL;VARCHAR2;150;Y;;3.0;400160.0;11636165.0;NO;; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;85.0;NUM_ATO_DECLARATORIO_EDITAL;NUMBER;22;Y;0.0;2.0;4673.0;11592990.0;NO;N�mero do ato declarat�rio na atualiza��o do cadastro do Contribuinte, quando este for colocado em Edital; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;61.0;NUM_CEP;NUMBER;22;Y;0.0;2.0;22548.0;11816722.0;NO;N�mero do CEP no Endere�o do Contribuinte.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;82.0;NUM_CERTIDAO_BAIXA;NUMBER;22;Y;0.0;2.0;291776.0;11781970.0;NO;N�mero da certid�o de baixa, quando o cadastro de um Contribuinte sofrer Baixa de Of�cio; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;83.0;NUM_EDITAL_ATUALIZACAO;NUMBER;22;Y;0.0;2.0;13103.0;11726531.0;NO;N�mero do Edital, que atualizou a situa��o do Contribuinte; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;63.0;NUM_INSCRICAO_JUCEC;VARCHAR2;11;Y;;2.0;20286.0;12024335.0;NO;N�mero da inscri��o na JUCEC.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;64.0;NUM_LOGRADOURO;VARCHAR2;5;Y;;2.0;15797.0;11762177.0;NO;N�mero do Logradouro no Endere�o do Contribuinte.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;86.0;NUM_OFICIO_ATUALIZACAO;NUMBER;22;Y;0.0;2.0;1399.0;12092319.0;NO;N�mero do of�cio que gerou o retorno do Contribuinte a situa��o anterior (anterior a ser colocado em Edital); (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;81.0;NUM_PROCESSO_ATUALIZACAO;NUMBER;22;Y;0.0;5.0;1286272.0;5286700.0;NO;N�mero do processo que gerou uma atualiza��o cadastral. Por exemplo, quando � necess�rio executar um comando manual para atualizar uma informa��o no cadastro do Contribuinte (normalmente uma CI ou CS). N�o vinculada a uma Solicita��o de Internet nem a REDESIM; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;78.0;NUM_SOLICITACAO_ALTERACAO;VARCHAR2;15;Y;;3.0;990528.0;10646307.0;NO;N�mero da solicita��o que gerou a altera��o no cadastro do Contribuinte (podendo ser da Internet ou da REDESIM); (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;65.0;NUM_TELEFONE;VARCHAR2;12;Y;;2.0;110816.0;11874673.0;NO;N�mero do Telefone do Contribuinte.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;62.0;NUM_TELEFONE2;VARCHAR2;12;Y;;2.0;166.0;12092060.0;NO;2o N�mero de telefone do Contribuinte; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;66.0;QTD_ECF;NUMBER;22;Y;0.0;2.0;141.0;11984685.0;NO;Quantidade de ECF do contribuinte.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;1.0;SEQ_CONTRIBUINTE;NUMBER;22;N;0.0;6.0;1307648.0;0.0;NO;;HST_CONTRI_PK (PRIMARY KEY: ENABLED)- SYS_C00105430 (C: ENABLED)
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;39.0;STA_ALTERACAO_CADASTRAL;NUMBER;22;Y;0.0;3.0;3.0;151318.0;NO;Indicador de status da altera��o cadastral. 1 - Em Inclus�o, 2 - Em Altera��o, 3 - Digitado.;CKC_STA_ALTER_CADAST_HST_CONT (C: ENABLED)
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;87.0;STA_ALTERACAO_CNAE;NUMBER;22;Y;0.0;3.0;2.0;230992.0;NO;"Indicador de status se houve altera��o de CNAE vinculado ao contribuinte:
+0 - N�o
+1 - Sim";CKC_STA_ALTER_CNAE_HIST_CONTR (C: ENABLED)
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;73.0;STA_ALTERACAO_CNPJ;NUMBER;22;Y;0.0;2.0;4.0;12095091.0;NO;"Indica o tipo de opera��o ocorrida em rela��o a altera��o do CNPJ:
+1 - Incorpora��o
+2 - Fus�o
+3 - Cis�o
+4 - Corre��o";CKC_STA_ALTER_CNPJ_HST_CONT (C: ENABLED)
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;69.0;STA_ALTERACAO_ORGAO_LOCAL;NUMBER;22;Y;0.0;0.0;0.0;12096726.0;NO;"Indicativo de que houve mudan�a no �rg�o Local ou Regime de Recolhimento normal:
+1 - SIM (Houve mudan�a)
+2 - N�O (N�o houve mudan�a)
+(Utilizado no SEPROCE - Sistema GIM)";CKC_STA_ALT_ORG_LOC_HIST_CONTR (C: ENABLED)
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;40.0;STA_ALTERACAO_SOCIEDADE;NUMBER;22;Y;0.0;2.0;1.0;10609380.0;NO;Indicador de status se houve altera��o na sociedade. 0 - N�o 1 - Sim.;CKC_ALTERACAO_SOC_HIST_CONTR (C: ENABLED)
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;14.0;STA_CGF_CENTRAL;VARCHAR2;1;Y;;2.0;2.0;12096704.0;NO;;AVCON_HISTO_STA_C_000 (C: ENABLED)
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;89.0;STA_COWORKING;VARCHAR2;1;Y;;2.0;2.0;12095914.0;NO;"Campo que indica se a empresa funciona em um coworking.
+0 - N�o est� no coworking
+1 - Est� no coworking"; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;90.0;STA_EXCECAO_ORGAOS;VARCHAR2;1;Y;;2.0;2.0;11976715.0;NO;"HISTORICO DO CAMPO NO CONTRIBUINTE:
+0 - N�O � EXCE��O (SEGUE AS REGRAS)
+1 - EXCE��O (N�O ENTRA NAS REGRAS)"; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;74.0;STA_IMPEDIR_EDITAL;NUMBER;22;Y;0.0;2.0;2.0;12096307.0;NO;"Status para impedir colocar em edital pela IN 11/2015.
+0 - Pode ser colocado EDITAL
+1 - N�O pode ser colocado em EDITAL";CKC_STA_IMP_EDITAL_HIST_CONTR (C: ENABLED)
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;91.0;STA_OPERADOR_LOGISTICO;NUMBER;22;Y;0.0;0.0;0.0;12096726.0;NO;"Indica se o contribuinte � operador log�stico:
+0 - n�o � operador log�stico
+1- � operador log�stico"; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;67.0;STA_REG_ESPECIAL_FISCAL;NUMBER;22;Y;0.0;0.0;0.0;12096726.0;NO;"Indica se Contribuinte est� ou n�o em regime especial de fiscaliza��o. Informa��o vinda do COMETA via mapa ETL.
+0 - N�o est� em regime especial de fiscaliza��o
+1 - Est� em regime especial de fiscaliza��o";CKC_STA_REG_ESPEC_FIS_HST_CONT (C: ENABLED)
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;76.0;TIP_LOGRADOURO;VARCHAR2;10;Y;;2.0;219.0;12000848.0;NO;Tipo de Logradouro do Endere�o do Contribuinte.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;77.0;TIP_SOLICITACAO_ALTERACAO;NUMBER;22;Y;0.0;2.0;2.0;10647074.0;NO;"Identifica o tipo de solicita��o que gerou a altera��o no cadastro do Contribuinte:
+1 - Internet
+2 - REDESIM
+3 - Receita Federal";TIP_SOLIC_CADAS_HIST_CONTR (C: ENABLED)
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;68.0;VLR_CAPITAL_SOCIAL;NUMBER;22;Y;2.0;2.0;6723.0;11923232.0;NO;Valor do Capital Social do Contribuinte.; (: )
+CADASTRO;HISTORICO_CONTRIBUINTE;;12096726.0;N;18.0;VLR_QUANTIDADE_UFIR;NUMBER;22;Y;0.0;2.0;723.0;11762128.0;NO;; (: )
+CADASTRO;HISTORICO_CRC;;66771.0;N;10.0;COD_CONTADOR;VARCHAR2;14;N;;13.0;44292.0;0.0;NO;CPF/CNPJ do contador;SYS_C001564111 (C: ENABLED)
+CADASTRO;HISTORICO_CRC;;66771.0;N;5.0;COD_CONTADOR_N;NUMBER;22;Y;0.0;5.0;20484.0;30264.0;NO;; (: )
+CADASTRO;HISTORICO_CRC;;66771.0;N;9.0;DAT_DESATIVACAO;DATE;7;Y;;2.0;1704.0;58801.0;NO;; (: )
+CADASTRO;HISTORICO_CRC;;66771.0;N;3.0;DAT_HIST;DATE;7;N;;8.0;5000.0;0.0;NO;;SYS_C00105439 (C: ENABLED)
+CADASTRO;HISTORICO_CRC;;66771.0;N;7.0;NOM_CONTADOR;VARCHAR2;150;N;;29.0;33280.0;0.0;NO;;SYS_C00105443 (C: ENABLED)
+CADASTRO;HISTORICO_CRC;;66771.0;N;8.0;NUM_CRC;VARCHAR2;10;N;;11.0;30434.0;0.0;NO;;SYS_C00105444 (C: ENABLED)
+CADASTRO;HISTORICO_CRC;;66771.0;N;4.0;SEQ_CRC;NUMBER;22;N;0.0;5.0;29910.0;0.0;NO;;SYS_C00105440 (C: ENABLED)
+CADASTRO;HISTORICO_CRC;;66771.0;N;1.0;SEQ_HIST_CRC;NUMBER;22;N;0.0;5.0;66771.0;0.0;NO;;HIST_CRC_PK (PRIMARY KEY: ENABLED)- SYS_C00105437 (C: ENABLED)
+CADASTRO;HISTORICO_CRC;;66771.0;N;6.0;TIP_CODIGO;VARCHAR2;1;N;;2.0;2.0;0.0;NO;;AVCON_1227215_TIP_C_000 (C: ENABLED)- SYS_C00105442 (C: ENABLED)
+CADASTRO;HISTORICO_CRC;;66771.0;N;2.0;TIP_HIST;VARCHAR2;1;N;;2.0;2.0;0.0;NO;;SYS_C00105438 (C: ENABLED)
+CADASTRO;HISTORICO_SOCIEDADE;;2091896.0;N;9.0;COD_CARGO;NUMBER;22;Y;0.0;2.0;9.0;1595051.0;NO;; (: )
+CADASTRO;HISTORICO_SOCIEDADE;;2091896.0;N;13.0;COD_CARGO_JUCEC;NUMBER;22;Y;0.0;2.0;21.0;2019061.0;NO;C�digo identificador do Cargo na JUCEC; (: )
+CADASTRO;HISTORICO_SOCIEDADE;;2091896.0;N;10.0;COD_USUARIO;VARCHAR2;8;Y;;8.0;1224.0;146988.0;NO;C�digo do Usu�rio Respons�vel pela altera��o. Faz referencia ao campo CONSEG.USUARIO.NUM_MATRICULA.; (: )
+CADASTRO;HISTORICO_SOCIEDADE;;2091896.0;N;5.0;DAT_ATUALIZACAO_JUCEC;DATE;7;Y;;5.0;27672.0;1004924.0;NO;; (: )
+CADASTRO;HISTORICO_SOCIEDADE;;2091896.0;N;15.0;DAT_EXCLUSAO;DATE;7;Y;;2.0;2.0;2091894.0;NO;; (: )
+CADASTRO;HISTORICO_SOCIEDADE;;2091896.0;N;14.0;DAT_INCLUSAO;DATE;7;Y;;2.0;2.0;2091894.0;NO;; (: )
+CADASTRO;HISTORICO_SOCIEDADE;;2091896.0;N;3.0;DAT_MOVIMENTO;DATE;7;N;;8.0;1049600.0;0.0;NO;;HIST_SOCIE_PK (PRIMARY KEY: ENABLED)- SYS_C00105449 (C: ENABLED)
+CADASTRO;HISTORICO_SOCIEDADE;;2091896.0;N;4.0;LOG_EXCLUSAO;VARCHAR2;1;Y;;2.0;2.0;513.0;NO;Sim se o movimento refere-se � exclus�o do s�cio;AVCON_376778_LOG_E_000 (C: ENABLED)
+CADASTRO;HISTORICO_SOCIEDADE;;2091896.0;N;8.0;NUM_CHANCELA_EXCLUSAO;VARCHAR2;11;Y;;2.0;40216.0;2023462.0;NO;; (: )
+CADASTRO;HISTORICO_SOCIEDADE;;2091896.0;N;7.0;NUM_CHANCELA_INCLUSAO;VARCHAR2;11;Y;;2.0;43812.0;1940401.0;NO;; (: )
+CADASTRO;HISTORICO_SOCIEDADE;;2091896.0;N;6.0;NUM_PERCENTUAL;NUMBER;22;Y;2.0;2.0;2139.0;1369756.0;NO;Percentual de participa��o do s�cio na sociedade; (: )
+CADASTRO;HISTORICO_SOCIEDADE;;2091896.0;N;2.0;SEQ_CONTRIBUINTE;NUMBER;22;N;0.0;6.0;1137792.0;0.0;NO;;HIST_SOCIE_CAD_CONT_FK (FOREIGN KEY: ENABLED)- HIST_SOCIE_PK (PRIMARY KEY: ENABLED)- SYS_C00105448 (C: ENABLED)
+CADASTRO;HISTORICO_SOCIEDADE;;2091896.0;N;1.0;SEQ_SOCIO;NUMBER;22;N;0.0;6.0;1064960.0;0.0;NO;;HIST_SOCIE_PK (PRIMARY KEY: ENABLED)- HIST_SOCIE_SOCIO_FK (FOREIGN KEY: ENABLED)- SYS_C00105447 (C: ENABLED)
+CADASTRO;HISTORICO_SOCIEDADE;;2091896.0;N;11.0;STA_ALTERACAO_CADASTRAL;NUMBER;22;Y;0.0;3.0;3.0;0.0;NO;"Indicador de status da altera��o cadastral.
+1 - Em Inclus�o
+2 - Em Altera��o
+3 - Digitado";CKC_STA_ALTER_CADAS_HST_SOCIED (C: ENABLED)
+CADASTRO;HISTORICO_SOCIEDADE;;2091896.0;N;12.0;STA_INCLUSAO;CHAR;1;Y;;2.0;2.0;0.0;NO;"Indica se o S�cio foi inclu�do na Sociedade nesta movimenta��o:
+N - N�o
+S - Sim";CKC_STA_INCLUSAO_HST_SOCIED (C: ENABLED)
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;9.0;COD_IDENTIDADE;VARCHAR2;25;Y;;4.0;138880.0;1760347.0;NO;; (: )
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;18.0;COD_LOGRADOURO;NUMBER;22;Y;0.0;2.0;4049.0;1776201.0;NO;C�digo de Logradouro do Endere�o do S�cio.; (: )
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;19.0;COD_MUNICIPIO;NUMBER;22;Y;0.0;2.0;496.0;1907740.0;NO;C�digo de Munic�pio do Endere�o do S�cio.; (: )
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;3.0;COD_SOCIO;VARCHAR2;14;Y;;12.0;1130368.0;0.0;NO;; (: )
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;11.0;COD_UF;NUMBER;22;Y;0.0;2.0;40.0;2011847.0;NO;; (: )
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;14.0;COD_USUARIO;VARCHAR2;8;Y;;9.0;1239.0;8892.0;NO;C�digo do Usu�rio Respons�vel pela altera��o. Faz referencia ao campo CONSEG.USUARIO.NUM_MATRICULA.; (: )
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;17.0;DAT_CONFIRMACAO_TITULAR;DATE;7;Y;;1.0;0.0;2017626.0;NO;Data de confirma��o do titular.; (: )
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;2.0;DAT_MOVIMENTO;DATE;7;N;;8.0;1117696.0;0.0;NO;;HIST_SOC_PK (PRIMARY KEY: ENABLED)- SYS_C00105453 (C: ENABLED)
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;20.0;DSC_COMPLEMENTO;VARCHAR2;150;Y;;2.0;8031.0;1982189.0;NO;Descri��o do Complemento do Endere�o do S�cio.; (: )
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;8.0;NOM_BAIRRO;VARCHAR2;80;Y;;3.0;13878.0;1839657.0;NO;; (: )
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;12.0;NOM_EMAIL;VARCHAR2;150;Y;;2.0;28750.0;1968470.0;NO;Campo que cont�m o email do s�cio.; (: )
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;7.0;NOM_ENDERECO;VARCHAR2;150;Y;;4.0;108112.0;1752827.0;NO;; (: )
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;10.0;NOM_MUNICIPIO;VARCHAR2;30;Y;;2.0;1017.0;1990449.0;NO;; (: )
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;26.0;NOM_REPR_LEGAL;VARCHAR2;80;Y;;2.0;2.0;2017616.0;NO;Nome do representante legal do s�cio estrangeiro, cujo endere�o ser� cadastrado nesse s�cio estrangeiro.; (: )
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;6.0;NOM_SOCIO;VARCHAR2;150;Y;;2.0;25970.0;1983995.0;NO;Nome do S�cio; (: )
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;4.0;NUM_CEP;NUMBER;22;Y;0.0;2.0;22220.0;1861372.0;NO;; (: )
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;25.0;NUM_CPF_REPR_LEGAL;NUMBER;22;Y;0.0;2.0;1.0;2017616.0;NO;CPF do representante legal do s�cio estrangeiro, cujo endere�o ser� cadastrado nesse s�cio estrangeiro.; (: )
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;16.0;NUM_ENDERECO;VARCHAR2;5;Y;;2.0;4879.0;1857372.0;NO;N�mero do Endere�o do S�cio.; (: )
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;5.0;NUM_TELEFONE;VARCHAR2;12;Y;;2.0;104224.0;1779309.0;NO;; (: )
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;22.0;NUM_TELEFONE2;VARCHAR2;12;Y;;2.0;48.0;2016663.0;NO;2o N�mero de telefone do S�cio; (: )
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;1.0;SEQ_SOCIO;NUMBER;22;N;0.0;6.0;1125248.0;0.0;NO;;HIST_SOC_PK (PRIMARY KEY: ENABLED)- HIST_SOC_SOCIO_FK (FOREIGN KEY: ENABLED)- SYS_C00105452 (C: ENABLED)
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;15.0;STA_ALTERACAO_CADASTRAL;NUMBER;22;Y;0.0;3.0;3.0;10458.0;NO;"Indicador de status da altera��o cadastral.
+1 - Em Inclus�o
+2 - Em Altera��o
+3 - Digitado";CKC_STA_ALTER_CADAST_HST_SOCIO (C: ENABLED)
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;23.0;STA_ALTERACAO_SOCIEDADE;NUMBER;22;Y;0.0;3.0;2.0;9498.0;NO;"Indica se houve altera��o em Sociedade junto com esta altera��o no S�cio.
+0 - N�o
+1 - Sim";CKC_STA_ALTER_SOCIED_HST_SOCIO (C: ENABLED)
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;24.0;STA_ESTRANGEIRO;NUMBER;22;Y;0.0;2.0;2.0;11819.0;NO;"Indica se o s�cio � estrangeiro:
+0 - n�o � estrangeiro
+1 - � estrangeiro"; (: )
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;13.0;TIP_CODIGO;VARCHAR2;1;Y;;2.0;9.0;7138.0;NO;Identifica se o s�cio � Pessoa F�sica ou Jur�dica.; (: )
+CADASTRO;HISTORICO_SOCIO;;2017626.0;N;21.0;TIP_LOGRADOURO;VARCHAR2;10;Y;;2.0;197.0;1887462.0;NO;Tipo de Logradouro do Endere�o do S�cio.; (: )
+CADASTRO;HIST_PESSOA;"Hist�rico de Pessoa.
+";705104.0;N;6.0;COD_USUARIO;VARCHAR2;30;Y;;11.0;84.0;0.0;NO;C�digo do Usu�rio Respons�vel pela altera��o.; (: )
+CADASTRO;HIST_PESSOA;"Hist�rico de Pessoa.
+";705104.0;N;2.0;DAT_ATUALIZACAO;DATE;7;N;;8.0;510368.0;0.0;NO;Data da altera��o;HIST_PESSOA_PK (PRIMARY KEY: ENABLED)- SYS_C001547443 (C: ENABLED)
+CADASTRO;HIST_PESSOA;"Hist�rico de Pessoa.
+";705104.0;N;4.0;SEQ_CONTRIBUINTE;NUMBER;22;Y;0.0;3.0;175360.0;529017.0;NO;Identificador de Contribuinte com CGF no Cadastro.; (: )
+CADASTRO;HIST_PESSOA;"Hist�rico de Pessoa.
+";705104.0;N;1.0;SEQ_PESSOA;NUMBER;22;N;0.0;6.0;703360.0;0.0;NO;Identificador �nico de inst�ncia de Pessoa no Cadastro.;HIST_PESSOA_PK (PRIMARY KEY: ENABLED)- HIST_PES_PES_FK (FOREIGN KEY: ENABLED)- SYS_C001547442 (C: ENABLED)
+CADASTRO;HIST_PESSOA;"Hist�rico de Pessoa.
+";705104.0;N;3.0;SEQ_PESSOA_FISICA_JURIDICA;NUMBER;22;Y;0.0;5.0;521472.0;175798.0;NO;Identificador de PessoaFisicaJuridica no Cadastro.; (: )
+CADASTRO;HIST_PESSOA;"Hist�rico de Pessoa.
+";705104.0;N;5.0;TIP_PESSOA;NUMBER;22;Y;0.0;3.0;4.0;0.0;NO;Tipo de pessoa, indicando se � PF ou PJ ou tem CGF.;CKC_TIP_PESSOA_HIST_PES (C: ENABLED)
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;6.0;COD_IDENTIDADE;VARCHAR2;35;Y;;2.0;56520.0;9196770.0;NO;N�mero da identidade; (: )
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;13.0;COD_MUNICIPIO;NUMBER;22;Y;0.0;4.0;4524.0;95826.0;NO;;HIST_PFJ_MUNICIPIO_FK (FOREIGN KEY: ENABLED)
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;4.0;COD_PESSOA;NUMBER;22;Y;0.0;8.0;4055040.0;0.0;NO;C�digo (CNPJ,CPF); (: )
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;26.0;COD_PESSOA_A;VARCHAR2;14;Y;;0.0;0.0;11553479.0;NO;"C�digo da pessoa, no formato alfanum�rico, seguindo o padr�o, de acordo com o TIP_PESSOA:
+    1 - CGF - 9 posi��es
+    2 - CNPJ - 14 posi��es
+    3 - CPF - 11 posi��es
+    4 - COD - 14 posi��es"; (: )
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;14.0;COD_UF;NUMBER;22;Y;0.0;3.0;31.0;121276.0;NO;;HIST_PFJ_MUNICIPIO_FK (FOREIGN KEY: ENABLED)
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;25.0;COD_USUARIO;VARCHAR2;30;Y;;10.0;340.0;0.0;NO;C�digo do Usu�rio Respons�vel pela altera��o.; (: )
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;2.0;DAT_ATUALIZACAO;DATE;7;N;;8.0;3367168.0;0.0;NO;Data da atualizacao;HIST_PFJ_PK (PRIMARY KEY: ENABLED)- SYS_C00105456 (C: ENABLED)
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;21.0;DAT_INCLUSAO;DATE;7;Y;;8.0;1128448.0;10848.0;NO;Data da inclus�o da pessoa f�sica ou jur�dica.; (: )
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;9.0;DSC_COMPLEMENTO;VARCHAR2;150;Y;;3.0;138320.0;9991753.0;NO;Complemento; (: )
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;10.0;NOM_BAIRRO;VARCHAR2;80;Y;;11.0;117760.0;338238.0;NO;Nome do bairro; (: )
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;18.0;NOM_EMAIL;VARCHAR2;150;Y;;29.0;79936.0;3614581.0;NO;Email do contribuinte.; (: )
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;7.0;NOM_LOGRADOURO;VARCHAR2;150;Y;;23.0;2222336.0;0.0;NO;Nome do logradouro (Endere�o); (: )
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;5.0;NOM_PESSOA;VARCHAR2;150;Y;;28.0;3766784.0;0.0;NO;Nome da pessoa; (: )
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;11.0;NUM_CEP;NUMBER;22;Y;0.0;5.0;148544.0;111767.0;NO;N�mero do CEP; (: )
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;19.0;NUM_CNH;NUMBER;22;Y;0.0;2.0;51280.0;6035545.0;NO;N�mero da carteira de motorista ou carteira nacional de habilita��o da pessoa.; (: )
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;8.0;NUM_LOGRADOURO;NUMBER;22;Y;0.0;3.0;11112.0;906548.0;NO;N�mero do logradouro.; (: )
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;17.0;NUM_SEQUENCIAL_SIC;NUMBER;22;Y;0.0;0.0;0.0;11553479.0;NO;N�mero seq�encial no SIC.; (: )
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;12.0;NUM_TELEFONE;VARCHAR2;12;Y;;2.0;137056.0;10738021.0;NO;N�mero do telefone.; (: )
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;16.0;NUM_TELEFONE2;VARCHAR2;12;Y;;2.0;6451.0;11397943.0;NO;Segundo N�mero do Telefone (NUM-FONE2-PES); (: )
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;15.0;SEQ_PAIS;NUMBER;22;Y;0.0;3.0;3.0;2055704.0;NO;Pa�s da pessoa (COD-PAIS-PES).; (: )
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;1.0;SEQ_PESSOA_FISICA_JURIDICA;NUMBER;22;N;0.0;6.0;4082176.0;0.0;NO;;HIST_PFJ_PES_FIS_JU_FK (FOREIGN KEY: ENABLED)- HIST_PFJ_PK (PRIMARY KEY: ENABLED)- SYS_C00105455 (C: ENABLED)
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;24.0;SEQ_SOCIO;NUMBER;22;Y;0.0;0.0;0.0;11553479.0;NO;Sequencial identificador do S�cio, caso o registro PESSOA_FISICA_JURIDICA tenha equivalente em SOCIO; (: )
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;22.0;STA_EMISSAO;VARCHAR2;1;Y;;2.0;2.0;11217832.0;NO;STATUS QUE INDICA UM EMISSOR DE NOTAS FISCAIS AVULSAS; (: )
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;23.0;STA_EMISSAO_NFE;VARCHAR2;1;Y;;2.0;1.0;11543231.0;NO;Identifica o status do emissor da NFE; (: )
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;20.0;STA_INCLUSAO_ORACLE;NUMBER;22;Y;0.0;3.0;2.0;0.0;NO;Flag que indica se a pessoa f�sica ou jur�dica foi inserida pelo oracle ou n�o (pelo aix).; (: )
+CADASTRO;HIST_PESSOA_FISICA_JURIDICA;;11553479.0;N;3.0;TIP_PESSOA;VARCHAR2;1;Y;;2.0;3.0;0.0;NO;"Tipo de Pessoa (TIP_DEVEDOR_PES):
+1 - CGF
+2 - CNPJ
+3 - CPF
+4 - Outro C�digo";CKC_TIP_PESSOA_HIS_PES_FIS_JUR (C: ENABLED)
+CADASTRO;HIST_TRANSMISSAO;;1446036.0;N;16.0;COD_NUM_CONTROLE_ARQUIVO;NUMBER;22;Y;0.0;7.0;33008.0;1131.0;NO;; (: )
+CADASTRO;HIST_TRANSMISSAO;;1446036.0;N;14.0;COD_ORGAO_LOCAL;NUMBER;22;Y;0.0;0.0;0.0;1446036.0;NO;; (: )
+CADASTRO;HIST_TRANSMISSAO;;1446036.0;N;10.0;DAT_ENVIO_RECIBO;DATE;7;Y;;1.0;0.0;1446036.0;NO;; (: )
+CADASTRO;HIST_TRANSMISSAO;;1446036.0;N;4.0;DAT_RECEPCAO;DATE;7;N;;8.0;1415808.0;0.0;NO;;SYS_C00105464 (C: ENABLED)
+CADASTRO;HIST_TRANSMISSAO;;1446036.0;N;2.0;NOM_ARQUIVO;VARCHAR2;50;N;;24.0;1310080.0;0.0;NO;;SYS_C00105462 (C: ENABLED)
+CADASTRO;HIST_TRANSMISSAO;;1446036.0;N;11.0;NOM_ARQUIVO_AGRUPAMENTO;VARCHAR2;50;Y;;20.0;177552.0;264109.0;NO;; (: )
+CADASTRO;HIST_TRANSMISSAO;;1446036.0;N;5.0;NOM_PATH_ARQUIVO;VARCHAR2;80;N;;40.0;12496.0;0.0;NO;;SYS_C00105465 (C: ENABLED)
+CADASTRO;HIST_TRANSMISSAO;;1446036.0;N;12.0;NOM_PATH_ARQUIVO_AGRUPAMENTO;VARCHAR2;80;Y;;30.0;7.0;264109.0;NO;; (: )
+CADASTRO;HIST_TRANSMISSAO;;1446036.0;N;9.0;NOM_PATH_RECIBO;VARCHAR2;80;Y;;6.0;285.0;1256526.0;NO;; (: )
+CADASTRO;HIST_TRANSMISSAO;;1446036.0;N;8.0;NOM_RECIBO;VARCHAR2;50;Y;;5.0;189510.0;1256526.0;NO;; (: )
+CADASTRO;HIST_TRANSMISSAO;;1446036.0;N;3.0;NOM_SISTEMA;VARCHAR2;10;N;;6.0;15.0;0.0;NO;;SYS_C00105463 (C: ENABLED)
+CADASTRO;HIST_TRANSMISSAO;;1446036.0;N;7.0;SEQ_ACESSO;NUMBER;22;N;0.0;3.0;3.0;0.0;NO;;SYS_C00105467 (C: ENABLED)
+CADASTRO;HIST_TRANSMISSAO;;1446036.0;N;15.0;SEQ_ISN_ARQUIVO;NUMBER;22;Y;0.0;6.0;1350016.0;1131.0;NO;; (: )
+CADASTRO;HIST_TRANSMISSAO;;1446036.0;N;1.0;SEQ_TRANSMISSAO;NUMBER;22;N;0.0;6.0;1433856.0;0.0;NO;;SYS_C00105461 (C: ENABLED)
+CADASTRO;HIST_TRANSMISSAO;;1446036.0;N;13.0;SEQ_TRANSMISSOR;NUMBER;22;Y;0.0;4.0;6716.0;101.0;NO;; (: )
+CADASTRO;HIST_TRANSMISSAO;;1446036.0;N;6.0;STA_ARQUIVO;NUMBER;22;N;0.0;3.0;9.0;0.0;NO;;SYS_C00105466 (C: ENABLED)
+CADASTRO;INCORPORACAO_JUCEC;Tabela que registra e controla os lotes de documentos digitalizados obtidos diretamente da JUCEC;597116.0;N;7.0;COD_STATUS;NUMBER;22;Y;0.0;3.0;2.0;0.0;NO;"C�digo que indica o status do arquivo com rela��o a seu processamento.
+- se for 0 n�o foi processado
+- se for 1 foi processado com sucesso
+- se for 2 n�o foi encontrado na estrutura de diret�rios da jucec"; (: )
+CADASTRO;INCORPORACAO_JUCEC;Tabela que registra e controla os lotes de documentos digitalizados obtidos diretamente da JUCEC;597116.0;N;3.0;DAT_CAIXA;DATE;7;Y;;8.0;303.0;0.0;NO;Data em que a caixa � criado na JUCEC; (: )
+CADASTRO;INCORPORACAO_JUCEC;Tabela que registra e controla os lotes de documentos digitalizados obtidos diretamente da JUCEC;597116.0;N;2.0;DAT_PROCESSAMENTO;DATE;7;Y;;8.0;314.0;0.0;NO;Data em que o Lote foi processado; (: )
+CADASTRO;INCORPORACAO_JUCEC;Tabela que registra e controla os lotes de documentos digitalizados obtidos diretamente da JUCEC;597116.0;N;5.0;DSC_ARQUIVAMENTO;VARCHAR2;30;Y;;23.0;298624.0;0.0;NO;Identificador do Arquivamento;INCORPORACAO_JUCEC_UK1 (UNIQUE: ENABLED)
+CADASTRO;INCORPORACAO_JUCEC;Tabela que registra e controla os lotes de documentos digitalizados obtidos diretamente da JUCEC;597116.0;N;6.0;DSC_ARQUIVO;VARCHAR2;30;Y;;12.0;595776.0;0.0;NO;Identificador da imagem digitalizada;INCORPORACAO_JUCEC_UK1 (UNIQUE: ENABLED)
+CADASTRO;INCORPORACAO_JUCEC;Tabela que registra e controla os lotes de documentos digitalizados obtidos diretamente da JUCEC;597116.0;N;4.0;DSC_CAIXA;VARCHAR2;30;Y;;10.0;2842.0;0.0;NO;Descri�o que identifica a Caixa;INCORPORACAO_JUCEC_UK1 (UNIQUE: ENABLED)
+CADASTRO;INCORPORACAO_JUCEC;Tabela que registra e controla os lotes de documentos digitalizados obtidos diretamente da JUCEC;597116.0;N;1.0;SEQ_INCORPORACAO;NUMBER;22;N;0.0;6.0;597116.0;0.0;NO;Sequence da tabela INCORPORACAO_JUCEC;PK_INCORPORACAO_JUCEC (PRIMARY KEY: ENABLED)- SYS_C00105468 (C: ENABLED)
+CADASTRO;LIBERACAO_CADINE;Tabela que mant�m as libera��es do cadastramento de S�cio que possui restri��es no CADINE;461.0;N;5.0;COD_ORGAO_LOCAL;NUMBER;22;Y;0.0;6.0;36.0;0.0;NO;C�digo do �rg�o Local em que foi registrada a libera��o;FK_ORG_LOC_R_AUT_LIBERA_CADINE (FOREIGN KEY: ENABLED)
+CADASTRO;LIBERACAO_CADINE;Tabela que mant�m as libera��es do cadastramento de S�cio que possui restri��es no CADINE;461.0;N;6.0;COD_USUARIO;VARCHAR2;8;Y;;9.0;108.0;0.0;NO;C�digo do usu�rio respons�vel pelo registro da Dilig�ncia; (: )
+CADASTRO;LIBERACAO_CADINE;Tabela que mant�m as libera��es do cadastramento de S�cio que possui restri��es no CADINE;461.0;N;3.0;DAT_LIBERACAO;DATE;7;N;;8.0;457.0;0.0;NO;Data referente a libera��o do cadastramento do S�cio por restri��o CADINE;SYS_C001525486 (C: ENABLED)
+CADASTRO;LIBERACAO_CADINE;Tabela que mant�m as libera��es do cadastramento de S�cio que possui restri��es no CADINE;461.0;N;4.0;DSC_MOTIVO_LIBERACAO;VARCHAR2;250;N;;64.0;352.0;0.0;NO;Descri��o do motivo da libera��o do CADINE, informado no momento do cadastramento do S�cio;SYS_C001525487 (C: ENABLED)
+CADASTRO;LIBERACAO_CADINE;Tabela que mant�m as libera��es do cadastramento de S�cio que possui restri��es no CADINE;461.0;N;1.0;SEQ_LIBERACAO_CADINE;NUMBER;22;N;0.0;4.0;461.0;0.0;NO;Sequencial da tabela LIBERACAO_CADINE;PK_LIBERACAO_CADINE (PRIMARY KEY: ENABLED)- SYS_C001525484 (C: ENABLED)
+CADASTRO;LIBERACAO_CADINE;Tabela que mant�m as libera��es do cadastramento de S�cio que possui restri��es no CADINE;461.0;N;2.0;SEQ_SOCIEDADE;NUMBER;22;N;0.0;6.0;461.0;0.0;NO;Sequencial identificador da Sociedade;FK_SOCIEDADE_R_LIBERA_CADINE (FOREIGN KEY: ENABLED)- SYS_C001525485 (C: ENABLED)
+CADASTRO;LOG_CONTRIBUINTE;Tabela para gravar os dados antes de fazer a altera��o dos processos REDESIM.;168576.0;N;5.0;COD_CGF;NUMBER;22;N;0.0;6.0;104112.0;0.0;NO;N�mero do CGF que est� sendo alterado;LOG_CAD_CGF_FK (FOREIGN KEY: ENABLED)- SYS_C001564106 (C: ENABLED)
+CADASTRO;LOG_CONTRIBUINTE;Tabela para gravar os dados antes de fazer a altera��o dos processos REDESIM.;168576.0;N;6.0;COD_CNPJ;VARCHAR2;14;Y;;15.0;103248.0;132.0;NO;N�mero do CNPJ que est� sendo alterado; (: )
+CADASTRO;LOG_CONTRIBUINTE;Tabela para gravar os dados antes de fazer a altera��o dos processos REDESIM.;168576.0;N;8.0;COD_PROCESSO;VARCHAR2;20;Y;;15.0;148464.0;0.0;NO;N�mero do processo REDESIM que est� causando a altera��o; (: )
+CADASTRO;LOG_CONTRIBUINTE;Tabela para gravar os dados antes de fazer a altera��o dos processos REDESIM.;168576.0;N;2.0;DAT_LOG_CONTRIBUINTE;DATE;7;N;;8.0;166848.0;0.0;NO;Data em que o registro est� sendo gravado na tabela = sysdate;SYS_C001564103 (C: ENABLED)
+CADASTRO;LOG_CONTRIBUINTE;Tabela para gravar os dados antes de fazer a altera��o dos processos REDESIM.;168576.0;N;3.0;DAT_MOVIMENTO;DATE;7;N;;8.0;167136.0;0.0;NO;Data em que o log est� sendo gravado = data que ser� gravado o hist�rico do contribuinte;SYS_C001564104 (C: ENABLED)
+CADASTRO;LOG_CONTRIBUINTE;Tabela para gravar os dados antes de fazer a altera��o dos processos REDESIM.;168576.0;N;9.0;DSC_DADOS_CONTRIBUINTE;CLOB;4000;N;;1568.0;0.0;0.0;NO;Dados do contribuinte antes de ser alterado.;SYS_C001564107 (C: ENABLED)
+CADASTRO;LOG_CONTRIBUINTE;Tabela para gravar os dados antes de fazer a altera��o dos processos REDESIM.;168576.0;N;4.0;SEQ_CONTRIBUINTE;NUMBER;22;N;0.0;6.0;103624.0;0.0;NO;Sequencial identificador do Contribuinte;LOG_CAD_CONT_FK (FOREIGN KEY: ENABLED)- SYS_C001564105 (C: ENABLED)
+CADASTRO;LOG_CONTRIBUINTE;Tabela para gravar os dados antes de fazer a altera��o dos processos REDESIM.;168576.0;N;1.0;SEQ_LOG_CONTRIBUINTE;NUMBER;22;N;0.0;5.0;168576.0;0.0;NO;Sequencial da tabela;PK_LOG_CONTRIBUINTE (PRIMARY KEY: ENABLED)- SYS_C001564102 (C: ENABLED)
+CADASTRO;LOG_CONTRIBUINTE;Tabela para gravar os dados antes de fazer a altera��o dos processos REDESIM.;168576.0;N;7.0;SEQ_PROCESSO;NUMBER;22;Y;0.0;6.0;151760.0;3555.0;NO;Sequencial do Processo REDESIM; (: )
+CADASTRO;LOG_REQUISICAO_RFB;Tabela que ter� os logs de acesso ao servi�o da RFB, para consultar um CPF ou CNPJ que n�o conste ainda na nossa base de dados.;4650.0;N;5.0;DAT_REQUISICAO;DATE;7;N;;8.0;4534.0;0.0;NO;Data qem que a requisi��o foi feita, no formado data e hora;SYS_C001541642 (C: ENABLED)
+CADASTRO;LOG_REQUISICAO_RFB;Tabela que ter� os logs de acesso ao servi�o da RFB, para consultar um CPF ou CNPJ que n�o conste ainda na nossa base de dados.;4650.0;N;8.0;DSC_EXCECAO;VARCHAR2;200;Y;;9.0;11.0;3706.0;NO;Retorno da exce��o � chamada ao servi�o da RFB, caso d� algum erro. Se der tudo certo, esse campo ser� nulo.; (: )
+CADASTRO;LOG_REQUISICAO_RFB;Tabela que ter� os logs de acesso ao servi�o da RFB, para consultar um CPF ou CNPJ que n�o conste ainda na nossa base de dados.;4650.0;N;7.0;DSC_REQUISICAO;VARCHAR2;200;N;;78.0;13.0;0.0;NO;Requisi��o enviada para RFB;SYS_C001541644 (C: ENABLED)
+CADASTRO;LOG_REQUISICAO_RFB;Tabela que ter� os logs de acesso ao servi�o da RFB, para consultar um CPF ou CNPJ que n�o conste ainda na nossa base de dados.;4650.0;N;6.0;NOM_USUARIO;VARCHAR2;30;N;;6.0;10.0;0.0;NO;Usu�rio que chamou o WS fo Cadastro;SYS_C001541643 (C: ENABLED)
+CADASTRO;LOG_REQUISICAO_RFB;Tabela que ter� os logs de acesso ao servi�o da RFB, para consultar um CPF ou CNPJ que n�o conste ainda na nossa base de dados.;4650.0;N;3.0;NUM_DOCUMENTO;VARCHAR2;14;N;;12.0;3760.0;0.0;NO;N�mero do CPF ou CNPJ consultado;SYS_C001541640 (C: ENABLED)
+CADASTRO;LOG_REQUISICAO_RFB;Tabela que ter� os logs de acesso ao servi�o da RFB, para consultar um CPF ou CNPJ que n�o conste ainda na nossa base de dados.;4650.0;N;1.0;SEQ_LOG_REQUISICAO_RFB;NUMBER;22;N;0.0;4.0;4650.0;0.0;NO;Sequencial identificador da requisicao;PK_LOG_REQUISICAO_RFB (PRIMARY KEY: ENABLED)- SYS_C001541638 (C: ENABLED)
+CADASTRO;LOG_REQUISICAO_RFB;Tabela que ter� os logs de acesso ao servi�o da RFB, para consultar um CPF ou CNPJ que n�o conste ainda na nossa base de dados.;4650.0;N;4.0;STA_REQUISICAO;CHAR;1;N;;2.0;2.0;0.0;NO;"Status da chamada ao servi�o da RFB:
+- S: Sucesso
+- E: Erro";CKC_STA_REQUISICAO_LOG_REQU (C: ENABLED)- SYS_C001541641 (C: ENABLED)
+CADASTRO;LOG_REQUISICAO_RFB;Tabela que ter� os logs de acesso ao servi�o da RFB, para consultar um CPF ou CNPJ que n�o conste ainda na nossa base de dados.;4650.0;N;2.0;TIP_DOCUMENTO;NUMBER;22;N;0.0;3.0;1.0;0.0;NO;"Tipo de documento consultado:
+- 1: CPF (pessoa f�sica)
+- 2: CNPJ (pessoa jur�dica)";CKC_TIP_DOCUMENTO_LOG_REQU (C: ENABLED)- SYS_C001541639 (C: ENABLED)
+CADASTRO;MOTIVO_BAIXA_RFB;Tabela Dom�nio 02 da Receita Federal do Brasil - Motivo de Baixa de um Estabelecimento;59.0;N;1.0;COD_MOTIVO_BAIXA;NUMBER;22;N;0.0;3.0;59.0;0.0;NO;C�digo do Motivo de Baixa;PK_MOTIVO_BAIXA_RFB (PRIMARY KEY: ENABLED)- SYS_C001532807 (C: ENABLED)
+CADASTRO;MOTIVO_BAIXA_RFB;Tabela Dom�nio 02 da Receita Federal do Brasil - Motivo de Baixa de um Estabelecimento;59.0;N;2.0;DSC_MOTIVO_BAIXA;VARCHAR2;150;N;;40.0;59.0;0.0;NO;Descri��o do Motivo de Baixa;SYS_C001532808 (C: ENABLED)
+CADASTRO;MOTIVO_INDEF_SN;"A tabela foi criada para armazenar os motivos de indeferimento do Simples Nacional.
+";71166.0;N;3.0;COD_CGF;NUMBER;22;Y;0.0;6.0;52288.0;3831.0;NO;C�digo CGF do contribuinte.; (: )
+CADASTRO;MOTIVO_INDEF_SN;"A tabela foi criada para armazenar os motivos de indeferimento do Simples Nacional.
+";71166.0;N;2.0;COD_CNPJ;NUMBER;22;N;0.0;9.0;55820.0;0.0;NO;C�digo CNPJ do contribuinte.;SYS_C00105471 (C: ENABLED)
+CADASTRO;MOTIVO_INDEF_SN;"A tabela foi criada para armazenar os motivos de indeferimento do Simples Nacional.
+";71166.0;N;6.0;COD_ORIGEM;NUMBER;22;Y;0.0;3.0;1.0;0.0;NO;"C�digo origem motivo.
+01 - Sefaz
+02 - Municipio
+03 - Uni�o"; (: )
+CADASTRO;MOTIVO_INDEF_SN;"A tabela foi criada para armazenar os motivos de indeferimento do Simples Nacional.
+";71166.0;N;5.0;DAT_CARGA;DATE;7;Y;;8.0;79.0;0.0;NO;Data da carga.; (: )
+CADASTRO;MOTIVO_INDEF_SN;"A tabela foi criada para armazenar os motivos de indeferimento do Simples Nacional.
+";71166.0;N;4.0;DSC_MOTIVO;VARCHAR2;300;Y;;47.0;10.0;0.0;NO;Descriss�o motivo do indefermento.; (: )
+CADASTRO;MOTIVO_INDEF_SN;"A tabela foi criada para armazenar os motivos de indeferimento do Simples Nacional.
+";71166.0;N;1.0;SEQ_MOTIVO_INDEF_SN;NUMBER;22;N;0.0;5.0;71166.0;0.0;NO;Identificador �nico da tabela MOTIVO_INDEF_SN;PK_MOTIVO_INDEF_SN (PRIMARY KEY: ENABLED)- SYS_C00105470 (C: ENABLED)
+CADASTRO;MUNICIPIO_RFB;Tabela Dom�nio 09 da Receita Federal do Brasil - Munic�pios do Brasil;5571.0;N;1.0;COD_MUNICIPIO;NUMBER;22;N;0.0;4.0;5571.0;0.0;NO;C�digo do Munic�pio;PK_MUNICIPIO_RFB (PRIMARY KEY: ENABLED)- SYS_C001532822 (C: ENABLED)
+CADASTRO;MUNICIPIO_RFB;Tabela Dom�nio 09 da Receita Federal do Brasil - Munic�pios do Brasil;5571.0;N;2.0;DSC_MUNICIPIO;VARCHAR2;60;N;;13.0;5289.0;0.0;NO;Descri��o do Munic�pio;SYS_C001532823 (C: ENABLED)
+CADASTRO;NATUREZA_JURIDICA_RFB;Tabela Dom�nio 07 da Receita Federal do Brasil - Natureza Jur�dica de uma Empresa;88.0;N;1.0;COD_NATUREZA_JURIDICA;NUMBER;22;N;0.0;4.0;88.0;0.0;NO;C�digo da Natureza Jur�dica;PK_NATUREZA_JURIDICA_RFB (PRIMARY KEY: ENABLED)- SYS_C001532816 (C: ENABLED)
+CADASTRO;NATUREZA_JURIDICA_RFB;Tabela Dom�nio 07 da Receita Federal do Brasil - Natureza Jur�dica de uma Empresa;88.0;N;2.0;DSC_NATUREZA_JURIDICA;VARCHAR2;150;N;;37.0;87.0;0.0;NO;Descri��o da Natureza Jur�dica;SYS_C001532817 (C: ENABLED)
+CADASTRO;OCORRENCIA_HIST_CONTRIB;Mant�m ocorr�ncias, normalmente por erro ou engano, de altera��es de informa��es cadastrais de um Contribuinte;293930.0;N;6.0;COD_USUARIO;VARCHAR2;8;N;;9.0;204.0;0.0;NO;C�digo do usu�rio que registrou a ocorr�ncia;SYS_C001525535 (C: ENABLED)
+CADASTRO;OCORRENCIA_HIST_CONTRIB;Mant�m ocorr�ncias, normalmente por erro ou engano, de altera��es de informa��es cadastrais de um Contribuinte;293930.0;N;3.0;DAT_MOVIMENTO;DATE;7;N;;8.0;175248.0;0.0;NO;Data de movimento do hist�rico do Contribuinte;FK_HIST_CONTRIB_R_OCO_HIS_CONT (FOREIGN KEY: ENABLED)- SYS_C001525532 (C: ENABLED)
+CADASTRO;OCORRENCIA_HIST_CONTRIB;Mant�m ocorr�ncias, normalmente por erro ou engano, de altera��es de informa��es cadastrais de um Contribuinte;293930.0;N;4.0;DAT_OCORRENCIA;DATE;7;N;;8.0;175088.0;0.0;NO;Data em que foi registrada a ocorr�ncia;SYS_C001525533 (C: ENABLED)
+CADASTRO;OCORRENCIA_HIST_CONTRIB;Mant�m ocorr�ncias, normalmente por erro ou engano, de altera��es de informa��es cadastrais de um Contribuinte;293930.0;N;5.0;DSC_MOTIVO;VARCHAR2;400;N;;96.0;29204.0;0.0;NO;Descri��o da ocorr�ncia. Esta pode acontecer por equ�voco do servidor fazend�rio que fez altera��o indevida no cadastro do Contribuinte, gerando transtorno para ele, inclusive impactando em outros sistemas;SYS_C001525534 (C: ENABLED)
+CADASTRO;OCORRENCIA_HIST_CONTRIB;Mant�m ocorr�ncias, normalmente por erro ou engano, de altera��es de informa��es cadastrais de um Contribuinte;293930.0;N;2.0;SEQ_CONTRIBUINTE;NUMBER;22;N;0.0;6.0;250160.0;0.0;NO;Sequencial identificador do Contribuinte que sofreu a ocorr�ncia (altera��o por engano);FK_HIST_CONTRIB_R_OCO_HIS_CONT (FOREIGN KEY: ENABLED)- SYS_C001525531 (C: ENABLED)
+CADASTRO;OCORRENCIA_HIST_CONTRIB;Mant�m ocorr�ncias, normalmente por erro ou engano, de altera��es de informa��es cadastrais de um Contribuinte;293930.0;N;1.0;SEQ_OCORRENCIA_HIST_CONTRIB;NUMBER;22;N;0.0;7.0;293930.0;0.0;NO;Sequencial identificador do registro;PK_OCORRENCIA_HIST_CONTRIB (PRIMARY KEY: ENABLED)- SYS_C001525530 (C: ENABLED)
+CADASTRO;ORGAO_PUBLICO;Tabela contendo os �rg�os p�blicos;178.0;N;6.0;COD_CNPJ;VARCHAR2;14;N;;15.0;178.0;0.0;NO;CNPJ do �rg�o p�blico;ORGAO_PUBLICO_CNPJ_UK (UNIQUE: ENABLED)- SYS_C001559677 (C: ENABLED)
+CADASTRO;ORGAO_PUBLICO;Tabela contendo os �rg�os p�blicos;178.0;N;3.0;COD_SITUACAO;NUMBER;22;N;0.0;3.0;1.0;0.0;NO;"Situa��o do �rg�o p�blico:
+1 - ativo
+2 - inativo";CKC_COD_SITUACAO_ORGAO_PU (C: ENABLED)- SYS_C001555265 (C: ENABLED)
+CADASTRO;ORGAO_PUBLICO;Tabela contendo os �rg�os p�blicos;178.0;N;5.0;DAT_ATUALIZACAO;DATE;7;N;;8.0;23.0;0.0;NO;Data em que o �rg�o foi alterado (se nunca tiver sifdo alterado, ser� igual a DAT_INCLUSAO.;SYS_C001555267 (C: ENABLED)
+CADASTRO;ORGAO_PUBLICO;Tabela contendo os �rg�os p�blicos;178.0;N;4.0;DAT_INCLUSAO;DATE;7;N;;8.0;22.0;0.0;NO;Data em que o �rg�o foi inserido na tabela;SYS_C001555266 (C: ENABLED)
+CADASTRO;ORGAO_PUBLICO;Tabela contendo os �rg�os p�blicos;178.0;N;2.0;NOM_RAZAO_SOCIAL;VARCHAR2;150;N;;48.0;178.0;0.0;NO;Raz�o Social do �rg�o p�blico;SYS_C001555264 (C: ENABLED)
+CADASTRO;ORGAO_PUBLICO;Tabela contendo os �rg�os p�blicos;178.0;N;1.0;SEQ_ORGAO_PUBLICO;NUMBER;22;N;0.0;4.0;178.0;0.0;NO;Sequencial da tabela;PK_ORGAO_PUBLICO (PRIMARY KEY: ENABLED)- SYS_C001555262 (C: ENABLED)
+CADASTRO;PAIS_RFB;Tabela Dom�nio 10 da Receita Federal do Brasil - Pa�ses;255.0;N;1.0;COD_PAIS;NUMBER;22;N;0.0;4.0;255.0;0.0;NO;C�digo do Pa�s;PK_PAIS_RFB (PRIMARY KEY: ENABLED)- SYS_C001532825 (C: ENABLED)
+CADASTRO;PAIS_RFB;Tabela Dom�nio 10 da Receita Federal do Brasil - Pa�ses;255.0;N;2.0;DSC_PAIS;VARCHAR2;150;N;;14.0;254.0;0.0;NO;Descri��o do Pa�s;SYS_C001532826 (C: ENABLED)
+CADASTRO;PESSOA;"Qualquer Pessoa, F�sica ou Jur�dica (podendo ser contribuinte), com um papel qualquer em algum sistema da SEFAZ. Entidade criada para os sistemas da plataforma Java.
+";5728357.0;N;3.0;SEQ_CONTRIBUINTE;NUMBER;22;Y;0.0;2.0;1209782.0;4518575.0;NO;Identificador de Contribuinte com CGF no Cadastro.;FK_CON_R_PES (FOREIGN KEY: ENABLED)- PESSOA_UK1 (UNIQUE: ENABLED)
+CADASTRO;PESSOA;"Qualquer Pessoa, F�sica ou Jur�dica (podendo ser contribuinte), com um papel qualquer em algum sistema da SEFAZ. Entidade criada para os sistemas da plataforma Java.
+";5728357.0;N;1.0;SEQ_PESSOA;NUMBER;22;N;0.0;6.0;5728357.0;0.0;NO;Identificador �nico de inst�ncia de Pessoa no Cadastro.;PK_PESSOA (PRIMARY KEY: ENABLED)- SYS_C00105473 (C: ENABLED)
+CADASTRO;PESSOA;"Qualquer Pessoa, F�sica ou Jur�dica (podendo ser contribuinte), com um papel qualquer em algum sistema da SEFAZ. Entidade criada para os sistemas da plataforma Java.
+";5728357.0;N;2.0;SEQ_PESSOA_FISICA_JURIDICA;NUMBER;22;Y;0.0;5.0;4604655.0;1123702.0;NO;Identificador de PessoaFisicaJuridica no Cadastro.;FK_PES_FIS_JUR_R_PES (FOREIGN KEY: ENABLED)- PESSOA_UK2 (UNIQUE: ENABLED)
+CADASTRO;PESSOA;"Qualquer Pessoa, F�sica ou Jur�dica (podendo ser contribuinte), com um papel qualquer em algum sistema da SEFAZ. Entidade criada para os sistemas da plataforma Java.
+";5728357.0;N;4.0;TIP_PESSOA;NUMBER;22;N;0.0;3.0;4.0;0.0;NO;Tipo de pessoa, indicando se � PF ou PJ ou tem CGF.;CKC_TIP_PESSOA_PESSOA (C: ENABLED)- SYS_C00105474 (C: ENABLED)
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;10.0;COD_IDENTIDADE;VARCHAR2;35;Y;;2.0;241456.0;3822994.0;NO;Documento de Identidade ( DSC_DOC_IDENT_PES ); (: )
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;11.0;COD_MUNICIPIO;NUMBER;22;Y;0.0;4.0;4690.0;269721.0;NO;;PES_FIS_JU_MUNICIPIO_FK (FOREIGN KEY: ENABLED)
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;3.0;COD_PESSOA;NUMBER;22;Y;0.0;8.0;4874752.0;0.0;NO;C�digo da pessoa ( COD_DEVEDOR_PES);PES_FIS_JU_TIP_COD_PESSOA_UK (UNIQUE: ENABLED)
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;25.0;COD_PESSOA_A;VARCHAR2;14;Y;;0.0;0.0;4898935.0;NO;"C�digo da pessoa, no formato alfanum�rico, seguindo o padr�o, de acordo com o TIP_PESSOA:
+    1 - CGF - 9 posi��es
+    2 - CNPJ - 14 posi��es
+    3 - CPF - 11 posi��es
+    4 - COD - 14 posi��es";PES_FIS_JU_TIP_COD_PESSOA_A_UK (UNIQUE: ENABLED)
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;12.0;COD_UF;NUMBER;22;Y;0.0;3.0;31.0;285697.0;NO;;PES_FIS_JU_MUNICIPIO_FK (FOREIGN KEY: ENABLED)
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;9.0;DAT_ATUALIZACAO;DATE;7;Y;;7.0;2225664.0;804063.0;NO;Data  e hora da �ltima Atualiza��o ( DAT-ATUALIZ-PES); (: )
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;22.0;DAT_INCLUSAO;DATE;7;Y;;8.0;1395456.0;1079.0;NO;Data da inclus?o da pessoa f?sica ou jur?dica.; (: )
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;13.0;DSC_COMPLEMENTO;VARCHAR2;150;Y;;3.0;165168.0;4168155.0;NO;Complemento do Endere�o (DSC_COMPLEMENTO_PES); (: )
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;8.0;NOM_BAIRRO;VARCHAR2;80;Y;;11.0;148912.0;401374.0;NO;Nome do Bairro (DSC_BAIRRO_PES ); (: )
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;17.0;NOM_EMAIL;VARCHAR2;150;Y;;2.0;76880.0;4761161.0;NO;Email do contribuinte.; (: )
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;5.0;NOM_LOGRADOURO;VARCHAR2;150;N;;21.0;2051968.0;0.0;NO;Nome do Logradouro (DSC_LOGRADOURO_PES );SYS_C00105483 (C: ENABLED)
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;4.0;NOM_PESSOA;VARCHAR2;150;N;;28.0;3999232.0;0.0;NO;Nome ( NOM_DEVEDOR_PES );SYS_C00105482 (C: ENABLED)
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;6.0;NUM_CEP;NUMBER;22;Y;0.0;5.0;172352.0;198101.0;NO;N�mero do CEP (NUM_CEP_PES); (: )
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;18.0;NUM_CNH;NUMBER;22;Y;0.0;2.0;215712.0;4293853.0;NO;N�mero da carteira de motorista ou carteira nacional de habilita��o da pessoa.; (: )
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;7.0;NUM_LOGRADOURO;NUMBER;22;Y;0.0;3.0;12296.0;405971.0;NO;N�mero do Logradouro ( NUM_LOGRADOURO_PES ); (: )
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;15.0;NUM_SEQUENCIAL_SIC;NUMBER;22;Y;0.0;0.0;0.0;4898935.0;NO;;PES_FIS_JU_SEQUENCIAL_SIC_UK (UNIQUE: ENABLED)
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;14.0;NUM_TELEFONE;VARCHAR2;12;Y;;3.0;162032.0;4132055.0;NO;N�mero do Telefone (NUM-FONE-PES); (: )
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;19.0;NUM_TELEFONE2;VARCHAR2;12;Y;;2.0;14379.0;4842711.0;NO;Segundo N�mero do Telefone (NUM-FONE2-PES); (: )
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;16.0;SEQ_PAIS;NUMBER;22;Y;0.0;2.0;3.0;1443802.0;NO;Pa�s da pessoa (COD-PAIS-PES).; (: )
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;1.0;SEQ_PESSOA_FISICA_JURIDICA;NUMBER;22;N;0.0;6.0;4898935.0;0.0;NO;;PES_FIS_JU_PK (PRIMARY KEY: ENABLED)- SYS_C00105479 (C: ENABLED)
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;24.0;SEQ_SOCIO;NUMBER;22;Y;0.0;0.0;0.0;4898935.0;NO;Sequencial identificador do S�cio, caso o registro PESSOA_FISICA_JURIDICA tenha equivalente em SOCIO;FK_SOCIO_R_PES_FIS_JUR (FOREIGN KEY: ENABLED)
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;20.0;STA_EMISSAO;VARCHAR2;1;Y;;2.0;2.0;4766283.0;NO;STATUS QUE INDICA UM EMISSOR DE NOTAS FISCAIS AVULSAS.; (: )
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;23.0;STA_EMISSAO_NFE;VARCHAR2;1;Y;;2.0;1.0;4895587.0;NO;Identifica o status do emissor da NFE; (: )
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;21.0;STA_INCLUSAO_ORACLE;NUMBER;22;Y;0.0;3.0;2.0;0.0;NO;Flag que indica se a pessoa f?sica ou jur?dica foi inserida pelo oracle ou n?o (pelo aix).;CKC_STA_INCLUSAO_ORAC_PESSOA_F (C: ENABLED)
+CADASTRO;PESSOA_FISICA_JURIDICA;;4898935.0;N;2.0;TIP_PESSOA;VARCHAR2;1;N;;2.0;3.0;0.0;NO;"Tipo de Pessoa (TIP_DEVEDOR_PES):
+1 - CGF
+2 - CNPJ
+3 - CPF
+4 - Outro C�digo";CKC_TIP_PESSOA_PES_FIS_JUR (C: ENABLED)- PES_FIS_JU_TIP_COD_PESSOA_A_UK (UNIQUE: ENABLED)- PES_FIS_JU_TIP_COD_PESSOA_UK (UNIQUE: ENABLED)- SYS_C00105480 (C: ENABLED)
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;22.0;COD_CEP;NUMBER;22;Y;0.0;6.0;1224320.0;3.0;NO;O CEP do domic�lio do CPF consultado; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;2.0;COD_CPF;NUMBER;22;N;0.0;8.0;259634782.0;0.0;NO;N�mero de CPF da Pessoa F�sica;PESSOA_FISICA_RFB_UK1 (UNIQUE: ENABLED)- SYS_C001529183 (C: ENABLED)
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;20.0;COD_MUNICIPIO;NUMBER;22;Y;0.0;4.0;5572.0;3.0;NO;O c�digo do munic�pio do endere�o, conforme tabela pr�pria da Receita Federal do Brasil; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;27.0;COD_MUNICIPIO_NATURALIDADE;NUMBER;22;Y;0.0;4.0;5572.0;3.0;NO;O c�digo do munic�pio de naturalidade, conforme tabela pr�pria da Receita Federal do Brasil.; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;11.0;COD_NATUREZA_OCUPACAO;NUMBER;22;Y;0.0;3.0;99.0;0.0;NO;C�digo da Natureza da Ocupa��o da Pessoa F�sica; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;12.0;COD_OCUPACAO_PRINCIPAL;NUMBER;22;Y;0.0;3.0;669.0;0.0;NO;C�digo da Ocupa��o Principal da Pessoa F�sica; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;6.0;COD_PAIS;NUMBER;22;Y;0.0;3.0;247.0;0.0;NO;Caso seja residente no exterior, o c�digo do pa�s onde reside; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;31.0;COD_PAIS_NACIONALIDADE;NUMBER;22;Y;0.0;3.0;258.0;3.0;NO;Caso seja estrangeiro, � o c�digo do pa�s nacionalidade; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;19.0;COD_UF;CHAR;2;Y;;3.0;28.0;7.0;NO;A sigla da Unidade da Federa��o (Estado) do domic�lio do CPF consultado; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;29.0;COD_UF_NATURALIDADE;CHAR;2;Y;;3.0;28.0;120074738.0;NO;A sigla da Unidade da Federa��o (Estado) do munic�pio de Naturalidade; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;25.0;COD_UNIDADE_ADMINISTRATIVA;NUMBER;22;Y;0.0;5.0;347.0;3.0;NO;C�digo da Unidade Administrativa; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;34.0;DAT_ALTERACAO;DATE;7;Y;;6.0;12980.0;74419294.0;NO;Data da ultima atualiza��o. Pode haver registro sem a Data; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;35.0;DAT_CARGA;DATE;7;Y;;8.0;1358.0;0.0;NO;Data de carga do registro, pela ferramenta ETL da SEFAZ; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;33.0;DAT_INSCRICAO;DATE;7;Y;;7.0;10446.0;72477243.0;NO;Data de inscri��o do CPF. Pode haver registro sem a Data; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;9.0;DAT_NASCIMENTO;DATE;7;Y;;8.0;54408.0;451.0;NO;Data de Nascimento da Pessoa F�sica. Pode haver registro com data de nascimento fora do calend�rio civil.; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;17.0;DSC_COMPLEMENTO;VARCHAR2;50;Y;;4.0;8167936.0;157488478.0;NO;O complemento do logradouro do domic�lio do CPF consultado; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;18.0;NOM_BAIRRO;VARCHAR2;50;Y;;11.0;3487744.0;9901368.0;NO;O bairro do domic�lio do CPF consultado; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;15.0;NOM_LOGRADOURO;VARCHAR2;60;Y;;16.0;19697664.0;1662849.0;NO;O logradouro do domic�lio do CPF consultado; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;8.0;NOM_MAE;VARCHAR2;60;Y;;25.0;75300864.0;17502186.0;NO;"Nome da M�e da Pessoa F�sica. Pode haver registro com o Nome da M�e em Branco. Pode haver registro com a constante ""MAE DESCONHECIDA"""; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;21.0;NOM_MUNICIPIO;VARCHAR2;50;Y;;12.0;5298.0;5.0;NO;Nome do Munic�pio do endere�o; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;28.0;NOM_MUNICIPIO_NATURALIDADE;VARCHAR2;50;Y;;7.0;5289.0;120074738.0;NO;Nome do Munic�pio de Naturalidade; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;7.0;NOM_PAIS;VARCHAR2;60;Y;;2.0;248.0;259086949.0;NO;Caso seja residente no exterior, o nome do pa�s onde reside; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;32.0;NOM_PAIS_NACIONALIDADE;VARCHAR2;60;Y;;2.0;257.0;256941977.0;NO;Caso seja estrangeiro, � o nome do pa�s nacionalidade; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;3.0;NOM_PESSOA_FISICA;VARCHAR2;60;N;;26.0;162447360.0;0.0;NO;Nome da Pessoa F�sica;SYS_C001529184 (C: ENABLED)
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;26.0;NUM_ANO_OBITO;NUMBER;22;Y;0.0;3.0;149.0;3.0;NO;Ano do �bito no formato AAAA; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;13.0;NUM_ANO_OCUPACAO;NUMBER;22;Y;0.0;3.0;27.0;0.0;NO;Ano Exerc�cio a que se referem os c�digos natureza da ocupa��o e c�digo da ocupa��o principal, no formato AAAA; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;23.0;NUM_DDD_TEL;VARCHAR2;4;Y;;3.0;106.0;162337917.0;NO;N�mero do DDD; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;16.0;NUM_ENDERECO;VARCHAR2;6;Y;;4.0;269408.0;30171831.0;NO;O n�mero no logradouro do domic�lio do CPF consultado; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;24.0;NUM_TELEFONE;VARCHAR2;8;Y;;4.0;30384128.0;162337917.0;NO;N�mero do Telefone ou Celular. Se celular, constar� apenas os 8 �ltimos d�gitos; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;1.0;SEQ_PESSOA_FISICA_RFB;NUMBER;22;N;0.0;7.0;259634782.0;0.0;NO;Sequencial identificador da Pessoa F�sica;PK_PESSOA_FISICA_RFB (PRIMARY KEY: ENABLED)- SYS_C001529182 (C: ENABLED)
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;30.0;STA_ESTRANGEIRO;NUMBER;22;Y;0.0;3.0;2.0;3.0;NO;"Indicativo de estrangeiro:
+0 - N�o � estrangeiro
+1 - � estrangeiro"; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;5.0;STA_RESIDENTE_EXTERIOR;NUMBER;22;Y;0.0;3.0;3.0;0.0;NO;"Indicativo de Residente no Exterior:
+1 - Residente
+2 - N�o Residente"; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;4.0;STA_SITUACAO_CADASTRAL;NUMBER;22;N;0.0;3.0;7.0;0.0;NO;"Indicativo da Situa��o Cadastral do CPF:
+0 - Regular
+2 - Suspensa
+3 - Titular Falecido
+4 - Pendente de Regulariza��o
+5 - Cancelada por Multiplicidade
+8 - Nula
+9 - Cancelada de Of�cio";SYS_C001529185 (C: ENABLED)
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;14.0;TIP_LOGRADOURO;VARCHAR2;20;Y;;6.0;48.0;2.0;NO;� o nome do tipo do logradouro do domic�lio do CPF consultado; (: )
+CADASTRO;PESSOA_FISICA_RFB;Tabela de Pessoas F�sicas (ou Pessoas Naturais), conforme arquivo de CPFs exportado pela Receita Federal do Brasil;259634782.0;N;10.0;TIP_SEXO;NUMBER;22;Y;0.0;3.0;4.0;0.0;NO;"Indicativo de Sexo da Pessoa F�sica.
+1 - Masculino
+2 - Feminino
+9 - Sem informa��o"; (: )
+CADASTRO;PORTE_EMPRESA_RFB;Tabela Dom�nio 04 da Receita Federal do Brasil - Porte de uma Empresa;4.0;N;1.0;COD_PORTE_EMPRESA;NUMBER;22;N;0.0;3.0;4.0;0.0;NO;C�digo do Porte de Empresa;PK_PORTE_EMPRESA_RFB (PRIMARY KEY: ENABLED)- SYS_C001532810 (C: ENABLED)
+CADASTRO;PORTE_EMPRESA_RFB;Tabela Dom�nio 04 da Receita Federal do Brasil - Porte de uma Empresa;4.0;N;2.0;DSC_PORTE_EMPRESA;VARCHAR2;60;N;;15.0;4.0;0.0;NO;Descri��o do Porte de Empresa;SYS_C001532811 (C: ENABLED)
+CADASTRO;QUALIFICACAO_SOCIO_RFB;Tabela Dom�nio 06 da Receita Federal do Brasil - Qualifica��o de um S�cio;68.0;N;1.0;COD_QUALIFICACAO_SOCIO;NUMBER;22;N;0.0;3.0;68.0;0.0;NO;C�digo da Qualifica��o de um S�cio;PK_QUALIFICACAO_SOCIO_RFB (PRIMARY KEY: ENABLED)- SYS_C001532813 (C: ENABLED)
+CADASTRO;QUALIFICACAO_SOCIO_RFB;Tabela Dom�nio 06 da Receita Federal do Brasil - Qualifica��o de um S�cio;68.0;N;2.0;DSC_QUALIFICACAO_SOCIO;VARCHAR2;150;N;;28.0;68.0;0.0;NO;Descri��o da Qualifica��o de um S�cio;SYS_C001532814 (C: ENABLED)
+CADASTRO;REPRESENTANTE_CRC;;5379.0;N;7.0;COD_CPF_REPRESENTANTE;VARCHAR2;14;N;;12.0;4301.0;0.0;NO;CPF do Representante da empresa de contabilidade;SYS_C001564166 (C: ENABLED)
+CADASTRO;REPRESENTANTE_CRC;;5379.0;N;3.0;COD_CPF_REPRESENTANTE_N;NUMBER;22;Y;0.0;8.0;4190.0;193.0;NO;Cpf do Representante do CRC (que e de um CNPJ); (: )
+CADASTRO;REPRESENTANTE_CRC;;5379.0;N;6.0;DAT_EXCLUSAO;DATE;7;Y;;3.0;507.0;4343.0;NO;Data da Exclusao Logica; (: )
+CADASTRO;REPRESENTANTE_CRC;;5379.0;N;5.0;DAT_INCLUSAO;DATE;7;N;;8.0;1012.0;0.0;NO;Data da Inclusao;SYS_C00105492 (C: ENABLED)
+CADASTRO;REPRESENTANTE_CRC;;5379.0;N;2.0;SEQ_CRC_CNPJ;NUMBER;22;Y;0.0;5.0;3675.0;0.0;NO;;REP_CRC_CRC_FK (FOREIGN KEY: ENABLED)
+CADASTRO;REPRESENTANTE_CRC;;5379.0;N;1.0;SEQ_REPRESENTANTE_CRC;NUMBER;22;N;0.0;5.0;5379.0;0.0;NO;SEQUENCE;REP_CRC_PK (PRIMARY KEY: ENABLED)- SYS_C00105489 (C: ENABLED)
+CADASTRO;REPRESENTANTE_CRC;;5379.0;N;4.0;TIP_CODIGO;VARCHAR2;1;N;;2.0;1.0;0.0;NO;Tipo do Codigo do Representante, deve ser sempre = '1';SYS_C00105491 (C: ENABLED)
+CADASTRO;REPRESENTANTE_NFA;Representante dos Emissores de Notas Fiscais Avulsas;0.0;N;3.0;COD_CNPJ_REPRESENTANTE;NUMBER;22;Y;0.0;0.0;0.0;0.0;NO;CNPJ DO EMISSOR; (: )
+CADASTRO;REPRESENTANTE_NFA;Representante dos Emissores de Notas Fiscais Avulsas;0.0;N;2.0;COD_CPF_REPRESENTANTE;NUMBER;22;Y;0.0;0.0;0.0;0.0;NO;CPF DO REPRESENTANTE; (: )
+CADASTRO;REPRESENTANTE_NFA;Representante dos Emissores de Notas Fiscais Avulsas;0.0;N;4.0;DAT_CADASTRO;DATE;7;Y;;0.0;0.0;0.0;NO;DATA DO CADASTRO; (: )
+CADASTRO;REPRESENTANTE_NFA;Representante dos Emissores de Notas Fiscais Avulsas;0.0;N;6.0;DSC_OBSERVACAO;VARCHAR2;1000;Y;;0.0;0.0;0.0;NO;OBSERVACAO DO BLOQUEIO; (: )
+CADASTRO;REPRESENTANTE_NFA;Representante dos Emissores de Notas Fiscais Avulsas;0.0;N;1.0;SEQ_REPRESENTANTE_NFA;NUMBER;22;N;0.0;0.0;0.0;0.0;NO;SEQUENCIAL DA TABELA;PK_REPRESENTANTE_NFA (PRIMARY KEY: ENABLED)- SYS_C00105494 (C: ENABLED)
+CADASTRO;REPRESENTANTE_NFA;Representante dos Emissores de Notas Fiscais Avulsas;0.0;N;5.0;STA_BLOQUEIO;VARCHAR2;1;Y;;0.0;0.0;0.0;NO;STATUS DO BLOQUEIO; (: )
+CADASTRO;RFB_EVENTO_MEI;Arquivos de eventos do MEI (Microempreendedor Individual) enviados pela Receita Federal;241987.0;N;10.0;COD_CNPJ_BASICO;VARCHAR2;8;N;;9.0;212272.0;0.0;NO;N�mero do CNPJ b�sico enviado pela Receita Federal;SYS_C001560930 (C: ENABLED)
+CADASTRO;RFB_EVENTO_MEI;Arquivos de eventos do MEI (Microempreendedor Individual) enviados pela Receita Federal;241987.0;N;2.0;COD_EVENTO_MEI;NUMBER;22;N;0.0;4.0;35.0;0.0;NO;C�digo do evento do SIMEI;FK_EVEN_MEI_R_RFB_EVEN_MEI (FOREIGN KEY: ENABLED)- SYS_C001525546 (C: ENABLED)
+CADASTRO;RFB_EVENTO_MEI;Arquivos de eventos do MEI (Microempreendedor Individual) enviados pela Receita Federal;241987.0;N;3.0;COD_NATUREZA_EVENTO;NUMBER;22;N;0.0;3.0;3.0;0.0;NO;"Natureza de evento do Simples Nacional:
+1 - Medida Judicial
+2 - Ato Administrativo
+3 - Op��o do Contribuinte
+4 - Redesim";CKC_NATUREZA_EVE_RFB_EVE_MEI (C: ENABLED)- SYS_C001525548 (C: ENABLED)
+CADASTRO;RFB_EVENTO_MEI;Arquivos de eventos do MEI (Microempreendedor Individual) enviados pela Receita Federal;241987.0;N;9.0;COD_USUARIO;VARCHAR2;8;Y;;9.0;1.0;0.0;NO;C�digo do usu�rio que gravou o registro; (: )
+CADASTRO;RFB_EVENTO_MEI;Arquivos de eventos do MEI (Microempreendedor Individual) enviados pela Receita Federal;241987.0;N;4.0;DAT_EFEITO;DATE;7;Y;;8.0;1087.0;0.0;NO;Data de efeito no evento; (: )
+CADASTRO;RFB_EVENTO_MEI;Arquivos de eventos do MEI (Microempreendedor Individual) enviados pela Receita Federal;241987.0;N;5.0;DAT_OCORRENCIA;DATE;7;Y;;8.0;232880.0;0.0;NO;Data da ocorr�ncia do evento; (: )
+CADASTRO;RFB_EVENTO_MEI;Arquivos de eventos do MEI (Microempreendedor Individual) enviados pela Receita Federal;241987.0;N;7.0;DAT_ULTIMA_ALTERACAO;DATE;7;Y;;8.0;96.0;0.0;NO;Data da �ltima altera��o do registro; (: )
+CADASTRO;RFB_EVENTO_MEI;Arquivos de eventos do MEI (Microempreendedor Individual) enviados pela Receita Federal;241987.0;N;6.0;NUM_PROCESSO;NUMBER;22;Y;0.0;6.0;218592.0;0.0;NO;N�mero da RFB gravado no nosso n�mero de processo; (: )
+CADASTRO;RFB_EVENTO_MEI;Arquivos de eventos do MEI (Microempreendedor Individual) enviados pela Receita Federal;241987.0;N;8.0;NUM_PROCESSO_SN;NUMBER;22;Y;0.0;6.0;215424.0;0.0;NO;N�mero do processo do Simples Nacional; (: )
+CADASTRO;RFB_EVENTO_MEI;Arquivos de eventos do MEI (Microempreendedor Individual) enviados pela Receita Federal;241987.0;N;1.0;SEQ_RFB_EVENTO_MEI;NUMBER;22;N;0.0;5.0;241987.0;0.0;NO;Sequencial identificador do registro;PK_RFB_EVENTO_MEI (PRIMARY KEY: ENABLED)- SYS_C001525545 (C: ENABLED)
+CADASTRO;RFB_EVENTO_SN;Arquivos de eventos do Simples Nacional enviados pela Receita Federal;154895.0;N;10.0;COD_CNPJ_BASICO;VARCHAR2;8;N;;9.0;142880.0;0.0;NO;N�mero do CNPJ b�sico enviado pela Receita Federal;SYS_C001560928 (C: ENABLED)
+CADASTRO;RFB_EVENTO_SN;Arquivos de eventos do Simples Nacional enviados pela Receita Federal;154895.0;N;2.0;COD_EVENTO_SN;NUMBER;22;N;0.0;4.0;40.0;0.0;NO;C�digo do evento do Simples Nacional;FK_EVEN_SIM_NAC_R_RFB_EVEN_SN (FOREIGN KEY: ENABLED)- SYS_C001525553 (C: ENABLED)
+CADASTRO;RFB_EVENTO_SN;Arquivos de eventos do Simples Nacional enviados pela Receita Federal;154895.0;N;3.0;COD_NATUREZA_EVENTO;NUMBER;22;N;0.0;3.0;3.0;0.0;NO;"Natureza de evento do Simples Nacional:
+1 - Medida Judicial
+2 - Ato Administrativo
+3 - Op��o do Contribuinte
+4 - Redesim";CKC_NATUREZA_EVE_RFB_EVE_SN (C: ENABLED)- SYS_C001525555 (C: ENABLED)
+CADASTRO;RFB_EVENTO_SN;Arquivos de eventos do Simples Nacional enviados pela Receita Federal;154895.0;N;8.0;COD_USUARIO;VARCHAR2;8;Y;;7.0;1.0;0.0;NO;C�digo do usu�rio que gravou o registro; (: )
+CADASTRO;RFB_EVENTO_SN;Arquivos de eventos do Simples Nacional enviados pela Receita Federal;154895.0;N;4.0;DAT_EFEITO;DATE;7;Y;;8.0;654.0;0.0;NO;Data de efeito do evento; (: )
+CADASTRO;RFB_EVENTO_SN;Arquivos de eventos do Simples Nacional enviados pela Receita Federal;154895.0;N;5.0;DAT_OCORRENCIA;DATE;7;Y;;8.0;145648.0;0.0;NO;Data da ocorr�ncia do evento; (: )
+CADASTRO;RFB_EVENTO_SN;Arquivos de eventos do Simples Nacional enviados pela Receita Federal;154895.0;N;9.0;DAT_PROCESSAMENTO;DATE;7;Y;;8.0;76.0;1000.0;NO;; (: )
+CADASTRO;RFB_EVENTO_SN;Arquivos de eventos do Simples Nacional enviados pela Receita Federal;154895.0;N;7.0;DAT_ULTIMA_ALTERACAO;DATE;7;Y;;8.0;85.0;0.0;NO;Data da �ltima altera��o do registro; (: )
+CADASTRO;RFB_EVENTO_SN;Arquivos de eventos do Simples Nacional enviados pela Receita Federal;154895.0;N;6.0;NUM_PROCESSO;NUMBER;22;Y;0.0;6.0;144192.0;0.0;NO;N�mero da Receita Federal gravado no nosso n�mero de processo; (: )
+CADASTRO;RFB_EVENTO_SN;Arquivos de eventos do Simples Nacional enviados pela Receita Federal;154895.0;N;1.0;SEQ_RFB_EVENTO_SN;NUMBER;22;N;0.0;5.0;154895.0;0.0;NO;Sequencial identificador do registro;PK_RFB_EVENTO_SN (PRIMARY KEY: ENABLED)- SYS_C001525552 (C: ENABLED)
+CADASTRO;SINDUSCON;Cont�m as empresas construtoras civis, que s�o filiadas ao SINDUSCON - Sindicato das Ind�strias da Constru��o Civil. Essas empresas det�m alguns benef�cios relacionados ao ICMS no Estado do Cear�. Mensalmente, o SINDUSCON envia a lista das empresas filiadas. Caso uma determinada empresa n�o exista no cadastro da SEFAZ ou caso exista, mas esteja inativada (data fim de vig�ncia preenchida), ela � inserida no banco de dados. Caso a empresa exista no cadastro da SEFAZ como filiada e n�o mais venha no arquivo enviado pelo SINDUSCON, a  data final de vig�ncia da empresa deve ser setada para a data corrente.;3050.0;N;3.0;COD_CGF;NUMBER;22;Y;0.0;6.0;887.0;144.0;NO;Inscri��o estadual da Empresa. N�o � obrigat�rio.; (: )
+CADASTRO;SINDUSCON;Cont�m as empresas construtoras civis, que s�o filiadas ao SINDUSCON - Sindicato das Ind�strias da Constru��o Civil. Essas empresas det�m alguns benef�cios relacionados ao ICMS no Estado do Cear�. Mensalmente, o SINDUSCON envia a lista das empresas filiadas. Caso uma determinada empresa n�o exista no cadastro da SEFAZ ou caso exista, mas esteja inativada (data fim de vig�ncia preenchida), ela � inserida no banco de dados. Caso a empresa exista no cadastro da SEFAZ como filiada e n�o mais venha no arquivo enviado pelo SINDUSCON, a  data final de vig�ncia da empresa deve ser setada para a data corrente.;3050.0;N;2.0;COD_CNPJ;NUMBER;22;N;0.0;9.0;1132.0;0.0;NO;CNPJ da Empresa.;SYS_C00105497 (C: ENABLED)
+CADASTRO;SINDUSCON;Cont�m as empresas construtoras civis, que s�o filiadas ao SINDUSCON - Sindicato das Ind�strias da Constru��o Civil. Essas empresas det�m alguns benef�cios relacionados ao ICMS no Estado do Cear�. Mensalmente, o SINDUSCON envia a lista das empresas filiadas. Caso uma determinada empresa n�o exista no cadastro da SEFAZ ou caso exista, mas esteja inativada (data fim de vig�ncia preenchida), ela � inserida no banco de dados. Caso a empresa exista no cadastro da SEFAZ como filiada e n�o mais venha no arquivo enviado pelo SINDUSCON, a  data final de vig�ncia da empresa deve ser setada para a data corrente.;3050.0;N;6.0;DAT_VIGENCIA_FIM;DATE;7;Y;;8.0;39.0;0.0;NO;Data em que a empresa saiu do cadastro SINDUSCON da SEFAZ.; (: )
+CADASTRO;SINDUSCON;Cont�m as empresas construtoras civis, que s�o filiadas ao SINDUSCON - Sindicato das Ind�strias da Constru��o Civil. Essas empresas det�m alguns benef�cios relacionados ao ICMS no Estado do Cear�. Mensalmente, o SINDUSCON envia a lista das empresas filiadas. Caso uma determinada empresa n�o exista no cadastro da SEFAZ ou caso exista, mas esteja inativada (data fim de vig�ncia preenchida), ela � inserida no banco de dados. Caso a empresa exista no cadastro da SEFAZ como filiada e n�o mais venha no arquivo enviado pelo SINDUSCON, a  data final de vig�ncia da empresa deve ser setada para a data corrente.;3050.0;N;5.0;DAT_VIGENCIA_INICIO;DATE;7;N;;8.0;64.0;0.0;NO;Data de inclus�o da empresa no cadastro SINDUSCON pela SEFAZ.;SYS_C00105499 (C: ENABLED)
+CADASTRO;SINDUSCON;Cont�m as empresas construtoras civis, que s�o filiadas ao SINDUSCON - Sindicato das Ind�strias da Constru��o Civil. Essas empresas det�m alguns benef�cios relacionados ao ICMS no Estado do Cear�. Mensalmente, o SINDUSCON envia a lista das empresas filiadas. Caso uma determinada empresa n�o exista no cadastro da SEFAZ ou caso exista, mas esteja inativada (data fim de vig�ncia preenchida), ela � inserida no banco de dados. Caso a empresa exista no cadastro da SEFAZ como filiada e n�o mais venha no arquivo enviado pelo SINDUSCON, a  data final de vig�ncia da empresa deve ser setada para a data corrente.;3050.0;N;4.0;NOM_RAZAO_SOCIAL;VARCHAR2;60;N;;33.0;1201.0;0.0;NO;Nome da empresa.;SYS_C00105498 (C: ENABLED)
+CADASTRO;SINDUSCON;Cont�m as empresas construtoras civis, que s�o filiadas ao SINDUSCON - Sindicato das Ind�strias da Constru��o Civil. Essas empresas det�m alguns benef�cios relacionados ao ICMS no Estado do Cear�. Mensalmente, o SINDUSCON envia a lista das empresas filiadas. Caso uma determinada empresa n�o exista no cadastro da SEFAZ ou caso exista, mas esteja inativada (data fim de vig�ncia preenchida), ela � inserida no banco de dados. Caso a empresa exista no cadastro da SEFAZ como filiada e n�o mais venha no arquivo enviado pelo SINDUSCON, a  data final de vig�ncia da empresa deve ser setada para a data corrente.;3050.0;N;1.0;SEQ_SINDUSCON;NUMBER;22;N;0.0;4.0;3050.0;0.0;NO;Identificador �nico da empresa filiada ao SINDUSCON.;PK_SINDUSCON (PRIMARY KEY: ENABLED)- SYS_C00105496 (C: ENABLED)
+CADASTRO;SITUACAO_CADASTRAL_RFB;Tabela Dom�nio 01 da Receita Federal do Brasil - Situa��o Cadastral de um Estabelecimento;7.0;N;1.0;COD_SITUACAO_CADASTRAL;NUMBER;22;N;0.0;3.0;7.0;0.0;NO;C�digo da Situa��o Cadastral;PK_SITUACAO_CADASTRAL_RFB (PRIMARY KEY: ENABLED)- SYS_C001532804 (C: ENABLED)
+CADASTRO;SITUACAO_CADASTRAL_RFB;Tabela Dom�nio 01 da Receita Federal do Brasil - Situa��o Cadastral de um Estabelecimento;7.0;N;2.0;DSC_SITUACAO_CADASTRAL;VARCHAR2;60;N;;11.0;7.0;0.0;NO;Descri��o da Situa��o Cadastral;SYS_C001532805 (C: ENABLED)
+CADASTRO;SITUACAO_JURIDICA;"Tabela para guardar os eventos abaixo chegados pelo REDESIM:
+405- DECRETA��O DE FAL�NCIA
+406- REABILITA��O DE FAL�NCIA
+407- ESP�LIO DE EMPRES�RIO, EMPRESA INDIVIDUAL IMOBILI�RIA, EIRELI OU TITULAR DE EMPRESA UNIPESSOAL DE ADVOCACIA
+408- T�RMINO DE LIQUIDA��O
+410- IN�CIO DA INTERVEN��O
+411- ENCERRAMENTO DA INTERVEN��O
+416- IN�CIO DE LIQUIDA��O JUDICIAL
+417- IN�CIO DE LIQUIDA��O EXTRAJUDICIAL
+418- RECUPERA��O JUDICIAL
+419- ENCERRAMENTO DE RECUPERA��O JUDICIAL
+";501.0;N;7.0;COD_CNPJ;VARCHAR2;14;Y;;0.0;0.0;501.0;NO;CNPJ no formato alfanum�rico; (: )
+CADASTRO;SITUACAO_JURIDICA;"Tabela para guardar os eventos abaixo chegados pelo REDESIM:
+405- DECRETA��O DE FAL�NCIA
+406- REABILITA��O DE FAL�NCIA
+407- ESP�LIO DE EMPRES�RIO, EMPRESA INDIVIDUAL IMOBILI�RIA, EIRELI OU TITULAR DE EMPRESA UNIPESSOAL DE ADVOCACIA
+408- T�RMINO DE LIQUIDA��O
+410- IN�CIO DA INTERVEN��O
+411- ENCERRAMENTO DA INTERVEN��O
+416- IN�CIO DE LIQUIDA��O JUDICIAL
+417- IN�CIO DE LIQUIDA��O EXTRAJUDICIAL
+418- RECUPERA��O JUDICIAL
+419- ENCERRAMENTO DE RECUPERA��O JUDICIAL
+";501.0;N;4.0;COD_CNPJ_N;NUMBER;22;N;0.0;9.0;396.0;0.0;NO;CNPJ do Processo REDESIM;SYS_C001550665 (C: ENABLED)
+CADASTRO;SITUACAO_JURIDICA;"Tabela para guardar os eventos abaixo chegados pelo REDESIM:
+405- DECRETA��O DE FAL�NCIA
+406- REABILITA��O DE FAL�NCIA
+407- ESP�LIO DE EMPRES�RIO, EMPRESA INDIVIDUAL IMOBILI�RIA, EIRELI OU TITULAR DE EMPRESA UNIPESSOAL DE ADVOCACIA
+408- T�RMINO DE LIQUIDA��O
+410- IN�CIO DA INTERVEN��O
+411- ENCERRAMENTO DA INTERVEN��O
+416- IN�CIO DE LIQUIDA��O JUDICIAL
+417- IN�CIO DE LIQUIDA��O EXTRAJUDICIAL
+418- RECUPERA��O JUDICIAL
+419- ENCERRAMENTO DE RECUPERA��O JUDICIAL
+";501.0;N;3.0;COD_EVENTO;NUMBER;22;N;0.0;4.0;9.0;0.0;NO;C�digo do evento REDESIM;SITUACAO_JURIDICA_UK (UNIQUE: ENABLED)- SIT_JURIDICA_EVENTO_FK (FOREIGN KEY: ENABLED)- SYS_C001550664 (C: ENABLED)
+CADASTRO;SITUACAO_JURIDICA;"Tabela para guardar os eventos abaixo chegados pelo REDESIM:
+405- DECRETA��O DE FAL�NCIA
+406- REABILITA��O DE FAL�NCIA
+407- ESP�LIO DE EMPRES�RIO, EMPRESA INDIVIDUAL IMOBILI�RIA, EIRELI OU TITULAR DE EMPRESA UNIPESSOAL DE ADVOCACIA
+408- T�RMINO DE LIQUIDA��O
+410- IN�CIO DA INTERVEN��O
+411- ENCERRAMENTO DA INTERVEN��O
+416- IN�CIO DE LIQUIDA��O JUDICIAL
+417- IN�CIO DE LIQUIDA��O EXTRAJUDICIAL
+418- RECUPERA��O JUDICIAL
+419- ENCERRAMENTO DE RECUPERA��O JUDICIAL
+";501.0;N;5.0;COD_PROCESSO_REDESIM;VARCHAR2;18;N;;14.0;501.0;0.0;NO;N�mero do Processo REDESIM que gerou esse evento.;SYS_C001550666 (C: ENABLED)
+CADASTRO;SITUACAO_JURIDICA;"Tabela para guardar os eventos abaixo chegados pelo REDESIM:
+405- DECRETA��O DE FAL�NCIA
+406- REABILITA��O DE FAL�NCIA
+407- ESP�LIO DE EMPRES�RIO, EMPRESA INDIVIDUAL IMOBILI�RIA, EIRELI OU TITULAR DE EMPRESA UNIPESSOAL DE ADVOCACIA
+408- T�RMINO DE LIQUIDA��O
+410- IN�CIO DA INTERVEN��O
+411- ENCERRAMENTO DA INTERVEN��O
+416- IN�CIO DE LIQUIDA��O JUDICIAL
+417- IN�CIO DE LIQUIDA��O EXTRAJUDICIAL
+418- RECUPERA��O JUDICIAL
+419- ENCERRAMENTO DE RECUPERA��O JUDICIAL
+";501.0;N;6.0;DAT_EVENTO;DATE;7;N;;8.0;358.0;0.0;NO;Data do evento REDESIM;SITUACAO_JURIDICA_UK (UNIQUE: ENABLED)- SYS_C001550667 (C: ENABLED)
+CADASTRO;SITUACAO_JURIDICA;"Tabela para guardar os eventos abaixo chegados pelo REDESIM:
+405- DECRETA��O DE FAL�NCIA
+406- REABILITA��O DE FAL�NCIA
+407- ESP�LIO DE EMPRES�RIO, EMPRESA INDIVIDUAL IMOBILI�RIA, EIRELI OU TITULAR DE EMPRESA UNIPESSOAL DE ADVOCACIA
+408- T�RMINO DE LIQUIDA��O
+410- IN�CIO DA INTERVEN��O
+411- ENCERRAMENTO DA INTERVEN��O
+416- IN�CIO DE LIQUIDA��O JUDICIAL
+417- IN�CIO DE LIQUIDA��O EXTRAJUDICIAL
+418- RECUPERA��O JUDICIAL
+419- ENCERRAMENTO DE RECUPERA��O JUDICIAL
+";501.0;N;2.0;SEQ_CONTRIBUINTE;NUMBER;22;N;0.0;6.0;396.0;0.0;NO;Sequencial do contribuinte que recebeu o evento;SITUACAO_JURIDICA_UK (UNIQUE: ENABLED)- SIT_JURDICA_CONTRIB_FK (FOREIGN KEY: ENABLED)- SYS_C001550663 (C: ENABLED)
+CADASTRO;SITUACAO_JURIDICA;"Tabela para guardar os eventos abaixo chegados pelo REDESIM:
+405- DECRETA��O DE FAL�NCIA
+406- REABILITA��O DE FAL�NCIA
+407- ESP�LIO DE EMPRES�RIO, EMPRESA INDIVIDUAL IMOBILI�RIA, EIRELI OU TITULAR DE EMPRESA UNIPESSOAL DE ADVOCACIA
+408- T�RMINO DE LIQUIDA��O
+410- IN�CIO DA INTERVEN��O
+411- ENCERRAMENTO DA INTERVEN��O
+416- IN�CIO DE LIQUIDA��O JUDICIAL
+417- IN�CIO DE LIQUIDA��O EXTRAJUDICIAL
+418- RECUPERA��O JUDICIAL
+419- ENCERRAMENTO DE RECUPERA��O JUDICIAL
+";501.0;N;1.0;SEQ_SITUACAO_JURIDICA;NUMBER;22;N;0.0;4.0;501.0;0.0;NO;Sequencial da tabela.;PK_SITUACAO_JURIDICA (PRIMARY KEY: ENABLED)- SYS_C001550662 (C: ENABLED)
+CADASTRO;SOCIEDADE;;1517223.0;N;7.0;COD_CARGO;NUMBER;22;N;0.0;3.0;10.0;0.0;NO;;SYS_C00105505 (C: ENABLED)
+CADASTRO;SOCIEDADE;;1517223.0;N;12.0;COD_CARGO_JUCEC;NUMBER;22;Y;0.0;2.0;25.0;993142.0;NO;C�digo identificador do Cargo na JUCEC; (: )
+CADASTRO;SOCIEDADE;;1517223.0;N;2.0;DAT_ATUALIZACAO_JUCEC;DATE;7;Y;;8.0;17968.0;208418.0;NO;; (: )
+CADASTRO;SOCIEDADE;;1517223.0;N;8.0;DAT_EXCLUSAO;DATE;7;Y;;2.0;79608.0;1400116.0;NO;;SOCIEDADE_CONT_SOC_DAT_EXCL_UK (UNIQUE: ENABLED)
+CADASTRO;SOCIEDADE;;1517223.0;N;9.0;DAT_INCLUSAO;DATE;7;Y;;8.0;754048.0;2018.0;NO;Data de entrada na sociedade.; (: )
+CADASTRO;SOCIEDADE;;1517223.0;N;11.0;NUM_CHANCELA_EXCLUSAO;VARCHAR2;11;Y;;2.0;2.0;1517219.0;NO;N�mero da Chancela na Exclus�o de S�cio na JUCEC.; (: )
+CADASTRO;SOCIEDADE;;1517223.0;N;4.0;NUM_CHANCELA_INCLUSAO;VARCHAR2;11;Y;;2.0;41764.0;1386683.0;NO;; (: )
+CADASTRO;SOCIEDADE;;1517223.0;N;3.0;NUM_PERCENTUAL;NUMBER;22;N;2.0;3.0;3259.0;0.0;NO;Percentual de participa��o do s�cio na sociedade;SYS_C00105502 (C: ENABLED)
+CADASTRO;SOCIEDADE;;1517223.0;N;6.0;SEQ_CONTRIBUINTE;NUMBER;22;N;0.0;6.0;1208832.0;0.0;NO;;SOCIEDADE_CAD_CONT_FK (FOREIGN KEY: ENABLED)- SOCIEDADE_CONT_SOC_DAT_EXCL_UK (UNIQUE: ENABLED)- SYS_C00105504 (C: ENABLED)
+CADASTRO;SOCIEDADE;;1517223.0;N;1.0;SEQ_SOCIEDADE;NUMBER;22;N;0.0;6.0;1517223.0;0.0;NO;;SOCIEDADE_PK (PRIMARY KEY: ENABLED)- SYS_C00105501 (C: ENABLED)
+CADASTRO;SOCIEDADE;;1517223.0;N;5.0;SEQ_SOCIO;NUMBER;22;N;0.0;6.0;1118208.0;0.0;NO;;SOCIEDADE_CONT_SOC_DAT_EXCL_UK (UNIQUE: ENABLED)- SOCIEDADE_SOCIO_FK (FOREIGN KEY: ENABLED)- SYS_C00105503 (C: ENABLED)
+CADASTRO;SOCIEDADE;;1517223.0;N;10.0;STA_ALTERACAO_CADASTRAL;NUMBER;22;Y;0.0;3.0;3.0;60734.0;NO;"Indicador de status da altera��o cadastral.
+1 - Em Inclus�o
+2 - Em Altera��o
+3 - Digitado";CKC_STA_ALTER_CADAST_SOCIEDADE (C: ENABLED)
+CADASTRO;SOCIEDADE_JUCEC;;0.0;N;7.0;COD_CARGO;NUMBER;22;Y;0.0;0.0;0.0;0.0;NO;"C�digo cargo s�cio na JUCEC:
+1 - Diretor
+2 - Acionista
+3 - Diretor Presidente
+4 - S�cio
+6 - S�cio Gerente
+7 - S�ndico
+8 - Liquidante
+10 - Titular de FI
+11 - Gerente"; (: )
+CADASTRO;SOCIEDADE_JUCEC;;0.0;N;5.0;COD_CPF_CGC_SOCIO;NUMBER;22;Y;0.0;0.0;0.0;0.0;NO;CPF/CGC do s�cio na JUCEC; (: )
+CADASTRO;SOCIEDADE_JUCEC;;0.0;N;2.0;COD_EMPRESA;NUMBER;22;Y;0.0;0.0;0.0;0.0;NO;C�digo identificador da empresa; (: )
+CADASTRO;SOCIEDADE_JUCEC;;0.0;N;4.0;COD_INSCRICAO_JUNTA;VARCHAR2;11;Y;;0.0;0.0;0.0;NO;Inscri��o na Junta Comercial (NIRE); (: )
+CADASTRO;SOCIEDADE_JUCEC;;0.0;N;6.0;COD_INSCRICAO_JUNTA_SOCIO;VARCHAR2;11;Y;;0.0;0.0;0.0;NO;Inscri��o na JUCEC do s�cio; (: )
+CADASTRO;SOCIEDADE_JUCEC;;0.0;N;3.0;COD_SOCIO;NUMBER;22;Y;0.0;0.0;0.0;0.0;NO;C�digo s�cio; (: )
+CADASTRO;SOCIEDADE_JUCEC;;0.0;N;10.0;COD_VINCULO;NUMBER;22;Y;0.0;0.0;0.0;0.0;NO;Codigo do vinculo (cargo) do s�cio na empresa. Como uma mesma pessoa pode ter mais de um vinculo, este campo ter� o vinculo principal. Ex: s�cio gerente e s�cio ter� s�cio gerente; (: )
+CADASTRO;SOCIEDADE_JUCEC;;0.0;N;9.0;DAT_ATUALIZACAO;DATE;7;Y;;0.0;0.0;0.0;NO;Data da �ltima atualiza��o na SEFAZ; (: )
+CADASTRO;SOCIEDADE_JUCEC;;0.0;N;8.0;NUM_PERCENTUAL;NUMBER;22;Y;2.0;0.0;0.0;0.0;NO;Percentual do s�cio na sociedade; (: )
+CADASTRO;SOCIEDADE_JUCEC;;0.0;N;1.0;SEQ_SOCIEDADE_JUCEC;NUMBER;22;N;0.0;0.0;0.0;0.0;NO;Sequencial identificador do registro;PK_SOCIEDADE_JUCEC (PRIMARY KEY: ENABLED)- SYS_C001525563 (C: ENABLED)
+CADASTRO;SOCIO;;1128511.0;N;11.0;COD_IDENTIDADE;VARCHAR2;25;Y;;18.0;786688.0;333149.0;NO;; (: )
+CADASTRO;SOCIO;;1128511.0;N;17.0;COD_LOGRADOURO;NUMBER;22;Y;0.0;0.0;0.0;1128511.0;NO;C�digo de Logradouro do Endere�o do S�cio; (: )
+CADASTRO;SOCIO;;1128511.0;N;18.0;COD_MUNICIPIO;NUMBER;22;Y;0.0;3.0;1335.0;604546.0;NO;C�digo de Munic�pio do Endere�o do S�cio; (: )
+CADASTRO;SOCIO;;1128511.0;N;2.0;COD_SOCIO;VARCHAR2;14;N;;12.0;1128511.0;0.0;NO;;SOCIO_COD_SOCIO_TIP_CODIGO_UK (UNIQUE: ENABLED)- SYS_C00105509 (C: ENABLED)
+CADASTRO;SOCIO;;1128511.0;N;5.0;COD_UF;NUMBER;22;N;0.0;3.0;30.0;0.0;NO;;SOCIO_UNID_FEDER_FK (FOREIGN KEY: ENABLED)- SYS_C00105512 (C: ENABLED)
+CADASTRO;SOCIO;;1128511.0;N;12.0;DAT_CONFIRMACAO_TITULAR;DATE;7;Y;;2.0;41.0;1128413.0;NO;; (: )
+CADASTRO;SOCIO;;1128511.0;N;15.0;DAT_ULTIMA_ALTERACAO;DATE;7;Y;;7.0;554432.0;283168.0;NO;Data da �ltima altera��o do cadastro do S�cio; (: )
+CADASTRO;SOCIO;;1128511.0;N;19.0;DSC_COMPLEMENTO;VARCHAR2;150;Y;;3.0;38980.0;973419.0;NO;Descri��o do Complemento do Endere�o do S�cio; (: )
+CADASTRO;SOCIO;;1128511.0;N;8.0;NOM_BAIRRO;VARCHAR2;80;Y;;31.0;36968.0;1.0;NO;; (: )
+CADASTRO;SOCIO;;1128511.0;N;13.0;NOM_EMAIL;VARCHAR2;150;Y;;6.0;110784.0;931568.0;NO;Campo que cont�m o email do s�cio.; (: )
+CADASTRO;SOCIO;;1128511.0;N;7.0;NOM_ENDERECO;VARCHAR2;150;Y;;36.0;604608.0;1.0;NO;; (: )
+CADASTRO;SOCIO;;1128511.0;N;9.0;NOM_MUNICIPIO;VARCHAR2;30;Y;;31.0;3992.0;122.0;NO;; (: )
+CADASTRO;SOCIO;;1128511.0;N;24.0;NOM_REPR_LEGAL;VARCHAR2;80;Y;;2.0;76.0;1128381.0;NO;Nome do representante legal do s�cio estrangeiro, cujo endere�o ser� cadastrado nesse s�cio estrangeiro.; (: )
+CADASTRO;SOCIO;;1128511.0;N;4.0;NOM_SOCIO;VARCHAR2;150;N;;28.0;1054976.0;0.0;NO;Nome do S�cio;SYS_C00105511 (C: ENABLED)
+CADASTRO;SOCIO;;1128511.0;N;6.0;NUM_CEP;NUMBER;22;N;0.0;6.0;53136.0;0.0;NO;;SYS_C00105513 (C: ENABLED)
+CADASTRO;SOCIO;;1128511.0;N;23.0;NUM_CPF_REPR_LEGAL;NUMBER;22;Y;0.0;2.0;76.0;1128381.0;NO;CPF do representante legal do s�cio estrangeiro, cujo endere�o ser� cadastrado nesse s�cio estrangeiro.; (: )
+CADASTRO;SOCIO;;1128511.0;N;16.0;NUM_ENDERECO;VARCHAR2;5;Y;;3.0;9600.0;712706.0;NO;N�mero do Endere�o do S�cio; (: )
+CADASTRO;SOCIO;;1128511.0;N;10.0;NUM_TELEFONE;VARCHAR2;12;Y;;8.0;522560.0;493213.0;NO;; (: )
+CADASTRO;SOCIO;;1128511.0;N;21.0;NUM_TELEFONE2;VARCHAR2;12;Y;;2.0;893.0;1127526.0;NO;2o N�mero de telefone do S�cio; (: )
+CADASTRO;SOCIO;;1128511.0;N;1.0;SEQ_SOCIO;NUMBER;22;N;0.0;6.0;1128511.0;0.0;NO;;SOCIO_PK (PRIMARY KEY: ENABLED)- SYS_C00105508 (C: ENABLED)
+CADASTRO;SOCIO;;1128511.0;N;14.0;STA_ALTERACAO_CADASTRAL;NUMBER;22;Y;0.0;3.0;3.0;201.0;NO;"Indicador de status da altera��o cadastral.
+1 - Em Inclus�o
+2 - Em Altera��o
+3 - Digitado";CKC_STA_ALTER_CADAST_SOCIO (C: ENABLED)
+CADASTRO;SOCIO;;1128511.0;N;22.0;STA_ESTRANGEIRO;NUMBER;22;Y;0.0;2.0;2.0;327.0;NO;"Indica se o s�cio � estrangeiro:
+0 - n�o � estrangeiro
+1 - � estrangeiro"; (: )
+CADASTRO;SOCIO;;1128511.0;N;3.0;TIP_CODIGO;VARCHAR2;1;N;;2.0;9.0;0.0;NO;Indica se o Socio e do tipo Pessoa Fisica ou Pessoa juridica. 0 - CNPJ, maior que zero CPF;SOCIO_COD_SOCIO_TIP_CODIGO_UK (UNIQUE: ENABLED)- SYS_C00105510 (C: ENABLED)
+CADASTRO;SOCIO;;1128511.0;N;20.0;TIP_LOGRADOURO;VARCHAR2;10;Y;;2.0;313.0;663214.0;NO;Tipo de Logradouro do Endere�o do S�cio; (: )
+CADASTRO;SOCIO_ESTRANGEIRO;"Mant�m os S�cios Estrangeiros de uma Sociedade, representados na mesma atrav�s de um S�cio espec�fico com o cargo ""Representante Tribut�rio""";888.0;N;3.0;NOM_SOCIO_ESTRANGEIRO;VARCHAR2;150;N;;27.0;708.0;0.0;NO;Nome do s�cio estrangeiro representado;SYS_C001525524 (C: ENABLED)
+CADASTRO;SOCIO_ESTRANGEIRO;"Mant�m os S�cios Estrangeiros de uma Sociedade, representados na mesma atrav�s de um S�cio espec�fico com o cargo ""Representante Tribut�rio""";888.0;N;2.0;SEQ_SOCIEDADE;NUMBER;22;N;0.0;6.0;584.0;0.0;NO;Sequencial identificador da Sociedade;FK_SOCIEDADE_R_SOCIO_ESTR (FOREIGN KEY: ENABLED)- SYS_C001525523 (C: ENABLED)
+CADASTRO;SOCIO_ESTRANGEIRO;"Mant�m os S�cios Estrangeiros de uma Sociedade, representados na mesma atrav�s de um S�cio espec�fico com o cargo ""Representante Tribut�rio""";888.0;N;1.0;SEQ_SOCIO_ESTRANGEIRO;NUMBER;22;N;0.0;4.0;888.0;0.0;NO;Sequencial identificador do S�cio Estrangeiro;PK_SOCIO_ESTRANGEIRO (PRIMARY KEY: ENABLED)- SYS_C001525522 (C: ENABLED)
+CADASTRO;SOCIO_JUCEC;S�cios de Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;5.0;COD_CPF_CGC_SOCIO;NUMBER;22;Y;0.0;0.0;0.0;0.0;NO;CPF/CGC do s�cio na JUCEC; (: )
+CADASTRO;SOCIO_JUCEC;S�cios de Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;6.0;COD_INSCRICAO_JUNTA_SOCIO;VARCHAR2;11;Y;;0.0;0.0;0.0;NO;Inscri��o na JUCEC do s�cio; (: )
+CADASTRO;SOCIO_JUCEC;S�cios de Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;2.0;COD_SOCIO;NUMBER;22;Y;0.0;0.0;0.0;0.0;NO;C�digo s�cio; (: )
+CADASTRO;SOCIO_JUCEC;S�cios de Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;3.0;COD_SOCIO_PESSOA_JURIDICA;NUMBER;22;Y;0.0;0.0;0.0;0.0;NO;Cont�m o c�digo identificador da empresa caso o s�cio seja pessoa juridica pertencente ao estado do Cear�, (2 prim. posicoes nire = 23). Se o s�cio for pessoa f�sica ou pessoa jur�dica de outro estado este campo ser� zerado; (: )
+CADASTRO;SOCIO_JUCEC;S�cios de Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;8.0;DAT_ATUALIZACAO;DATE;7;Y;;0.0;0.0;0.0;NO;Data da �ltima atualiza��o na SEFAZ; (: )
+CADASTRO;SOCIO_JUCEC;S�cios de Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;7.0;NOM_SOCIO;VARCHAR2;150;Y;;0.0;0.0;0.0;NO;Nome do s�cio na JUCEC; (: )
+CADASTRO;SOCIO_JUCEC;S�cios de Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;1.0;SEQ_SOCIO_JUCEC;NUMBER;22;N;0.0;0.0;0.0;0.0;NO;Sequencial identificador do registro;PK_SOCIO_JUCEC (PRIMARY KEY: ENABLED)- SYS_C001525565 (C: ENABLED)
+CADASTRO;SOCIO_JUCEC;S�cios de Contribuintes cadastrados na JUCEC (Junta Comercial do Estado do Cear�), de acordo com arquivo enviado periodicamente pela mesma;0.0;N;4.0;TIP_SOCIO;NUMBER;22;Y;0.0;0.0;0.0;0.0;NO;"Tipo de S�cio:
+1 - CPF
+2 - CGC
+3 - NIRE"; (: )
+CADASTRO;SOCIO_RFB;Tabela de S�cios de uma Empresa, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;20788646.0;N;3.0;COD_CNPJ;NUMBER;22;N;0.0;9.0;11084800.0;0.0;NO;N�mero do CNPJ vinculado ao S�cio;SYS_C001532949 (C: ENABLED)
+CADASTRO;SOCIO_RFB;Tabela de S�cios de uma Empresa, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;20788646.0;N;4.0;COD_CNPJ_BASE;NUMBER;22;N;0.0;6.0;11040768.0;0.0;NO;N�mero do CNPJ Base vinculado ao S�cio;SYS_C001532950 (C: ENABLED)
+CADASTRO;SOCIO_RFB;Tabela de S�cios de uma Empresa, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;20788646.0;N;6.0;COD_CPF_CNPJ_SOCIO;NUMBER;22;N;0.0;8.0;14415872.0;0.0;NO;CPF ou CNPJ do S�cio. No caso de S�cio do tipo Estrangeiro � preenchido com 'NOVES'. Para CPFs � formatado com ZEROS � esquerda.;SYS_C001532952 (C: ENABLED)
+CADASTRO;SOCIO_RFB;Tabela de S�cios de uma Empresa, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;20788646.0;N;11.0;COD_CPF_REPRESENTANTE;NUMBER;22;Y;0.0;3.0;265056.0;0.0;NO;CPF do representante; (: )
+CADASTRO;SOCIO_RFB;Tabela de S�cios de uma Empresa, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;20788646.0;N;9.0;COD_PAIS_SOCIO_ESTRANGEIRO;VARCHAR2;3;Y;;4.0;183.0;0.0;NO;C�digo do pa�s do S�cio Estrangeiro; (: )
+CADASTRO;SOCIO_RFB;Tabela de S�cios de uma Empresa, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;20788646.0;N;7.0;COD_QUALIFICACAO;NUMBER;22;Y;0.0;3.0;50.0;0.0;NO;C�digo da qualifica��o do S�cio; (: )
+CADASTRO;SOCIO_RFB;Tabela de S�cios de uma Empresa, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;20788646.0;N;12.0;COD_QUALIFICACAO_REPRESENTANTE;NUMBER;22;Y;0.0;3.0;9.0;0.0;NO;C�digo da qualifica��o do representante; (: )
+CADASTRO;SOCIO_RFB;Tabela de S�cios de uma Empresa, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;20788646.0;N;13.0;DAT_CARGA;DATE;7;Y;;8.0;1.0;0.0;NO;Data de carga do registro, pela ferramenta ETL da SEFAZ; (: )
+CADASTRO;SOCIO_RFB;Tabela de S�cios de uma Empresa, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;20788646.0;N;8.0;DAT_ENTRADA_SOCIEDADE;DATE;7;N;;8.0;22206.0;0.0;NO;Data da entrada na Sociedade;SYS_C001532953 (C: ENABLED)
+CADASTRO;SOCIO_RFB;Tabela de S�cios de uma Empresa, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;20788646.0;N;10.0;NOM_SOCIO_ESTRANGEIRO;VARCHAR2;150;Y;;2.0;11908.0;20775859.0;NO;Nome do S�cio Estrangeiro; (: )
+CADASTRO;SOCIO_RFB;Tabela de S�cios de uma Empresa, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;20788646.0;N;2.0;SEQ_EMPRESA_RFB;NUMBER;22;Y;0.0;6.0;10848256.0;27.0;NO;Sequencial identificador da Empresa; (: )
+CADASTRO;SOCIO_RFB;Tabela de S�cios de uma Empresa, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;20788646.0;N;1.0;SEQ_SOCIO_RFB;NUMBER;22;N;0.0;6.0;20788646.0;0.0;NO;Sequencial identificador do S�cio;PK_SOCIO_RFB (PRIMARY KEY: ENABLED)- SYS_C001532948 (C: ENABLED)
+CADASTRO;SOCIO_RFB;Tabela de S�cios de uma Empresa, conforme arquivo de CNPJs exportado pela Receita Federal do Brasil;20788646.0;N;5.0;TIP_SOCIO;NUMBER;22;N;0.0;3.0;3.0;0.0;NO;"Identifica o tipo de S�cio:
+1 - Pessoa Jur�dica
+2 - Pessoa F�sica
+3 - Estrangeiro";SYS_C001532951 (C: ENABLED)
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;54.0;COD_CAE_NACIONAL;NUMBER;22;Y;0.0;2.0;286.0;62073.0;NO;CNAE nacional;FK_CAE_NAC_R_SOL_CAD (FOREIGN KEY: ENABLED)
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;53.0;COD_CAE_PRINCIPAL;NUMBER;22;Y;0.0;2.0;276.0;62073.0;NO;CNAE principal;FK_CAE_PRI_R_SOL_CAD (FOREIGN KEY: ENABLED)
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;55.0;COD_CAE_SECUNDARIO;NUMBER;22;Y;0.0;2.0;255.0;62538.0;NO;1o CNAE secund�rio;FK_CAE_SEC_R_SOL_CAD (FOREIGN KEY: ENABLED)
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;56.0;COD_CAE_SECUNDARIO2;NUMBER;22;Y;0.0;2.0;211.0;62866.0;NO;2o CNAE secund�rio;FK_CAE_SEC2_R_SOL_CAD (FOREIGN KEY: ENABLED)
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;51.0;COD_CAFIR;VARCHAR2;8;Y;;9.0;823.0;0.0;NO;Cafir do Produtor Rural; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;2.0;COD_CATEGORIA_ESTABELECIMENTO;NUMBER;22;Y;0.0;3.0;6.0;0.0;NO;C�digo da categoria do estabelecimento do Contribuinte; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;46.0;COD_CGF_ESTAB_VINCULADO;NUMBER;22;Y;0.0;2.0;10.0;913.0;NO;CGF vinculado, qdo tem unidade auxiliar; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;68.0;COD_CNPJ;VARCHAR2;14;Y;;15.0;48444.0;913.0;NO;; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;15.0;COD_CNPJ_N;NUMBER;22;Y;0.0;8.0;48032.0;913.0;NO;Codigo do CNPJ fornecido pela Receita Federal, se nao for Produtor rural; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;67.0;COD_CONTADOR;VARCHAR2;14;Y;;12.0;1147.0;700.0;NO;; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;9.0;COD_CONTADOR_N;NUMBER;22;Y;0.0;3.0;1509.0;139.0;NO;CPF/CNPJ do contador; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;70.0;COD_CPF_RESP_DOCS;VARCHAR2;14;Y;;12.0;28548.0;913.0;NO;; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;61.0;COD_CPF_RESP_DOCS_N;NUMBER;22;Y;0.0;7.0;28632.0;913.0;NO;CPF do responsavel pelos documentos; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;69.0;COD_CPF_SOLICITANTE;VARCHAR2;14;Y;;12.0;5177.0;913.0;NO;; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;57.0;COD_CPF_SOLICITANTE_N;NUMBER;22;Y;0.0;7.0;5187.0;913.0;NO;CPF do solicitante ; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;43.0;COD_DISTRITO;NUMBER;22;Y;0.0;2.0;13.0;55986.0;NO;Distrito do contribuinte; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;52.0;COD_INSS_CEI;VARCHAR2;12;Y;;13.0;847.0;0.0;NO;INSS/CEI do Produtor Rural; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;7.0;COD_LOGRADOURO;NUMBER;22;Y;0.0;2.0;516.0;62822.0;NO;C�digo do logradouro (COD-LOGRADOURO-LOG); (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;12.0;COD_MUNICIPIO;NUMBER;22;Y;0.0;2.0;388.0;56987.0;NO;Munic�pio da solicita��o; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;39.0;COD_MUNICIPIO_CONTADOR;NUMBER;22;Y;0.0;2.0;101.0;62865.0;NO;Munic�pio do contador; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;5.0;COD_NATUREZA_JURIDICA;NUMBER;22;Y;0.0;2.0;12.0;54122.0;NO;Natureza jur�dica do contribuinte; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;10.0;COD_ORGAO_LOCAL;NUMBER;22;Y;0.0;6.0;43.0;3861.0;NO;�rg�o local da solicita��o;FK_ORG_LOC_R_SOL_CAD (FOREIGN KEY: ENABLED)
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;3.0;COD_REGIME_RECOLHIMENTO;NUMBER;22;N;0.0;3.0;10.0;0.0;NO;C�digo da regime de recolhimento do Contribuinte;SYS_C001545932 (C: ENABLED)
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;29.0;COD_STATUS;NUMBER;22;N;0.0;3.0;7.0;0.0;NO;"Status da da solicita��o
+1 - solicitado
+2 - designado
+3 - deferido
+4 - indeferido
+5 - homologado
+6 - pendente
+7 - dilig�ncia
+9 - cancelado";CKC_COD_STATUS_SOL (C: ENABLED)- SYS_C001545934 (C: ENABLED)
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;4.0;COD_TIPO_CONTRIBUINTE;NUMBER;22;Y;0.0;2.0;25.0;55101.0;NO;Tipo do contribuinte; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;50.0;COD_TIPO_OPERACAO_CONTADOR;NUMBER;22;Y;0.0;2.0;2.0;63297.0;NO;"opera��o de contador:
+1 - inclus�o
+2 - substitui��o
+3 - altera��o
+4 - exclus�o";CKC_COD_TIPO_OPERACAO_CNT (C: ENABLED)
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;49.0;COD_TIPO_SOLICITACAO;NUMBER;22;N;0.0;3.0;7.0;0.0;NO;"Tipo da solicita��o:
+0 - cadastramento
+1 - n�o usado
+2 - altera��o de contribuinte
+3 - altera��o de endere�o
+4 - altera��o de quadro societ�rio
+5 - altera��o de quadro societ�rio de ofpicio
+6 - altera��o de contador
+7 - baixa a pedido
+9 - reativa��o de contribuinte";CKC_COD_TIPO_SOL (C: ENABLED)- SYS_C001545935 (C: ENABLED)
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;11.0;COD_UF;NUMBER;22;Y;0.0;2.0;21.0;54202.0;NO;UF da solicita��o; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;8.0;COD_UF_CONTADOR;NUMBER;22;Y;0.0;3.0;24.0;139.0;NO;UF do contador; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;45.0;COD_UNIDADE_AUXILIAR;NUMBER;22;Y;0.0;2.0;5.0;913.0;NO;Unidade auxiliar, se tiver; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;66.0;COD_USUARIO_DESIGNADO;VARCHAR2;8;Y;;9.0;260.0;179.0;NO;Usu�rio para o qual foi designada a solicita��o; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;48.0;DAT_ATUALIZACAO;DATE;7;Y;;8.0;5962.0;0.0;NO;Data da atualiza��o; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;13.0;DAT_SOLICITACAO;DATE;7;N;;8.0;61248.0;0.0;NO;Data do cadastramento da solicita��o;SYS_C001545933 (C: ENABLED)
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;19.0;DSC_CAE_PRINCIPAL;VARCHAR2;60;Y;;61.0;1412.0;913.0;NO;CAE principal; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;34.0;DSC_CAE_SECUNDARIO;VARCHAR2;60;Y;;61.0;992.0;913.0;NO;CAE secund�rio; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;44.0;DSC_CAE_SECUNDARIO2;VARCHAR2;60;Y;;61.0;775.0;913.0;NO;2o CNAE secund�rio; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;30.0;DSC_COMPLEMENTO;VARCHAR2;150;Y;;21.0;853.0;1763.0;NO;Complemento; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;65.0;DSC_COMPLEMENTO_CONTADOR;VARCHAR2;150;Y;;2.0;109.0;63413.0;NO;Complemento do endere�o do contador; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;17.0;DSC_LOGRADOURO;VARCHAR2;150;Y;;31.0;2247.0;0.0;NO;Nome da rua; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;31.0;NOM_BAIRRO;VARCHAR2;80;Y;;31.0;1108.0;0.0;NO;Nome do bairro; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;47.0;NOM_BAIRRO_CONTADOR;VARCHAR2;80;Y;;31.0;152.0;1249.0;NO;Bairro do contador; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;23.0;NOM_CONTADOR;VARCHAR2;150;Y;;36.0;1679.0;328.0;NO;Nome do contador; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;33.0;NOM_EMAIL;VARCHAR2;150;Y;;41.0;1935.0;141.0;NO;E-mail do contribuinte; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;42.0;NOM_EMAIL_CONTADOR;VARCHAR2;150;Y;;41.0;1648.0;470.0;NO;E-mail; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;64.0;NOM_EMAIL_RESP_DOCS;VARCHAR2;150;Y;;41.0;14304.0;913.0;NO;Email do respons�vel pelos documentos; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;24.0;NOM_ENDERECO_CONTADOR;VARCHAR2;150;Y;;36.0;1882.0;223.0;NO;Endere�o; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;60.0;NOM_ENDERECO_RESP_DOCS;VARCHAR2;253;Y;;251.0;34084.0;913.0;NO;endere�o do respons�vel pelos documentos; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;26.0;NOM_FANTASIA;VARCHAR2;150;Y;;31.0;2073.0;106.0;NO;Nome fantasia; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;41.0;NOM_MUNICIPIO_CONTADOR;VARCHAR2;30;Y;;31.0;289.0;913.0;NO;; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;16.0;NOM_RAZAO_SOCIAL;VARCHAR2;150;Y;;148.0;52168.0;41.0;NO;Raz�o Social; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;59.0;NOM_RESP_DOCS;VARCHAR2;150;Y;;61.0;28322.0;913.0;NO;nome do respons�vel pelos documentos; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;58.0;NOM_SOLICITANTE;VARCHAR2;150;Y;;61.0;5180.0;913.0;NO;Nome do solicitante; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;28.0;NUM_CEP;NUMBER;22;Y;0.0;3.0;1431.0;0.0;NO;Cep; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;36.0;NUM_CEP_CONTADOR;NUMBER;22;Y;0.0;3.0;1190.0;143.0;NO;CEP; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;6.0;NUM_CRC_CONTADOR;VARCHAR2;10;Y;;11.0;1835.0;236.0;NO;N�mero do CRC do contador; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;25.0;NUM_ENDERECO_CONTADOR;VARCHAR2;5;Y;;6.0;335.0;1245.0;NO;N�mero; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;32.0;NUM_FAX;VARCHAR2;12;Y;;3.0;250.0;913.0;NO;Fax do contribuinte; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;40.0;NUM_FAX_CONTADOR;VARCHAR2;12;Y;;3.0;1045.0;737.0;NO;Fax; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;38.0;NUM_FONE_COMER_CONTADOR;VARCHAR2;12;Y;;3.0;1607.0;223.0;NO;Telefone comercial; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;37.0;NUM_FONE_RESID_CONTADOR;VARCHAR2;12;Y;;3.0;1391.0;651.0;NO;Telefone residencial; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;62.0;NUM_FONE1_RESP_DOCS;VARCHAR2;12;Y;;9.0;13608.0;913.0;NO;Telefone do respons�vel pelos documentos; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;63.0;NUM_FONE2_RESP_DOCS;VARCHAR2;12;Y;;2.0;1.0;913.0;NO;outro telefone do respons�vel pelos documentos; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;35.0;NUM_IDENTIDADE_CONTADOR;VARCHAR2;25;Y;;26.0;1765.0;267.0;NO;Identidade do contador; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;14.0;NUM_INSCRICAO_JUCEC;VARCHAR2;11;Y;;12.0;47800.0;913.0;NO;Numero de inscri��o na junta comercial; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;18.0;NUM_LOGRADOURO;VARCHAR2;5;Y;;6.0;1244.0;0.0;NO;N�mero; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;27.0;NUM_TELEFONE;VARCHAR2;12;Y;;3.0;2190.0;0.0;NO;Telefone do contribuinte; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;1.0;SEQ_SOLICITACAO_CADASTRO;NUMBER;22;N;0.0;8.0;63635.0;0.0;NO;Sequencial da solicita��o de cadastro;SOL_CAD_PK (PRIMARY KEY: ENABLED)- SYS_C001545931 (C: ENABLED)
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;22.0;TIP_COD_CONTADOR;NUMBER;22;Y;0.0;3.0;2.0;700.0;NO;"Tipo de c�digo (CNPJ,CPF,etc)
+1 - CPF
+2 - CNPJ";CKC_TIP_COD_CONTADOR (C: ENABLED)
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;20.0;VLR_CAPITAL_SOCIAL;NUMBER;22;Y;2.0;3.0;328.0;913.0;NO;Valor do capital social; (: )
+CADASTRO;SOLICITACAO_CADASTRO;Solicita��es de inclus�o ou altera��o cadastral de Contribuintes, realizadas pela Internet;63635.0;N;21.0;VLR_PREVISAO_FATURAMENTO_ANUAL;NUMBER;22;Y;0.0;3.0;275.0;913.0;NO;Previs�o de faturamento anual; (: )
+CADASTRO;SOLICITACAO_MOVIMENTACAO;Tabela contendo todas as moviment��o da solicita��o at� sua conclus�o.;1826320.0;N;10.0;COD_CPF_SOLICITANTE;VARCHAR2;14;Y;;2.0;4062.0;1819068.0;NO;CPF de quem solicitou; (: )
+CADASTRO;SOLICITACAO_MOVIMENTACAO;Tabela contendo todas as moviment��o da solicita��o at� sua conclus�o.;1826320.0;N;8.0;COD_CPF_SOLICITANTE_N;NUMBER;22;Y;0.0;2.0;3946.0;1819228.0;NO;CPF de quem solicitou; (: )
+CADASTRO;SOLICITACAO_MOVIMENTACAO;Tabela contendo todas as moviment��o da solicita��o at� sua conclus�o.;1826320.0;N;7.0;COD_LOGRADOURO_ANTERIOR;NUMBER;22;Y;0.0;2.0;738.0;1819352.0;NO;Se houver mudan��o de logradouro; (: )
+CADASTRO;SOLICITACAO_MOVIMENTACAO;Tabela contendo todas as moviment��o da solicita��o at� sua conclus�o.;1826320.0;N;6.0;COD_STATUS;NUMBER;22;N;0.0;3.0;8.0;0.0;NO;"Status da movimenta��o:
+1 - solicitado
+2 - designado
+3 - deferido
+4 - indeferido
+5 - homologado
+6 - pendente
+7 - dilig�ncia
+9 - cancelado";CKC_COD_STATUS_SOLICITA (C: ENABLED)- SYS_C001545959 (C: ENABLED)
+CADASTRO;SOLICITACAO_MOVIMENTACAO;Tabela contendo todas as moviment��o da solicita��o at� sua conclus�o.;1826320.0;N;4.0;COD_USUARIO;VARCHAR2;8;Y;;9.0;532.0;0.0;NO;Usu�rio da movimenta��o; (: )
+CADASTRO;SOLICITACAO_MOVIMENTACAO;Tabela contendo todas as moviment��o da solicita��o at� sua conclus�o.;1826320.0;N;3.0;DAT_ATUALIZACAO;DATE;7;Y;;8.0;1781760.0;0.0;NO;data da movimenta��o; (: )
+CADASTRO;SOLICITACAO_MOVIMENTACAO;Tabela contendo todas as moviment��o da solicita��o at� sua conclus�o.;1826320.0;N;5.0;DSC_OBSERVACAO;VARCHAR2;350;Y;;19.0;188240.0;1441107.0;NO;Alguma observa��o sobre a movimenta��o; (: )
+CADASTRO;SOLICITACAO_MOVIMENTACAO;Tabela contendo todas as moviment��o da solicita��o at� sua conclus�o.;1826320.0;N;9.0;NOM_SOLICITANTE;VARCHAR2;150;Y;;2.0;4240.0;1819068.0;NO;Nome de quem solicitou; (: )
+CADASTRO;SOLICITACAO_MOVIMENTACAO;Tabela contendo todas as moviment��o da solicita��o at� sua conclus�o.;1826320.0;N;2.0;SEQ_SOLICITACAO_CADASTRO;NUMBER;22;N;0.0;8.0;563008.0;0.0;NO;Sequencial da solicita��o;SYS_C001545958 (C: ENABLED)
+CADASTRO;SOLICITACAO_MOVIMENTACAO;Tabela contendo todas as moviment��o da solicita��o at� sua conclus�o.;1826320.0;N;1.0;SEQ_SOLICITACAO_MOVIMENTO;NUMBER;22;N;0.0;6.0;1826320.0;0.0;NO;;PK_SOLICITACAO_MOVIMENTACAO (PRIMARY KEY: ENABLED)- SYS_C001545957 (C: ENABLED)
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;7.0;COD_CARGO;NUMBER;22;N;0.0;3.0;9.0;0.0;NO;Cargo do s�cio;FK_CAR_R_SOL_SOC (FOREIGN KEY: ENABLED)- SYS_C001545948 (C: ENABLED)
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;24.0;COD_CGF;NUMBER;22;Y;0.0;0.0;0.0;221683.0;NO;CGF onde o s�cio faz parte do QSA;FK_CTB_CGF_R_SOL_SOC (FOREIGN KEY: ENABLED)
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;5.0;COD_MUNICIPIO;NUMBER;22;Y;0.0;2.0;146.0;220769.0;NO;Munic�pio do s�cio; (: )
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;19.0;COD_SITUACAO_SOCIO;NUMBER;22;Y;0.0;0.0;0.0;221683.0;NO;Situa��o do s�cio;AVCON_1013814_COD_S_000 (C: ENABLED)
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;27.0;COD_SOCIO;VARCHAR2;14;N;;13.0;172720.0;0.0;NO;CPF/CNPJ do s�cio;PK_SOLICITACAO_SOCIO (PRIMARY KEY: ENABLED)- SYS_C001563808 (C: ENABLED)
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;2.0;COD_SOCIO_N;VARCHAR2;14;Y;;12.0;169376.0;1.0;NO;CPF/CNPJ do s�cio; (: )
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;21.0;COD_TIPO_OPERACAO;NUMBER;22;Y;0.0;2.0;3.0;197909.0;NO;"Opera��o do s�cio
+1 - inclus�o
+2 - altera��o
+3 - exclus�o";AVCON_1013814_COD_T_000 (C: ENABLED)
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;4.0;COD_UF;NUMBER;22;Y;0.0;3.0;31.0;0.0;NO;UF do s�cio; (: )
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;12.0;DAT_CADASTRO_JUCEC;DATE;7;Y;;8.0;6701.0;3452.0;NO;Data em que o s�cio entrou no QSA; (: )
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;23.0;DAT_EXCLUSAO;DATE;7;Y;;2.0;3322.0;211072.0;NO;Data de exclus�o no QSA; (: )
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;26.0;DSC_COMPLEMENTO;VARCHAR2;150;Y;;2.0;174.0;221451.0;NO;Complemento do endere�o do s�cio; (: )
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;11.0;NOM_BAIRRO;VARCHAR2;80;N;;81.0;11979.0;0.0;NO;Bairro do s�cio;SYS_C001545951 (C: ENABLED)
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;16.0;NOM_EMAIL;VARCHAR2;150;Y;;12.0;34264.0;125097.0;NO;Email do s�cio; (: )
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;10.0;NOM_ENDERECO;VARCHAR2;150;N;;151.0;162960.0;0.0;NO;Endere�o do s�cio;SYS_C001545950 (C: ENABLED)
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;6.0;NOM_MUNICIPIO;VARCHAR2;30;Y;;31.0;845.0;914.0;NO;Nome do munic�pio; (: )
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;9.0;NOM_SOCIO;VARCHAR2;150;N;;151.0;174608.0;0.0;NO;Nome do s�cio;SYS_C001545949 (C: ENABLED)
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;15.0;NUM_CEP;NUMBER;22;Y;0.0;6.0;21686.0;0.0;NO;CEP do s�cio; (: )
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;22.0;NUM_CHANCELA_EXCLUSAO;NUMBER;22;Y;0.0;2.0;8781.0;210690.0;NO;Chancela de exclus�o no QDA; (: )
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;18.0;NUM_CHANCELA_INCLUSAO;NUMBER;22;Y;0.0;2.0;8231.0;210067.0;NO;Chancela de inclus�o na sociedade; (: )
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;25.0;NUM_ENDERECO;VARCHAR2;5;Y;;2.0;333.0;220769.0;NO;N�mero do endere�o do s�cio; (: )
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;13.0;NUM_IDENTIDADE;VARCHAR2;25;Y;;26.0;181504.0;0.0;NO;RG do s�cio; (: )
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;8.0;NUM_INSCRICAO_JUCEC;VARCHAR2;11;Y;;12.0;142608.0;914.0;NO;NIRE do s�cio; (: )
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;17.0;NUM_PERCENTUAL;NUMBER;22;Y;2.0;3.0;1269.0;0.0;NO;% da sociedade; (: )
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;20.0;NUM_SEQUENCIAL_CPF;NUMBER;22;Y;0.0;0.0;0.0;221683.0;NO;Seq do CPFdo s�cio; (: )
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;14.0;NUM_TELEFONE;VARCHAR2;12;Y;;8.0;66872.0;0.0;NO;Telefone do s�cio; (: )
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;1.0;SEQ_SOLICITACAO_CADASTRO;NUMBER;22;N;0.0;8.0;156848.0;0.0;NO;Sequencial da solicita��o;PK_SOLICITACAO_SOCIO (PRIMARY KEY: ENABLED)- SYS_C001545945 (C: ENABLED)
+CADASTRO;SOLICITACAO_SOCIO;Solicita��es de inclus�o ou altera��o cadastral de S�cios de Contribuintes, realizadas pela Internet;221683.0;N;3.0;TIP_CODIGO;NUMBER;22;N;0.0;3.0;5.0;0.0;NO;Tipo do c�digo (0 - CNPJ, 1- CPF);PK_SOLICITACAO_SOCIO (PRIMARY KEY: ENABLED)- SYS_C001545947 (C: ENABLED)
+CADASTRO;TRANSMISSAO;;24172490.0;N;16.0;COD_NUM_CONTROLE_ARQUIVO;NUMBER;22;Y;0.0;7.0;66088.0;0.0;NO;; (: )
+CADASTRO;TRANSMISSAO;;24172490.0;N;14.0;COD_ORGAO_LOCAL;NUMBER;22;Y;0.0;0.0;0.0;24172490.0;NO;;TRANSMISSA_ORG_LOCAL_FK (FOREIGN KEY: ENABLED)
+CADASTRO;TRANSMISSAO;;24172490.0;N;18.0;DAT_ENTRADA;DATE;7;Y;;6.0;15158272.0;7661554.0;NO;; (: )
+CADASTRO;TRANSMISSAO;;24172490.0;N;10.0;DAT_ENVIO_RECIBO;DATE;7;Y;;1.0;0.0;24172490.0;NO;; (: )
+CADASTRO;TRANSMISSAO;;24172490.0;N;4.0;DAT_RECEPCAO;DATE;7;N;;8.0;23275520.0;0.0;NO;;SYS_C00105528 (C: ENABLED)
+CADASTRO;TRANSMISSAO;;24172490.0;N;17.0;DAT_STATUS;DATE;7;Y;;6.0;4721152.0;7661238.0;NO;; (: )
+CADASTRO;TRANSMISSAO;;24172490.0;N;2.0;NOM_ARQUIVO;VARCHAR2;50;N;;24.0;23621632.0;0.0;NO;;SYS_C00105526 (C: ENABLED)
+CADASTRO;TRANSMISSAO;;24172490.0;N;11.0;NOM_ARQUIVO_AGRUPAMENTO;VARCHAR2;50;Y;;21.0;4683264.0;2437214.0;NO;; (: )
+CADASTRO;TRANSMISSAO;;24172490.0;N;5.0;NOM_PATH_ARQUIVO;VARCHAR2;80;N;;49.0;1894912.0;0.0;NO;;SYS_C00105529 (C: ENABLED)
+CADASTRO;TRANSMISSAO;;24172490.0;N;12.0;NOM_PATH_ARQUIVO_AGRUPAMENTO;VARCHAR2;80;Y;;45.0;49.0;2437214.0;NO;; (: )
+CADASTRO;TRANSMISSAO;;24172490.0;N;9.0;NOM_PATH_RECIBO;VARCHAR2;80;Y;;2.0;5.0;24040150.0;NO;; (: )
+CADASTRO;TRANSMISSAO;;24172490.0;N;8.0;NOM_RECIBO;VARCHAR2;50;Y;;2.0;130472.0;24040150.0;NO;; (: )
+CADASTRO;TRANSMISSAO;;24172490.0;N;3.0;NOM_SISTEMA;VARCHAR2;20;N;;6.0;18.0;0.0;NO;Nome do sistema aplicativo (CADASTRO,COMETA,SID);SYS_C00105527 (C: ENABLED)
+CADASTRO;TRANSMISSAO;;24172490.0;N;7.0;SEQ_ACESSO;NUMBER;22;N;0.0;2.0;1.0;0.0;NO;;SYS_C00105531 (C: ENABLED)
+CADASTRO;TRANSMISSAO;;24172490.0;N;15.0;SEQ_ISN_ARQUIVO;NUMBER;22;Y;0.0;6.0;23207936.0;0.0;NO;; (: )
+CADASTRO;TRANSMISSAO;;24172490.0;N;1.0;SEQ_TRANSMISSAO;NUMBER;22;N;0.0;6.0;24172490.0;0.0;NO;;SYS_C00105525 (C: ENABLED)- TRANSMISSA_PK (PRIMARY KEY: ENABLED)
+CADASTRO;TRANSMISSAO;;24172490.0;N;13.0;SEQ_TRANSMISSOR;NUMBER;22;Y;0.0;5.0;19404.0;1831323.0;NO;;TRANSMISSA_TRANSMISSO_FK (FOREIGN KEY: ENABLED)
+CADASTRO;TRANSMISSAO;;24172490.0;N;6.0;STA_ARQUIVO;NUMBER;22;N;0.0;3.0;7.0;0.0;NO;;AVCON_479058_STA_A_000 (C: ENABLED)- SYS_C00105530 (C: ENABLED)
+CADASTRO;TRANSMISSOR;;27365.0;N;26.0;COD_CNPJ_CONTRIBUINTE;NUMBER;22;Y;0.0;3.0;4456.0;20993.0;NO;; (: )
+CADASTRO;TRANSMISSOR;;27365.0;N;29.0;COD_CPF_REPRESENTANTE_LEGAL;NUMBER;22;Y;0.0;3.0;4516.0;19752.0;NO;; (: )
+CADASTRO;TRANSMISSOR;;27365.0;N;18.0;COD_IDENTIDADE;VARCHAR2;25;Y;;9.0;10572.0;7465.0;NO;; (: )
+CADASTRO;TRANSMISSOR;;27365.0;N;24.0;COD_IDENTIFICACAO;VARCHAR2;10;N;;11.0;26660.0;0.0;NO;;SYS_C00105548 (C: ENABLED)
+CADASTRO;TRANSMISSOR;;27365.0;N;6.0;COD_MUNICIPIO;NUMBER;22;N;0.0;4.0;330.0;0.0;NO;;SYS_C00105540 (C: ENABLED)
+CADASTRO;TRANSMISSOR;;27365.0;N;23.0;COD_ORGAO_LOCAL_ORIGINARIO;NUMBER;22;N;0.0;6.0;57.0;0.0;NO;;SYS_C00105547 (C: ENABLED)- TRANSMISSO_ORG_LOCAL_FK (FOREIGN KEY: ENABLED)
+CADASTRO;TRANSMISSOR;;27365.0;N;2.0;COD_TRANSMISSOR;VARCHAR2;20;N;;12.0;12229.0;0.0;NO;;SYS_C00105536 (C: ENABLED)- TRANSMISSO_COD_DAT_DES_UK (UNIQUE: ENABLED)
+CADASTRO;TRANSMISSOR;;27365.0;N;5.0;COD_UF;NUMBER;22;N;0.0;3.0;21.0;0.0;NO;;SYS_C00105539 (C: ENABLED)
+CADASTRO;TRANSMISSOR;;27365.0;N;21.0;DAT_DESATIVACAO;DATE;7;Y;;5.0;15298.0;12066.0;NO;;TRANSMISSO_COD_DAT_DES_UK (UNIQUE: ENABLED)
+CADASTRO;TRANSMISSOR;;27365.0;N;22.0;DOC_MOTIVO_DESATIVACAO;VARCHAR2;200;Y;;27.0;40.0;12066.0;NO;; (: )
+CADASTRO;TRANSMISSOR;;27365.0;N;17.0;NOM_BAIRRO;VARCHAR2;30;Y;;11.0;1827.0;486.0;NO;; (: )
+CADASTRO;TRANSMISSOR;;27365.0;N;28.0;NOM_CARGO_REPRESENTANTE;VARCHAR2;60;Y;;5.0;425.0;19769.0;NO;; (: )
+CADASTRO;TRANSMISSOR;;27365.0;N;11.0;NOM_CHAVE_DECIFRAGEM;VARCHAR2;140;N;;141.0;26490.0;0.0;NO;;SYS_C00105545 (C: ENABLED)
+CADASTRO;TRANSMISSOR;;27365.0;N;16.0;NOM_COMPLEMENTO;VARCHAR2;20;Y;;5.0;4037.0;15554.0;NO;; (: )
+CADASTRO;TRANSMISSOR;;27365.0;N;14.0;NOM_EMAIL;VARCHAR2;50;Y;;19.0;12524.0;7414.0;NO;; (: )
+CADASTRO;TRANSMISSOR;;27365.0;N;20.0;NOM_GRUPO_SEFAZNET;VARCHAR2;15;N;;14.0;9.0;0.0;NO;;SYS_C00105546 (C: ENABLED)
+CADASTRO;TRANSMISSOR;;27365.0;N;8.0;NOM_LOGRADOURO;VARCHAR2;60;N;;20.0;8561.0;0.0;NO;;SYS_C00105542 (C: ENABLED)
+CADASTRO;TRANSMISSOR;;27365.0;N;27.0;NOM_REPRESENTANTE_LEGAL;VARCHAR2;60;Y;;9.0;4758.0;19768.0;NO;; (: )
+CADASTRO;TRANSMISSOR;;27365.0;N;7.0;NOM_RESPONSAVEL;VARCHAR2;60;N;;29.0;13752.0;0.0;NO;;SYS_C00105541 (C: ENABLED)
+CADASTRO;TRANSMISSOR;;27365.0;N;10.0;NOM_SENHA_ALDEIANET;VARCHAR2;21;N;;22.0;26214.0;0.0;NO;;SYS_C00105544 (C: ENABLED)
+CADASTRO;TRANSMISSOR;;27365.0;N;25.0;NOM_SENHA_WEB;VARCHAR2;32;Y;;2.0;2.0;27361.0;NO;; (: )
+CADASTRO;TRANSMISSOR;;27365.0;N;9.0;NUM_CEP;NUMBER;22;N;0.0;5.0;4562.0;0.0;NO;;SYS_C00105543 (C: ENABLED)
+CADASTRO;TRANSMISSOR;;27365.0;N;19.0;NUM_CRC;VARCHAR2;10;Y;;9.0;7733.0;7087.0;NO;; (: )
+CADASTRO;TRANSMISSOR;;27365.0;N;13.0;NUM_FAX;VARCHAR2;12;Y;;5.0;7054.0;16337.0;NO;; (: )
+CADASTRO;TRANSMISSOR;;27365.0;N;15.0;NUM_LOGRADOURO;VARCHAR2;5;Y;;6.0;2910.0;1.0;NO;; (: )
+CADASTRO;TRANSMISSOR;;27365.0;N;12.0;NUM_TELEFONE;VARCHAR2;12;Y;;9.0;16205.0;1852.0;NO;; (: )
+CADASTRO;TRANSMISSOR;;27365.0;N;4.0;SEQ_ACESSO;NUMBER;22;N;0.0;5.0;25002.0;0.0;NO;CONSEG;SYS_C00105538 (C: ENABLED)
+CADASTRO;TRANSMISSOR;;27365.0;N;1.0;SEQ_TRANSMISSOR;NUMBER;22;N;0.0;5.0;27365.0;0.0;NO;;SYS_C00105535 (C: ENABLED)- TRANSMISSO_PK (PRIMARY KEY: ENABLED)
+CADASTRO;TRANSMISSOR;;27365.0;N;3.0;TIP_CODIGO;VARCHAR2;1;N;;2.0;4.0;0.0;NO;;AVCON_188279_TIP_C_000 (C: ENABLED)- SYS_C00105537 (C: ENABLED)- TRANSMISSO_COD_DAT_DES_UK (UNIQUE: ENABLED)
+CADASTRO;VERIFICA_USO;;48061122.0;N;1.0;DATA_COLETA;DATE;7;Y;;8.0;7657984.0;0.0;NO;; (: )
+CADASTRO;VERIFICA_USO;;48061122.0;N;3.0;END_IP;VARCHAR2;15;Y;;15.0;49.0;0.0;NO;; (: )
+CADASTRO;VERIFICA_USO;;48061122.0;N;5.0;SEQ_PESSOA_FJ;NUMBER;22;Y;0.0;6.0;4154368.0;0.0;NO;; (: )
+CADASTRO;VERIFICA_USO;;48061122.0;N;2.0;TIPO_OPERACAO;CHAR;3;Y;;4.0;2.0;0.0;NO;; (: )
+CADASTRO;VERIFICA_USO;;48061122.0;N;4.0;USUARIO;VARCHAR2;30;Y;;12.0;159.0;0.0;NO;; (: )
+CADASTRO;VERIFICA_USO_PESSOA;Tabela de auditoria da CADASTRO.PESSOA;781373.0;N;1.0;DATA_COLETA;DATE;7;N;;8.0;575360.0;0.0;NO;Data da inclus�o/altera��o;SYS_C001547445 (C: ENABLED)
+CADASTRO;VERIFICA_USO_PESSOA;Tabela de auditoria da CADASTRO.PESSOA;781373.0;N;3.0;END_IP;VARCHAR2;15;Y;;15.0;43.0;0.0;NO;IP da altera��o; (: )
+CADASTRO;VERIFICA_USO_PESSOA;Tabela de auditoria da CADASTRO.PESSOA;781373.0;N;6.0;SEQ_CTB;NUMBER;22;Y;0.0;3.0;229472.0;551185.0;NO;sequencial do contribuinte; (: )
+CADASTRO;VERIFICA_USO_PESSOA;Tabela de auditoria da CADASTRO.PESSOA;781373.0;N;7.0;SEQ_PESSOA;NUMBER;22;Y;0.0;6.0;781373.0;0.0;NO;sequencial da pessoa; (: )
+CADASTRO;VERIFICA_USO_PESSOA;Tabela de auditoria da CADASTRO.PESSOA;781373.0;N;5.0;SEQ_PESSOA_FJ;NUMBER;22;Y;0.0;5.0;547456.0;229797.0;NO;sequencial da pessoa_fsica_juridica; (: )
+CADASTRO;VERIFICA_USO_PESSOA;Tabela de auditoria da CADASTRO.PESSOA;781373.0;N;2.0;TIPO_OPERACAO;CHAR;3;N;;4.0;2.0;0.0;NO;Tipo da opera��o INS, UPD;SYS_C001547446 (C: ENABLED)
+CADASTRO;VERIFICA_USO_PESSOA;Tabela de auditoria da CADASTRO.PESSOA;781373.0;N;8.0;TIP_PESSOA;NUMBER;22;Y;0.0;3.0;4.0;0.0;NO;tipo da pessoa; (: )
+CADASTRO;VERIFICA_USO_PESSOA;Tabela de auditoria da CADASTRO.PESSOA;781373.0;N;4.0;USUARIO;VARCHAR2;30;Y;;12.0;85.0;0.0;NO;Usuario que fez a altera��o; (: )

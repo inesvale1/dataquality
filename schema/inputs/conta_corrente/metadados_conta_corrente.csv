@@ -1,0 +1,231 @@
+OWNER;TABLE_NAME;TAB_COMMENTS;NUM_ROWS;DUPLICATED;COLUMN_ID;COLUMN_NAME;DATA_TYPE;DATA_LENGTH;NULLABLE;DATA_SCALE;AVG_COL_LEN;NUM_DISTINCT;NUM_NULLS;DEFAULT_ON_NULL;COL_COMMENTS;CONSTRAINTS
+CONTA_CORRENTE;ARQUIVO_ETL;Arquivos ETL;4067.0;N;3.0;DAT_CRIACAO_ARQUIVO;DATE;7;Y;;8.0;1439.0;0.0;NO;Data/hora de cria��o do arquivo; (: )
+CONTA_CORRENTE;ARQUIVO_ETL;Arquivos ETL;4067.0;N;2.0;NOM_ARQUIVO_ETL;VARCHAR2;100;N;;36.0;3908.0;0.0;NO;Nome do arquivo;SYS_C001551459 (C: ENABLED)
+CONTA_CORRENTE;ARQUIVO_ETL;Arquivos ETL;4067.0;N;1.0;SEQ_ARQUIVO_ETL;NUMBER;22;N;0.0;5.0;4067.0;0.0;NO;Sequencial da tabela;PK_ARQUIVO_ETL (PRIMARY KEY: ENABLED)- SYS_C001551458 (C: ENABLED)
+CONTA_CORRENTE;ARQUIVO_ETL;Arquivos ETL;4067.0;N;4.0;TIP_ARQUIVO;VARCHAR2;30;Y;;23.0;8.0;0.0;NO;Tipo do Arquivo; (: )
+CONTA_CORRENTE;AUDITORIA_ENTIDADES;Guarda as auditorias das entidades;56110690.0;N;2.0;COD_MATRICULA_USUARIO;VARCHAR2;255;Y;;3.0;1037.0;44131422.0;NO;guarda o codigo da matricula do usuario; (: )
+CONTA_CORRENTE;AUDITORIA_ENTIDADES;Guarda as auditorias das entidades;56110690.0;N;3.0;DAT_DATA_MODIFICACAO;DATE;7;Y;;8.0;8630272.0;0.0;NO;Data e hora da inclusao/alteracao do registro.; (: )
+CONTA_CORRENTE;AUDITORIA_ENTIDADES;Guarda as auditorias das entidades;56110690.0;N;4.0;DAT_TIMESTAMP;TIMESTAMP(6);11;Y;6.0;11.0;55341056.0;0.0;NO;Representacao numerica do campo DAT_DATA_MODIFICACAO, exigido pelo hibernate.; (: )
+CONTA_CORRENTE;AUDITORIA_ENTIDADES;Guarda as auditorias das entidades;56110690.0;N;1.0;SEQ_AUDITORIA;NUMBER;22;N;0.0;6.0;56110690.0;0.0;NO;guarda a sequencia da auditoria;PK_AUDITORIA_ENTIDADES (PRIMARY KEY: ENABLED)- SYS_C001518469 (C: ENABLED)
+CONTA_CORRENTE;CNAE_LEI_DESCONTO;CNAEs relacionados na Lei dos descontos;17.0;N;2.0;COD_CAE;NUMBER;22;N;0.0;6.0;17.0;0.0;NO;CNAE relacionado na Lei;FK_CAE_R_CNAE_LEI (FOREIGN KEY: ENABLED)- PK_CNAE_LEI_DESCONTO (PRIMARY KEY: ENABLED)- SYS_C001551483 (C: ENABLED)
+CONTA_CORRENTE;CNAE_LEI_DESCONTO;CNAEs relacionados na Lei dos descontos;17.0;N;1.0;SEQ_LEI_DESCONTO;NUMBER;22;N;0.0;4.0;1.0;0.0;NO;Sequencial da tabela;FK_LEI_DESCONTO_R_CNAE_LEI (FOREIGN KEY: ENABLED)- PK_CNAE_LEI_DESCONTO (PRIMARY KEY: ENABLED)- SYS_C001551482 (C: ENABLED)
+CONTA_CORRENTE;DEBITO;Tabela para armazenamento da gera��o de debitos na base de dados da SEFAZ.;91996535.0;N;4.0;COD_INDICADOR;NUMBER;22;Y;0.0;3.0;1.0;95196.0;NO;C�digo do Indicador Financeiro;FK_IND_FIN_R_DEB (FOREIGN KEY: ENABLED)
+CONTA_CORRENTE;DEBITO;Tabela para armazenamento da gera��o de debitos na base de dados da SEFAZ.;91996535.0;N;5.0;COD_PRODUTO_SERVICO;NUMBER;22;Y;0.0;0.0;0.0;91996535.0;NO;C�digo de produto/servi�o ( COD-PRODUTO-SERVICO );FK_PRO_SER_R_DEB (FOREIGN KEY: ENABLED)
+CONTA_CORRENTE;DEBITO;Tabela para armazenamento da gera��o de debitos na base de dados da SEFAZ.;91996535.0;N;3.0;COD_RECEITA;NUMBER;22;Y;0.0;4.0;17.0;0.0;NO;C�digo da receita ( COD-RECEITA-CRD );FK_COD_REC_R_DEB (FOREIGN KEY: ENABLED)
+CONTA_CORRENTE;DEBITO;Tabela para armazenamento da gera��o de debitos na base de dados da SEFAZ.;91996535.0;N;8.0;DAT_CORRECAO;DATE;7;Y;;3.0;5206.0;75434641.0;NO;Data para armazenamento da data de corre��o.; (: )
+CONTA_CORRENTE;DEBITO;Tabela para armazenamento da gera��o de debitos na base de dados da SEFAZ.;91996535.0;N;12.0;DAT_INCLUSAO;DATE;7;N;;8.0;7384.0;0.0;NO;Campo com a data de inclus�o do d�bito.;SYS_C001517479 (C: ENABLED)
+CONTA_CORRENTE;DEBITO;Tabela para armazenamento da gera��o de debitos na base de dados da SEFAZ.;91996535.0;N;7.0;DAT_VENCIMENTO;DATE;7;N;;8.0;5187.0;0.0;NO;Campo para armazenamento da data de vencimento do d�bito.;SYS_C001517476 (C: ENABLED)
+CONTA_CORRENTE;DEBITO;Tabela para armazenamento da gera��o de debitos na base de dados da SEFAZ.;91996535.0;N;14.0;NUM_ANO_REFERENCIA;NUMBER;22;N;0.0;4.0;36.0;0.0;NO;Campo com o ano de refer�ncia do d�bito.;SYS_C001517481 (C: ENABLED)
+CONTA_CORRENTE;DEBITO;Tabela para armazenamento da gera��o de debitos na base de dados da SEFAZ.;91996535.0;N;17.0;NUM_DOCUMENTO_ORIGEM;VARCHAR2;50;Y;;18.0;4277760.0;697799.0;NO;"N�mero do documento no sistema de origem do D�bito, definido no campo TIP_ORIGEM_SISTEMA.
+Exemplos:
+1 - IPVA - N�mero do Chassi
+2 - ITCD - Guia do ITCD
+3 - Auto de Infra��o - N�mero do Auto de Infra��o
+7 - SISAGUA - N�mero do Pedido de impress�o de selos
+8 - COPAF - Sequencial do Parcelamento
+9 - SISCOEX - N�mero da Declara��o de Importa��o (DI)"; (: )
+CONTA_CORRENTE;DEBITO;Tabela para armazenamento da gera��o de debitos na base de dados da SEFAZ.;91996535.0;N;13.0;NUM_MES_REFERENCIA;NUMBER;22;N;0.0;3.0;12.0;0.0;NO;Campo com o m�s de referencia do d�bito.;SYS_C001517480 (C: ENABLED)
+CONTA_CORRENTE;DEBITO;Tabela para armazenamento da gera��o de debitos na base de dados da SEFAZ.;91996535.0;N;20.0;NUM_TERMO_NOTIFICACAO;NUMBER;22;Y;0.0;2.0;180.0;91907273.0;NO;N�mero do termo de notifica��o do d�bito ao devedor.; (: )
+CONTA_CORRENTE;DEBITO;Tabela para armazenamento da gera��o de debitos na base de dados da SEFAZ.;91996535.0;N;16.0;NUM_VERSAO;NUMBER;22;Y;0.0;3.0;18.0;0.0;NO;Campo necessario para controle de concorrencia do hibernate.; (: )
+CONTA_CORRENTE;DEBITO;Tabela para armazenamento da gera��o de debitos na base de dados da SEFAZ.;91996535.0;N;1.0;SEQ_DEBITO;NUMBER;22;N;0.0;6.0;91996535.0;0.0;NO;Campo chave primaria da tabela que ir� utilizar a sequence SEQ_DEBITO.;PK_DEBITO (PRIMARY KEY: ENABLED)- SYS_C001517475 (C: ENABLED)
+CONTA_CORRENTE;DEBITO;Tabela para armazenamento da gera��o de debitos na base de dados da SEFAZ.;91996535.0;N;19.0;SEQ_DEBITO_AIX;NUMBER;22;Y;0.0;2.0;716480.0;91275102.0;NO;Sequencial do Debito no AIX; (: )
+CONTA_CORRENTE;DEBITO;Tabela para armazenamento da gera��o de debitos na base de dados da SEFAZ.;91996535.0;N;2.0;SEQ_DEBITO_ORIGEM;NUMBER;22;Y;0.0;2.0;51564.0;91934359.0;NO;Campo para armazenamento do valor da sequence do debito de origem.;FK_DEB_R_DEB (FOREIGN KEY: ENABLED)
+CONTA_CORRENTE;DEBITO;Tabela para armazenamento da gera��o de debitos na base de dados da SEFAZ.;91996535.0;N;6.0;SEQ_PESSOA;NUMBER;22;Y;0.0;6.0;2907136.0;1.0;NO;Identificador �nico de inst�ncia de Pessoa no Cadastro.;FK_PES_R_DEB (FOREIGN KEY: ENABLED)
+CONTA_CORRENTE;DEBITO;Tabela para armazenamento da gera��o de debitos na base de dados da SEFAZ.;91996535.0;N;15.0;STA_DEBITO;NUMBER;22;N;0.0;3.0;10.0;0.0;NO;Campo com o status do d�bito.;SYS_C001517482 (C: ENABLED)
+CONTA_CORRENTE;DEBITO;Tabela para armazenamento da gera��o de debitos na base de dados da SEFAZ.;91996535.0;N;18.0;TIP_DEBITO;NUMBER;22;Y;0.0;2.0;3.0;91434262.0;NO;"Tipo de Origem do FECOP
+1  Fecop Normal
+2  Fecop ST"; (: )
+CONTA_CORRENTE;DEBITO;Tabela para armazenamento da gera��o de debitos na base de dados da SEFAZ.;91996535.0;N;9.0;TIP_ORIGEM_SISTEMA;NUMBER;22;N;0.0;3.0;7.0;0.0;NO;Coluna com o tipo de origem do d�bito.;SYS_C001517477 (C: ENABLED)
+CONTA_CORRENTE;DEBITO;Tabela para armazenamento da gera��o de debitos na base de dados da SEFAZ.;91996535.0;N;11.0;VLR_MULTA_ORIGINAL;NUMBER;22;Y;2.0;2.0;2136.0;91726817.0;NO;Campo com o valor original da multa.; (: )
+CONTA_CORRENTE;DEBITO;Tabela para armazenamento da gera��o de debitos na base de dados da SEFAZ.;91996535.0;N;10.0;VLR_PRINCIPAL_ORIGINAL;NUMBER;22;N;2.0;5.0;588160.0;0.0;NO;Campo com o valor original do d�bito.;SYS_C001517478 (C: ENABLED)
+CONTA_CORRENTE;DEBITO_AUD;Tabela de auditoria para armazenamento da gera��o de debitos na base de dados da SEFAZ.;13158777.0;N;15.0;COD_INDICADOR;NUMBER;22;Y;0.0;0.0;0.0;13158777.0;NO;C�digo do Indicador Financeiro; (: )
+CONTA_CORRENTE;DEBITO_AUD;Tabela de auditoria para armazenamento da gera��o de debitos na base de dados da SEFAZ.;13158777.0;N;16.0;COD_PRODUTO_SERVICO;NUMBER;22;Y;0.0;0.0;0.0;13158777.0;NO;C�digo de produto/servi�o ( COD-PRODUTO-SERVICO ); (: )
+CONTA_CORRENTE;DEBITO_AUD;Tabela de auditoria para armazenamento da gera��o de debitos na base de dados da SEFAZ.;13158777.0;N;14.0;COD_RECEITA;NUMBER;22;Y;0.0;0.0;0.0;13158777.0;NO;C�digo da receita ( COD-RECEITA-CRD ); (: )
+CONTA_CORRENTE;DEBITO_AUD;Tabela de auditoria para armazenamento da gera��o de debitos na base de dados da SEFAZ.;13158777.0;N;4.0;DAT_CORRECAO;DATE;7;Y;;8.0;3802.0;204932.0;NO;Data para armazenamento da data de corre��o.; (: )
+CONTA_CORRENTE;DEBITO_AUD;Tabela de auditoria para armazenamento da gera��o de debitos na base de dados da SEFAZ.;13158777.0;N;8.0;DAT_INCLUSAO;DATE;7;Y;;8.0;2879.0;0.0;NO;Campo com a data de inclus�o do d�bito.; (: )
+CONTA_CORRENTE;DEBITO_AUD;Tabela de auditoria para armazenamento da gera��o de debitos na base de dados da SEFAZ.;13158777.0;N;3.0;DAT_VENCIMENTO;DATE;7;Y;;8.0;3804.0;0.0;NO;Campo para armazenamento da data de vencimento do d�bito.; (: )
+CONTA_CORRENTE;DEBITO_AUD;Tabela de auditoria para armazenamento da gera��o de debitos na base de dados da SEFAZ.;13158777.0;N;10.0;NUM_ANO_REFERENCIA;NUMBER;22;Y;0.0;4.0;32.0;0.0;NO;Campo com o ano de refer�ncia do d�bito.; (: )
+CONTA_CORRENTE;DEBITO_AUD;Tabela de auditoria para armazenamento da gera��o de debitos na base de dados da SEFAZ.;13158777.0;N;18.0;NUM_DOCUMENTO_ORIGEM;VARCHAR2;50;Y;;17.0;2693376.0;530871.0;NO;"N�mero do documento no sistema de origem do D�bito, definido no campo TIP_ORIGEM_SISTEMA.
+Exemplos:
+1 - IPVA - N�mero do Chassi
+2 - ITCD - Guia do ITCD
+3 - Auto de Infra��o - N�mero do Auto de Infra��o
+7 - SISAGUA - N�mero do Pedido de impress�o de selos
+8 - COPAF - Sequencial do Parcelamento
+9 - SISCOEX - N�mero da Declara��o de Importa��o (DI)"; (: )
+CONTA_CORRENTE;DEBITO_AUD;Tabela de auditoria para armazenamento da gera��o de debitos na base de dados da SEFAZ.;13158777.0;N;9.0;NUM_MES_REFERENCIA;NUMBER;22;Y;0.0;3.0;12.0;0.0;NO;Campo com o m�s de referencia do d�bito.; (: )
+CONTA_CORRENTE;DEBITO_AUD;Tabela de auditoria para armazenamento da gera��o de debitos na base de dados da SEFAZ.;13158777.0;N;12.0;NUM_REV;NUMBER;22;N;0.0;6.0;12753920.0;0.0;NO;Armazena o n�mero da revisao;FK_AUDIT_ENTID_R_DEBITO (FOREIGN KEY: ENABLED)- PK_DEBITO_AUD (PRIMARY KEY: ENABLED)- SYS_C001517515 (C: ENABLED)
+CONTA_CORRENTE;DEBITO_AUD;Tabela de auditoria para armazenamento da gera��o de debitos na base de dados da SEFAZ.;13158777.0;N;21.0;NUM_TERMO_NOTIFICACAO;NUMBER;22;Y;0.0;2.0;1.0;13158740.0;NO;N�mero do termo de notifica��o do d�bito ao devedor.; (: )
+CONTA_CORRENTE;DEBITO_AUD;Tabela de auditoria para armazenamento da gera��o de debitos na base de dados da SEFAZ.;13158777.0;N;1.0;SEQ_DEBITO;NUMBER;22;N;0.0;6.0;12814336.0;0.0;NO;Campo chave primaria da tabela - replica da table debito;PK_DEBITO_AUD (PRIMARY KEY: ENABLED)- SYS_C001517514 (C: ENABLED)
+CONTA_CORRENTE;DEBITO_AUD;Tabela de auditoria para armazenamento da gera��o de debitos na base de dados da SEFAZ.;13158777.0;N;20.0;SEQ_DEBITO_AIX;NUMBER;22;Y;0.0;2.0;8611.0;13149294.0;NO;Sequencial do Debito no AIX; (: )
+CONTA_CORRENTE;DEBITO_AUD;Tabela de auditoria para armazenamento da gera��o de debitos na base de dados da SEFAZ.;13158777.0;N;2.0;SEQ_DEBITO_ORIGEM;NUMBER;22;Y;0.0;2.0;21316.0;13127482.0;NO;Campo para armazenamento do valor da sequence do debito de origem.; (: )
+CONTA_CORRENTE;DEBITO_AUD;Tabela de auditoria para armazenamento da gera��o de debitos na base de dados da SEFAZ.;13158777.0;N;17.0;SEQ_PESSOA;NUMBER;22;Y;0.0;0.0;0.0;13158777.0;NO;Identificador �nico de inst�ncia de Pessoa no Cadastro.; (: )
+CONTA_CORRENTE;DEBITO_AUD;Tabela de auditoria para armazenamento da gera��o de debitos na base de dados da SEFAZ.;13158777.0;N;11.0;STA_DEBITO;NUMBER;22;Y;0.0;3.0;7.0;0.0;NO;Campo com o status do d�bito.; (: )
+CONTA_CORRENTE;DEBITO_AUD;Tabela de auditoria para armazenamento da gera��o de debitos na base de dados da SEFAZ.;13158777.0;N;19.0;TIP_DEBITO;NUMBER;22;Y;0.0;2.0;3.0;13041206.0;NO;"TIpo de Debito
+"; (: )
+CONTA_CORRENTE;DEBITO_AUD;Tabela de auditoria para armazenamento da gera��o de debitos na base de dados da SEFAZ.;13158777.0;N;5.0;TIP_ORIGEM_SISTEMA;NUMBER;22;Y;0.0;3.0;7.0;0.0;NO;Coluna com o tipo de origem do d�bito.; (: )
+CONTA_CORRENTE;DEBITO_AUD;Tabela de auditoria para armazenamento da gera��o de debitos na base de dados da SEFAZ.;13158777.0;N;13.0;TIP_REVTYPE;NUMBER;22;Y;0.0;3.0;3.0;0.0;NO;"Armazena o tipo da revisao:
+ADD (REVTYPE=0) - INSERT
+MOD (REVTYPE=1) - UPDATE
+DEL (REVTYPE=2) - DELETE "; (: )
+CONTA_CORRENTE;DEBITO_AUD;Tabela de auditoria para armazenamento da gera��o de debitos na base de dados da SEFAZ.;13158777.0;N;7.0;VLR_MULTA_ORIGINAL;NUMBER;22;Y;2.0;2.0;2165.0;12971129.0;NO;Campo com o valor original da multa.; (: )
+CONTA_CORRENTE;DEBITO_AUD;Tabela de auditoria para armazenamento da gera��o de debitos na base de dados da SEFAZ.;13158777.0;N;6.0;VLR_PRINCIPAL_ORIGINAL;NUMBER;22;Y;2.0;5.0;301856.0;0.0;NO;Campo com o valor original do d�bito.; (: )
+CONTA_CORRENTE;DEBITO_DOC_CREDITO;Tabela ;225117270.0;N;7.0;NUM_VERSAO;NUMBER;22;Y;0.0;2.0;1.0;225115962.0;NO;Campo necessario para controle de concorrencia do hibernate.; (: )
+CONTA_CORRENTE;DEBITO_DOC_CREDITO;Tabela ;225117270.0;N;3.0;SEQ_DEBITO;NUMBER;22;N;0.0;6.0;72351744.0;0.0;NO;Chave estrangeira da tabela DEBITO.;FK_DEB_R_DEB_DOC_CRE (FOREIGN KEY: ENABLED)- SYS_C001517498 (C: ENABLED)
+CONTA_CORRENTE;DEBITO_DOC_CREDITO;Tabela ;225117270.0;N;1.0;SEQ_DEBITO_DOC_CREDITO;NUMBER;22;N;0.0;7.0;225117270.0;0.0;NO;CAMPO IDENFICIDADOR DO REGISTRO;PK_DEBITO_DOC_CREDITO (PRIMARY KEY: ENABLED)- SYS_C001517496 (C: ENABLED)
+CONTA_CORRENTE;DEBITO_DOC_CREDITO;Tabela ;225117270.0;N;2.0;SEQ_DOCUMENTO_CREDITO;NUMBER;22;N;0.0;7.0;144179200.0;0.0;NO;Chave estrangeira da tabela DOCUMENTO_CREDITO.;FK_DOC_CRE_R_DEB_DOC_CRE (FOREIGN KEY: ENABLED)- SYS_C001517497 (C: ENABLED)
+CONTA_CORRENTE;DEBITO_DOC_CREDITO;Tabela ;225117270.0;N;6.0;VLR_CREDITO_JUROS;NUMBER;22;Y;2.0;3.0;76192.0;6.0;NO;Campo com o valor do juros.; (: )
+CONTA_CORRENTE;DEBITO_DOC_CREDITO;Tabela ;225117270.0;N;5.0;VLR_CREDITO_MULTA;NUMBER;22;Y;2.0;3.0;66288.0;158817.0;NO;Campo com o valor da multa.; (: )
+CONTA_CORRENTE;DEBITO_DOC_CREDITO;Tabela ;225117270.0;N;4.0;VLR_CREDITO_PRINCIPAL;NUMBER;22;Y;2.0;5.0;579840.0;0.0;NO;Campo com o valor do cr�dito principal.; (: )
+CONTA_CORRENTE;DEBITO_DOC_CREDITO;Tabela ;225117270.0;N;8.0;VLR_DESCONTO;NUMBER;22;Y;2.0;3.0;35168.0;7089.0;NO;CAMPO INDICATIVO DO VALOR DO DESCONTO DE UM DAE PARA UM DETERMINADO D�BITO; (: )
+CONTA_CORRENTE;DEBITO_LEI_DESCONTO;Associa��o de uma Lei de Desconto a um D�bito para ser aplicado no per�odo de REFIS.;572.0;N;5.0;DAT_FIM;DATE;7;N;;8.0;3.0;0.0;NO;Data final da associa��o entre d�bito e lei desconto;SYS_C001563969 (C: ENABLED)
+CONTA_CORRENTE;DEBITO_LEI_DESCONTO;Associa��o de uma Lei de Desconto a um D�bito para ser aplicado no per�odo de REFIS.;572.0;N;4.0;DAT_INICIO;DATE;7;N;;8.0;10.0;0.0;NO;Data de inclus�o da associa��o entre d�bito e lei desconto;SYS_C001563968 (C: ENABLED)
+CONTA_CORRENTE;DEBITO_LEI_DESCONTO;Associa��o de uma Lei de Desconto a um D�bito para ser aplicado no per�odo de REFIS.;572.0;N;3.0;SEQ_DEBITO;NUMBER;22;N;0.0;6.0;572.0;0.0;NO;Sequencial identificador do d�bito associado � Lei Desconto;FK_DEBITO_R_DEBITO_LEI_DESC (FOREIGN KEY: ENABLED)- SYS_C001563967 (C: ENABLED)
+CONTA_CORRENTE;DEBITO_LEI_DESCONTO;Associa��o de uma Lei de Desconto a um D�bito para ser aplicado no per�odo de REFIS.;572.0;N;1.0;SEQ_DEBITO_LEI_DESCONTO;NUMBER;22;N;0.0;4.0;572.0;0.0;NO;Sequencial identificador de DEBITO_LEI_DESCONTO;PK_DEBITO_LEI_DESC (PRIMARY KEY: ENABLED)- SYS_C001563965 (C: ENABLED)
+CONTA_CORRENTE;DEBITO_LEI_DESCONTO;Associa��o de uma Lei de Desconto a um D�bito para ser aplicado no per�odo de REFIS.;572.0;N;2.0;SEQ_LEI_DESCONTO;NUMBER;22;N;0.0;4.0;1.0;0.0;NO;Sequencial identificador da Lei Desconto associada ao d�bito;SYS_C001563966 (C: ENABLED)
+CONTA_CORRENTE;DEBITO_LEI_DESCONTO;Associa��o de uma Lei de Desconto a um D�bito para ser aplicado no per�odo de REFIS.;572.0;N;6.0;SEQ_USUARIO;NUMBER;22;N;0.0;6.0;17.0;0.0;NO;Usu�rio que fez a homologa��o da associa��o;SYS_C001563970 (C: ENABLED)
+CONTA_CORRENTE;DOCUMENTO_CREDITO;Tabela com as informa��es do documento de cr�dito.;146165625.0;N;3.0;NUM_VERSAO;NUMBER;22;Y;0.0;2.0;1.0;941836.0;NO;Campo necessario para controle de concorrencia do hibernate.; (: )
+CONTA_CORRENTE;DOCUMENTO_CREDITO;Tabela com as informa��es do documento de cr�dito.;146165625.0;N;2.0;SEQ_DAE_EMITIDO;NUMBER;22;Y;0.0;6.0;101113856.0;43376391.0;NO;Sequencial identificador do DAE;FK_DAE_EMI_R_DOC_CRE (FOREIGN KEY: ENABLED)
+CONTA_CORRENTE;DOCUMENTO_CREDITO;Tabela com as informa��es do documento de cr�dito.;146165625.0;N;7.0;SEQ_DECRETO_PARCELAMENTO;NUMBER;22;Y;0.0;2.0;5.0;146164873.0;NO;Sequencial do decreto do parcelamento associada ao documento de cr�dito.; (: )
+CONTA_CORRENTE;DOCUMENTO_CREDITO;Tabela com as informa��es do documento de cr�dito.;146165625.0;N;1.0;SEQ_DOCUMENTO_CREDITO;NUMBER;22;N;0.0;7.0;146165625.0;0.0;NO;Campo chave primaria da tabela que ir� utilizar a sequence SEQ_DOCUMENTO_CREDITO.;PK_DOCUMENTO_CREDITO (PRIMARY KEY: ENABLED)- SYS_C001517485 (C: ENABLED)
+CONTA_CORRENTE;DOCUMENTO_CREDITO;Tabela com as informa��es do documento de cr�dito.;146165625.0;N;5.0;SEQ_DOCUMENTO_GERADO;NUMBER;22;Y;0.0;2.0;136096.0;146024995.0;NO;Chave sequencial do Documento Gerado. Enquanto o novo RECEITA2 conviver com o legado RECEITA AIX/ORACLE, o sequencial ser� a sequence compartilhada RECEITA.SQ_DAE_EMITIDO. Quando a conviv�ncia acabar, ser� mantida a sequence RECEITA2.SQ_DOCUMENTO_GERADO;FK_DOC_GER_R_DOC_CRE (FOREIGN KEY: ENABLED)
+CONTA_CORRENTE;DOCUMENTO_CREDITO;Tabela com as informa��es do documento de cr�dito.;146165625.0;N;6.0;SEQ_LEI_DESCONTO;NUMBER;22;Y;0.0;2.0;3.0;146059609.0;NO;Sequencial da lei de desconto associada ao documento de cr�dito.;FK_LEI_R_DOC_CREDITO (FOREIGN KEY: ENABLED)
+CONTA_CORRENTE;DOCUMENTO_CREDITO;Tabela com as informa��es do documento de cr�dito.;146165625.0;N;4.0;TIP_DEBITO;NUMBER;22;Y;0.0;2.0;4.0;145139125.0;NO;"1  Fecop Normal
+2 Fecop ST"; (: )
+CONTA_CORRENTE;FAIXA_DESCONTO_LEI_DESCONTO;Faixas de desconto da Lei;9.0;N;3.0;DAT_FIM;TIMESTAMP(6);11;Y;6.0;11.0;6.0;0.0;NO;Data final da faixa de descontos; (: )
+CONTA_CORRENTE;FAIXA_DESCONTO_LEI_DESCONTO;Faixas de desconto da Lei;9.0;N;4.0;DAT_INICIO;TIMESTAMP(6);11;N;6.0;11.0;6.0;0.0;NO;Data de in�cio da faixa de descontos;SYS_C001551472 (C: ENABLED)
+CONTA_CORRENTE;FAIXA_DESCONTO_LEI_DESCONTO;Faixas de desconto da Lei;9.0;N;1.0;SEQ_FAIXA_DESCONTO_LEI_DESC;NUMBER;22;N;0.0;4.0;9.0;0.0;NO;Sequencial da tabela;PK_FAIXA_DESCONTO_LEI_DESCONTO (PRIMARY KEY: ENABLED)- SYS_C001551470 (C: ENABLED)
+CONTA_CORRENTE;FAIXA_DESCONTO_LEI_DESCONTO;Faixas de desconto da Lei;9.0;N;2.0;SEQ_LEI_DESCONTO;NUMBER;22;N;0.0;4.0;8.0;0.0;NO;Sequencial da tabela;FK_LEI_DESCONTO_R_FAIXA_DESC (FOREIGN KEY: ENABLED)- SYS_C001551471 (C: ENABLED)
+CONTA_CORRENTE;FAIXA_DESCONTO_LEI_DESCONTO;Faixas de desconto da Lei;9.0;N;5.0;VLR_DESCONTO_JUROS;NUMBER;22;Y;2.0;3.0;3.0;0.0;NO;Desconto de juros concedido na faixa;CKC_VLR_DESCONTO_JURO_FAI_DESC (C: ENABLED)
+CONTA_CORRENTE;FAIXA_DESCONTO_LEI_DESCONTO;Faixas de desconto da Lei;9.0;N;6.0;VLR_DESCONTO_MULTA;NUMBER;22;Y;2.0;3.0;3.0;0.0;NO;Desconto de multa concedido na faixa;CKC_VLR_DESCONTO_MULT_FAI_DESC (C: ENABLED)
+CONTA_CORRENTE;HISTORICO_DEBITO;Tabela para armazenamento do historico de debitos realizados.;0.0;N;6.0;COD_INDICADOR;NUMBER;22;N;0.0;0.0;0.0;0.0;NO;C�digo do Indicador Financeiro;SYS_C001517504 (C: ENABLED)
+CONTA_CORRENTE;HISTORICO_DEBITO;Tabela para armazenamento do historico de debitos realizados.;0.0;N;5.0;COD_RECEITA;NUMBER;22;N;0.0;0.0;0.0;0.0;NO;C�digo da receita.;SYS_C001517503 (C: ENABLED)
+CONTA_CORRENTE;HISTORICO_DEBITO;Tabela para armazenamento do historico de debitos realizados.;0.0;N;8.0;DAT_CORRECAO;DATE;7;Y;;0.0;0.0;0.0;NO;Data de corre��o do debito.; (: )
+CONTA_CORRENTE;HISTORICO_DEBITO;Tabela para armazenamento do historico de debitos realizados.;0.0;N;12.0;DAT_INCLUSAO;DATE;7;N;;0.0;0.0;0.0;NO;Campo com a data de inclus�o do d�bito.;SYS_C001517508 (C: ENABLED)
+CONTA_CORRENTE;HISTORICO_DEBITO;Tabela para armazenamento do historico de debitos realizados.;0.0;N;2.0;DAT_MOVIMENTO;DATE;7;N;;0.0;0.0;0.0;NO;Campo com a data de movimento para a tabela de historico.;SYS_C001517501 (C: ENABLED)
+CONTA_CORRENTE;HISTORICO_DEBITO;Tabela para armazenamento do historico de debitos realizados.;0.0;N;7.0;DAT_VENCIMENTO;DATE;7;N;;0.0;0.0;0.0;NO;Data de vencimento do debito.;SYS_C001517505 (C: ENABLED)
+CONTA_CORRENTE;HISTORICO_DEBITO;Tabela para armazenamento do historico de debitos realizados.;0.0;N;14.0;NUM_ANO_REFERENCIA;NUMBER;22;N;0.0;0.0;0.0;0.0;NO;Campo com o ano de referencia do d�bito.;SYS_C001517510 (C: ENABLED)
+CONTA_CORRENTE;HISTORICO_DEBITO;Tabela para armazenamento do historico de debitos realizados.;0.0;N;13.0;NUM_MES_REFERENCIA;NUMBER;22;N;0.0;0.0;0.0;0.0;NO;Campo com o m�s de referencia do debito.;SYS_C001517509 (C: ENABLED)
+CONTA_CORRENTE;HISTORICO_DEBITO;Tabela para armazenamento do historico de debitos realizados.;0.0;N;16.0;NUM_VERSAO;NUMBER;22;Y;0.0;0.0;0.0;0.0;NO;Campo necessario para controle de concorrencia do hibernate.; (: )
+CONTA_CORRENTE;HISTORICO_DEBITO;Tabela para armazenamento do historico de debitos realizados.;0.0;N;4.0;SEQ_DEBITO_ORIGEM;NUMBER;22;Y;0.0;0.0;0.0;0.0;NO;C�digo sequencial do debito de origem.; (: )
+CONTA_CORRENTE;HISTORICO_DEBITO;Tabela para armazenamento do historico de debitos realizados.;0.0;N;1.0;SEQ_HISTORICO_DEBITO;NUMBER;22;N;0.0;0.0;0.0;0.0;NO;Campo chave primaria da tabela que ir� utilizar a sequence SEQ_HISTORICO_DEBITO.;PK_HISTORICO_DEBITO (PRIMARY KEY: ENABLED)- SYS_C001517500 (C: ENABLED)
+CONTA_CORRENTE;HISTORICO_DEBITO;Tabela para armazenamento do historico de debitos realizados.;0.0;N;3.0;SEQ_PESSOA;NUMBER;22;N;0.0;0.0;0.0;0.0;NO;Codigo da pessoa para registro na tabela de historico.;SYS_C001517502 (C: ENABLED)
+CONTA_CORRENTE;HISTORICO_DEBITO;Tabela para armazenamento do historico de debitos realizados.;0.0;N;15.0;STA_DEBITO;NUMBER;22;N;0.0;0.0;0.0;0.0;NO;Campo com o status do d�bito.;SYS_C001517511 (C: ENABLED)
+CONTA_CORRENTE;HISTORICO_DEBITO;Tabela para armazenamento do historico de debitos realizados.;0.0;N;9.0;TIP_ORIGEM_SISTEMA;NUMBER;22;N;0.0;0.0;0.0;0.0;NO;Campo com o sistema de origem.;CKC_TIP_ORIGEM_SISTEM_HISTORIC (C: ENABLED)- SYS_C001517506 (C: ENABLED)
+CONTA_CORRENTE;HISTORICO_DEBITO;Tabela para armazenamento do historico de debitos realizados.;0.0;N;11.0;VLR_MULTA_ORIGINAL;NUMBER;22;Y;2.0;0.0;0.0;0.0;NO;Campo com o valor da multa do d�bito.; (: )
+CONTA_CORRENTE;HISTORICO_DEBITO;Tabela para armazenamento do historico de debitos realizados.;0.0;N;10.0;VLR_PRINCIPAL_ORIGINAL;NUMBER;22;N;2.0;0.0;0.0;0.0;NO;Campo com o valor original do d�bito.;SYS_C001517507 (C: ENABLED)
+CONTA_CORRENTE;LANCAMENTO;Tabela para armazenamento os lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;254631073.0;N;5.0;COD_RECEITA;NUMBER;22;Y;0.0;4.0;17.0;3145031.0;NO;C�digo da receita ( COD-RECEITA-CRD );FK_COD_REC_R_LAN (FOREIGN KEY: ENABLED)
+CONTA_CORRENTE;LANCAMENTO;Tabela para armazenamento os lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;254631073.0;N;14.0;DAT_INCLUSAO;DATE;7;N;;8.0;645120.0;0.0;NO;Data de inclus�o do lan�amento;SYS_C001565444 (C: ENABLED)
+CONTA_CORRENTE;LANCAMENTO;Tabela para armazenamento os lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;254631073.0;N;7.0;DAT_LANCAMENTO;DATE;7;N;;8.0;7100.0;0.0;NO;Campo com a data em que nasceu a linha.;SYS_C001517489 (C: ENABLED)
+CONTA_CORRENTE;LANCAMENTO;Tabela para armazenamento os lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;254631073.0;N;8.0;DAT_VENCIMENTO;DATE;7;Y;;4.0;5344.0;155785317.0;NO;Campo com a data de vencimento.; (: )
+CONTA_CORRENTE;LANCAMENTO;Tabela para armazenamento os lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;254631073.0;N;12.0;DSC_INFORM_COMPLEMENT;VARCHAR2;500;Y;;2.0;12296.0;246847945.0;NO;Campo com informa��es complementares ao lan�amento.; (: )
+CONTA_CORRENTE;LANCAMENTO;Tabela para armazenamento os lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;254631073.0;N;10.0;NUM_ANO_REFERENCIA;NUMBER;22;Y;0.0;3.0;35.0;146579640.0;NO;Campo com o ano de referencia do lancamento.; (: )
+CONTA_CORRENTE;LANCAMENTO;Tabela para armazenamento os lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;254631073.0;N;9.0;NUM_MES_REFERENCIA;NUMBER;22;Y;0.0;2.0;12.0;146579630.0;NO;Campo com o m�s de referencia do lan�amento.; (: )
+CONTA_CORRENTE;LANCAMENTO;Tabela para armazenamento os lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;254631073.0;N;13.0;NUM_VERSAO;NUMBER;22;Y;0.0;2.0;13.0;5390689.0;NO;Campo necessario para controle de concorrencia do hibernate.; (: )
+CONTA_CORRENTE;LANCAMENTO;Tabela para armazenamento os lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;254631073.0;N;2.0;SEQ_DEBITO;NUMBER;22;Y;0.0;6.0;91529216.0;93266.0;NO;Chave estrangeira da tabela DEBITO.;FK_DEB_R_LAN (FOREIGN KEY: ENABLED)
+CONTA_CORRENTE;LANCAMENTO;Tabela para armazenamento os lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;254631073.0;N;4.0;SEQ_DOCUMENTO_CREDITO;NUMBER;22;Y;0.0;4.0;39124992.0;109989364.0;NO;Chave estrangeira da tabela DOCUMENTO_CREDITO.;FK_DOC_CRE_R_LAN (FOREIGN KEY: DISABLED)
+CONTA_CORRENTE;LANCAMENTO;Tabela para armazenamento os lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;254631073.0;N;1.0;SEQ_LANCAMENTO;NUMBER;22;N;0.0;7.0;254631073.0;0.0;NO;Campo chave primaria da tabela que ir� utilizar a sequence SEQ_LANCAMENTO.;PK_LANCAMENTO (PRIMARY KEY: ENABLED)- SYS_C001517487 (C: ENABLED)
+CONTA_CORRENTE;LANCAMENTO;Tabela para armazenamento os lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;254631073.0;N;6.0;SEQ_PESSOA;NUMBER;22;Y;0.0;6.0;2899968.0;13039775.0;NO;Identificador �nico de inst�ncia de Pessoa no Cadastro.;FK_PES_R_LAN (FOREIGN KEY: ENABLED)
+CONTA_CORRENTE;LANCAMENTO;Tabela para armazenamento os lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;254631073.0;N;3.0;SEQ_TIPO_LANCAMENTO;NUMBER;22;N;0.0;3.0;36.0;0.0;NO;Chave estrangeira da tabela TIPO_LANCAMENTO.;FK_TIP_LAN_R_LAN (FOREIGN KEY: DISABLED)- SYS_C001517488 (C: ENABLED)
+CONTA_CORRENTE;LANCAMENTO;Tabela para armazenamento os lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;254631073.0;N;11.0;VLR_LANCAMENTO;NUMBER;22;N;2.0;5.0;780800.0;0.0;NO;Campo com o valor de lan�amento.;SYS_C001517490 (C: ENABLED)
+CONTA_CORRENTE;LANCAMENTO_ATUAL;;6985.0;N;5.0;COD_RECEITA;NUMBER;22;Y;0.0;4.0;1.0;0.0;NO;; (: )
+CONTA_CORRENTE;LANCAMENTO_ATUAL;;6985.0;N;7.0;DAT_LANCAMENTO;DATE;7;N;;8.0;1.0;0.0;NO;;SYS_C001517917 (C: ENABLED)
+CONTA_CORRENTE;LANCAMENTO_ATUAL;;6985.0;N;8.0;DAT_VENCIMENTO;DATE;7;Y;;2.0;14.0;6936.0;NO;; (: )
+CONTA_CORRENTE;LANCAMENTO_ATUAL;;6985.0;N;12.0;DSC_INFORM_COMPLEMENT;VARCHAR2;500;Y;;0.0;0.0;6985.0;NO;; (: )
+CONTA_CORRENTE;LANCAMENTO_ATUAL;;6985.0;N;10.0;NUM_ANO_REFERENCIA;NUMBER;22;Y;0.0;4.0;3.0;0.0;NO;; (: )
+CONTA_CORRENTE;LANCAMENTO_ATUAL;;6985.0;N;9.0;NUM_MES_REFERENCIA;NUMBER;22;Y;0.0;3.0;8.0;0.0;NO;; (: )
+CONTA_CORRENTE;LANCAMENTO_ATUAL;;6985.0;N;13.0;NUM_VERSAO;NUMBER;22;Y;0.0;2.0;1.0;0.0;NO;; (: )
+CONTA_CORRENTE;LANCAMENTO_ATUAL;;6985.0;N;2.0;SEQ_DEBITO;NUMBER;22;Y;0.0;6.0;5807.0;0.0;NO;; (: )
+CONTA_CORRENTE;LANCAMENTO_ATUAL;;6985.0;N;4.0;SEQ_DOCUMENTO_CREDITO;NUMBER;22;Y;0.0;6.0;1295.0;49.0;NO;; (: )
+CONTA_CORRENTE;LANCAMENTO_ATUAL;;6985.0;N;1.0;SEQ_LANCAMENTO;NUMBER;22;N;0.0;6.0;6985.0;0.0;NO;;SYS_C001517915 (C: ENABLED)
+CONTA_CORRENTE;LANCAMENTO_ATUAL;;6985.0;N;6.0;SEQ_PESSOA;NUMBER;22;Y;0.0;6.0;1192.0;0.0;NO;; (: )
+CONTA_CORRENTE;LANCAMENTO_ATUAL;;6985.0;N;3.0;SEQ_TIPO_LANCAMENTO;NUMBER;22;N;0.0;3.0;4.0;0.0;NO;;SYS_C001517916 (C: ENABLED)
+CONTA_CORRENTE;LANCAMENTO_ATUAL;;6985.0;N;11.0;VLR_LANCAMENTO;NUMBER;22;N;2.0;5.0;1389.0;0.0;NO;;SYS_C001517918 (C: ENABLED)
+CONTA_CORRENTE;LANCAMENTO_AUD;Tabela para armazenamento da auditoria dos lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;161554866.0;N;7.0;COD_RECEITA;NUMBER;22;Y;0.0;4.0;17.0;369.0;NO;C�digo da receita ( COD-RECEITA-CRD ); (: )
+CONTA_CORRENTE;LANCAMENTO_AUD;Tabela para armazenamento da auditoria dos lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;161554866.0;N;9.0;DAT_LANCAMENTO;DATE;7;N;;8.0;3262.0;0.0;NO;Campo com a data em que nasceu a linha.;SYS_C001518475 (C: ENABLED)
+CONTA_CORRENTE;LANCAMENTO_AUD;Tabela para armazenamento da auditoria dos lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;161554866.0;N;10.0;DAT_VENCIMENTO;DATE;7;Y;;2.0;4062.0;146474224.0;NO;Campo com a data de vencimento.; (: )
+CONTA_CORRENTE;LANCAMENTO_AUD;Tabela para armazenamento da auditoria dos lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;161554866.0;N;14.0;DSC_INFORM_COMPLEMENT;VARCHAR2;500;Y;;2.0;10742.0;159407288.0;NO;Campo com informa��es complementares ao lan�amento.; (: )
+CONTA_CORRENTE;LANCAMENTO_AUD;Tabela para armazenamento da auditoria dos lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;161554866.0;N;12.0;NUM_ANO_REFERENCIA;NUMBER;22;Y;0.0;2.0;33.0;143731075.0;NO;Campo com o ano de referencia do lancamento.; (: )
+CONTA_CORRENTE;LANCAMENTO_AUD;Tabela para armazenamento da auditoria dos lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;161554866.0;N;11.0;NUM_MES_REFERENCIA;NUMBER;22;Y;0.0;2.0;12.0;143731075.0;NO;Campo com o m�s de referencia do lan�amento.; (: )
+CONTA_CORRENTE;LANCAMENTO_AUD;Tabela para armazenamento da auditoria dos lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;161554866.0;N;2.0;NUM_REV;NUMBER;22;N;0.0;6.0;55623680.0;0.0;NO;Armazena o n�mero da revisao;FK_AUDIT_ENTID_R_LANCAMENTO (FOREIGN KEY: ENABLED)- PK_LANCAMENTO_AUD (PRIMARY KEY: ENABLED)- SYS_C001518473 (C: ENABLED)
+CONTA_CORRENTE;LANCAMENTO_AUD;Tabela para armazenamento da auditoria dos lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;161554866.0;N;15.0;NUM_VERSAO;NUMBER;22;Y;0.0;0.0;0.0;161554866.0;NO;Campo necessario para controle de concorrencia do hibernate.; (: )
+CONTA_CORRENTE;LANCAMENTO_AUD;Tabela para armazenamento da auditoria dos lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;161554866.0;N;4.0;SEQ_DEBITO;NUMBER;22;Y;0.0;6.0;75341824.0;0.0;NO;Chave estrangeira da tabela DEBITO.; (: )
+CONTA_CORRENTE;LANCAMENTO_AUD;Tabela para armazenamento da auditoria dos lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;161554866.0;N;6.0;SEQ_DOCUMENTO_CREDITO;NUMBER;22;Y;0.0;6.0;36388864.0;25596383.0;NO;Chave estrangeira da tabela DOCUMENTO_CREDITO.; (: )
+CONTA_CORRENTE;LANCAMENTO_AUD;Tabela para armazenamento da auditoria dos lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;161554866.0;N;1.0;SEQ_LANCAMENTO;NUMBER;22;N;0.0;7.0;157368320.0;0.0;NO;Campo chave primaria da tabela que ir� utilizar a sequence SEQ_LANCAMENTO.;PK_LANCAMENTO_AUD (PRIMARY KEY: ENABLED)- SYS_C001518472 (C: ENABLED)
+CONTA_CORRENTE;LANCAMENTO_AUD;Tabela para armazenamento da auditoria dos lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;161554866.0;N;8.0;SEQ_PESSOA;NUMBER;22;Y;0.0;6.0;2566144.0;10371738.0;NO;Identificador �nico de inst�ncia de Pessoa no Cadastro.; (: )
+CONTA_CORRENTE;LANCAMENTO_AUD;Tabela para armazenamento da auditoria dos lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;161554866.0;N;5.0;SEQ_TIPO_LANCAMENTO;NUMBER;22;N;0.0;3.0;34.0;0.0;NO;Chave estrangeira da tabela TIPO_LANCAMENTO.;SYS_C001518474 (C: ENABLED)
+CONTA_CORRENTE;LANCAMENTO_AUD;Tabela para armazenamento da auditoria dos lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;161554866.0;N;3.0;TIP_REVTYPE;NUMBER;22;Y;0.0;3.0;3.0;0.0;NO;"Armazena o tipo da revisao:
+ADD (REVTYPE=0) - INSERT
+MOD (REVTYPE=1) - UPDATE
+DEL (REVTYPE=2) - DELETE "; (: )
+CONTA_CORRENTE;LANCAMENTO_AUD;Tabela para armazenamento da auditoria dos lan�amentos de d�bito ou cr�dito na base de dados da SEFAZ.;161554866.0;N;13.0;VLR_LANCAMENTO;NUMBER;22;N;2.0;5.0;452096.0;0.0;NO;Campo com o valor de lan�amento.;SYS_C001518476 (C: ENABLED)
+CONTA_CORRENTE;LEI_DESCONTO;Leis que deram origem aos descontos;8.0;N;5.0;COD_SISTEMA_ORIGEM;NUMBER;22;N;0.0;3.0;4.0;0.0;NO;Sistema de origem;SYS_C001551468 (C: ENABLED)
+CONTA_CORRENTE;LEI_DESCONTO;Leis que deram origem aos descontos;8.0;N;2.0;DAT_FIM;TIMESTAMP(6);11;Y;6.0;11.0;5.0;0.0;NO;Data final dos descontos; (: )
+CONTA_CORRENTE;LEI_DESCONTO;Leis que deram origem aos descontos;8.0;N;3.0;DAT_INICIO;TIMESTAMP(6);11;N;6.0;11.0;5.0;0.0;NO;Data de in�cio dos descontos;SYS_C001551466 (C: ENABLED)
+CONTA_CORRENTE;LEI_DESCONTO;Leis que deram origem aos descontos;8.0;N;10.0;DSC_INFO_COMPLEMENTAR;VARCHAR2;200;Y;;19.0;1.0;4.0;NO;Informa��es complementares para o DAE associado � lei de desconto.; (: )
+CONTA_CORRENTE;LEI_DESCONTO;Leis que deram origem aos descontos;8.0;N;6.0;DSC_PERIODO_REFERENCIA_FIM;VARCHAR2;7;Y;;8.0;4.0;0.0;NO;Refer�ncia final dos descontos; (: )
+CONTA_CORRENTE;LEI_DESCONTO;Leis que deram origem aos descontos;8.0;N;7.0;DSC_PERIODO_REFERENCIA_INICIO;VARCHAR2;7;Y;;2.0;1.0;7.0;NO;Refer�ncia inicial dos descontos; (: )
+CONTA_CORRENTE;LEI_DESCONTO;Leis que deram origem aos descontos;8.0;N;4.0;NUM_LEI;VARCHAR2;256;N;;11.0;5.0;0.0;NO;N�mero da lei que deu origem aos descontos;SYS_C001551467 (C: ENABLED)
+CONTA_CORRENTE;LEI_DESCONTO;Leis que deram origem aos descontos;8.0;N;1.0;SEQ_LEI_DESCONTO;NUMBER;22;N;0.0;4.0;8.0;0.0;NO;Sequencial da tabela;PK_LEI_DESCONTO (PRIMARY KEY: ENABLED)- SYS_C001551465 (C: ENABLED)
+CONTA_CORRENTE;LEI_DESCONTO;Leis que deram origem aos descontos;8.0;N;8.0;TIP_CRITICA_CNAE;CHAR;1;Y;;2.0;2.0;0.0;NO;Tipo de cr�tica a CNAEs; (: )
+CONTA_CORRENTE;LEI_DESCONTO;Leis que deram origem aos descontos;8.0;N;9.0;TIP_CRITICA_RECEITA;CHAR;1;Y;;2.0;2.0;0.0;NO;Tipo de cr�tica a Receitas; (: )
+CONTA_CORRENTE;LINHA_ARQUIVO_ETL;Registros dos arquivos ETL;55074321.0;N;3.0;DSC_CONTEUDO_LINHA_ARQUIVO;VARCHAR2;4000;Y;;360.0;7138304.0;0.0;NO;Conteudo do arquivo; (: )
+CONTA_CORRENTE;LINHA_ARQUIVO_ETL;Registros dos arquivos ETL;55074321.0;N;2.0;SEQ_ARQUIVO_ETL;NUMBER;22;N;0.0;5.0;3975.0;0.0;NO;Sequencial da tabela;FK_LINHA_ARQ_ETL_R_ARQ_ETL (FOREIGN KEY: ENABLED)- SYS_C001551462 (C: ENABLED)
+CONTA_CORRENTE;LINHA_ARQUIVO_ETL;Registros dos arquivos ETL;55074321.0;N;1.0;SEQ_LINHA_ARQUIVO_ETL;NUMBER;22;N;0.0;7.0;55074321.0;0.0;NO;Sequencial da tabela;PK_LINHA_ARQUIVO_ETL (PRIMARY KEY: ENABLED)- SYS_C001551461 (C: ENABLED)
+CONTA_CORRENTE;MIGRACAO_LEGADO;"Tabela que ser� populada com os dados de IPVA dos ve�culos que tem saldo devedor ou credor nos anos anteriores a 2018 . 
+Esta tabela servir� como base para a migra��o destes dados para o novo sistema IPVA (Downsizing)";694469.0;N;8.0;COD_CHASSI_VEICULO;VARCHAR2;25;Y;;0.0;0.0;694469.0;NO;"Chassi do veiculo
+"; (: )
+CONTA_CORRENTE;MIGRACAO_LEGADO;"Tabela que ser� populada com os dados de IPVA dos ve�culos que tem saldo devedor ou credor nos anos anteriores a 2018 . 
+Esta tabela servir� como base para a migra��o destes dados para o novo sistema IPVA (Downsizing)";694469.0;N;15.0;COD_DEVEDOR;NUMBER;22;Y;0.0;6.0;27188.0;0.0;NO;Documento identificador do devedor do d�bito (de acordo com o definido em TIP_DEVEDOR); (: )
+CONTA_CORRENTE;MIGRACAO_LEGADO;"Tabela que ser� populada com os dados de IPVA dos ve�culos que tem saldo devedor ou credor nos anos anteriores a 2018 . 
+Esta tabela servir� como base para a migra��o destes dados para o novo sistema IPVA (Downsizing)";694469.0;N;11.0;COD_INSCRICAO;NUMBER;22;Y;0.0;3.0;11355.0;0.0;NO;"Codigo da Inscri��o da Divida Ativa
+"; (: )
+CONTA_CORRENTE;MIGRACAO_LEGADO;"Tabela que ser� populada com os dados de IPVA dos ve�culos que tem saldo devedor ou credor nos anos anteriores a 2018 . 
+Esta tabela servir� como base para a migra��o destes dados para o novo sistema IPVA (Downsizing)";694469.0;N;4.0;COD_LANCAMENTO;NUMBER;22;Y;0.0;4.0;2.0;0.0;NO;Codigo do lan�amento . Ser� um lan�amento de credito ou de d�bito; (: )
+CONTA_CORRENTE;MIGRACAO_LEGADO;"Tabela que ser� populada com os dados de IPVA dos ve�culos que tem saldo devedor ou credor nos anos anteriores a 2018 . 
+Esta tabela servir� como base para a migra��o destes dados para o novo sistema IPVA (Downsizing)";694469.0;N;1.0;COD_RECEITA;NUMBER;22;Y;0.0;4.0;12.0;0.0;NO;C�digo da receita ; (: )
+CONTA_CORRENTE;MIGRACAO_LEGADO;"Tabela que ser� populada com os dados de IPVA dos ve�culos que tem saldo devedor ou credor nos anos anteriores a 2018 . 
+Esta tabela servir� como base para a migra��o destes dados para o novo sistema IPVA (Downsizing)";694469.0;N;19.0;DAT_INSC_PARC;DATE;7;Y;;3.0;2225.0;548586.0;NO;Data de inscri��o no parcelamento; (: )
+CONTA_CORRENTE;MIGRACAO_LEGADO;"Tabela que ser� populada com os dados de IPVA dos ve�culos que tem saldo devedor ou credor nos anos anteriores a 2018 . 
+Esta tabela servir� como base para a migra��o destes dados para o novo sistema IPVA (Downsizing)";694469.0;N;3.0;DAT_LANCAMENTO;DATE;7;N;;8.0;2835.0;0.0;NO;Campo para armazenamento da data de vencimento do d�bito.;SYS_C001518574 (C: ENABLED)
+CONTA_CORRENTE;MIGRACAO_LEGADO;"Tabela que ser� populada com os dados de IPVA dos ve�culos que tem saldo devedor ou credor nos anos anteriores a 2018 . 
+Esta tabela servir� como base para a migra��o destes dados para o novo sistema IPVA (Downsizing)";694469.0;N;2.0;DAT_VENCIMENTO;DATE;7;N;;8.0;3002.0;0.0;NO;Campo para armazenamento da data de vencimento do d�bito.;SYS_C001518573 (C: ENABLED)
+CONTA_CORRENTE;MIGRACAO_LEGADO;"Tabela que ser� populada com os dados de IPVA dos ve�culos que tem saldo devedor ou credor nos anos anteriores a 2018 . 
+Esta tabela servir� como base para a migra��o destes dados para o novo sistema IPVA (Downsizing)";694469.0;N;7.0;NUM_ANO_REFERENCIA;NUMBER;22;N;0.0;4.0;24.0;0.0;NO;Campo com o ano de refer�ncia do d�bito.;SYS_C001518577 (C: ENABLED)
+CONTA_CORRENTE;MIGRACAO_LEGADO;"Tabela que ser� populada com os dados de IPVA dos ve�culos que tem saldo devedor ou credor nos anos anteriores a 2018 . 
+Esta tabela servir� como base para a migra��o destes dados para o novo sistema IPVA (Downsizing)";694469.0;N;13.0;NUM_DOCUMENTO_ORIGEM;NUMBER;22;Y;0.0;3.0;180.0;0.0;NO;N�mero do documento que originou o d�bito. Exemplo: guia de ITCD; (: )
+CONTA_CORRENTE;MIGRACAO_LEGADO;"Tabela que ser� populada com os dados de IPVA dos ve�culos que tem saldo devedor ou credor nos anos anteriores a 2018 . 
+Esta tabela servir� como base para a migra��o destes dados para o novo sistema IPVA (Downsizing)";694469.0;N;6.0;NUM_MES_REFERENCIA;NUMBER;22;N;0.0;3.0;12.0;0.0;NO;Campo com o m�s de referencia do d�bito.;SYS_C001518576 (C: ENABLED)
+CONTA_CORRENTE;MIGRACAO_LEGADO;"Tabela que ser� populada com os dados de IPVA dos ve�culos que tem saldo devedor ou credor nos anos anteriores a 2018 . 
+Esta tabela servir� como base para a migra��o destes dados para o novo sistema IPVA (Downsizing)";694469.0;N;9.0;NUM_PARCELA;NUMBER;22;Y;0.0;2.0;1.0;0.0;NO;"Numero da parcela em aberto
+"; (: )
+CONTA_CORRENTE;MIGRACAO_LEGADO;"Tabela que ser� populada com os dados de IPVA dos ve�culos que tem saldo devedor ou credor nos anos anteriores a 2018 . 
+Esta tabela servir� como base para a migra��o destes dados para o novo sistema IPVA (Downsizing)";694469.0;N;16.0;SEQ_DEBITO_AIX;NUMBER;22;Y;0.0;6.0;623616.0;0.0;NO;Sequencial do D�bito no COPAF do AIX; (: )
+CONTA_CORRENTE;MIGRACAO_LEGADO;"Tabela que ser� populada com os dados de IPVA dos ve�culos que tem saldo devedor ou credor nos anos anteriores a 2018 . 
+Esta tabela servir� como base para a migra��o destes dados para o novo sistema IPVA (Downsizing)";694469.0;N;20.0;SEQ_DEBITO_AIX_PARC;NUMBER;22;Y;0.0;3.0;88624.0;0.0;NO;Sequencial do d�bito do parcelamento no AIX; (: )
+CONTA_CORRENTE;MIGRACAO_LEGADO;"Tabela que ser� populada com os dados de IPVA dos ve�culos que tem saldo devedor ou credor nos anos anteriores a 2018 . 
+Esta tabela servir� como base para a migra��o destes dados para o novo sistema IPVA (Downsizing)";694469.0;N;10.0;SEQ_PARCELAMENTO;NUMBER;22;Y;0.0;3.0;10447.0;0.0;NO;Sequencial do Parcelamento; (: )
+CONTA_CORRENTE;MIGRACAO_LEGADO;"Tabela que ser� populada com os dados de IPVA dos ve�culos que tem saldo devedor ou credor nos anos anteriores a 2018 . 
+Esta tabela servir� como base para a migra��o destes dados para o novo sistema IPVA (Downsizing)";694469.0;N;12.0;STA_SITUACAO;NUMBER;22;Y;0.0;3.0;11.0;0.0;NO;"Status da Situa��o do ipva quando estiver inscrito ou parcelado
+"; (: )
+CONTA_CORRENTE;MIGRACAO_LEGADO;"Tabela que ser� populada com os dados de IPVA dos ve�culos que tem saldo devedor ou credor nos anos anteriores a 2018 . 
+Esta tabela servir� como base para a migra��o destes dados para o novo sistema IPVA (Downsizing)";694469.0;N;17.0;TIP_DEBITO;NUMBER;22;Y;0.0;3.0;3.0;0.0;NO;Tipo do d�bito migrado; (: )
+CONTA_CORRENTE;MIGRACAO_LEGADO;"Tabela que ser� populada com os dados de IPVA dos ve�culos que tem saldo devedor ou credor nos anos anteriores a 2018 . 
+Esta tabela servir� como base para a migra��o destes dados para o novo sistema IPVA (Downsizing)";694469.0;N;14.0;TIP_DEVEDOR;NUMBER;22;Y;0.0;3.0;2.0;0.0;NO;"Tipo do documento que identifica o devedor do d�bito:
+1 - CGF
+2 - CNPJ
+3 - CPF
+4 - C�digo identificador gerado no CADASTRO.PESSOA F�SICA JUR�DICA"; (: )
+CONTA_CORRENTE;MIGRACAO_LEGADO;"Tabela que ser� populada com os dados de IPVA dos ve�culos que tem saldo devedor ou credor nos anos anteriores a 2018 . 
+Esta tabela servir� como base para a migra��o destes dados para o novo sistema IPVA (Downsizing)";694469.0;N;18.0;VLR_INSC_PARC;NUMBER;22;Y;2.0;3.0;81352.0;0.0;NO;Valor inscrito no parcelamento; (: )
+CONTA_CORRENTE;MIGRACAO_LEGADO;"Tabela que ser� populada com os dados de IPVA dos ve�culos que tem saldo devedor ou credor nos anos anteriores a 2018 . 
+Esta tabela servir� como base para a migra��o destes dados para o novo sistema IPVA (Downsizing)";694469.0;N;5.0;VLR_LANCAMENTO;NUMBER;22;N;2.0;5.0;392832.0;0.0;NO;"Valor do saldo devedor ou credor
+";SYS_C001518575 (C: ENABLED)
+CONTA_CORRENTE;RECEITA_LEI_DESCONTO;Receitas relacionadas na Lei dos descontos;10.0;N;2.0;COD_RECEITA;NUMBER;22;N;0.0;4.0;7.0;0.0;NO;Receita relacionada na Lei;FK_RECEITA_R_RECEITA_LEI (FOREIGN KEY: ENABLED)- PK_RECEITA_LEI_DESCONTO (PRIMARY KEY: ENABLED)- SYS_C001551478 (C: ENABLED)
+CONTA_CORRENTE;RECEITA_LEI_DESCONTO;Receitas relacionadas na Lei dos descontos;10.0;N;1.0;SEQ_LEI_DESCONTO;NUMBER;22;N;0.0;4.0;8.0;0.0;NO;Sequencial da tabela;FK_LEI_DESCONTO_R_RECEITA_LEI (FOREIGN KEY: ENABLED)- PK_RECEITA_LEI_DESCONTO (PRIMARY KEY: ENABLED)- SYS_C001551477 (C: ENABLED)
+CONTA_CORRENTE;TIPO_LANCAMENTO;Tabela com as informa��es do tipo de lan�amentos existentes.;48.0;N;2.0;COD_LANCAMENTO;NUMBER;22;N;0.0;4.0;48.0;0.0;NO;Campo com o c�digo do tipo de lan�amento.;SYS_C001517493 (C: ENABLED)
+CONTA_CORRENTE;TIPO_LANCAMENTO;Tabela com as informa��es do tipo de lan�amentos existentes.;48.0;N;3.0;DSC_LANCAMENTO;VARCHAR2;120;N;;19.0;45.0;0.0;NO;Campo com a descri��o do lan�amento.;SYS_C001517494 (C: ENABLED)
+CONTA_CORRENTE;TIPO_LANCAMENTO;Tabela com as informa��es do tipo de lan�amentos existentes.;48.0;N;1.0;SEQ_TIPO_LANCAMENTO;NUMBER;22;N;0.0;3.0;48.0;0.0;NO;Campo chave primaria da tabela que ir� utilizar a sequence SEQ_TIPO_LANCAMENTO.;PK_TIPO_LANCAMENTO (PRIMARY KEY: ENABLED)- SYS_C001517492 (C: ENABLED)
+CONTA_CORRENTE;TIPO_LANCAMENTO;Tabela com as informa��es do tipo de lan�amentos existentes.;48.0;N;4.0;TIP_LANCAMENTO;VARCHAR2;1;Y;;2.0;2.0;0.0;NO;"INDICA DE UM LAN�AMENTO � DE CR�DITO OU D�BITO
+C :CR�DITO
+D:DEBITO"; (: )

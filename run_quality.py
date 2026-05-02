@@ -135,6 +135,7 @@ def _run_model_phase(config: dict[str, object], multiple_phases: bool) -> None:
         metadata_query_template=get_config_value(phase_config, "metadata_query_template", template_config.get("metadata_query_template")),
         metadata_s3_uri=get_config_value(phase_config, "metadata_s3_uri", template_config.get("metadata_s3_uri")),
         s3_storage_options=dict(get_config_value(phase_config, "s3_storage_options", template_config.get("s3_storage_options", {})) or {}),
+        include_schemas=list(get_config_value(phase_config, "include_schemas", template_config.get("include_schemas", [])) or []) or None,
     )
 
     print("=== Model Quality ===")
@@ -230,6 +231,7 @@ def _run_data_phase(config: dict[str, object], multiple_phases: bool) -> None:
         s3_storage_options=dict(get_config_value(phase_config, "s3_storage_options", template_config.get("s3_storage_options", {})) or {}),
         sample_query_template=get_config_value(phase_config, "sample_query_template", template_config.get("sample_query_template")),
         sample_limit=int(get_config_value(phase_config, "sample_limit", template_config["sample_limit"])),
+        include_schemas=list(get_config_value(phase_config, "include_schemas", template_config.get("include_schemas", [])) or []) or None,
     )
 
     print("=== Data Quality ===")

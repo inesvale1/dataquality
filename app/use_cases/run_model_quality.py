@@ -42,6 +42,7 @@ class RunOptions:
     metadata_query_template: str | None = None
     metadata_s3_uri: str | None = None
     s3_storage_options: dict[str, object] | None = None
+    include_schemas: List[str] | None = None
 
 
 def run_model_quality(options: RunOptions) -> None:
@@ -64,6 +65,7 @@ def run_model_quality(options: RunOptions) -> None:
         )
         dfs = metadata_source.get_metadata_by_schema()
 
+    dfs = _filter_schemas(dfs, options.include_schemas)
     print(f"Total dataframes loaded: {len(dfs)}")
     print(f"Dictionary keys: {list(dfs.keys())}")
     if telemetry is not None:
@@ -73,8 +75,8 @@ def run_model_quality(options: RunOptions) -> None:
     exclude_set = _parse_exclude_tables(options.exclude_tables or [])
 
     for schema_name, df in dfs.items():
-        if schema_name != "cadastro":  # --- IGNORE FOR TESTS---
-            continue                     # --- IGNORE ---
+        #if schema_name != "cadastro":  # --- IGNORE FOR TESTS---
+        #    continue                     # --- IGNORE ---
         
         with (telemetry.stage("schema.process", schema=schema_name) if telemetry is not None else nullcontext()):
             if exclude_set:
@@ -123,6 +125,13 @@ def run_model_quality(options: RunOptions) -> None:
                 out_path = save_excel_report(options.base_folder, schema_name, sections)
 
             print(f"Issues saved to {out_path}")
+
+
+def _filter_schemas(dfs: dict, include_schemas: List[str] | None) -> dict:
+    if not include_schemas:
+        return dfs
+    allowed = {s.strip().lower() for s in include_schemas if s.strip()}
+    return {k: v for k, v in dfs.items() if k.lower() in allowed}
 
 
 def _parse_exclude_tables(items: List[str]) -> list[tuple[str, str | None]]:
