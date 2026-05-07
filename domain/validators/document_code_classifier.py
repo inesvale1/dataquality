@@ -6,8 +6,10 @@ import re
 from dataquality.domain.validators.br_documents import (
     clean_alphanumeric_document,
     clean_numeric_document,
+    is_valid_cgf,
     is_valid_cnpj,
     is_valid_cpf,
+    normalize_numeric_cgf_for_validation,
     normalize_numeric_cnpj_for_validation,
     normalize_numeric_cpf_for_validation,
 )
@@ -21,6 +23,7 @@ class DocumentCodeClassification:
     numeric_value: str
     cpf_valid: bool
     cnpj_valid: bool
+    cgf_valid: bool = False
 
 
 def classify_document_code(column_name: str, value: object) -> DocumentCodeClassification:
@@ -31,11 +34,14 @@ def classify_document_code(column_name: str, value: object) -> DocumentCodeClass
 
     cpf_valid = False
     cnpj_valid = False
+    cgf_valid = False
 
     if strategy in {"CPF_ONLY", "MIXED"}:
         cpf_valid = _is_valid_cpf_candidate(raw_text)
-    if strategy in {"CNPJ_ONLY", "MIXED"}:
+    if strategy in {"CNPJ_ONLY", "MIXED", "CONTRIBUINTE"}:
         cnpj_valid = _is_valid_cnpj_candidate(raw_text)
+    if strategy == "CONTRIBUINTE":
+        cgf_valid = _is_valid_cgf_candidate(raw_text)
 
     if strategy == "CPF_ONLY":
         classification = "CPF" if cpf_valid else "INVALIDO"
@@ -48,6 +54,15 @@ def classify_document_code(column_name: str, value: object) -> DocumentCodeClass
             classification = "CPF"
         elif cnpj_valid:
             classification = "CNPJ"
+        else:
+            classification = "INVALIDO"
+    elif strategy == "CONTRIBUINTE":
+        if cnpj_valid and cgf_valid:
+            classification = "AMBIGUO"
+        elif cnpj_valid:
+            classification = "CNPJ"
+        elif cgf_valid:
+            classification = "CGF"
         else:
             classification = "INVALIDO"
     else:
@@ -65,6 +80,12 @@ def classify_document_code(column_name: str, value: object) -> DocumentCodeClass
             normalized_value = canonical_cpf
             numeric_value = canonical_cpf
 
+    if classification == "CGF" and numeric_value:
+        canonical_cgf = normalize_numeric_cgf_for_validation(numeric_value)
+        if len(canonical_cgf) == 9:
+            normalized_value = canonical_cgf
+            numeric_value = canonical_cgf
+
     confidence = _infer_confidence(classification, numeric_value, normalized_value)
     return DocumentCodeClassification(
         classification=classification,
@@ -73,6 +94,7 @@ def classify_document_code(column_name: str, value: object) -> DocumentCodeClass
         numeric_value=numeric_value,
         cpf_valid=cpf_valid,
         cnpj_valid=cnpj_valid,
+        cgf_valid=cgf_valid,
     )
 
 
@@ -80,21 +102,28 @@ def _infer_validation_strategy(column_name: str) -> str:
     normalized_name = re.sub(r"[^A-Z0-9]+", "_", str(column_name or "").upper()).strip("_")
     has_cpf = bool(re.search(r"(^|_)CPF(_|$)", normalized_name))
     has_cnpj = bool(re.search(r"(^|_)CNPJ(_|$)", normalized_name))
-    has_cod_contr = bool(re.search(r"(^|_)COD_CONTR(_|$)", normalized_name))
+    has_contribuinte = bool(re.search(r"(^|_)CONTRIBUINTE(_|$)", normalized_name))
 
-    if has_cod_contr or (has_cpf and has_cnpj):
+    if has_cpf and has_cnpj:
         return "MIXED"
     if has_cpf:
         return "CPF_ONLY"
     if has_cnpj:
         return "CNPJ_ONLY"
+    if has_contribuinte:
+        return "CONTRIBUINTE"
     return "UNSUPPORTED"
 
 
 def _is_valid_cpf_candidate(value: object) -> bool:
     digits = clean_numeric_document(value)
-    if not digits or len(digits) > 11:
+    if not digits:
         return False
+    if len(digits) > 11:
+        # CPF pode estar armazenado com zeros a esquerda no tamanho de CNPJ (14 digitos)
+        digits = digits.lstrip("0") or "0"
+        if len(digits) > 11:
+            return False
     return is_valid_cpf(digits)
 
 
@@ -116,6 +145,15 @@ def _is_valid_cnpj_candidate(value: object) -> bool:
     return False
 
 
+def _is_valid_cgf_candidate(value: object) -> bool:
+    digits = clean_numeric_document(value)
+    if not digits:
+        return False
+    if len(digits) > 9:
+        return False
+    return is_valid_cgf(digits)
+
+
 def _infer_confidence(classification: str, numeric_value: str, normalized_value: str) -> str:
     if classification == "INVALIDO":
         return ""
@@ -135,6 +173,14 @@ def _infer_confidence(classification: str, numeric_value: str, normalized_value:
         if length == 14:
             return "ALTA"
         if length in {12, 13}:
+            return "MEDIA"
+        return "BAIXA"
+
+    if classification == "CGF":
+        length = len(numeric_value)
+        if length == 9:
+            return "ALTA"
+        if length in {7, 8}:
             return "MEDIA"
         return "BAIXA"
 

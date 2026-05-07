@@ -53,7 +53,7 @@ class DocumentCodeLoader:
 
         stem = Path(filename).stem
         parts = [part.strip() for part in stem.split(".") if part.strip()]
-        if len(parts) < 4:
+        if len(parts) < 3:
             return None
 
         owner, table, column = parts[-3:]

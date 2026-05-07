@@ -51,8 +51,8 @@ class DocumentCodeQualityAnalyzer:
         )
         issues_df["desc"] = issues_df["classification"].map(
             {
-                "INVALIDO": "Invalid CPF/CNPJ",
-                "AMBIGUO": "Ambiguous CPF/CNPJ",
+                "INVALIDO": "Invalid document code (CPF/CNPJ/CGF)",
+                "AMBIGUO": "Ambiguous document code (CPF/CNPJ/CGF)",
             }
         )
         issues_df = issues_df[["rule", "desc", "owner", "table", "column", "value"]]
@@ -83,6 +83,7 @@ class DocumentCodeQualityAnalyzer:
                     "confidence": classification.confidence,
                     "cpf_valid": classification.cpf_valid,
                     "cnpj_valid": classification.cnpj_valid,
+                    "cgf_valid": classification.cgf_valid,
                     "distinct_key": (
                         input_file.owner,
                         input_file.table,

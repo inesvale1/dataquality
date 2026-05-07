@@ -12,6 +12,7 @@ from dataquality.domain.config.metadata_metric_config import METADATA_INDICATOR_
 from dataquality.domain.validators.metadata_validator import MetadataValidator
 from dataquality.adapters.outbound.exporters.excel_report import build_section_df
 from dataquality.domain.suggesters.metadata_issue_suggester import (
+    AnthropicCommentSuggester,
     LLMCommentSuggester,
     MetadataIssueSuggester,
     OpenAICompatibleCommentSuggester,
@@ -28,6 +29,7 @@ class MetadataQualityMetricsCalculator:
         llm_comment_config: LLMCommentConfig | None = None,
         context_output_dir: Path | None = None,
         save_context_json: bool = True,
+        base_folder: Path | None = None,
     ):
         self.schema_name = schema_name
         self.validator = validator
@@ -36,6 +38,7 @@ class MetadataQualityMetricsCalculator:
         self.llm_comment_config = llm_comment_config or LLMCommentConfig()
         self.context_output_dir = context_output_dir or Path(__file__).resolve().parents[2] / "config"
         self.save_context_json = bool(save_context_json)
+        self.base_folder = Path(base_folder) if base_folder else None
 
     def calculate_sections(self) -> dict[str, pd.DataFrame]:
         """
@@ -165,7 +168,23 @@ class MetadataQualityMetricsCalculator:
             return LLMCommentSuggester(enabled=False)
         if not self.llm_comment_config.enabled:
             return LLMCommentSuggester(enabled=False)
+
+        api_type = str(getattr(self.llm_comment_config, "api_type", "azure")).strip().lower()
+        if api_type == "anthropic":
+            context_path = self._resolve_business_context_path()
+            return AnthropicCommentSuggester.from_config(self.llm_comment_config, context_path=context_path)
         return OpenAICompatibleCommentSuggester.from_config(self.llm_comment_config)
+
+    def _resolve_business_context_path(self) -> Path | None:
+        schema = self.schema_name
+        candidates = [
+            self.base_folder / schema / f"context_{schema}.json" if self.base_folder else None,
+            self.context_output_dir.parent / "schema" / "inputs" / schema / f"context_{schema}.json",
+        ]
+        for path in candidates:
+            if path and path.exists():
+                return path
+        return None
 
     def _build_data_quality_candidates(self, df_schema_metadata: pd.DataFrame) -> pd.DataFrame:
         if df_schema_metadata.empty:

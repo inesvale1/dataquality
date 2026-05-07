@@ -4,6 +4,7 @@ import json
 import os
 import re
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any, Dict, Optional, Tuple
 from urllib import error, request
 
@@ -12,6 +13,16 @@ import pandas as pd
 
 from dataquality.domain.config.llm_comment_config import LLMCommentConfig
 from dataquality.domain.config.validation_config import ValidationConfig
+
+
+def _read_keyring(service: str, username: str) -> str:
+    if not service or not username:
+        return ""
+    try:
+        import keyring
+        return keyring.get_password(service, username) or ""
+    except Exception:
+        return ""
 
 
 @dataclass
@@ -278,6 +289,189 @@ class OpenAICompatibleCommentSuggester(LLMCommentSuggester):
             else:
                 headers["Authorization"] = f"Bearer {self.api_key}"
         return headers
+
+
+@dataclass
+class AnthropicCommentSuggester(LLMCommentSuggester):
+    api_key: str = ""
+    model: str = "claude-sonnet-4-6"
+    business_context: Dict[str, Any] = field(default_factory=dict)
+    timeout_seconds: int = 60
+    temperature: float = 0.2
+    max_output_tokens: int = 512
+    disabled_reason: str = ""
+    last_error: str = ""
+    response_cache: Dict[str, Optional[str]] = field(default_factory=dict)
+
+    @classmethod
+    def from_config(cls, config: LLMCommentConfig, context_path: Optional[Path] = None) -> "AnthropicCommentSuggester":
+        api_key = os.getenv("ANTHROPIC_API_KEY", "")
+        if not api_key and getattr(config, "api_key_env", ""):
+            api_key = os.getenv(config.api_key_env, "")
+        if not api_key:
+            api_key = _read_keyring(
+                getattr(config, "api_key_keyring_service", ""),
+                getattr(config, "api_key_keyring_username", ""),
+            )
+
+        requires_api_key = bool(getattr(config, "require_api_key", True))
+        enabled = bool(config.enabled and config.model and (api_key or not requires_api_key))
+
+        if not config.enabled:
+            disabled_reason = "LLM_DISABLED"
+        elif requires_api_key and not api_key:
+            disabled_reason = "LLM_MISSING_API_KEY"
+        elif not config.model:
+            disabled_reason = "LLM_MISSING_MODEL"
+        else:
+            disabled_reason = ""
+
+        business_context: Dict[str, Any] = {}
+        if context_path and Path(context_path).exists():
+            try:
+                with open(context_path, encoding="utf-8") as f:
+                    business_context = json.load(f)
+            except Exception:
+                pass
+
+        return cls(
+            enabled=enabled,
+            api_key=api_key,
+            model=config.model,
+            business_context=business_context,
+            timeout_seconds=int(config.timeout_seconds),
+            temperature=float(config.temperature),
+            max_output_tokens=int(config.max_output_tokens),
+            disabled_reason=disabled_reason,
+        )
+
+    def suggest_column_comment(self, context: Dict[str, Any]) -> Optional[str]:
+        return self._suggest(context, entity_type="column")
+
+    def suggest_table_comment(self, context: Dict[str, Any]) -> Optional[str]:
+        return self._suggest(context, entity_type="table")
+
+    def _suggest(self, context: Dict[str, Any], entity_type: str) -> Optional[str]:
+        if not self.enabled:
+            return None
+
+        try:
+            import anthropic as _anthropic
+        except ImportError:
+            self.last_error = "anthropic package not installed. Run: pip install anthropic"
+            return None
+
+        cache_key = json.dumps(
+            {"entity_type": entity_type, "ctx": {k: str(v)[:120] for k, v in context.items()}},
+            ensure_ascii=False, sort_keys=True,
+        )
+        if cache_key in self.response_cache:
+            return self.response_cache[cache_key]
+
+        table_name = str(context.get("table_name", ""))
+        business_ctx = self._filter_business_context(table_name)
+        system_prompt = self._build_system_prompt()
+        user_prompt = self._build_user_prompt(context, entity_type, business_ctx)
+
+        try:
+            self.last_error = ""
+            client = _anthropic.Anthropic(api_key=self.api_key)
+            response = client.messages.create(
+                model=self.model,
+                max_tokens=self.max_output_tokens,
+                temperature=self.temperature,
+                system=system_prompt,
+                messages=[{"role": "user", "content": user_prompt}],
+            )
+            raw = response.content[0].text if response.content else ""
+        except Exception as exc:
+            self.last_error = str(exc)
+            print(f"[AnthropicCommentSuggester] ERRO: {self.last_error}")
+            self.response_cache[cache_key] = None
+            return None
+
+        comment = self._extract_comment(raw)
+        self.response_cache[cache_key] = comment
+        return comment
+
+    def _filter_business_context(self, table_name: str) -> Dict[str, Any]:
+        if not self.business_context:
+            return {}
+        table_lower = table_name.lower().replace("_", "")
+
+        all_dtos = self.business_context.get("dtos_entrada", []) + self.business_context.get("dtos_saida", [])
+        relevant_dtos = [
+            dto for dto in all_dtos
+            if table_lower in str(dto.get("operacao", "")).lower().replace("_", "")
+        ][:3]
+
+        all_enums = self.business_context.get("enumeracoes", [])
+        relevant_enums = [e for e in all_enums if e.get("valores")][:5]
+
+        result: Dict[str, Any] = {}
+        if relevant_dtos:
+            result["dtos"] = relevant_dtos
+        if relevant_enums:
+            result["enums"] = relevant_enums
+        return result
+
+    def _build_system_prompt(self) -> str:
+        schema_desc = str(self.business_context.get("descricao", "")).strip()
+        intro = (
+            f"Contexto do sistema: {schema_desc}\n\n" if schema_desc
+            else ""
+        )
+        return (
+            "Voce e um especialista em banco de dados Oracle e no dominio fiscal/tributario "
+            "da Secretaria da Fazenda do Estado do Ceara (Sefaz-CE).\n"
+            f"{intro}"
+            "Regras:\n"
+            "- Comentario de tabela: 1-2 frases descrevendo o proposito da tabela.\n"
+            "- Comentario de coluna: 1 frase clara e objetiva sobre o significado de negocio.\n"
+            "- Para colunas COD_: inclua os valores possiveis se disponiveis no contexto.\n"
+            "- Para colunas DAT_: indique o evento que a data registra.\n"
+            "- Nao use acentos (compatibilidade Oracle < 23c).\n"
+            "- Nao invente significados alem do contexto fornecido.\n"
+            'Responda SOMENTE com JSON valido no formato {"comment": "..."}.'
+        )
+
+    def _build_user_prompt(self, context: Dict[str, Any], entity_type: str, business_ctx: Dict[str, Any]) -> str:
+        if entity_type == "column":
+            parts = [
+                f"Gere um comentario Oracle para a coluna abaixo.",
+                f"TABELA: {context.get('table_name', '')}",
+                f"COLUNA: {context.get('column_name', '')} ({context.get('data_type', '')})",
+                f"PK: {context.get('is_pk', False)} | FK: {context.get('is_fk', False)} | NULLABLE: {context.get('nullable', '')}",
+            ]
+            if context.get("table_comment"):
+                parts.append(f"COMENTARIO DA TABELA: {context['table_comment']}")
+            if context.get("references"):
+                ref = context["references"]
+                parts.append(f"REFERENCIA: {ref.get('table', '')} ({ref.get('column', '')})")
+        else:
+            parts = [
+                f"Gere um comentario Oracle para a tabela abaixo.",
+                f"TABELA: {context.get('table_name', '')}",
+                f"TIPO INFERIDO: {context.get('table_type_inference', '')}",
+                f"COLUNAS PRINCIPAIS: {', '.join(context.get('main_columns', [])[:8])}",
+            ]
+            if context.get("row_count"):
+                parts.append(f"TOTAL DE LINHAS: {context['row_count']}")
+
+        if business_ctx:
+            parts.append(f"\nCONTEXTO DE NEGOCIO:\n{json.dumps(business_ctx, ensure_ascii=False, indent=2)}")
+
+        return "\n".join(parts)
+
+    def _extract_comment(self, raw: str) -> Optional[str]:
+        match = re.search(r"\{.*\}", raw, flags=re.DOTALL)
+        candidate = match.group(0) if match else raw
+        try:
+            payload = json.loads(candidate)
+        except json.JSONDecodeError:
+            payload = {"comment": raw.strip()}
+        comment = str(payload.get("comment", "")).strip()
+        return comment or None
 
 
 class MetadataIssueSuggester:

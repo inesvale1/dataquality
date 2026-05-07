@@ -16,3 +16,5 @@ class LLMCommentConfig:
     max_output_tokens: int = 120
     api_type: str = "azure"
     api_version: str = "2024-12-01-preview"
+    api_key_keyring_service: str = ""
+    api_key_keyring_username: str = ""

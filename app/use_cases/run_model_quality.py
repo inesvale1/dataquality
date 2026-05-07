@@ -75,13 +75,6 @@ def run_model_quality(options: RunOptions) -> None:
     exclude_set = _parse_exclude_tables(options.exclude_tables or [])
 
     for schema_name, df in dfs.items():
-<<<<<<< HEAD
-        #if schema_name != "cadastro":  # --- IGNORE FOR TESTS---
-=======
-        #if schema_name != "sitram2":  # --- IGNORE FOR TESTS---
->>>>>>> 88e687f5550d577722e2f1ccff5c714fd2a25310
-        #    continue                     # --- IGNORE ---
-        
         with (telemetry.stage("schema.process", schema=schema_name) if telemetry is not None else nullcontext()):
             if exclude_set:
                 df = _filter_excluded_tables(df, exclude_set)
@@ -118,6 +111,7 @@ def run_model_quality(options: RunOptions) -> None:
                     llm_comment_config=options.llm_comment_config,
                     context_output_dir=options.context_output_dir,
                     save_context_json=options.save_context_json,
+                    base_folder=options.base_folder,
                 )
                 sections = metadata_calculator.calculate_sections()
 
