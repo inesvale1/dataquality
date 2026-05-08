@@ -8,6 +8,8 @@ import pandas as pd
 from openpyxl.utils import get_column_letter
 from dataquality.shared.telemetry import get_current_telemetry
 
+_EXCEL_MAX_ROWS = 1_048_576
+
 def build_section_df(rows) -> pd.DataFrame:
     """Build a section DataFrame with either 3 or 4 columns."""
     if rows and len(rows[0]) == 4:
@@ -38,20 +40,28 @@ def save_excel_report(
     file_name_out.parent.mkdir(parents=True, exist_ok=True)
     telemetry = get_current_telemetry()
 
+    data_issues_df = sections.pop("DATA_ISSUES", None)
+    if data_issues_df is not None:
+        csv_path = output_folder / f"{schema_name}_data_issues_{timestamp}.csv"
+        data_issues_df.to_csv(csv_path, index=False, sep=";")
+        print(f"[csv] Data issues ({len(data_issues_df):,} rows) saved to {csv_path}")
+
     if telemetry is not None:
         telemetry.increment("excel_reports_generated", schema=schema_name)
         with telemetry.stage("excel.save_report", schema=schema_name, extra={"sheet_count": len(sections)}):
             with pd.ExcelWriter(file_name_out, engine="openpyxl", mode="w") as writer:
                 for sheet_name, df in sections.items():
-                    with telemetry.stage("excel.write_sheet", schema=schema_name, table=sheet_name, extra={"rows": int(df.shape[0]), "columns": int(df.shape[1])}):
-                        df.to_excel(writer, sheet_name=sheet_name, index=False)
+                    df_sheet = _truncate_for_excel(sheet_name, df)
+                    with telemetry.stage("excel.write_sheet", schema=schema_name, table=sheet_name, extra={"rows": int(df_sheet.shape[0]), "columns": int(df_sheet.shape[1])}):
+                        df_sheet.to_excel(writer, sheet_name=sheet_name, index=False)
                     with telemetry.stage("excel.autosize_sheet", schema=schema_name, table=sheet_name):
-                        _autosize_worksheet_columns(writer, sheet_name, df)
+                        _autosize_worksheet_columns(writer, sheet_name, df_sheet)
     else:
         with pd.ExcelWriter(file_name_out, engine="openpyxl", mode="w") as writer:
             for sheet_name, df in sections.items():
-                df.to_excel(writer, sheet_name=sheet_name, index=False)
-                _autosize_worksheet_columns(writer, sheet_name, df)
+                df_sheet = _truncate_for_excel(sheet_name, df)
+                df_sheet.to_excel(writer, sheet_name=sheet_name, index=False)
+                _autosize_worksheet_columns(writer, sheet_name, df_sheet)
 
     if telemetry is not None:
         try:
@@ -61,6 +71,17 @@ def save_excel_report(
 
 
     return file_name_out
+
+
+def _truncate_for_excel(sheet_name: str, df: pd.DataFrame) -> pd.DataFrame:
+    limit = _EXCEL_MAX_ROWS - 1  # reserve one row for the header
+    if len(df) > limit:
+        print(
+            f"[excel] Sheet '{sheet_name}' has {len(df):,} rows — truncated to "
+            f"{limit:,} (Excel limit). Full data saved separately as CSV."
+        )
+        return df.iloc[:limit]
+    return df
 
 
 def _resolve_output_folder(base_folder: Path) -> Path:
