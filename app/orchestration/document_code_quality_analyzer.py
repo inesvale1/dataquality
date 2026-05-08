@@ -40,9 +40,8 @@ class DocumentCodeQualityAnalyzer:
                 classifications_df=classifications_df,
             )
 
-        distinct_df = classifications_df.drop_duplicates(subset=["distinct_key"]).copy()
-        issue_mask = distinct_df["classification"].isin(["INVALIDO", "AMBIGUO"])
-        issues_df = distinct_df.loc[issue_mask, ["classification", "owner", "table", "column", "value"]].copy()
+        issue_mask = classifications_df["classification"].isin(["INVALIDO", "AMBIGUO"])
+        issues_df = classifications_df.loc[issue_mask, ["classification", "owner", "table", "column", "value"]].copy()
         issues_df["rule"] = issues_df["classification"].map(
             {
                 "INVALIDO": "MQID015",
@@ -58,7 +57,7 @@ class DocumentCodeQualityAnalyzer:
         issues_df = issues_df[["rule", "desc", "owner", "table", "column", "value"]]
 
         return DocumentCodeAnalysisResult(
-            total_distinct_codes=int(distinct_df.shape[0]),
+            total_distinct_codes=int(classifications_df.shape[0]),
             invalid_or_ambiguous_distinct_codes=int(issue_mask.sum()),
             issues_df=issues_df.reset_index(drop=True),
             classifications_df=classifications_df.reset_index(drop=True),
@@ -84,12 +83,6 @@ class DocumentCodeQualityAnalyzer:
                     "cpf_valid": classification.cpf_valid,
                     "cnpj_valid": classification.cnpj_valid,
                     "cgf_valid": classification.cgf_valid,
-                    "distinct_key": (
-                        input_file.owner,
-                        input_file.table,
-                        column_name,
-                        classification.normalized_value,
-                    ),
                 }
             )
         return rows
