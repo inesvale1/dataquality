@@ -296,6 +296,7 @@ class AnthropicCommentSuggester(LLMCommentSuggester):
     api_key: str = ""
     model: str = "claude-sonnet-4-6"
     business_context: Dict[str, Any] = field(default_factory=dict)
+    metadata_fallback: Dict[str, Any] = field(default_factory=dict)
     timeout_seconds: int = 60
     temperature: float = 0.2
     max_output_tokens: int = 512
@@ -304,7 +305,7 @@ class AnthropicCommentSuggester(LLMCommentSuggester):
     response_cache: Dict[str, Optional[str]] = field(default_factory=dict)
 
     @classmethod
-    def from_config(cls, config: LLMCommentConfig, context_path: Optional[Path] = None) -> "AnthropicCommentSuggester":
+    def from_config(cls, config: LLMCommentConfig, context_path: Optional[Path] = None, metadata_fallback: Optional[Dict[str, Any]] = None) -> "AnthropicCommentSuggester":
         api_key = os.getenv("ANTHROPIC_API_KEY", "")
         if not api_key and getattr(config, "api_key_env", ""):
             api_key = os.getenv(config.api_key_env, "")
@@ -339,6 +340,7 @@ class AnthropicCommentSuggester(LLMCommentSuggester):
             api_key=api_key,
             model=config.model,
             business_context=business_context,
+            metadata_fallback=metadata_fallback or {},
             timeout_seconds=int(config.timeout_seconds),
             temperature=float(config.temperature),
             max_output_tokens=int(config.max_output_tokens),
@@ -396,15 +398,14 @@ class AnthropicCommentSuggester(LLMCommentSuggester):
 
     def _filter_business_context(self, table_name: str) -> Dict[str, Any]:
         if not self.business_context:
-            return {}
-        table_lower = table_name.lower().replace("_", "")
+            return self._filter_metadata_fallback(table_name)
 
+        table_lower = table_name.lower().replace("_", "")
         all_dtos = self.business_context.get("dtos_entrada", []) + self.business_context.get("dtos_saida", [])
         relevant_dtos = [
             dto for dto in all_dtos
             if table_lower in str(dto.get("operacao", "")).lower().replace("_", "")
         ][:3]
-
         all_enums = self.business_context.get("enumeracoes", [])
         relevant_enums = [e for e in all_enums if e.get("valores")][:5]
 
@@ -413,6 +414,28 @@ class AnthropicCommentSuggester(LLMCommentSuggester):
             result["dtos"] = relevant_dtos
         if relevant_enums:
             result["enums"] = relevant_enums
+        return result
+
+    def _filter_metadata_fallback(self, table_name: str) -> Dict[str, Any]:
+        if not self.metadata_fallback:
+            return {}
+        table_upper = table_name.upper()
+        table_entry = next(
+            (t for t in self.metadata_fallback.get("tables", []) if str(t.get("table_name", "")).upper() == table_upper),
+            None,
+        )
+        if not table_entry:
+            return {}
+        result: Dict[str, Any] = {}
+        existing = table_entry.get("existing_column_comments")
+        if existing:
+            result["existing_column_comments"] = existing
+        keywords = table_entry.get("column_name_keywords")
+        if keywords:
+            result["column_name_keywords"] = keywords
+        related = table_entry.get("related_tables")
+        if related:
+            result["related_tables"] = related
         return result
 
     def _build_system_prompt(self) -> str:

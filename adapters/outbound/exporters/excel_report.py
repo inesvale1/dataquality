@@ -42,7 +42,7 @@ def save_excel_report(
 
     data_issues_df = sections.pop("DATA_ISSUES", None)
     if data_issues_df is not None:
-        csv_path = output_folder / f"{schema_name}_data_issues_{timestamp}.csv"
+        csv_path = output_folder / f"issues_data_{schema_name}_{timestamp}.csv"
         data_issues_df.to_csv(csv_path, index=False, sep=";")
         print(f"[csv] Data issues ({len(data_issues_df):,} rows) saved to {csv_path}")
 

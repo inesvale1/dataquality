@@ -43,6 +43,7 @@ class RunOptions:
     metadata_s3_uri: str | None = None
     s3_storage_options: dict[str, object] | None = None
     include_schemas: List[str] | None = None
+    regenerate_context: bool = True
 
 
 def run_model_quality(options: RunOptions) -> None:
@@ -112,11 +113,11 @@ def run_model_quality(options: RunOptions) -> None:
                     context_output_dir=options.context_output_dir,
                     save_context_json=options.save_context_json,
                     base_folder=options.base_folder,
+                    regenerate_context=options.regenerate_context,
                 )
                 sections = metadata_calculator.calculate_sections()
 
             if telemetry is not None:
-                print("dentro telemetry")
                 telemetry.set_gauge("candidates_total", int(sections["DATA_QUALITY_RULE_CANDIDATES"].shape[0]), schema=schema_name)
 
             with (telemetry.stage("excel.export", schema=schema_name) if telemetry is not None else nullcontext()):

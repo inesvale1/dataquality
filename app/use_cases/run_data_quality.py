@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import List, Optional
 
 from dataquality.adapters.outbound.exporters.excel_report import save_excel_report
+from dataquality.app.orchestration.document_code_quality_analyzer import DocumentCodeQualityAnalyzer
 from dataquality.domain.config.validation_config import ValidationConfig
 from dataquality.domain.validators.data_quality_validator import DataQualityValidator
 from dataquality.domain.validators.metadata_validator import MetadataValidator
@@ -47,6 +48,7 @@ class RunDataQualityOptions:
     sample_query_template: str | None = None
     sample_limit: int = 1000
     include_schemas: List[str] | None = None
+    skip_document_code_analysis: bool = False
 
 
 def run_data_quality(options: RunDataQualityOptions) -> None:
@@ -114,8 +116,15 @@ def run_data_quality(options: RunDataQualityOptions) -> None:
                         schema=schema_name,
                     )
 
-            with (telemetry.stage("samples.load", schema=schema_name) if telemetry is not None else nullcontext()):
-                samples_by_table = sample_source.get_samples_for_schema(schema_name, candidates_df)
+            if candidates_df.empty:
+                samples_by_table = {}
+            else:
+                try:
+                    with (telemetry.stage("samples.load", schema=schema_name) if telemetry is not None else nullcontext()):
+                        samples_by_table = sample_source.get_samples_for_schema(schema_name, candidates_df)
+                except FileNotFoundError as exc:
+                    print(f"[data_quality] Samples not available for schema '{schema_name}': {exc}. Skipping sample-based validation.")
+                    samples_by_table = {}
 
             if telemetry is not None:
                 telemetry.set_gauge("sample_tables_loaded", len(samples_by_table), schema=schema_name)
@@ -125,6 +134,15 @@ def run_data_quality(options: RunDataQualityOptions) -> None:
                 candidates_df=candidates_df,
                 samples_by_table=samples_by_table,
             )
+
+            if not options.skip_document_code_analysis:
+                with (telemetry.stage("document_codes.analyze", schema=schema_name) if telemetry is not None else nullcontext()):
+                    doc_analyzer = DocumentCodeQualityAnalyzer(Path(options.metadata_base_folder))
+                    doc_result = doc_analyzer.analyze_schema(schema_name)
+                sections["DATA_ISSUES"] = doc_result.issues_df
+                if telemetry is not None:
+                    telemetry.set_gauge("document_code_total", doc_result.total_distinct_codes, schema=schema_name)
+                    telemetry.set_gauge("document_code_invalid", doc_result.invalid_or_ambiguous_distinct_codes, schema=schema_name)
             if telemetry is not None:
                 telemetry.set_gauge("data_quality_metrics_rows", int(sections["DATA_QUALITY_METRICS"].shape[0]), schema=schema_name)
                 telemetry.set_gauge("data_quality_issue_rows", int(sections["DATA_QUALITY_ISSUES"].shape[0]), schema=schema_name)

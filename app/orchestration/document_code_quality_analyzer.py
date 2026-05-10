@@ -9,6 +9,14 @@ import pandas as pd
 from dataquality.domain.validators.document_code_classifier import classify_document_code
 from dataquality.infrastructure.io.csv.document_code_loader import DocumentCodeLoader
 
+_ISSUE_CLASSIFICATIONS = {"INVALIDO", "AMBIGUO"}
+_RULE_MAP = {"INVALIDO": "MQID015", "AMBIGUO": "MQID015"}
+_DESC_MAP = {
+    "INVALIDO": "Invalid document code (CPF/CNPJ/CGF)",
+    "AMBIGUO": "Ambiguous document code (CPF/CNPJ/CGF)",
+}
+_EMPTY_ISSUES_COLUMNS = ["rule", "desc", "owner", "table", "column", "value"]
+
 
 @dataclass(frozen=True)
 class DocumentCodeAnalysisResult:
@@ -24,65 +32,53 @@ class DocumentCodeQualityAnalyzer:
 
     def analyze_schema(self, schema_name: str) -> DocumentCodeAnalysisResult:
         input_files = self.loader.list_schema_files(schema_name)
-        rows: list[dict[str, object]] = []
+        total_count = 0
+        issue_rows: list[dict[str, object]] = []
+
         if input_files:
             max_workers = min(8, len(input_files))
             with ThreadPoolExecutor(max_workers=max_workers) as executor:
-                for file_rows in executor.map(self._analyze_input_file, input_files):
-                    rows.extend(file_rows)
+                for file_total, file_issues in executor.map(self._analyze_input_file, input_files):
+                    total_count += file_total
+                    issue_rows.extend(file_issues)
 
-        classifications_df = pd.DataFrame(rows)
-        if classifications_df.empty:
+        if not issue_rows:
             return DocumentCodeAnalysisResult(
-                total_distinct_codes=0,
+                total_distinct_codes=total_count,
                 invalid_or_ambiguous_distinct_codes=0,
-                issues_df=pd.DataFrame(columns=["rule", "desc", "owner", "table", "column", "value"]),
-                classifications_df=classifications_df,
+                issues_df=pd.DataFrame(columns=_EMPTY_ISSUES_COLUMNS),
+                classifications_df=pd.DataFrame(),
             )
 
-        issue_mask = classifications_df["classification"].isin(["INVALIDO", "AMBIGUO"])
-        issues_df = classifications_df.loc[issue_mask, ["classification", "owner", "table", "column", "value"]].copy()
-        issues_df["rule"] = issues_df["classification"].map(
-            {
-                "INVALIDO": "MQID015",
-                "AMBIGUO": "MQID015",
-            }
-        )
-        issues_df["desc"] = issues_df["classification"].map(
-            {
-                "INVALIDO": "Invalid document code (CPF/CNPJ/CGF)",
-                "AMBIGUO": "Ambiguous document code (CPF/CNPJ/CGF)",
-            }
-        )
-        issues_df = issues_df[["rule", "desc", "owner", "table", "column", "value"]]
+        issues_df = pd.DataFrame(issue_rows)
+        issues_df["rule"] = issues_df["classification"].map(_RULE_MAP)
+        issues_df["desc"] = issues_df["classification"].map(_DESC_MAP)
+        issues_df = issues_df[_EMPTY_ISSUES_COLUMNS].reset_index(drop=True)
 
         return DocumentCodeAnalysisResult(
-            total_distinct_codes=int(classifications_df.shape[0]),
-            invalid_or_ambiguous_distinct_codes=int(issue_mask.sum()),
-            issues_df=issues_df.reset_index(drop=True),
-            classifications_df=classifications_df.reset_index(drop=True),
+            total_distinct_codes=total_count,
+            invalid_or_ambiguous_distinct_codes=len(issue_rows),
+            issues_df=issues_df,
+            classifications_df=pd.DataFrame(),
         )
 
-    def _analyze_input_file(self, input_file) -> list[dict[str, object]]:
+    def _analyze_input_file(self, input_file) -> tuple[int, list[dict[str, object]]]:
         column_name, values = self.loader.load_values(input_file)
-        rows: list[dict[str, object]] = []
+        total = 0
+        issue_rows: list[dict[str, object]] = []
         for value in values:
             classification = classify_document_code(column_name, value)
             if not classification.normalized_value:
                 continue
-            rows.append(
-                {
-                    "owner": input_file.owner,
-                    "table": input_file.table,
-                    "column": column_name,
-                    "value": str(value).strip(),
-                    "normalized_value": classification.normalized_value,
-                    "numeric_value": classification.numeric_value,
-                    "classification": classification.classification,
-                    "confidence": classification.confidence,
-                    "cpf_valid": classification.cpf_valid,
-                    "cnpj_valid": classification.cnpj_valid,
-                    "cgf_valid": classification.cgf_valid,
-                }
-            )
-        return rows
+            total += 1
+            if classification.classification in _ISSUE_CLASSIFICATIONS:
+                issue_rows.append(
+                    {
+                        "owner": input_file.owner,
+                        "table": input_file.table,
+                        "column": column_name,
+                        "value": str(value).strip(),
+                        "classification": classification.classification,
+                    }
+                )
+        return total, issue_rows
