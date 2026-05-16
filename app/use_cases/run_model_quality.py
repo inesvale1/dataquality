@@ -83,7 +83,7 @@ def run_model_quality(options: RunOptions) -> None:
             df_schema_metadata = df.copy() # preserve original for the Excel first sheet
 
             print("\n==============================")
-            print(f"Validating schema: {schema_name}")
+            print(f"Validating metadata schema: {schema_name}")
             print("==============================")
             if telemetry is not None:
                 telemetry.set_gauge("input_columns", int(df.shape[0]), schema=schema_name)

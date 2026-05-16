@@ -1,0 +1,221 @@
+{
+  "run_model_quality": true,
+  "run_data_quality": true,
+  "telemetry_enabled": false,
+  "telemetry_output": false,
+  "delete_cols": [
+    "COLUMN_ID",
+    "NUM_BUCKETS",
+    "DENSITY"
+  ],
+  "plural_exceptions": [
+    "DAS",
+    "INS",
+    "SUBS",
+    "ICMS",
+    "FIS",
+    "BUS",
+    "CBS",
+    "IBS",
+    "PIS",
+    "COFINS",
+    "ISS",
+    "HORAS_EXTRAS",
+    "DIAS"
+  ],
+  "db_type": "Oracle",
+  "metadata_source": "csv",
+  "db_connection_uri": null,
+  "db_driver_class_name": "oracle+oracledb",
+  "db_username": null,
+  "db_host": null,
+  "db_port": 1521,
+  "db_service_name": null,
+  "db_sid": null,
+  "db_dsn": null,
+  "db_password_keyring_service": "dataquality-oracle",
+  "db_password_keyring_username": null,
+  "metadata_db_schemas": [],
+  "metadata_query_template": null,
+  "metadata_s3_uri": null,
+  "sample_s3_uri": null,
+  "s3_storage_options": {},
+  "include_schemas": ["sitram2","cadastro"],
+  "exclude_tables": [
+    "RUPD$",
+    "VW",
+    "SUANOTA.NFP_DADOS_CADASTRAIS_HIST_BKP2",
+    "MLOG$_",
+    "TEMP",
+    "ADVOGADO_20100512",
+    "20180115",
+    "ARUBAAUTH"
+  ],
+  "save_context_json": false,
+  "regenerate_context": false,
+  "llm_comment_generation": {
+    "enabled": true,
+    "comment_generation_strategy": "llm",
+    "api_type": "anthropic",
+    "api_key_env": "ANTHROPIC_API_KEY",
+    "api_key_keyring_service": "dataquality-anthropic",
+    "api_key_keyring_username": "anthropic",
+    "require_api_key": true,
+    "model": "claude-sonnet-4-6",
+    "base_url": "",
+    "api_version": "",
+    "timeout_seconds": 60,
+    "temperature": 0.2,
+    "max_output_tokens": 512
+  },
+  "validation_config": {
+    "max_table_len": 30,
+    "max_column_len": 30,
+    "prefix_names": [
+      "COD_",
+      "DAT_",
+      "DSC_",
+      "NOM_",
+      "NUM_",
+      "QTD_",
+      "SEQ_",
+      "SIT_",
+      "STA_",
+      "TXT_",
+      "TIP_",
+      "TOT_",
+      "VLR_",
+      "BIN_",
+      "HOR_",
+      "XML_"
+    ],
+    "pk_prefix": "PK_",
+    "fk_prefix": "FK_",
+    "unique_suffix_regex": ".*_UK(\\d+)?$",
+    "type_naming": {
+      "date_prefixes": [
+        "DAT_"
+      ],
+      "indicator_prefixes": [
+        "FLG_",
+        "IND_"
+      ],
+      "value_prefixes": [
+        "VLR_"
+      ],
+      "quantity_prefixes": [
+        "QTD_"
+      ],
+      "code_prefixes": [
+        "COD_"
+      ],
+      "identifier_name_patterns": [
+        "(^|_)ID($|_)",
+        "(^|_)COD($|_)",
+        "(^|_)CPF($|_)",
+        "(^|_)CNPJ($|_)",
+        "(^|_)CEP($|_)",
+        "(^|_)EMAIL($|_)",
+        "(^|_)PLACA($|_)",
+        "(^|_)RENAVAM($|_)",
+        "(^|_)CHASSI($|_)",
+        "(^|_)MATRICULA($|_)",
+        "(^|_)PROTOCOLO($|_)"
+      ],
+      "indicator_text_lengths": [
+        1
+      ],
+      "indicator_numeric_lengths": [
+        1
+      ],
+      "indicator_numeric_scales": [
+        0
+      ],
+      "quantity_numeric_scales": [
+        0
+      ],
+      "code_max_text_length": 64,
+      "named_length_rules": [
+        {
+          "token": "CPF",
+          "allowed_lengths": [
+            11,
+            14
+          ],
+          "max_length": null,
+          "expected_description": "CHAR/VARCHAR2 length 11 or 14"
+        },
+        {
+          "token": "CNPJ",
+          "allowed_lengths": [
+            14,
+            18
+          ],
+          "max_length": null,
+          "expected_description": "CHAR/VARCHAR2 length 14 or 18"
+        },
+        {
+          "token": "CEP",
+          "allowed_lengths": [
+            8,
+            9
+          ],
+          "max_length": null,
+          "expected_description": "CHAR/VARCHAR2 length 8 or 9"
+        },
+        {
+          "token": "UF",
+          "allowed_lengths": [
+            2
+          ],
+          "max_length": null,
+          "expected_description": "CHAR/VARCHAR2 length 2"
+        },
+        {
+          "token": "EMAIL",
+          "allowed_lengths": [],
+          "max_length": 254,
+          "expected_description": "text up to 254 chars"
+        },
+        {
+          "token": "PLACA",
+          "allowed_lengths": [
+            7,
+            8
+          ],
+          "max_length": null,
+          "expected_description": "CHAR/VARCHAR2 length 7 or 8"
+        }
+      ]
+    }
+  },
+  "model_quality": {
+    "base_folder": "dataquality\\schema",
+    "metadata_source": "csv"
+  },
+  "data_quality": {
+    "metadata_base_folder": "dataquality\\schema",
+    "sample_base_folder": "dataquality\\schema",
+    "metadata_source": "csv",
+    "sample_source": "csv",
+    "skip_document_code_analysis": false,
+    "db_connection_uri": null,
+    "db_driver_class_name": "oracle+oracledb",
+    "db_username": "sefaz2\\49756615",
+    "db_host":  "sd2dbc22.sefaz-ce.gov.br",
+    "db_port": 1521,
+    "db_service_name": "DESE",
+    "db_sid": null,
+    "db_dsn": null,
+    "db_password_keyring_service": "dataquality-oracle",
+    "db_password_keyring_username": "sefaz2\\49756615",
+    "metadata_db_schemas": [],
+    "metadata_query_template": null,
+    "metadata_s3_uri": null,
+    "sample_s3_uri": null,
+    "s3_storage_options": {},
+    "db_authentication_type": "username_password",
+    "sample_query_template": null,
+    "sample_limit": 1000
+  }
+}

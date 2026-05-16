@@ -53,7 +53,8 @@ class MetadataQualityMetricsCalculator:
 
         df_schema_metadata = (self.df_schema_metadata.copy() if self.df_schema_metadata is not None else pd.DataFrame())
         df_schema_metadata = self.validator.annotate_data_quality_candidates(df_schema_metadata)
-        context_file = self.context_output_dir / f"context_{self.schema_name}.json"
+        context_dir = self._resolve_context_dir()
+        context_file = context_dir / f"metadata_context_{self.schema_name}.json"
         if not self.regenerate_context and context_file.exists():
             schema_context = json.loads(context_file.read_text(encoding="utf-8"))
             print(f"[context] Reusing existing context: {context_file}")
@@ -61,7 +62,7 @@ class MetadataQualityMetricsCalculator:
             context_builder = MetadataContextBuilder(
                 schema_name=self.schema_name,
                 df_schema_metadata=df_schema_metadata,
-                output_dir=self.context_output_dir,
+                output_dir=context_dir,
             )
             schema_context = context_builder.build()
             if self.save_context_json:
@@ -154,9 +155,9 @@ class MetadataQualityMetricsCalculator:
         return {
             "SCHEMA_METADATA": df_schema_metadata,
             "DATA_QUALITY_RULE_CANDIDATES": df_data_quality_candidates,
-            "METADATA_MEASURES": df_measures,
-            "METADATA_ISSUES": df_issues,
-            "METRICS": df_metrics,
+            "METADATA_QUALITY_MEASURES": df_measures,
+            "METADATA_QUALITY_ISSUES": df_issues,
+            "METADATA_QUALITY_METRICS": df_metrics,
         }
 
     def _build_llm_suggester(self, schema_context: dict | None = None) -> LLMCommentSuggester:
@@ -177,11 +178,17 @@ class MetadataQualityMetricsCalculator:
             )
         return OpenAICompatibleCommentSuggester.from_config(self.llm_comment_config)
 
+    def _resolve_context_dir(self) -> Path:
+        if self.base_folder is not None:
+            candidate = self.base_folder / self.schema_name / "inputs"
+            if candidate.exists():
+                return candidate
+        return self.context_output_dir
+
     def _resolve_business_context_path(self) -> Path | None:
         schema = self.schema_name
         candidates = [
-            self.base_folder / schema / f"context_{schema}.json" if self.base_folder else None,
-            self.context_output_dir.parent / "schema" / "inputs" / schema / f"context_{schema}.json",
+            self.base_folder / schema / "inputs" / f"sources_context_{schema}.json" if self.base_folder else None,
         ]
         for path in candidates:
             if path and path.exists():

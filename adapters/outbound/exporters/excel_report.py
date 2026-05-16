@@ -31,7 +31,7 @@ def save_excel_report(
     input metadata lives in schema/inputs. Otherwise, writes to the provided folder.
     """
     timestamp = datetime.now().strftime("%Y%m%d_%H%M")
-    output_folder = _resolve_output_folder(Path(base_folder))
+    output_folder = _resolve_output_folder(Path(base_folder), schema_name)
     file_name_out = (
         output_folder
         / f"{file_prefix}_{schema_name}_{timestamp}.xlsx"
@@ -42,9 +42,10 @@ def save_excel_report(
 
     data_issues_df = sections.pop("DATA_ISSUES", None)
     if data_issues_df is not None:
-        csv_path = output_folder / f"issues_data_{schema_name}_{timestamp}.csv"
+        output_folder.mkdir(parents=True, exist_ok=True)
+        csv_path = output_folder / f"issues_data_{schema_name}_cpf_cnpj_{timestamp}.csv"
         data_issues_df.to_csv(csv_path, index=False, sep=";")
-        print(f"[csv] Data issues ({len(data_issues_df):,} rows) saved to {csv_path}")
+        print(f"[csv] CPF/CNPJ issues ({len(data_issues_df):,} rows) saved to {csv_path}")
 
     if telemetry is not None:
         telemetry.increment("excel_reports_generated", schema=schema_name)
@@ -84,8 +85,11 @@ def _truncate_for_excel(sheet_name: str, df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def _resolve_output_folder(base_folder: Path) -> Path:
+def _resolve_output_folder(base_folder: Path, schema_name: str) -> Path:
     base_folder = Path(base_folder)
+    schema_dir = base_folder / schema_name
+    if schema_dir.exists():
+        return schema_dir / "outputs"
     if base_folder.name.lower() == "inputs":
         return base_folder.parent / "outputs"
     return base_folder

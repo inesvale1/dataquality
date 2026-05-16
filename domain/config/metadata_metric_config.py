@@ -47,5 +47,4 @@ METADATA_INDICATOR_SPECS: tuple[MetadataMetricSpec, ...] = (
     MetadataMetricSpec("MQID012", "Identifier-like columns protected by PK or UK", "Consistency", "MQME024", "MQME023"),
     MetadataMetricSpec("MQID013", "Compliance between type and naming convention", "Consistency", "MQME026", "MQME025"),
     MetadataMetricSpec("MQID014", "Tables with comments", "Completeness", "MQME027", "MQME001"),
-    MetadataMetricSpec("MQID015", "Valid CPF and CNPJ codes", "Conformity", "MQME029", "MQME028"),
 )

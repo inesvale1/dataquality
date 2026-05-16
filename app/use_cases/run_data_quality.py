@@ -8,6 +8,7 @@ from typing import List, Optional
 from dataquality.adapters.outbound.exporters.excel_report import save_excel_report
 from dataquality.app.orchestration.document_code_quality_analyzer import DocumentCodeQualityAnalyzer
 from dataquality.domain.config.validation_config import ValidationConfig
+from dataquality.shared.utils import safe_iqmd
 from dataquality.domain.validators.data_quality_validator import DataQualityValidator
 from dataquality.domain.validators.metadata_validator import MetadataValidator
 from dataquality.infrastructure.io.metadata_sources import build_metadata_source
@@ -78,6 +79,10 @@ def run_data_quality(options: RunDataQualityOptions) -> None:
     dq_validator = DataQualityValidator()
 
     for schema_name, df_metadata in metadata_by_schema.items():
+        print("\n==============================")
+        print(f"Validating data schema: {schema_name}")
+        print("==============================")
+
         with (telemetry.stage("schema.process", schema=schema_name) if telemetry is not None else nullcontext()):
             if exclude_set:
                 df_metadata = _filter_excluded_tables(df_metadata, exclude_set)
@@ -140,9 +145,35 @@ def run_data_quality(options: RunDataQualityOptions) -> None:
                     doc_analyzer = DocumentCodeQualityAnalyzer(Path(options.metadata_base_folder))
                     doc_result = doc_analyzer.analyze_schema(schema_name)
                 sections["DATA_ISSUES"] = doc_result.issues_df
+                valid_codes = doc_result.total_distinct_codes - doc_result.invalid_or_ambiguous_distinct_codes
+                mqid015_row = {
+                    "Schema": schema_name,
+                    "Owner": schema_name.upper(),
+                    "Table": "",
+                    "Column": "",
+                    "Metric": "MQID015",
+                    "Dimension": "Conformity",
+                    "SemanticTag": "CPF/CNPJ/CGF",
+                    "Priority": "HIGH",
+                    "RuleType": "DOCUMENT_CODE_CONFORMITY",
+                    "ExpectedFormat": "",
+                    "CalculationMethod": "DATA_SCAN",
+                    "EvaluatedRows": doc_result.total_distinct_codes,
+                    "ValidRows": valid_codes,
+                    "InvalidRows": doc_result.invalid_or_ambiguous_distinct_codes,
+                    "Value": f"{safe_iqmd(valid_codes, doc_result.total_distinct_codes):.2f}",
+                    "Status": "CALCULATED",
+                }
+                sections["DATA_QUALITY_METRICS"] = pd.concat(
+                    [sections["DATA_QUALITY_METRICS"], pd.DataFrame([mqid015_row])],
+                    ignore_index=True,
+                )
                 if telemetry is not None:
                     telemetry.set_gauge("document_code_total", doc_result.total_distinct_codes, schema=schema_name)
                     telemetry.set_gauge("document_code_invalid", doc_result.invalid_or_ambiguous_distinct_codes, schema=schema_name)
+
+            sections.pop("DATA_QUALITY_RULE_CANDIDATES", None)
+
             if telemetry is not None:
                 telemetry.set_gauge("data_quality_metrics_rows", int(sections["DATA_QUALITY_METRICS"].shape[0]), schema=schema_name)
                 telemetry.set_gauge("data_quality_issue_rows", int(sections["DATA_QUALITY_ISSUES"].shape[0]), schema=schema_name)

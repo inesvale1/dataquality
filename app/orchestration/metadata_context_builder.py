@@ -19,7 +19,7 @@ class MetadataContextBuilder:
     def build_and_save(self, payload: dict[str, Any] | None = None) -> Path:
         payload = payload or self.build()
         self.output_dir.mkdir(parents=True, exist_ok=True)
-        output_path = self.output_dir / f"context_{self.schema_name}.json"
+        output_path = self.output_dir / f"metadata_context_{self.schema_name}.json"
         output_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
         return output_path
 

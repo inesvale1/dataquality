@@ -31,29 +31,19 @@ from dataquality.shared.telemetry import (
 )
 
 
-def _resolve_folder(raw_path: str, local_folder_name: str) -> Path:
+def _resolve_folder(raw_path: str, *fallback_parts: str) -> Path:
     candidate = Path(raw_path)
     if candidate.exists():
         return candidate
     script_dir = Path(__file__).resolve().parent
-    fallback = script_dir / local_folder_name
+    fallback = script_dir.joinpath(*fallback_parts)
     if fallback.exists():
         return fallback
     return candidate
 
 
 def _resolve_model_base_folder(raw_path: str) -> Path:
-    candidate = Path(raw_path)
-    if candidate.exists():
-        return candidate
-    script_dir = Path(__file__).resolve().parent
-    inputs_fallback = script_dir / "schema" / "inputs"
-    fallback = script_dir / "schema"
-    if candidate == Path("dataquality\\schema\\inputs") and inputs_fallback.exists():
-        return inputs_fallback
-    if candidate == Path("dataquality\\schema") and fallback.exists():
-        return fallback
-    return candidate
+    return _resolve_folder(raw_path, "schema")
 
 
 def _parse_bool(raw_value: str | bool) -> bool:
@@ -73,7 +63,7 @@ def _build_telemetry_output_path(
     multiple_phases: bool,
 ) -> Path:
     telemetry_folder = Path(__file__).resolve().parent / "app"
-    if not raw_output:
+    if not raw_output or isinstance(raw_output, bool):
         return build_default_telemetry_path(telemetry_folder, run_name)
 
     output_path = Path(str(raw_output))
@@ -139,7 +129,7 @@ def _run_model_phase(config: dict[str, object], multiple_phases: bool) -> None:
         regenerate_context=_parse_bool(get_config_value(phase_config, "regenerate_context", template_config.get("regenerate_context", True))),
     )
 
-    print("=== Model Quality ===")
+    print("\n=== Model Quality ===")
     print("Saving to:", base_folder)
 
     if telemetry_enabled:
@@ -168,9 +158,9 @@ def _run_model_phase(config: dict[str, object], multiple_phases: bool) -> None:
         clear_current_telemetry()
 
     if telemetry_path is not None:
-        print("Telemetry saved to:", telemetry_path)
+        print("\nTelemetry saved to:", telemetry_path)
     else:
-        print("Telemetry disabled")
+        print("\nTelemetry disabled")
     telemetry_status = payload.get("run_summary", {}).get("status", payload.get("status", "UNKNOWN"))
     print("Telemetry status:", telemetry_status)
 
@@ -189,7 +179,7 @@ def _run_data_phase(config: dict[str, object], multiple_phases: bool) -> None:
     if sample_source.strip().lower() == "csv":
         sample_base_folder = _resolve_folder(
             str(get_config_value(phase_config, "sample_base_folder", template_config["sample_base_folder"])),
-            "samples",
+            "schema",
         )
 
     validation_config = build_validation_config(get_config_value(phase_config, "validation_config", None))
@@ -236,7 +226,7 @@ def _run_data_phase(config: dict[str, object], multiple_phases: bool) -> None:
         skip_document_code_analysis=_parse_bool(get_config_value(phase_config, "skip_document_code_analysis", template_config.get("skip_document_code_analysis", False))),
     )
 
-    print("=== Data Quality ===")
+    print("\n=== Data Quality ===")
     print("Metadata folder:", metadata_base_folder)
     if sample_base_folder is not None:
         print("Sample folder:", sample_base_folder)
@@ -271,9 +261,9 @@ def _run_data_phase(config: dict[str, object], multiple_phases: bool) -> None:
         clear_current_telemetry()
 
     if telemetry_path is not None:
-        print("Telemetry saved to:", telemetry_path)
+        print("\nTelemetry saved to:", telemetry_path)
     else:
-        print("Telemetry disabled")
+        print("\nTelemetry disabled")
     telemetry_status = payload.get("run_summary", {}).get("status", payload.get("status", "UNKNOWN"))
     print("Telemetry status:", telemetry_status)
 

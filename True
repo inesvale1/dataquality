@@ -1,0 +1,988 @@
+{
+  "metadata": {
+    "telemetry_version": "2.0",
+    "run_name": "data_quality",
+    "schema_id_convention": "lowercase",
+    "schema_name_convention": "uppercase",
+    "collector": "TelemetryCollector",
+    "entrypoint": "run_quality.py",
+    "phase": "data_quality",
+    "metadata_source": "csv",
+    "sample_source": "csv",
+    "db_type": "Oracle",
+    "metadata_base_folder": "D:\\Users\\49756615\\Documents\\DoutoradoUFC\\Implementation\\dataquality\\schema",
+    "sample_base_folder": "dataquality\\samples",
+    "use_case": "run_data_quality",
+    "metadata_source_type": "csv",
+    "sample_source_type": "csv",
+    "sample_limit": 1000,
+    "event_count": 33,
+    "schema_count": 19
+  },
+  "run_summary": {
+    "status": "SUCCESS",
+    "started_at": "2026-05-15T18:57:21.364791+00:00",
+    "ended_at": "2026-05-15T19:39:57.357098+00:00",
+    "total_duration_ms": 2555992.444,
+    "counts": {
+      "metadata_files_loaded": 19,
+      "metadata_rows_loaded": 14483,
+      "metadata_loader_tables_detected": 1381,
+      "stage.metadata.load.count": 1,
+      "schemas_loaded": 2,
+      "tables_read": 152,
+      "stage.metadata.annotate_candidates.count": 2,
+      "candidates_generated": 529,
+      "technical_failures.samples.csv_cache_load": 2,
+      "stage.samples.csv_cache_load.count": 2,
+      "technical_failures.samples.load": 2,
+      "stage.samples.load.count": 2,
+      "candidates_processed": 529,
+      "stage.data_quality_validator.validate_candidates.count": 2,
+      "stage.document_codes.analyze.count": 2,
+      "excel_reports_generated": 2,
+      "stage.excel.write_sheet.count": 6,
+      "stage.excel.autosize_sheet.count": 6,
+      "stage.excel.save_report.count": 2,
+      "stage.excel.export.count": 2,
+      "stage.schema.process.count": 2
+    },
+    "totals": {
+      "technical_failures_total": 4
+    },
+    "durations_ms": {
+      "stage.metadata.load.duration_ms_total": 1843.437,
+      "stage.metadata.annotate_candidates.duration_ms_total": 1435.5610000000001,
+      "stage.samples.csv_cache_load.duration_ms_total": 2.482,
+      "stage.samples.load.duration_ms_total": 3.833,
+      "stage.data_quality_validator.validate_candidates.duration_ms_total": 393.786,
+      "stage.document_codes.analyze.duration_ms_total": 2465774.719,
+      "stage.excel.write_sheet.duration_ms_total": 721.412,
+      "stage.excel.autosize_sheet.duration_ms_total": 215.998,
+      "stage.excel.save_report.duration_ms_total": 4374.663,
+      "stage.excel.export.duration_ms_total": 86383.11,
+      "stage.schema.process.duration_ms_total": 2554121.139
+    },
+    "peaks": {
+      "max_process_rss_bytes": 3147329536,
+      "max_python_heap_bytes": 1676058322
+    },
+    "sizes": {},
+    "last_observed": {}
+  },
+  "schema_summaries": {
+    "cadastro": {
+      "schema_id": "cadastro",
+      "schema_name": "CADASTRO",
+      "status": "FAILED",
+      "counts": {
+        "metadata_loader_tables_detected": 65,
+        "input_columns": 906,
+        "input_tables": 65,
+        "tables_read": 65,
+        "stage.metadata.annotate_candidates.count": 1,
+        "candidates_generated": 323,
+        "technical_failures.samples.csv_cache_load": 1,
+        "stage.samples.csv_cache_load.count": 1,
+        "technical_failures.samples.load": 1,
+        "stage.samples.load.count": 1,
+        "sample_tables_loaded": 0,
+        "candidates_processed": 323,
+        "stage.data_quality_validator.validate_candidates.count": 1,
+        "data_quality_metric_rows": 0,
+        "data_quality_issue_rows": 323,
+        "stage.document_codes.analyze.count": 1,
+        "data_quality_metrics_rows": 0,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 3,
+        "stage.excel.autosize_sheet.count": 3,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.export.count": 1,
+        "stage.schema.process.count": 1
+      },
+      "totals": {
+        "candidates_total": 323,
+        "technical_failures_total": 2,
+        "document_code_total": 13190959
+      },
+      "durations_ms": {
+        "stage.metadata.annotate_candidates.duration_ms_total": 656.317,
+        "stage.samples.csv_cache_load.duration_ms_total": 0.562,
+        "stage.samples.load.duration_ms_total": 0.966,
+        "stage.data_quality_validator.validate_candidates.duration_ms_total": 189.987,
+        "stage.document_codes.analyze.duration_ms_total": 2122167.149,
+        "stage.excel.write_sheet.duration_ms_total": 436.402,
+        "stage.excel.autosize_sheet.duration_ms_total": 128.853,
+        "stage.excel.save_report.duration_ms_total": 2927.901,
+        "stage.excel.export.duration_ms_total": 84870.493,
+        "stage.schema.process.duration_ms_total": 2207934.932
+      },
+      "peaks": {
+        "max_process_rss_bytes": 3147329536,
+        "max_python_heap_bytes": 1676058322
+      },
+      "sizes": {
+        "last_excel_file_size_bytes": 80403
+      },
+      "last_observed": {
+        "format_candidates": 178,
+        "redundancy_candidates": 160,
+        "document_code_invalid": 5175087
+      }
+    },
+    "conseg": {
+      "schema_id": "conseg",
+      "schema_name": "CONSEG",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 15,
+        "input_columns": 115,
+        "input_tables": 15
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "conta_corrente": {
+      "schema_id": "conta_corrente",
+      "schema_name": "CONTA_CORRENTE",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 18,
+        "input_columns": 175,
+        "input_tables": 18
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "copaf": {
+      "schema_id": "copaf",
+      "schema_name": "COPAF",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 16,
+        "input_columns": 106,
+        "input_tables": 16
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "dimp": {
+      "schema_id": "dimp",
+      "schema_name": "DIMP",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 27,
+        "input_columns": 238,
+        "input_tables": 27
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "ipva2": {
+      "schema_id": "ipva2",
+      "schema_name": "IPVA2",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 66,
+        "input_columns": 630,
+        "input_tables": 66
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "itcd2": {
+      "schema_id": "itcd2",
+      "schema_name": "ITCD2",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 89,
+        "input_columns": 1018,
+        "input_tables": 89
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "nfecorp": {
+      "schema_id": "nfecorp",
+      "schema_name": "NFECORP",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 77,
+        "input_columns": 1282,
+        "input_tables": 77
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "receita2": {
+      "schema_id": "receita2",
+      "schema_name": "RECEITA2",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 77,
+        "input_columns": 619,
+        "input_tables": 77
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "seta": {
+      "schema_id": "seta",
+      "schema_name": "SETA",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 105,
+        "input_columns": 633,
+        "input_tables": 105
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "sgt": {
+      "schema_id": "sgt",
+      "schema_name": "SGT",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 38,
+        "input_columns": 386,
+        "input_tables": 38
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "sinfa": {
+      "schema_id": "sinfa",
+      "schema_name": "SINFA",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 42,
+        "input_columns": 504,
+        "input_tables": 42
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "sipaj": {
+      "schema_id": "sipaj",
+      "schema_name": "SIPAJ",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 72,
+        "input_columns": 356,
+        "input_tables": 72
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "sisagua": {
+      "schema_id": "sisagua",
+      "schema_name": "SISAGUA",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 5,
+        "input_columns": 46,
+        "input_tables": 5
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "siscoex2": {
+      "schema_id": "siscoex2",
+      "schema_name": "SISCOEX2",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 95,
+        "input_columns": 709,
+        "input_tables": 95
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "sisseg": {
+      "schema_id": "sisseg",
+      "schema_name": "SISSEG",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 35,
+        "input_columns": 250,
+        "input_tables": 35
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "sitram2": {
+      "schema_id": "sitram2",
+      "schema_name": "SITRAM2",
+      "status": "FAILED",
+      "counts": {
+        "metadata_loader_tables_detected": 88,
+        "input_columns": 1034,
+        "input_tables": 87,
+        "tables_read": 87,
+        "stage.metadata.annotate_candidates.count": 1,
+        "candidates_generated": 206,
+        "technical_failures.samples.csv_cache_load": 1,
+        "stage.samples.csv_cache_load.count": 1,
+        "technical_failures.samples.load": 1,
+        "stage.samples.load.count": 1,
+        "sample_tables_loaded": 0,
+        "candidates_processed": 206,
+        "stage.data_quality_validator.validate_candidates.count": 1,
+        "data_quality_metric_rows": 0,
+        "data_quality_issue_rows": 206,
+        "stage.document_codes.analyze.count": 1,
+        "data_quality_metrics_rows": 0,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 3,
+        "stage.excel.autosize_sheet.count": 3,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.export.count": 1,
+        "stage.schema.process.count": 1
+      },
+      "totals": {
+        "candidates_total": 206,
+        "technical_failures_total": 2,
+        "document_code_total": 3202269
+      },
+      "durations_ms": {
+        "stage.metadata.annotate_candidates.duration_ms_total": 779.244,
+        "stage.samples.csv_cache_load.duration_ms_total": 1.92,
+        "stage.samples.load.duration_ms_total": 2.867,
+        "stage.data_quality_validator.validate_candidates.duration_ms_total": 203.799,
+        "stage.document_codes.analyze.duration_ms_total": 343607.57,
+        "stage.excel.write_sheet.duration_ms_total": 285.01,
+        "stage.excel.autosize_sheet.duration_ms_total": 87.145,
+        "stage.excel.save_report.duration_ms_total": 1446.762,
+        "stage.excel.export.duration_ms_total": 1512.617,
+        "stage.schema.process.duration_ms_total": 346186.207
+      },
+      "peaks": {
+        "max_process_rss_bytes": 2942377984,
+        "max_python_heap_bytes": 1676058322
+      },
+      "sizes": {
+        "last_excel_file_size_bytes": 55557
+      },
+      "last_observed": {
+        "format_candidates": 94,
+        "redundancy_candidates": 113,
+        "document_code_invalid": 2491
+      }
+    },
+    "suanota": {
+      "schema_id": "suanota",
+      "schema_name": "SUANOTA",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 314,
+        "input_columns": 4385,
+        "input_tables": 314
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "tramita": {
+      "schema_id": "tramita",
+      "schema_name": "TRAMITA",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 137,
+        "input_columns": 1089,
+        "input_tables": 137
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    }
+  },
+  "events": [
+    {
+      "event_type": "stage",
+      "name": "metadata.load",
+      "schema_id": null,
+      "schema_name": null,
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T18:57:21.364945+00:00",
+      "ended_at": "2026-05-15T18:57:23.208623+00:00",
+      "duration_ms": 1843.437,
+      "memory": {
+        "process_rss_bytes": 110772224,
+        "python_heap_peak_bytes": 6197503
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "metadata.annotate_candidates",
+      "schema_id": "cadastro",
+      "schema_name": "CADASTRO",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T18:57:23.232283+00:00",
+      "ended_at": "2026-05-15T18:57:23.888780+00:00",
+      "duration_ms": 656.317,
+      "memory": {
+        "process_rss_bytes": 111407104,
+        "python_heap_peak_bytes": 6651828
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "failure",
+      "name": "samples.csv_cache_load",
+      "schema_id": "cadastro",
+      "schema_name": "CADASTRO",
+      "table": null,
+      "status": "FAILED",
+      "exception_type": "FileNotFoundError",
+      "message": "Base folder not found: dataquality\\samples",
+      "traceback": "FileNotFoundError: Base folder not found: dataquality\\samples",
+      "timestamp": "2026-05-15T18:57:23.895660+00:00",
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "samples.csv_cache_load",
+      "schema_id": "cadastro",
+      "schema_name": "CADASTRO",
+      "table": null,
+      "status": "FAILED",
+      "started_at": "2026-05-15T18:57:23.895143+00:00",
+      "ended_at": "2026-05-15T18:57:23.895861+00:00",
+      "duration_ms": 0.562,
+      "memory": {
+        "process_rss_bytes": 111497216,
+        "python_heap_peak_bytes": 6651828
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "failure",
+      "name": "samples.load",
+      "schema_id": "cadastro",
+      "schema_name": "CADASTRO",
+      "table": null,
+      "status": "FAILED",
+      "exception_type": "FileNotFoundError",
+      "message": "Base folder not found: dataquality\\samples",
+      "traceback": "FileNotFoundError: Base folder not found: dataquality\\samples",
+      "timestamp": "2026-05-15T18:57:23.896029+00:00",
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "samples.load",
+      "schema_id": "cadastro",
+      "schema_name": "CADASTRO",
+      "table": null,
+      "status": "FAILED",
+      "started_at": "2026-05-15T18:57:23.895099+00:00",
+      "ended_at": "2026-05-15T18:57:23.896177+00:00",
+      "duration_ms": 0.966,
+      "memory": {
+        "process_rss_bytes": 111497216,
+        "python_heap_peak_bytes": 6651828
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "data_quality_validator.validate_candidates",
+      "schema_id": "cadastro",
+      "schema_name": "CADASTRO",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T18:57:23.896402+00:00",
+      "ended_at": "2026-05-15T18:57:24.086560+00:00",
+      "duration_ms": 189.987,
+      "memory": {
+        "process_rss_bytes": 111521792,
+        "python_heap_peak_bytes": 6651828
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "document_codes.analyze",
+      "schema_id": "cadastro",
+      "schema_name": "CADASTRO",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T18:57:24.103672+00:00",
+      "ended_at": "2026-05-15T19:32:46.272186+00:00",
+      "duration_ms": 2122167.149,
+      "memory": {
+        "process_rss_bytes": 3147329536,
+        "python_heap_peak_bytes": 1676058322
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.write_sheet",
+      "schema_id": "cadastro",
+      "schema_name": "CADASTRO",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T19:34:08.224571+00:00",
+      "ended_at": "2026-05-15T19:34:08.497608+00:00",
+      "duration_ms": 272.859,
+      "memory": {
+        "process_rss_bytes": 2935635968,
+        "python_heap_peak_bytes": 1676058322
+      },
+      "extra": {
+        "rows": 323,
+        "columns": 37
+      }
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.autosize_sheet",
+      "schema_id": "cadastro",
+      "schema_name": "CADASTRO",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T19:34:08.497694+00:00",
+      "ended_at": "2026-05-15T19:34:08.596881+00:00",
+      "duration_ms": 98.947,
+      "memory": {
+        "process_rss_bytes": 2936426496,
+        "python_heap_peak_bytes": 1676058322
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.write_sheet",
+      "schema_id": "cadastro",
+      "schema_name": "CADASTRO",
+      "table": "DATA_QUALITY_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T19:34:08.597017+00:00",
+      "ended_at": "2026-05-15T19:34:08.598071+00:00",
+      "duration_ms": 0.891,
+      "memory": {
+        "process_rss_bytes": 2936438784,
+        "python_heap_peak_bytes": 1676058322
+      },
+      "extra": {
+        "rows": 0,
+        "columns": 0
+      }
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.autosize_sheet",
+      "schema_id": "cadastro",
+      "schema_name": "CADASTRO",
+      "table": "DATA_QUALITY_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T19:34:08.598155+00:00",
+      "ended_at": "2026-05-15T19:34:08.598309+00:00",
+      "duration_ms": 0.038,
+      "memory": {
+        "process_rss_bytes": 2936438784,
+        "python_heap_peak_bytes": 1676058322
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.write_sheet",
+      "schema_id": "cadastro",
+      "schema_name": "CADASTRO",
+      "table": "DATA_QUALITY_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T19:34:08.598399+00:00",
+      "ended_at": "2026-05-15T19:34:08.761230+00:00",
+      "duration_ms": 162.652,
+      "memory": {
+        "process_rss_bytes": 2936520704,
+        "python_heap_peak_bytes": 1676058322
+      },
+      "extra": {
+        "rows": 323,
+        "columns": 13
+      }
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.autosize_sheet",
+      "schema_id": "cadastro",
+      "schema_name": "CADASTRO",
+      "table": "DATA_QUALITY_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T19:34:08.761328+00:00",
+      "ended_at": "2026-05-15T19:34:08.791351+00:00",
+      "duration_ms": 29.868,
+      "memory": {
+        "process_rss_bytes": 2936524800,
+        "python_heap_peak_bytes": 1676058322
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.save_report",
+      "schema_id": "cadastro",
+      "schema_name": "CADASTRO",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T19:34:08.215130+00:00",
+      "ended_at": "2026-05-15T19:34:11.143282+00:00",
+      "duration_ms": 2927.901,
+      "memory": {
+        "process_rss_bytes": 2938060800,
+        "python_heap_peak_bytes": 1676058322
+      },
+      "extra": {
+        "sheet_count": 3
+      }
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.export",
+      "schema_id": "cadastro",
+      "schema_name": "CADASTRO",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T19:32:46.273034+00:00",
+      "ended_at": "2026-05-15T19:34:11.143660+00:00",
+      "duration_ms": 84870.493,
+      "memory": {
+        "process_rss_bytes": 2938060800,
+        "python_heap_peak_bytes": 1676058322
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "schema.process",
+      "schema_id": "cadastro",
+      "schema_name": "CADASTRO",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T18:57:23.208917+00:00",
+      "ended_at": "2026-05-15T19:34:11.143971+00:00",
+      "duration_ms": 2207934.932,
+      "memory": {
+        "process_rss_bytes": 2938073088,
+        "python_heap_peak_bytes": 1676058322
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "metadata.annotate_candidates",
+      "schema_id": "sitram2",
+      "schema_name": "SITRAM2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T19:34:11.183031+00:00",
+      "ended_at": "2026-05-15T19:34:11.962516+00:00",
+      "duration_ms": 779.244,
+      "memory": {
+        "process_rss_bytes": 2941390848,
+        "python_heap_peak_bytes": 1676058322
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "failure",
+      "name": "samples.csv_cache_load",
+      "schema_id": "sitram2",
+      "schema_name": "SITRAM2",
+      "table": null,
+      "status": "FAILED",
+      "exception_type": "FileNotFoundError",
+      "message": "Base folder not found: dataquality\\samples",
+      "traceback": "FileNotFoundError: Base folder not found: dataquality\\samples",
+      "timestamp": "2026-05-15T19:34:11.977451+00:00",
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "samples.csv_cache_load",
+      "schema_id": "sitram2",
+      "schema_name": "SITRAM2",
+      "table": null,
+      "status": "FAILED",
+      "started_at": "2026-05-15T19:34:11.975615+00:00",
+      "ended_at": "2026-05-15T19:34:11.977809+00:00",
+      "duration_ms": 1.92,
+      "memory": {
+        "process_rss_bytes": 2941898752,
+        "python_heap_peak_bytes": 1676058322
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "failure",
+      "name": "samples.load",
+      "schema_id": "sitram2",
+      "schema_name": "SITRAM2",
+      "table": null,
+      "status": "FAILED",
+      "exception_type": "FileNotFoundError",
+      "message": "Base folder not found: dataquality\\samples",
+      "traceback": "FileNotFoundError: Base folder not found: dataquality\\samples",
+      "timestamp": "2026-05-15T19:34:11.978173+00:00",
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "samples.load",
+      "schema_id": "sitram2",
+      "schema_name": "SITRAM2",
+      "table": null,
+      "status": "FAILED",
+      "started_at": "2026-05-15T19:34:11.975348+00:00",
+      "ended_at": "2026-05-15T19:34:11.978595+00:00",
+      "duration_ms": 2.867,
+      "memory": {
+        "process_rss_bytes": 2941911040,
+        "python_heap_peak_bytes": 1676058322
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "data_quality_validator.validate_candidates",
+      "schema_id": "sitram2",
+      "schema_name": "SITRAM2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T19:34:11.979316+00:00",
+      "ended_at": "2026-05-15T19:34:12.183325+00:00",
+      "duration_ms": 203.799,
+      "memory": {
+        "process_rss_bytes": 2942377984,
+        "python_heap_peak_bytes": 1676058322
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "document_codes.analyze",
+      "schema_id": "sitram2",
+      "schema_name": "SITRAM2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T19:34:12.210726+00:00",
+      "ended_at": "2026-05-15T19:39:55.818500+00:00",
+      "duration_ms": 343607.57,
+      "memory": {
+        "process_rss_bytes": 820662272,
+        "python_heap_peak_bytes": 1676058322
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.write_sheet",
+      "schema_id": "sitram2",
+      "schema_name": "SITRAM2",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T19:39:55.887054+00:00",
+      "ended_at": "2026-05-15T19:39:56.092954+00:00",
+      "duration_ms": 205.715,
+      "memory": {
+        "process_rss_bytes": 820359168,
+        "python_heap_peak_bytes": 1676058322
+      },
+      "extra": {
+        "rows": 206,
+        "columns": 37
+      }
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.autosize_sheet",
+      "schema_id": "sitram2",
+      "schema_name": "SITRAM2",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T19:39:56.093069+00:00",
+      "ended_at": "2026-05-15T19:39:56.160000+00:00",
+      "duration_ms": 66.761,
+      "memory": {
+        "process_rss_bytes": 820387840,
+        "python_heap_peak_bytes": 1676058322
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.write_sheet",
+      "schema_id": "sitram2",
+      "schema_name": "SITRAM2",
+      "table": "DATA_QUALITY_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T19:39:56.160113+00:00",
+      "ended_at": "2026-05-15T19:39:56.160978+00:00",
+      "duration_ms": 0.734,
+      "memory": {
+        "process_rss_bytes": 820396032,
+        "python_heap_peak_bytes": 1676058322
+      },
+      "extra": {
+        "rows": 0,
+        "columns": 0
+      }
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.autosize_sheet",
+      "schema_id": "sitram2",
+      "schema_name": "SITRAM2",
+      "table": "DATA_QUALITY_METRICS",
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T19:39:56.161073+00:00",
+      "ended_at": "2026-05-15T19:39:56.161215+00:00",
+      "duration_ms": 0.039,
+      "memory": {
+        "process_rss_bytes": 820396032,
+        "python_heap_peak_bytes": 1676058322
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.write_sheet",
+      "schema_id": "sitram2",
+      "schema_name": "SITRAM2",
+      "table": "DATA_QUALITY_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T19:39:56.161302+00:00",
+      "ended_at": "2026-05-15T19:39:56.240035+00:00",
+      "duration_ms": 78.561,
+      "memory": {
+        "process_rss_bytes": 820436992,
+        "python_heap_peak_bytes": 1676058322
+      },
+      "extra": {
+        "rows": 206,
+        "columns": 13
+      }
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.autosize_sheet",
+      "schema_id": "sitram2",
+      "schema_name": "SITRAM2",
+      "table": "DATA_QUALITY_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T19:39:56.240138+00:00",
+      "ended_at": "2026-05-15T19:39:56.260642+00:00",
+      "duration_ms": 20.345,
+      "memory": {
+        "process_rss_bytes": 820436992,
+        "python_heap_peak_bytes": 1676058322
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.save_report",
+      "schema_id": "sitram2",
+      "schema_name": "SITRAM2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T19:39:55.884103+00:00",
+      "ended_at": "2026-05-15T19:39:57.331058+00:00",
+      "duration_ms": 1446.762,
+      "memory": {
+        "process_rss_bytes": 606244864,
+        "python_heap_peak_bytes": 1676058322
+      },
+      "extra": {
+        "sheet_count": 3
+      }
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.export",
+      "schema_id": "sitram2",
+      "schema_name": "SITRAM2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T19:39:55.818649+00:00",
+      "ended_at": "2026-05-15T19:39:57.331361+00:00",
+      "duration_ms": 1512.617,
+      "memory": {
+        "process_rss_bytes": 606244864,
+        "python_heap_peak_bytes": 1676058322
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "schema.process",
+      "schema_id": "sitram2",
+      "schema_name": "SITRAM2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-05-15T19:34:11.145229+00:00",
+      "ended_at": "2026-05-15T19:39:57.331539+00:00",
+      "duration_ms": 346186.207,
+      "memory": {
+        "process_rss_bytes": 606244864,
+        "python_heap_peak_bytes": 1676058322
+      },
+      "extra": {}
+    }
+  ]
+}

@@ -93,7 +93,7 @@ def build_model_quality_config_template() -> dict[str, Any]:
 
 
 def build_quality_config_template() -> dict[str, Any]:
-    return _load_bundled_config_template("run_quality.example.json")
+    return _load_bundled_config_template("run_quality.config.json")
 
 
 def get_phase_config(config: dict[str, Any], phase_key: str) -> dict[str, Any]:
