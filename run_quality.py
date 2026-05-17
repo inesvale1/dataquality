@@ -18,6 +18,7 @@ from dataquality.shared.runtime_config import (
     build_llm_comment_config,
     build_model_quality_config_template,
     build_quality_config_template,
+    build_scoring_config,
     build_validation_config,
     get_config_value,
     get_phase_config,
@@ -75,7 +76,11 @@ def _build_telemetry_output_path(
     return output_path.with_name(stem + output_path.suffix)
 
 
-def _run_model_phase(config: dict[str, object], multiple_phases: bool) -> None:
+def _run_model_phase(
+    config: dict[str, object],
+    multiple_phases: bool,
+    scoring_config=None,
+) -> dict[str, float | None]:
     template_config = build_model_quality_config_template()
     phase_config = get_phase_config(config, "model_quality")
 
@@ -127,6 +132,7 @@ def _run_model_phase(config: dict[str, object], multiple_phases: bool) -> None:
         s3_storage_options=dict(get_config_value(phase_config, "s3_storage_options", template_config.get("s3_storage_options", {})) or {}),
         include_schemas=list(get_config_value(phase_config, "include_schemas", template_config.get("include_schemas", [])) or []) or None,
         regenerate_context=_parse_bool(get_config_value(phase_config, "regenerate_context", template_config.get("regenerate_context", True))),
+        scoring_config=scoring_config,
     )
 
     print("\n=== Model Quality ===")
@@ -148,8 +154,9 @@ def _run_model_phase(config: dict[str, object], multiple_phases: bool) -> None:
         collector = None
         set_current_telemetry(None)
 
+    mddq_by_schema: dict[str, float | None] = {}
     try:
-        run_model_quality(opts)
+        mddq_by_schema = run_model_quality(opts)
         payload = collector.finalize("SUCCESS") if collector is not None else {"status": "SUCCESS"}
     except Exception:
         payload = collector.finalize("FAILED") if collector is not None else {"status": "FAILED"}
@@ -163,9 +170,15 @@ def _run_model_phase(config: dict[str, object], multiple_phases: bool) -> None:
         print("\nTelemetry disabled")
     telemetry_status = payload.get("run_summary", {}).get("status", payload.get("status", "UNKNOWN"))
     print("Telemetry status:", telemetry_status)
+    return mddq_by_schema
 
 
-def _run_data_phase(config: dict[str, object], multiple_phases: bool) -> None:
+def _run_data_phase(
+    config: dict[str, object],
+    multiple_phases: bool,
+    scoring_config=None,
+    mddq_by_schema: dict[str, float | None] | None = None,
+) -> dict[str, float | None]:
     template_config = build_data_quality_config_template()
     phase_config = get_phase_config(config, "data_quality")
 
@@ -224,6 +237,8 @@ def _run_data_phase(config: dict[str, object], multiple_phases: bool) -> None:
         sample_limit=int(get_config_value(phase_config, "sample_limit", template_config["sample_limit"])),
         include_schemas=list(get_config_value(phase_config, "include_schemas", template_config.get("include_schemas", [])) or []) or None,
         skip_document_code_analysis=_parse_bool(get_config_value(phase_config, "skip_document_code_analysis", template_config.get("skip_document_code_analysis", False))),
+        scoring_config=scoring_config,
+        mddq_by_schema=mddq_by_schema,
     )
 
     print("\n=== Data Quality ===")
@@ -251,8 +266,9 @@ def _run_data_phase(config: dict[str, object], multiple_phases: bool) -> None:
         collector = None
         set_current_telemetry(None)
 
+    ddq_by_schema: dict[str, float | None] = {}
     try:
-        run_data_quality(opts)
+        ddq_by_schema = run_data_quality(opts)
         payload = collector.finalize("SUCCESS") if collector is not None else {"status": "SUCCESS"}
     except Exception:
         payload = collector.finalize("FAILED") if collector is not None else {"status": "FAILED"}
@@ -266,6 +282,7 @@ def _run_data_phase(config: dict[str, object], multiple_phases: bool) -> None:
         print("\nTelemetry disabled")
     telemetry_status = payload.get("run_summary", {}).get("status", payload.get("status", "UNKNOWN"))
     print("Telemetry status:", telemetry_status)
+    return ddq_by_schema
 
 
 def main() -> None:
@@ -299,11 +316,15 @@ def main() -> None:
     if not args.run_model_quality and not args.run_data_quality:
         raise ValueError("At least one phase must be enabled: run_model_quality or run_data_quality.")
 
+    raw_scoring = get_config_value(json_config, "scoring", None)
+    scoring_config = build_scoring_config(raw_scoring if isinstance(raw_scoring, dict) else None)
+
     multiple_phases = bool(args.run_model_quality and args.run_data_quality)
+    mddq_by_schema: dict[str, float | None] = {}
     if args.run_model_quality:
-        _run_model_phase(json_config, multiple_phases)
+        mddq_by_schema = _run_model_phase(json_config, multiple_phases, scoring_config)
     if args.run_data_quality:
-        _run_data_phase(json_config, multiple_phases)
+        _run_data_phase(json_config, multiple_phases, scoring_config, mddq_by_schema)
 
 
 def _optional_int(value: object) -> int | None:

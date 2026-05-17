@@ -7,7 +7,14 @@ from typing import List, Optional
 
 from dataquality.adapters.outbound.exporters.excel_report import save_excel_report
 from dataquality.app.orchestration.document_code_quality_analyzer import DocumentCodeQualityAnalyzer
+from dataquality.domain.config.scoring_config import ScoringConfig
 from dataquality.domain.config.validation_config import ValidationConfig
+from dataquality.domain.scoring.quality_scorer import (
+    build_ddq_scores_df,
+    build_schema_score_rows,
+    compute_ddq,
+    compute_schema_score,
+)
 from dataquality.shared.utils import safe_iqmd
 from dataquality.domain.validators.data_quality_validator import DataQualityValidator
 from dataquality.domain.validators.metadata_validator import MetadataValidator
@@ -50,11 +57,19 @@ class RunDataQualityOptions:
     sample_limit: int = 1000
     include_schemas: List[str] | None = None
     skip_document_code_analysis: bool = False
+    scoring_config: ScoringConfig | None = None
+    mddq_by_schema: dict[str, float | None] | None = None
 
 
-def run_data_quality(options: RunDataQualityOptions) -> None:
+def run_data_quality(options: RunDataQualityOptions) -> dict[str, float | None]:
+    """End-to-end runner for the data quality phase.
+
+    Returns a mapping of schema_name → DDQ score (0-100) for each processed schema.
+    """
     print("\nSummary:")
     telemetry = get_current_telemetry()
+    scoring_config = options.scoring_config or ScoringConfig()
+    mddq_by_schema = options.mddq_by_schema or {}
 
     with (telemetry.stage("metadata.load") if telemetry is not None else nullcontext()):
         metadata_source = _build_metadata_source(options)
@@ -77,6 +92,7 @@ def run_data_quality(options: RunDataQualityOptions) -> None:
         telemetry.set_gauge("schemas_loaded", len(metadata_by_schema))
 
     dq_validator = DataQualityValidator()
+    ddq_by_schema: dict[str, float | None] = {}
 
     for schema_name, df_metadata in metadata_by_schema.items():
         print("\n==============================")
@@ -161,7 +177,7 @@ def run_data_quality(options: RunDataQualityOptions) -> None:
                     "EvaluatedRows": doc_result.total_distinct_codes,
                     "ValidRows": valid_codes,
                     "InvalidRows": doc_result.invalid_or_ambiguous_distinct_codes,
-                    "Value": f"{safe_iqmd(valid_codes, doc_result.total_distinct_codes):.2f}",
+                    "Value": f"{safe_iqmd(doc_result.invalid_or_ambiguous_distinct_codes, doc_result.total_distinct_codes):.2f}",
                     "Status": "CALCULATED",
                 }
                 sections["DATA_QUALITY_METRICS"] = pd.concat(
@@ -174,9 +190,36 @@ def run_data_quality(options: RunDataQualityOptions) -> None:
 
             sections.pop("DATA_QUALITY_RULE_CANDIDATES", None)
 
+            # Granular per-column metrics — used for DDQ computation
+            df_dq_metrics_granular = sections.get("DATA_QUALITY_METRICS", pd.DataFrame())
+            ddq = compute_ddq(df_dq_metrics_granular, scoring_config.data_quality_metric_weights)
+            ddq_by_schema[schema_name] = ddq
+
+            df_quality_scores = build_ddq_scores_df(
+                df_dq_metrics_granular, scoring_config.data_quality_metric_weights, ddq
+            )
+            mddq = mddq_by_schema.get(schema_name)
+            if mddq is not None or ddq is not None:
+                schema_score = compute_schema_score(mddq, ddq, scoring_config)
+                extra_rows = build_schema_score_rows(mddq, ddq, schema_score, scoring_config)
+                df_quality_scores = pd.concat(
+                    [df_quality_scores, pd.DataFrame(extra_rows)], ignore_index=True
+                )
+                if schema_score is not None:
+                    print(f"Schema score ({schema_name}): {schema_score:.2f}")
+            sections["QUALITY_SCORES"] = df_quality_scores
+
+            # Replace granular metrics with aggregated view (same format as METADATA_QUALITY_METRICS)
+            sections["DATA_QUALITY_METRICS"] = _aggregate_dq_metrics(df_dq_metrics_granular)
+
+            if ddq is not None:
+                print(f"DDQ ({schema_name}): {ddq:.2f}")
+
             if telemetry is not None:
-                telemetry.set_gauge("data_quality_metrics_rows", int(sections["DATA_QUALITY_METRICS"].shape[0]), schema=schema_name)
+                telemetry.set_gauge("data_quality_metrics_rows", int(df_dq_metrics_granular.shape[0]), schema=schema_name)
                 telemetry.set_gauge("data_quality_issue_rows", int(sections["DATA_QUALITY_ISSUES"].shape[0]), schema=schema_name)
+                if ddq is not None:
+                    telemetry.set_gauge("ddq", round(ddq, 4), schema=schema_name)
 
             with (telemetry.stage("excel.export", schema=schema_name) if telemetry is not None else nullcontext()):
                 out_path = save_excel_report(
@@ -186,6 +229,44 @@ def run_data_quality(options: RunDataQualityOptions) -> None:
                     file_prefix="issues_dados",
                 )
             print(f"Data quality report saved to {out_path}")
+
+    return ddq_by_schema
+
+
+_DQ_METRIC_DESCRIPTIONS: dict[str, str] = {
+    "Format Conformity": "Format conformity across candidate columns",
+    "Uniqueness": "Uniqueness across candidate columns",
+    "Redundancy detection": "Redundancy detection across candidate columns",
+    "MQID015": "Valid CPF/CNPJ/CGF",
+}
+
+
+def _aggregate_dq_metrics(df_granular: pd.DataFrame) -> pd.DataFrame:
+    """Collapse per-column metric rows into one row per metric type.
+
+    Output matches the METADATA_QUALITY_METRICS column layout:
+    Indicator | Dimension | Description | Value
+    """
+    cols = ["Indicator", "Dimension", "Description", "Value"]
+    if df_granular.empty:
+        return pd.DataFrame(columns=cols)
+
+    calculated = df_granular[
+        df_granular["Status"].astype(str).str.startswith("CALCULATED", na=False)
+    ].copy()
+    if calculated.empty:
+        return pd.DataFrame(columns=cols)
+
+    calculated["_v"] = pd.to_numeric(calculated["Value"], errors="coerce")
+    grouped = (
+        calculated.groupby("Metric", sort=False)
+        .agg(Dimension=("Dimension", "first"), _avg=("_v", "mean"))
+        .reset_index()
+        .rename(columns={"Metric": "Indicator"})
+    )
+    grouped["Description"] = grouped["Indicator"].map(_DQ_METRIC_DESCRIPTIONS).fillna(grouped["Indicator"])
+    grouped["Value"] = grouped["_avg"].map(lambda v: f"{v:.2f}" if pd.notna(v) else "N/A")
+    return grouped[cols]
 
 
 def _filter_schemas(dfs: dict, include_schemas: List[str] | None) -> dict:

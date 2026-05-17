@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from dataquality.domain.config.llm_comment_config import LLMCommentConfig
+from dataquality.domain.config.scoring_config import ScoringConfig, _DEFAULT_DQ_WEIGHTS, _DEFAULT_METADATA_WEIGHTS
 from dataquality.domain.config.validation_config import NamedLengthRule, TypeNamingRuleConfig, ValidationConfig
 
 
@@ -71,6 +72,29 @@ def build_validation_config(raw: dict[str, Any] | None) -> ValidationConfig | No
     type_kwargs["named_length_rules"] = named_rules
     validation_kwargs["type_naming"] = TypeNamingRuleConfig(**type_kwargs)
     return ValidationConfig(**validation_kwargs)
+
+
+def build_scoring_config(raw: dict[str, Any] | None) -> ScoringConfig:
+    if not raw:
+        return ScoringConfig()
+
+    raw_meta_weights = get_config_value(raw, "metadata_metric_weights", None)
+    raw_dq_weights = get_config_value(raw, "data_quality_metric_weights", None)
+
+    meta_weights: dict[str, float] = dict(_DEFAULT_METADATA_WEIGHTS)
+    if isinstance(raw_meta_weights, dict):
+        meta_weights = {str(k): float(v) for k, v in raw_meta_weights.items()}
+
+    dq_weights: dict[str, float] = dict(_DEFAULT_DQ_WEIGHTS)
+    if isinstance(raw_dq_weights, dict):
+        dq_weights = {str(k): float(v) for k, v in raw_dq_weights.items()}
+
+    return ScoringConfig(
+        metadata_metric_weights=meta_weights,
+        data_quality_metric_weights=dq_weights,
+        mddq_phase_weight=float(get_config_value(raw, "mddq_phase_weight", 30.0)),
+        ddq_phase_weight=float(get_config_value(raw, "ddq_phase_weight", 70.0)),
+    )
 
 
 def build_llm_comment_config(raw: dict[str, Any] | None) -> LLMCommentConfig | None:

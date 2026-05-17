@@ -97,8 +97,8 @@ class DataQualityValidator:
 
         return {
             "DATA_QUALITY_RULE_CANDIDATES": pd.DataFrame(candidate_rows),
-            "DATA_QUALITY_METRICS": pd.DataFrame(metric_rows),
             "DATA_QUALITY_ISSUES": pd.DataFrame(issue_rows),
+            "DATA_QUALITY_METRICS": pd.DataFrame(metric_rows),
         }
 
     def validate_format_conformity(

@@ -40,7 +40,7 @@
   "metadata_s3_uri": null,
   "sample_s3_uri": null,
   "s3_storage_options": {},
-  "include_schemas": ["sitram2","cadastro"],
+  "include_schemas": ["cadastro", "sitram2"],
   "exclude_tables": [
     "RUPD$",
     "VW",
@@ -188,6 +188,32 @@
         }
       ]
     }
+  },
+  "scoring": {
+    "metadata_metric_weights": {
+      "MQID001": 3,
+      "MQID002": 2,
+      "MQID003": 6,
+      "MQID004": 3,
+      "MQID005": 10,
+      "MQID006": 7,
+      "MQID007": 7,
+      "MQID008": 5,
+      "MQID009": 8,
+      "MQID010": 10,
+      "MQID011": 10,
+      "MQID012": 12,
+      "MQID013": 10,
+      "MQID014": 7
+    },
+    "data_quality_metric_weights": {
+      "Format Conformity": 40,
+      "Uniqueness": 30,
+      "Redundancy detection": 20,
+      "MQID015": 10
+    },
+    "mddq_phase_weight": 30,
+    "ddq_phase_weight": 70
   },
   "model_quality": {
     "base_folder": "dataquality\\schema",

@@ -7,10 +7,12 @@ import pandas as pd
 
 from dataquality.app.orchestration.metadata_context_builder import MetadataContextBuilder
 from dataquality.domain.config.llm_comment_config import LLMCommentConfig
+from dataquality.domain.config.scoring_config import ScoringConfig
 from dataquality.shared.utils import safe_iqmd
 from dataquality.domain.config.metadata_metric_config import METADATA_INDICATOR_SPECS
 from dataquality.domain.validators.metadata_validator import MetadataValidator
 from dataquality.adapters.outbound.exporters.excel_report import build_section_df
+from dataquality.domain.scoring.quality_scorer import build_mddq_scores_df, compute_mddq
 from dataquality.domain.suggesters.metadata_issue_suggester import (
     AnthropicCommentSuggester,
     LLMCommentSuggester,
@@ -31,6 +33,7 @@ class MetadataQualityMetricsCalculator:
         save_context_json: bool = True,
         base_folder: Path | None = None,
         regenerate_context: bool = True,
+        scoring_config: ScoringConfig | None = None,
     ):
         self.schema_name = schema_name
         self.validator = validator
@@ -41,14 +44,20 @@ class MetadataQualityMetricsCalculator:
         self.save_context_json = bool(save_context_json)
         self.base_folder = Path(base_folder) if base_folder else None
         self.regenerate_context = regenerate_context
+        self.scoring_config = scoring_config or ScoringConfig()
 
-    def calculate_sections(self) -> dict[str, pd.DataFrame]:
+    def calculate_sections(self) -> tuple[dict[str, pd.DataFrame], float | None]:
         """
-        Returns DataFrames for metadata quality sections.
-        - SCHEMA_METADATA: raw input
-        - METADATA_MEASURES: totals for metadata scope (includes schema totals)
-        - METADATA_ISSUES: validator.issues_df with standard columns
-        - METADATA_METRICS: quality indicators (percentual) for the whole schema
+        Returns (sections, mddq) where sections is a dict of DataFrames and mddq
+        is the weighted average metadata quality score (0-100) or None.
+
+        Sections:
+        - SCHEMA_METADATA: raw input (candidate annotation columns stripped)
+        - DATA_QUALITY_RULE_CANDIDATES: DQ rule candidates derived from metadata
+        - METADATA_QUALITY_MEASURES: raw/derived measure totals
+        - METADATA_QUALITY_ISSUES: validator issues with LLM suggestions
+        - METADATA_QUALITY_METRICS: quality indicator percentages
+        - QUALITY_SCORES: MDDQ weighted-average breakdown
         """
 
         df_schema_metadata = (self.df_schema_metadata.copy() if self.df_schema_metadata is not None else pd.DataFrame())
@@ -152,13 +161,28 @@ class MetadataQualityMetricsCalculator:
             columns=["Indicator", "Dimension", "Description", "Value"],
         )
 
-        return {
-            "SCHEMA_METADATA": df_schema_metadata,
+        _candidate_cols = [
+            *MetadataValidator.FORMAT_CONFORMITY_COLUMNS,
+            *MetadataValidator.REDUNDANCY_COLUMNS,
+        ]
+        df_schema_metadata_export = df_schema_metadata.drop(
+            columns=[c for c in _candidate_cols if c in df_schema_metadata.columns],
+        )
+
+        mddq = compute_mddq(df_metrics, self.scoring_config.metadata_metric_weights)
+        df_quality_scores = build_mddq_scores_df(
+            df_metrics, self.scoring_config.metadata_metric_weights, mddq
+        )
+
+        sections = {
+            "SCHEMA_METADATA": df_schema_metadata_export,
             "DATA_QUALITY_RULE_CANDIDATES": df_data_quality_candidates,
             "METADATA_QUALITY_MEASURES": df_measures,
             "METADATA_QUALITY_ISSUES": df_issues,
             "METADATA_QUALITY_METRICS": df_metrics,
+            "QUALITY_SCORES": df_quality_scores,
         }
+        return sections, mddq
 
     def _build_llm_suggester(self, schema_context: dict | None = None) -> LLMCommentSuggester:
         strategy = str(getattr(self.llm_comment_config, "comment_generation_strategy", "rules")).strip().lower()

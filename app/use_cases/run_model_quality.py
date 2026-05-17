@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import List, Optional
 
 from dataquality.domain.config.llm_comment_config import LLMCommentConfig
+from dataquality.domain.config.scoring_config import ScoringConfig
 from dataquality.domain.config.validation_config import ValidationConfig
 from dataquality.domain.validators.metadata_validator import MetadataValidator
 from dataquality.infrastructure.io.metadata_sources import build_metadata_source
@@ -44,12 +45,14 @@ class RunOptions:
     s3_storage_options: dict[str, object] | None = None
     include_schemas: List[str] | None = None
     regenerate_context: bool = True
+    scoring_config: ScoringConfig | None = None
 
 
-def run_model_quality(options: RunOptions) -> None:
-    """End-to-end runner for the *model quality* phase (schema metadata validation + metrics)."""
-    
-    #print("\nSummary:")
+def run_model_quality(options: RunOptions) -> dict[str, float | None]:
+    """End-to-end runner for the *model quality* phase (schema metadata validation + metrics).
+
+    Returns a mapping of schema_name → MDDQ score (0-100) for each processed schema.
+    """
     telemetry = get_current_telemetry()
 
     with (telemetry.stage("metadata.load") if telemetry is not None else nullcontext()):
@@ -74,13 +77,14 @@ def run_model_quality(options: RunOptions) -> None:
         telemetry.set_gauge("schemas_loaded", len(dfs))
 
     exclude_set = _parse_exclude_tables(options.exclude_tables or [])
+    mddq_by_schema: dict[str, float | None] = {}
 
     for schema_name, df in dfs.items():
         with (telemetry.stage("schema.process", schema=schema_name) if telemetry is not None else nullcontext()):
             if exclude_set:
                 df = _filter_excluded_tables(df, exclude_set)
 
-            df_schema_metadata = df.copy() # preserve original for the Excel first sheet
+            df_schema_metadata = df.copy()
 
             print("\n==============================")
             print(f"Validating metadata schema: {schema_name}")
@@ -89,7 +93,7 @@ def run_model_quality(options: RunOptions) -> None:
                 telemetry.set_gauge("input_columns", int(df.shape[0]), schema=schema_name)
                 telemetry.set_gauge("input_tables", int(df["TABLE_NAME"].nunique()), schema=schema_name)
                 telemetry.increment("tables_read", int(df["TABLE_NAME"].nunique()), schema=schema_name)
-            
+
             validator = MetadataValidator(
                 df=df,
                 table_plural_exceptions=options.plural_table_exceptions,
@@ -114,16 +118,25 @@ def run_model_quality(options: RunOptions) -> None:
                     save_context_json=options.save_context_json,
                     base_folder=options.base_folder,
                     regenerate_context=options.regenerate_context,
+                    scoring_config=options.scoring_config,
                 )
-                sections = metadata_calculator.calculate_sections()
+                sections, mddq = metadata_calculator.calculate_sections()
+
+            mddq_by_schema[schema_name] = mddq
+            if mddq is not None:
+                print(f"MDDQ ({schema_name}): {mddq:.2f}")
 
             if telemetry is not None:
                 telemetry.set_gauge("candidates_total", int(sections["DATA_QUALITY_RULE_CANDIDATES"].shape[0]), schema=schema_name)
+                if mddq is not None:
+                    telemetry.set_gauge("mddq", round(mddq, 4), schema=schema_name)
 
             with (telemetry.stage("excel.export", schema=schema_name) if telemetry is not None else nullcontext()):
                 out_path = save_excel_report(options.base_folder, schema_name, sections)
 
             print(f"Issues saved to {out_path}")
+
+    return mddq_by_schema
 
 
 def _filter_schemas(dfs: dict, include_schemas: List[str] | None) -> dict:
