@@ -4,7 +4,8 @@
       "PowerShell(& \"d:\\\\Users\\\\49756615\\\\Documents\\\\DoutoradoUFC\\\\Implementation\\\\dataquality\\\\.venv\\\\Scripts\\\\python.exe\" -m pip list 2>&1)",
       "Bash(Get-ChildItem -Path \"d:\\\\Users\\\\49756615\\\\Documents\\\\DoutoradoUFC\\\\Implementation\\\\dataquality\" -Recurse -Directory)",
       "Bash(Select-Object -ExpandProperty FullName)",
-      "Bash(Sort-Object)"
+      "Bash(Sort-Object)",
+      "Bash(dir \"c:\\\\Users\\\\49756615\\\\Documents\\\\DoutoradoUFC\\\\Implementation\\\\dataquality\\\\app\\\\telemetry\" /od)"
     ]
   }
 }

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import httpx
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -377,7 +378,11 @@ class AnthropicCommentSuggester(LLMCommentSuggester):
 
         try:
             self.last_error = ""
-            client = _anthropic.Anthropic(api_key=self.api_key)
+            http_client = self._build_http_client()
+            client = _anthropic.Anthropic(
+                api_key=self.api_key,
+                **({"http_client": http_client} if http_client is not None else {}),
+            )
             response = client.messages.create(
                 model=self.model,
                 max_tokens=self.max_output_tokens,
@@ -395,6 +400,36 @@ class AnthropicCommentSuggester(LLMCommentSuggester):
         comment = self._extract_comment(raw)
         self.response_cache[cache_key] = comment
         return comment
+
+    def _build_http_client(self):
+        import os
+        try:
+            import httpx
+        except ImportError:
+            return None
+
+        proxy_url = os.environ.get("HTTPS_PROXY") or os.environ.get("HTTP_PROXY")
+        if not proxy_url:
+            return None
+
+        proxy_user = os.environ.get("PROXY_USER", "")
+        proxy_pass = os.environ.get("PROXY_PASS", "")
+
+        if proxy_user and proxy_pass:
+            try:
+                from httpx_ntlm import HttpNtlmAuth
+                return httpx.Client(proxy=proxy_url, auth=HttpNtlmAuth(proxy_user, proxy_pass))
+            except ImportError:
+                pass
+            from urllib.parse import urlparse, urlunparse
+            parsed = urlparse(proxy_url)
+            if not parsed.username:
+                netloc = f"{proxy_user}:{proxy_pass}@{parsed.hostname}"
+                if parsed.port:
+                    netloc += f":{parsed.port}"
+                proxy_url = urlunparse(parsed._replace(netloc=netloc))
+
+        return httpx.Client(proxy=proxy_url)
 
     def _filter_business_context(self, table_name: str) -> Dict[str, Any]:
         if not self.business_context:

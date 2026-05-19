@@ -207,10 +207,10 @@
       "MQID014": 7
     },
     "data_quality_metric_weights": {
-      "Format Conformity": 40,
-      "Uniqueness": 30,
-      "Redundancy detection": 20,
-      "MQID015": 10
+      "Format Conformity": 0,
+      "Uniqueness": 0,
+      "Redundancy detection": 0,
+      "MQID015": 100
     },
     "mddq_phase_weight": 30,
     "ddq_phase_weight": 70

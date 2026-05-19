@@ -115,46 +115,52 @@ def run_data_quality(options: RunDataQualityOptions) -> dict[str, float | None]:
                 schema_name=schema_name,
             )
 
-            with (telemetry.stage("metadata.annotate_candidates", schema=schema_name) if telemetry is not None else nullcontext()):
-                annotated_metadata = metadata_validator.annotate_data_quality_candidates(df_metadata)
-
-            candidates_df = annotated_metadata.loc[
-                annotated_metadata["FORMAT_CONFORMITY_CANDIDATE"].astype(bool)
-                | annotated_metadata["REDUNDANCY_CANDIDATE"].astype(bool)
-            ].copy()
-            if telemetry is not None:
-                telemetry.set_gauge("candidates_total", int(candidates_df.shape[0]), schema=schema_name)
-                telemetry.increment("candidates_generated", int(candidates_df.shape[0]), schema=schema_name)
-                if not candidates_df.empty:
-                    telemetry.set_gauge(
-                        "format_candidates",
-                        int(candidates_df["FORMAT_CONFORMITY_CANDIDATE"].astype(bool).sum()),
-                        schema=schema_name,
-                    )
-                    telemetry.set_gauge(
-                        "redundancy_candidates",
-                        int(candidates_df["REDUNDANCY_CANDIDATE"].astype(bool).sum()),
-                        schema=schema_name,
-                    )
-
-            if candidates_df.empty:
-                samples_by_table = {}
-            else:
-                try:
-                    with (telemetry.stage("samples.load", schema=schema_name) if telemetry is not None else nullcontext()):
-                        samples_by_table = sample_source.get_samples_for_schema(schema_name, candidates_df)
-                except FileNotFoundError as exc:
-                    print(f"[data_quality] Samples not available for schema '{schema_name}': {exc}. Skipping sample-based validation.")
-                    samples_by_table = {}
-
-            if telemetry is not None:
-                telemetry.set_gauge("sample_tables_loaded", len(samples_by_table), schema=schema_name)
-
-            sections = dq_validator.validate_candidates(
-                schema_name=schema_name,
-                candidates_df=candidates_df,
-                samples_by_table=samples_by_table,
-            )
+            # -- Format Conformity, Uniqueness e Redundancy desativados temporariamente --
+            # with (telemetry.stage("metadata.annotate_candidates", schema=schema_name) if telemetry is not None else nullcontext()):
+            #     annotated_metadata = metadata_validator.annotate_data_quality_candidates(df_metadata)
+            #
+            # candidates_df = annotated_metadata.loc[
+            #     annotated_metadata["FORMAT_CONFORMITY_CANDIDATE"].astype(bool)
+            #     | annotated_metadata["REDUNDANCY_CANDIDATE"].astype(bool)
+            # ].copy()
+            # if telemetry is not None:
+            #     telemetry.set_gauge("candidates_total", int(candidates_df.shape[0]), schema=schema_name)
+            #     telemetry.increment("candidates_generated", int(candidates_df.shape[0]), schema=schema_name)
+            #     if not candidates_df.empty:
+            #         telemetry.set_gauge(
+            #             "format_candidates",
+            #             int(candidates_df["FORMAT_CONFORMITY_CANDIDATE"].astype(bool).sum()),
+            #             schema=schema_name,
+            #         )
+            #         telemetry.set_gauge(
+            #             "redundancy_candidates",
+            #             int(candidates_df["REDUNDANCY_CANDIDATE"].astype(bool).sum()),
+            #             schema=schema_name,
+            #         )
+            #
+            # if candidates_df.empty:
+            #     samples_by_table = {}
+            # else:
+            #     try:
+            #         with (telemetry.stage("samples.load", schema=schema_name) if telemetry is not None else nullcontext()):
+            #             samples_by_table = sample_source.get_samples_for_schema(schema_name, candidates_df)
+            #     except FileNotFoundError as exc:
+            #         print(f"[data_quality] Samples not available for schema '{schema_name}': {exc}. Skipping sample-based validation.")
+            #         samples_by_table = {}
+            #
+            # if telemetry is not None:
+            #     telemetry.set_gauge("sample_tables_loaded", len(samples_by_table), schema=schema_name)
+            #
+            # sections = dq_validator.validate_candidates(
+            #     schema_name=schema_name,
+            #     candidates_df=candidates_df,
+            #     samples_by_table=samples_by_table,
+            # )
+            sections = {
+                "DATA_QUALITY_RULE_CANDIDATES": pd.DataFrame(),
+                "DATA_QUALITY_ISSUES": pd.DataFrame(),
+                "DATA_QUALITY_METRICS": pd.DataFrame(),
+            }
 
             if not options.skip_document_code_analysis:
                 with (telemetry.stage("document_codes.analyze", schema=schema_name) if telemetry is not None else nullcontext()):
