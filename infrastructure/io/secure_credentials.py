@@ -4,6 +4,49 @@ from dataclasses import dataclass
 from urllib.parse import quote_plus
 
 
+def build_database_engine(settings: "DatabaseConnectionSettings"):
+    """Create a SQLAlchemy engine passing credentials via connect_args.
+
+    Using connect_args instead of embedding credentials in the URL avoids
+    quote_plus encoding issues with domain usernames that contain backslashes
+    (e.g. sefaz2\\49756615), which oracledb does not decode correctly from URLs.
+    """
+    try:
+        from sqlalchemy import create_engine
+    except ImportError as exc:
+        raise RuntimeError(
+            "Database access requires SQLAlchemy. Install it with: pip install sqlalchemy"
+        ) from exc
+
+    password = _read_keyring_password(settings)
+
+    if settings.connection_uri:
+        uri = _inject_password(str(settings.connection_uri).strip(), password)
+        return create_engine(uri)
+
+    driver = str(settings.driver_class_name or "oracle+oracledb").strip()
+    username = _require(settings.username, "db_username")
+    if password is None:
+        raise ValueError("A keyring password is required when db_connection_uri is not provided.")
+
+    connect_args: dict = {"user": username, "password": password}
+
+    if settings.dsn:
+        connect_args["dsn"] = str(settings.dsn)
+    else:
+        host = _require(settings.host, "db_host")
+        connect_args["host"] = host
+        connect_args["port"] = int(settings.port or 1521)
+        if settings.service_name:
+            connect_args["service_name"] = str(settings.service_name)
+        elif settings.sid:
+            connect_args["sid"] = str(settings.sid)
+        else:
+            raise ValueError("Configure db_service_name, db_sid, or db_dsn for Oracle access.")
+
+    return create_engine(f"{driver}://", connect_args=connect_args)
+
+
 @dataclass(frozen=True)
 class DatabaseConnectionSettings:
     connection_uri: str | None = None

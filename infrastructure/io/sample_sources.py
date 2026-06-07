@@ -7,7 +7,7 @@ from typing import Protocol
 import pandas as pd
 
 from dataquality.infrastructure.io.csv.sample_loader import SampleDataLoader
-from dataquality.infrastructure.io.secure_credentials import DatabaseConnectionSettings, build_database_connection_uri
+from dataquality.infrastructure.io.secure_credentials import DatabaseConnectionSettings, build_database_engine
 from dataquality.shared.telemetry import get_current_telemetry
 
 
@@ -47,10 +47,11 @@ class DatabaseSampleSource:
         sample_limit: int = 1000,
         query_template: str | None = None,
     ):
-        self.connection_uri = self._build_connection_uri(connection_uri, connection_settings, driver_class_name)
+        self._connection_settings = connection_settings
+        self._raw_connection_uri = connection_uri
+        self._driver_class_name = driver_class_name
         self.db_type = db_type
         self.authentication_type = authentication_type
-        self.driver_class_name = driver_class_name
         self.sample_limit = int(sample_limit)
         self.query_template = query_template or self._default_query_template(db_type)
 
@@ -60,13 +61,22 @@ class DatabaseSampleSource:
             return {}
 
         try:
-            from sqlalchemy import create_engine, text
+            from sqlalchemy import text
         except ImportError as exc:
             raise RuntimeError(
                 "Database sample source requires SQLAlchemy. Install it before using --sample-source database."
             ) from exc
 
-        engine = create_engine(self.connection_uri, connect_args=self._build_connect_args())
+        if self._connection_settings is not None:
+            engine = build_database_engine(self._connection_settings)
+        elif self._raw_connection_uri:
+            try:
+                from sqlalchemy import create_engine
+            except ImportError as exc:
+                raise RuntimeError("Database sample source requires SQLAlchemy.") from exc
+            engine = create_engine(str(self._raw_connection_uri).strip())
+        else:
+            raise ValueError("connection_uri or connection_settings is required for database sample source.")
         samples_by_table: dict[str, pd.DataFrame] = {}
         unique_tables = (
             candidates_df[["OWNER", "TABLE_NAME"]]
@@ -139,13 +149,6 @@ class DatabaseSampleSource:
             raise ValueError("connection_uri or connection_settings is required for database sample source.")
         return self._normalize_connection_uri(connection_uri, driver_class_name)
 
-    def _build_connect_args(self) -> dict[str, object]:
-        auth_type = str(self.authentication_type).strip().lower()
-        if auth_type in {"username_password", "password", "basic", ""}:
-            return {}
-        if auth_type in {"external", "kerberos", "iam"}:
-            return {}
-        raise ValueError(f"Unsupported authentication_type: {self.authentication_type}")
 
 
 class S3SampleSource:

@@ -7,6 +7,7 @@ from typing import List, Optional
 
 from dataquality.adapters.outbound.exporters.excel_report import save_excel_report
 from dataquality.app.orchestration.document_code_quality_analyzer import DocumentCodeQualityAnalyzer
+from dataquality.infrastructure.io.oracle.result_exporter import build_oracle_exporter
 from dataquality.domain.config.scoring_config import ScoringConfig
 from dataquality.domain.config.validation_config import ValidationConfig
 from dataquality.domain.scoring.quality_scorer import (
@@ -59,6 +60,9 @@ class RunDataQualityOptions:
     skip_document_code_analysis: bool = False
     scoring_config: ScoringConfig | None = None
     mddq_by_schema: dict[str, float | None] | None = None
+    metadata_query_file: str | None = None
+    # output: "excel" | "oracle" | "both"
+    output_type: str = "excel"
 
 
 def run_data_quality(options: RunDataQualityOptions) -> dict[str, float | None]:
@@ -227,14 +231,41 @@ def run_data_quality(options: RunDataQualityOptions) -> dict[str, float | None]:
                 if ddq is not None:
                     telemetry.set_gauge("ddq", round(ddq, 4), schema=schema_name)
 
-            with (telemetry.stage("excel.export", schema=schema_name) if telemetry is not None else nullcontext()):
-                out_path = save_excel_report(
-                    options.metadata_base_folder,
-                    schema_name,
-                    sections,
-                    file_prefix="issues_dados",
-                )
-            print(f"Data quality report saved to {out_path}")
+            output_type = str(options.output_type or "excel").strip().lower()
+            export_sections = {"QUALITY_SCORES": sections["QUALITY_SCORES"]}
+            if "DATA_ISSUES" in sections:
+                export_sections["DATA_ISSUES"] = sections["DATA_ISSUES"]
+
+            if output_type in {"excel", "both"}:
+                with (telemetry.stage("excel.export", schema=schema_name) if telemetry is not None else nullcontext()):
+                    out_path = save_excel_report(
+                        options.metadata_base_folder,
+                        schema_name,
+                        export_sections,
+                        file_prefix="issues_dados",
+                    )
+                print(f"Data quality report saved to {out_path}")
+
+            if output_type in {"oracle", "both"}:
+                doc_issues_df = sections.get("DATA_ISSUES")
+                with (telemetry.stage("oracle.export", schema=schema_name) if telemetry is not None else nullcontext()):
+                    exporter = build_oracle_exporter(_build_connection_settings(options))
+                    exec_id = exporter.begin_execution(
+                        owner=schema_name,
+                        source_type=options.metadata_source_type.upper(),
+                        notes=f"issues_dados phase — DDQ={ddq:.2f}" if ddq is not None else "issues_dados phase",
+                    )
+                    try:
+                        exporter.save_quality_scores(exec_id, sections["QUALITY_SCORES"])
+                        if doc_issues_df is not None and not doc_issues_df.empty:
+                            exporter.save_doc_code_issues(exec_id, doc_issues_df)
+                        exporter.finish_execution(exec_id, "SUCCESS")
+                    except Exception:
+                        exporter.finish_execution(exec_id, "ERROR")
+                        raise
+                    finally:
+                        exporter.dispose()
+                print(f"[oracle] Results written to DQ_EXECUTION / DQ_QUALITY_SCORE (execution {exec_id})")
 
     return ddq_by_schema
 
@@ -311,6 +342,7 @@ def _build_metadata_source(options: RunDataQualityOptions):
         schemas=options.metadata_db_schemas,
         db_type=options.db_type,
         query_template=options.metadata_query_template,
+        query_file=options.metadata_query_file,
         s3_uri=options.metadata_s3_uri,
         s3_storage_options=options.s3_storage_options,
     )

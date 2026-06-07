@@ -47,6 +47,18 @@ def _resolve_model_base_folder(raw_path: str) -> Path:
     return _resolve_folder(raw_path, "schema")
 
 
+def _resolve_query_file(raw_path: str | None) -> str | None:
+    if not raw_path:
+        return None
+    candidate = Path(raw_path)
+    if candidate.exists():
+        return str(candidate)
+    script_relative = Path(__file__).resolve().parent / raw_path
+    if script_relative.exists():
+        return str(script_relative)
+    return str(candidate)
+
+
 def _parse_bool(raw_value: str | bool) -> bool:
     if isinstance(raw_value, bool):
         return raw_value
@@ -128,11 +140,13 @@ def _run_model_phase(
         ),
         metadata_db_schemas=list(get_config_value(phase_config, "metadata_db_schemas", template_config.get("metadata_db_schemas", [])) or []),
         metadata_query_template=get_config_value(phase_config, "metadata_query_template", template_config.get("metadata_query_template")),
+        metadata_query_file=_resolve_query_file(get_config_value(phase_config, "metadata_query_file", template_config.get("metadata_query_file"))),
         metadata_s3_uri=get_config_value(phase_config, "metadata_s3_uri", template_config.get("metadata_s3_uri")),
         s3_storage_options=dict(get_config_value(phase_config, "s3_storage_options", template_config.get("s3_storage_options", {})) or {}),
         include_schemas=list(get_config_value(phase_config, "include_schemas", template_config.get("include_schemas", [])) or []) or None,
         regenerate_context=_parse_bool(get_config_value(phase_config, "regenerate_context", template_config.get("regenerate_context", True))),
         scoring_config=scoring_config,
+        output_type=str(get_config_value(phase_config, "output_type", template_config.get("output_type", "excel"))),
     )
 
     print("\n=== Model Quality ===")
@@ -230,6 +244,7 @@ def _run_data_phase(
         ),
         metadata_db_schemas=list(get_config_value(phase_config, "metadata_db_schemas", template_config.get("metadata_db_schemas", [])) or []),
         metadata_query_template=get_config_value(phase_config, "metadata_query_template", template_config.get("metadata_query_template")),
+        metadata_query_file=_resolve_query_file(get_config_value(phase_config, "metadata_query_file", template_config.get("metadata_query_file"))),
         metadata_s3_uri=get_config_value(phase_config, "metadata_s3_uri", template_config.get("metadata_s3_uri")),
         sample_s3_uri=get_config_value(phase_config, "sample_s3_uri", template_config.get("sample_s3_uri")),
         s3_storage_options=dict(get_config_value(phase_config, "s3_storage_options", template_config.get("s3_storage_options", {})) or {}),
@@ -239,6 +254,7 @@ def _run_data_phase(
         skip_document_code_analysis=_parse_bool(get_config_value(phase_config, "skip_document_code_analysis", template_config.get("skip_document_code_analysis", False))),
         scoring_config=scoring_config,
         mddq_by_schema=mddq_by_schema,
+        output_type=str(get_config_value(phase_config, "output_type", template_config.get("output_type", "excel"))),
     )
 
     print("\n=== Data Quality ===")

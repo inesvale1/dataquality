@@ -100,8 +100,11 @@ def build_mddq_scores_df(
 ) -> pd.DataFrame:
     """Build the QUALITY_SCORES breakdown DataFrame for the model quality phase."""
     desc_by_indicator = {s.indicator: s.description for s in METADATA_INDICATOR_SPECS}
-    rows: list[dict] = []
+    dim_by_indicator: dict[str, str] = {}
+    if not df_metrics.empty and "Dimension" in df_metrics.columns:
+        dim_by_indicator = df_metrics.set_index("Indicator")["Dimension"].to_dict()
 
+    rows: list[dict] = []
     total_w = 0.0
     for indicator, weight in weights.items():
         metric_rows = df_metrics[df_metrics["Indicator"] == indicator] if not df_metrics.empty else pd.DataFrame()
@@ -111,24 +114,23 @@ def build_mddq_scores_df(
         except (ValueError, TypeError):
             value = None
 
-        weighted = (weight * value / max(sum(weights.values()), 1e-9)) if value is not None else None
         total_w += weight
         rows.append({
             "ScoreType": "MDDQ",
             "Component": indicator,
+            "Dimension": dim_by_indicator.get(indicator, ""),
             "Description": desc_by_indicator.get(indicator, ""),
             "Weight": round(weight, 4),
             "Value": round(value, 4) if value is not None else None,
-            "WeightedValue": round(weighted, 4) if weighted is not None else None,
         })
 
     rows.append({
         "ScoreType": "MDDQ",
         "Component": "MDDQ",
+        "Dimension": "",
         "Description": "Metadata DQ Weighted Average",
         "Weight": round(total_w, 4),
-        "Value": None,
-        "WeightedValue": round(mddq, 4) if mddq is not None else None,
+        "Value": round(mddq, 4) if mddq is not None else None,
     })
 
     return pd.DataFrame(rows)
@@ -147,6 +149,11 @@ def build_ddq_scores_df(
         if not df_metrics.empty
         else pd.DataFrame()
     )
+
+    dim_by_metric: dict[str, str] = {}
+    if not calculated.empty and "Dimension" in calculated.columns:
+        dim_by_metric = calculated.groupby("Metric")["Dimension"].first().to_dict()
+
     if not calculated.empty:
         calculated["_v"] = pd.to_numeric(calculated["Value"], errors="coerce")
         avg_by_type: dict[str, float | None] = (
@@ -159,24 +166,23 @@ def build_ddq_scores_df(
     total_w = 0.0
     for metric_type, weight in weights.items():
         avg = avg_by_type.get(metric_type)
-        weighted = (weight * avg / max(sum(weights.values()), 1e-9)) if avg is not None else None
         total_w += weight
         rows.append({
             "ScoreType": "DDQ",
             "Component": metric_type,
+            "Dimension": dim_by_metric.get(metric_type, ""),
             "Description": f"Avg value for metric type '{metric_type}'",
             "Weight": round(weight, 4),
             "Value": round(avg, 4) if avg is not None else None,
-            "WeightedValue": round(weighted, 4) if weighted is not None else None,
         })
 
     rows.append({
         "ScoreType": "DDQ",
         "Component": "DDQ",
+        "Dimension": "",
         "Description": "Data Quality Weighted Average",
         "Weight": round(total_w, 4),
-        "Value": None,
-        "WeightedValue": round(ddq, 4) if ddq is not None else None,
+        "Value": round(ddq, 4) if ddq is not None else None,
     })
 
     return pd.DataFrame(rows)
@@ -188,40 +194,18 @@ def build_schema_score_rows(
     schema_score: float | None,
     config: ScoringConfig,
 ) -> list[dict]:
-    """Return rows to append to QUALITY_SCORES for the combined schema score."""
-    rows: list[dict] = []
-    if mddq is not None:
-        rows.append({
+    """Return a single row with the combined schema score.
+
+    MDDQ and DDQ values are already present in their own ScoreType blocks,
+    so repeating them here would create redundant rows with the same value.
+    """
+    return [
+        {
             "ScoreType": "SCHEMA_SCORE",
-            "Component": "MDDQ",
-            "Description": "Metadata DQ phase contribution",
-            "Weight": round(config.mddq_phase_weight, 4),
-            "Value": round(mddq, 4),
-            "WeightedValue": round(
-                config.mddq_phase_weight * mddq
-                / max(config.mddq_phase_weight + config.ddq_phase_weight, 1e-9),
-                4,
-            ),
-        })
-    if ddq is not None:
-        rows.append({
-            "ScoreType": "SCHEMA_SCORE",
-            "Component": "DDQ",
-            "Description": "Data Quality phase contribution",
-            "Weight": round(config.ddq_phase_weight, 4),
-            "Value": round(ddq, 4),
-            "WeightedValue": round(
-                config.ddq_phase_weight * ddq
-                / max(config.mddq_phase_weight + config.ddq_phase_weight, 1e-9),
-                4,
-            ),
-        })
-    rows.append({
-        "ScoreType": "SCHEMA_SCORE",
-        "Component": "SCHEMA_SCORE",
-        "Description": "Overall schema quality score",
-        "Weight": None,
-        "Value": None,
-        "WeightedValue": round(schema_score, 4) if schema_score is not None else None,
-    })
-    return rows
+            "Component": "SCHEMA_SCORE",
+            "Dimension": "",
+            "Description": "Overall schema quality score",
+            "Weight": None,
+            "Value": round(schema_score, 4) if schema_score is not None else None,
+        }
+    ]

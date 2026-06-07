@@ -5,7 +5,9 @@
       "Bash(Get-ChildItem -Path \"d:\\\\Users\\\\49756615\\\\Documents\\\\DoutoradoUFC\\\\Implementation\\\\dataquality\" -Recurse -Directory)",
       "Bash(Select-Object -ExpandProperty FullName)",
       "Bash(Sort-Object)",
-      "Bash(dir \"c:\\\\Users\\\\49756615\\\\Documents\\\\DoutoradoUFC\\\\Implementation\\\\dataquality\\\\app\\\\telemetry\" /od)"
+      "Bash(dir \"c:\\\\Users\\\\49756615\\\\Documents\\\\DoutoradoUFC\\\\Implementation\\\\dataquality\\\\app\\\\telemetry\" /od)",
+      "Bash(python -c ' *)",
+      "Read(//c/Users/49756615/Documents/DoutoradoUFC/Implementation/**)"
     ]
   }
 }

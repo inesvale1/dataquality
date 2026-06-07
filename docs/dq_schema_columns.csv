@@ -1,0 +1,24 @@
+TABLE_NAME;SEQUENCE;COLUMN_NAME;DATA_TYPE;LENGTH;PRECISION;SCALE;NULLABLE;PRIMARY_KEY;IDENTITY;FOREIGN_KEY_TABLE;FOREIGN_KEY_COLUMN;UNIQUE_CONSTRAINT;CHECK_CONSTRAINT;DEFAULT_VALUE;DESCRIPTION
+DQ_EXECUTION;1;COD_EXECUTION;NUMBER;;;;;N;Y;Y;;;;;Identificador unico da execucao (PK surrogate).
+DQ_EXECUTION;2;DSC_OWNER;VARCHAR2;128;;;;N;N;N;;;;;Schema Oracle avaliado na execucao.
+DQ_EXECUTION;3;TIP_SOURCE;VARCHAR2;20;;;;N;N;N;;;;"IN ('CSV','ORACLE','S3')";;Tipo da fonte de entrada: CSV, ORACLE ou S3.
+DQ_EXECUTION;4;STA_EXECUTION;VARCHAR2;20;;;;N;N;N;;;;"IN ('RUNNING','SUCCESS','ERROR')";RUNNING;Status da execucao: RUNNING, SUCCESS ou ERROR.
+DQ_EXECUTION;5;DAT_EXECUTION;TIMESTAMP;;;;;N;N;N;;;;;SYSTIMESTAMP;Data e hora de inicio da execucao.
+DQ_EXECUTION;6;DAT_FINISHED;TIMESTAMP;;;;;Y;N;N;;;;;; Data e hora de termino da execucao.
+DQ_EXECUTION;7;TXT_NOTES;VARCHAR2;4000;;;;Y;N;N;;;;;Observacoes livres sobre a execucao.
+DQ_QUALITY_SCORE;1;COD_ID;NUMBER;;;;;N;Y;Y;;;;;Identificador unico do registro (PK surrogate).
+DQ_QUALITY_SCORE;2;COD_EXECUTION;NUMBER;;;;;N;N;N;DQ_EXECUTION;COD_EXECUTION;;;; Referencia a execucao que gerou este registro.
+DQ_QUALITY_SCORE;3;TIP_SCORE;VARCHAR2;20;;;;N;N;N;;;;"IN ('MDDQ','DDQ','SCHEMA_SCORE')";;Tipo de score: MDDQ (metadados), DDQ (dados) ou SCHEMA_SCORE (combinado).
+DQ_QUALITY_SCORE;4;COD_COMPONENT;VARCHAR2;50;;;;N;N;N;;;;;Codigo do indicador ou componente (ex: MQID001, MDDQ, DDQ, SCHEMA_SCORE).
+DQ_QUALITY_SCORE;5;DSC_DIMENSION;VARCHAR2;50;;;;Y;N;N;;;;;Dimensao de qualidade (Consistency, Completeness, Uniqueness, Conformity).
+DQ_QUALITY_SCORE;6;DSC_DESCRIPTION;VARCHAR2;400;;;;Y;N;N;;;;;Descricao textual do componente ou indicador.
+DQ_QUALITY_SCORE;7;NUM_WEIGHT;NUMBER;;;10;4;Y;N;N;;;;;Peso do componente no calculo do score ponderado.
+DQ_QUALITY_SCORE;8;NUM_VALUE;NUMBER;;;10;4;Y;N;N;;;;;Valor calculado do indicador (0-100) ou score final ponderado.
+DQ_DOC_CODE_ISSUE;1;COD_ID;NUMBER;;;;;N;Y;Y;;;;;Identificador unico do registro (PK surrogate).
+DQ_DOC_CODE_ISSUE;2;COD_EXECUTION;NUMBER;;;;;N;N;N;DQ_EXECUTION;COD_EXECUTION;;;;Referencia a execucao que gerou este registro.
+DQ_DOC_CODE_ISSUE;3;COD_RULE;VARCHAR2;20;;;;N;N;N;;;;;Codigo da regra de qualidade violada (MQID015).
+DQ_DOC_CODE_ISSUE;4;DSC_DESCRIPTION;VARCHAR2;200;;;;Y;N;N;;;;;Descricao legivel da regra violada (ex: Invalid document code).
+DQ_DOC_CODE_ISSUE;5;DSC_OWNER;VARCHAR2;128;;;;Y;N;N;;;;;Schema Oracle dono da tabela onde o valor foi encontrado.
+DQ_DOC_CODE_ISSUE;6;NOM_TABLE;VARCHAR2;128;;;;Y;N;N;;;;;Nome da tabela onde o valor foi encontrado.
+DQ_DOC_CODE_ISSUE;7;NOM_COLUMN;VARCHAR2;128;;;;Y;N;N;;;;;Nome da coluna onde o valor foi encontrado.
+DQ_DOC_CODE_ISSUE;8;TXT_VALUE;VARCHAR2;30;;;;Y;N;N;;;;;Valor CPF/CNPJ/CGF invalido ou ambiguo encontrado nos dados.

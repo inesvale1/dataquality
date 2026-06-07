@@ -11,6 +11,7 @@ from dataquality.domain.config.validation_config import ValidationConfig
 from dataquality.domain.validators.metadata_validator import MetadataValidator
 from dataquality.infrastructure.io.metadata_sources import build_metadata_source
 from dataquality.infrastructure.io.secure_credentials import DatabaseConnectionSettings
+from dataquality.infrastructure.io.oracle.result_exporter import OracleResultExporter, build_oracle_exporter
 from dataquality.app.orchestration.metadata_quality_metrics_calculator import MetadataQualityMetricsCalculator
 from dataquality.adapters.outbound.exporters.excel_report import save_excel_report
 from dataquality.shared.telemetry import get_current_telemetry
@@ -41,11 +42,14 @@ class RunOptions:
     db_password_keyring_username: str | None = None
     metadata_db_schemas: List[str] | None = None
     metadata_query_template: str | None = None
+    metadata_query_file: str | None = None
     metadata_s3_uri: str | None = None
     s3_storage_options: dict[str, object] | None = None
     include_schemas: List[str] | None = None
     regenerate_context: bool = True
     scoring_config: ScoringConfig | None = None
+    # output: "excel" | "oracle" | "both"
+    output_type: str = "excel"
 
 
 def run_model_quality(options: RunOptions) -> dict[str, float | None]:
@@ -64,6 +68,7 @@ def run_model_quality(options: RunOptions) -> dict[str, float | None]:
             schemas=options.metadata_db_schemas,
             db_type=options.db_type,
             query_template=options.metadata_query_template,
+            query_file=options.metadata_query_file,
             s3_uri=options.metadata_s3_uri,
             s3_storage_options=options.s3_storage_options,
         )
@@ -131,10 +136,31 @@ def run_model_quality(options: RunOptions) -> dict[str, float | None]:
                 if mddq is not None:
                     telemetry.set_gauge("mddq", round(mddq, 4), schema=schema_name)
 
-            with (telemetry.stage("excel.export", schema=schema_name) if telemetry is not None else nullcontext()):
-                out_path = save_excel_report(options.base_folder, schema_name, sections)
+            output_type = str(options.output_type or "excel").strip().lower()
+            export_sections = {"QUALITY_SCORES": sections["QUALITY_SCORES"]}
 
-            print(f"Issues saved to {out_path}")
+            if output_type in {"excel", "both"}:
+                with (telemetry.stage("excel.export", schema=schema_name) if telemetry is not None else nullcontext()):
+                    out_path = save_excel_report(options.base_folder, schema_name, export_sections)
+                print(f"Issues saved to {out_path}")
+
+            if output_type in {"oracle", "both"}:
+                with (telemetry.stage("oracle.export", schema=schema_name) if telemetry is not None else nullcontext()):
+                    exporter = build_oracle_exporter(_build_connection_settings(options))
+                    exec_id = exporter.begin_execution(
+                        owner=schema_name,
+                        source_type=options.metadata_source_type.upper(),
+                        notes=f"issues_metadados phase — MDDQ={mddq:.2f}" if mddq is not None else "issues_metadados phase",
+                    )
+                    try:
+                        exporter.save_quality_scores(exec_id, sections["QUALITY_SCORES"])
+                        exporter.finish_execution(exec_id, "SUCCESS")
+                    except Exception:
+                        exporter.finish_execution(exec_id, "ERROR")
+                        raise
+                    finally:
+                        exporter.dispose()
+                print(f"[oracle] Results written to DQ_EXECUTION / DQ_QUALITY_SCORE (execution {exec_id})")
 
     return mddq_by_schema
 

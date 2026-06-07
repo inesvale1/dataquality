@@ -7,7 +7,7 @@ from typing import Protocol
 import pandas as pd
 
 from dataquality.infrastructure.io.csv.schema_loader import schemaLoader
-from dataquality.infrastructure.io.secure_credentials import DatabaseConnectionSettings, build_database_connection_uri
+from dataquality.infrastructure.io.secure_credentials import DatabaseConnectionSettings, build_database_connection_uri, build_database_engine
 from dataquality.shared.telemetry import get_current_telemetry
 
 
@@ -33,29 +33,33 @@ class DatabaseMetadataSource:
         columns_to_delete: list[str] | None = None,
         db_type: str = "Oracle",
         query_template: str | None = None,
+        query_file: str | None = None,
     ):
         self.connection_settings = connection_settings
         self.schemas = [_normalize_identifier(schema) for schema in (schemas or []) if str(schema).strip()]
         self.columns_to_delete = columns_to_delete or []
         self.db_type = db_type
-        self.query_template = query_template or self._default_query_template(db_type)
+        self.query_template = (
+            _load_query_file(query_file)
+            if query_file
+            else (query_template or self._default_query_template(db_type))
+        )
 
     def get_metadata_by_schema(self) -> dict[str, pd.DataFrame]:
         telemetry = get_current_telemetry()
         try:
-            from sqlalchemy import create_engine, text
+            from sqlalchemy import text
         except ImportError as exc:
             raise RuntimeError("Database metadata source requires SQLAlchemy. Install it with: pip install sqlalchemy") from exc
 
         if not self.schemas:
             raise ValueError("metadata_db_schemas must contain at least one Oracle owner/schema.")
 
-        connection_uri = build_database_connection_uri(self.connection_settings)
         query = self.query_template.format(owners_filter=self._build_owner_filter())
         normalizer = schemaLoader(Path("."), self.columns_to_delete, auto_load=False)
 
         with (telemetry.stage("metadata.oracle_load") if telemetry is not None else _nullcontext()):
-            engine = create_engine(connection_uri)
+            engine = build_database_engine(self.connection_settings)
             with engine.connect() as connection:
                 df = pd.read_sql(text(query), connection)
 
@@ -196,6 +200,7 @@ def build_metadata_source(
     schemas: list[str] | None = None,
     db_type: str = "Oracle",
     query_template: str | None = None,
+    query_file: str | None = None,
     s3_uri: str | None = None,
     s3_storage_options: dict[str, object] | None = None,
 ) -> MetadataSource:
@@ -211,6 +216,7 @@ def build_metadata_source(
             columns_to_delete=columns_to_delete,
             db_type=db_type,
             query_template=query_template,
+            query_file=query_file,
         )
     if normalized == "s3":
         return S3MetadataSource(str(s3_uri or ""), columns_to_delete, s3_storage_options)
@@ -232,6 +238,19 @@ def _schema_from_metadata_filename(uri: str) -> str | None:
     if not match:
         return None
     return re.sub(r"[^0-9a-zA-Z_]+", "_", match.group(1)).strip("_").lower()
+
+
+def _load_query_file(path: str) -> str:
+    """Read a SQL query from a file.  The file must contain a single SELECT statement
+    with the placeholder {owners_filter} where the IN-list of schema names will be
+    injected (e.g. ``WHERE c.owner IN ({owners_filter})``).
+    """
+    query_path = Path(path)
+    if not query_path.exists():
+        raise FileNotFoundError(
+            f"metadata_query_file not found: {query_path.resolve()}"
+        )
+    return query_path.read_text(encoding="utf-8")
 
 
 class _nullcontext:
