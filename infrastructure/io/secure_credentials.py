@@ -9,7 +9,7 @@ def build_database_engine(settings: "DatabaseConnectionSettings"):
 
     Using connect_args instead of embedding credentials in the URL avoids
     quote_plus encoding issues with domain usernames that contain backslashes
-    (e.g. sefaz2\\49756615), which oracledb does not decode correctly from URLs.
+    (e.g. SEFAZ2\\49756615), which oracledb does not decode correctly from URLs.
     """
     try:
         from sqlalchemy import create_engine
