@@ -1,8 +1,8 @@
 {
   "run_model_quality": true,
   "run_data_quality": true,
-  "telemetry_enabled": false,
-  "telemetry_output": false,
+  "telemetry_enabled": true,
+  "telemetry_output": true,
   "delete_cols": [
     "COLUMN_ID",
     "NUM_BUCKETS",
@@ -219,7 +219,7 @@
   },
   "model_quality": {
     "base_folder": "dataquality\\schema",
-    "metadata_source": "oracle",
+    "metadata_source": "csv",
     "output_type": "excel",
     "metadata_query_file": "config/queries/metadata_query.sql",
     "db_username": "SEFAZ2\\49756615",
@@ -233,8 +233,8 @@
   "data_quality": {
     "metadata_base_folder": "dataquality\\schema",
     "sample_base_folder": "dataquality\\schema",
-    "metadata_source": "oracle",
-    "sample_source": "oracle",
+    "metadata_source": "csv",
+    "sample_source": "csv",
     "output_type": "excel",
     "metadata_query_file": "config/queries/metadata_query.sql",
     "skip_document_code_analysis": false,

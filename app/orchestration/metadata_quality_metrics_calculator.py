@@ -56,8 +56,7 @@ class MetadataQualityMetricsCalculator:
         - DATA_QUALITY_RULE_CANDIDATES: DQ rule candidates derived from metadata
         - METADATA_QUALITY_MEASURES: raw/derived measure totals
         - METADATA_QUALITY_ISSUES: validator issues with LLM suggestions
-        - METADATA_QUALITY_METRICS: quality indicator percentages
-        - QUALITY_SCORES: MDDQ weighted-average breakdown
+        - METADATA_SCORES: MDDQ weighted-average breakdown (indicators + aggregate)
         """
 
         df_schema_metadata = (self.df_schema_metadata.copy() if self.df_schema_metadata is not None else pd.DataFrame())
@@ -179,8 +178,7 @@ class MetadataQualityMetricsCalculator:
             "DATA_QUALITY_RULE_CANDIDATES": df_data_quality_candidates,
             "METADATA_QUALITY_MEASURES": df_measures,
             "METADATA_QUALITY_ISSUES": df_issues,
-            "METADATA_QUALITY_METRICS": df_metrics,
-            "QUALITY_SCORES": df_quality_scores,
+            "METADATA_SCORES": df_quality_scores,
         }
         return sections, mddq
 

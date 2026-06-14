@@ -137,11 +137,10 @@ def run_model_quality(options: RunOptions) -> dict[str, float | None]:
                     telemetry.set_gauge("mddq", round(mddq, 4), schema=schema_name)
 
             output_type = str(options.output_type or "excel").strip().lower()
-            export_sections = {"QUALITY_SCORES": sections["QUALITY_SCORES"]}
 
             if output_type in {"excel", "both"}:
                 with (telemetry.stage("excel.export", schema=schema_name) if telemetry is not None else nullcontext()):
-                    out_path = save_excel_report(options.base_folder, schema_name, export_sections)
+                    out_path = save_excel_report(options.base_folder, schema_name, dict(sections))
                 print(f"Issues saved to {out_path}")
 
             if output_type in {"oracle", "both"}:
@@ -153,7 +152,7 @@ def run_model_quality(options: RunOptions) -> dict[str, float | None]:
                         notes=f"issues_metadados phase — MDDQ={mddq:.2f}" if mddq is not None else "issues_metadados phase",
                     )
                     try:
-                        exporter.save_quality_scores(exec_id, sections["QUALITY_SCORES"])
+                        exporter.save_quality_scores(exec_id, sections["METADATA_SCORES"])
                         exporter.finish_execution(exec_id, "SUCCESS")
                     except Exception:
                         exporter.finish_execution(exec_id, "ERROR")
