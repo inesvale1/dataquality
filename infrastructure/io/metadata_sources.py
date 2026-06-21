@@ -203,6 +203,10 @@ def build_metadata_source(
     query_file: str | None = None,
     s3_uri: str | None = None,
     s3_storage_options: dict[str, object] | None = None,
+    athena_databases: list[str] | None = None,
+    athena_workgroup: str = "primary",
+    athena_s3_output: str | None = None,
+    aws_region: str | None = None,
 ) -> MetadataSource:
     normalized = str(source_type or "csv").strip().lower()
     if normalized == "csv":
@@ -220,6 +224,20 @@ def build_metadata_source(
         )
     if normalized == "s3":
         return S3MetadataSource(str(s3_uri or ""), columns_to_delete, s3_storage_options)
+    if normalized == "athena":
+        from dataquality.infrastructure.io.aws.athena_metadata_source import AthenaMetadataSource
+        databases = athena_databases or schemas or []
+        if not databases:
+            raise ValueError(
+                "athena_databases or metadata_db_schemas is required when metadata_source='athena'."
+            )
+        return AthenaMetadataSource(
+            databases=databases,
+            workgroup=athena_workgroup,
+            s3_output=athena_s3_output,
+            aws_region=aws_region,
+            columns_to_delete=columns_to_delete,
+        )
     raise ValueError(f"Unsupported metadata_source: {source_type}")
 
 

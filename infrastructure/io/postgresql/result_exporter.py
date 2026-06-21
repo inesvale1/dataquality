@@ -9,21 +9,19 @@ from dataquality.infrastructure.io.secure_credentials import (
     build_database_engine,
 )
 
-_DEFAULT_RESULTS_SCHEMA = "QUALIDADE_DADOS"
+_DEFAULT_RESULTS_SCHEMA = "qualidade_dados"
 
 
-class OracleResultExporter:
-    """Writes framework output to the output schema tables.
+class PostgreSQLResultExporter:
+    """Writes framework output to a PostgreSQL (AWS RDS) schema.
 
-    Target tables (must exist before running):
-      <schema>.EXECUCAO
-      <schema>.RESULTADO_QUALIDADE
-      <schema>.PROBLEMA_EXECUCAO
-      <schema>.DIMENSAO
+    Target tables (must exist — see config/ddl_output_schema_postgresql.sql):
+      <schema>.dimensao
+      <schema>.execucao          (SERIAL PK)
+      <schema>.resultado_qualidade  (SERIAL PK)
+      <schema>.problema_execucao    (SERIAL PK)
 
-    Credentials are never stored in config files: the password is read from
-    the OS keyring via the same DatabaseConnectionSettings mechanism used for
-    reading metadata.
+    Uses RETURNING to retrieve auto-generated PKs (no explicit sequences).
     """
 
     def __init__(
@@ -32,44 +30,39 @@ class OracleResultExporter:
         schema: str = _DEFAULT_RESULTS_SCHEMA,
     ):
         self.connection_settings = connection_settings
-        self._results_schema = str(schema).strip().upper() if schema else _DEFAULT_RESULTS_SCHEMA
+        self._results_schema = str(schema).strip().lower() if schema else _DEFAULT_RESULTS_SCHEMA
         self._engine = None
-        self._dim_codes: dict[str, int] | None = None  # cache: lower(DSC_DIMENSAO) → COD_DIMENSAO
+        self._dim_codes: dict[str, int] | None = None
 
     # ------------------------------------------------------------------
-    # Public API
+    # Public API  (same interface as OracleResultExporter)
     # ------------------------------------------------------------------
 
     def begin_execution(
         self,
         owner: str,
-        source_type: str = "ORACLE",
+        source_type: str = "ATHENA",
         notes: str | None = None,
     ) -> int:
-        """Insert a row into EXECUCAO with status RUNNING and return SEQ_EXECUCAO."""
         from sqlalchemy import text
 
         with self._get_engine().begin() as conn:
-            seq_id = conn.execute(
-                text(f"SELECT {self._results_schema}.SQ_EXECUCAO.NEXTVAL FROM DUAL")
-            ).scalar()
-            conn.execute(
+            row = conn.execute(
                 text(
-                    f"INSERT INTO {self._results_schema}.EXECUCAO "
-                    "(SEQ_EXECUCAO, DSC_OWNER, TIP_FONTE, STA_EXECUCAO, DAT_EXECUCAO, DSC_OBSERVACAO) "
-                    "VALUES (:seq, :owner, :fonte, 'RUNNING', SYSTIMESTAMP, :obs)"
+                    f"INSERT INTO {self._results_schema}.execucao "
+                    "(dsc_owner, tip_fonte, sta_execucao, dat_execucao, dsc_observacao) "
+                    "VALUES (:owner, :fonte, 'RUNNING', CURRENT_TIMESTAMP, :obs) "
+                    "RETURNING seq_execucao"
                 ),
                 {
-                    "seq": seq_id,
                     "owner": _str(owner, 128),
                     "fonte": _str(source_type, 20),
                     "obs": _str(notes, 4000),
                 },
             )
-        return int(seq_id)
+            return int(row.scalar())
 
     def finish_execution(self, execution_id: int, status: str = "SUCCESS") -> None:
-        """Update EXECUCAO status and set DAT_FINALIZACAO."""
         from sqlalchemy import text
 
         status_clean = str(status).strip().upper()
@@ -78,24 +71,14 @@ class OracleResultExporter:
         with self._get_engine().begin() as conn:
             conn.execute(
                 text(
-                    f"UPDATE {self._results_schema}.EXECUCAO "
-                    "SET STA_EXECUCAO = :status, DAT_FINALIZACAO = SYSTIMESTAMP "
-                    "WHERE SEQ_EXECUCAO = :seq"
+                    f"UPDATE {self._results_schema}.execucao "
+                    "SET sta_execucao = :status, dat_finalizacao = CURRENT_TIMESTAMP "
+                    "WHERE seq_execucao = :seq"
                 ),
                 {"status": status_clean, "seq": execution_id},
             )
 
     def save_quality_scores(self, execution_id: int, df: pd.DataFrame) -> None:
-        """Bulk-insert QUALITY_SCORES rows into RESULTADO_QUALIDADE.
-
-        Column mapping (DataFrame → Oracle):
-          ScoreType  → TIP_RESULTADO
-          Component  → COD_MEDIDA
-          Dimension  → COD_DIMENSAO  (resolved via DIMENSAO domain table)
-          Description→ DSC_RESULTADO
-          Weight     → NUM_PESO
-          Value      → NUM_VALOR
-        """
         if df is None or df.empty:
             return
 
@@ -117,28 +100,17 @@ class OracleResultExporter:
             ]
             conn.execute(
                 text(
-                    f"INSERT INTO {self._results_schema}.RESULTADO_QUALIDADE "
-                    "(SEQ_RESULTADO_QUALIDADE, SEQ_EXECUCAO, COD_MEDIDA, COD_DIMENSAO, "
-                    " TIP_RESULTADO, DSC_RESULTADO, NUM_PESO, NUM_VALOR) "
-                    f"VALUES ({self._results_schema}.SQ_RESULTADO_QUALIDADE.NEXTVAL, :seq_exec, :cod_medida, "
-                    "        :cod_dim, :tip_res, :dsc_res, :peso, :valor)"
+                    f"INSERT INTO {self._results_schema}.resultado_qualidade "
+                    "(seq_execucao, cod_medida, cod_dimensao, tip_resultado, "
+                    " dsc_resultado, num_peso, num_valor) "
+                    "VALUES (:seq_exec, :cod_medida, :cod_dim, :tip_res, "
+                    "        :dsc_res, :peso, :valor)"
                 ),
                 rows,
             )
-        print(f"[oracle] RESULTADO_QUALIDADE: {len(rows)} rows inserted (execucao {execution_id})")
+        print(f"[postgresql] resultado_qualidade: {len(rows)} rows inserted (execucao {execution_id})")
 
     def save_doc_code_issues(self, execution_id: int, df: pd.DataFrame) -> None:
-        """Bulk-insert CPF/CNPJ/CGF issues into PROBLEMA_EXECUCAO.
-
-        Column mapping (DataFrame → Oracle):
-          rule   → COD_MEDIDA
-          desc   → DSC_PROBLEMA
-          owner  → DSC_OWNER
-          table  → NOM_TABELA
-          column → NOM_COLUNA
-          value  → DSC_VALOR
-          (Conformity dimension resolved automatically via DIMENSAO table)
-        """
         if df is None or df.empty:
             return
 
@@ -162,15 +134,15 @@ class OracleResultExporter:
             ]
             conn.execute(
                 text(
-                    f"INSERT INTO {self._results_schema}.PROBLEMA_EXECUCAO "
-                    "(SEQ_PROBLEMA_EXECUCAO, SEQ_EXECUCAO, COD_MEDIDA, COD_DIMENSAO, "
-                    " DSC_PROBLEMA, DSC_OWNER, NOM_TABELA, NOM_COLUNA, DSC_VALOR) "
-                    f"VALUES ({self._results_schema}.SQ_PROBLEMA_EXECUCAO.NEXTVAL, :seq_exec, :cod_medida, "
-                    "        :cod_dim, :dsc_prob, :owner, :tabela, :coluna, :valor)"
+                    f"INSERT INTO {self._results_schema}.problema_execucao "
+                    "(seq_execucao, cod_medida, cod_dimensao, dsc_problema, "
+                    " dsc_owner, nom_tabela, nom_coluna, dsc_valor) "
+                    "VALUES (:seq_exec, :cod_medida, :cod_dim, :dsc_prob, "
+                    "        :owner, :tabela, :coluna, :valor)"
                 ),
                 rows,
             )
-        print(f"[oracle] PROBLEMA_EXECUCAO: {len(rows)} rows inserted (execucao {execution_id})")
+        print(f"[postgresql] problema_execucao: {len(rows)} rows inserted (execucao {execution_id})")
 
     def dispose(self) -> None:
         if self._engine is not None:
@@ -188,23 +160,15 @@ class OracleResultExporter:
         return self._engine
 
     def _load_dimension_codes(self, conn) -> dict[str, int]:
-        """Return cached dict of lower(DSC_DIMENSAO) → COD_DIMENSAO from DIMENSAO table."""
         if self._dim_codes is not None:
             return self._dim_codes
         from sqlalchemy import text
 
         rows = conn.execute(
-            text(f"SELECT COD_DIMENSAO, DSC_DIMENSAO FROM {self._results_schema}.DIMENSAO")
+            text(f"SELECT cod_dimensao, dsc_dimensao FROM {self._results_schema}.dimensao")
         ).fetchall()
         self._dim_codes = {str(r[1]).strip().lower(): int(r[0]) for r in rows}
         return self._dim_codes
-
-
-def build_oracle_exporter(
-    connection_settings: DatabaseConnectionSettings,
-    schema: str = _DEFAULT_RESULTS_SCHEMA,
-) -> OracleResultExporter:
-    return OracleResultExporter(connection_settings, schema=schema)
 
 
 # ------------------------------------------------------------------
@@ -229,7 +193,6 @@ def _float(value: object) -> float | None:
 
 
 def _norm(value: object) -> str:
-    """Normalize a dimension label for dict lookup."""
     if value is None:
         return ""
     return str(value).strip().lower()

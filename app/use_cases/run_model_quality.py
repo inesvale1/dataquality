@@ -11,7 +11,7 @@ from dataquality.domain.config.validation_config import ValidationConfig
 from dataquality.domain.validators.metadata_validator import MetadataValidator
 from dataquality.infrastructure.io.metadata_sources import build_metadata_source
 from dataquality.infrastructure.io.secure_credentials import DatabaseConnectionSettings
-from dataquality.infrastructure.io.oracle.result_exporter import OracleResultExporter, build_oracle_exporter
+from dataquality.infrastructure.io.result_exporter_factory import build_result_exporter
 from dataquality.app.orchestration.metadata_quality_metrics_calculator import MetadataQualityMetricsCalculator
 from dataquality.adapters.outbound.exporters.excel_report import save_excel_report
 from dataquality.shared.telemetry import get_current_telemetry
@@ -50,6 +50,22 @@ class RunOptions:
     scoring_config: ScoringConfig | None = None
     # output: "excel" | "oracle" | "both"
     output_type: str = "excel"
+    # Output Oracle connection (separate from metadata reader)
+    output_db_schema: str | None = None
+    output_db_driver_class_name: str | None = None
+    output_db_username: str | None = None
+    output_db_host: str | None = None
+    output_db_port: int | None = None
+    output_db_service_name: str | None = None
+    output_db_sid: str | None = None
+    output_db_dsn: str | None = None
+    output_db_password_keyring_service: str | None = None
+    output_db_password_keyring_username: str | None = None
+    # Athena / Glue metadata source
+    athena_databases: list[str] | None = None
+    athena_workgroup: str = "primary"
+    athena_s3_output: str | None = None
+    aws_region: str | None = None
 
 
 def run_model_quality(options: RunOptions) -> dict[str, float | None]:
@@ -71,6 +87,10 @@ def run_model_quality(options: RunOptions) -> dict[str, float | None]:
             query_file=options.metadata_query_file,
             s3_uri=options.metadata_s3_uri,
             s3_storage_options=options.s3_storage_options,
+            athena_databases=options.athena_databases,
+            athena_workgroup=options.athena_workgroup,
+            athena_s3_output=options.athena_s3_output,
+            aws_region=options.aws_region,
         )
         dfs = metadata_source.get_metadata_by_schema()
 
@@ -143,9 +163,13 @@ def run_model_quality(options: RunOptions) -> dict[str, float | None]:
                     out_path = save_excel_report(options.base_folder, schema_name, dict(sections))
                 print(f"Issues saved to {out_path}")
 
-            if output_type in {"oracle", "both"}:
-                with (telemetry.stage("oracle.export", schema=schema_name) if telemetry is not None else nullcontext()):
-                    exporter = build_oracle_exporter(_build_connection_settings(options))
+            if output_type in {"oracle", "postgresql", "postgres", "database", "both"}:
+                with (telemetry.stage("db.export", schema=schema_name) if telemetry is not None else nullcontext()):
+                    exporter = build_result_exporter(
+                        _build_output_connection_settings(options),
+                        schema=options.output_db_schema or "QUALIDADE_DADOS",
+                        output_type=options.output_type,
+                    )
                     exec_id = exporter.begin_execution(
                         owner=schema_name,
                         source_type=options.metadata_source_type.upper(),
@@ -159,7 +183,7 @@ def run_model_quality(options: RunOptions) -> dict[str, float | None]:
                         raise
                     finally:
                         exporter.dispose()
-                print(f"[oracle] Results written to DQ_EXECUTION / DQ_QUALITY_SCORE (execution {exec_id})")
+                print(f"[db] Results written to execucao / resultado_qualidade (execution {exec_id})")
 
     return mddq_by_schema
 
@@ -223,3 +247,19 @@ def _build_connection_settings(options: RunOptions) -> DatabaseConnectionSetting
         password_keyring_service=options.db_password_keyring_service,
         password_keyring_username=options.db_password_keyring_username,
     )
+
+
+def _build_output_connection_settings(options: RunOptions) -> DatabaseConnectionSettings:
+    if options.output_db_host or options.output_db_dsn or options.output_db_username:
+        return DatabaseConnectionSettings(
+            driver_class_name=options.output_db_driver_class_name or options.db_driver_class_name,
+            username=options.output_db_username,
+            host=options.output_db_host,
+            port=options.output_db_port,
+            service_name=options.output_db_service_name,
+            sid=options.output_db_sid,
+            dsn=options.output_db_dsn,
+            password_keyring_service=options.output_db_password_keyring_service,
+            password_keyring_username=options.output_db_password_keyring_username,
+        )
+    return _build_connection_settings(options)

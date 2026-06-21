@@ -147,6 +147,20 @@ def _run_model_phase(
         regenerate_context=_parse_bool(get_config_value(phase_config, "regenerate_context", template_config.get("regenerate_context", True))),
         scoring_config=scoring_config,
         output_type=str(get_config_value(phase_config, "output_type", template_config.get("output_type", "excel"))),
+        output_db_schema=get_config_value(phase_config, "output_db_schema", template_config.get("output_db_schema")),
+        output_db_driver_class_name=get_config_value(phase_config, "output_db_driver_class_name", template_config.get("output_db_driver_class_name")),
+        output_db_username=get_config_value(phase_config, "output_db_username", template_config.get("output_db_username")),
+        output_db_host=get_config_value(phase_config, "output_db_host", template_config.get("output_db_host")),
+        output_db_port=_optional_int(get_config_value(phase_config, "output_db_port", template_config.get("output_db_port"))),
+        output_db_service_name=get_config_value(phase_config, "output_db_service_name", template_config.get("output_db_service_name")),
+        output_db_sid=get_config_value(phase_config, "output_db_sid", template_config.get("output_db_sid")),
+        output_db_dsn=get_config_value(phase_config, "output_db_dsn", template_config.get("output_db_dsn")),
+        output_db_password_keyring_service=get_config_value(phase_config, "output_db_password_keyring_service", template_config.get("output_db_password_keyring_service")),
+        output_db_password_keyring_username=get_config_value(phase_config, "output_db_password_keyring_username", template_config.get("output_db_password_keyring_username")),
+        athena_databases=list(get_config_value(phase_config, "athena_databases", template_config.get("athena_databases", [])) or []) or None,
+        athena_workgroup=str(get_config_value(phase_config, "athena_workgroup", template_config.get("athena_workgroup", "primary")) or "primary"),
+        athena_s3_output=get_config_value(phase_config, "athena_s3_output", template_config.get("athena_s3_output")),
+        aws_region=get_config_value(phase_config, "aws_region", template_config.get("aws_region")),
     )
 
     print("\n=== Model Quality ===")
@@ -255,6 +269,20 @@ def _run_data_phase(
         scoring_config=scoring_config,
         mddq_by_schema=mddq_by_schema,
         output_type=str(get_config_value(phase_config, "output_type", template_config.get("output_type", "excel"))),
+        output_db_schema=get_config_value(phase_config, "output_db_schema", template_config.get("output_db_schema")),
+        output_db_driver_class_name=get_config_value(phase_config, "output_db_driver_class_name", template_config.get("output_db_driver_class_name")),
+        output_db_username=get_config_value(phase_config, "output_db_username", template_config.get("output_db_username")),
+        output_db_host=get_config_value(phase_config, "output_db_host", template_config.get("output_db_host")),
+        output_db_port=_optional_int(get_config_value(phase_config, "output_db_port", template_config.get("output_db_port"))),
+        output_db_service_name=get_config_value(phase_config, "output_db_service_name", template_config.get("output_db_service_name")),
+        output_db_sid=get_config_value(phase_config, "output_db_sid", template_config.get("output_db_sid")),
+        output_db_dsn=get_config_value(phase_config, "output_db_dsn", template_config.get("output_db_dsn")),
+        output_db_password_keyring_service=get_config_value(phase_config, "output_db_password_keyring_service", template_config.get("output_db_password_keyring_service")),
+        output_db_password_keyring_username=get_config_value(phase_config, "output_db_password_keyring_username", template_config.get("output_db_password_keyring_username")),
+        athena_databases=list(get_config_value(phase_config, "athena_databases", template_config.get("athena_databases", [])) or []) or None,
+        athena_workgroup=str(get_config_value(phase_config, "athena_workgroup", template_config.get("athena_workgroup", "primary")) or "primary"),
+        athena_s3_output=get_config_value(phase_config, "athena_s3_output", template_config.get("athena_s3_output")),
+        aws_region=get_config_value(phase_config, "aws_region", template_config.get("aws_region")),
     )
 
     print("\n=== Data Quality ===")

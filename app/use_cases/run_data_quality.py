@@ -7,7 +7,7 @@ from typing import List, Optional
 
 from dataquality.adapters.outbound.exporters.excel_report import save_excel_report
 from dataquality.app.orchestration.document_code_quality_analyzer import DocumentCodeQualityAnalyzer
-from dataquality.infrastructure.io.oracle.result_exporter import build_oracle_exporter
+from dataquality.infrastructure.io.result_exporter_factory import build_result_exporter
 from dataquality.domain.config.scoring_config import ScoringConfig
 from dataquality.domain.config.validation_config import ValidationConfig
 from dataquality.domain.scoring.quality_scorer import (
@@ -63,6 +63,22 @@ class RunDataQualityOptions:
     metadata_query_file: str | None = None
     # output: "excel" | "oracle" | "both"
     output_type: str = "excel"
+    # Output Oracle connection (separate from metadata reader)
+    output_db_schema: str | None = None
+    output_db_driver_class_name: str | None = None
+    output_db_username: str | None = None
+    output_db_host: str | None = None
+    output_db_port: int | None = None
+    output_db_service_name: str | None = None
+    output_db_sid: str | None = None
+    output_db_dsn: str | None = None
+    output_db_password_keyring_service: str | None = None
+    output_db_password_keyring_username: str | None = None
+    # Athena / Glue metadata + sample source
+    athena_databases: list[str] | None = None
+    athena_workgroup: str = "primary"
+    athena_s3_output: str | None = None
+    aws_region: str | None = None
 
 
 def run_data_quality(options: RunDataQualityOptions) -> dict[str, float | None]:
@@ -190,9 +206,12 @@ def run_data_quality(options: RunDataQualityOptions) -> dict[str, float | None]:
                     "Value": f"{safe_iqmd(doc_result.invalid_or_ambiguous_distinct_codes, doc_result.total_distinct_codes):.2f}",
                     "Status": "CALCULATED",
                 }
-                sections["DATA_QUALITY_METRICS"] = pd.concat(
-                    [sections["DATA_QUALITY_METRICS"], pd.DataFrame([mqid015_row])],
-                    ignore_index=True,
+                new_row_df = pd.DataFrame([mqid015_row])
+                existing_metrics = sections["DATA_QUALITY_METRICS"]
+                sections["DATA_QUALITY_METRICS"] = (
+                    pd.concat([existing_metrics, new_row_df], ignore_index=True)
+                    if not existing_metrics.empty
+                    else new_row_df
                 )
                 if telemetry is not None:
                     telemetry.set_gauge("document_code_total", doc_result.total_distinct_codes, schema=schema_name)
@@ -212,9 +231,11 @@ def run_data_quality(options: RunDataQualityOptions) -> dict[str, float | None]:
             if mddq is not None or ddq is not None:
                 schema_score = compute_schema_score(mddq, ddq, scoring_config)
                 extra_rows = build_schema_score_rows(mddq, ddq, schema_score, scoring_config)
-                df_quality_scores = pd.concat(
-                    [df_quality_scores, pd.DataFrame(extra_rows)], ignore_index=True
-                )
+                extra_df = pd.DataFrame(extra_rows)
+                for col in ["Weight", "Value"]:
+                    if col in extra_df.columns:
+                        extra_df[col] = pd.to_numeric(extra_df[col], errors="coerce")
+                df_quality_scores = pd.concat([df_quality_scores, extra_df], ignore_index=True)
                 if schema_score is not None:
                     print(f"Schema score ({schema_name}): {schema_score:.2f}")
             sections["QUALITY_SCORES"] = df_quality_scores
@@ -246,10 +267,14 @@ def run_data_quality(options: RunDataQualityOptions) -> dict[str, float | None]:
                     )
                 print(f"Data quality report saved to {out_path}")
 
-            if output_type in {"oracle", "both"}:
+            if output_type in {"oracle", "postgresql", "postgres", "database", "both"}:
                 doc_issues_df = sections.get("DATA_ISSUES")
-                with (telemetry.stage("oracle.export", schema=schema_name) if telemetry is not None else nullcontext()):
-                    exporter = build_oracle_exporter(_build_connection_settings(options))
+                with (telemetry.stage("db.export", schema=schema_name) if telemetry is not None else nullcontext()):
+                    exporter = build_result_exporter(
+                        _build_output_connection_settings(options),
+                        schema=options.output_db_schema or "QUALIDADE_DADOS",
+                        output_type=options.output_type,
+                    )
                     exec_id = exporter.begin_execution(
                         owner=schema_name,
                         source_type=options.metadata_source_type.upper(),
@@ -265,7 +290,7 @@ def run_data_quality(options: RunDataQualityOptions) -> dict[str, float | None]:
                         raise
                     finally:
                         exporter.dispose()
-                print(f"[oracle] Results written to DQ_EXECUTION / DQ_QUALITY_SCORE (execution {exec_id})")
+                print(f"[db] Results written to execucao / resultado_qualidade (execution {exec_id})")
 
     return ddq_by_schema
 
@@ -330,6 +355,14 @@ def _build_sample_source(options: RunDataQualityOptions) -> SampleSource:
         )
     if source_type == "s3":
         return S3SampleSource(str(options.sample_s3_uri or ""), options.s3_storage_options)
+    if source_type == "athena":
+        from dataquality.infrastructure.io.aws.athena_sample_source import AthenaSampleSource
+        return AthenaSampleSource(
+            workgroup=options.athena_workgroup,
+            s3_output=options.athena_s3_output,
+            aws_region=options.aws_region,
+            sample_limit=options.sample_limit,
+        )
     raise ValueError(f"Unsupported sample_source_type: {options.sample_source_type}")
 
 
@@ -345,6 +378,10 @@ def _build_metadata_source(options: RunDataQualityOptions):
         query_file=options.metadata_query_file,
         s3_uri=options.metadata_s3_uri,
         s3_storage_options=options.s3_storage_options,
+        athena_databases=options.athena_databases,
+        athena_workgroup=options.athena_workgroup,
+        athena_s3_output=options.athena_s3_output,
+        aws_region=options.aws_region,
     )
 
 
@@ -361,6 +398,22 @@ def _build_connection_settings(options: RunDataQualityOptions) -> DatabaseConnec
         password_keyring_service=options.db_password_keyring_service,
         password_keyring_username=options.db_password_keyring_username,
     )
+
+
+def _build_output_connection_settings(options: RunDataQualityOptions) -> DatabaseConnectionSettings:
+    if options.output_db_host or options.output_db_dsn or options.output_db_username:
+        return DatabaseConnectionSettings(
+            driver_class_name=options.output_db_driver_class_name or options.db_driver_class_name,
+            username=options.output_db_username,
+            host=options.output_db_host,
+            port=options.output_db_port,
+            service_name=options.output_db_service_name,
+            sid=options.output_db_sid,
+            dsn=options.output_db_dsn,
+            password_keyring_service=options.output_db_password_keyring_service,
+            password_keyring_username=options.output_db_password_keyring_username,
+        )
+    return _build_connection_settings(options)
 
 
 def _parse_exclude_tables(items: List[str]) -> list[tuple[str | None, str]]:
