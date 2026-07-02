@@ -62,6 +62,14 @@ class schemaLoader:
     _TRUE_TOKENS = {"Y", "YES", "SIM", "S", "1", "TRUE", "VERDADE", "VERDADEIRO", "T", "ON"}
     _FALSE_TOKENS = {"N", "NO", "NÃO", "NAO", "0", "FALSE", "FALSO", "F", "OFF"}
 
+    # Detects accented characters silently replaced by '?' during a bad Oracle
+    # extraction (e.g. NLS/charset mismatch): "Ac?o Fiscal", "N?o", "Descric?o".
+    _MID_WORD_QUESTION_MARK = re.compile(r"[A-Za-zÀ-ÿ]\?[A-Za-zÀ-ÿ]")
+    # Detects accented characters silently dropped instead of substituted
+    # (e.g. "CESTA BASICA" with no accent at all where "BÁSICA" is expected).
+    _ACCENTED_CHARS = set("ÁÉÍÓÚÃÕÂÊÔÀÇáéíóúãõâêôàç")
+    _MIN_TEXT_LENGTH_FOR_ACCENT_CHECK = 500
+
     def __init__(self, base_folder: Path, columns_to_delete: Optional[List[str]] = None, auto_load: bool = True):
         self.base_folder: Path = Path(base_folder)
         self.columns_to_delete = columns_to_delete or []
@@ -159,6 +167,7 @@ class schemaLoader:
                 df = self._finalize_dataframe(df)
                 dfs[suffix] = df
                 self._register_dataframe_telemetry(df, suffix)
+                self._check_encoding_corruption(df, suffix)
 
         return dfs
 
@@ -174,6 +183,7 @@ class schemaLoader:
             df = self._finalize_dataframe(owner_df.copy())
             dfs[suffix] = df
             self._register_dataframe_telemetry(df, suffix)
+            self._check_encoding_corruption(df, suffix)
         return dfs
 
     def _finalize_dataframe(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -193,6 +203,51 @@ class schemaLoader:
         telemetry.increment("metadata_loader_tables_detected", int(df["TABLE_NAME"].nunique()), schema=schema_name)
         telemetry.set_gauge("input_columns", int(df.shape[0]), schema=schema_name)
         telemetry.set_gauge("input_tables", int(df["TABLE_NAME"].nunique()), schema=schema_name)
+
+    def _check_encoding_corruption(self, df: pd.DataFrame, schema_name: str) -> None:
+        """Warn when TAB_COMMENTS/COL_COMMENTS show signs of an Oracle-extraction
+        encoding mismatch. Detection only: the bytes are already lost by this point,
+        so the fix is re-extracting the schema after correcting the Oracle
+        connection's charset/NLS settings, not anything this loader can repair.
+        """
+        text_parts: list[str] = []
+        for col in ("TAB_COMMENTS", "COL_COMMENTS"):
+            if col in df.columns:
+                text_parts.extend(str(v) for v in df[col].dropna().tolist())
+        combined_text = " ".join(text_parts)
+        if not combined_text.strip():
+            return
+
+        question_mark_matches = self._MID_WORD_QUESTION_MARK.findall(combined_text)
+        if question_mark_matches:
+            examples = sorted(set(question_mark_matches))[:5]
+            print(
+                f"[encoding] WARN schema '{schema_name}': {len(question_mark_matches)} occurrences of "
+                f"'?' mid-word in TAB_COMMENTS/COL_COMMENTS suggest accented characters were replaced "
+                f"during Oracle extraction (examples: {examples}). Re-extract this schema after fixing "
+                "the Oracle connection charset/NLS settings."
+            )
+            self._report_corruption_telemetry(
+                "encoding_corruption_questionmark_matches", len(question_mark_matches), schema_name
+            )
+
+        if (
+            len(combined_text) >= self._MIN_TEXT_LENGTH_FOR_ACCENT_CHECK
+            and not any(ch in self._ACCENTED_CHARS for ch in combined_text)
+        ):
+            print(
+                f"[encoding] WARN schema '{schema_name}': no accented Portuguese characters found across "
+                f"{len(combined_text)} chars of TAB_COMMENTS/COL_COMMENTS; accents were likely stripped "
+                "during Oracle extraction. Re-extract this schema after fixing the Oracle connection "
+                "charset/NLS settings."
+            )
+            self._report_corruption_telemetry("encoding_corruption_missing_accents", 1, schema_name)
+
+    def _report_corruption_telemetry(self, metric: str, value: int, schema_name: str) -> None:
+        telemetry = get_current_telemetry()
+        if telemetry is None:
+            return
+        telemetry.increment(metric, value, schema=schema_name)
 
     def _sanitize_suffix(self, suffix: str) -> str:
         return re.sub(r"[^0-9a-zA-Z_]+", "_", suffix).strip("_").lower()
