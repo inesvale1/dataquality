@@ -1,0 +1,671 @@
+{
+  "metadata": {
+    "telemetry_version": "2.0",
+    "run_name": "model_quality",
+    "schema_id_convention": "lowercase",
+    "schema_name_convention": "uppercase",
+    "collector": "TelemetryCollector",
+    "entrypoint": "run_quality.py",
+    "phase": "model_quality",
+    "db_type": "Oracle",
+    "base_folder": "C:\\Users\\49756615\\Documents\\DoutoradoUFC\\Implementation\\dataquality\\schema",
+    "metadata_source": "csv",
+    "use_case": "run_model_quality",
+    "metadata_source_type": "csv",
+    "event_count": 16,
+    "schema_count": 19
+  },
+  "run_summary": {
+    "status": "SUCCESS",
+    "started_at": "2026-07-17T19:37:58.708743+00:00",
+    "ended_at": "2026-07-17T19:38:43.362639+00:00",
+    "total_duration_ms": 44651.938,
+    "counts": {
+      "metadata_files_loaded": 19,
+      "metadata_rows_loaded": 14483,
+      "metadata_loader_tables_detected": 1381,
+      "encoding_corruption_questionmark_matches": 623,
+      "encoding_corruption_missing_accents": 18,
+      "stage.metadata.load.count": 1,
+      "schemas_loaded": 1,
+      "tables_read": 77,
+      "stage.metadata_validator.run_all.count": 1,
+      "stage.metadata.metrics_calculation.count": 1,
+      "excel_reports_generated": 1,
+      "stage.excel.write_sheet.count": 5,
+      "stage.excel.autosize_sheet.count": 5,
+      "stage.excel.save_report.count": 1,
+      "stage.excel.export.count": 1,
+      "stage.schema.process.count": 1
+    },
+    "totals": {},
+    "durations_ms": {
+      "stage.metadata.load.duration_ms_total": 535.851,
+      "stage.metadata_validator.run_all.duration_ms_total": 207.435,
+      "stage.metadata.metrics_calculation.duration_ms_total": 41898.602,
+      "stage.excel.write_sheet.duration_ms_total": 505.178,
+      "stage.excel.autosize_sheet.duration_ms_total": 83.103,
+      "stage.excel.save_report.duration_ms_total": 1998.843,
+      "stage.excel.export.duration_ms_total": 2001.16,
+      "stage.schema.process.duration_ms_total": 44115.639
+    },
+    "peaks": {
+      "max_process_rss_bytes": 224845824,
+      "max_python_heap_bytes": 34981369
+    },
+    "sizes": {},
+    "last_observed": {}
+  },
+  "schema_summaries": {
+    "cadastro": {
+      "schema_id": "cadastro",
+      "schema_name": "CADASTRO",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 65,
+        "input_columns": 906,
+        "input_tables": 65,
+        "encoding_corruption_questionmark_matches": 7,
+        "encoding_corruption_missing_accents": 1
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "conseg": {
+      "schema_id": "conseg",
+      "schema_name": "CONSEG",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 15,
+        "input_columns": 115,
+        "input_tables": 15,
+        "encoding_corruption_missing_accents": 1
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "conta_corrente": {
+      "schema_id": "conta_corrente",
+      "schema_name": "CONTA_CORRENTE",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 18,
+        "input_columns": 175,
+        "input_tables": 18,
+        "encoding_corruption_missing_accents": 1
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "copaf": {
+      "schema_id": "copaf",
+      "schema_name": "COPAF",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 16,
+        "input_columns": 106,
+        "input_tables": 16,
+        "encoding_corruption_missing_accents": 1
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "dimp": {
+      "schema_id": "dimp",
+      "schema_name": "DIMP",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 27,
+        "input_columns": 238,
+        "input_tables": 27,
+        "encoding_corruption_missing_accents": 1
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "ipva2": {
+      "schema_id": "ipva2",
+      "schema_name": "IPVA2",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 66,
+        "input_columns": 630,
+        "input_tables": 66,
+        "encoding_corruption_missing_accents": 1
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "itcd2": {
+      "schema_id": "itcd2",
+      "schema_name": "ITCD2",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 89,
+        "input_columns": 1018,
+        "input_tables": 89,
+        "encoding_corruption_missing_accents": 1
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "nfecorp": {
+      "schema_id": "nfecorp",
+      "schema_name": "NFECORP",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 77,
+        "input_columns": 1282,
+        "input_tables": 77,
+        "encoding_corruption_questionmark_matches": 97,
+        "encoding_corruption_missing_accents": 1
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "receita2": {
+      "schema_id": "receita2",
+      "schema_name": "RECEITA2",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 77,
+        "input_columns": 619,
+        "input_tables": 77,
+        "encoding_corruption_missing_accents": 1,
+        "tables_read": 77,
+        "stage.metadata_validator.run_all.count": 1,
+        "metadata_issue_rows": 161,
+        "stage.metadata.metrics_calculation.count": 1,
+        "excel_reports_generated": 1,
+        "stage.excel.write_sheet.count": 5,
+        "stage.excel.autosize_sheet.count": 5,
+        "stage.excel.save_report.count": 1,
+        "stage.excel.export.count": 1,
+        "stage.schema.process.count": 1
+      },
+      "totals": {
+        "candidates_total": 150
+      },
+      "durations_ms": {
+        "stage.metadata_validator.run_all.duration_ms_total": 207.435,
+        "stage.metadata.metrics_calculation.duration_ms_total": 41898.602,
+        "stage.excel.write_sheet.duration_ms_total": 505.178,
+        "stage.excel.autosize_sheet.duration_ms_total": 83.103,
+        "stage.excel.save_report.duration_ms_total": 1998.843,
+        "stage.excel.export.duration_ms_total": 2001.16,
+        "stage.schema.process.duration_ms_total": 44115.639
+      },
+      "peaks": {
+        "max_process_rss_bytes": 224845824,
+        "max_python_heap_bytes": 34981369
+      },
+      "sizes": {
+        "last_excel_file_size_bytes": 109179
+      },
+      "last_observed": {
+        "mddq": 89.237
+      }
+    },
+    "seta": {
+      "schema_id": "seta",
+      "schema_name": "SETA",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 105,
+        "input_columns": 633,
+        "input_tables": 105,
+        "encoding_corruption_missing_accents": 1
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "sgt": {
+      "schema_id": "sgt",
+      "schema_name": "SGT",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 38,
+        "input_columns": 386,
+        "input_tables": 38,
+        "encoding_corruption_missing_accents": 1
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "sinfa": {
+      "schema_id": "sinfa",
+      "schema_name": "SINFA",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 42,
+        "input_columns": 504,
+        "input_tables": 42,
+        "encoding_corruption_questionmark_matches": 14,
+        "encoding_corruption_missing_accents": 1
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "sipaj": {
+      "schema_id": "sipaj",
+      "schema_name": "SIPAJ",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 72,
+        "input_columns": 356,
+        "input_tables": 72,
+        "encoding_corruption_missing_accents": 1
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "sisagua": {
+      "schema_id": "sisagua",
+      "schema_name": "SISAGUA",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 5,
+        "input_columns": 46,
+        "input_tables": 5,
+        "encoding_corruption_missing_accents": 1
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "siscoex2": {
+      "schema_id": "siscoex2",
+      "schema_name": "SISCOEX2",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 95,
+        "input_columns": 709,
+        "input_tables": 95,
+        "encoding_corruption_missing_accents": 1
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "sisseg": {
+      "schema_id": "sisseg",
+      "schema_name": "SISSEG",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 35,
+        "input_columns": 250,
+        "input_tables": 35,
+        "encoding_corruption_questionmark_matches": 1,
+        "encoding_corruption_missing_accents": 1
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "sitram2": {
+      "schema_id": "sitram2",
+      "schema_name": "SITRAM2",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 88,
+        "input_columns": 1036,
+        "input_tables": 88,
+        "encoding_corruption_questionmark_matches": 504,
+        "encoding_corruption_missing_accents": 1
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "suanota": {
+      "schema_id": "suanota",
+      "schema_name": "SUANOTA",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 314,
+        "input_columns": 4385,
+        "input_tables": 314
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    },
+    "tramita": {
+      "schema_id": "tramita",
+      "schema_name": "TRAMITA",
+      "status": "SUCCESS",
+      "counts": {
+        "metadata_loader_tables_detected": 137,
+        "input_columns": 1089,
+        "input_tables": 137,
+        "encoding_corruption_missing_accents": 1
+      },
+      "totals": {},
+      "durations_ms": {},
+      "peaks": {},
+      "sizes": {},
+      "last_observed": {}
+    }
+  },
+  "events": [
+    {
+      "event_type": "stage",
+      "name": "metadata.load",
+      "schema_id": null,
+      "schema_name": null,
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-07-17T19:37:58.708798+00:00",
+      "ended_at": "2026-07-17T19:37:59.244792+00:00",
+      "duration_ms": 535.851,
+      "memory": {
+        "process_rss_bytes": 132988928,
+        "python_heap_peak_bytes": 7357511
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "metadata_validator.run_all",
+      "schema_id": "receita2",
+      "schema_name": "RECEITA2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-07-17T19:37:59.252715+00:00",
+      "ended_at": "2026-07-17T19:37:59.460253+00:00",
+      "duration_ms": 207.435,
+      "memory": {
+        "process_rss_bytes": 133472256,
+        "python_heap_peak_bytes": 7357511
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "metadata.metrics_calculation",
+      "schema_id": "receita2",
+      "schema_name": "RECEITA2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-07-17T19:37:59.460315+00:00",
+      "ended_at": "2026-07-17T19:38:41.360946+00:00",
+      "duration_ms": 41898.602,
+      "memory": {
+        "process_rss_bytes": 216039424,
+        "python_heap_peak_bytes": 31397315
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.write_sheet",
+      "schema_id": "receita2",
+      "schema_name": "RECEITA2",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-07-17T19:38:41.365883+00:00",
+      "ended_at": "2026-07-17T19:38:41.682933+00:00",
+      "duration_ms": 316.896,
+      "memory": {
+        "process_rss_bytes": 219648000,
+        "python_heap_peak_bytes": 32737478
+      },
+      "extra": {
+        "rows": 619,
+        "columns": 22
+      }
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.autosize_sheet",
+      "schema_id": "receita2",
+      "schema_name": "RECEITA2",
+      "table": "SCHEMA_METADATA",
+      "status": "SUCCESS",
+      "started_at": "2026-07-17T19:38:41.683004+00:00",
+      "ended_at": "2026-07-17T19:38:41.732288+00:00",
+      "duration_ms": 49.165,
+      "memory": {
+        "process_rss_bytes": 219824128,
+        "python_heap_peak_bytes": 32836704
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.write_sheet",
+      "schema_id": "receita2",
+      "schema_name": "RECEITA2",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-07-17T19:38:41.732407+00:00",
+      "ended_at": "2026-07-17T19:38:41.787216+00:00",
+      "duration_ms": 54.661,
+      "memory": {
+        "process_rss_bytes": 224772096,
+        "python_heap_peak_bytes": 33267335
+      },
+      "extra": {
+        "rows": 150,
+        "columns": 15
+      }
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.autosize_sheet",
+      "schema_id": "receita2",
+      "schema_name": "RECEITA2",
+      "table": "DATA_QUALITY_RULE_CANDIDATES",
+      "status": "SUCCESS",
+      "started_at": "2026-07-17T19:38:41.787288+00:00",
+      "ended_at": "2026-07-17T19:38:41.799821+00:00",
+      "duration_ms": 12.445,
+      "memory": {
+        "process_rss_bytes": 224845824,
+        "python_heap_peak_bytes": 33306823
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.write_sheet",
+      "schema_id": "receita2",
+      "schema_name": "RECEITA2",
+      "table": "METADATA_QUALITY_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-07-17T19:38:41.799887+00:00",
+      "ended_at": "2026-07-17T19:38:41.874909+00:00",
+      "duration_ms": 74.874,
+      "memory": {
+        "process_rss_bytes": 209137664,
+        "python_heap_peak_bytes": 33357134
+      },
+      "extra": {
+        "rows": 170,
+        "columns": 4
+      }
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.autosize_sheet",
+      "schema_id": "receita2",
+      "schema_name": "RECEITA2",
+      "table": "METADATA_QUALITY_MEASURES",
+      "status": "SUCCESS",
+      "started_at": "2026-07-17T19:38:41.874984+00:00",
+      "ended_at": "2026-07-17T19:38:41.878878+00:00",
+      "duration_ms": 3.813,
+      "memory": {
+        "process_rss_bytes": 209137664,
+        "python_heap_peak_bytes": 33357134
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.write_sheet",
+      "schema_id": "receita2",
+      "schema_name": "RECEITA2",
+      "table": "METADATA_QUALITY_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-07-17T19:38:41.878941+00:00",
+      "ended_at": "2026-07-17T19:38:41.933351+00:00",
+      "duration_ms": 54.193,
+      "memory": {
+        "process_rss_bytes": 209604608,
+        "python_heap_peak_bytes": 33576739
+      },
+      "extra": {
+        "rows": 161,
+        "columns": 15
+      }
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.autosize_sheet",
+      "schema_id": "receita2",
+      "schema_name": "RECEITA2",
+      "table": "METADATA_QUALITY_ISSUES",
+      "status": "SUCCESS",
+      "started_at": "2026-07-17T19:38:41.933428+00:00",
+      "ended_at": "2026-07-17T19:38:41.947592+00:00",
+      "duration_ms": 14.053,
+      "memory": {
+        "process_rss_bytes": 209616896,
+        "python_heap_peak_bytes": 33614222
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.write_sheet",
+      "schema_id": "receita2",
+      "schema_name": "RECEITA2",
+      "table": "METADATA_SCORES",
+      "status": "SUCCESS",
+      "started_at": "2026-07-17T19:38:41.947667+00:00",
+      "ended_at": "2026-07-17T19:38:41.952304+00:00",
+      "duration_ms": 4.554,
+      "memory": {
+        "process_rss_bytes": 209645568,
+        "python_heap_peak_bytes": 33645435
+      },
+      "extra": {
+        "rows": 15,
+        "columns": 6
+      }
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.autosize_sheet",
+      "schema_id": "receita2",
+      "schema_name": "RECEITA2",
+      "table": "METADATA_SCORES",
+      "status": "SUCCESS",
+      "started_at": "2026-07-17T19:38:41.952361+00:00",
+      "ended_at": "2026-07-17T19:38:41.956070+00:00",
+      "duration_ms": 3.627,
+      "memory": {
+        "process_rss_bytes": 209645568,
+        "python_heap_peak_bytes": 33654361
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.save_report",
+      "schema_id": "receita2",
+      "schema_name": "RECEITA2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-07-17T19:38:41.363028+00:00",
+      "ended_at": "2026-07-17T19:38:43.362122+00:00",
+      "duration_ms": 1998.843,
+      "memory": {
+        "process_rss_bytes": 211525632,
+        "python_heap_peak_bytes": 34981369
+      },
+      "extra": {
+        "sheet_count": 5
+      }
+    },
+    {
+      "event_type": "stage",
+      "name": "excel.export",
+      "schema_id": "receita2",
+      "schema_name": "RECEITA2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-07-17T19:38:41.361083+00:00",
+      "ended_at": "2026-07-17T19:38:43.362426+00:00",
+      "duration_ms": 2001.16,
+      "memory": {
+        "process_rss_bytes": 211525632,
+        "python_heap_peak_bytes": 34981369
+      },
+      "extra": {}
+    },
+    {
+      "event_type": "stage",
+      "name": "schema.process",
+      "schema_id": "receita2",
+      "schema_name": "RECEITA2",
+      "table": null,
+      "status": "SUCCESS",
+      "started_at": "2026-07-17T19:37:59.244878+00:00",
+      "ended_at": "2026-07-17T19:38:43.362581+00:00",
+      "duration_ms": 44115.639,
+      "memory": {
+        "process_rss_bytes": 211525632,
+        "python_heap_peak_bytes": 34981369
+      },
+      "extra": {}
+    }
+  ]
+}

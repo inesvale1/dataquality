@@ -7,7 +7,8 @@
       "Bash(Sort-Object)",
       "Bash(dir \"c:\\\\Users\\\\49756615\\\\Documents\\\\DoutoradoUFC\\\\Implementation\\\\dataquality\\\\app\\\\telemetry\" /od)",
       "Bash(python -c ' *)",
-      "Read(//c/Users/49756615/Documents/DoutoradoUFC/Implementation/**)"
+      "Read(//c/Users/49756615/Documents/DoutoradoUFC/Implementation/**)",
+      "PowerShell(python \"c:\\\\Users\\\\49756615\\\\Documents\\\\DoutoradoUFC\\\\Implementation\\\\dataquality\\\\run_quality.py\" --config-json \"c:\\\\Users\\\\49756615\\\\Documents\\\\DoutoradoUFC\\\\Implementation\\\\dataquality\\\\config\\\\run_quality.config.json\")"
     ]
   }
 }
