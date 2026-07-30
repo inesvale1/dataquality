@@ -7,7 +7,6 @@ import re
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, Optional, Tuple
-from urllib import error, request
 
 import inflect
 import pandas as pd
@@ -24,6 +23,51 @@ def _read_keyring(service: str, username: str) -> str:
         return keyring.get_password(service, username) or ""
     except Exception:
         return ""
+
+
+def _build_proxy_http_client() -> Optional["httpx.Client"]:
+    """Build an httpx client that authenticates against a corporate proxy, if configured.
+
+    The proxy itself is detected the same way urllib does (env vars first,
+    falling back to the OS-level config on Windows/macOS), because this
+    network's proxy is configured system-wide and is not exposed through
+    HTTPS_PROXY/HTTP_PROXY.
+
+    Proxy credentials are embedded as Basic auth directly in the proxy URL.
+    That is a deliberate choice, not the simplest option: httpcore only ever
+    sends Proxy-Authorization on the initial CONNECT when credentials are
+    embedded in the proxy URL (Basic). An `auth=` object such as
+    httpx_ntlm's HttpNtlmAuth authenticates the *request* that flows through
+    an already-established tunnel — it never gets a chance to run if the
+    CONNECT itself is rejected with 407, which is the failure seen here.
+    """
+    from urllib.request import getproxies
+
+    proxy_info = getproxies()
+    proxy_url = (
+        os.environ.get("HTTPS_PROXY")
+        or os.environ.get("HTTP_PROXY")
+        or proxy_info.get("https")
+        or proxy_info.get("http")
+    )
+    if not proxy_url:
+        return None
+
+    proxy_user = os.environ.get("PROXY_USER", "")
+    proxy_pass = os.environ.get("PROXY_PASS", "")
+    if proxy_user and not proxy_pass:
+        proxy_pass = _read_keyring("dataquality-proxy", proxy_user)
+
+    if proxy_user and proxy_pass:
+        from urllib.parse import urlparse, urlunparse
+        parsed = urlparse(proxy_url)
+        if not parsed.username:
+            netloc = f"{proxy_user}:{proxy_pass}@{parsed.hostname}"
+            if parsed.port:
+                netloc += f":{parsed.port}"
+            proxy_url = urlunparse(parsed._replace(netloc=netloc))
+
+    return httpx.Client(proxy=proxy_url)
 
 
 @dataclass
@@ -55,6 +99,11 @@ class OpenAICompatibleCommentSuggester(LLMCommentSuggester):
     @classmethod
     def from_config(cls, config: LLMCommentConfig) -> "OpenAICompatibleCommentSuggester":
         api_key = os.getenv(config.api_key_env, "") if getattr(config, "api_key_env", "") else ""
+        if not api_key:
+            api_key = _read_keyring(
+                getattr(config, "api_key_keyring_service", ""),
+                getattr(config, "api_key_keyring_username", ""),
+            )
         requires_api_key = bool(getattr(config, "require_api_key", True))
         enabled = bool(config.enabled and config.model and (api_key or not requires_api_key))
         if not config.enabled:
@@ -161,18 +210,25 @@ class OpenAICompatibleCommentSuggester(LLMCommentSuggester):
         return base + "/chat/completions"
 
     def _post_json(self, payload: Dict[str, Any]) -> str | None:
+        http_client = self._build_http_client()
         try:
             self.last_error = ""
             endpoint = self._build_endpoint()
-            req = request.Request(
-                endpoint,
-                data=json.dumps(payload).encode("utf-8"),
-                headers=self._build_headers(),
-                method="POST",
-            )
-            with request.urlopen(req, timeout=self.timeout_seconds) as response:
-                body = json.loads(response.read().decode("utf-8"))
-        except error.HTTPError as exc:
+            owns_client = http_client is None
+            client = http_client or httpx.Client()
+            try:
+                response = client.post(
+                    endpoint,
+                    json=payload,
+                    headers=self._build_headers(),
+                    timeout=self.timeout_seconds,
+                )
+                response.raise_for_status()
+                body = response.json()
+            finally:
+                if owns_client:
+                    client.close()
+        except httpx.HTTPStatusError as exc:
             self.last_error = self._format_http_error(exc)
             return None
         except Exception as exc:
@@ -262,10 +318,10 @@ class OpenAICompatibleCommentSuggester(LLMCommentSuggester):
             return text
         return text[: max_length - 3].rstrip() + "..."
 
-    def _format_http_error(self, exc: error.HTTPError) -> str:
+    def _format_http_error(self, exc: "httpx.HTTPStatusError") -> str:
         detail = ""
         try:
-            raw = exc.read().decode("utf-8", errors="replace")
+            raw = exc.response.text
             parsed = json.loads(raw)
             if isinstance(parsed, dict):
                 err = parsed.get("error", {})
@@ -277,10 +333,11 @@ class OpenAICompatibleCommentSuggester(LLMCommentSuggester):
                 detail = raw.strip()
         except Exception:
             detail = str(exc)
-        status = getattr(exc, "code", "")
-        reason = getattr(exc, "reason", "")
-        summary = f"HTTP {status} {reason}".strip()
+        summary = f"HTTP {exc.response.status_code} {exc.response.reason_phrase}".strip()
         return f"{summary}: {detail}".strip(": ")
+
+    def _build_http_client(self) -> Optional["httpx.Client"]:
+        return _build_proxy_http_client()
 
     def _build_headers(self) -> Dict[str, str]:
         headers = {"Content-Type": "application/json"}
@@ -402,34 +459,7 @@ class AnthropicCommentSuggester(LLMCommentSuggester):
         return comment
 
     def _build_http_client(self):
-        import os
-        try:
-            import httpx
-        except ImportError:
-            return None
-
-        proxy_url = os.environ.get("HTTPS_PROXY") or os.environ.get("HTTP_PROXY")
-        if not proxy_url:
-            return None
-
-        proxy_user = os.environ.get("PROXY_USER", "")
-        proxy_pass = os.environ.get("PROXY_PASS", "")
-
-        if proxy_user and proxy_pass:
-            try:
-                from httpx_ntlm import HttpNtlmAuth
-                return httpx.Client(proxy=proxy_url, auth=HttpNtlmAuth(proxy_user, proxy_pass))
-            except ImportError:
-                pass
-            from urllib.parse import urlparse, urlunparse
-            parsed = urlparse(proxy_url)
-            if not parsed.username:
-                netloc = f"{proxy_user}:{proxy_pass}@{parsed.hostname}"
-                if parsed.port:
-                    netloc += f":{parsed.port}"
-                proxy_url = urlunparse(parsed._replace(netloc=netloc))
-
-        return httpx.Client(proxy=proxy_url)
+        return _build_proxy_http_client()
 
     def _filter_business_context(self, table_name: str) -> Dict[str, Any]:
         if not self.business_context:

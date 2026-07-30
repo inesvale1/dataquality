@@ -35,6 +35,7 @@ class MetadataContextBuilder:
             }
 
         owner = str(df["OWNER"].dropna().astype(str).iloc[0]).upper()
+        db_instance_name = self._first_non_empty(df.get("DB_INSTANCE_NAME", pd.Series(dtype=str)))
         pk_lookup = self._build_pk_lookup(df)
         table_contexts: list[dict[str, Any]] = []
         column_contexts: list[dict[str, Any]] = []
@@ -49,6 +50,7 @@ class MetadataContextBuilder:
         return {
             "schema_name": self.schema_name,
             "owner": owner,
+            "db_instance_name": db_instance_name,
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "tables": table_contexts,
             "columns": column_contexts,
@@ -77,6 +79,7 @@ class MetadataContextBuilder:
         primary_keys = self._collect_columns(table_df, "IS_PK")
         foreign_keys = self._collect_columns(table_df, "IS_FK")
         table_comment = self._first_non_empty(table_df.get("TAB_COMMENTS", pd.Series(dtype=str)))
+        db_instance_name = self._first_non_empty(table_df.get("DB_INSTANCE_NAME", pd.Series(dtype=str)))
         existing_column_comments = {
             str(row["COLUMN_NAME"]): str(row["COL_COMMENTS"]).strip()
             for _, row in table_df.iterrows()
@@ -88,6 +91,7 @@ class MetadataContextBuilder:
         return {
             "owner": owner,
             "table_name": table_name,
+            "db_instance_name": db_instance_name,
             "table_comment": table_comment,
             "table_type_inference": self._infer_table_type(table_name, table_df, row_count),
             "primary_keys": primary_keys,

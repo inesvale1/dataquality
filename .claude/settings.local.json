@@ -8,7 +8,12 @@
       "Bash(dir \"c:\\\\Users\\\\49756615\\\\Documents\\\\DoutoradoUFC\\\\Implementation\\\\dataquality\\\\app\\\\telemetry\" /od)",
       "Bash(python -c ' *)",
       "Read(//c/Users/49756615/Documents/DoutoradoUFC/Implementation/**)",
-      "PowerShell(python \"c:\\\\Users\\\\49756615\\\\Documents\\\\DoutoradoUFC\\\\Implementation\\\\dataquality\\\\run_quality.py\" --config-json \"c:\\\\Users\\\\49756615\\\\Documents\\\\DoutoradoUFC\\\\Implementation\\\\dataquality\\\\config\\\\run_quality.config.json\")"
+      "PowerShell(python \"c:\\\\Users\\\\49756615\\\\Documents\\\\DoutoradoUFC\\\\Implementation\\\\dataquality\\\\run_quality.py\" --config-json \"c:\\\\Users\\\\49756615\\\\Documents\\\\DoutoradoUFC\\\\Implementation\\\\dataquality\\\\config\\\\run_quality.config.json\")",
+      "Bash(python -c \"import json; json.load\\(open\\('config/run_quality.config.json', encoding='utf-8'\\)\\); print\\('OK: valid JSON'\\)\")",
+      "Bash(python -c \"import keyring; print\\('keyring OK, backend:', keyring.get_keyring\\(\\)\\)\")",
+      "Bash(python -)",
+      "Bash(env)",
+      "Bash(python -c \"import os; print\\('HTTPS_PROXY=', os.environ.get\\('HTTPS_PROXY'\\)\\); print\\('HTTP_PROXY=', os.environ.get\\('HTTP_PROXY'\\)\\); print\\('PROXY_USER=', os.environ.get\\('PROXY_USER'\\)\\); print\\('PROXY_PASS set:', bool\\(os.environ.get\\('PROXY_PASS'\\)\\)\\)\")"
     ]
   }
 }

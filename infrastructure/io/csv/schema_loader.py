@@ -35,6 +35,7 @@ class schemaLoader:
     ]
 
     STRING_COLS = [
+        "DB_INSTANCE_NAME",
         "OWNER",
         "TABLE_NAME",
         "COLUMN_NAME",
@@ -88,6 +89,8 @@ class schemaLoader:
             df["TAB_COMMENTS"] = pd.NA
         if "CONSTRAINTS" not in df.columns:
             df["CONSTRAINTS"] = ""
+        if "DB_INSTANCE_NAME" not in df.columns:
+            df["DB_INSTANCE_NAME"] = pd.NA
 
         df["CONSTRAINTS_NORM"] = df["CONSTRAINTS"].astype(str).str.upper().fillna("")
 
@@ -221,12 +224,14 @@ class schemaLoader:
         question_mark_matches = self._MID_WORD_QUESTION_MARK.findall(combined_text)
         if question_mark_matches:
             examples = sorted(set(question_mark_matches))[:5]
-            print(
-                f"[encoding] WARN schema '{schema_name}': {len(question_mark_matches)} occurrences of "
-                f"'?' mid-word in TAB_COMMENTS/COL_COMMENTS suggest accented characters were replaced "
-                f"during Oracle extraction (examples: {examples}). Re-extract this schema after fixing "
-                "the Oracle connection charset/NLS settings."
-            )
+            # Console warning silenced temporarily while schemas are being re-extracted
+            # with corrected Oracle NLS/charset settings; detection/telemetry stay on.
+            # print(
+            #     f"[encoding] WARN schema '{schema_name}': {len(question_mark_matches)} occurrences of "
+            #     f"'?' mid-word in TAB_COMMENTS/COL_COMMENTS suggest accented characters were replaced "
+            #     f"during Oracle extraction (examples: {examples}). Re-extract this schema after fixing "
+            #     "the Oracle connection charset/NLS settings."
+            # )
             self._report_corruption_telemetry(
                 "encoding_corruption_questionmark_matches", len(question_mark_matches), schema_name
             )
@@ -235,12 +240,13 @@ class schemaLoader:
             len(combined_text) >= self._MIN_TEXT_LENGTH_FOR_ACCENT_CHECK
             and not any(ch in self._ACCENTED_CHARS for ch in combined_text)
         ):
-            print(
-                f"[encoding] WARN schema '{schema_name}': no accented Portuguese characters found across "
-                f"{len(combined_text)} chars of TAB_COMMENTS/COL_COMMENTS; accents were likely stripped "
-                "during Oracle extraction. Re-extract this schema after fixing the Oracle connection "
-                "charset/NLS settings."
-            )
+            # Console warning silenced temporarily; see note above.
+            # print(
+            #     f"[encoding] WARN schema '{schema_name}': no accented Portuguese characters found across "
+            #     f"{len(combined_text)} chars of TAB_COMMENTS/COL_COMMENTS; accents were likely stripped "
+            #     "during Oracle extraction. Re-extract this schema after fixing the Oracle connection "
+            #     "charset/NLS settings."
+            # )
             self._report_corruption_telemetry("encoding_corruption_missing_accents", 1, schema_name)
 
     def _report_corruption_telemetry(self, metric: str, value: int, schema_name: str) -> None:

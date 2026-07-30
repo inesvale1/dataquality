@@ -89,6 +89,7 @@ class DenodoCatalogInputBuilder:
         return {
             "source_system": self.source_system or self.schema_name,
             "schema_name": self.schema_name,
+            "db_instance_name": technical_context.get("db_instance_name"),
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "curation_status": _CURATION_STATUS_PENDING,
             "business_domain_hint": self._infer_business_domain(business_context),
@@ -126,6 +127,7 @@ class DenodoCatalogInputBuilder:
         return {
             "source_schema": owner,
             "source_table": table_name,
+            "db_instance_name": table_context.get("db_instance_name"),
             "denodo_database": None,
             "denodo_view": None,
             "business_name": None,

@@ -1,8 +1,8 @@
 {
   "run_model_quality": true,
   "run_data_quality": true,
-  "telemetry_enabled": true,
-  "telemetry_output": true,
+  "telemetry_enabled": false,
+  "telemetry_output": false,
   "delete_cols": [
     "COLUMN_ID",
     "NUM_BUCKETS",
@@ -22,6 +22,7 @@
     "ISS",
     "HORAS_EXTRAS",
     "DIAS"
+    
   ],
   "db_type": "Oracle",
   "metadata_source": "csv",
@@ -68,18 +69,18 @@
     "ARUBAAUTH"
   ],
   "save_context_json": false,
-  "regenerate_context": false,
+  "regenerate_context": true,
   "llm_comment_generation": {
     "enabled": true,
     "comment_generation_strategy": "llm",
-    "api_type": "anthropic",
-    "api_key_env": "ANTHROPIC_API_KEY",
-    "api_key_keyring_service": "dataquality-anthropic",
-    "api_key_keyring_username": "anthropic",
+    "api_type": "azure",
+    "api_key_env": "",
+    "api_key_keyring_service": "dataquality-azure-openai",
+    "api_key_keyring_username": "azure-openai",
     "require_api_key": true,
-    "model": "claude-sonnet-4-6",
-    "base_url": "",
-    "api_version": "",
+    "model": "gpt-4o-mini",
+    "base_url": "https://sefazce-cegid-sophiaq.openai.azure.com/",
+    "api_version": "2024-12-01-preview",
     "timeout_seconds": 60,
     "temperature": 0.2,
     "max_output_tokens": 512
