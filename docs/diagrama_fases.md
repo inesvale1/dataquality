@@ -80,7 +80,7 @@ flowchart TD
 | 3 | Cálculo de métricas de qualidade | `MetadataQualityMetricsCalculator` | MQID001–015 (% conformidade) |
 | 4 | Identificação de candidatos de dados | `MetadataValidator` (candidatos) | Lista de colunas candidatas |
 | 5 | Geração de sugestões via LLM (opcional) | `MetadataIssueSuggester` + Claude API | Descrições em linguagem natural |
-| 6 | Exportação do relatório Excel | `ExcelReportExporter` | `issues_metadados_<esquema>.xlsx` |
+| 6 | Exportação do relatório Excel | `ExcelReportExporter` | `issues_metadata_<esquema>.xlsx` |
 
 ### Etapas do Processo — Dados
 

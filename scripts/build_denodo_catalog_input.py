@@ -21,7 +21,7 @@ def _load_schema_metadata(inputs_dir: Path, schema_name: str) -> pd.DataFrame:
     dictionary = loader.get_dictionary()
     if schema_name not in dictionary:
         raise FileNotFoundError(
-            f"metadados_{schema_name}.csv not found under {inputs_dir} "
+            f"metadata_{schema_name}.csv not found under {inputs_dir} "
             f"(schemas found: {sorted(dictionary.keys()) or 'none'})"
         )
     return dictionary[schema_name]
@@ -47,12 +47,12 @@ def main() -> None:
         "and (optionally) an already-computed METADATA_SCORES sheet."
     )
     parser.add_argument("--schema", required=True, help="Schema name, e.g. sitram2 or cadastro")
-    parser.add_argument("--base-folder", default="schema", help="Root folder containing <schema>/inputs")
+    parser.add_argument("--base-folder", default="../schema", help="Root folder containing <schema>/inputs")
     parser.add_argument("--output-dir", default=None, help="Defaults to <base-folder>/<schema>/outputs")
     parser.add_argument(
         "--scores-excel",
         default=None,
-        help="Optional path to an issues_metadados_*.xlsx report; its METADATA_SCORES "
+        help="Optional path to an issues_metadata_*.xlsx report; its METADATA_SCORES "
         "sheet is reused to fill quality_score instead of recomputing it.",
     )
     parser.add_argument(

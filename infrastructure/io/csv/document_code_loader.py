@@ -48,7 +48,7 @@ class DocumentCodeLoader:
 
     def _parse_input_filename(self, filename: str) -> tuple[str, str, str] | None:
         lowered = filename.lower()
-        if lowered == "metadados.csv" or lowered.startswith("metadados_"):
+        if lowered == "metadados.csv" or lowered.startswith("metadata_"):
             return None
 
         stem = Path(filename).stem

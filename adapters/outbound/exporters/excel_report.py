@@ -27,7 +27,7 @@ def save_excel_report(
 ) -> Path:
     """Write the Excel report for a schema.
 
-    Output file name: issues_metadados_<schema>.xlsx in schema/outputs when the
+    Output file name: issues_metadata_<schema>.xlsx in schema/outputs when the
     input metadata lives in schema/inputs. Otherwise, writes to the provided folder.
     """
     timestamp = datetime.now().strftime("%Y%m%d_%H%M")

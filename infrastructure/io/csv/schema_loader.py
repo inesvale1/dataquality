@@ -10,10 +10,10 @@ from dataquality.shared.telemetry import get_current_telemetry
 
 
 class schemaLoader:
-    """Load metadata CSV files (metadados_*.csv) from a base folder.
+    """Load metadata CSV files (metadata_*.csv) from a base folder.
 
     The loader walks all subfolders under `base_folder`, finds CSV files matching
-    `metadados_<schema>.csv`, loads each file into a typed DataFrame, and stores
+    `metadata_<schema>.csv`, loads each file into a typed DataFrame, and stores
     the result in a dictionary keyed by `<schema>`.
 
     This implementation is intentionally CSV-based, so you can later replace it
@@ -130,12 +130,12 @@ class schemaLoader:
     # ---------------- internal helpers ----------------
 
     def save_individual_csvs(self, base_folder: Optional[Path] = None) -> None:
-        """Save each schema's DataFrame as metadados_<schema>.csv inside its own subfolder."""
+        """Save each schema's DataFrame as metadata_<schema>.csv inside its own subfolder."""
         output_root = Path(base_folder) if base_folder else self.base_folder
         for schema_name, df in self.dictionary.items():
             schema_dir = output_root / schema_name
             schema_dir.mkdir(parents=True, exist_ok=True)
-            csv_path = schema_dir / f"metadados_{schema_name}.csv"
+            csv_path = schema_dir / f"metadata_{schema_name}.csv"
             df.to_csv(csv_path, index=False, sep=";", encoding="utf-8-sig")
 
     def _read_csv_tree(self) -> Dict[str, pd.DataFrame]:
@@ -144,7 +144,7 @@ class schemaLoader:
 
         dfs: Dict[str, pd.DataFrame] = {}
         # Agora o padrão aceita apenas CSV
-        pattern = re.compile(r"^metadados_(.+)\.csv$", flags=re.IGNORECASE)
+        pattern = re.compile(r"^metadata_(.+)\.csv$", flags=re.IGNORECASE)
 
         for root, _, files in os.walk(self.base_folder):
             for fname in files:

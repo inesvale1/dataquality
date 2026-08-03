@@ -44,7 +44,7 @@ def _resolve_folder(raw_path: str, *fallback_parts: str) -> Path:
 
 
 def _resolve_model_base_folder(raw_path: str) -> Path:
-    return _resolve_folder(raw_path, "schema")
+    return _resolve_folder(raw_path, "..", "schema")
 
 
 def _resolve_query_file(raw_path: str | None) -> str | None:
@@ -214,13 +214,13 @@ def _run_data_phase(
     sample_source = str(get_config_value(phase_config, "sample_source", template_config["sample_source"]))
     metadata_base_folder = _resolve_folder(
         str(get_config_value(phase_config, "metadata_base_folder", template_config["metadata_base_folder"])),
-        "schema",
+        "..", "schema",
     )
     sample_base_folder = None
     if sample_source.strip().lower() == "csv":
         sample_base_folder = _resolve_folder(
             str(get_config_value(phase_config, "sample_base_folder", template_config["sample_base_folder"])),
-            "schema",
+            "..", "schema",
         )
 
     validation_config = build_validation_config(get_config_value(phase_config, "validation_config", None))

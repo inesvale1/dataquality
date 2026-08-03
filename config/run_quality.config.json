@@ -233,7 +233,7 @@
     "ddq_phase_weight": 70
   },
   "model_quality": {
-    "base_folder": "dataquality\\schema",
+    "base_folder": "../schema",
     "metadata_source": "csv",
     "output_type": "excel",
     "metadata_query_file": "config/queries/metadata_query.sql",
@@ -257,13 +257,13 @@
     "__aws_output_db_password_keyring_username": "postgres_user"
   },
   "data_quality": {
-    "metadata_base_folder": "dataquality\\schema",
-    "sample_base_folder": "dataquality\\schema",
+    "metadata_base_folder": "../schema",
+    "sample_base_folder": "../schema",
     "metadata_source": "csv",
     "sample_source": "csv",
     "output_type": "excel",
     "metadata_query_file": "config/queries/metadata_query.sql",
-    "skip_document_code_analysis": false,
+    "skip_document_code_analysis": true,
     "db_connection_uri": null,
     "db_driver_class_name": "oracle+oracledb",
     "db_username": "SEFAZ2\\49756615",

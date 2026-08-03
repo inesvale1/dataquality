@@ -13,7 +13,7 @@ This folder is a refactoring of the original `DataModelQuality.ipynb` into a pac
 python run_quality.py --config-json config/run_quality.example.json
 ```
 
-The base folder must contain subfolders with files like `metadados_<schema>.csv`.
+The base folder must contain subfolders with files like `metadata_<schema>.csv`.
 The files generated with the data model issues are located in the same folder and have the prefix `issues_metadata_<schema>.csv`.
 
 ## Output (Excel sheets)

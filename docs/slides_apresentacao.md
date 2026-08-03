@@ -94,7 +94,7 @@ Cada métrica é calculada como **percentual de conformidade** (0%–100%).
 
 ## Slide 6 — Relatórios Excel Gerados
 
-### Arquivo 1: `issues_metadados_<esquema>_<timestamp>.xlsx`
+### Arquivo 1: `issues_metadata_<esquema>_<timestamp>.xlsx`
 
 | Aba | Conteúdo |
 |-----|----------|
@@ -121,7 +121,7 @@ O sistema é flexível quanto à origem dos dados:
 
 | Fonte | Metadados | Amostras de Dados |
 |-------|-----------|-------------------|
-| **CSV** | `schema/inputs/metadados_<esquema>.csv` | `samples/amostra_<esquema>.csv` |
+| **CSV** | `schema/inputs/metadata_<esquema>.csv` | `samples/amostra_<esquema>.csv` |
 | **Oracle DB** | Extração via conexão JDBC/cx_Oracle | Query por tabela com `SAMPLE_LIMIT` |
 | **Amazon S3** | Leitura de CSV no bucket configurado | Leitura de CSV no bucket configurado |
 

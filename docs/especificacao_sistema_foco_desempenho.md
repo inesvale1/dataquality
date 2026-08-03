@@ -28,7 +28,7 @@ O sistema possui dois fluxos principais:
 
 Na implementacao atual:
 
-- os metadados sao carregados de arquivos `metadados_<schema>.csv`;
+- os metadados sao carregados de arquivos `metadata_<schema>.csv`;
 - as amostras de dados podem vir de CSV ou do banco;
 - os resultados sao exportados para planilhas Excel.
 

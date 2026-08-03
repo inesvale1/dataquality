@@ -1,6 +1,6 @@
 -- ============================================================
 -- DDL Oracle - Framework de Qualidade de Dados - Sefaz-CE
--- Origem: issues_metadados_cadastro_20260428_1548.xlsx
+-- Origem: issues_metadata_cadastro_20260428_1548.xlsx
 -- Convenção de prefixos aplicada:
 --   COD_  Identificadores e códigos
 --   NOM_  Nomes

@@ -32,7 +32,7 @@ class SampleDataLoader:
     def _load_dir(self, directory: Path, schema_name: str, schemas: Dict[str, Dict[str, pd.DataFrame]]) -> None:
         for file_path in directory.glob("*.csv"):
             fname = file_path.name
-            if fname.lower().startswith("metadados_"):
+            if fname.lower().startswith("metadata_"):
                 continue
             table_name = self._table_name_from_file(fname)
             if not table_name:

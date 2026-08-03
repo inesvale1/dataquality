@@ -252,7 +252,7 @@ def _schema_from_metadata_filename(uri: str) -> str | None:
     name = Path(str(uri).split("/")[-1]).stem
     if name.lower() == "metadados":
         return None
-    match = re.match(r"^metadados_(.+)$", name, flags=re.IGNORECASE)
+    match = re.match(r"^metadata_(.+)$", name, flags=re.IGNORECASE)
     if not match:
         return None
     return re.sub(r"[^0-9a-zA-Z_]+", "_", match.group(1)).strip("_").lower()
