@@ -597,7 +597,18 @@ class MetadataIssueSuggester:
 
     def _ensure_columns(self, issues_df: pd.DataFrame) -> pd.DataFrame:
         df_out = issues_df.copy() if issues_df is not None else pd.DataFrame()
-        for col in ("COLUMN_TYPE", "SUGGESTED_VALUE", "SUGGESTED_SOURCE", "SUGGESTED_CONFIDENCE", "SUGGESTED_DDL", "SUGGESTED_DETAIL"):
+        for col in (
+            "COLUMN_TYPE",
+            "SUGGESTED_VALUE",
+            "SUGGESTED_SOURCE",
+            "SUGGESTED_CONFIDENCE",
+            "SUGGESTED_DDL",
+            "SUGGESTED_DETAIL",
+            "SUGGESTED_VALUE_RULES",
+            "SUGGESTED_DDL_RULES",
+            "SUGGESTED_VALUE_LLM",
+            "SUGGESTED_DDL_LLM",
+        ):
             if col not in df_out.columns:
                 df_out[col] = ""
         return df_out
@@ -675,6 +686,30 @@ class MetadataIssueSuggester:
         ddl = self._build_ddl(rule, owner, table, column, constraint_name, suggested_value)
         detail = self._resolve_llm_failure_detail(source)
 
+        suggested_value_rules = ""
+        ddl_rules = ""
+        suggested_value_llm = ""
+        ddl_llm = ""
+
+        if rule == "MQME008":
+            context = self.column_context_lookup.get((owner, table, column), {})
+            rules_value, _, _ = self._suggest_column_comment_by_rules(owner, table, column, context)
+            suggested_value_rules = rules_value
+            ddl_rules = self._build_ddl(rule, owner, table, column, constraint_name, rules_value)
+            if self.llm_comment_suggester.enabled:
+                llm_value, _, _ = self._suggest_column_comment_via_llm(context)
+                suggested_value_llm = llm_value
+                ddl_llm = self._build_ddl(rule, owner, table, column, constraint_name, llm_value)
+        elif rule == "MQME027":
+            context = self.table_context_lookup.get((owner, table), {})
+            rules_value, _, _ = self._suggest_table_comment_by_rules(owner, table, context)
+            suggested_value_rules = rules_value
+            ddl_rules = self._build_ddl(rule, owner, table, column, constraint_name, rules_value)
+            if self.llm_comment_suggester.enabled:
+                llm_value, _, _ = self._suggest_table_comment_via_llm(context)
+                suggested_value_llm = llm_value
+                ddl_llm = self._build_ddl(rule, owner, table, column, constraint_name, llm_value)
+
         return {
             "COLUMN_TYPE": column_type,
             "SUGGESTED_VALUE": suggested_value,
@@ -682,6 +717,10 @@ class MetadataIssueSuggester:
             "SUGGESTED_CONFIDENCE": confidence,
             "SUGGESTED_DDL": ddl,
             "SUGGESTED_DETAIL": detail,
+            "SUGGESTED_VALUE_RULES": suggested_value_rules,
+            "SUGGESTED_DDL_RULES": ddl_rules,
+            "SUGGESTED_VALUE_LLM": suggested_value_llm,
+            "SUGGESTED_DDL_LLM": ddl_llm,
         }
 
     def _suggest_column_prefix(self, column: str, table: str, column_type: str) -> Tuple[str, str, float]:
@@ -700,6 +739,9 @@ class MetadataIssueSuggester:
         context = self.column_context_lookup.get((owner, table, column), {})
         if self.comment_generation_strategy != "llm":
             return self._suggest_column_comment_by_rules(owner, table, column, context)
+        return self._suggest_column_comment_via_llm(context)
+
+    def _suggest_column_comment_via_llm(self, context: Dict[str, Any]) -> Tuple[str, str, float]:
         if not context:
             return "", "LLM_CONTEXT_MISSING", 0.0
         llm_comment = self.llm_comment_suggester.suggest_column_comment(context)
@@ -884,6 +926,9 @@ class MetadataIssueSuggester:
         context = self.table_context_lookup.get((owner, table), {})
         if self.comment_generation_strategy != "llm":
             return self._suggest_table_comment_by_rules(owner, table, context)
+        return self._suggest_table_comment_via_llm(context)
+
+    def _suggest_table_comment_via_llm(self, context: Dict[str, Any]) -> Tuple[str, str, float]:
         if not context:
             return "", "LLM_CONTEXT_MISSING", 0.0
         llm_comment = self.llm_comment_suggester.suggest_table_comment(context)

@@ -13,7 +13,9 @@
       "Bash(python -c \"import keyring; print\\('keyring OK, backend:', keyring.get_keyring\\(\\)\\)\")",
       "Bash(python -)",
       "Bash(env)",
-      "Bash(python -c \"import os; print\\('HTTPS_PROXY=', os.environ.get\\('HTTPS_PROXY'\\)\\); print\\('HTTP_PROXY=', os.environ.get\\('HTTP_PROXY'\\)\\); print\\('PROXY_USER=', os.environ.get\\('PROXY_USER'\\)\\); print\\('PROXY_PASS set:', bool\\(os.environ.get\\('PROXY_PASS'\\)\\)\\)\")"
+      "Bash(python -c \"import os; print\\('HTTPS_PROXY=', os.environ.get\\('HTTPS_PROXY'\\)\\); print\\('HTTP_PROXY=', os.environ.get\\('HTTP_PROXY'\\)\\); print\\('PROXY_USER=', os.environ.get\\('PROXY_USER'\\)\\); print\\('PROXY_PASS set:', bool\\(os.environ.get\\('PROXY_PASS'\\)\\)\\)\")",
+      "Bash(ls -la \"c:/Users/49756615/Documents/DoutoradoUFC/Implementation/schema\" 2>/dev/null | head -50)",
+      "Read(//c/Users/49756615/Documents/DoutoradoUFC/Implementation/schema/**)"
     ]
   }
 }

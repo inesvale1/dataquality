@@ -69,10 +69,10 @@
     "ARUBAAUTH"
   ],
   "save_context_json": false,
-  "regenerate_context": true,
+  "regenerate_context": false,
   "llm_comment_generation": {
-    "enabled": true,
-    "comment_generation_strategy": "llm",
+    "enabled": false,
+    "comment_generation_strategy": "rules",
     "api_type": "azure",
     "api_key_env": "",
     "api_key_keyring_service": "dataquality-azure-openai",
@@ -263,7 +263,7 @@
     "sample_source": "csv",
     "output_type": "excel",
     "metadata_query_file": "config/queries/metadata_query.sql",
-    "skip_document_code_analysis": true,
+    "skip_document_code_analysis": false,
     "db_connection_uri": null,
     "db_driver_class_name": "oracle+oracledb",
     "db_username": "SEFAZ2\\49756615",
