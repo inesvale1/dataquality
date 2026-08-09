@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 
 import pandas as pd
 
-from dataquality.app.orchestration.metadata_context_builder import MetadataContextBuilder
+from dataquality.infrastructure.io.pipeline_bridge import ensure_metadata_context
 from dataquality.domain.config.llm_comment_config import LLMCommentConfig
 from dataquality.domain.config.scoring_config import ScoringConfig
 from dataquality.shared.utils import safe_iqmd
@@ -29,10 +28,9 @@ class MetadataQualityMetricsCalculator:
         df_schema_metadata: pd.DataFrame | None = None,
         db_type: str = "Oracle",
         llm_comment_config: LLMCommentConfig | None = None,
-        context_output_dir: Path | None = None,
-        save_context_json: bool = True,
         base_folder: Path | None = None,
-        regenerate_context: bool = True,
+        require_metadata_context: bool = True,
+        workspace_root: Path | None = None,
         scoring_config: ScoringConfig | None = None,
     ):
         self.schema_name = schema_name
@@ -40,10 +38,10 @@ class MetadataQualityMetricsCalculator:
         self.df_schema_metadata = df_schema_metadata
         self.db_type = db_type
         self.llm_comment_config = llm_comment_config or LLMCommentConfig()
-        self.context_output_dir = context_output_dir or Path(__file__).resolve().parents[2] / "config"
-        self.save_context_json = bool(save_context_json)
         self.base_folder = Path(base_folder) if base_folder else None
-        self.regenerate_context = regenerate_context
+        self.require_metadata_context = require_metadata_context
+        # dataquality/app/orchestration/ -> dataquality/ -> Implementation/
+        self.workspace_root = workspace_root or Path(__file__).resolve().parents[2]
         self.scoring_config = scoring_config or ScoringConfig()
 
     def calculate_sections(self) -> tuple[dict[str, pd.DataFrame], float | None]:
@@ -62,19 +60,12 @@ class MetadataQualityMetricsCalculator:
         df_schema_metadata = (self.df_schema_metadata.copy() if self.df_schema_metadata is not None else pd.DataFrame())
         df_schema_metadata = self.validator.annotate_data_quality_candidates(df_schema_metadata)
         context_dir = self._resolve_context_dir()
-        context_file = context_dir / f"metadata_context_{self.schema_name}.json"
-        if not self.regenerate_context and context_file.exists():
-            schema_context = json.loads(context_file.read_text(encoding="utf-8"))
-            print(f"[context] Reusing existing context: {context_file}")
-        else:
-            context_builder = MetadataContextBuilder(
-                schema_name=self.schema_name,
-                df_schema_metadata=df_schema_metadata,
-                output_dir=context_dir,
-            )
-            schema_context = context_builder.build()
-            if self.save_context_json:
-                context_builder.build_and_save(schema_context)
+        schema_context = ensure_metadata_context(
+            schema_name=self.schema_name,
+            inputs_dir=context_dir,
+            required=self.require_metadata_context,
+            workspace_root=self.workspace_root,
+        )
         df_data_quality_candidates = self._build_data_quality_candidates(df_schema_metadata)
         df_issues = self.validator.issues_df.copy()
         suggester = MetadataIssueSuggester(
@@ -204,10 +195,8 @@ class MetadataQualityMetricsCalculator:
 
     def _resolve_context_dir(self) -> Path:
         if self.base_folder is not None:
-            candidate = self.base_folder / self.schema_name / "inputs"
-            if candidate.exists():
-                return candidate
-        return self.context_output_dir
+            return self.base_folder / self.schema_name / "inputs"
+        return self.workspace_root / "schema" / self.schema_name / "inputs"
 
     def _resolve_business_context_path(self) -> Path | None:
         schema = self.schema_name

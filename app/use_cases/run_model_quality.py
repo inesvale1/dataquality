@@ -27,8 +27,8 @@ class RunOptions:
     db_type: str = "Oracle"
     exclude_tables: List[str] | None = None
     llm_comment_config: LLMCommentConfig | None = None
-    context_output_dir: Path | None = None
-    save_context_json: bool = True
+    require_metadata_context: bool = True
+    workspace_root: Path | None = None
     metadata_source_type: str = "csv"
     db_connection_uri: str | None = None
     db_driver_class_name: str | None = None
@@ -46,7 +46,6 @@ class RunOptions:
     metadata_s3_uri: str | None = None
     s3_storage_options: dict[str, object] | None = None
     include_schemas: List[str] | None = None
-    regenerate_context: bool = True
     scoring_config: ScoringConfig | None = None
     # output: "excel" | "oracle" | "both"
     output_type: str = "excel"
@@ -139,10 +138,9 @@ def run_model_quality(options: RunOptions) -> dict[str, float | None]:
                     df_schema_metadata=df_schema_metadata,
                     db_type=options.db_type,
                     llm_comment_config=options.llm_comment_config,
-                    context_output_dir=options.context_output_dir,
-                    save_context_json=options.save_context_json,
                     base_folder=options.base_folder,
-                    regenerate_context=options.regenerate_context,
+                    require_metadata_context=options.require_metadata_context,
+                    workspace_root=options.workspace_root,
                     scoring_config=options.scoring_config,
                 )
                 sections, mddq = metadata_calculator.calculate_sections()

@@ -68,8 +68,7 @@
     "20180115",
     "ARUBAAUTH"
   ],
-  "save_context_json": false,
-  "regenerate_context": false,
+  "require_metadata_context": true,
   "llm_comment_generation": {
     "enabled": false,
     "comment_generation_strategy": "rules",

@@ -107,7 +107,7 @@ def _run_model_phase(
     llm_comment_config = build_llm_comment_config(llm_comment_raw)
     telemetry_enabled = _parse_bool(get_config_value(phase_config, "telemetry_enabled", template_config.get("telemetry_enabled", False)))
     telemetry_output = get_config_value(phase_config, "telemetry_output", template_config.get("telemetry_output"))
-    save_context_json = _parse_bool(get_config_value(phase_config, "save_context_json", template_config.get("save_context_json", True)))
+    require_metadata_context = _parse_bool(get_config_value(phase_config, "require_metadata_context", template_config.get("require_metadata_context", True)))
 
     opts = RunOptions(
         base_folder=base_folder,
@@ -117,8 +117,8 @@ def _run_model_phase(
         db_type=str(get_config_value(phase_config, "db_type", template_config["db_type"])),
         exclude_tables=list(get_config_value(phase_config, "exclude_tables", template_config["exclude_tables"])),
         llm_comment_config=llm_comment_config or LLMCommentConfig(),
-        context_output_dir=Path(__file__).resolve().parent / "config",
-        save_context_json=save_context_json,
+        require_metadata_context=require_metadata_context,
+        workspace_root=Path(__file__).resolve().parent.parent,
         metadata_source_type=metadata_source,
         db_connection_uri=get_config_value(phase_config, "db_connection_uri", template_config.get("db_connection_uri")),
         db_driver_class_name=get_config_value(phase_config, "db_driver_class_name", template_config.get("db_driver_class_name")),
@@ -144,7 +144,6 @@ def _run_model_phase(
         metadata_s3_uri=get_config_value(phase_config, "metadata_s3_uri", template_config.get("metadata_s3_uri")),
         s3_storage_options=dict(get_config_value(phase_config, "s3_storage_options", template_config.get("s3_storage_options", {})) or {}),
         include_schemas=list(get_config_value(phase_config, "include_schemas", template_config.get("include_schemas", [])) or []) or None,
-        regenerate_context=_parse_bool(get_config_value(phase_config, "regenerate_context", template_config.get("regenerate_context", True))),
         scoring_config=scoring_config,
         output_type=str(get_config_value(phase_config, "output_type", template_config.get("output_type", "excel"))),
         output_db_schema=get_config_value(phase_config, "output_db_schema", template_config.get("output_db_schema")),

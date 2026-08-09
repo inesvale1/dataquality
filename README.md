@@ -22,16 +22,25 @@ The files generated with the data model issues are located in the same folder an
 - `METADATA_ISSUE`: consolidated list of rule violations
 - `METADATA_METRIC`: quality indicators calculated from measures
 
-## Technical catalog context (`metadata_context_<schema>.json`)
+## dataquality does not generate context anymore
 
-The extraction of physical metadata (Oracle/CSV/S3/Athena) and the construction of
-`metadata_context_<schema>.json` now have their source of truth in the sibling
-project `../technicalcatalogpipeline` (Fase 1 — Pipeline de Catálogo Técnico).
-`config/run_quality.config.json` defaults to `"regenerate_context": false`, so
-`run_quality.py` reuses the `metadata_context_<schema>.json` already produced by
-`technicalcatalogpipeline` under `schema/<schema>/inputs/` instead of rebuilding it.
+`dataquality` no longer contains any code that builds `metadata_context_<schema>.json`
+or `sources_context_<schema>.json` — that responsibility belongs entirely to the
+sibling projects `../technicalcatalogpipeline` (Fase 1) and `../businessglossarypipeline`
+(Fase 2). `dataquality` only *reads* those files from `schema/<schema>/inputs/`.
 
-The local copy of that logic (`app/orchestration/metadata_context_builder.py`,
-`infrastructure/io/metadata_sources.py`) is kept as-is for backward compatibility
-(e.g. running `dataquality` standalone, before `technicalcatalogpipeline` has run
-for a schema) — it is a fallback, not the primary path going forward.
+When a file is missing, `dataquality/infrastructure/io/pipeline_bridge.py` decides
+what happens next, controlled by two flags:
+
+- **`require_metadata_context`** (`config/run_quality.config.json`, default `true`):
+  if `metadata_context_<schema>.json` is missing, `run_quality.py` shells out to
+  `technicalcatalogpipeline/scripts/build_technical_catalog.py --schema <schema>`
+  and re-reads the file it wrote. If that also fails (e.g. `metadata_<schema>.csv`
+  itself doesn't exist), the run fails with a clear error. Set to `false` to instead
+  proceed with an empty context (degrades MDDQ/LLM-suggestion quality but never blocks).
+- **`--require-sources-context`** (only relevant to `scripts/build_denodo_catalog_input.py`,
+  default `false`): same idea for `sources_context_<schema>.json`, but shelling out to
+  `businessglossarypipeline/scripts/generate_sources_context.py` instead — **this can
+  trigger a real LLM API call and cost money/time**, which is why it defaults to off.
+
+Both projects are expected to be siblings of `dataquality/` (same parent folder).

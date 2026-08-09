@@ -9,7 +9,7 @@ from typing import Any
 
 import pandas as pd
 
-from dataquality.app.orchestration.metadata_context_builder import MetadataContextBuilder
+from dataquality.infrastructure.io.pipeline_bridge import ensure_metadata_context, ensure_sources_context
 from dataquality.domain.config.validation_config import ValidationConfig
 
 _CURATION_STATUS_PENDING = "PENDING_CURATION"
@@ -35,10 +35,15 @@ class DenodoCatalogInputBuilder:
     """Builds a canonical Denodo Data Catalog input document for one schema.
 
     Combines three sources that already exist in the framework, without adding
-    any new extraction or LLM step:
-    - technical context from `MetadataContextBuilder` (Oracle metadata already loaded);
-    - business context from the `sources_context_<schema>.json` artifacts (Java source
-      scan output: regras_negocio, enumeracoes, dtos_entrada/saida, tabelas_sql);
+    any new extraction or LLM step of its own:
+    - technical context read from `metadata_context_<schema>.json` (built by the
+      sibling `technicalcatalogpipeline` project; requested on demand via
+      `pipeline_bridge.ensure_metadata_context` if missing and required);
+    - business context read from `sources_context_<schema>.json` (built by the
+      sibling `businessglossarypipeline` project; requested on demand via
+      `pipeline_bridge.ensure_sources_context` if missing and required) --
+      Java source scan output: regras_negocio, enumeracoes, dtos_entrada/saida,
+      tabelas_sql;
     - the schema quality score already computed by `domain.scoring.quality_scorer`.
 
     Fields that require synthesis (business_name, business_description, business_domain
@@ -47,8 +52,11 @@ class DenodoCatalogInputBuilder:
     """
 
     schema_name: str
-    df_schema_metadata: pd.DataFrame
+    inputs_dir: Path
     output_dir: Path
+    workspace_root: Path
+    require_metadata_context: bool = True
+    require_sources_context: bool = False
     business_context: dict[str, Any] | None = None
     quality_scores_df: pd.DataFrame | None = None
     validation_config: ValidationConfig = field(default_factory=ValidationConfig)
@@ -62,13 +70,22 @@ class DenodoCatalogInputBuilder:
         return output_path
 
     def build(self) -> dict[str, Any]:
-        technical_context = MetadataContextBuilder(
+        technical_context = ensure_metadata_context(
             schema_name=self.schema_name,
-            df_schema_metadata=self.df_schema_metadata,
-            output_dir=self.output_dir,
-        ).build()
+            inputs_dir=self.inputs_dir,
+            required=self.require_metadata_context,
+            workspace_root=self.workspace_root,
+        )
 
-        business_context = self.business_context or {}
+        if self.business_context is not None:
+            business_context = self.business_context
+        else:
+            business_context = ensure_sources_context(
+                schema_name=self.schema_name,
+                inputs_dir=self.inputs_dir,
+                required=self.require_sources_context,
+                workspace_root=self.workspace_root,
+            ) or {}
         columns_by_table = self._group_columns_by_table(technical_context.get("columns", []))
         sensitive_patterns = self._compile_sensitive_patterns()
         schema_quality_score, quality_score_source = self._resolve_schema_quality_score()
