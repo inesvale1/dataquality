@@ -190,6 +190,7 @@ class MetadataQualityMetricsCalculator:
                 self.llm_comment_config,
                 context_path=context_path,
                 metadata_fallback=metadata_fallback,
+                business_docs_context_path=self._resolve_business_docs_context_path(),
             )
         return OpenAICompatibleCommentSuggester.from_config(self.llm_comment_config)
 
@@ -207,6 +208,13 @@ class MetadataQualityMetricsCalculator:
             if path and path.exists():
                 return path
         return None
+
+    def _resolve_business_docs_context_path(self) -> Path | None:
+        schema = self.schema_name
+        if not self.base_folder:
+            return None
+        path = self.base_folder / schema / "inputs" / f"business_docs_context_{schema}.json"
+        return path if path.exists() else None
 
     def _build_data_quality_candidates(self, df_schema_metadata: pd.DataFrame) -> pd.DataFrame:
         if df_schema_metadata.empty:

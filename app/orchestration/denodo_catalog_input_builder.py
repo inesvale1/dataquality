@@ -9,12 +9,17 @@ from typing import Any
 
 import pandas as pd
 
-from dataquality.infrastructure.io.pipeline_bridge import ensure_metadata_context, ensure_sources_context
+from dataquality.infrastructure.io.pipeline_bridge import ensure_business_docs_context, ensure_metadata_context, ensure_sources_context
 from dataquality.domain.config.validation_config import ValidationConfig
 
 _CURATION_STATUS_PENDING = "PENDING_CURATION"
 _MAX_MATCHED_DTOS = 3
 _MAX_MATCHED_BUSINESS_RULES = 3
+_MAX_MATCHED_BUSINESS_DOCS = 3
+# documentos_negocio entries worth matching against a specific table: a whole
+# "visao" document is schema-wide (see business_vision_summary below), not
+# table-specific, so it's excluded here on purpose.
+_TABLE_RELEVANT_DOC_TYPES = {"caso_de_uso", "regras_negocio", "requisitos"}
 
 # Subset of ValidationConfig.type_naming.identifier_name_patterns tokens that are
 # genuinely indicative of personal/sensitive data (matches the "Sensibilidade
@@ -44,6 +49,12 @@ class DenodoCatalogInputBuilder:
       `pipeline_bridge.ensure_sources_context` if missing and required) --
       Java source scan output: regras_negocio, enumeracoes, dtos_entrada/saida,
       tabelas_sql;
+    - business documents context read from `business_docs_context_<schema>.json`
+      (also built by `businessglossarypipeline`, via `--only docs`; requested
+      on demand via `pipeline_bridge.ensure_business_docs_context` if missing
+      and required) -- vision/requirements/use-case/business-rule documents
+      extracted from .odt/.docx/.pdf, optional and off by default (see
+      require_business_docs_context);
     - the schema quality score already computed by `domain.scoring.quality_scorer`.
 
     Fields that require synthesis (business_name, business_description, business_domain
@@ -57,7 +68,9 @@ class DenodoCatalogInputBuilder:
     workspace_root: Path
     require_metadata_context: bool = True
     require_sources_context: bool = False
+    require_business_docs_context: bool = False
     business_context: dict[str, Any] | None = None
+    business_docs_context: dict[str, Any] | None = None
     quality_scores_df: pd.DataFrame | None = None
     validation_config: ValidationConfig = field(default_factory=ValidationConfig)
     source_system: str | None = None
@@ -86,6 +99,17 @@ class DenodoCatalogInputBuilder:
                 required=self.require_sources_context,
                 workspace_root=self.workspace_root,
             ) or {}
+
+        if self.business_docs_context is not None:
+            business_docs_context = self.business_docs_context
+        else:
+            business_docs_context = ensure_business_docs_context(
+                schema_name=self.schema_name,
+                inputs_dir=self.inputs_dir,
+                required=self.require_business_docs_context,
+                workspace_root=self.workspace_root,
+            ) or {}
+
         columns_by_table = self._group_columns_by_table(technical_context.get("columns", []))
         sensitive_patterns = self._compile_sensitive_patterns()
         schema_quality_score, quality_score_source = self._resolve_schema_quality_score()
@@ -96,6 +120,7 @@ class DenodoCatalogInputBuilder:
                 table_context,
                 columns_by_table.get(str(table_context.get("table_name", "")), []),
                 business_context,
+                business_docs_context,
                 sensitive_patterns,
                 schema_quality_score,
                 referenced_tables,
@@ -110,6 +135,7 @@ class DenodoCatalogInputBuilder:
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "curation_status": _CURATION_STATUS_PENDING,
             "business_domain_hint": self._infer_business_domain(business_context),
+            "business_vision_summary": self._build_vision_summary(business_docs_context),
             "business_glossary": self._build_glossary(business_context),
             "quality_score": schema_quality_score,
             "quality_score_source": quality_score_source,
@@ -126,6 +152,7 @@ class DenodoCatalogInputBuilder:
         table_context: dict[str, Any],
         column_contexts: list[dict[str, Any]],
         business_context: dict[str, Any],
+        business_docs_context: dict[str, Any],
         sensitive_patterns: list[tuple[str, re.Pattern[str]]],
         schema_quality_score: float | None,
         referenced_tables: set[str],
@@ -162,6 +189,7 @@ class DenodoCatalogInputBuilder:
             "business_context_candidates": {
                 "dtos": self._match_dtos(table_name, business_context),
                 "business_rules": self._match_business_rules(table_name, business_context),
+                "business_docs": self._match_business_docs(table_name, business_docs_context),
             },
             "columns": columns,
         }
@@ -292,6 +320,68 @@ class DenodoCatalogInputBuilder:
 
     def _normalize_token(self, value: str) -> str:
         return re.sub(r"[^A-Z0-9]+", "", value.upper())
+
+    # ------------------------------------------------------------------
+    # Business context (from business_docs_context_<schema>.json -- vision/
+    # requirements/use-case/business-rule documents, distinct from
+    # sources_context which comes from source code)
+    # ------------------------------------------------------------------
+
+    def _build_vision_summary(self, business_docs_context: dict[str, Any]) -> str | None:
+        """Schema-wide narrative (not matched to any one table), built from
+        every documento_negocio classified as tipo_documento="visao" --
+        typically 0 or 1 per system, but concatenates if more than one."""
+        documentos = business_docs_context.get("documentos_negocio", [])
+        if not isinstance(documentos, list):
+            return None
+
+        parts: list[str] = []
+        for doc in documentos:
+            if not isinstance(doc, dict) or doc.get("tipo_documento") != "visao":
+                continue
+            resumo = str(doc.get("resumo", "")).strip()
+            if resumo:
+                parts.append(resumo)
+            objetivos = doc.get("objetivos_negocio", [])
+            if isinstance(objetivos, list) and objetivos:
+                parts.append("Objetivos: " + "; ".join(str(item) for item in objetivos))
+        return " ".join(parts) if parts else None
+
+    def _match_business_docs(self, table_name: str, business_docs_context: dict[str, Any]) -> list[dict[str, Any]]:
+        """Match requisitos/casos de uso/regras de negocio documents to a
+        table by token overlap between the table name and the document's
+        titulo/resumo/requisitos/regras_negocio -- same approach as
+        _match_business_rules, applied to a different source. Returns a
+        compact reference (not the full document) since a matched doc can
+        carry many requisitos/regras_negocio entries of its own."""
+        documentos = business_docs_context.get("documentos_negocio", [])
+        if not isinstance(documentos, list):
+            return []
+
+        table_tokens = set(re.split(r"[^A-Z0-9]+", table_name.upper()))
+        table_tokens = {token for token in table_tokens if len(token) > 2}
+        if not table_tokens:
+            return []
+
+        scored: list[tuple[int, dict[str, Any]]] = []
+        for doc in documentos:
+            if not isinstance(doc, dict) or doc.get("tipo_documento") not in _TABLE_RELEVANT_DOC_TYPES:
+                continue
+            haystack = json.dumps(
+                {key: doc.get(key) for key in ("titulo", "resumo", "requisitos", "regras_negocio")},
+                ensure_ascii=False,
+            ).upper()
+            score = sum(1 for token in table_tokens if token in haystack)
+            if score > 0:
+                scored.append((score, {
+                    "arquivo": doc.get("arquivo"),
+                    "tipo_documento": doc.get("tipo_documento"),
+                    "titulo": doc.get("titulo"),
+                    "resumo": doc.get("resumo"),
+                }))
+
+        scored.sort(key=lambda item: item[0], reverse=True)
+        return [entry for _, entry in scored[:_MAX_MATCHED_BUSINESS_DOCS]]
 
     # ------------------------------------------------------------------
     # Quality score (reuses whatever METADATA_SCORES-shaped DataFrame the

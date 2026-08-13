@@ -354,6 +354,11 @@ class AnthropicCommentSuggester(LLMCommentSuggester):
     api_key: str = ""
     model: str = "claude-sonnet-4-6"
     business_context: Dict[str, Any] = field(default_factory=dict)
+    # Vision/requirements/use-case/business-rule documents extracted from
+    # .odt/.docx/.pdf (business_docs_context_<schema>.json), distinct from
+    # business_context (which comes from source code). Optional -- most
+    # schemas won't have this file yet.
+    business_docs_context: Dict[str, Any] = field(default_factory=dict)
     metadata_fallback: Dict[str, Any] = field(default_factory=dict)
     timeout_seconds: int = 60
     temperature: float = 0.2
@@ -363,7 +368,13 @@ class AnthropicCommentSuggester(LLMCommentSuggester):
     response_cache: Dict[str, Optional[str]] = field(default_factory=dict)
 
     @classmethod
-    def from_config(cls, config: LLMCommentConfig, context_path: Optional[Path] = None, metadata_fallback: Optional[Dict[str, Any]] = None) -> "AnthropicCommentSuggester":
+    def from_config(
+        cls,
+        config: LLMCommentConfig,
+        context_path: Optional[Path] = None,
+        metadata_fallback: Optional[Dict[str, Any]] = None,
+        business_docs_context_path: Optional[Path] = None,
+    ) -> "AnthropicCommentSuggester":
         api_key = os.getenv("ANTHROPIC_API_KEY", "")
         if not api_key and getattr(config, "api_key_env", ""):
             api_key = os.getenv(config.api_key_env, "")
@@ -393,11 +404,20 @@ class AnthropicCommentSuggester(LLMCommentSuggester):
             except Exception:
                 pass
 
+        business_docs_context: Dict[str, Any] = {}
+        if business_docs_context_path and Path(business_docs_context_path).exists():
+            try:
+                with open(business_docs_context_path, encoding="utf-8") as f:
+                    business_docs_context = json.load(f)
+            except Exception:
+                pass
+
         return cls(
             enabled=enabled,
             api_key=api_key,
             model=config.model,
             business_context=business_context,
+            business_docs_context=business_docs_context,
             metadata_fallback=metadata_fallback or {},
             timeout_seconds=int(config.timeout_seconds),
             temperature=float(config.temperature),
@@ -479,7 +499,43 @@ class AnthropicCommentSuggester(LLMCommentSuggester):
             result["dtos"] = relevant_dtos
         if relevant_enums:
             result["enums"] = relevant_enums
+        relevant_docs = self._match_business_docs(table_name)
+        if relevant_docs:
+            result["business_docs"] = relevant_docs
         return result
+
+    def _match_business_docs(self, table_name: str) -> list[Dict[str, Any]]:
+        """Match requisitos/casos de uso/regras de negocio documents
+        (business_docs_context) to a table by token overlap between the table
+        name and the document's titulo/resumo/requisitos/regras_negocio --
+        same approach DenodoCatalogInputBuilder._match_business_docs uses,
+        kept local here since the two projects don't share code."""
+        documentos = self.business_docs_context.get("documentos_negocio", [])
+        if not isinstance(documentos, list) or not documentos:
+            return []
+
+        table_tokens = {token for token in re.split(r"[^A-Z0-9]+", table_name.upper()) if len(token) > 2}
+        if not table_tokens:
+            return []
+
+        relevant_doc_types = {"caso_de_uso", "regras_negocio", "requisitos"}
+        scored: list[tuple] = []
+        for doc in documentos:
+            if not isinstance(doc, dict) or doc.get("tipo_documento") not in relevant_doc_types:
+                continue
+            haystack = json.dumps(
+                {key: doc.get(key) for key in ("titulo", "resumo", "requisitos", "regras_negocio")},
+                ensure_ascii=False,
+            ).upper()
+            score = sum(1 for token in table_tokens if token in haystack)
+            if score > 0:
+                scored.append((score, {
+                    "titulo": doc.get("titulo"),
+                    "resumo": doc.get("resumo"),
+                }))
+
+        scored.sort(key=lambda item: item[0], reverse=True)
+        return [entry for _, entry in scored[:3]]
 
     def _filter_metadata_fallback(self, table_name: str) -> Dict[str, Any]:
         if not self.metadata_fallback:
@@ -505,10 +561,12 @@ class AnthropicCommentSuggester(LLMCommentSuggester):
 
     def _build_system_prompt(self) -> str:
         schema_desc = str(self.business_context.get("descricao", "")).strip()
-        intro = (
-            f"Contexto do sistema: {schema_desc}\n\n" if schema_desc
-            else ""
-        )
+        vision_summary = self._build_vision_summary()
+        intro = ""
+        if schema_desc:
+            intro += f"Contexto do sistema: {schema_desc}\n\n"
+        if vision_summary:
+            intro += f"Visao do sistema: {vision_summary}\n\n"
         return (
             "Voce e um especialista em banco de dados Oracle e no dominio fiscal/tributario "
             "da Secretaria da Fazenda do Estado do Ceara (Sefaz-CE).\n"
@@ -522,6 +580,21 @@ class AnthropicCommentSuggester(LLMCommentSuggester):
             "- Nao invente significados alem do contexto fornecido.\n"
             'Responda SOMENTE com JSON valido no formato {"comment": "..."}.'
         )
+
+    def _build_vision_summary(self) -> str:
+        """Schema-wide narrative from business_docs_context's tipo_documento="visao"
+        entries -- same construction as DenodoCatalogInputBuilder._build_vision_summary."""
+        documentos = self.business_docs_context.get("documentos_negocio", [])
+        if not isinstance(documentos, list):
+            return ""
+        parts: list[str] = []
+        for doc in documentos:
+            if not isinstance(doc, dict) or doc.get("tipo_documento") != "visao":
+                continue
+            resumo = str(doc.get("resumo", "")).strip()
+            if resumo:
+                parts.append(resumo)
+        return " ".join(parts)
 
     def _build_user_prompt(self, context: Dict[str, Any], entity_type: str, business_ctx: Dict[str, Any]) -> str:
         if entity_type == "column":

@@ -66,6 +66,14 @@ def main() -> None:
         help="If sources_context_<schema>.json is missing, call businessglossarypipeline to build it "
         "-- this can make a REAL LLM API call and cost money/time (default: false).",
     )
+    parser.add_argument(
+        "--require-business-docs-context",
+        default=False,
+        type=_parse_bool,
+        help="If business_docs_context_<schema>.json is missing, call businessglossarypipeline "
+        "--only docs to build it -- this can make MANY real LLM API calls (one per vision/"
+        "requirements/use-case document) and cost real money/time (default: false).",
+    )
     args = parser.parse_args()
 
     base_folder = Path(args.base_folder)
@@ -85,6 +93,7 @@ def main() -> None:
         workspace_root=workspace_root,
         require_metadata_context=args.require_metadata_context,
         require_sources_context=args.require_sources_context,
+        require_business_docs_context=args.require_business_docs_context,
         quality_scores_df=quality_scores_df,
     )
     output_path = builder.build_and_save()
