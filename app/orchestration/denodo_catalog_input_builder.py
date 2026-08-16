@@ -35,6 +35,16 @@ _PERSONAL_DATA_TOKENS = {"CPF", "CNPJ", "CEP", "EMAIL", "PLACA", "RENAVAM", "CHA
 _QUALITY_SCORE_COMPONENT_PRIORITY = ("SCHEMA_SCORE", "MDDQ", "DDQ")
 
 
+def _write_timestamped_copy(path: Path, content: str) -> Path:
+    """Write an extra dated copy of `path` alongside it. The fixed name stays
+    authoritative for anything that reads it back; the timestamped sibling is
+    a history trail only."""
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    timestamped_path = path.with_name(f"{path.stem}_{timestamp}{path.suffix}")
+    timestamped_path.write_text(content, encoding="utf-8")
+    return timestamped_path
+
+
 @dataclass
 class DenodoCatalogInputBuilder:
     """Builds a canonical Denodo Data Catalog input document for one schema.
@@ -78,8 +88,10 @@ class DenodoCatalogInputBuilder:
     def build_and_save(self, payload: dict[str, Any] | None = None) -> Path:
         payload = payload or self.build()
         self.output_dir.mkdir(parents=True, exist_ok=True)
+        content = json.dumps(payload, ensure_ascii=False, indent=2)
         output_path = self.output_dir / f"denodo_catalog_input_{self.schema_name}.json"
-        output_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+        output_path.write_text(content, encoding="utf-8")
+        _write_timestamped_copy(output_path, content)
         return output_path
 
     def build(self) -> dict[str, Any]:
@@ -262,27 +274,54 @@ class DenodoCatalogInputBuilder:
         return self.schema_name.title()
 
     def _build_glossary(self, business_context: dict[str, Any]) -> list[dict[str, Any]]:
+        # One `enumeracoes` entry per (pacote, classe, constante) -- see
+        # core/sources_context_builder.py's dedupe key in businessglossarypipeline
+        # and prompts/sources_context_output_schema.json. There is no "nome"/
+        # "valores" field on the item itself: the glossary term is the enum
+        # *class* (`classe`), and its "valores" are every constant declared in
+        # that class, so entries are grouped here rather than copied 1:1 --
+        # copying 1:1 previously produced one glossary entry per constant, all
+        # missing "termo"/"valores" (wrong field names) and collapsing into
+        # identical empty stubs whenever they shared a `pacote`.
         enumeracoes = business_context.get("enumeracoes", [])
         if not isinstance(enumeracoes, list):
             return []
-        glossary = []
+        grouped: dict[tuple[str, str], dict[str, Any]] = {}
+        order: list[tuple[str, str]] = []
         for item in enumeracoes:
             if not isinstance(item, dict):
                 continue
-            glossary.append(
+            pacote = item.get("pacote") or ""
+            classe = item.get("classe") or ""
+            key = (pacote, classe)
+            if key not in grouped:
+                grouped[key] = {"termo": classe or None, "pacote": pacote or None, "valores": []}
+                order.append(key)
+            grouped[key]["valores"].append(
                 {
-                    "termo": item.get("nome"),
-                    "pacote": item.get("pacote"),
-                    "valores": item.get("valores", []),
+                    "constante": item.get("constante"),
+                    "codigo": item.get("codigo"),
+                    "descricao": item.get("descricao"),
                 }
             )
-        return glossary
+        return [grouped[key] for key in order]
 
     def _normalize_referenced_tables(self, business_context: dict[str, Any]) -> set[str]:
+        # tabelas_sql entries are objects ({"tabela": ..., "operacoes": [...],
+        # "arquivo": ...} -- prompts/sources_context_output_schema.json), not
+        # plain strings; stringifying the dict itself (str(table)) never
+        # matches a real qualified table name, which silently made
+        # referenced_in_source_code False for every table.
         tabelas_sql = business_context.get("tabelas_sql", [])
         if not isinstance(tabelas_sql, list):
             return set()
-        return {str(table).strip().upper() for table in tabelas_sql if str(table).strip()}
+        names: set[str] = set()
+        for table in tabelas_sql:
+            name = table.get("tabela") if isinstance(table, dict) else table
+            name = str(name).strip().upper() if name else ""
+            if name:
+                names.add(name)
+        return names
 
     def _match_dtos(self, table_name: str, business_context: dict[str, Any]) -> list[dict[str, Any]]:
         table_token = self._normalize_token(table_name)

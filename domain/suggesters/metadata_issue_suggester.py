@@ -672,15 +672,10 @@ class MetadataIssueSuggester:
         df_out = issues_df.copy() if issues_df is not None else pd.DataFrame()
         for col in (
             "COLUMN_TYPE",
-            "SUGGESTED_VALUE",
+            "SUGGESTED_VALUE_RULES",
             "SUGGESTED_SOURCE",
             "SUGGESTED_CONFIDENCE",
-            "SUGGESTED_DDL",
-            "SUGGESTED_DETAIL",
-            "SUGGESTED_VALUE_RULES",
-            "SUGGESTED_DDL_RULES",
             "SUGGESTED_VALUE_LLM",
-            "SUGGESTED_DDL_LLM",
         ):
             if col not in df_out.columns:
                 df_out[col] = ""
@@ -756,44 +751,32 @@ class MetadataIssueSuggester:
         elif rule in ("MQME020", "MQME021"):
             suggested_value, source, confidence = "0", "RULES", 0.6
 
-        ddl = self._build_ddl(rule, owner, table, column, constraint_name, suggested_value)
-        detail = self._resolve_llm_failure_detail(source)
-
-        suggested_value_rules = ""
-        ddl_rules = ""
+        # suggested_value already IS the rules-based suggestion for every rule
+        # (comment rules included: _suggest_column_comment/_suggest_table_comment
+        # route to *_by_rules when comment_generation_strategy != "llm"), so it's
+        # reported directly as SUGGESTED_VALUE_RULES -- no separate rules_value
+        # recomputation needed. SUGGESTED_VALUE_LLM stays a comparison-only
+        # column, populated for the comment rules (MQME008/027) whenever the LLM
+        # suggester is enabled, regardless of the primary strategy.
         suggested_value_llm = ""
-        ddl_llm = ""
 
         if rule == "MQME008":
             context = self.column_context_lookup.get((owner, table, column), {})
-            rules_value, _, _ = self._suggest_column_comment_by_rules(owner, table, column, context)
-            suggested_value_rules = rules_value
-            ddl_rules = self._build_ddl(rule, owner, table, column, constraint_name, rules_value)
             if self.llm_comment_suggester.enabled:
                 llm_value, _, _ = self._suggest_column_comment_via_llm(context)
                 suggested_value_llm = llm_value
-                ddl_llm = self._build_ddl(rule, owner, table, column, constraint_name, llm_value)
         elif rule == "MQME027":
             context = self.table_context_lookup.get((owner, table), {})
-            rules_value, _, _ = self._suggest_table_comment_by_rules(owner, table, context)
-            suggested_value_rules = rules_value
-            ddl_rules = self._build_ddl(rule, owner, table, column, constraint_name, rules_value)
             if self.llm_comment_suggester.enabled:
                 llm_value, _, _ = self._suggest_table_comment_via_llm(context)
                 suggested_value_llm = llm_value
-                ddl_llm = self._build_ddl(rule, owner, table, column, constraint_name, llm_value)
 
         return {
             "COLUMN_TYPE": column_type,
-            "SUGGESTED_VALUE": suggested_value,
+            "SUGGESTED_VALUE_RULES": suggested_value,
             "SUGGESTED_SOURCE": source,
             "SUGGESTED_CONFIDENCE": confidence,
-            "SUGGESTED_DDL": ddl,
-            "SUGGESTED_DETAIL": detail,
-            "SUGGESTED_VALUE_RULES": suggested_value_rules,
-            "SUGGESTED_DDL_RULES": ddl_rules,
             "SUGGESTED_VALUE_LLM": suggested_value_llm,
-            "SUGGESTED_DDL_LLM": ddl_llm,
         }
 
     def _suggest_column_prefix(self, column: str, table: str, column_type: str) -> Tuple[str, str, float]:
@@ -860,44 +843,6 @@ class MetadataIssueSuggester:
             return "", "", 0.0
         suggested = f"{table}_{column}_UK" if column else f"{table}_UK"
         return suggested, "RULES", 0.8
-
-    def _build_ddl(
-        self,
-        rule: str,
-        owner: str,
-        table: str,
-        column: str,
-        constraint_name: str,
-        suggested_value: str,
-    ) -> str:
-        if not suggested_value:
-            return ""
-        if self.db_type.lower() != "oracle":
-            return ""
-
-        qualified_table = self._qualify_table(owner, table)
-
-        if rule in ("MQME014", "MQME015"):
-            return f"ALTER TABLE {qualified_table} RENAME COLUMN {column} TO {suggested_value};"
-        if rule in ("MQME012", "MQME013"):
-            return f"ALTER TABLE {qualified_table} RENAME TO {suggested_value};"
-        if rule == "MQME008":
-            comment = suggested_value.replace("'", "''")
-            return f"COMMENT ON COLUMN {qualified_table}.{column} IS '{comment}';"
-        if rule == "MQME027":
-            comment = suggested_value.replace("'", "''")
-            return f"COMMENT ON TABLE {qualified_table} IS '{comment}';"
-        if rule in ("MQME009", "MQME010", "MQME011"):
-            if not constraint_name:
-                return ""
-            return f"ALTER TABLE {qualified_table} RENAME CONSTRAINT {constraint_name} TO {suggested_value};"
-
-        return ""
-
-    def _qualify_table(self, owner: str, table: str) -> str:
-        if owner:
-            return f"{owner}.{table}"
-        return table
 
     def _clean_str(self, value: Any) -> str:
         s = str(value).strip()
@@ -1099,15 +1044,6 @@ class MetadataIssueSuggester:
         if last_error:
             return "LLM_ERROR"
         return "LLM_NO_RESULT"
-
-    def _resolve_llm_failure_detail(self, source: str) -> str:
-        if source != "LLM_ERROR":
-            return ""
-        detail = getattr(self.llm_comment_suggester, "last_error", "") or ""
-        detail = re.sub(r"\s+", " ", str(detail)).strip()
-        if len(detail) > 300:
-            detail = detail[:297].rstrip() + "..."
-        return detail
 
     def _meaningful_tokens(self, value: str) -> list[str]:
         stop_tokens = {"DE", "DA", "DO", "DOS", "DAS", "R", "TAB", "TBL"}

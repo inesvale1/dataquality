@@ -14,3 +14,6 @@ psutil>=5.9
 
 # Anthropic Claude API (needed when api_type = "anthropic")
 anthropic>=0.40
+
+# Neo4j knowledge graph loader (scripts/build_knowledge_graph.py)
+neo4j>=5.20

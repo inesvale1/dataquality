@@ -175,9 +175,9 @@ class MetadataQualityMetricsCalculator:
 
     def _build_llm_suggester(self, schema_context: dict | None = None) -> LLMCommentSuggester:
         # Built whenever llm_comment_config.enabled is true, independent of
-        # comment_generation_strategy: the primary SUGGESTED_VALUE column still
-        # follows the strategy, but the SUGGESTED_VALUE_LLM comparison column
-        # (populated in MetadataIssueSuggester._suggest_row) needs a live
+        # comment_generation_strategy: the primary SUGGESTED_VALUE_RULES column
+        # still follows the strategy, but the SUGGESTED_VALUE_LLM comparison
+        # column (populated in MetadataIssueSuggester._suggest_row) needs a live
         # suggester even when the primary strategy is "rules".
         if not self.llm_comment_config.enabled:
             return LLMCommentSuggester(enabled=False)
