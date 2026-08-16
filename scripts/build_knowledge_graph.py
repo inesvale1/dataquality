@@ -11,7 +11,8 @@ mostly a direct translation of those references into Cypher MERGE
 statements, not a new extraction step.
 
 Node labels:
-    Schema, TechnicalAsset (table), BusinessConcept, BusinessRule, ValueDomain
+    Schema, TechnicalAsset (table), BusinessConcept, BusinessRule, ValueDomain,
+    BusinessKey (CPF/CNPJ/... -- not schema-scoped, see below)
 
 Relationships:
     (TechnicalAsset)-[:BELONGS_TO]->(Schema)
@@ -20,6 +21,21 @@ Relationships:
     (BusinessRule)-[:APPLIES_TO]->(BusinessConcept)
     (BusinessConcept)-[:HAS_DOMAIN]->(ValueDomain)
     (TechnicalAsset)-[:REFERENCES {via_column}]->(TechnicalAsset)   -- FK graph, from metadata_context
+    (TechnicalAsset)-[:HAS_KEY {column}]->(BusinessKey)             -- cross-schema, see below
+
+Every other node above is namespaced per schema (uid = "<schema>::<local_id>"),
+so nothing above connects across schemas by itself -- cadastro/receita2/sitram2
+are technically 3 separate Oracle schemas processed independently in Fase 1/2,
+and their business_concepts/technical_assets never get compared against each
+other. BusinessKey is the deliberate exception: one global node per natural
+business key (CPF, CNPJ, CEP, EMAIL, PLACA, RENAVAM, CHASSI, MATRICULA --
+CROSS_SCHEMA_KEY_TOKENS below, same list as
+app/orchestration/denodo_catalog_input_builder.py's _PERSONAL_DATA_TOKENS),
+linked from every TechnicalAsset (in any schema) that has a column matching
+that token. Two tables in different schemas sharing a BusinessKey is exactly
+the kind of relationship a formal Oracle FK wouldn't capture (SEFAZ-CE
+generally avoids cross-schema FK constraints by design) but that matters for
+finding how e.g. cadastro (the CNPJ/CPF registry) connects to receita2/sitram2.
 
 Two ways to load, same data either way:
 
@@ -48,6 +64,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -197,12 +214,59 @@ def collect_graph_data(
     }
 
 
+# Natural/business keys likely to appear identically across schemas even
+# without a formal cross-schema Oracle FK (which SEFAZ-CE generally avoids by
+# design -- see the module docstring). Deliberately narrower than
+# ValidationConfig.type_naming.identifier_name_patterns (which also matches
+# generic ID/COD/PROTOCOLO): those match nearly every table and would turn
+# BusinessKey into a near-complete graph instead of a meaningful one. Mirrors
+# app/orchestration/denodo_catalog_input_builder.py's _PERSONAL_DATA_TOKENS.
+CROSS_SCHEMA_KEY_TOKENS = ("CPF", "CNPJ", "CEP", "EMAIL", "PLACA", "RENAVAM", "CHASSI", "MATRICULA")
+
+
+def collect_business_keys(metadata_contexts: dict[str, dict[str, Any]]) -> dict[str, list[dict[str, Any]]]:
+    """Cross-schema pass: one global BusinessKey node per token in
+    CROSS_SCHEMA_KEY_TOKENS, linked from every TechnicalAsset (in any of the
+    schemas passed in) whose column name contains that token. Unlike
+    collect_graph_data, this looks at every schema's metadata_context
+    together -- that's the whole point, it's the one thing meant to connect
+    across schema boundaries.
+    """
+    seen_keys: set[str] = set()
+    business_keys: list[dict[str, Any]] = []
+    seen_edges: set[tuple[str, str, str]] = set()
+    has_key_edges: list[dict[str, Any]] = []
+
+    for schema_name, metadata_context in metadata_contexts.items():
+        for col in metadata_context.get("columns", []) or []:
+            column_name = str(col.get("column_name", "")).upper()
+            table_name = str(col.get("table_name", "")).strip()
+            if not column_name or not table_name:
+                continue
+            tokens = set(re.split(r"[^A-Z0-9]+", column_name))
+            for key_token in CROSS_SCHEMA_KEY_TOKENS:
+                if key_token not in tokens:
+                    continue
+                if key_token not in seen_keys:
+                    seen_keys.add(key_token)
+                    business_keys.append({"name": key_token})
+                ta_uid = f"{schema_name}::TA-{table_name.upper()}"
+                edge_key = (ta_uid, key_token, column_name)
+                if edge_key in seen_edges:
+                    continue
+                seen_edges.add(edge_key)
+                has_key_edges.append({"ta_uid": ta_uid, "key_name": key_token, "column": column_name})
+
+    return {"business_keys": business_keys, "has_key_edges": has_key_edges}
+
+
 CONSTRAINT_STATEMENTS = [
     "CREATE CONSTRAINT schema_name IF NOT EXISTS FOR (s:Schema) REQUIRE s.name IS UNIQUE",
     "CREATE CONSTRAINT technical_asset_uid IF NOT EXISTS FOR (t:TechnicalAsset) REQUIRE t.uid IS UNIQUE",
     "CREATE CONSTRAINT business_concept_uid IF NOT EXISTS FOR (c:BusinessConcept) REQUIRE c.uid IS UNIQUE",
     "CREATE CONSTRAINT business_rule_uid IF NOT EXISTS FOR (r:BusinessRule) REQUIRE r.uid IS UNIQUE",
     "CREATE CONSTRAINT value_domain_uid IF NOT EXISTS FOR (v:ValueDomain) REQUIRE v.uid IS UNIQUE",
+    "CREATE CONSTRAINT business_key_name IF NOT EXISTS FOR (k:BusinessKey) REQUIRE k.name IS UNIQUE",
 ]
 
 # (row_key_in_data -> cypher property name) for each SET clause; "uid" is
@@ -220,8 +284,8 @@ _NODE_SPECS: list[tuple[str, str, list[str]]] = [
 # ---------------------------------------------------------------------------
 
 
-def load_via_driver(driver: Any, schema_name: str, graph: dict[str, list[dict[str, Any]]]) -> None:
-    with driver.session() as session:
+def load_via_driver(driver: Any, schema_name: str, graph: dict[str, list[dict[str, Any]]], database: str = "neo4j") -> None:
+    with driver.session(database=database) as session:
         session.execute_write(lambda tx: tx.run("MERGE (s:Schema {name: $name})", name=schema_name))
 
         for data_key, label, set_props in _NODE_SPECS:
@@ -286,6 +350,30 @@ def load_via_driver(driver: Any, schema_name: str, graph: dict[str, list[dict[st
             )
 
 
+def load_business_keys_via_driver(driver: Any, business_keys: dict[str, list[dict[str, Any]]], database: str = "neo4j") -> None:
+    # Runs after every schema's load_via_driver call: MATCH on TechnicalAsset
+    # below requires those nodes to already exist.
+    with driver.session(database=database) as session:
+        if business_keys["business_keys"]:
+            session.execute_write(
+                lambda tx: tx.run(
+                    "UNWIND $rows AS row MERGE (k:BusinessKey {name: row.name})",
+                    rows=business_keys["business_keys"],
+                )
+            )
+        if business_keys["has_key_edges"]:
+            session.execute_write(
+                lambda tx: tx.run(
+                    """
+                    UNWIND $rows AS row
+                    MATCH (t:TechnicalAsset {uid: row.ta_uid}), (k:BusinessKey {name: row.key_name})
+                    MERGE (t)-[edge:HAS_KEY {column: row.column}]->(k)
+                    """,
+                    rows=business_keys["has_key_edges"],
+                )
+            )
+
+
 # ---------------------------------------------------------------------------
 # Backend 2: render a self-contained .cypher script (no driver, no network
 # from this machine -- paste it into any already-connected Neo4j Browser tab,
@@ -310,7 +398,10 @@ def _cypher_literal(value: Any) -> str:
     return _cypher_literal(str(value))
 
 
-def render_cypher_script(graphs: list[tuple[str, dict[str, list[dict[str, Any]]]]]) -> str:
+def render_cypher_script(
+    graphs: list[tuple[str, dict[str, list[dict[str, Any]]]]],
+    business_keys: dict[str, list[dict[str, Any]]] | None = None,
+) -> str:
     lines: list[str] = [
         "// Gerado por dataquality/scripts/build_knowledge_graph.py --emit-cypher",
         "// Cole este script inteiro no editor de consulta do Neo4j Browser (Aura Console",
@@ -363,6 +454,18 @@ def render_cypher_script(graphs: list[tuple[str, dict[str, list[dict[str, Any]]]
             lines.append(f"{merge_clause};")
             lines.append("")
 
+    if business_keys:
+        lines.append("// ===== Chaves de negocio entre esquemas (CPF/CNPJ/...) =====")
+        if business_keys["business_keys"]:
+            lines.append(f"UNWIND {_cypher_literal(business_keys['business_keys'])} AS row")
+            lines.append("MERGE (k:BusinessKey {name: row.name});")
+            lines.append("")
+        if business_keys["has_key_edges"]:
+            lines.append(f"UNWIND {_cypher_literal(business_keys['has_key_edges'])} AS row")
+            lines.append("MATCH (t:TechnicalAsset {uid: row.ta_uid}), (k:BusinessKey {name: row.key_name})")
+            lines.append("MERGE (t)-[edge:HAS_KEY {column: row.column}]->(k);")
+            lines.append("")
+
     return "\n".join(lines)
 
 
@@ -373,6 +476,7 @@ def main() -> None:
     parser.add_argument("--neo4j-uri", default="bolt://localhost:7687")
     parser.add_argument("--neo4j-user", default="neo4j")
     parser.add_argument("--neo4j-password", default=None, help="Required unless --emit-cypher is used")
+    parser.add_argument("--neo4j-database", default="neo4j", help="Database name inside the DBMS (default: neo4j)")
     parser.add_argument(
         "--emit-cypher",
         default=None,
@@ -388,6 +492,7 @@ def main() -> None:
 
     base_folder = Path(args.base_folder)
     collected: list[tuple[str, dict[str, list[dict[str, Any]]]]] = []
+    metadata_contexts: dict[str, dict[str, Any]] = {}
 
     for schema_name in args.schemas:
         canonical_path = base_folder / schema_name / "outputs" / f"local_canonical_context_{schema_name}.json"
@@ -400,7 +505,9 @@ def main() -> None:
 
         metadata_context = _load_json(metadata_path)
         if metadata_context is None:
-            print(f"[aviso] {metadata_path} nao encontrado -- arestas REFERENCES (FK) ficarao de fora para {schema_name}.")
+            print(f"[aviso] {metadata_path} nao encontrado -- arestas REFERENCES (FK) e chaves de negocio entre esquemas ficarao de fora para {schema_name}.")
+        else:
+            metadata_contexts[schema_name] = metadata_context
 
         graph = collect_graph_data(schema_name, canonical, metadata_context)
         collected.append((schema_name, graph))
@@ -417,8 +524,15 @@ def main() -> None:
         print("Nada para carregar.")
         sys.exit(1)
 
+    business_keys = collect_business_keys(metadata_contexts)
+    print(
+        f"Chaves de negocio entre esquemas: {len(business_keys['business_keys'])} tipos "
+        f"({', '.join(k['name'] for k in business_keys['business_keys'])}), "
+        f"{len(business_keys['has_key_edges'])} tabelas ligadas a alguma chave"
+    )
+
     if args.emit_cypher:
-        script = render_cypher_script(collected)
+        script = render_cypher_script(collected, business_keys)
         output_path = Path(args.emit_cypher)
         output_path.write_text(script, encoding="utf-8")
         print(f"\nScript Cypher gravado em: {output_path.resolve()} ({len(script):,} caracteres)")
@@ -434,18 +548,23 @@ def main() -> None:
         print(f"[erro] Nao foi possivel conectar a {args.neo4j_uri}: {exc}")
         sys.exit(1)
 
-    with driver.session() as session:
+    with driver.session(database=args.neo4j_database) as session:
         for statement in CONSTRAINT_STATEMENTS:
             session.run(statement)
 
     for schema_name, graph in collected:
         print(f"Carregando {schema_name}...")
-        load_via_driver(driver, schema_name, graph)
+        load_via_driver(driver, schema_name, graph, database=args.neo4j_database)
+
+    print("Carregando chaves de negocio entre esquemas...")
+    load_business_keys_via_driver(driver, business_keys, database=args.neo4j_database)
 
     driver.close()
     print("\nConcluido. Abra o Neo4j Browser e rode, por exemplo:")
     print("  MATCH (n) RETURN n LIMIT 300")
     print("  MATCH (c:BusinessConcept)-[r:RELATES_TO]->(c2:BusinessConcept) RETURN c, r, c2")
+    print("  MATCH (t1:TechnicalAsset)-[:HAS_KEY]->(k:BusinessKey)<-[:HAS_KEY]-(t2:TechnicalAsset)")
+    print("  WHERE t1.schema <> t2.schema RETURN t1, k, t2")
 
 
 if __name__ == "__main__":
